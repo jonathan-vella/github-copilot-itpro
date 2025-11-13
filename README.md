@@ -350,7 +350,28 @@ Learn declarative vs. imperative approaches and when to use each.
 }
 ```
 
-See [resources/vscode-extensions/](resources/vscode-extensions/) for setup guide.
+### 🎯 Supercharge Your Copilot (NEW!)
+
+Enhance Copilot with curated customizations from the [Awesome Copilot](https://github.com/github/awesome-copilot) repository:
+
+**[📦 Copilot Customizations for IT Pros](resources/copilot-customizations/)**
+
+Get started in 5 minutes with:
+- ✅ **Bicep Best Practices**: Auto-applied naming conventions and security standards
+- ✅ **PowerShell Testing**: Pester v5 patterns built-in
+- ✅ **Azure Architecture**: Well-Architected Framework guidance
+- ✅ **DevOps Principles**: DORA metrics and automation patterns
+
+**Quick Setup**:
+```bash
+# Add Bicep and DevOps standards (recommended)
+cat resources/copilot-customizations/instructions/bicep-code-best-practices.instructions.md >> .github/copilot-instructions.md
+cat resources/copilot-customizations/instructions/devops-core-principles.instructions.md >> .github/copilot-instructions.md
+```
+
+**Result**: 60-90% faster infrastructure code with best practices built-in
+
+📖 **Full Guide**: [resources/copilot-customizations/QUICK-START.md](resources/copilot-customizations/QUICK-START.md)
 
 ---
 
@@ -385,6 +406,7 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 - **Microsoft Cloud Adoption Framework (CAF)**: Guidance and best practices
 - **Azure Well-Architected Framework (WAF)**: Design principles
 - **GitHub Copilot Team**: AI-powered development experience
+- **[Awesome Copilot Community](https://github.com/github/awesome-copilot)**: Curated customizations and best practices
 - **Community Contributors**: Sharing scenarios and feedback
 
 ---
@@ -404,6 +426,7 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 - [Well-Architected Framework](https://learn.microsoft.com/azure/architecture/framework/)
 - [Azure Architecture Center](https://learn.microsoft.com/azure/architecture/)
 - [GitHub Copilot Documentation](https://docs.github.com/copilot)
+- [Awesome Copilot Repository](https://github.com/github/awesome-copilot) - 200+ Copilot customizations
 
 ---
 
