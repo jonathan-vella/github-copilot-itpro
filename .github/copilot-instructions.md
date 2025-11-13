@@ -294,6 +294,94 @@ All demo code should follow these security principles:
 - Keep line length reasonable (80-120 chars when possible)
 - Use relative links for internal navigation
 
+## Suitable Tasks for Copilot Coding Agent
+
+### Tasks Well-Suited for Copilot
+
+When assigned to work on issues in this repository, Copilot works best on:
+
+- **Bug fixes**: Correcting issues in Bicep templates, PowerShell scripts, or documentation
+- **Test coverage**: Adding validation scripts or test cases for demos
+- **Documentation updates**: Improving README files, adding examples, updating guides
+- **Code refactoring**: Improving existing scripts or templates for clarity and maintainability
+- **Demo enhancements**: Adding new scenarios or prompts to existing demos
+- **Template generation**: Creating new Bicep modules or PowerShell functions
+- **Small feature additions**: Adding parameters, outputs, or new resources to templates
+
+### Tasks to Keep Manual
+
+Some tasks should be handled by human developers:
+
+- **Complex multi-demo refactoring**: Changes affecting multiple demos requiring design consistency
+- **Architecture decisions**: Deciding demo structure, learning paths, or partner toolkit design
+- **Production deployments**: Actual Azure deployments to live environments
+- **Security reviews**: Validating security implications of infrastructure changes
+- **Partner-specific customizations**: Tailoring content for specific customer needs
+- **Strategic content**: Creating new case studies or value messaging
+
+### Issue Description Best Practices
+
+For best results when assigning issues to Copilot:
+
+- ✅ **Be specific**: "Add NSG rules to network.bicep for web tier allowing HTTP/HTTPS"
+- ✅ **Include acceptance criteria**: "Must include outputs for NSG ID and include comments"
+- ✅ **Reference files**: "Update demos/01-bicep-quickstart/with-copilot/network.bicep"
+- ✅ **Specify standards**: "Follow security baseline and use latest API versions"
+- ❌ **Avoid vague requests**: "Make the demo better" or "Add more content"
+
+## Custom Agents
+
+This repository supports GitHub Copilot custom agents for specialized tasks. Custom agents can be defined in `.github/agents/` directory.
+
+### Potential Custom Agents for This Repository
+
+Consider creating custom agents for:
+
+1. **Bicep Template Specialist**
+   - Focus: Azure infrastructure as code
+   - Expertise: Bicep syntax, Azure resources, security best practices
+   - Use for: Creating or reviewing Bicep templates
+
+2. **PowerShell Automation Expert**
+   - Focus: PowerShell scripting for Azure
+   - Expertise: Azure PowerShell modules, error handling, automation patterns
+   - Use for: Writing or improving PowerShell scripts
+
+3. **Documentation Generator**
+   - Focus: Technical documentation and runbooks
+   - Expertise: Markdown, Mermaid diagrams, Azure architecture
+   - Use for: Creating or updating documentation
+
+4. **Demo Validator**
+   - Focus: Ensuring demo quality and consistency
+   - Expertise: Demo structure, validation scripts, time tracking
+   - Use for: Reviewing new demos before publication
+
+### Creating a Custom Agent
+
+To create a custom agent, add a markdown file in `.github/agents/`:
+
+```markdown
+# Agent Name: Bicep Template Specialist
+
+## Description
+Expert in Azure Bicep templates with focus on security and best practices.
+
+## Specialization
+- Azure resource types and API versions
+- Security configurations (encryption, private endpoints, NSGs)
+- Naming conventions and tagging standards
+- Modular template design
+
+## Instructions
+When creating or reviewing Bicep templates:
+- Use latest API versions (2023-05-01 or newer)
+- Include security by default settings
+- Add descriptive @description() decorators
+- Follow repository naming conventions
+- Generate comprehensive outputs
+```
+
 ## Questions to Ask Users
 
 When users request changes or additions:
@@ -303,6 +391,54 @@ When users request changes or additions:
 3. **Duration**: "Is this a 30-min demo or deep-dive content?"
 4. **Environment**: "Is this for dev/demo or production deployment?"
 5. **Metrics**: "Do you have time savings data to include?"
+6. **Scope**: "Is this suitable for Copilot coding agent or needs human review?"
+
+## Development Environment
+
+### Required Tools
+
+To work with this repository effectively, ensure the following tools are installed:
+
+- **Visual Studio Code** (latest version)
+- **GitHub Copilot extension** for VS Code
+- **Azure CLI** (version 2.50.0 or newer)
+- **Bicep CLI** (version 0.20.0 or newer) - Often included with Azure CLI
+- **PowerShell 7+** (cross-platform)
+- **Git** (version 2.30.0 or newer)
+
+### Recommended VS Code Extensions
+
+- GitHub Copilot (required)
+- GitHub Copilot Chat (required)
+- Azure Bicep
+- PowerShell
+- Markdown All in One
+- Mermaid Preview
+- Azure Account
+- Azure Resources
+
+### Local Validation Commands
+
+Before committing changes:
+
+```powershell
+# Validate Bicep templates
+bicep build demos/01-bicep-quickstart/with-copilot/main.bicep
+
+# Run PowerShell script analyzer
+Invoke-ScriptAnalyzer -Path demos/02-powershell-automation/ -Recurse
+
+# Check markdown links (if markdownlint-cli installed)
+markdownlint **/*.md --ignore node_modules
+```
+
+### Azure Subscription Requirements
+
+For testing demos:
+- Azure subscription with Contributor access
+- Sufficient quota for demo resources (typically minimal)
+- Resource groups should use naming pattern: `rg-copilot-demo-<demo-name>-<random>`
+- Clean up resources after testing to minimize costs
 
 ## Resources
 
@@ -310,6 +446,7 @@ When users request changes or additions:
 - [PowerShell Best Practices](https://learn.microsoft.com/powershell/scripting/developer/cmdlet/cmdlet-development-guidelines)
 - [Azure Naming Conventions](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging)
 - [GitHub Copilot for Azure](https://learn.microsoft.com/azure/developer/github/github-copilot-azure)
+- [GitHub Copilot Best Practices](https://docs.github.com/en/copilot/tutorials/coding-agent/get-the-best-results)
 
 ---
 
