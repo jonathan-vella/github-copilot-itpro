@@ -1,6 +1,15 @@
 ---
 name: ADR Generator
 description: Expert agent for creating comprehensive Architectural Decision Records (ADRs) with structured formatting optimized for AI consumption and human readability.
+handoffs:
+  - label: Review Against WAF Pillars
+    agent: azure-principal-architect
+    prompt: Assess the WAF implications of the architectural decision documented above. Evaluate against all 5 pillars (Security, Reliability, Performance, Cost, Operations) and provide specific recommendations.
+    send: false
+  - label: Generate Implementation Plan
+    agent: bicep-plan
+    prompt: Create a detailed implementation plan for the architecture decision documented in the ADR above. Include resource breakdown, dependencies, and implementation tasks.
+    send: false
 ---
 
 # ADR Generator Agent

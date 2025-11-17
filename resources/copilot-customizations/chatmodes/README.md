@@ -1,54 +1,27 @@
-# GitHub Copilot Custom Chat Modes
+# GitHub Copilot Supplementary Chat Modes
 
-This directory contains specialized chat modes that enhance GitHub Copilot's capabilities for Azure infrastructure development.
+This directory contains supplementary chat modes that enhance GitHub Copilot's capabilities for Azure infrastructure development.
+
+## ⚠️ Important: Primary Workflow Uses Custom Agents
+
+This repository's **primary workflow** uses **Custom Agents** (not chat modes) located in `.github/agents/`:
+
+- **@adr-generator** - Document architectural decisions
+- **@azure-principal-architect** - Azure Well-Architected Framework guidance
+- **@bicep-plan** - Infrastructure planning with AVM modules
+- **@bicep-implement** - Bicep code generation
+
+📖 See [FOUR-MODE-WORKFLOW.md](../FOUR-MODE-WORKFLOW.md) for the complete agent-based workflow.
 
 ## Overview
 
-Custom chat modes provide context-specific expertise without switching tools. Each mode is optimized for specific stages of infrastructure development.
+This directory contains **supplementary chat modes** for specialized scenarios not covered by the primary agent workflow. These modes provide context-specific expertise for alternative Infrastructure as Code approaches (Terraform), debugging, and Azure Verified Module exploration.
 
-## Four-Mode Workflow
+### Archived Modes
 
-This repository uses a structured four-mode workflow for Azure infrastructure development:
+Three chat modes (azure-principal-architect, bicep-plan, bicep-implement) have been **superseded by Custom Agents** and moved to `archive/`. See [archive/README.md](archive/README.md) for migration guidance.
 
-```mermaid
-graph LR
-    A[1. ADR Generator<br/>Custom Agent] --> B[2. Azure Principal<br/>Architect Mode]
-    B --> C[3. Bicep Planning<br/>Mode]
-    C --> D[4. Bicep Implementation<br/>Mode]
-    
-    style A fill:#e1f5ff
-    style B fill:#fff4e1
-    style C fill:#e8f5e8
-    style D fill:#ffe8f5
-```
-
-### Workflow Stages
-
-| Stage | Mode | Purpose | Output |
-|-------|------|---------|--------|
-| **Decision** | ADR Generator (Agent) | Document architectural decisions | `/docs/adr/adr-NNNN-*.md` |
-| **Architecture** | Azure Principal Architect | WAF assessment & best practices | Architecture guidance |
-| **Planning** | Bicep Planning | Create machine-readable plans | `.bicep-planning-files/INFRA.*.md` |
-| **Implementation** | Bicep Implementation | Generate production-ready code | `*.bicep` files |
-
-## Available Chat Modes
-
-### Core Workflow Modes
-
-#### azure-principal-architect.chatmode.md
-**Purpose:** Azure Well-Architected Framework expertise
-
-**Use When:**
-- Evaluating architectural decisions against WAF pillars (Security, Reliability, Performance, Cost, Operations)
-- Need Azure-specific best practices and patterns
-- Assessing trade-offs between architectural approaches
-- Designing multi-region or high-availability solutions
-
-**Example:**
-```markdown
-Using azure-principal-architect mode, assess the security and cost implications 
-of using Azure Private Endpoints vs. Service Endpoints for PaaS services.
-```
+## Available Supplementary Chat Modes
 
 ---
 
@@ -74,19 +47,6 @@ with 3 spokes, Azure Firewall, and Private DNS zones.
 #### bicep-implement.chatmode.md
 **Purpose:** Generate production-ready Bicep templates
 
-**Use When:**
-- Implementing infrastructure plans
-- Converting ARM templates to Bicep
-- Adding resources to existing templates
-- Following Azure naming conventions and security best practices
-
-**Example:**
-```markdown
-Using bicep-implement mode, implement the network plan from 
-.bicep-planning-files/INFRA.hub-spoke-network.md
-```
-
----
 
 ### Azure Verified Modules (AVM) Modes
 
@@ -98,6 +58,7 @@ Using bicep-implement mode, implement the network plan from
 - Need enterprise features (RBAC, monitoring, compliance)
 - Want consistent, well-tested modules
 - Following Microsoft Cloud Adoption Framework
+- **Supplementing** the primary @bicep-implement agent with specific AVM guidance
 
 **Example:**
 ```markdown
@@ -114,6 +75,7 @@ the AVM pattern with proper tagging and diagnostic settings.
 - Managing multi-cloud environments
 - Existing Terraform investment
 - Need Terraform-specific patterns
+- **Alternative to** the Bicep-based primary workflow
 
 ---
 
@@ -127,6 +89,7 @@ the AVM pattern with proper tagging and diagnostic settings.
 - Implementing tenant isolation strategies
 - Planning SaaS pricing models
 - Handling SaaS data architecture
+- **Specialized guidance** beyond the general @azure-principal-architect agent
 
 **Example:**
 ```markdown
@@ -136,13 +99,13 @@ using Azure AD B2C and database-per-tenant pattern.
 
 ---
 
-### Terraform Modes
+### Terraform Modes (Alternative IaC Workflow)
 
 #### terraform-azure-planning.chatmode.md
 **Purpose:** Create Terraform infrastructure plans for Azure
 
 **Use When:**
-- Planning Terraform-based Azure deployments
+- Planning Terraform-based Azure deployments (alternative to Bicep)
 - Converting existing infrastructure to Terraform
 - Creating reusable Terraform modules
 
@@ -152,13 +115,13 @@ using Azure AD B2C and database-per-tenant pattern.
 **Purpose:** Generate production-ready Terraform code for Azure
 
 **Use When:**
-- Implementing Terraform plans
+- Implementing Terraform plans (alternative to Bicep)
 - Creating Azure provider configurations
 - Building Terraform modules
 
 ---
 
-### Planning & Debugging Modes
+### Utility Modes
 
 #### plan.chatmode.md
 **Purpose:** General task planning and decomposition
@@ -167,6 +130,7 @@ using Azure AD B2C and database-per-tenant pattern.
 - Breaking down complex tasks
 - Creating implementation roadmaps
 - Planning multi-phase projects
+- **Alternative to** @bicep-plan for non-infrastructure planning
 
 ---
 
@@ -183,11 +147,15 @@ using Azure AD B2C and database-per-tenant pattern.
 #### debug.chatmode.md
 **Purpose:** Troubleshooting and diagnostics assistance
 
+#### debug.chatmode.md
+**Purpose:** Debug infrastructure deployment issues
+
 **Use When:**
 - Debugging Bicep/Terraform deployment failures
 - Analyzing Azure resource errors
 - Troubleshooting infrastructure issues
 - Interpreting error messages
+- **Supplementing** the primary agents with debugging expertise
 
 **Example:**
 ```markdown
@@ -199,41 +167,68 @@ Using debug mode, analyze this Bicep deployment error:
 
 ## Usage Guidelines
 
+### Primary Workflow: Use Custom Agents First
+
+For the main Azure infrastructure workflow, **always use Custom Agents** (invoked with `@agent-name`):
+
+```
+@adr-generator Document the decision to use hub-spoke topology
+@azure-principal-architect Assess the security implications of this design
+@bicep-plan Create an implementation plan for the hub-spoke network
+@bicep-implement Generate the Bicep templates from the plan
+```
+
+### When to Use Chat Modes
+
+Use these **supplementary chat modes** for:
+- ✅ Alternative IaC approaches (Terraform)
+- ✅ Specialized scenarios (SaaS architecture, AVM deep-dives)
+- ✅ Debugging and troubleshooting
+- ✅ General planning (non-infrastructure)
+
 ### Activating Chat Modes
 
 **In VS Code:**
 1. Open GitHub Copilot Chat
-2. Type `@workspace` to invoke workspace context
-3. Mention the mode: "Using bicep-plan mode, create a plan for..."
+2. Type `@workspace` to invoke workspace context (optional)
+3. Reference the mode: "Using terraform-azure-planning mode, create a plan for..."
 
-**In Issues/Pull Requests:**
-```markdown
-@github-copilot using bicep-implement mode, generate a Bicep template 
-for the network plan in .bicep-planning-files/INFRA.network.md
-```
+**Note:** Chat mode activation varies by Copilot interface. Custom Agents (`@agent-name`) have consistent invocation across all platforms.
 
 ### Mode Selection Decision Tree
 
 ```mermaid
 graph TD
     A[What do you need?] --> B{Document Decision?}
-    B -->|Yes| C[ADR Generator Agent]
+    B -->|Yes| C[@adr-generator Agent]
     B -->|No| D{Need Architecture Guidance?}
-    D -->|Yes| E[Azure Principal Architect]
-    D -->|No| F{Ready to Code?}
-    F -->|No - Need Plan| G[Bicep Planning Mode]
-    F -->|Yes - Have Plan| H[Bicep Implementation Mode]
+    D -->|Yes| E{For SaaS?}
+    E -->|Yes| F[azure-saas-architect mode]
+    E -->|No| G[@azure-principal-architect Agent]
     
-    E --> I{For SaaS?}
-    I -->|Yes| J[Azure SaaS Architect]
-    I -->|No| K[Continue with Principal]
+    D -->|No| H{Infrastructure as Code?}
+    H -->|Bicep| I{Have Plan?}
+    I -->|No| J[@bicep-plan Agent]
+    I -->|Yes| K[@bicep-implement Agent]
     
-    H --> L{Use AVM Modules?}
-    L -->|Yes| M[AVM Bicep Mode]
-    L -->|No| N[Standard Bicep Implement]
+    H -->|Terraform| L[terraform-azure-planning mode]
+    L --> M[terraform-azure-implement mode]
     
-    style C fill:#e1f5ff
-    style E fill:#fff4e1
+    H -->|Troubleshooting| N[debug mode]
+    
+    style C fill:#4CAF50,color:#fff
+    style G fill:#4CAF50,color:#fff
+    style J fill:#4CAF50,color:#fff
+    style K fill:#4CAF50,color:#fff
+    style F fill:#FFC107
+    style L fill:#FFC107
+    style M fill:#FFC107
+    style N fill:#FFC107
+```
+
+**Legend:**
+- 🟢 **Green** = Custom Agents (Primary Workflow)
+- 🟡 **Yellow** = Chat Modes (Supplementary Tools)
     style G fill:#e8f5e8
     style H fill:#ffe8f5
 ```

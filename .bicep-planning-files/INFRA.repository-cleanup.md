@@ -1,99 +1,110 @@
 ---
-goal: Repository Cleanup and Four-Mode Alignment for Azure Infrastructure Development
+goal: Repository Cleanup and Four-Agent Workflow Integration for Azure Infrastructure Development
 ---
 
-# Implementation Plan: Four-Mode Workflow Integration
+# Implementation Plan: Four-Agent Workflow Integration
 
 ## Overview
 
-This plan restructures the **github-copilot-itpro** repository to establish a cohesive four-mode workflow for Azure infrastructure development targeting IT Professionals and SI partners. The workflow integrates:
+This plan restructures the **github-copilot-itpro** repository to establish a cohesive four-agent workflow for Azure infrastructure development targeting IT Professionals and SI partners. The workflow integrates:
 
 1. **ADR Generator (Custom Agent)** - Document architectural decisions
-2. **Azure Principal Architect (Chat Mode)** - Azure Well-Architected Framework guidance  
-3. **Bicep Planning (Chat Mode)** - Infrastructure planning with AVM modules
-4. **Bicep Implementation (Chat Mode)** - Bicep code generation
+2. **Azure Principal Architect (Custom Agent)** - Azure Well-Architected Framework guidance  
+3. **Bicep Planning (Custom Agent)** - Infrastructure planning with AVM modules
+4. **Bicep Implementation (Custom Agent)** - Bicep code generation
 
-## Phase 1 — Install ADR Generator Custom Agent
+**Key Architectural Decision:** All four capabilities are implemented as **Custom Agents** (not chat modes), providing superior integration, consistency, and tool access.
 
-**Objective:** Enable architectural decision documentation with structured ADR generation
+## Phase 1 — Install Four Custom Agents ✅ COMPLETED
 
-| Task | Description | Action |
+**Objective:** Enable complete infrastructure workflow with four specialized custom agents
+
+| Task | Description | Status |
 |------|-------------|--------|
-| TASK-001 | Download ADR Generator agent file | Download from awesome-copilot to `.github/agents/adr-generator.agent.md` |
-| TASK-002 | Create ADR documentation directory | Create `/docs/adr/` folder structure |
-| TASK-003 | Generate initial ADR for workflow adoption | Use ADR Generator to document "Four-Mode Workflow Adoption" decision |
-| TASK-004 | Update repository README | Add Custom Agents section referencing ADR Generator |
+| TASK-001 | Install ADR Generator agent | ✅ Downloaded to `.github/agents/adr-generator.agent.md` |
+| TASK-002 | Create Azure Principal Architect agent | ✅ Created from chat mode at `.github/agents/azure-principal-architect.agent.md` |
+| TASK-003 | Create Bicep Planning agent | ✅ Created from chat mode at `.github/agents/bicep-plan.agent.md` |
+| TASK-004 | Create Bicep Implementation agent | ✅ Created from chat mode at `.github/agents/bicep-implement.agent.md` |
+| TASK-005 | Create ADR documentation directory | ✅ Created `/docs/adr/` folder |
+| TASK-006 | Generate initial ADR-0001 | ✅ Created "Four-Agent Workflow Adoption" ADR |
+| TASK-007 | Test ADR Generator with ADR-0002 | ✅ Created Azure Bastion example ADR |
+| TASK-008 | Update repository README | ✅ Added Custom Agents & Workflow section |
 
-**Success Criteria:**
-- ADR Generator agent file present in `.github/agents/`
-- `/docs/adr/` directory exists
-- Initial ADR-0001 created documenting workflow adoption
+**Success Criteria:** ✅ ALL MET
+- All 4 agent files present in `.github/agents/`
+- `/docs/adr/` directory exists with 2 ADRs
 - README.md updated with agent documentation
+- Agent functionality validated
 
-## Phase 2 — Reorganize Chat Mode Structure
+## Phase 2 — Migrate Chat Modes to Custom Agents ✅ COMPLETED
 
-**Objective:** Consolidate custom chat modes into standardized location with clear documentation
+**Objective:** Convert primary workflow chat modes to superior custom agent architecture
 
-| Task | Description | Action |
+| Task | Description | Status |
 |------|-------------|--------|
-| TASK-005 | Audit existing chat modes | List all *.chatmode.md files across repository |
-| TASK-006 | Consolidate chat mode location | Move all chat modes to `resources/copilot-customizations/chatmodes/` |
-| TASK-007 | Remove duplicate or outdated modes | Identify and remove superseded versions |
-| TASK-008 | Create chat mode README | Document each mode's purpose, when to use it, and workflow integration |
+| TASK-009 | Audit existing chat modes | ✅ Found 11 chat modes in `resources/copilot-customizations/chatmodes/` |
+| TASK-010 | Identify workflow-critical modes | ✅ Identified 3 for agent conversion (architect, plan, implement) |
+| TASK-011 | Convert to custom agents | ✅ Created 3 agents from chat modes |
+| TASK-012 | Validate agent structure | ✅ All agents have proper YAML frontmatter, tools, descriptions |
 
-**Files Affected:**
-- `resources/copilot-customizations/chatmodes/*.chatmode.md` (all chat modes)
-- `resources/copilot-customizations/chatmodes/README.md` (new documentation)
+**Architectural Decision:** Chat modes converted to custom agents for primary workflow. Remaining chat modes (debug, terraform, AVM, etc.) kept as supplementary tools.
 
-**Success Criteria:**
-- All chat modes in single location
-- No duplicate modes exist
-- README.md explains four-mode workflow
-- Each mode's purpose clearly documented
+**Success Criteria:** ✅ ALL MET
+- 4 custom agents installed (ADR + 3 converted)
+- Primary workflow uses agents, not chat modes
+- Legacy chat modes remain for backward compatibility
 
-## Phase 3 — Establish Four-Mode Workflow Documentation
+## Phase 3 — Establish Four-Agent Workflow Documentation ✅ COMPLETED
 
-**Objective:** Create comprehensive documentation showing how the four modes work together
+**Objective:** Create comprehensive documentation showing how the four agents work together
 
-| Task | Description | Action |
+| Task | Description | Status |
 |------|-------------|--------|
-| TASK-009 | Create workflow diagram | Mermaid diagram showing mode transitions and outputs |
-| TASK-010 | Document workflow stages | Explain each stage: Decision → Architecture → Planning → Implementation |
-| TASK-011 | Create workflow examples | Provide Demo 1 (Bicep) example using all four modes |
-| TASK-012 | Add troubleshooting guidance | Document common issues and mode selection guidance |
+| TASK-013 | Create workflow diagram | ✅ Created Mermaid diagram in FOUR-MODE-WORKFLOW.md |
+| TASK-014 | Document workflow stages | ✅ Documented all 4 stages with examples |
+| TASK-015 | Create workflow examples | ✅ Provided complete secure dev environment example |
+| TASK-016 | Add troubleshooting guidance | ✅ Included decision tree and troubleshooting section |
+| TASK-017 | Update main README | ✅ Added Custom Agents & Workflow section |
+| TASK-018 | Create chatmodes README | ✅ Documented supplementary modes |
 
-**New File:** `resources/copilot-customizations/FOUR-MODE-WORKFLOW.md`
+**Files Created/Updated:**
+- ✅ `resources/copilot-customizations/FOUR-MODE-WORKFLOW.md` (700+ lines)
+- ✅ `resources/copilot-customizations/chatmodes/README.md`
+- ✅ `resources/copilot-customizations/README.md`
+- ✅ `README.md` (root, added workflow section)
 
 **Workflow Stages:**
 
 ```mermaid
 graph LR
-    A[Architectural Decision] -->|ADR Generator| B[Document ADR]
+    A[Architectural Decision] -->|@adr-generator| B[Document ADR]
     B --> C[Architectural Planning]
-    C -->|Azure Principal Architect| D[WAF Assessment]
+    C -->|@azure-principal-architect| D[WAF Assessment]
     D --> E[Infrastructure Planning]
-    E -->|Bicep Planning Mode| F[Create Planning File]
+    E -->|@bicep-plan| F[Create Planning File]
     F --> G[Implementation]
-    G -->|Bicep Implementation Mode| H[Generate Bicep Code]
+    G -->|@bicep-implement| H[Generate Bicep Code]
     H --> I[Deploy to Azure]
 ```
 
-**Success Criteria:**
-- Workflow documentation created
-- Mermaid diagrams illustrate mode relationships
-- Examples show complete workflow
-- Troubleshooting section addresses common scenarios
+**Success Criteria:** ✅ ALL MET
+- Comprehensive workflow documentation created
+- Mermaid diagrams illustrate agent relationships
+- Complete examples demonstrate workflow
+- Troubleshooting and decision guidance included
 
-## Phase 4 — Update Demo Scripts with Four-Mode Integration
+## Phase 4 — Update Demo Scripts with Four-Agent Integration
 
-**Objective:** Enhance demo scripts to showcase the four-mode workflow
+**Objective:** Enhance demo scripts to showcase the four-agent workflow
+
+**Status:** 🔄 READY TO START
 
 | Task | Description | Action |
 |------|-------------|--------|
-| TASK-013 | Update Demo 1 (Bicep) script | Add four-mode workflow walkthrough |
-| TASK-014 | Update Demo 5 (Documentation) script | Show ADR Generator usage for architecture docs |
-| TASK-015 | Create mode selection guide | Help presenters choose appropriate mode for scenarios |
-| TASK-016 | Add timing guidance | Estimate time for each mode in 30-min demo format |
+| TASK-019 | Update Demo 1 (Bicep) script | Add four-agent workflow walkthrough |
+| TASK-020 | Update Demo 5 (Documentation) script | Show ADR Generator usage for architecture docs |
+| TASK-021 | Create agent selection guide | Help presenters choose appropriate agent for scenarios |
+| TASK-022 | Add timing guidance | Estimate time for each agent in 30-min demo format |
 
 **Files to Update:**
 - `demos/01-bicep-quickstart/DEMO-SCRIPT.md`
@@ -101,54 +112,74 @@ graph LR
 - `demos/01-bicep-quickstart/prompts/effective-prompts.md`
 
 **Success Criteria:**
-- Demo scripts reference appropriate modes
-- Mode selection guidance included
-- Timing estimates provided
-- Prompts updated for four-mode workflow
+- Demo scripts reference appropriate agents (using @ syntax)
+- Agent selection guidance included
+- Timing estimates provided for 30-min format
+- Prompts updated for four-agent workflow
 
 ## Phase 5 — Create ADRs for Existing Architecture Patterns
 
-**Objective:** Retroactively document architectural decisions made in demos using ADR Generator
+**Objective:** Retroactively document architectural decisions made in demos using @adr-generator agent
 
-| Task | Description | Action |
+**Status:** 🔄 IN PROGRESS (2 of 5 ADRs created)
+
+| Task | Description | Status |
 |------|-------------|--------|
-| TASK-017 | ADR: 3-Tier Architecture Pattern | Document Demo 1 VNet segmentation decision |
-| TASK-018 | ADR: Azure Arc Onboarding Strategy | Document Demo 3 hybrid cloud approach |
-| TASK-019 | ADR: PowerShell Automation Standards | Document Demo 2 scripting conventions |
-| TASK-020 | ADR: Azure Verified Modules Adoption | Document AVM usage strategy |
+| TASK-023 | ADR-0001: Four-Agent Workflow | ✅ Created |
+| TASK-024 | ADR-0002: Azure Bastion (test) | ✅ Created |
+| TASK-025 | ADR: 3-Tier Architecture Pattern | ⏸️ Document Demo 1 VNet segmentation |
+| TASK-026 | ADR: Azure Arc Onboarding Strategy | ⏸️ Document Demo 3 hybrid cloud |
+| TASK-027 | ADR: PowerShell Automation Standards | ⏸️ Document Demo 2 scripting |
+| TASK-028 | ADR: Azure Verified Modules Adoption | ⏸️ Document AVM strategy |
 
-**New ADRs:**
-- `/docs/adr/adr-0001-four-mode-workflow-adoption.md`
-- `/docs/adr/adr-0002-three-tier-network-architecture.md`
-- `/docs/adr/adr-0003-azure-arc-hybrid-strategy.md`
-- `/docs/adr/adr-0004-powershell-automation-standards.md`
-- `/docs/adr/adr-0005-azure-verified-modules-adoption.md`
+**ADRs to Create:**
+- ✅ `/docs/adr/adr-0001-four-agent-workflow-adoption.md`
+- ✅ `/docs/adr/adr-0002-azure-bastion-secure-access.md` (test)
+- ⏸️ `/docs/adr/adr-0003-three-tier-network-architecture.md`
+- ⏸️ `/docs/adr/adr-0004-azure-arc-hybrid-strategy.md`
+- ⏸️ `/docs/adr/adr-0005-powershell-automation-standards.md`
+- ⏸️ `/docs/adr/adr-0006-azure-verified-modules-adoption.md`
 
 **Success Criteria:**
-- Minimum 5 ADRs created
-- Each demo has architectural decisions documented
-- ADRs reference relevant Azure Architecture Center patterns
-- Consequences section includes measurable impacts
+- Minimum 5 ADRs created (currently 2/5)
+- Each major demo has architectural decisions documented
+- ADRs reference Azure Architecture Center patterns
+- Consequences include measurable impacts
 
-## Phase 6 — Cleanup Redundant Customizations
+## Phase 6 — Cleanup Legacy Chat Modes and Redundant Files
 
-**Objective:** Remove outdated or superseded Copilot customizations
+**Objective:** Remove superseded chat modes now that custom agents are primary workflow
+
+**Status:** 🔄 READY TO START
 
 | Task | Description | Action |
 |------|-------------|--------|
-| TASK-021 | Audit custom instructions | Review all *.instructions.md files |
-| TASK-022 | Identify superseded content | Find instructions now covered by chat modes |
-| TASK-023 | Archive or remove redundant files | Clean up deprecated customizations |
-| TASK-024 | Update copilot-instructions.md | Ensure main instructions reference four modes |
+| TASK-029 | Archive superseded chat modes | Move azure-principal-architect, bicep-plan, bicep-implement to archive |
+| TASK-030 | Document remaining chat modes | Update README to clarify agents vs. supplementary modes |
+| TASK-031 | Review custom instructions | Audit `resources/copilot-customizations/instructions/` |
+| TASK-032 | Remove duplicate guidance | Ensure no conflicts between agents and instructions |
+| TASK-033 | Update copilot-instructions.md | Reference four-agent workflow as primary |
 
 **Files to Review:**
-- `resources/copilot-customizations/instructions/*.instructions.md`
-- `.github/copilot-instructions.md`
+- `resources/copilot-customizations/chatmodes/azure-principal-architect.chatmode.md` - ⚠️ SUPERSEDED by agent
+- `resources/copilot-customizations/chatmodes/bicep-plan.chatmode.md` - ⚠️ SUPERSEDED by agent
+- `resources/copilot-customizations/chatmodes/bicep-implement.chatmode.md` - ⚠️ SUPERSEDED by agent
+- `resources/copilot-customizations/chatmodes/azure-verified-modules-*.chatmode.md` - ✅ KEEP (supplementary)
+- `resources/copilot-customizations/chatmodes/terraform-*.chatmode.md` - ✅ KEEP (alternative IaC)
+- `resources/copilot-customizations/chatmodes/debug.chatmode.md` - ✅ KEEP (utility)
+- `resources/copilot-customizations/instructions/` - 🔍 REVIEW (may still be useful)
+
+**Recommended Actions:**
+- **ARCHIVE** (not delete) 3 superseded chat modes in `resources/copilot-customizations/chatmodes/archive/`
+- **KEEP** remaining 8 chat modes as supplementary tools
+- **REVIEW** instructions folder - keep Bicep best practices, archive duplicates
+- **UPDATE** all documentation to reference **agents first**, chat modes as secondary
 
 **Success Criteria:**
-- No duplicate guidance across modes and instructions
-- Clear hierarchy: instructions → chat modes → agents
-- copilot-instructions.md references four-mode workflow
+- Clear separation: agents = primary workflow, chat modes = supplementary
+- No duplicate guidance between agents and instructions
+- Documentation hierarchy established
+- Legacy files archived, not deleted (for rollback capability)
 - Archive folder created for deprecated content
 
 ## Phase 7 — Partner Toolkit Integration

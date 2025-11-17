@@ -2,6 +2,17 @@
 
 This directory contains curated resources from the [github/awesome-copilot](https://github.com/github/awesome-copilot) repository, specifically selected to enhance your GitHub Copilot experience when working with Azure infrastructure and IT Pro scenarios.
 
+## 🚀 Four-Mode Workflow
+
+This repository uses a **structured four-mode workflow** for Azure infrastructure development:
+
+1. **ADR Generator** (Custom Agent) → Document architectural decisions
+2. **Azure Principal Architect** (Chat Mode) → Azure Well-Architected Framework guidance
+3. **Bicep Planning** (Chat Mode) → Create structured infrastructure plans
+4. **Bicep Implementation** (Chat Mode) → Generate production-ready Bicep code
+
+📖 **Complete Guide:** See [FOUR-MODE-WORKFLOW.md](FOUR-MODE-WORKFLOW.md) for detailed workflow documentation with examples and decision trees.
+
 ## 🎯 What's Included
 
 These customizations provide Copilot with specialized knowledge about:
@@ -15,15 +26,25 @@ These customizations provide Copilot with specialized knowledge about:
 
 ```
 copilot-customizations/
+├── FOUR-MODE-WORKFLOW.md # Complete four-mode workflow guide
 ├── instructions/          # Project-wide coding standards and conventions
 │   ├── bicep-code-best-practices.instructions.md
 │   ├── powershell-pester-5.instructions.md
 │   ├── terraform-azure.instructions.md
 │   └── devops-core-principles.instructions.md
 ├── chatmodes/            # Specialized AI personas for specific tasks
-│   ├── bicep-implement.chatmode.md
+│   ├── README.md         # Chat mode usage guide and decision trees
+│   ├── azure-principal-architect.chatmode.md (Four-Mode Workflow)
+│   ├── bicep-plan.chatmode.md (Four-Mode Workflow)
+│   ├── bicep-implement.chatmode.md (Four-Mode Workflow)
+│   ├── azure-saas-architect.chatmode.md
+│   ├── azure-verified-modules-bicep.chatmode.md
+│   ├── azure-verified-modules-terraform.chatmode.md
+│   ├── terraform-azure-planning.chatmode.md
 │   ├── terraform-azure-implement.chatmode.md
-│   └── azure-principal-architect.chatmode.md
+│   ├── debug.chatmode.md
+│   ├── plan.chatmode.md
+│   └── planner.chatmode.md
 ├── prompts/              # Reusable task templates
 │   ├── documentation-writer.prompt.md
 │   └── azure-resource-health-diagnose.prompt.md
@@ -32,6 +53,31 @@ copilot-customizations/
 ```
 
 ## 🚀 Quick Start
+
+### Recommended: Use the Four-Mode Workflow
+
+The most effective way to use GitHub Copilot for Azure infrastructure is through our structured four-mode workflow:
+
+1. **Install Custom Agents** (if not already done)
+   - ADR Generator is located in `.github/agents/adr-generator.agent.md`
+   - Automatically available in VS Code GitHub Copilot
+
+2. **Activate Chat Modes**
+   - All 11 chat modes are in `chatmodes/` directory
+   - Use `@workspace` in Copilot Chat to invoke workspace context
+   - Reference modes: "Using azure-principal-architect mode..."
+
+3. **Follow the Workflow**
+   ```mermaid
+   graph LR
+       A[ADR Generator] --> B[Principal Architect]
+       B --> C[Bicep Planning]
+       C --> D[Bicep Implementation]
+   ```
+
+4. **Learn by Example**
+   - See [FOUR-MODE-WORKFLOW.md](FOUR-MODE-WORKFLOW.md) for complete examples
+   - See [chatmodes/README.md](chatmodes/README.md) for mode-specific guidance
 
 ### Option 1: Project-Wide Instructions (Recommended for This Repo)
 

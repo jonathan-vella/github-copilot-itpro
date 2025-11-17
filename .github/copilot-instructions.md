@@ -9,6 +9,39 @@ This repository demonstrates how GitHub Copilot serves as an **efficiency multip
 - **Primary**: System Integrator (SI) partners delivering Azure infrastructure projects
 - **Secondary**: IT Pros learning cloud/IaC, customers evaluating GitHub Copilot
 
+## Four-Agent Workflow Architecture
+
+This repository uses a **four-agent workflow** for Azure infrastructure development:
+
+1. **ADR Generator** - Document architectural decisions (`.github/agents/adr-generator.agent.md`)
+2. **Azure Principal Architect** - Azure Well-Architected Framework guidance (`.github/agents/azure-principal-architect.agent.md`)
+3. **Bicep Planning Specialist** - Infrastructure planning with AVM modules (`.github/agents/bicep-plan.agent.md`)
+4. **Bicep Implementation Specialist** - Bicep code generation (`.github/agents/bicep-implement.agent.md`)
+
+**How to Use Custom Agents:**
+1. Press `Ctrl+Shift+A` or click the **Agent** button in Copilot Chat
+2. Select agent from dropdown: `adr_generator`, `azure-principal-architect`, `bicep-plan`, or `bicep-implement`
+3. Type your prompt and submit
+
+**Example Workflow:**
+```
+Agent: adr_generator
+Prompt: Document the decision to use hub-spoke network topology
+
+Agent: azure-principal-architect  
+Prompt: Assess WAF implications of this design
+
+Agent: bicep-plan
+Prompt: Create an implementation plan for the network
+
+Agent: bicep-implement
+Prompt: Generate Bicep templates from the plan
+```
+
+📖 **Full Documentation:** See `resources/copilot-customizations/FOUR-MODE-WORKFLOW.md`
+
+**Supplementary Tools:** Additional chat modes are available in `resources/copilot-customizations/chatmodes/` for Terraform, debugging, and specialized scenarios.
+
 ## Repository Structure
 
 ```
