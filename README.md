@@ -102,6 +102,68 @@ github-copilot-itpro/
 
 ---
 
+## 🤖 Custom Agents & Workflow
+
+This repository uses a **four-mode workflow** to accelerate Azure infrastructure development with GitHub Copilot:
+
+### Four-Mode Workflow
+
+```mermaid
+graph LR
+    A[ADR Generator<br/>Agent] --> B[Azure Principal<br/>Architect Mode]
+    B --> C[Bicep Planning<br/>Mode]
+    C --> D[Bicep Implementation<br/>Mode]
+    
+    style A fill:#e1f5ff
+    style B fill:#fff4e1
+    style C fill:#e8f5e8
+    style D fill:#ffe8f5
+```
+
+1. **ADR Generator** (Custom Agent) - Document architectural decisions in [`/docs/adr/`](docs/adr)
+2. **Azure Principal Architect** (Chat Mode) - Get Azure Well-Architected Framework guidance
+3. **Bicep Planning** (Chat Mode) - Create structured infrastructure plans in `.bicep-planning-files/`
+4. **Bicep Implementation** (Chat Mode) - Generate production-ready Bicep templates
+
+### Custom Agents
+
+**ADR Generator** - Located in `.github/agents/adr-generator.agent.md`
+
+Creates comprehensive Architectural Decision Records following Microsoft best practices.
+
+**Usage:**
+```markdown
+@adr-generator Create an ADR for using Azure Bastion vs. Jump Boxes for secure VM access
+```
+
+**Features:**
+- Structured ADR format with status, context, decision, consequences
+- Alternatives analysis with rejection rationale
+- Implementation notes and success metrics
+- Automatic numbering and file naming
+
+**Learn More:** See [`/docs/adr/adr-0001-four-mode-workflow-adoption.md`](docs/adr/adr-0001-four-mode-workflow-adoption.md) for the architectural decision behind this workflow.
+
+### Custom Chat Modes
+
+All custom chat modes are located in `resources/copilot-customizations/chatmodes/`:
+
+- **azure-principal-architect.chatmode.md** - Azure Well-Architected Framework expert
+- **bicep-plan.chatmode.md** - Infrastructure planning with machine-readable output
+- **bicep-implement.chatmode.md** - Production-ready Bicep code generation
+- **azure-verified-modules-bicep.chatmode.md** - Azure Verified Modules integration
+- **debug.chatmode.md** - Troubleshooting and diagnostics assistance
+- **plan.chatmode.md** - General planning and task decomposition
+- **planner.chatmode.md** - Strategic planning and roadmapping
+
+**Quick Start:**
+1. Open VS Code in this repository
+2. Use `@workspace` to invoke workspace context
+3. Mention specific modes: "Using bicep-plan mode, create a plan for..."
+4. Follow the four-mode workflow for complex infrastructure
+
+---
+
 ## 💡 Core Value Propositions
 
 ### 1. Work Faster ⚡
