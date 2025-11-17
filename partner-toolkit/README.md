@@ -2,6 +2,18 @@
 
 Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contains everything System Integrator (SI) partners need to successfully sell and deliver GitHub Copilot demonstrations to Azure customers.
 
+## 🤖 NEW: Custom Agents Workflow
+
+**Demonstrate 94% time savings** with the four-agent workflow:
+
+- **ADR Generator** → **Azure Principal Architect** → **Bicep Planning** → **Bicep Implementation**
+- Complete infrastructure in 20 minutes vs. 5.25 hours manual
+- Automatic handoffs with context preservation
+- Production-ready code with validation
+
+📖 **Demo Script**: [resources/copilot-customizations/AGENT-HANDOFF-DEMO.md](../resources/copilot-customizations/AGENT-HANDOFF-DEMO.md)  
+🎯 **Use Case**: Show customers the complete Azure infrastructure development lifecycle
+
 ---
 
 ## 📁 Toolkit Contents

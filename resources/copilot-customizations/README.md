@@ -2,16 +2,41 @@
 
 This directory contains curated resources from the [github/awesome-copilot](https://github.com/github/awesome-copilot) repository, specifically selected to enhance your GitHub Copilot experience when working with Azure infrastructure and IT Pro scenarios.
 
-## 🚀 Four-Mode Workflow
+## 🚀 Four-Agent Workflow
 
-This repository uses a **structured four-mode workflow** for Azure infrastructure development:
+This repository uses **four custom GitHub Copilot agents** with automatic handoffs for Azure infrastructure development:
 
-1. **ADR Generator** (Custom Agent) → Document architectural decisions
-2. **Azure Principal Architect** (Chat Mode) → Azure Well-Architected Framework guidance
-3. **Bicep Planning** (Chat Mode) → Create structured infrastructure plans
-4. **Bicep Implementation** (Chat Mode) → Generate production-ready Bicep code
+**Agents** (in `.github/agents/`):
+1. **ADR Generator** (`adr_generator`) → Document architectural decisions
+2. **Azure Principal Architect** (`azure-principal-architect`) → WAF assessment and guidance
+3. **Bicep Planning Specialist** (`bicep-plan`) → Create machine-readable implementation plans
+4. **Bicep Implementation Specialist** (`bicep-implement`) → Generate production-ready Bicep code
 
-📖 **Complete Guide:** See [FOUR-MODE-WORKFLOW.md](FOUR-MODE-WORKFLOW.md) for detailed workflow documentation with examples and decision trees.
+**Key Features**:
+- ✅ **Automatic Handoffs**: Click buttons to switch agents with context
+- ✅ **Machine-Readable Plans**: Structured YAML for deterministic code generation
+- ✅ **Production-Ready Code**: Latest APIs, security best practices, validation
+- ✅ **94% Time Savings**: 5.25 hours → 20 minutes for complete infrastructure
+
+📖 **Complete Guide:** [FOUR-MODE-WORKFLOW.md](FOUR-MODE-WORKFLOW.md) (683 lines)  
+🎬 **Demo Script:** [AGENT-HANDOFF-DEMO.md](AGENT-HANDOFF-DEMO.md) (15-20 minutes)  
+📚 **Index:** [INDEX.md](INDEX.md) (All customizations)  
+
+### How to Use Custom Agents
+
+1. **Open Copilot Chat** (`Ctrl+Alt+I`)
+2. **Click Agent button** (`Ctrl+Shift+A`) or use the Agent dropdown
+3. **Select agent**: `adr_generator`, `azure-principal-architect`, `bicep-plan`, or `bicep-implement`
+4. **Type prompt** and submit
+5. **Click handoff buttons** to automatically switch agents with context
+
+**Example**:
+```
+(Using adr_generator agent)
+Document the decision to use hub network topology.
+Include rationale and alternatives.
+```
+→ Creates ADR → Click "Review Against WAF Pillars" → Automatically switches to `azure-principal-architect`
 
 ## 🎯 What's Included
 
