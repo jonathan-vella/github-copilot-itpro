@@ -6,7 +6,7 @@ Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contai
 
 **Demonstrate 94% time savings** with the four-agent workflow:
 
-- **ADR Generator** → **Azure Principal Architect** → **Bicep Planning** → **Bicep Implementation**
+- **ADR Generator** *(optional)* → **Azure Principal Architect** → **Bicep Planning** → **Bicep Implementation**
 - Complete infrastructure in 20 minutes vs. 5.25 hours manual
 - Automatic handoffs with context preservation
 - Production-ready code with validation

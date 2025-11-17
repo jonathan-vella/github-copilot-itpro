@@ -7,7 +7,7 @@ This directory contains curated resources from the [github/awesome-copilot](http
 This repository uses **four custom GitHub Copilot agents** with automatic handoffs for Azure infrastructure development:
 
 **Agents** (in `.github/agents/`):
-1. **ADR Generator** (`adr_generator`) → Document architectural decisions
+1. **ADR Generator** (`adr_generator`) → Document architectural decisions - *Optional: for enterprise governance*
 2. **Azure Principal Architect** (`azure-principal-architect`) → WAF assessment and guidance
 3. **Bicep Planning Specialist** (`bicep-plan`) → Create machine-readable implementation plans
 4. **Bicep Implementation Specialist** (`bicep-implement`) → Generate production-ready Bicep code

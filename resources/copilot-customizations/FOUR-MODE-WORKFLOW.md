@@ -6,10 +6,12 @@ This document describes the structured workflow for developing Azure infrastruct
 
 The four-agent workflow provides a systematic approach to infrastructure development:
 
-1. **Document Decisions** → ADR Generator (Custom Agent)
+1. **Document Decisions** → ADR Generator (Custom Agent) - *Optional for enterprise governance*
 2. **Plan Architecture** → Azure Principal Architect (Custom Agent)
 3. **Create Plan** → Bicep Planning Specialist (Custom Agent)
 4. **Implement Code** → Bicep Implementation Specialist (Custom Agent)
+
+> **Note**: The ADR Generator agent is optional. For quick demos focused on speed, you can start directly with the Azure Principal Architect agent (step 2). The ADR agent is most valuable for enterprise teams needing audit trails and governance documentation.
 
 **How to Use Custom Agents:**
 - Press `Ctrl+Shift+A` or click the **Agent** button in Copilot Chat
@@ -20,10 +22,10 @@ The four-agent workflow provides a systematic approach to infrastructure develop
 
 ```mermaid
 graph TB
-    Start([Infrastructure Requirement]) --> Decision{Need Architectural<br/>Decision?}
+    Start([Infrastructure Requirement]) --> Decision{Need Governance<br/>Documentation?}
     
-    Decision -->|Yes| ADR[ADR Generator Agent<br/>Document Decision]
-    Decision -->|No| Arch
+    Decision -->|Yes - Enterprise| ADR[ADR Generator Agent<br/>Document Decision<br/><i>OPTIONAL</i>]
+    Decision -->|No - Quick Demo| Arch
     
     ADR --> Arch[Azure Principal Architect<br/>WAF Assessment]
     
@@ -49,9 +51,11 @@ graph TB
 
 ## Mode Details
 
-### 1. ADR Generator (Custom Agent)
+### 1. ADR Generator (Custom Agent) - *Optional*
 
 **Purpose:** Document significant architectural decisions for future reference and team alignment.
+
+> **Use Case**: Best for enterprise teams, large projects, or when governance/audit trails are required. **Skip for quick demos** focused on showing infrastructure development speed.
 
 **When to Use:**
 - Making architectural decisions that impact multiple teams or components

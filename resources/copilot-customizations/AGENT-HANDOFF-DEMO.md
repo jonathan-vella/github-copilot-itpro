@@ -17,7 +17,9 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 
 ## 📋 Demo Script
 
-### Phase 1: Document Architectural Decision (ADR Generator)
+### Phase 1: Document Architectural Decision (ADR Generator) - *Optional*
+
+> **⏭️ Skip this phase** if you want to focus on infrastructure speed (start at Phase 2). This phase is valuable for showing enterprise governance capabilities.
 
 **Goal**: Create an Architecture Decision Record documenting a technical choice.
 

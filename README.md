@@ -122,7 +122,7 @@ This repository includes **four custom GitHub Copilot agents** that work togethe
 
 ```mermaid
 graph LR
-    A[1. ADR Generator<br/>Agent] -->|Handoff| B[2. Azure Principal<br/>Architect Agent]
+    A[1. ADR Generator<br/>Agent<br/><i>Optional</i>] -.->|Handoff| B[2. Azure Principal<br/>Architect Agent]
     B -->|Handoff| C[3. Bicep Planning<br/>Specialist Agent]
     C -->|Handoff| D[4. Bicep Implementation<br/>Specialist Agent]
     
@@ -144,8 +144,10 @@ graph LR
 
 ### The Four Agents
 
-#### 1. ADR Generator (`adr_generator`)
-**Purpose**: Document architectural decisions with structured ADRs
+#### 1. ADR Generator (`adr_generator`) - *Optional*
+**Purpose**: Document architectural decisions with structured ADRs for enterprise governance
+
+> **Skip for demos** focused on speed. Most valuable for enterprise teams needing audit trails.
 
 **Usage**:
 ```
