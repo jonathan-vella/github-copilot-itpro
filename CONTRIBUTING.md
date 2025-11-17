@@ -43,7 +43,7 @@ Thank you for your interest in contributing! This repository is designed to help
 
 1. **Check existing issues** - Someone might already be working on it
 2. **Open an issue** - Discuss your idea before investing time
-3. **Review the plan** - See [untitled:plan-githubCopilotItProFieldGuide.prompt.md](docs/plan-githubCopilotItProFieldGuide.prompt.md)
+3. **Review the TODO** - See [TODO.md](TODO.md) for current priorities
 
 ### Demo Structure Requirements
 
