@@ -23,7 +23,7 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 
 1. **Invoke the ADR Generator**:
    - Press `Ctrl+Shift+A` (or click **Agent** button in Copilot Chat)
-   - Select `@adr_generator` from the dropdown
+   - Select `adr_generator` from the dropdown
 
 2. **Provide the prompt**:
    ```
@@ -49,7 +49,7 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 4. **Use the Handoff Button** ⭐:
    - Look at the bottom of the response
    - Click **"Review Against WAF Pillars"** button
-   - This automatically invokes `@azure-principal-architect` with context
+   - This automatically invokes `azure-principal-architect` with context
 
 ---
 
@@ -60,10 +60,11 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 1. **Agent automatically invoked** (via handoff from Phase 1)
    - If not, manually invoke:
      ```
-     @azure-principal-architect Assess the hub network topology decision against 
+     Assess the hub network topology decision against 
      Azure Well-Architected Framework pillars. Use the ADR from 
      #file:docs/adr/adr-0003-hub-network-topology-test.md
      ```
+   - (Using `azure-principal-architect` agent from dropdown)
 
 2. **Review the WAF Assessment**:
    - Copilot evaluates across 5 pillars:
@@ -77,7 +78,7 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 
 3. **Use the Handoff Button** ⭐:
    - Click **"Generate Implementation Plan"**
-   - Automatically invokes `@bicep-plan` with architecture context
+   - Automatically invokes `bicep-plan` with architecture context
 
 ---
 
@@ -88,10 +89,11 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 1. **Agent automatically invoked** (via handoff from Phase 2)
    - If not, manually invoke:
      ```
-     @bicep-plan Create a detailed Bicep implementation plan for the hub network.
+     Create a detailed Bicep implementation plan for the hub network.
      Include all resources, dependencies, security configurations, and deployment phases.
      Reference #file:docs/adr/adr-0003-hub-network-topology-test.md
      ```
+   - (Using `bicep-plan` agent from dropdown)
 
 2. **Review the Implementation Plan**:
    - Copilot creates `.bicep-planning-files/INFRA.{goal}.md` with:
@@ -109,7 +111,7 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 
 3. **Use the Handoff Button** ⭐:
    - Click **"Generate Bicep Code"**
-   - Automatically invokes `@bicep-implement` with plan details
+   - Automatically invokes `bicep-implement` with plan details
 
 ---
 
@@ -120,11 +122,12 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 1. **Agent automatically invoked** (via handoff from Phase 3)
    - If not, manually invoke:
      ```
-     @bicep-implement Implement the Bicep templates based on the plan in 
+     Implement the Bicep templates based on the plan in 
      #file:.bicep-planning-files/INFRA.hub-network-test.md
      
      Output to: infrastructure/hub-network-demo/
      ```
+   - (Using `bicep-implement` agent from dropdown)
 
 2. **Review the Generated Code**:
    - Copilot creates:
@@ -144,7 +147,7 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
    - Shows compilation success with no errors
 
 4. **Optional Handoff**:
-   - Click **"Review Security & Compliance"** to return to `@azure-principal-architect`
+   - Click **"Review Security & Compliance"** to return to `azure-principal-architect`
    - Or click **"Update Plan Status"** to mark tasks complete in planning file
 
 ---
