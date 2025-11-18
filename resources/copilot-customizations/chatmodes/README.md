@@ -43,7 +43,7 @@ Three chat modes (azure-principal-architect, bicep-plan, bicep-implement) have b
 ```markdown
 Using bicep-plan mode, create a plan for deploying a hub-spoke network 
 with 3 spokes, Azure Firewall, and Private DNS zones.
-```yaml
+```
 
 ---
 
@@ -106,7 +106,7 @@ the AVM pattern with proper tagging and diagnostic settings.
 ```markdown
 Using azure-saas-architect mode, design a tenant isolation strategy 
 using Azure AD B2C and database-per-tenant pattern.
-```bicep
+```
 
 ---
 
@@ -249,7 +249,7 @@ graph TD
     style L fill:#FFC107
     style M fill:#FFC107
     style N fill:#FFC107
-```yaml
+```
 
 **Legend:**
 
@@ -277,7 +277,7 @@ graph TD
 
 **3. Combine Modes for Complex Tasks**
 
-```markdown
+```
 # Step 1: Architecture Assessment
 Using azure-principal-architect mode, evaluate security requirements 
 for PCI-DSS compliant infrastructure.
@@ -319,21 +319,21 @@ Using bicep-implement mode, generate Bicep templates from the plan.
 
 **Step 1: Document Decision**
 
-```markdown
+```
 @adr-generator Create an ADR for using hub-spoke network topology 
 vs. virtual WAN for a multi-region deployment.
 ```
 
 **Step 2: Architecture Guidance**
 
-```markdown
+```
 Using azure-principal-architect mode, assess the hub-spoke design 
 against WAF pillars for a requirement of 99.95% SLA.
 ```yaml
 
 **Step 3: Create Plan**
 
-```markdown
+```
 Using bicep-plan mode, create a detailed plan for implementing 
 a hub-spoke network with:
 - Hub VNet in West Europe with Azure Firewall
@@ -344,7 +344,7 @@ a hub-spoke network with:
 
 **Step 4: Implement**
 
-```markdown
+```
 Using bicep-implement mode, implement the hub network from 
 .bicep-planning-files/INFRA.hub-spoke-network.md
 ```yaml
@@ -355,7 +355,7 @@ Using bicep-implement mode, implement the hub network from
 
 **Scenario:** Bicep deployment fails with cryptic error
 
-```markdown
+```
 Using debug mode, analyze this deployment error and suggest fixes:
 
 Error: InvalidTemplateDeployment
@@ -367,7 +367,7 @@ Subnets must have an NSG attached.
 
 **Debug Mode Response:**
 
-```markdown
+```
 Analysis:
 - Azure Policy is blocking subnet creation without NSG
 - Policy name: "Deny-Subnet-Without-Nsg"

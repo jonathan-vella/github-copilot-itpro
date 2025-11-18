@@ -49,7 +49,7 @@ estimatedCost:
 
 references:
   docs: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal
-```bicep
+```
 
 ### virtualNetwork
 
@@ -153,7 +153,7 @@ estimatedCost:
 references:
   docs: https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview
   avm: https://github.com/Azure/bicep-registry-modules/tree/avm/res/network/network-security-group/0.5.2
-```bicep
+```
 
 ### networkSecurityGroupData
 
@@ -251,7 +251,7 @@ estimatedCost:
 references:
   docs: https://learn.microsoft.com/en-us/azure/app-service/overview-hosting-plans
   avm: https://github.com/Azure/bicep-registry-modules/tree/avm/res/web/serverfarm/0.5.0
-```bicep
+```
 
 ### appService
 
@@ -387,7 +387,7 @@ estimatedCost:
 references:
   docs: https://learn.microsoft.com/en-us/azure/azure-sql/database/logical-servers
   avm: https://github.com/Azure/bicep-registry-modules/tree/avm/res/sql/server/0.21.0
-```bicep
+```
 
 ### sqlDatabase
 
@@ -525,7 +525,7 @@ estimatedCost:
 references:
   docs: https://learn.microsoft.com/en-us/azure/key-vault/general/overview
   avm: https://github.com/Azure/bicep-registry-modules/tree/avm/res/key-vault/vault/0.13.3
-```bicep
+```
 
 ### privateEndpointKeyVault
 
@@ -640,7 +640,7 @@ estimatedCost:
 references:
   docs: https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview
   avm: https://github.com/Azure/bicep-registry-modules/tree/avm/res/network/private-endpoint/0.11.1
-```bicep
+```
 
 ### logAnalyticsWorkspace
 
@@ -764,7 +764,7 @@ estimatedCost:
 references:
   docs: https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview
   avm: https://github.com/Azure/bicep-registry-modules/tree/avm/res/insights/component/0.7.0
-```bicep
+```
 
 # Cost Estimation
 
@@ -1019,7 +1019,7 @@ az deployment group create `
   --resource-group rg-contoso-patient-portal-prod `
   --template-file main.bicep `
   --parameters main.bicepparam
-```yaml
+```
 
 **Phase-Specific Rollback Considerations:**
 

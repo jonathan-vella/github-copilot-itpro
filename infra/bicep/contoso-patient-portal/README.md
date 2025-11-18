@@ -67,7 +67,7 @@ cd infra/bicep/contoso-patient-portal
 
 # What-if analysis (dry run)
 .\deploy.ps1 -WhatIf
-```bicep
+```
 
 **Option 2: Using Azure CLI**
 
@@ -156,7 +156,7 @@ bicep lint main.bicep
 
 # What-if analysis
 az deployment sub what-if --location eastus2 --template-file main.bicep --parameters main.bicepparam
-```bicep
+```
 
 ### Post-Deployment Validation
 
@@ -209,7 +209,7 @@ param environment = 'dev'
 param location = 'eastus2'
 param projectName = 'contoso-patient-portal'
 // Use lower SKUs for cost savings
-```bicep
+```
 
 **Staging** (`main.staging.bicepparam`):
 
@@ -267,7 +267,7 @@ Solution: Verify RBAC role assignment completed. App Service needs 'Key Vault Se
 
 ```powershell
 az group delete --name rg-contoso-patient-portal-prod --yes --no-wait
-```bicep
+```
 
 **Delete specific resource**:
 

@@ -176,15 +176,15 @@ Let's begin.
 ```
 Get-AzResourceGroup
 ```
-````
+```
 
 **After:**
 
 ````markdown
-```powershell
+```
 Get-AzResourceGroup
 ```
-````
+```
 
 ### Line Length
 

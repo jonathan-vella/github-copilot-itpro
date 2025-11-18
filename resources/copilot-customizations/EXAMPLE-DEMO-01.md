@@ -7,7 +7,7 @@ This document shows how the Copilot customizations improve the Bicep Quickstart 
 ```bash
 # Add Bicep best practices to project
 cat resources/copilot-customizations/instructions/bicep-code-best-practices.instructions.md >> .github/copilot-instructions.md
-```bicep
+```
 
 ## Before vs. After Comparison
 
@@ -93,7 +93,7 @@ output storageAccountName string = storageAccount.name
 
 @description('Primary endpoints for the storage account')
 output primaryEndpoints object = storageAccount.properties.primaryEndpoints
-```bicep
+```
 
 ## Key Improvements Applied
 
@@ -237,7 +237,7 @@ properties: {
   }
   isVersioningEnabled: true
 }
-```bash
+```
 
 ## DevOps Integration
 
@@ -299,7 +299,7 @@ With `powershell-pester-5.instructions.md`:
 
 ```powershell
 # Create tests for a deployment validation script
-```bash
+```
 
 **Copilot generates**:
 
@@ -369,7 +369,7 @@ virtual network with proper segmentation.
 ## Steps
 
 ### 1. Review the Template
-```bash
+```
 # Clone the repository
 git clone https://github.com/jonathan-vella/github-copilot-itpro.git
 cd github-copilot-itpro/demos/01-bicep-quickstart/with-copilot

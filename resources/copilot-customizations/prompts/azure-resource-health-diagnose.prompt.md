@@ -100,7 +100,7 @@ This workflow analyzes a specific Azure resource to assess its health status, di
    | summarize ErrorCount=count() by Resource, ResultType, bin(TimeGenerated, 1h)
    | order by TimeGenerated desc
 
-```yaml
+```
 
    **Performance Analysis**:
 
@@ -129,7 +129,7 @@ This workflow analyzes a specific Azure resource to assess its health status, di
    | where Category == "SQLSecurityAuditEvents"
    | where action_name_s == "CONNECTION_FAILED"
    | summarize ConnectionFailures=count() by bin(TimeGenerated, 1h)
-```bicep
+```
 
 3. **Pattern Recognition**:
    - Identify recurring error patterns or anomalies
@@ -224,7 +224,7 @@ This workflow analyzes a specific Azure resource to assess its health status, di
 
    ❓ Proceed with detailed remediation plan? (y/n)
 
-```bicep
+```
 
 2. **Generate Detailed Report**:
 
@@ -261,21 +261,21 @@ This workflow analyzes a specific Azure resource to assess its health status, di
    ## 🛠️ Remediation Plan
    
    ### Phase 1: Immediate Actions (0-2 hours)
-   ```bash
+   ```
    # Critical fixes to restore service
    [Azure CLI commands with explanations]
 ```
 
 ### Phase 2: Short-term Fixes (2-24 hours)
 
-   ```bash
+   ```
    # Performance and reliability improvements
    [Azure CLI commands with explanations]
 ```yaml
 
    ### Phase 3: Long-term Improvements (1-4 weeks)
 
-   ```bash
+   ```
    # Architectural and preventive measures
    [Azure CLI commands and configuration changes]
 ```

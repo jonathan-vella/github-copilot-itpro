@@ -34,7 +34,7 @@ bicep --version
 
 # Verify GitHub Copilot
 code --list-extensions | Select-String copilot
-```text
+```
 
 ### 2. Customer Discovery (Before Demo)
 
@@ -88,7 +88,7 @@ IT Pros responsible for infrastructure deployment, cloud architects, DevOps engi
 
 "Before we start, let me show you what infrastructure deployment looks like WITHOUT Copilot..."
 
-```text
+```
 
 1. Open `demos/01-bicep-quickstart/manual-approach/time-tracking.md`
 2. Walk through: 81 minutes, 3 failed deployments, syntax errors
@@ -101,7 +101,7 @@ IT Pros responsible for infrastructure deployment, cloud architects, DevOps engi
 "Today we'll deploy a secure Azure network with 3 subnets, 3 NSGs with security rules,
 and a storage account with blob services. Typically 45 minutes. Let's do it in 10."
 
-```bicep
+```
 
 #### Phase 2: Live Copilot Development (18 minutes)
 
@@ -136,7 +136,7 @@ and a storage account with blob services. Typically 45 minutes. Let's do it in 1
 "Copilot knows Azure security best practices. It's suggesting priority 100 for allow rules,
 priority 4096 for deny rules, and properly structured rule properties."
 
-```yaml
+```
 
 **Step 3: Storage Account (5 minutes)**
 
@@ -154,7 +154,7 @@ priority 4096 for deny rules, and properly structured rule properties."
 "Security by default. Copilot learned from millions of repositories and knows
 that modern storage accounts should have these security settings."
 
-```yaml
+```
 
 #### Phase 3: Validation & Deployment (5 minutes)
 
@@ -243,7 +243,7 @@ IT operations teams, Azure administrators, compliance officers
 .SYNOPSIS
     Generate comprehensive Azure resource inventory report
 #>
-```bicep
+```
 
 3. Accept Copilot's comment-based help completion
 4. Type: `[CmdletBinding()]` and let Copilot suggest parameters
@@ -270,7 +270,7 @@ IT operations teams, Azure administrators, compliance officers
 "This script will save you $244,000 per year by finding and removing orphaned resources.
 Copilot just generated the logic to identify them and calculate savings."
 
-```powershell
+```
 
 **Script 3: Bulk Tagging (7 minutes)**
 
@@ -287,7 +287,7 @@ Copilot just generated the logic to identify them and calculate savings."
 "Notice the safety features Copilot added? Dry-run mode, confirmation prompts,
 parallel processing - these are production-ready patterns."
 
-```yaml
+```
 
 #### Phase 3: Show Results (5 minutes)
 
@@ -320,7 +320,7 @@ Operational Savings:
 - Orphaned resource cleanup: $244,000/year Azure cost reduction
 Total Annual Value: $1,086,000
 
-```yaml
+```
 
 ---
 
@@ -349,7 +349,7 @@ Azure patterns. Notice how it automatically suggested:
 These are security best practices built-in. Plus, YOU review every suggestion before accepting it.
 Copilot accelerates, but you're still in control."
 
-```yaml
+```
 
 ### Objection 2: "What about our junior engineers?"
 
@@ -361,7 +361,7 @@ Copilot accelerates, but you're still in control."
 suggests best practices, proper patterns, and correct syntax. It's like having a senior engineer
 pair programming with them. We've seen junior engineers become productive 60% faster."
 
-```yaml
+```
 
 ### Objection 3: "We have specific company standards"
 
@@ -373,7 +373,7 @@ pair programming with them. We've seen junior engineers become productive 60% fa
 same repository, and Copilot will suggest patterns that match YOUR standards. You can also use
 .copilot-instructions.md files to specify company-specific guidelines."
 
-```yaml
+```
 
 ### Objection 4: "How much does it cost?"
 
@@ -391,7 +391,7 @@ same repository, and Copilot will suggest patterns that match YOUR standards. Yo
 And that's just time savings. We haven't counted reduced errors, better security,
 or the Azure cost reduction from orphaned resource cleanup."
 
-```yaml
+```
 
 ### Objection 5: "Our code is proprietary/confidential"
 
@@ -403,7 +403,7 @@ or the Azure cost reduction from orphaned resource cleanup."
 but your proprietary code stays private. You can also use GitHub Copilot Enterprise which has
 additional compliance and privacy features."
 
-```yaml
+```
 
 ---
 
@@ -431,7 +431,7 @@ additional compliance and privacy features."
   - Developer satisfaction survey
 - Cost: $195-390 for pilot period
 
-```javascript
+```
 
 3. **Technical Setup**
    - Schedule 30-minute setup session

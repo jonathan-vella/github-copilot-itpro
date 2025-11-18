@@ -167,7 +167,7 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
          sku: N/A
          monthlyRange: $0
 
-```bicep
+```
 
    "Each resource is fully specified with purpose, dependencies, parameters, and costs."
 
@@ -234,7 +234,7 @@ targetScope = 'subscription'
 param location string = 'eastus2'
 param environment string = 'prod'
 ...
-```bicep
+```
 
 "Clean, modular main orchestrator with clear structure."
 
@@ -269,7 +269,7 @@ function Test-Prerequisites {
 ```powershell
 cd infra/bicep/contoso-patient-portal
 bicep build main.bicep --stdout --no-restore
-```text
+```
 
 **[Show successful compilation]**
 

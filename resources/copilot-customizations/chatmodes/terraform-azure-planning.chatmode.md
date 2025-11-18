@@ -99,7 +99,7 @@ goal: [Title of what to achieve]
 
 ### {resourceName}
 
-```yaml
+```
 name: <resourceName>
 kind: AVM | Raw
 # If kind == AVM:
@@ -154,4 +154,4 @@ avm: {module repo URL or commit} # if applicable
 
 
 <!-- Repeat Phase blocks as needed: Phase 1, Phase 2, Phase 3, … -->
-````
+```

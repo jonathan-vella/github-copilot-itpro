@@ -59,7 +59,7 @@ graph TB
     style CSV fill:#50e6ff,color:#000
     style JSON fill:#50e6ff,color:#000
     style HTML fill:#50e6ff,color:#000
-```bicep
+```
 
 ---
 
@@ -216,7 +216,7 @@ Get-AzResourceReport.ps1 `
 Send-MailMessage -To "ops-team@company.com" `
     -Subject "Daily Azure Resource Report" `
     -Attachments "ResourceInventory_*.html"
-```powershell
+```
 
 ---
 
@@ -258,7 +258,7 @@ Remove-OrphanedResources.ps1 `
 Remove-OrphanedResources.ps1 `
     -ResourceGroupPattern "rg-projectx-*" `
     -BackupFirst
-```powershell
+```
 
 ---
 
@@ -352,7 +352,7 @@ Log location: `$OutputPath\*_timestamp.log`
     ScriptPath: 'Get-AzResourceReport.ps1'
     ScriptArguments: '-IncludeCost -OutputFormat JSON'
     azurePowerShellVersion: 'LatestVersion'
-```powershell
+```
 
 ---
 
@@ -388,7 +388,7 @@ Invoke-AzOperationalInsightsDataCollection `
     -SharedKey $sharedKey `
     -LogType "AzureResourceInventory" `
     -Body ($report | ConvertTo-Json -Depth 10)
-```bicep
+```
 
 ---
 

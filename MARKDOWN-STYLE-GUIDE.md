@@ -144,18 +144,18 @@ Always specify the language for syntax highlighting:
 ✅ **Good:**
 
 ````markdown
-```powershell
+```
 Get-AzResourceGroup -Name "rg-demo"
 ```
 
-```bicep
+```
 param location string = 'swedencentral'
 ```
 
-```bash
+```
 az group create --name rg-demo --location swedencentral
 ```
-````
+```
 
 ❌ **Bad:**
 
@@ -163,7 +163,50 @@ az group create --name rg-demo --location swedencentral
 ```
 Get-AzResourceGroup -Name "rg-demo"
 ```
+```
+
+#### Code Fence Closures
+
+**CRITICAL**: Always close code fences with plain ` ``` ` (three backticks with NO language identifier).
+
+✅ **Correct:**
+
+````markdown
+```powershell
+Get-AzResourceGroup -Name "rg-demo"
+```
 ````
+
+````markdown
+```mermaid
+graph LR
+    A --> B
+```
+````
+
+❌ **Incorrect:**
+
+````markdown
+```powershell
+Get-AzResourceGroup -Name "rg-demo"
+```powershell  ← WRONG: Do not add language to closing fence
+````
+
+````markdown
+```mermaid
+graph LR
+    A --> B
+```yaml  ← WRONG: Do not add language to closing fence
+````
+
+**Why This Matters**:
+
+- Incorrect closures break mermaid chart rendering
+- GitHub's markdown parser fails to recognize the code block end
+- Syntax highlighting doesn't work properly
+- Documentation appears unprofessional
+
+**Rule**: Opening fence gets language, closing fence is always plain ` ``` `.
 
 #### Supported Languages
 
@@ -286,12 +329,12 @@ Use blockquotes for important notes:
 Use mermaid code blocks for diagrams:
 
 ````markdown
-```mermaid
+```
 graph LR
     A[On-Premises] --> B[Azure Arc]
     B --> C[Azure Portal]
 ```
-````
+```
 
 #### Diagram Best Practices
 
@@ -450,15 +493,15 @@ Related demos or resources.
 ```
 Get-AzResourceGroup
 ```
-````
+```
 
 ✅ **Solution:**
 
 ````markdown
-```powershell
+```
 Get-AzResourceGroup
 ```
-````
+```
 
 ### Issue: Lists Without Blank Lines
 

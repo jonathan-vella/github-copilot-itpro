@@ -194,7 +194,7 @@ include comprehensive outputs for audit documentation.
    git clone https://github.com/jonathan-vella/github-copilot-itpro.git
    cd github-copilot-itpro/demos/06-azure-specialization-prep
 
-```bash
+```
 
 2. **Login to Azure**:
 
@@ -209,7 +209,7 @@ include comprehensive outputs for audit documentation.
    # Follow the demo script
    code DEMO-SCRIPT.md
 
-```yaml
+```
 
 4. **Deploy infrastructure** (generated with agents):
 
@@ -222,7 +222,7 @@ include comprehensive outputs for audit documentation.
    ```powershell
    ./scripts/validate.ps1 -ResourceGroupName rg-audit-demo-prod
 
-```yaml
+```
 
 6. **Cleanup resources**:
 

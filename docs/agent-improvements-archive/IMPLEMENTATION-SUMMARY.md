@@ -267,7 +267,7 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
    # Test each agent with simple prompts
    # Verify new features appear in outputs
 
-```text
+```
 
 2. **Run Baseline Tests**
 
@@ -332,7 +332,7 @@ Output:
 - Add Azure SQL Database
 - Implement Application Gateway
 [No cost information]
-```yaml
+```
 
 **After (v1.1.0):**
 
@@ -370,7 +370,7 @@ Phase 1: Deploy hub VNet
 Phase 2: Deploy spoke VNets
 Phase 3: Configure peering
 [Text description only]
-```bicep
+```
 
 **After (v1.1.0):**
 
@@ -381,7 +381,7 @@ Prompt: Plan a hub-spoke network
 Output:
 # Resource Dependencies
 
-```mermaid
+```
 graph TD
     RG[Resource Group] --> HubVNet[Hub VNet]
     RG --> Spoke1[Spoke VNet 1]
@@ -399,7 +399,7 @@ graph TD
 3. Azure Firewall + Bastion
 4. VNet peering connections
 
-```yaml
+```
 
 ### Example 3: Using Progressive Implementation
 
@@ -429,7 +429,7 @@ Generating network-foundation.bicep...
 - Network Security Groups (empty rules)
 
 **Validation Steps:**
-```powershell
+```
 bicep build network-foundation.bicep
 az deployment group what-if --template-file network-foundation.bicep
 az deployment group create --template-file network-foundation.bicep
@@ -519,7 +519,7 @@ $metrics = @{
 # Save to tracking file
 $metrics | ConvertTo-Json | 
     Add-Content "docs/agent-improvements/metrics-tracking.json"
-```powershell
+```
 
 ---
 

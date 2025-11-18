@@ -188,7 +188,7 @@ Generate a Bicep module (compute.bicep) for Windows Server VMs with IIS installa
 
 **Custom Script Extension Requirements**:
 Install and configure IIS with the following PowerShell script:
-```powershell
+```
 Install-WindowsFeature -Name Web-Server -IncludeManagementTools
 Install-WindowsFeature -Name Web-Asp-Net45
 New-WebAppPool -Name 'TaskManagerPool'
@@ -243,7 +243,7 @@ New-Item -Path 'C:\inetpub\wwwroot\TaskManager' -ItemType Directory
 
 Generate the complete compute.bicep module with all resources, extensions, parameters, and outputs.
 
-```bicep
+```
 
 **Why this works**:
 - ✅ Complete VM specifications including sizes and images
@@ -355,13 +355,13 @@ Generate a Bicep module (database.bicep) for Azure SQL Database with comprehensi
 
 **Example Connection String Output**:
 
-```yaml
+```
 Server=tcp:{serverName}.database.windows.net,1433;Initial Catalog={databaseName};Persist Security Info=False;User ID={username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
 ```
 
 Generate the complete database.bicep module with all resources, security configurations, parameters, and outputs.
 
-```bicep
+```
 
 **Why this works**:
 - ✅ Comprehensive security configuration (TDE, auditing, threat detection)
@@ -475,7 +475,7 @@ Generate a Bicep module (loadbalancer.bicep) for Azure Load Balancer:
 
 Generate the complete loadbalancer.bicep module with all resources, rules, parameters, and outputs.
 
-```yaml
+```
 
 **Why this works**:
 - ✅ Complete load balancer configuration
@@ -606,7 +606,7 @@ Generate a Bicep module (monitoring.bicep) for comprehensive Azure Monitor confi
 
 Generate the complete monitoring.bicep module with all resources, alert rules, diagnostic settings, parameters, and outputs.
 
-```bicep
+```
 
 **Why this works**:
 - ✅ Comprehensive monitoring strategy
@@ -626,7 +626,7 @@ Generate the complete monitoring.bicep module with all resources, alert rules, d
 
 Generate a Bicep template for VMs in Azure.
 
-```bicep
+```
 
 **Problems**:
 - No VM specifications (size, OS, quantity)
@@ -643,7 +643,7 @@ Generate a Bicep template for VMs in Azure.
 
 Create a network.bicep module with a VNet and two subnets.
 
-```yaml
+```
 
 **Problems**:
 - No address spaces specified
@@ -660,7 +660,7 @@ Create a network.bicep module with a VNet and two subnets.
 
 Generate database.bicep for Azure SQL with all features enabled.
 
-```bicep
+```
 
 **Problems**:
 - No parameter definitions
@@ -686,7 +686,7 @@ SQL Database Configuration:
 - Zone Redundant: false
 - TLS Version: 1.2 minimum
 
-```text
+```
 
 ### 2. Define Comprehensive Parameter Lists
 
@@ -701,7 +701,7 @@ Parameters:
 - adminPassword: securestring (use @secure decorator)
 - vmSize: string (default: 'Standard_D2s_v3')
 
-```text
+```
 
 ### 3. Request All Necessary Outputs
 
@@ -715,7 +715,7 @@ Outputs Required:
 - nsgId: NSG resource ID
 - publicIpAddress: Public IP address value
 
-```text
+```
 
 ### 4. Emphasize Security Best Practices
 
@@ -730,7 +730,7 @@ Security Requirements:
 - Enable encryption at rest
 - No hardcoded credentials
 
-```text
+```
 
 ### 5. Include Decorators and Comments
 
@@ -744,7 +744,7 @@ Implementation Requirements:
 - Use @minValue/@maxValue for numeric constraints
 - Add comments explaining complex configurations
 
-```text
+```
 
 ### 6. Reference Azure Verified Modules
 
@@ -757,7 +757,7 @@ Best Practices:
 - Reference AVM parameters and outputs
 - Document any custom modifications
 
-```bicep
+```
 
 ---
 
@@ -844,7 +844,7 @@ Generate a complete Bicep module (network.bicep) for network infrastructure supp
 
 **Parameters**:
 
-```bicep
+```
 @description('Azure region for all resources')
 param location string = resourceGroup().location
 
@@ -882,7 +882,7 @@ param tags object = {
 
 **Outputs Required**:
 
-```bicep
+```
 @description('Virtual network resource ID')
 output vnetId string
 
@@ -963,7 +963,7 @@ output publicIpFqdn string
 
 **Expected Module Structure**:
 
-```bicep
+```
 // network.bicep - Network Infrastructure Module
 // Purpose: Deploys VNet, subnets, NSGs, and public IP for Contoso Task Manager
 // ALZ Alignment: Network topology, security, resource organization

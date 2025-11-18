@@ -111,7 +111,7 @@ Traditional infrastructure design involves:
    ```powershell
    cd demos/07-five-agent-workflow/prompts
 
-```yaml
+```
 
 2. **Open VS Code**:
 
@@ -201,7 +201,7 @@ See [DEMO-SCRIPT.md](DEMO-SCRIPT.md) for detailed walkthrough.
    bicep build main.bicep --stdout --no-restore
    bicep lint main.bicep
 
-```yaml
+```
 
 4. (Optional) What-if deployment:
 
