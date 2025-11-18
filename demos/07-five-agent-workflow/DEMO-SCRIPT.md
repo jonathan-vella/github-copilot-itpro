@@ -17,7 +17,7 @@ By the end of this demo, the audience will:
 ### Environment Setup (10 minutes before)
 
 - [ ] VS Code open with GitHub Copilot installed
-- [ ] Open `demos/07-four-agent-workflow/` directory
+- [ ] Open `demos/07-five-agent-workflow/` directory
 - [ ] GitHub Copilot Chat visible (`Ctrl+Shift+I`)
 - [ ] Test agent selection (`Ctrl+Shift+A`) - verify all 4 agents available
 - [ ] Have `prompts/workflow-prompts.md` ready in second window
@@ -343,7 +343,7 @@ A: The workflow pattern applies universally. You'd need to create cloud-specific
 
 **Where to Find Everything:**
 
-- Demo Files: `demos/07-four-agent-workflow/`
+- Demo Files: `demos/07-five-agent-workflow/`
 - Agent Configuration: `.github/agents/`
 - Full Workflow Guide: `resources/copilot-customizations/FIVE-MODE-WORKFLOW.md`
 - Bicep Templates: `infra/bicep/contoso-patient-portal/`

@@ -18,7 +18,7 @@ This repository uses **four custom GitHub Copilot agents** with automatic handof
 - ✅ **Production-Ready Code**: Latest APIs, security best practices, validation
 - ✅ **94% Time Savings**: 5.25 hours → 20 minutes for complete infrastructure
 
-📖 **Complete Guide:** [FOUR-MODE-WORKFLOW.md](FOUR-MODE-WORKFLOW.md) (683 lines)  
+📖 **Complete Guide:** [FIVE-MODE-WORKFLOW.md](FIVE-MODE-WORKFLOW.md) (683 lines)  
 🎬 **Demo Script:** [AGENT-HANDOFF-DEMO.md](AGENT-HANDOFF-DEMO.md) (15-20 minutes)  
 📚 **Index:** [INDEX.md](INDEX.md) (All customizations)  
 

@@ -597,8 +597,8 @@ if ($content -match '```chatagent\s+---\s+(.+?)\s+---') {
 
 ### Documentation Resources
 
-- [Four-Mode Workflow Guide](../resources/copilot-customizations/FOUR-MODE-WORKFLOW.md)
-- [Agent Improvements Roadmap](../../docs/agent-improvements/ROADMAP.md)
+- [Five-Mode Workflow Guide](../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md)
+- [Agent Version History (Archive)](../../docs/agent-improvements-archive/CHANGELOG.md)
 - [Test Cases](./test-cases/)
 - [GitHub Copilot Documentation](https://docs.github.com/en/copilot)
 

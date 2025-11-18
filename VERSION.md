@@ -151,4 +151,4 @@ PATCH (Improvements):
 
 **Latest Release**: [v1.0.0](#version-100-2025-11-18---initial-release-) (Initial Production Release)  
 **Next Planned**: v1.1.0 (Q1 2026) - Case Studies  
-**See Also**: [PROGRESS.md](PROGRESS.md) | [PROJECT-SUMMARY.md](PROJECT-SUMMARY.md)
+**See Also**: [PROGRESS.md](PROGRESS.md)

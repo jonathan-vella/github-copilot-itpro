@@ -86,7 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Documentation
 - Created agent improvements roadmap
 - Added this changelog
-- Updated FOUR-MODE-WORKFLOW.md with new capabilities
+- Updated FIVE-MODE-WORKFLOW.md with new capabilities
 
 ---
 
@@ -169,7 +169,7 @@ Special thanks to everyone who contributed to these improvements:
 
 - [Roadmap](./ROADMAP.md)
 - [Testing Results](./TESTING-RESULTS.md)
-- [Four-Mode Workflow](../../resources/copilot-customizations/FOUR-MODE-WORKFLOW.md)
+- [Five-Mode Workflow](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md)
 - [Agent Troubleshooting](../../resources/copilot-customizations/AGENT-TROUBLESHOOTING.md)
 
 ---

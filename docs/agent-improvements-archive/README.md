@@ -24,7 +24,7 @@ This directory tracks improvements to the GitHub Copilot custom agents used in t
 ## 🎯 Quick Links
 
 ### Getting Started
-- [Four-Mode Workflow](../../resources/copilot-customizations/FOUR-MODE-WORKFLOW.md) - How to use the agents
+- [Five-Mode Workflow](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md) - How to use the agents
 - [Agent Troubleshooting](../../resources/copilot-customizations/AGENT-TROUBLESHOOTING.md) - Common issues and solutions
 - [Test Suite](../../demos/agent-testing/) - Testing framework and procedures
 
@@ -191,7 +191,7 @@ cd demos/agent-testing
 ## 📚 Documentation Index
 
 ### Core Documentation
-- **Getting Started:** [Four-Mode Workflow](../../resources/copilot-customizations/FOUR-MODE-WORKFLOW.md)
+- **Getting Started:** [Five-Mode Workflow](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md)
 - **Troubleshooting:** [Agent Troubleshooting Guide](../../resources/copilot-customizations/AGENT-TROUBLESHOOTING.md)
 - **Testing:** [Test Suite README](../../demos/agent-testing/README.md)
 

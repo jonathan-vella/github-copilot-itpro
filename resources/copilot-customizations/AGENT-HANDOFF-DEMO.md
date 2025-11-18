@@ -282,7 +282,7 @@ Remove-Item infrastructure/hub-network-demo -Recurse
 
 ## 🔗 Related Documentation
 
-- [Four-Agent Workflow Guide](./FOUR-MODE-WORKFLOW.md) - Complete workflow documentation
+- [Five-Agent Workflow Guide](./FIVE-MODE-WORKFLOW.md) - Complete workflow documentation
 - [Agent Configuration](../../.github/agents/) - Agent YAML files with handoffs
 - [Copilot Instructions](../../.github/copilot-instructions.md) - Repository context for Copilot
 

@@ -247,7 +247,7 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
    ```
 
 3. **Review Documentation**
-   - Read FOUR-MODE-WORKFLOW.md for updated workflow
+   - Read FIVE-MODE-WORKFLOW.md for updated workflow
    - Review AGENT-TROUBLESHOOTING.md for common issues
    - Familiarize with testing procedures
 
@@ -432,7 +432,7 @@ az deployment group create --template-file network-foundation.bicep
    - Know when to use each feature
 
 2. **How to Use**
-   - Follow updated FOUR-MODE-WORKFLOW.md
+   - Follow updated FIVE-MODE-WORKFLOW.md
    - Reference troubleshooting guide when stuck
    - Use test cases as prompt templates
 
@@ -582,7 +582,7 @@ Get-Content docs/agent-improvements/CHANGELOG.md
 code resources/copilot-customizations/AGENT-TROUBLESHOOTING.md
 
 # Review workflow
-code resources/copilot-customizations/FOUR-MODE-WORKFLOW.md
+code resources/copilot-customizations/FIVE-MODE-WORKFLOW.md
 ```
 
 ---

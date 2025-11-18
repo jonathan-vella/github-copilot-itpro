@@ -38,7 +38,7 @@ Agent: bicep-implement
 Prompt: Generate Bicep templates from the plan
 ```
 
-📖 **Full Documentation:** See `resources/copilot-customizations/FOUR-MODE-WORKFLOW.md`
+📖 **Full Documentation:** See `resources/copilot-customizations/FIVE-MODE-WORKFLOW.md`
 
 **Supplementary Tools:** Additional chat modes are available in `resources/copilot-customizations/chatmodes/` for Terraform, debugging, and specialized scenarios.
 

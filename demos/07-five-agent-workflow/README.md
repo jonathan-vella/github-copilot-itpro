@@ -83,7 +83,7 @@ Traditional infrastructure design involves:
 
 1. **Navigate to prompts directory**:
    ```powershell
-   cd demos/07-four-agent-workflow/prompts
+   cd demos/07-five-agent-workflow/prompts
    ```
 
 2. **Open VS Code**:
@@ -103,7 +103,7 @@ See [DEMO-SCRIPT.md](DEMO-SCRIPT.md) for detailed walkthrough.
 ## 📁 Demo Structure
 
 ```
-07-four-agent-workflow/
+07-five-agent-workflow/
 ├── README.md                           # This file
 ├── DEMO-SCRIPT.md                      # Step-by-step presentation guide
 ├── scenario/

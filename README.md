@@ -364,7 +364,7 @@ Implement the Bicep templates based on the plan...
 
 ### Quick Start Guide
 
-📖 **[Complete Workflow Documentation](resources/copilot-customizations/FOUR-MODE-WORKFLOW.md)** (includes Plan agent guidance)  
+📖 **[Complete Workflow Documentation](resources/copilot-customizations/FIVE-MODE-WORKFLOW.md)** (includes Plan agent guidance)  
 🎬 **[15-Minute Demo Script](resources/copilot-customizations/AGENT-HANDOFF-DEMO.md)** (start with `@plan`)  
 📚 **[Plan Agent Documentation](https://code.visualstudio.com/docs/copilot/chat/chat-planning)** (official VS Code docs)  
 📚 **[Index of All Customizations](resources/copilot-customizations/INDEX.md)**  

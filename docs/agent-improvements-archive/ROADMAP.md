@@ -110,7 +110,7 @@ This roadmap tracks improvements to the four custom GitHub Copilot agents used i
 
 **Activities:**
 - Create troubleshooting guide
-- Update FOUR-MODE-WORKFLOW.md
+- Update FIVE-MODE-WORKFLOW.md
 - Record demo videos
 - Create agent cheat sheet
 - Partner training materials
@@ -201,7 +201,7 @@ This roadmap tracks improvements to the four custom GitHub Copilot agents used i
 ## Resources
 
 ### Documentation
-- [Four-Mode Workflow](../../resources/copilot-customizations/FOUR-MODE-WORKFLOW.md)
+- [Five-Mode Workflow](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md)
 - [Agent Definitions](../../.github/agents/)
 - [Test Suite](../../demos/agent-testing/)
 
