@@ -22,6 +22,7 @@ This is a hands-on collection of **30-minute demos** showing how GitHub Copilot 
 | **Arc onboarding** (100 servers) | 80 hrs | 8 hrs | **90%** ⚡ |
 | **Troubleshooting diagnostics** | 30 min | 8 min | **73%** ⚡ |
 | **Documentation** (runbook) | 90 min | 20 min | **78%** ⚡ |
+| **Specialization audit prep** | 60 hrs | 10 hrs | **83%** ⚡ |
 
 ### Who This Is For
 
@@ -46,6 +47,7 @@ cd github-copilot-itpro
 # - Adopting IaC → demos/01-bicep-quickstart  
 # - Hybrid Infrastructure → demos/03-azure-arc-onboarding
 # - Operational Teams → demos/04-troubleshooting-assistant
+# - Specialization Partners → demos/06-azure-specialization-prep
 
 # Read the demo script
 cat demos/01-bicep-quickstart/DEMO-SCRIPT.md
@@ -63,8 +65,9 @@ cd demos/01-bicep-quickstart/validation
 2. **Foundation** (30 min): [PowerShell Automation](demos/02-powershell-automation) - See automation best practices emerge
 3. **Modern IaC** (30 min): [Bicep Quickstart](demos/01-bicep-quickstart) - Bridge to Infrastructure as Code
 4. **Advanced** (30 min): [Azure Arc](demos/03-azure-arc-onboarding) - Hybrid infrastructure at scale
+5. **Specialization** (30 min): [Azure Specialization Prep](demos/06-azure-specialization-prep) - Audit preparation with custom agents
 
-**Total Investment:** 2 hours | **Outcome:** Confident in modern Azure practices
+**Total Investment:** 2.5 hours | **Outcome:** Confident in modern Azure practices + specialization readiness
 
 ---
 
@@ -85,7 +88,8 @@ github-copilot-itpro/
 │   ├── 02-powershell-automation/       # Operational tasks automated
 │   ├── 03-azure-arc-onboarding/        # Hybrid infrastructure simplified
 │   ├── 04-troubleshooting-assistant/   # AI-powered diagnostics
-│   └── 05-documentation-generator/     # Runbooks & diagrams at speed
+│   ├── 05-documentation-generator/     # Runbooks & diagrams at speed
+│   └── 06-azure-specialization-prep/   # Audit preparation accelerated
 │
 ├── resources/copilot-customizations/   # Workflow guides & instructions
 │   ├── FOUR-MODE-WORKFLOW.md           # Complete workflow documentation
@@ -462,6 +466,30 @@ Generate architecture diagrams, runbooks, and troubleshooting guides automatical
 - Documentation as code
 - Diagram generation
 - Template reuse
+
+---
+
+### [Demo 6: Azure Specialization Audit Preparation](demos/06-azure-specialization-prep)
+**Time:** 30 minutes | **Level:** Advanced
+
+Accelerate Azure Infrastructure and Database Migration Specialization audit preparation using the four-agent workflow.
+
+**Scenarios:**
+- Complete audit evidence generation (8 controls)
+- Infrastructure as Code with ALZ alignment
+- Well-Architected Framework assessments
+- Architecture Decision Records (ADRs)
+
+**What You'll Learn:**
+- Four-agent workflow with automatic handoffs
+- ADR Generator → Azure Architect → Bicep Planning → Bicep Implementation
+- Production-ready Bicep templates with security best practices
+- Audit evidence documentation
+
+**Business Value:**
+- **Time Savings:** 60 hours → 10 hours (83% reduction)
+- **Annual ROI:** $21,000 for 4 audits/year
+- **Audit Coverage:** 3 Module A + 5 Module B controls
 
 ---
 
