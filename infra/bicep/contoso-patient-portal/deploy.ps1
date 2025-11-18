@@ -46,8 +46,8 @@
 [CmdletBinding(SupportsShouldProcess)]
 param(
     [Parameter()]
-    [ValidateSet('eastus', 'eastus2', 'westus2', 'westeurope', 'northeurope')]
-    [string]$Location = 'eastus2',
+    [ValidateSet('swedencentral', 'eastus', 'eastus2', 'westus2', 'westeurope', 'northeurope')]
+    [string]$Location = 'swedencentral',
 
     [Parameter()]
     [ValidateSet('dev', 'staging', 'prod')]
