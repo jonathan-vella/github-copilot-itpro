@@ -50,7 +50,7 @@ cd github-copilot-itpro
 # - Hybrid Infrastructure → demos/03-azure-arc-onboarding
 # - Operational Teams → demos/04-troubleshooting-assistant
 # - Specialization Partners → demos/06-azure-specialization-prep
-# - Complete Workflow → demos/07-five-agent-workflow
+# - Complete Workflow → infra/bicep/contoso-patient-portal (Demo 07 implementation)
 
 # Read the demo script
 cat demos/01-bicep-quickstart/DEMO-SCRIPT.md
@@ -69,7 +69,9 @@ cd demos/01-bicep-quickstart/validation
 3. **Modern IaC** (30 min): [Bicep Quickstart](demos/01-bicep-quickstart) - Bridge to Infrastructure as Code
 4. **Advanced** (30 min): [Azure Arc](demos/03-azure-arc-onboarding) - Hybrid infrastructure at scale
 5. **Specialization** (40 min): [Azure Specialization Prep](demos/06-azure-specialization-prep) - Audit preparation with validation
-6. **Complete Workflow** (45 min): [Five-Agent Workflow](demos/07-five-agent-workflow) - Requirements to code in minutes
+6. **Complete Workflow** (45 min): [Five-Agent Workflow](infra/bicep/contoso-patient-portal) - Requirements to code in minutes
+
+> **Note on Demo 07**: The Five-Agent Workflow demo is implemented in `infra/bicep/contoso-patient-portal/` rather than a separate `demos/07-five-agent-workflow/` directory. This production-ready HIPAA-compliant infrastructure (1,070 lines of Bicep, 10 modules) serves as the working demonstration of the complete agent workflow, showing 96% time savings (18 hours manual → 45 minutes with agents). See [`FIVE-MODE-WORKFLOW.md`](resources/copilot-customizations/FIVE-MODE-WORKFLOW.md) for complete documentation.
 
 **Total Investment:** 3.5 hours | **Outcome:** Confident in modern Azure practices + specialization readiness + agent workflow mastery
 
@@ -571,8 +573,10 @@ Accelerate Azure Infrastructure and Database Migration Specialization audit prep
 
 ---
 
-### [Demo 7: Five-Agent Workflow](demos/07-five-agent-workflow) 🆕
+### [Demo 7: Five-Agent Workflow](infra/bicep/contoso-patient-portal) 🆕
 **Time:** 45-60 minutes | **Level:** Advanced
+
+> **Implementation Note**: This demo is implemented as production-ready infrastructure in `infra/bicep/contoso-patient-portal/` (1,070 lines of Bicep across 10 modules), serving as the working demonstration of the complete five-agent workflow. See [`FIVE-MODE-WORKFLOW.md`](resources/copilot-customizations/FIVE-MODE-WORKFLOW.md) for detailed documentation.
 
 Showcase the complete 5-agent workflow from business requirements to deployable infrastructure with automatic agent handoffs.
 

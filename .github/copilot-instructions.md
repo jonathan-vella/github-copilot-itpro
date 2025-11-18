@@ -2,6 +2,56 @@
 
 This file provides context and guidance for GitHub Copilot when assisting with this repository.
 
+## Quick Reference for AI Agents
+
+**Essential Knowledge for Immediate Productivity:**
+
+1. **Default Region**: Always use `swedencentral` unless specified otherwise
+2. **Unique Resource Names**: Generate `var uniqueSuffix = uniqueString(resourceGroup().id)` in main.bicep, pass to ALL modules
+3. **Name Length Limits**: Key Vault ≤24 chars, Storage ≤24 chars (no hyphens), SQL ≤63 chars
+4. **Demo Policy Bypass**: Add `SecurityControl: 'Ignore'` tag to bypass Azure AD-only auth for SQL Server
+5. **Zone Redundancy**: App Service Plans need P1v3 SKU (not S1) for zone redundancy
+6. **Four-Agent Workflow**: azure-principal-architect → bicep-plan → bicep-implement (ADR optional)
+7. **Working Example**: `infra/bicep/contoso-patient-portal/` demonstrates all patterns correctly
+8. **Deploy Script Pattern**: Use `[CmdletBinding(SupportsShouldProcess)]` + `$WhatIfPreference` (NOT explicit `$WhatIf` param)
+
+**Critical Files:**
+- Agent definitions: `.github/agents/*.agent.md`
+- Workflow guide: `resources/copilot-customizations/FIVE-MODE-WORKFLOW.md`
+- Production example: `infra/bicep/contoso-patient-portal/`
+- Bicep implement agent: `.github/agents/bicep-implement.agent.md` (has unique suffix guidance)
+
+## Regional Selection Guidelines
+
+**Default Region**: `swedencentral` (sustainable operations with renewable energy)
+
+**When to Use Other Regions:**
+
+### Geographic Latency Optimization
+- **Americas**: Use `eastus`, `eastus2`, `westus2`, or `centralus` for users primarily in North/South America
+- **Asia Pacific**: Use `southeastasia`, `eastasia`, or `australiaeast` for users in APAC region
+- **Europe (alternatives)**: Use `westeurope` or `northeurope` if swedencentral doesn't meet requirements
+
+### Compliance & Data Sovereignty
+- **Germany**: Use `germanywestcentral` for German data residency requirements
+- **Switzerland**: Use `switzerlandnorth` for Swiss banking/healthcare regulations
+- **UK**: Use `uksouth` or `ukwest` for UK GDPR requirements
+- **France**: Use `francecentral` for French data sovereignty
+- **Specific Regulations**: Check compliance requirements at [Azure Compliance](https://learn.microsoft.com/azure/compliance/)
+
+### Service Availability
+- **Preview Features**: Some Azure preview features may only be available in specific regions (typically `eastus`, `westus2`, `westeurope`)
+- **VM/Database SKUs**: Not all VM sizes or database tiers are available in all regions
+- **Check Availability**: Use [Azure Products by Region](https://azure.microsoft.com/global-infrastructure/services/) to verify service availability
+- **Availability Zones**: Ensure the selected region supports availability zones if zone redundancy is required
+
+### Cost Optimization
+- Some regions have lower pricing for compute and storage resources
+- Use [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) to compare costs
+- Consider egress costs for data transfer between regions
+
+**Best Practice**: When deviating from `swedencentral`, document the reason (latency/compliance/availability) in deployment parameters or README.
+
 ## Repository Purpose
 
 This repository demonstrates how GitHub Copilot serves as an **efficiency multiplier** for IT Professionals and Cloud Architects working with Azure infrastructure. The target audience is:
@@ -13,7 +63,7 @@ This repository demonstrates how GitHub Copilot serves as an **efficiency multip
 
 This repository uses a **four-agent workflow** for Azure infrastructure development:
 
-1. **ADR Generator** - Document architectural decisions (`.github/agents/adr-generator.agent.md`)
+1. **ADR Generator** (Optional) - Document architectural decisions (`.github/agents/adr-generator.agent.md`)
 2. **Azure Principal Architect** - Azure Well-Architected Framework guidance (`.github/agents/azure-principal-architect.agent.md`)
 3. **Bicep Planning Specialist** - Infrastructure planning with AVM modules (`.github/agents/bicep-plan.agent.md`)
 4. **Bicep Implementation Specialist** - Bicep code generation (`.github/agents/bicep-implement.agent.md`)
@@ -25,14 +75,11 @@ This repository uses a **four-agent workflow** for Azure infrastructure developm
 
 **Example Workflow:**
 ```
-Agent: adr_generator
-Prompt: Document the decision to use hub-spoke network topology
-
-Agent: azure-principal-architect  
-Prompt: Assess WAF implications of this design
+Agent: azure-principal-architect (skip ADR for quick demos)
+Prompt: Assess HIPAA-compliant patient portal architecture
 
 Agent: bicep-plan
-Prompt: Create an implementation plan for the network
+Prompt: Create implementation plan with AVM modules
 
 Agent: bicep-implement
 Prompt: Generate Bicep templates from the plan
@@ -40,23 +87,36 @@ Prompt: Generate Bicep templates from the plan
 
 📖 **Full Documentation:** See `resources/copilot-customizations/FIVE-MODE-WORKFLOW.md`
 
+**Critical Agent Behaviors:**
+- **All agents default to `swedencentral` region** unless explicitly specified
+- **Bicep agents ALWAYS generate unique resource name suffixes** using `uniqueString(resourceGroup().id)` to prevent naming collisions
+- **Key Vault names**: Must be ≤24 chars (pattern: `kv-{shortname}-{env}-{suffix}`)
+- **App Service Plans**: Use P1v3 (Premium) or higher for zone redundancy (Standard SKU doesn't support it)
+- **SQL Server**: Add `SecurityControl: 'Ignore'` tag to bypass Azure AD-only auth policy in demo environments
+
 **Supplementary Tools:** Additional chat modes are available in `resources/copilot-customizations/chatmodes/` for Terraform, debugging, and specialized scenarios.
 
 ## Repository Structure
 
 ```
 github-copilot-itpro/
-├── demos/               # Self-contained 30-minute demo modules
+├── .github/agents/                      # 4 custom agents for workflow
+├── demos/                               # Self-contained 30-minute demo modules
 │   ├── 01-bicep-quickstart/
 │   ├── 02-powershell-automation/
 │   ├── 03-azure-arc-onboarding/
 │   ├── 04-troubleshooting-assistant/
-│   └── 05-documentation-generator/
-├── partner-toolkit/     # Materials for SI partners
-├── case-studies/        # Real-world success stories
-├── skills-bridge/       # Learning content for IT Pros
-└── resources/          # Shared utilities and guides
+│   ├── 05-documentation-generator/
+│   └── 06-azure-specialization-prep/
+├── infra/bicep/                         # Production-ready Bicep examples
+│   └── contoso-patient-portal/         # HIPAA-compliant multi-tier app
+├── partner-toolkit/                     # Materials for SI partners
+├── case-studies/                        # Real-world success stories
+├── skills-bridge/                       # Learning content for IT Pros
+└── resources/copilot-customizations/    # Workflow guides & chat modes
 ```
+
+**Note**: Demo 07 (Five-Agent Workflow) is referenced in README but lives in `infra/bicep/contoso-patient-portal/` - this is the actual working implementation of the workflow.
 
 ## Content Format Standards
 
@@ -113,20 +173,34 @@ tags: {
 When generating Bicep code:
 
 1. **Always use latest API versions** (2023-05-01 or newer)
-2. **Include security by default**:
+2. **Default location**: `swedencentral` (unless specified otherwise)
+3. **CRITICAL - Unique resource names**: Generate suffix in main.bicep and pass to ALL modules:
+   ```bicep
+   var uniqueSuffix = uniqueString(resourceGroup().id)
+   ```
+4. **Name length constraints**:
+   - Key Vault: ≤24 chars (e.g., `kv-contosop-dev-abc123` = 22 chars)
+   - Storage Account: ≤24 chars, lowercase + numbers only, NO hyphens
+   - SQL Server: ≤63 chars, lowercase + numbers + hyphens
+5. **Include security by default**:
    - `supportsHttpsTrafficOnly: true`
    - `minimumTlsVersion: 'TLS1_2'`
    - `allowBlobPublicAccess: false`
    - NSG deny rules at priority 4096
-3. **Add descriptive comments** for all parameters and resources
-4. **Include outputs** for resource IDs and endpoints
-5. **Use parameters** instead of hardcoded values
-6. **Follow modular design** (separate files for network, storage, compute)
+6. **Azure Policy compliance for demos**:
+   - SQL Server: Add `SecurityControl: 'Ignore'` tag to bypass Azure AD-only auth requirement
+   - App Service Plan: Use P1v3 (not S1) for zone redundancy support
+7. **Add descriptive comments** for all parameters and resources
+8. **Include outputs** for resource IDs and endpoints
+9. **Follow modular design** (separate files for network, storage, compute)
 
 Example parameter documentation:
 ```bicep
 @description('Azure region for all resources')
-param location string = resourceGroup().location
+param location string = 'swedencentral'
+
+@description('Unique suffix for resource naming (generated from resource group ID)')
+param uniqueSuffix string
 
 @description('Environment name (dev, staging, prod)')
 @allowed([
@@ -273,6 +347,67 @@ graph LR
     D --> E[Validate & Deploy]
 ```
 
+## Critical Deployment Patterns
+
+### Resource Naming with Unique Suffixes
+
+**Problem**: Azure resources like Key Vault, Storage Accounts, and SQL Servers require globally unique names. Without suffixes, deployments fail with naming collisions.
+
+**Solution Pattern** (See `infra/bicep/contoso-patient-portal/` for complete implementation):
+
+```bicep
+// main.bicep - Generate suffix once
+var uniqueSuffix = uniqueString(subscription().subscriptionId, resourceGroupName)
+
+// Pass to all modules
+module keyVault 'modules/key-vault.bicep' = {
+  params: {
+    uniqueSuffix: uniqueSuffix
+    // ... other params
+  }
+}
+
+// modules/key-vault.bicep - Apply to resource names
+param uniqueSuffix string
+var keyVaultName = 'kv-${take(replace(projectName, '-', ''), 8)}-${take(environment, 3)}-${take(uniqueSuffix, 6)}'
+// Result: "kv-contosop-dev-abc123" (22 chars, within 24 limit)
+```
+
+**Key Points:**
+- Use `take()` to control name length (Key Vault = 24 chars max)
+- Remove hyphens for Storage Accounts (no special chars allowed)
+- Shorten project names (e.g., "contoso-patient-portal" → "contosop")
+- Apply suffix to ALL resources for consistency
+
+### Azure Policy Workarounds for Demo Environments
+
+**Common Policy Blockers:**
+1. **SQL Server Azure AD-only authentication**: Add `SecurityControl: 'Ignore'` tag
+2. **App Service Plan zone redundancy**: Must use Premium SKU (P1v3+), not Standard
+3. **Key Vault name length**: Policy doesn't block, but Azure enforces 24-char limit
+
+**Implementation** (See `infra/bicep/contoso-patient-portal/main.bicep`):
+```bicep
+param tags object = {
+  Environment: environment
+  ManagedBy: 'Bicep'
+  SecurityControl: 'Ignore'  // Bypass demo-blocking policies
+}
+```
+
+### Progressive Deployment Pattern
+
+For complex infrastructure (10+ resources, multiple modules):
+
+**Phase 1**: Foundation (networking, NSGs)
+**Phase 2**: Platform services (Key Vault, SQL Server, App Service Plan)
+**Phase 3**: Application tier (App Service, databases, private endpoints)
+**Phase 4**: Configuration (secrets, RBAC, monitoring)
+
+Between each phase: `bicep build` → `bicep lint` → `az deployment` → validate resources exist
+
+**Why**: Helps isolate dependency issues, provides clear rollback points, makes debugging easier.
+
 ## Repository-Specific Context
 
 ### Technologies Used
@@ -310,14 +445,48 @@ All demo code should follow these security principles:
 - Group resources logically (NSGs before VNets)
 - Include comprehensive outputs
 - Add comments explaining complex logic
+- **ALWAYS include `uniqueSuffix` parameter in modules**
+- Default `location` to `swedencentral`
 
-### When Editing PowerShell Files
+### When Editing PowerShell Deployment Scripts (deploy.ps1)
+
+Critical patterns from `infra/bicep/contoso-patient-portal/deploy.ps1`:
+
+1. **Use `[CmdletBinding(SupportsShouldProcess)]`** - Provides automatic `-WhatIf` support
+   - DO NOT add explicit `[switch]$WhatIf` parameter (causes conflict)
+   - Use `$WhatIfPreference` automatic variable in script body
+   - Use `$PSCmdlet.ShouldProcess()` for confirmation prompts
+
+2. **Bicep lint handling**: Treat warnings as non-blocking
+   ```powershell
+   $lintResult = bicep lint $TemplateFile 2>&1
+   if ($lintResult -match 'Error') { return $false }
+   if ($lintResult -match 'Warning') { Write-Warning "Non-blocking warnings found" }
+   return $true  # Continue deployment
+   ```
+
+3. **Region validation**: Add `swedencentral` to ValidateSet
+   ```powershell
+   [ValidateSet('swedencentral', 'eastus', 'eastus2', 'westus2', 'westeurope', 'northeurope')]
+   [string]$Location = 'swedencentral'
+   ```
+
+4. **Standard structure**:
+   - Prerequisites check (Azure CLI, Bicep CLI, authentication)
+   - Bicep validation (build + lint)
+   - Cost estimation display
+   - User confirmation (Read-Host)
+   - Deployment with progress indicators
+   - Output display (resource IDs, connection strings)
+
+### When Editing PowerShell Scripts (General)
 
 - Use 4-space indentation
 - Follow PSScriptAnalyzer rules
 - Include verbose output for debugging
 - Add progress indicators for long-running tasks
 - Use Write-Verbose, Write-Warning, Write-Error appropriately
+- Set `Set-StrictMode -Version Latest` and `$ErrorActionPreference = 'Stop'`
 
 ### When Editing Markdown Files
 
