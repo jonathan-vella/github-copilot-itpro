@@ -260,9 +260,6 @@ output vnetId string = virtualNetwork.id
 @description('Name of the virtual network')
 output vnetName string = virtualNetwork.name
 
-@description('Array of subnet IDs')
-output subnetIds array = [for (subnet, i) in virtualNetwork.properties.subnets: subnet.id]
-
 @description('Resource IDs of the Network Security Groups')
 output nsgIds object = {
   web: nsgWeb.id
