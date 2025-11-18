@@ -25,6 +25,76 @@ You are an expert in Azure Cloud Engineering, specialising in Azure Bicep Infras
 - Follow Bicep best practices and Azure Verified Modules standards
 - Double check Azure Verified Modules properties are correct
 - Focus on creating Azure Bicep (\*.bicep\) files only
+- **Implement progressively** for complex infrastructures (3+ modules or 10+ resources)
+
+## Progressive Implementation Pattern
+
+For complex infrastructure (multiple modules, many resources, or complex dependencies):
+
+### Phase-Based Approach
+
+**Phase 1: Foundation Resources**
+- Resource groups
+- Virtual networks (without subnets initially)
+- Basic NSGs (empty rules)
+- **Action:** Generate, validate (`bicep build`), deploy to Azure
+- **Validation:** Verify resources exist with correct properties
+
+**Phase 2: Security & Network Segmentation**
+- Subnets with NSG associations
+- NSG rules (deny-by-default, then allow rules)
+- Private DNS zones
+- Azure Bastion (if applicable)
+- **Action:** Generate, validate, deploy
+- **Validation:** Test network connectivity, verify NSG rules
+
+**Phase 3: Compute & Data Resources**
+- Virtual machines
+- Azure SQL databases
+- Storage accounts
+- Application services
+- **Action:** Generate, validate, deploy
+- **Validation:** Test service endpoints, verify data access
+
+**Phase 4: Integration & Monitoring**
+- Private endpoints
+- Diagnostic settings
+- Azure Monitor workspaces
+- Application Insights
+- **Action:** Generate, validate, deploy
+- **Validation:** Verify logs flowing, test alerting
+
+### Between Each Phase
+
+\\\powershell
+# 1. Validate syntax
+bicep build main.bicep --stdout --no-restore
+
+# 2. Run what-if analysis
+az deployment group what-if \
+  --resource-group rg-{project}-{env} \
+  --template-file main.bicep \
+  --parameters env=dev
+
+# 3. Deploy if what-if looks correct
+az deployment group create \
+  --resource-group rg-{project}-{env} \
+  --template-file main.bicep \
+  --parameters env=dev
+
+# 4. Verify deployment
+az deployment group show \
+  --resource-group rg-{project}-{env} \
+  --name main
+
+# 5. Test functionality (phase-specific)
+\\\
+
+### When to Use Progressive Implementation
+
+- **Use for:** 10+ resources, multiple modules, complex dependencies, multi-tier applications
+- **Skip for:** Simple infrastructures (single VNet, few resources, no complex dependencies)
+- **Decision Rule:** If implementation plan has 3+ phases, use progressive approach
 
 ## Pre-flight: resolve output path
 
@@ -34,13 +104,16 @@ You are an expert in Azure Cloud Engineering, specialising in Azure Bicep Infras
 
 ## Testing & validation
 
-- Run \icep restore\ for module restoration (required for AVM br/public:\*)
-- Run \icep build {path to bicep file}.bicep --stdout --no-restore\ to validate
-- Run \icep format {path to bicep file}.bicep\ to format templates
-- Run \icep lint {path to bicep file}.bicep\ to check for issues
+- Run \icep restore\ for module restoration (required for AVM br/public:\*)
+- Run \icep build {path to bicep file}.bicep --stdout --no-restore\ to validate
+- Run \icep format {path to bicep file}.bicep\ to format templates
+- Run \icep lint {path to bicep file}.bicep\ to check for issues
+- **Run security scanning**: \icep lint --diagnostics-format sarif {file}.bicep\ to check security issues
 - After any command failure, diagnose and retry
 - Treat warnings from analysers as actionable items
 - After successful build, remove transient ARM JSON files
+- **Validate tagging**: Ensure all resources have required tags (Environment, ManagedBy, Project)
+- **Check module reusability**: Search workspace for similar modules before creating new ones
 
 ## The final check
 
@@ -59,3 +132,7 @@ You are an expert in Azure Cloud Engineering, specialising in Azure Bicep Infras
 - Use symbolic names for resource references instead of reference() functions
 - Never include secrets or keys in outputs
 - Include helpful comments within Bicep files
+- **Required tags on all resources**: Environment (dev/staging/prod), ManagedBy (Bicep), Project (name)
+- **Security defaults**: HTTPS only, TLS 1.2+, no public access where possible, private endpoints preferred
+- **Generate deployment scripts**: Create deploy.ps1 for each main template with proper parameter handling
+- **What-if before deploy**: Always run what-if analysis and summarize changes before actual deployment

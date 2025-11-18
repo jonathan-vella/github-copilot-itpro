@@ -37,8 +37,11 @@ You are an expert in Azure Cloud Engineering, specialising in Azure Bicep Infras
 - Prefer **Azure Verified Modules (AVM)**; if none fit, document raw resource usage and API versions
   - Most Azure Verified Modules contain parameters for \privateEndpoints\, the privateEndpoint module does not have to be defined separately. Take this into account.
   - Use the latest Azure Verified Module version. Fetch from GitHub changelog
+- **Generate cost estimates** for all resources using Azure pricing patterns
+- **Generate dependency diagrams** using Mermaid to visualize resource relationships
 - Generate an overall architecture diagram
 - Generate a network architecture diagram to illustrate connectivity
+- **Include testing strategy** with validation steps and rollback procedures
 
 ## Output file structure
 
@@ -91,10 +94,57 @@ outputs:
   type: <type>
   description: <short>
 
+estimatedCost:
+  sku: <SKU/Tier>
+  monthlyRange: "$X - $Y"
+  costDrivers: [<list key cost factors>]
+
 references:
 docs: {URL to Microsoft Docs}
 avm: {module repo URL or commit} # if applicable
 \\\
+
+# Cost Estimation
+
+## Monthly Cost Breakdown
+
+| Resource | SKU/Tier | Quantity | Unit Cost | Monthly Cost |
+|----------|----------|----------|-----------|--------------|
+| {resource1} | {sku} | {qty} | ${x} | ${y} |
+| {resource2} | {sku} | {qty} | ${x} | ${y} |
+| **Total** | | | | **$XXX - $YYY** |
+
+**Cost Optimization Opportunities:**
+- {Opportunity 1}: Potential savings of $X/month
+- {Opportunity 2}: Potential savings of $Y/month
+
+**Cost Assumptions:**
+- Region: {primary region}
+- Usage patterns: {describe expected utilization}
+- Data transfer: {estimate egress/ingress}
+- Reservation discounts: Not included (could save 30-50% with 1-3 year reservations)
+
+# Resource Dependencies
+
+## Dependency Diagram
+
+\\\mermaid
+graph TD
+    RG[Resource Group] --> VNet[Virtual Network]
+    VNet --> Subnet1[Subnet: Compute]
+    VNet --> Subnet2[Subnet: Data]
+    Subnet1 --> VM1[Virtual Machine 1]
+    Subnet2 --> SQL[SQL Database]
+    VNet --> NSG[Network Security Group]
+    NSG --> Subnet1
+    NSG --> Subnet2
+\\\
+
+**Deployment Order:**
+1. Resource Group (foundation)
+2. Virtual Network + NSG (networking layer)
+3. Subnets (network segmentation)
+4. Compute and data resources (workload layer)
 
 # Implementation Plan
 
@@ -113,7 +163,37 @@ avm: {module repo URL or commit} # if applicable
 | TASK-001 | {Specific, agent-executable step} | {file/change, e.g., resources section} |
 | TASK-002 | {...}                             | {...}                                  |
 
-## High-level design
+# Testing Strategy
+
+## Validation Steps
+
+| Phase | Validation Method | Success Criteria | Tools |
+|-------|-------------------|------------------|-------|
+| Pre-deployment | Bicep build & lint | No errors, warnings resolved | bicep CLI |
+| Deployment | What-if analysis | Expected changes match plan | Azure CLI |
+| Post-deployment | Resource verification | All resources deployed successfully | Azure Portal/CLI |
+| Functional | Connectivity tests | Services reachable as designed | PowerShell/curl |
+
+## Rollback Strategy
+
+**If deployment fails at Phase X:**
+1. Identify failed resource from error message
+2. Check dependencies are deployed correctly
+3. Review parameter values for errors
+4. Delete resource group (dev/test) or specific resources (production)
+5. Fix issue in Bicep template
+6. Re-run deployment from failed phase
+
+**Rollback Commands:**
+\\\powershell
+# Delete entire resource group (dev/test only)
+az group delete --name rg-{project}-{env} --yes
+
+# Delete specific resources (production)
+az resource delete --ids {resource-id}
+\\\
+
+# High-level design
 
 {High-level design description}
 \\\\
