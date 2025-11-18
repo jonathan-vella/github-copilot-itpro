@@ -1,8 +1,10 @@
-# Demo 07: Four-Agent Workflow for Azure Infrastructure
+# Demo 07: Five-Agent Workflow for Azure Infrastructure
 
 ## 🎯 Overview
 
-This demo showcases GitHub Copilot's **4-agent workflow** for designing and implementing Azure infrastructure using custom agents. It demonstrates how architects and IT professionals can leverage specialized agents to move from business requirements to production-ready Bicep templates through a structured, iterative process.
+This demo showcases GitHub Copilot's **5-agent workflow** for designing and implementing Azure infrastructure using custom agents. It demonstrates how architects and IT professionals can leverage specialized agents to move from business requirements to production-ready Bicep templates through a structured, iterative process.
+
+> **Working Implementation**: The complete workflow output is available as production-ready infrastructure in [`../../infra/bicep/contoso-patient-portal/`](../../infra/bicep/contoso-patient-portal/) (1,070 lines of Bicep, 10 modules).
 
 **Target Audience**: Solution Architects, Cloud Architects, Infrastructure Engineers, IT Professionals
 
@@ -18,13 +20,23 @@ Traditional infrastructure design involves:
 - 🔄 **Rework**: Architectural decisions not reflected in code
 - 📚 **Documentation lag**: Code and docs out of sync
 
-**With 4-Agent Workflow**:
-- ⚡ **30-45 minutes**: Complete workflow from requirements to deployable code
+**With 5-Agent Workflow**:
+- ⚡ **45 minutes**: Complete workflow from requirements to deployable code (vs. 18 hours manual)
 - 🔗 **Automatic handoffs**: Context preserved between agents
 - ✅ **Aligned outputs**: Architecture drives implementation
 - 📖 **Living documentation**: Generated alongside infrastructure
+- 💰 **Cost-validated**: Budget estimates before implementation
 
-## 🤖 The Four Agents
+## 🤖 The Five Agents
+
+### 0. Plan Agent (`@plan`) - *Start Here*
+- **Purpose**: Break down complex infrastructure projects into step-by-step implementation plans
+- **Input**: Business requirements, constraints, budget, compliance needs
+- **Output**: Interactive planning session with clarifying questions, detailed implementation plan with phases, resource breakdown with cost estimates, deployment sequence
+- **Handoff**: Implementation plan → ADR Generator (optional) or Azure Principal Architect
+- **Key Feature**: Iterative refinement before any code is written
+
+**Usage**: Always start with `@plan` for multi-step infrastructure projects
 
 ### 1. Azure Principal Architect (`azure-principal-architect`)
 - **Purpose**: Azure Well-Architected Framework assessment
@@ -32,23 +44,26 @@ Traditional infrastructure design involves:
 - **Output**: WAF scores, service recommendations, cost estimates, HIPAA compliance mapping
 - **Handoff**: Architecture assessment → Bicep Planning Specialist
 
-### 2. Bicep Planning Specialist (`bicep-plan`)
+### 3. Bicep Planning Specialist (`bicep-plan`)
 - **Purpose**: Machine-readable implementation plan
 - **Input**: Architecture assessment
 - **Output**: Resource definitions, dependencies, cost tables, deployment phases
 - **Handoff**: Implementation plan → Bicep Implementation Specialist
 
-### 3. Bicep Implementation Specialist (`bicep-implement`)
+### 4. Bicep Implementation Specialist (`bicep-implement`)
 - **Purpose**: Production-ready Bicep templates
 - **Input**: Implementation plan
 - **Output**: Modular Bicep templates, parameter files, deployment scripts
 - **Handoff**: Templates ready for deployment
+- **Regional Default**: `swedencentral` (renewable energy)
+- **Naming Convention**: Generates unique suffixes using `uniqueString()` to prevent resource name collisions
 
-### 4. ADR Generator (`adr_generator`) - *Optional*
-- **Purpose**: Document architectural decisions
-- **Input**: Architecture discussions, trade-offs, decisions
-- **Output**: Structured ADR in markdown format
-- **Use Case**: Document key decisions during workflow
+### 2. ADR Generator (`adr_generator`) - *Optional*
+- **Purpose**: Document architectural decisions for enterprise governance
+- **Input**: Architecture discussions, trade-offs, decisions from Plan agent
+- **Output**: Structured ADR in markdown format (saved to `/docs/adr/`)
+- **Use Case**: Document key decisions during workflow (skip for speed-focused demos)
+- **Handoff**: ADR → Azure Principal Architect
 
 ## 📋 Scenario: Contoso Healthcare Patient Portal
 
@@ -62,9 +77,9 @@ Traditional infrastructure design involves:
 **Technical Requirements**:
 - **Budget**: $800/month maximum
 - **SLA**: 99.9% uptime minimum
-- **Regions**: US only (data sovereignty)
+- **Region**: Default `swedencentral` (can adjust for latency/compliance)
 - **Performance**: Support 60+ concurrent users
-- **Security**: Encryption at rest and in transit, audit logging
+- **Security**: Encryption at rest and in transit, audit logging, unique resource names
 
 **Constraints**:
 - Must deploy within 4 weeks
@@ -93,10 +108,12 @@ Traditional infrastructure design involves:
 
 3. **Open GitHub Copilot Chat** (`Ctrl+Shift+I`)
 
-4. **Follow the workflow**:
+4. **Follow the five-agent workflow**:
+   - Stage 0: Planning with `@plan` (5-10 min)
    - Stage 1: Architecture Design (15 min)
    - Stage 2: Implementation Planning (10 min)
    - Stage 3: Bicep Generation (15 min)
+   - Stage 4: Validation & Deployment
 
 See [DEMO-SCRIPT.md](DEMO-SCRIPT.md) for detailed walkthrough.
 
@@ -179,12 +196,13 @@ See [DEMO-SCRIPT.md](DEMO-SCRIPT.md) for detailed walkthrough.
 
 ## 📊 Value Metrics
 
-| Metric | Traditional Approach | With 4-Agent Workflow | Improvement |
+| Metric | Traditional Approach | With 5-Agent Workflow | Improvement |
 |--------|---------------------|----------------------|-------------|
+| **Planning & Requirements** | 1-2 hours | 5 minutes | **96% reduction** |
 | **Architecture Assessment** | 2-4 hours | 5 minutes | **96% reduction** |
 | **Implementation Planning** | 3-6 hours | 5 minutes | **95% reduction** |
 | **Bicep Template Creation** | 4-8 hours | 10 minutes | **95% reduction** |
-| **Total Time** | 9-18 hours | 30-45 minutes | **95% reduction** |
+| **Total Time** | 10-20 hours | 45 minutes | **96% reduction** |
 | **Context Loss** | High (multiple handoffs) | None (automatic) | **Eliminated** |
 | **Documentation** | Manual, often outdated | Auto-generated | **Always current** |
 
@@ -271,8 +289,10 @@ By the end of this demo, participants will:
 ## 📚 Resources
 
 ### Documentation
-- [Five-Agent Workflow Guide](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md)
-- [Custom Agent Configuration](../../.github/agents/)
+- [Five-Agent Workflow Guide](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md) - Complete documentation with Plan agent
+- [15-Minute Demo Script](../../resources/copilot-customizations/AGENT-HANDOFF-DEMO.md) - Quick demonstration
+- [Custom Agent Configuration](../../.github/agents/) - Agent definitions with swedencentral defaults
+- [Plan Agent Documentation](https://code.visualstudio.com/docs/copilot/chat/chat-planning) - Official VS Code docs
 - [Azure Well-Architected Framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/)
 
@@ -339,15 +359,15 @@ A: No - it augments their capabilities. Architects still make decisions; agents 
 ## ✅ Success Criteria
 
 Demo is successful when audience:
-- [ ] Understands the 4-agent workflow concept
+- [ ] Understands the 5-agent workflow concept (starting with Plan agent)
 - [ ] Sees value in automatic context handoffs
-- [ ] Recognizes time savings (95% reduction)
-- [ ] Appreciates production-ready output quality
+- [ ] Recognizes time savings (96% reduction, 18 hours → 45 minutes)
+- [ ] Appreciates production-ready output quality (unique suffixes, regional defaults)
 - [ ] Wants to try it on their own projects
 
 ## 📝 Feedback & Improvement
 
-This demo was created from an actual test execution of the 4-agent workflow. If you have suggestions for improvement:
+This demo was created from an actual test execution of the 5-agent workflow. If you have suggestions for improvement:
 
 1. Open an issue in the repository
 2. Describe your scenario/variation
