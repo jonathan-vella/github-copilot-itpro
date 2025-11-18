@@ -60,6 +60,7 @@ The Software Bill of Materials will capture three layers:
 ### Layer 1: Application Dependencies
 
 **Frontend (React Web App)**:
+
 - React 18.x
 - React Router
 - Axios (HTTP client)
@@ -69,6 +70,7 @@ The Software Bill of Materials will capture three layers:
 - ~15 total npm packages
 
 **Backend (Node.js API)**:
+
 - Express 4.x (web framework)
 - Mongoose 8.x (MongoDB ODM)
 - @azure/cosmos (Cosmos DB SDK)
@@ -85,6 +87,7 @@ The Software Bill of Materials will capture three layers:
 **Docker Base Image**: `node:20-alpine`
 
 **Alpine Linux Components**:
+
 - Alpine Linux 3.19
 - musl libc (C standard library)
 - OpenSSL 3.x
@@ -92,11 +95,13 @@ The Software Bill of Materials will capture three layers:
 - ~50 OS packages
 
 **Node.js Runtime**:
+
 - Node.js 20.x LTS
 - npm package manager
 - V8 JavaScript engine
 
 **Container Layers**:
+
 - Base OS layer
 - Node.js runtime layer
 - Application code layer
@@ -105,6 +110,7 @@ The Software Bill of Materials will capture three layers:
 ### Layer 3: Azure Infrastructure
 
 **Compute**:
+
 - **Azure App Service** (Web tier)
   - SKU: P1v3 (Premium tier)
   - OS: Linux
@@ -118,6 +124,7 @@ The Software Bill of Materials will capture three layers:
   - API Version: 2023-12-01
 
 **Data**:
+
 - **Azure Cosmos DB**
   - API: MongoDB 4.2
   - Consistency: Session
@@ -125,6 +132,7 @@ The Software Bill of Materials will capture three layers:
   - API Version: 2023-11-15
 
 **Security**:
+
 - **Azure Key Vault**
   - SKU: Standard
   - Soft delete enabled
@@ -132,12 +140,14 @@ The Software Bill of Materials will capture three layers:
   - API Version: 2023-07-01
 
 **Monitoring**:
+
 - **Application Insights**
   - Workspace-based
   - Retention: 90 days
   - API Version: 2020-02-02
 
 **Networking**:
+
 - **Virtual Network**
   - Address space: 10.0.0.0/16
   - Subnets: App (10.0.1.0/24), Data (10.0.2.0/24)
@@ -220,6 +230,7 @@ graph TB
 ### Sensitive Information to Exclude
 
 The SBOM will **NOT** include:
+
 - ❌ Secrets, passwords, connection strings
 - ❌ API keys or authentication tokens
 - ❌ Internal IP addresses or hostnames
@@ -230,6 +241,7 @@ The SBOM will **NOT** include:
 ### Information to Include
 
 The SBOM **WILL** include:
+
 - ✅ Component names and versions
 - ✅ License information (MIT, Apache, etc.)
 - ✅ Package URLs (PURLs) for identification
@@ -294,18 +306,21 @@ graph LR
 **Scenario**: Log4j vulnerability (CVE-2021-44228) disclosed
 
 **Without SBOM**:
+
 - Manual review of all applications (3 days)
 - Check each package.json file
 - Search for "log4j" (but it's Java, not Node.js)
 - Still uncertain about nested dependencies
 
 **With SBOM**:
+
 ```powershell
 # Query all SBOMs for vulnerable component
 Get-ChildItem -Recurse -Filter "*-sbom.json" | 
     Select-String "log4j" | 
     Select-Object -Property Path
 ```
+
 - Result in 15 minutes
 - Confirm Node.js app not affected
 - Provide evidence to customers same day
@@ -317,6 +332,7 @@ Get-ChildItem -Recurse -Filter "*-sbom.json" |
 **Required**: Identify all GPL-licensed components (copyleft implications)
 
 **SBOM Query**:
+
 ```powershell
 # Extract all components with GPL licenses
 $sbom = Get-Content merged-sbom.json | ConvertFrom-Json
@@ -339,6 +355,7 @@ $sbom.components | Where-Object { $_.licenses -like "*GPL*" } |
 **Auditor Request**: "Show evidence of component tracking and vulnerability management"
 
 **Evidence Package**:
+
 - Quarterly SBOMs (version controlled in Git)
 - Comparison reports (component changes over time)
 - Vulnerability scan results linked to SBOM
@@ -373,11 +390,13 @@ $sbom.components | Where-Object { $_.licenses -like "*GPL*" } |
 When generating the SBOM, include these metadata fields:
 
 **Organization**:
+
 - Name: HealthTech Solutions Inc.
 - URL: https://healthtechsolutions.example.com
 - Contact: security@healthtechsolutions.example.com
 
 **Application**:
+
 - Name: Patient Portal
 - Version: From Git tag (e.g., v2.5.1)
 - Description: Healthcare patient engagement platform
@@ -385,6 +404,7 @@ When generating the SBOM, include these metadata fields:
 **Timestamp**: ISO 8601 format (e.g., 2025-11-18T10:30:00Z)
 
 **Tools Used**:
+
 - Generator: Custom PowerShell scripts with GitHub Copilot
 - Format: CycloneDX 1.5
 - Specification: https://cyclonedx.org/specification/overview/

@@ -29,6 +29,7 @@ This document contains production-tested prompts for generating Azure PowerShell
 **Expected Result**: Complete function structure with proper help documentation.
 
 **Tips**:
+
 - Copilot generates `.SYNOPSIS`, `.DESCRIPTION`, `.PARAMETER`, `.EXAMPLE` automatically
 - Include `[CmdletBinding()]` for advanced function features
 - Use proper verb-noun naming (Get-, Set-, New-, Remove-)
@@ -46,6 +47,7 @@ This document contains production-tested prompts for generating Azure PowerShell
 **Expected Result**: Parameters with proper validation attributes.
 
 **Example**:
+
 ```powershell
 [Parameter(Mandatory = $true)]
 [ValidateNotNullOrEmpty()]
@@ -132,6 +134,7 @@ This document contains production-tested prompts for generating Azure PowerShell
 **Expected Result**: Comprehensive inventory script with CSV export and statistics.
 
 **Tips**:
+
 - Use `Export-Csv` with `-NoTypeInformation`
 - Add timestamp to filenames: `"Report_$(Get-Date -Format 'yyyyMMdd_HHmmss').csv"`
 - Include `Write-Progress` for large datasets
@@ -196,6 +199,7 @@ This document contains production-tested prompts for generating Azure PowerShell
 **Expected Result**: Bulk tagging script with WhatIf support and logging.
 
 **Tips**:
+
 - Use `[CmdletBinding(SupportsShouldProcess)]` for WhatIf support
 - Include `$PSCmdlet.ShouldProcess()` before making changes
 - Use `Write-Progress` to show operation progress
@@ -273,6 +277,7 @@ This document contains production-tested prompts for generating Azure PowerShell
 **Expected Result**: Retry mechanism with backoff strategy.
 
 **Example**:
+
 ```powershell
 # Retry Azure operation up to 3 times with exponential backoff
 # Handle TooManyRequests and ServiceUnavailable errors
@@ -319,6 +324,7 @@ This document contains production-tested prompts for generating Azure PowerShell
 **Expected Result**: Pipeline-enabled function with proper parameter binding.
 
 **Example**:
+
 ```powershell
 # Create function Get-AzResourceDetails that accepts resource objects from pipeline
 # Support: Get-AzResource | Get-AzResourceDetails
@@ -351,6 +357,7 @@ This document contains production-tested prompts for generating Azure PowerShell
 **Expected Result**: Structured output objects.
 
 **Example**:
+
 ```powershell
 # Return custom object with ResourceName, ResourceType, Status, Cost properties
 # Calculate cost per day as a computed property
@@ -436,6 +443,7 @@ This document contains production-tested prompts for generating Azure PowerShell
 **Instead of**: "Create script that does A, B, C, D, and E"
 
 **Do this**:
+
 1. "Create function to do A"
 2. "Create function to do B"
 3. "Create main function that calls A and B"

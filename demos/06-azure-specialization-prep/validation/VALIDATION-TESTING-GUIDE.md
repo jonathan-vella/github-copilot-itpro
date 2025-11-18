@@ -28,6 +28,7 @@ This guide provides comprehensive validation and testing procedures for Azure In
 ```
 
 **Validation Checklist**:
+
 - ✅ Operating system versions supported in Azure
 - ✅ Framework compatibility (.NET versions, SDKs)
 - ✅ Database compatibility (SQL Server versions, features)
@@ -193,6 +194,7 @@ azcopy sync validate `
 ```
 
 **Authentication Tests**:
+
 - ✅ User login with Microsoft Entra ID
 - ✅ Multi-factor authentication (MFA) flows
 - ✅ Service-to-service authentication (managed identities)
@@ -225,6 +227,7 @@ BaselineMetrics
 ```
 
 **Performance Acceptance Criteria**:
+
 - ⚠️ Response time within 10% of baseline
 - ⚠️ Throughput meets or exceeds baseline
 - ⚠️ Error rate ≤ 0.1%
@@ -285,6 +288,7 @@ Start-AzChaosExperiment -Name "VM-Shutdown-Experiment" -ResourceGroupName "rg-ta
 ```
 
 **Expected Results**:
+
 - ✅ Application remains accessible via load balancer
 - ✅ Traffic automatically fails over to healthy VM
 - ✅ No user-visible errors
@@ -336,6 +340,7 @@ requests
 ```
 
 **Expected Results**:
+
 - ✅ Application displays user-friendly error messages
 - ✅ Retry logic attempts reconnection (exponential backoff)
 - ✅ Cached data served when available
@@ -366,6 +371,7 @@ Start-AzChaosFaultInjection @cpuStress
 ```
 
 **Expected Results**:
+
 - ✅ Auto-scaling rules trigger within 5 minutes
 - ✅ Additional VM instances provisioned
 - ✅ Load balancer distributes traffic to new instances
@@ -400,6 +406,7 @@ az chaos experiment start \
 ```
 
 **Expected Results**:
+
 - ✅ Application response time increases proportionally
 - ✅ Timeouts configured appropriately (no premature failures)
 - ✅ User experience remains acceptable (< 3s response time)
@@ -605,6 +612,7 @@ az load test run `
 ```
 
 **Expected Results**:
+
 - Average response time: < 500ms
 - P95 response time: < 1000ms
 - P99 response time: < 1500ms
@@ -1097,6 +1105,7 @@ resource availabilityAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {
 ```
 
 **Report Contents**:
+
 1. **Executive Summary**: Overall health status, key metrics
 2. **Availability**: Uptime percentage, downtime incidents
 3. **Performance**: Response times, throughput, resource utilization
@@ -1121,6 +1130,7 @@ This comprehensive validation and testing guide covers:
 ✅ **Continuous Validation**: Synthetic monitoring, automated alerts, validation dashboards  
 
 **Next Steps**:
+
 1. Review validation scripts in `scripts/` folder
 2. Customize test scenarios for your workload
 3. Run pre-migration compatibility assessment
@@ -1131,6 +1141,7 @@ This comprehensive validation and testing guide covers:
 8. Generate validation reports for audit evidence
 
 **References**:
+
 - [CAF Migrate Methodology](https://learn.microsoft.com/azure/cloud-adoption-framework/migrate/)
 - [Azure Well-Architected Reliability](https://learn.microsoft.com/azure/well-architected/reliability/)
 - [Azure Chaos Studio Documentation](https://learn.microsoft.com/azure/chaos-studio/)

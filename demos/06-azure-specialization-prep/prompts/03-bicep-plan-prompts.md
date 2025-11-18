@@ -59,6 +59,7 @@ Provide: module structure, parameter strategy, deployment sequence, validation a
 ```
 
 **Why this works**:
+
 - ✅ Complete infrastructure requirements listed
 - ✅ Specific configuration details (VM sizes, disk types, tiers)
 - ✅ Clear naming and tagging standards
@@ -98,6 +99,7 @@ Provide: module breakdown for network components, NSG rule definitions, paramete
 ```
 
 **Why this works**:
+
 - ✅ Focused on specific infrastructure layer (networking)
 - ✅ Detailed subnet planning with CIDR notation
 - ✅ Security-first approach (NSG rules, least privilege)
@@ -145,6 +147,7 @@ Provide: module structure for VMs and extensions, parameter strategy for credent
 ```
 
 **Why this works**:
+
 - ✅ Detailed VM specifications
 - ✅ Automated configuration through extensions
 - ✅ Security considerations (credential handling)
@@ -199,6 +202,7 @@ Provide: module structure for SQL resources, parameter strategy for credentials,
 ```
 
 **Why this works**:
+
 - ✅ Comprehensive database requirements
 - ✅ Security-first design (TDE, firewall, auditing)
 - ✅ Backup and disaster recovery planning
@@ -248,6 +252,7 @@ Provide: module structure for monitoring components, alert rule definitions, par
 ```
 
 **Why this works**:
+
 - ✅ Complete observability strategy
 - ✅ Specific alert thresholds and recipients
 - ✅ Dashboard requirements defined
@@ -322,6 +327,7 @@ Provide: Complete module structure with file names, detailed parameter file stru
 ```
 
 **Why this works**:
+
 - ✅ Comprehensive, production-ready plan
 - ✅ Clear module boundaries and dependencies
 - ✅ Environment parameterization strategy
@@ -341,6 +347,7 @@ Create a plan for deploying Azure infrastructure using Bicep.
 ```
 
 **Problems**:
+
 - No specific requirements
 - No infrastructure components listed
 - No constraints or standards
@@ -355,6 +362,7 @@ Plan the deployment of VMs and a database in Azure.
 ```
 
 **Problems**:
+
 - No VM sizes, quantities, or OS specified
 - No database type or tier mentioned
 - No network configuration
@@ -369,6 +377,7 @@ Create a plan for: VNet, 2 VMs, Load Balancer, SQL Database, NSGs.
 ```
 
 **Problems**:
+
 - No configuration details
 - No relationships between components
 - No deployment sequence
@@ -382,6 +391,7 @@ Create a plan for: VNet, 2 VMs, Load Balancer, SQL Database, NSGs.
 ### 1. Provide Complete Infrastructure Requirements
 
 List all components with relationships:
+
 ```
 Requirements:
 1. Virtual Network with subnets (specify CIDR ranges)
@@ -394,6 +404,7 @@ Requirements:
 ### 2. Specify Configuration Details
 
 Be explicit about:
+
 - **VM sizing**: Standard_D2s_v3, not "medium VM"
 - **Database tier**: Standard S2 (50 DTUs), not "standard database"
 - **Disk types**: Premium SSD P10, not "fast disk"
@@ -402,6 +413,7 @@ Be explicit about:
 ### 3. Emphasize AVM Usage
 
 Direct the agent to use verified modules:
+
 ```
 Constraints:
 - Use Azure Verified Modules (AVM) where available
@@ -412,6 +424,7 @@ Constraints:
 ### 4. Request Structured Output
 
 Ask for specific deliverables:
+
 ```
 Provide:
 - Module structure with file names
@@ -424,6 +437,7 @@ Provide:
 ### 5. Include Security and Compliance
 
 Always mention:
+
 ```
 Security Requirements:
 - NSG rules following least privilege
@@ -436,6 +450,7 @@ Security Requirements:
 ### 6. Define Parameter Strategy
 
 Specify how to handle different values:
+
 ```
 Parameters:
 - Environment-specific: VM size, database tier
@@ -545,6 +560,7 @@ Provide a comprehensive implementation plan covering all aspects above, with spe
 ```
 
 **What makes this excellent**:
+
 1. ✅ Business context provided (customer, SLA, performance)
 2. ✅ Complete infrastructure specification with all tiers
 3. ✅ Detailed configuration (sizes, IPs, ports, rules)

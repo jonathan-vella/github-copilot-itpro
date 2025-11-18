@@ -44,6 +44,7 @@ az account show --output table
 > Traditionally, this would take about 45 minutes: researching Bicep syntax, writing templates, debugging errors. With GitHub Copilot, we'll complete this in 10 minutes."
 
 **Show the architecture diagram:**
+
 - Open [scenario/architecture.md](./scenario/architecture.md)
 - Highlight: VNet with 3 subnets, NSGs, storage account
 - Mention security requirements (NSGs, private endpoints)
@@ -54,6 +55,7 @@ az account show --output table
 
 **Script:**
 > "Here's what a traditional ARM template looks like. Notice:
+>
 > - 250+ lines of JSON
 > - Complex syntax and nested objects
 > - Easy to make mistakes
@@ -66,6 +68,7 @@ az account show --output table
 
 **Script:**
 > "The manual approach breaks down like this:
+>
 > - 15 minutes: Research and setup
 > - 20 minutes: Writing the template
 > - 10 minutes: Debugging errors
@@ -85,6 +88,7 @@ az account show --output table
 > "I'll start with a natural language comment describing what I need."
 
 **Type this prompt:**
+
 ```bicep
 // Create an Azure Virtual Network named 'vnet-demo' with address space 10.0.0.0/16
 // Include three subnets: web-tier (10.0.1.0/24), app-tier (10.0.2.0/24), data-tier (10.0.3.0/24)
@@ -94,6 +98,7 @@ az account show --output table
 **PAUSE** and let Copilot suggest.
 
 **Expected Suggestion:**
+
 ```bicep
 param location string = resourceGroup().location
 param vnetName string = 'vnet-demo'
@@ -139,6 +144,7 @@ output subnetIds array = [for (subnet, i) in virtualNetwork.properties.subnets: 
 
 **Script:**
 > "Notice what Copilot did:
+>
 > - Used the latest API version (2023-05-01)
 > - Created parameters with sensible defaults
 > - Structured subnets correctly
@@ -150,6 +156,7 @@ output subnetIds array = [for (subnet, i) in virtualNetwork.properties.subnets: 
 **Now add NSG:**
 
 **Type this prompt:**
+
 ```bicep
 // Add a Network Security Group for the web tier subnet
 // Allow inbound HTTP (80) and HTTPS (443) from Internet
@@ -160,6 +167,7 @@ output subnetIds array = [for (subnet, i) in virtualNetwork.properties.subnets: 
 
 **Script:**
 > "Copilot understands the security context. It's creating NSG rules that:
+>
 > - Allow standard web traffic
 > - Restrict access between tiers
 > - Follow least-privilege principles
@@ -173,6 +181,7 @@ output subnetIds array = [for (subnet, i) in virtualNetwork.properties.subnets: 
 **Action:** Create new file `with-copilot/storage.bicep`
 
 **Type this prompt:**
+
 ```bicep
 // Create a secure storage account for the application
 // Requirements:
@@ -186,6 +195,7 @@ output subnetIds array = [for (subnet, i) in virtualNetwork.properties.subnets: 
 **Accept Copilot's suggestion.**
 
 **Expected Suggestion:**
+
 ```bicep
 param location string = resourceGroup().location
 param storageAccountName string = 'stdemo${uniqueString(resourceGroup().id)}'
@@ -225,6 +235,7 @@ output blobEndpoint string = storageAccount.properties.primaryEndpoints.blob
 
 **Script:**
 > "Look at what Copilot included:
+>
 > - `uniqueString()` function for globally unique naming
 > - All security requirements met (HTTPS, TLS 1.2, no public access)
 > - Blob soft delete configured
@@ -240,6 +251,7 @@ output blobEndpoint string = storageAccount.properties.primaryEndpoints.blob
 **Action:** Create new file `with-copilot/main.bicep`
 
 **Type this prompt:**
+
 ```bicep
 // Main orchestration template
 // Deploy the network and storage modules
@@ -249,6 +261,7 @@ output blobEndpoint string = storageAccount.properties.primaryEndpoints.blob
 **Accept Copilot's suggestion.**
 
 **Expected Suggestion:**
+
 ```bicep
 param location string = resourceGroup().location
 param environment string = 'dev'
@@ -282,6 +295,7 @@ output blobEndpoint string = storage.outputs.blobEndpoint
 
 **Script:**
 > "Copilot created a clean orchestration template:
+>
 > - Module references to our network and storage files
 > - Consistent parameter passing
 > - Environment-based naming (dev/prod)
@@ -330,6 +344,7 @@ cd validation
 
 **Script:**
 > "I'm running an automated deployment script. This will:
+>
 > 1. Create the resource group if it doesn't exist
 > 2. Deploy the Bicep template
 > 3. Report deployment status
@@ -356,6 +371,7 @@ cd validation
 ```
 
 **Expected output:**
+
 ```
 ✅ Resource Group: rg-copilot-demo exists
 ✅ VNet: vnet-demo-demo deployed
@@ -374,6 +390,7 @@ Deployment Time: 3m 42s
 > "All resources deployed successfully. Everything is configured exactly as specified. Let's review what we created..."
 
 **Open Azure Portal** (optional):
+
 - Show VNet with subnets
 - Show NSG rules
 - Show storage account security settings
@@ -388,21 +405,25 @@ Deployment Time: 3m 42s
 > "Let's recap what GitHub Copilot enabled:
 >
 > **Speed**: 10 minutes vs. 45 minutes (78% faster)
+>
 > - Generated 250+ lines of code from natural language prompts
 > - Zero syntax errors
 > - Production-ready security configuration
 >
-> **Quality**: 
+> **Quality**:
+>
 > - Latest API versions
 > - Azure best practices built-in
 > - Consistent naming and structure
 >
 > **Learning Accelerator**:
+>
 > - No prior Bicep expertise required
 > - Learn by doing
 > - Context-aware suggestions teach best practices
 >
 > **Business Impact**:
+>
 > - Faster time to production
 > - Lower training costs
 > - Reduced operational overhead
@@ -414,16 +435,19 @@ Deployment Time: 3m 42s
 > "Here's how to get started:
 >
 > **For IT Pros:**
+>
 > 1. Clone this repository
 > 2. Follow the demo script
 > 3. Experiment with your own scenarios
 >
 > **For Partners:**
+>
 > 1. Use the [Partner Toolkit](../../partner-toolkit/) for customer demos
 > 2. Customize prompts for your client scenarios
 > 3. Share success stories with the community
 >
 > **Next Demo:**
+>
 > - [Demo 2: PowerShell Automation](../02-powershell-automation/) - Automate Azure operations
 > - [Demo 3: Azure Arc Onboarding](../03-azure-arc-onboarding/) - Manage hybrid environments"
 
@@ -452,6 +476,7 @@ az group show --name rg-copilot-demo
 **Issue:** Copilot doesn't suggest code after typing prompt
 
 **Solutions:**
+
 1. Press `Ctrl+Enter` to open Copilot panel
 2. Check VS Code status bar - ensure Copilot icon is active
 3. Verify file is saved with `.bicep` extension
@@ -504,14 +529,17 @@ az account show
 ### Backup Plans
 
 **If Copilot is slow/unresponsive:**
+
 - Have pre-written code in `backup/` folder
 - Copy-paste and explain what Copilot would have generated
 
 **If Azure deployment is slow:**
+
 - Continue to Phase 4 while deployment runs in background
 - Show Portal view of existing deployment
 
 **If demo environment fails:**
+
 - Use screenshots from `screenshots/` folder
 - Walk through pre-deployed environment
 
@@ -526,10 +554,12 @@ az account show
 | **Total** | **30 min** | **±5 min** |
 
 **If running short on time:**
+
 - Skip manual approach walkthrough (Phase 1.2)
 - Use pre-deployed resources for verification
 
 **If you have extra time:**
+
 - Add monitoring (Log Analytics prompt)
 - Demonstrate Copilot Chat for explanations
 - Show how to refactor/improve code with Copilot

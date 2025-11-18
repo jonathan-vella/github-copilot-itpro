@@ -12,6 +12,7 @@
 The bank is launching a new digital banking platform and needs to establish Azure infrastructure quickly. The existing IT team has strong Windows Server and networking skills but limited cloud experience. They've committed to a 6-month timeline for the first phase.
 
 **Key Stakeholders:**
+
 - **John Martinez** - IT Director: Focused on security and compliance
 - **Sarah Chen** - Network Administrator: Responsible for connectivity and segmentation
 - **Mike Johnson** - Systems Engineer: Will manage deployments and operations
@@ -23,21 +24,25 @@ The bank is launching a new digital banking platform and needs to establish Azur
 The application requires a three-tier network design:
 
 **Web Tier** (DMZ):
+
 - Public-facing web servers
 - HTTPS traffic from internet
 - Forwarding to app tier
 
 **Application Tier** (Secure Zone):
+
 - Business logic servers
 - Accessible only from web tier
 - Can connect to data tier
 
 **Data Tier** (Restricted Zone):
+
 - Database servers and storage
 - No direct internet access
 - Private connectivity only
 
 **Network Specifications:**
+
 - VNet address space: `10.0.0.0/16`
 - Web tier subnet: `10.0.1.0/24` (254 IPs)
 - App tier subnet: `10.0.2.0/24` (254 IPs)
@@ -49,6 +54,7 @@ The application requires a three-tier network design:
 Per regulatory compliance (PCI-DSS, SOC 2):
 
 **Network Security:**
+
 - Network Security Groups (NSGs) on each subnet
 - Web tier: Allow 80/443 inbound from internet
 - App tier: Allow 8080 from web tier only
@@ -56,6 +62,7 @@ Per regulatory compliance (PCI-DSS, SOC 2):
 - All tiers: Block all other inbound by default
 
 **Storage Security:**
+
 - Encrypted at rest (Microsoft-managed keys)
 - TLS 1.2 minimum for data in transit
 - No public blob access
@@ -65,12 +72,14 @@ Per regulatory compliance (PCI-DSS, SOC 2):
 ### 3. Storage Requirements
 
 **Blob Storage** for application data:
+
 - Hot tier (frequent access)
 - Geo-redundant storage (GRS) for disaster recovery
 - Private endpoint in data tier subnet
 - Lifecycle management for cost optimization
 
 **Capacity Planning:**
+
 - Initial: 100 GB
 - Growth: 50 GB/month
 - 3-year projection: 1.8 TB
@@ -78,12 +87,14 @@ Per regulatory compliance (PCI-DSS, SOC 2):
 ### 4. Naming and Tagging Standards
 
 **Naming Convention:**
+
 - VNet: `vnet-<env>-<app>-<region>`
 - Subnet: `snet-<tier>-<env>`
 - NSG: `nsg-<subnet>-<env>`
 - Storage: `st<app><env><random>`
 
 **Required Tags:**
+
 | Tag | Example Value | Purpose |
 |-----|---------------|---------|
 | Environment | Production | Environment designation |
@@ -95,16 +106,19 @@ Per regulatory compliance (PCI-DSS, SOC 2):
 ### 5. Operational Requirements
 
 **Monitoring:**
+
 - Azure Monitor integration
 - Network Watcher for connectivity diagnostics
 - Storage Analytics for blob access patterns
 
 **Backup/Recovery:**
+
 - Storage soft delete: 7 days
 - NSG flow logs retained for 90 days
 - Daily configuration backups
 
 **Change Management:**
+
 - All infrastructure defined as code (Bicep)
 - Version controlled in Git
 - Peer review required for production changes
@@ -123,6 +137,7 @@ The team has only 2 weeks to get the core network and storage infrastructure dep
 ### Skill Gap
 
 **Current Team Expertise:**
+
 - ✅ Strong: Windows Server, Active Directory, networking fundamentals
 - ⚠️ Moderate: Azure Portal navigation, basic CLI commands
 - ❌ Limited: Infrastructure as Code, Bicep/ARM, DevOps practices
@@ -133,6 +148,7 @@ The team has only 2 weeks to get the core network and storage infrastructure dep
 
 **Monthly Infrastructure Budget:** $2,000  
 **Cost Optimization Required:**
+
 - Use Standard tier where appropriate (not Premium)
 - Leverage locally redundant storage for non-critical data
 - Right-size subnets to avoid waste
@@ -140,11 +156,13 @@ The team has only 2 weeks to get the core network and storage infrastructure dep
 ### Compliance Requirements
 
 **Audit Trail:**
+
 - Who deployed what, when?
 - Configuration change history
 - Security rule modifications
 
 **Documentation:**
+
 - Architecture diagrams required
 - Runbooks for common operations
 - Disaster recovery procedures
@@ -163,6 +181,7 @@ The infrastructure deployment will be considered successful if:
 ## Pain Points (Traditional Approach)
 
 ### 1. Learning Curve
+
 - Bicep syntax is unfamiliar: 2-3 weeks training
 - Azure resource schemas are complex: constant documentation lookups
 - Best practices unclear: trial and error
@@ -170,6 +189,7 @@ The infrastructure deployment will be considered successful if:
 **Estimated Impact:** 40+ hours of training and research
 
 ### 2. Template Development
+
 - Writing VNet configuration: 15 minutes
 - Defining NSG rules: 20 minutes (lots of brackets)
 - Storage account settings: 10 minutes (finding right properties)
@@ -178,6 +198,7 @@ The infrastructure deployment will be considered successful if:
 **Estimated Impact:** 60+ minutes per attempt, 3-5 iterations typical
 
 ### 3. Error Troubleshooting
+
 - Cryptic error messages: "Property 'X' not found on type 'Y'"
 - Version mismatches: API versions change frequently
 - Copy-paste errors: Missing commas, wrong indentation
@@ -185,6 +206,7 @@ The infrastructure deployment will be considered successful if:
 **Estimated Impact:** 2-4 hours debugging per deployment
 
 ### 4. Documentation Burden
+
 - Manually document each resource
 - Keep diagrams in sync with code
 - Write deployment runbooks
@@ -192,33 +214,40 @@ The infrastructure deployment will be considered successful if:
 **Estimated Impact:** 3-4 hours per template
 
 ### Total Traditional Approach Time
+
 **Estimated: 45-60 minutes for template development** (excluding training)  
 **Plus: 40+ hours one-time learning investment**
 
 ## How Copilot Addresses These Pain Points
 
 ### Natural Language Interface
+
 ```bicep
 // Create an Azure VNet with three subnets for web, app, and data tiers
 ```
+
 No need to memorize syntax - describe what you need in plain English.
 
 ### Context-Aware Suggestions
+
 - Copilot knows Azure resource schemas
 - Suggests latest API versions
 - Follows naming best practices automatically
 
 ### Built-In Best Practices
+
 - Security configurations included by default
 - Proper resource relationships
 - Outputs for connecting resources
 
 ### Instant Documentation
+
 - Code is self-documenting with clear structure
 - Copilot can generate markdown docs from code
 - Architecture diagrams from templates
 
 ### Expected Copilot Time
+
 **10-15 minutes** for the same infrastructure  
 **Zero training required** - learn by doing
 
@@ -227,27 +256,32 @@ No need to memorize syntax - describe what you need in plain English.
 If you have more time or want to customize the demo:
 
 ### Extension 1: Add Monitoring
+
 ```bicep
 // Add Log Analytics workspace and diagnostic settings for all resources
 ```
 
 ### Extension 2: Add Private Endpoints
+
 ```bicep
 // Create a private endpoint for the storage account in the data tier subnet
 // Add private DNS zone for blob.core.windows.net
 ```
 
 ### Extension 3: Add Azure Bastion
+
 ```bicep
 // Add Azure Bastion subnet and host for secure VM access
 ```
 
 ### Extension 4: Add Firewall
+
 ```bicep
 // Add Azure Firewall in a dedicated subnet for centralized security
 ```
 
 ### Extension 5: Multi-Region
+
 ```bicep
 // Extend the infrastructure to West US for disaster recovery
 ```

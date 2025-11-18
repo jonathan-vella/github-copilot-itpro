@@ -16,27 +16,32 @@ HealthTech Solutions develops a patient engagement platform that includes appoin
 ### Application Stack
 
 **Frontend**:
+
 - React-based web application
 - TypeScript/JavaScript
 - Modern UI framework dependencies
 
 **Backend**:
+
 - Node.js API (Express framework)
 - TypeScript for type safety
 - 20+ npm package dependencies
 
 **Data Layer**:
+
 - Azure Cosmos DB (MongoDB API)
 - Structured and unstructured patient data
 - HIPAA-compliant encryption at rest
 
 **Infrastructure**:
+
 - Azure App Service (PaaS)
 - Azure Key Vault (secrets management)
 - Azure Monitor (logging and monitoring)
 - Private networking with VNet integration
 
 **Container**:
+
 - Docker containerization
 - Node.js 20 Alpine Linux base image
 - Deployed via Azure Container Registry
@@ -70,6 +75,7 @@ HealthTech Solutions must comply with multiple regulations:
 ### Customer Requirements
 
 **Enterprise Security Questionnaires**:
+
 - Large hospital systems require detailed SBOM as part of procurement
 - Questions include:
   - "Provide a complete list of third-party software components"
@@ -78,6 +84,7 @@ HealthTech Solutions must comply with multiple regulations:
   - "Can you identify affected systems within 24 hours of CVE disclosure?"
 
 **Security Incident Response**:
+
 - When Log4Shell was disclosed (Dec 2021), took 3 days to verify they weren't affected
 - Customers demanded faster response times
 - Manual component tracking was too slow
@@ -164,6 +171,7 @@ HealthTech Solutions must comply with multiple regulations:
 ### Requirements
 
 **Functional Requirements**:
+
 1. Scan npm dependencies from package.json (both dependencies and devDependencies)
 2. Analyze Docker container for base image components
 3. Query Azure infrastructure for deployed resource inventory
@@ -176,6 +184,7 @@ HealthTech Solutions must comply with multiple regulations:
 10. Merge multiple SBOMs into unified document
 
 **Non-Functional Requirements**:
+
 1. Run entirely in PowerShell (compatible with Windows + Azure DevOps)
 2. Use Azure CLI for infrastructure queries (already deployed)
 3. No additional licensing costs (leverage existing tools)
@@ -199,6 +208,7 @@ HealthTech Solutions must comply with multiple regulations:
 ## Technology Constraints
 
 **Existing Tools** (already deployed):
+
 - Azure CLI (authenticated)
 - PowerShell 7.0+
 - Node.js 18+ (for sample app)
@@ -206,12 +216,14 @@ HealthTech Solutions must comply with multiple regulations:
 - VS Code with GitHub Copilot
 
 **Approved for Use**:
+
 - Open-source SBOM scanners (Syft, CycloneDX CLI)
 - Azure Resource Graph queries
 - GitHub Copilot for script generation
 - Industry-standard SBOM formats (CycloneDX, SPDX)
 
 **Not Allowed**:
+
 - SaaS SBOM platforms (budget constraints)
 - Commercial vulnerability scanners (separate procurement)
 - Third-party data egress (HIPAA concerns)
@@ -219,16 +231,19 @@ HealthTech Solutions must comply with multiple regulations:
 ## Timeline
 
 **Pilot Phase** (Week 1-2):
+
 - Generate SBOM for patient portal application
 - Validate output with security team
 - Present to compliance officer
 
 **Production Rollout** (Week 3-4):
+
 - Integrate into Azure DevOps pipeline
 - Train 3 security engineers on process
 - Document runbooks and procedures
 
 **Scale** (Month 2-3):
+
 - Extend to all 5 production applications
 - Quarterly audit with automated SBOMs
 - Customer delivery process for SBOMs
@@ -238,11 +253,13 @@ HealthTech Solutions must comply with multiple regulations:
 ## Budget
 
 **Current Annual Cost** (manual process):
+
 - Security engineer time: 24 hours/year × $150/hr = **$3,600**
 - Audit findings remediation: ~10 hours × $150/hr = **$1,500**
 - **Total: $5,100 per year**
 
 **Target Annual Cost** (automated):
+
 - Security engineer time: 4 hours/year × $150/hr = **$600**
 - GitHub Copilot: $10/month × 12 = **$120**
 - **Total: $720 per year**

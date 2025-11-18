@@ -29,6 +29,7 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 ### Activities
 
 **Azure Arc Learning** (4 hours):
+
 - Read Microsoft documentation on Arc architecture
 - Understand Connected Machine agent requirements
 - Research network endpoints and firewall rules
@@ -36,12 +37,14 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 - Study extension management and policy integration
 
 **Architecture Design** (2 hours):
+
 - Design resource group structure for 12 facilities
 - Plan tagging strategy (CostCenter, Owner, Environment, Application)
 - Determine Log Analytics workspace configuration
 - Identify policy requirements for SOC 2 compliance
 
 **Tool Evaluation** (2 hours):
+
 - Compare Arc agent deployment methods (manual, SCCM, scripting)
 - Research parallel deployment options
 - Evaluate monitoring and alerting approaches
@@ -61,6 +64,7 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 ### Activities
 
 **Service Principal Creation** (1.5 hours):
+
 - Create Service Principal in Azure AD
 - Determine correct RBAC scope (subscription vs. resource group)
 - Find correct role definition IDs:
@@ -69,12 +73,14 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 - Assign roles and test permissions
 
 **Key Vault Configuration** (1.5 hours):
+
 - Create Key Vault or use existing
 - Configure access policies for Service Principal
 - Store credentials securely
 - Test secret retrieval
 
 **Testing & Troubleshooting** (1 hour):
+
 - Test SP authentication from test VM
 - Debug "insufficient permissions" errors
 - Re-scope roles after initial failures
@@ -93,6 +99,7 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 ### Script 1: Service Principal Creation (2 hours)
 
 **Manual Coding**:
+
 - Write parameter validation from scratch
 - Look up `New-AzADServicePrincipal` syntax
 - Research correct role assignment commands
@@ -100,6 +107,7 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 - Add logging and output formatting
 
 **Debugging**:
+
 - Fix parameter validation regex
 - Correct role assignment scope syntax
 - Handle existing SP scenarios
@@ -109,6 +117,7 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 ### Script 2: Parallel Agent Deployment (8 hours)
 
 **Manual Coding**:
+
 - Research PowerShell runspaces (3 hours of learning)
 - Write runspace pool creation logic
 - Implement scriptblock for agent installation
@@ -119,12 +128,14 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 - Write CSV import/export logic
 
 **Debugging**:
+
 - Fix runspace thread-safety issues (2 hours)
 - Debug WinRM connectivity failures
 - Handle timeout scenarios
 - Correct CSV column name mismatches
 
 **Challenges**:
+
 - **Runspace Complexity**: Not familiar with runspaces, required extensive research
 - **Cross-Platform**: Windows (WinRM) vs. Linux (SSH) required different approaches
 - **Error Handling**: Capturing errors from parallel jobs was tricky
@@ -135,6 +146,7 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 ### Script 3: Azure Policy Configuration (5 hours)
 
 **Manual Coding**:
+
 - Learn Azure Policy JSON schema (2 hours)
 - Write policy definitions for:
   - Tagging enforcement (deny effect)
@@ -144,12 +156,14 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 - Implement compliance reporting
 
 **Debugging**:
+
 - Fix JSON syntax errors in policy rules (1 hour)
 - Correct field paths in policy conditions
 - Debug deployIfNotExists ARM template
 - Handle policy propagation delays
 
 **Challenges**:
+
 - **JSON Complexity**: DeployIfNotExists effect requires nested ARM template
 - **Field Names**: Finding correct field names for Arc servers (`Microsoft.HybridCompute/machines/*`)
 - **Testing**: Policy assignments take 15-30 minutes to take effect
@@ -159,6 +173,7 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 ### Script 4: Monitoring Configuration (3 hours)
 
 **Manual Coding**:
+
 - Research Data Collection Rules (DCR) schema
 - Write performance counter configuration
 - Implement event log collection setup
@@ -166,6 +181,7 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 - Create alert rule definitions with KQL queries
 
 **Debugging**:
+
 - Fix DCR JSON schema errors
 - Correct performance counter paths (Windows vs. Linux differences)
 - Debug KQL query syntax
@@ -176,6 +192,7 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 ### Script 5: Validation & Health Check (2 hours)
 
 **Manual Coding**:
+
 - Write Arc server enumeration logic
 - Implement connectivity tests
 - Add extension status checking
@@ -183,6 +200,7 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 - Add heartbeat age calculations
 
 **Challenges**:
+
 - **HTML Generation**: Building dynamic HTML in PowerShell required string manipulation
 
 ---
@@ -194,6 +212,7 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 **Deployment Method**: Sequential with limited parallelization (10 servers at a time due to script limitations)
 
 **Time Breakdown**:
+
 - Average deployment time per server: 4-5 minutes
 - 500 servers × 4.5 minutes = 2,250 minutes = **37.5 hours**
 - Troubleshooting failures: +2.5 hours
@@ -235,18 +254,21 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 ### Activities
 
 **Policy Definition Creation** (8 hours):
+
 - Write custom tagging policy JSON (2 hours)
 - Create monitoring agent deployment policy (3 hours)
 - Define security baseline policies (2 hours)
 - Test policies in dev environment (1 hour)
 
 **Policy Assignment** (4 hours):
+
 - Assign policies to subscription scope
 - Configure policy parameters
 - Handle policy conflicts and exceptions
 - Document policy assignments
 
 **Compliance Monitoring** (4 hours):
+
 - Wait for policy evaluation (30 minutes × 8 iterations)
 - Generate compliance reports
 - Remediate non-compliant resources
@@ -266,21 +288,25 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 ### Activities
 
 **Log Analytics Workspace** (2 hours):
+
 - Create or configure existing workspace
 - Set data retention policies
 - Configure workspace access and RBAC
 
 **Data Collection Rules** (4 hours):
+
 - Create Windows DCR with performance counters (2 hours)
 - Create Linux DCR with syslog configuration (1.5 hours)
 - Associate DCRs with Arc servers (.5 hours)
 
 **Azure Monitor Agent Deployment** (3 hours):
+
 - Deploy AMA extension to 500 servers
 - Validate extension installation
 - Troubleshoot failed deployments
 
 **Alert Rules** (3 hours):
+
 - Create CPU, memory, disk space alerts
 - Configure action groups for notifications
 - Test alert firing and notification
@@ -300,18 +326,21 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 ### Activities
 
 **Connectivity Validation** (3 hours):
+
 - Check Arc agent status for all 500 servers
 - Verify last heartbeat timestamps
 - Validate extension installation and status
 - Generate validation report
 
 **Functional Testing** (3 hours):
+
 - Test policy enforcement (create non-compliant resource)
 - Verify monitoring data flow in Log Analytics
 - Test alert firing and notifications
 - Validate tag compliance
 
 **Troubleshooting** (2 hours):
+
 - Fix 40 disconnected servers
 - Remediate policy compliance failures
 - Address monitoring gaps (10 servers with no data)
@@ -329,17 +358,20 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 ### Activities
 
 **Architecture Documentation** (3 hours):
+
 - Document network topology and VPN configuration
 - Create Visio diagrams for Arc architecture
 - Describe policy inheritance and RBAC model
 
 **Runbook Creation** (4 hours):
+
 - Write server onboarding runbook
 - Document troubleshooting procedures
 - Create rollback procedures
 - Write operational checklists
 
 **Knowledge Transfer** (3 hours):
+
 - Create training materials for operations team
 - Document common issues and resolutions
 - Write PowerShell script usage guides
@@ -358,6 +390,7 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 ### Labor Cost
 
 **Assumptions**:
+
 - Infrastructure engineer hourly rate: $150/hour
 - Total manual hours: 106 hours
 
@@ -367,9 +400,11 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 ### Team Impact
 
 **Single Engineer**:
+
 - 106 hours ÷ 8 hours/day = 13.25 work days (2.6 weeks)
 
 **Two Engineers** (parallel work where possible):
+
 - Core path still ~70 hours due to dependencies
 - 70 hours ÷ 8 hours/day = 8.75 work days (1.75 weeks)
 
@@ -438,8 +473,9 @@ This document details the time required to onboard 500 servers to Azure Arc **wi
 The manual approach to Azure Arc onboarding at scale (500 servers) is **time-intensive, error-prone, and requires extensive Azure expertise**. The 106-hour baseline represents 13.25 work days for a single engineer—nearly 3 weeks of dedicated work.
 
 **Key Takeaways**:
+
 - Script development alone takes 20 hours (19% of project)
-- Manual deployment takes 40 hours (38% of project) 
+- Manual deployment takes 40 hours (38% of project)
 - Troubleshooting adds significant overhead (8+ hours)
 - Documentation is time-consuming and often incomplete
 

@@ -783,14 +783,16 @@ references:
 | **Total** | | | | **$331 - $346** |
 
 **Cost Optimization Opportunities:**
+
 - **Azure Reservations**: Commit to 1-year or 3-year App Service Plan reservation for 30-40% savings (~$50/month)
 - **SQL Database**: Consider Serverless tier during low-usage periods (potential $50-100/month savings)
 - **Log Analytics**: Implement 100 GB/day commitment tier if usage exceeds 100 GB/month ($30-50/month savings)
 - **Right-sizing**: Monitor App Service Plan usage and adjust instance count based on demand
 
 **Cost Assumptions:**
+
 - Region: East US 2 (consistent pricing across most US regions)
-- Usage patterns: 
+- Usage patterns:
   - Web traffic: ~10,000 users/month, typical SaaS pattern
   - Database: 50 DTU sustained usage (~70% of Standard S2 capacity)
   - Log ingestion: 5-10 GB/month (Application Insights + platform logs)
@@ -838,6 +840,7 @@ graph TD
 ```
 
 **Deployment Order:**
+
 1. **Phase 1 - Foundation (Resource Group, Networking)**
    - Resource Group
    - Virtual Network with subnets

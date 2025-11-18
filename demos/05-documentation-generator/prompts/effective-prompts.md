@@ -35,6 +35,7 @@
 ### Basic Architecture Doc
 
 **Prompt**:
+
 ```
 Generate comprehensive Azure architecture documentation for resource group [name].
 
@@ -55,6 +56,7 @@ Output format: Markdown with embedded Mermaid diagrams
 ### Advanced Architecture with Compliance
 
 **Prompt**:
+
 ```
 Generate Azure architecture documentation for [resource group] with focus on compliance.
 
@@ -87,6 +89,7 @@ Output: Markdown with Mermaid diagrams, compliance matrix table
 ### Deployment Runbook from Bicep
 
 **Prompt**:
+
 ```
 Generate operational runbook from Bicep template at [path/to/template.bicep].
 
@@ -113,6 +116,7 @@ Output: Markdown with PowerShell/Bash code blocks
 ### Operational Procedures Runbook
 
 **Prompt**:
+
 ```
 Create operational procedures runbook for [application name] deployed in Azure.
 
@@ -154,6 +158,7 @@ Output: Wiki-style Markdown with linked table of contents
 ### From Application Insights Patterns
 
 **Prompt**:
+
 ```
 Generate troubleshooting guide from Application Insights telemetry.
 
@@ -190,6 +195,7 @@ Output: Markdown with Mermaid flowcharts and KQL code blocks
 ### Generic Troubleshooting Template
 
 **Prompt**:
+
 ```
 Create troubleshooting guide for [Azure service/application].
 
@@ -230,6 +236,7 @@ Output: Markdown with Mermaid diagrams
 ### From Code Comments
 
 **Prompt**:
+
 ```
 Generate API documentation from C# Web API project at [path].
 
@@ -265,6 +272,7 @@ Output: Markdown with OpenAPI/Swagger-style formatting
 ### From OpenAPI Spec
 
 **Prompt**:
+
 ```
 Convert OpenAPI specification at [path/to/openapi.yaml] to user-friendly API documentation.
 
@@ -305,6 +313,7 @@ Output: Developer-friendly Markdown with extensive examples
 ### DR Procedures from Configuration
 
 **Prompt**:
+
 ```
 Generate disaster recovery runbook for [application/infrastructure name].
 
@@ -365,6 +374,7 @@ Output: PDF-ready Markdown
 ### Architecture Diagrams (Mermaid)
 
 **Prompt**:
+
 ```
 Generate Mermaid architecture diagram for Azure infrastructure.
 
@@ -388,6 +398,7 @@ Output: Valid Mermaid syntax in Markdown code block
 ```
 
 **Example Output**:
+
 ```mermaid
 graph TB
     subgraph Frontend
@@ -414,6 +425,7 @@ graph TB
 ### Network Topology Diagrams
 
 **Prompt**:
+
 ```
 Create network topology diagram in Mermaid for Azure virtual network.
 
@@ -436,6 +448,7 @@ Output: Mermaid syntax
 ### Sequence Diagrams for Workflows
 
 **Prompt**:
+
 ```
 Generate Mermaid sequence diagram for [workflow/process name].
 
@@ -465,12 +478,14 @@ Output: Mermaid sequence diagram syntax
 ### Technique 1: Iterative Refinement
 
 **Step 1 - Generate Basic Version**:
+
 ```
 Generate basic architecture documentation for [resource group].
 Include resource inventory and simple diagram.
 ```
 
 **Step 2 - Enhance Specific Section**:
+
 ```
 Expand the network security section of the architecture document.
 Add details on:
@@ -482,6 +497,7 @@ Add details on:
 ```
 
 **Step 3 - Add Cross-References**:
+
 ```
 Add cross-references throughout the document:
 - Link troubleshooting guide for common issues
@@ -491,6 +507,7 @@ Add cross-references throughout the document:
 ```
 
 **Step 4 - Customize Tone**:
+
 ```
 Adjust document tone for [audience]:
 - Executive summary: Business-focused, non-technical
@@ -501,6 +518,7 @@ Adjust document tone for [audience]:
 ### Technique 2: Template-Based Generation
 
 **Create Template Once**:
+
 ```markdown
 # [SERVICE NAME] Architecture Documentation
 
@@ -520,6 +538,7 @@ Adjust document tone for [audience]:
 ```
 
 **Prompt for Each Project**:
+
 ```
 Fill this architecture template for resource group [name]:
 [paste template]
@@ -532,6 +551,7 @@ Calculate cost estimates from resource SKUs.
 ### Technique 3: Multi-Document Generation
 
 **Prompt for Complete Documentation Suite**:
+
 ```
 Generate complete documentation suite for [project name]:
 
@@ -566,6 +586,7 @@ Output: 6 separate Markdown files
 **Scenario**: MSP completed Azure migration, needs to hand off to customer IT team
 
 **Prompt**:
+
 ```
 Generate customer handoff documentation for completed Azure migration.
 
@@ -604,6 +625,7 @@ Output: 4 linked Markdown documents
 **Scenario**: Security audit requires comprehensive architecture and compliance documentation
 
 **Prompt**:
+
 ```
 Generate audit-ready documentation for [environment name].
 
@@ -643,6 +665,7 @@ Output: Structured Markdown for PDF conversion
 **Scenario**: Senior engineer leaving, need to document tribal knowledge
 
 **Prompt**:
+
 ```
 Generate knowledge transfer documentation for [system name].
 
@@ -680,6 +703,7 @@ Format: Wiki-style with lots of examples
 ### Documentation Quality Metrics
 
 **Completeness**:
+
 ```
 Generate documentation completeness checklist for [doc type].
 List all required sections, verify each is present and adequate.
@@ -687,6 +711,7 @@ Report completeness percentage.
 ```
 
 **Accuracy Validation**:
+
 ```
 Compare generated documentation against actual Azure resources.
 Verify:
@@ -716,6 +741,7 @@ Report discrepancies for manual review.
 
 **Problem**: Documentation lacks specific details  
 **Solution**: Provide more context in prompt
+
 ```
 # Instead of:
 "Generate architecture documentation"
@@ -733,6 +759,7 @@ Include specific configuration details for each component."
 
 **Problem**: Mermaid diagram won't render  
 **Solution**: Request validation and fix
+
 ```
 Generate Mermaid architecture diagram for [resources].
 After generation, validate Mermaid syntax is correct.
@@ -744,6 +771,7 @@ Test in Mermaid Live Editor.
 
 **Problem**: Documentation references old Azure Portal or deprecated features  
 **Solution**: Specify current best practices
+
 ```
 Generate documentation using current Azure best practices (2024).
 Use:
@@ -758,6 +786,7 @@ Use:
 
 **Problem**: Multiple documents have different styles  
 **Solution**: Use consistent template
+
 ```
 Generate all documents using this template structure:
 [paste template with heading styles, section order, formatting rules]
@@ -773,7 +802,8 @@ Ensure consistency:
 
 ## Best Practices Summary
 
-### DO:
+### DO
+
 ✅ Provide detailed context about your infrastructure  
 ✅ Specify exact output format (Markdown, sections, diagrams)  
 ✅ Use templates for consistency across projects  
@@ -783,7 +813,8 @@ Ensure consistency:
 ✅ Version control documentation alongside code  
 ✅ Regenerate when infrastructure changes  
 
-### DON'T:
+### DON'T
+
 ❌ Use vague prompts ("make docs")  
 ❌ Skip human review and customization  
 ❌ Treat generated docs as 100% accurate without validation  

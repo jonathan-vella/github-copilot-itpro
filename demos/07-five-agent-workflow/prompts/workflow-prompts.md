@@ -214,24 +214,28 @@ Create a deployment guide (deploy.md) with step-by-step instructions.
 ### Expected Outputs
 
 **Phase 1 Files:**
+
 - [ ] `temp/contoso-healthcare-portal/phase1-foundation/main.bicep`
 - [ ] `temp/contoso-healthcare-portal/phase1-foundation/parameters.dev.json`
 - [ ] `temp/contoso-healthcare-portal/phase1-foundation/parameters.prod.json`
 - [ ] `temp/contoso-healthcare-portal/phase1-foundation/deploy-phase1.ps1`
 
 **Phase 2 Files:**
+
 - [ ] `temp/contoso-healthcare-portal/phase2-platform/main.bicep`
 - [ ] `temp/contoso-healthcare-portal/phase2-platform/parameters.dev.json`
 - [ ] `temp/contoso-healthcare-portal/phase2-platform/parameters.prod.json`
 - [ ] `temp/contoso-healthcare-portal/phase2-platform/deploy-phase2.ps1`
 
 **Phase 3 Files:**
+
 - [ ] `temp/contoso-healthcare-portal/phase3-security/main.bicep`
 - [ ] `temp/contoso-healthcare-portal/phase3-security/parameters.dev.json`
 - [ ] `temp/contoso-healthcare-portal/phase3-security/parameters.prod.json`
 - [ ] `temp/contoso-healthcare-portal/phase3-security/deploy-phase3.ps1`
 
 **Orchestration Files:**
+
 - [ ] `temp/contoso-healthcare-portal/main.bicep` (calls all phases)
 - [ ] `temp/contoso-healthcare-portal/deploy.md` (deployment guide)
 
@@ -257,6 +261,7 @@ Select-String -Path "temp/contoso-healthcare-portal/phase*/*.bicep" -Pattern "ht
 ### Variation 1: Higher Budget Scenario ($2,000/month)
 
 Modify Stage 1 prompt to include:
+
 - Premium App Service tier
 - Azure Front Door with WAF
 - Geo-replication for SQL Database
@@ -265,6 +270,7 @@ Modify Stage 1 prompt to include:
 ### Variation 2: Multi-Region Deployment
 
 Add to Stage 1 prompt:
+
 - Primary region: East US 2
 - Secondary region: Central US
 - Traffic Manager or Azure Front Door
@@ -273,6 +279,7 @@ Add to Stage 1 prompt:
 ### Variation 3: Enhanced Security
 
 Add to all stages:
+
 - Application Gateway with WAF
 - Azure Firewall for egress filtering
 - Azure DDoS Protection Standard
@@ -324,4 +331,3 @@ Add to all stages:
 
 **Last Updated:** 2025-11-18  
 **Tested With:** GitHub Copilot custom agents (four-mode workflow)
-

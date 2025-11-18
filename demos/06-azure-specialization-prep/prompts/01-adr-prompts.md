@@ -41,6 +41,7 @@ Include: decision drivers, alternatives considered, consequences, and compliance
 ```
 
 **Why this works**:
+
 - ✅ Clearly states the decision (Azure SQL Database vs. SQL Managed Instance)
 - ✅ Provides relevant context (application type, size, performance)
 - ✅ Mentions constraints (cost, limited DBA resources)
@@ -67,6 +68,7 @@ Include: decision rationale, risk assessment, migration complexity, and long-ter
 ```
 
 **Why this works**:
+
 - ✅ Explains the "why" behind the decision (lift-and-shift strategy)
 - ✅ Acknowledges team capabilities (IIS expertise)
 - ✅ Considers timeline constraints
@@ -94,6 +96,7 @@ and recommendations for production deployments.
 ```
 
 **Why this works**:
+
 - ✅ Acknowledges the trade-off (public vs. private endpoints)
 - ✅ Provides clear context (demo environment, not production)
 - ✅ Explains the decision factors (complexity, cost, timeline)
@@ -120,6 +123,7 @@ and scale-out strategy.
 ```
 
 **Why this works**:
+
 - ✅ Provides performance requirements and baselines
 - ✅ Explains sizing methodology
 - ✅ Considers cost and scalability
@@ -147,6 +151,7 @@ and future enhancements.
 ```
 
 **Why this works**:
+
 - ✅ Defines clear RTO/RPO requirements
 - ✅ Provides database characteristics
 - ✅ Explains budget constraints
@@ -163,6 +168,7 @@ Document why we chose Azure SQL Database.
 ```
 
 **Problems**:
+
 - Missing context about the application
 - No alternatives mentioned
 - No constraints or requirements
@@ -178,6 +184,7 @@ point-in-time restore enabled, TDE encryption, and geo-redundant backups.
 ```
 
 **Problems**:
+
 - Only technical specifications
 - No business requirements or drivers
 - No explanation of why these specific choices
@@ -193,6 +200,7 @@ networking, compute, security, monitoring, and backup.
 ```
 
 **Problems**:
+
 - Too broad, multiple topics
 - Won't generate focused ADR
 - Better to create separate ADRs for each major decision
@@ -204,6 +212,7 @@ networking, compute, security, monitoring, and backup.
 ### 1. Provide Clear Context
 
 Always include:
+
 - **Application details**: Type, size, performance requirements
 - **Business constraints**: Budget, timeline, team skills
 - **Technical requirements**: SLA, performance, security
@@ -211,6 +220,7 @@ Always include:
 ### 2. Mention Alternatives
 
 Help Copilot understand what you considered:
+
 ```
 Compare Azure SQL Database vs. SQL Managed Instance vs. SQL Server on VM
 ```
@@ -218,6 +228,7 @@ Compare Azure SQL Database vs. SQL Managed Instance vs. SQL Server on VM
 ### 3. Request Specific Sections
 
 Guide the structure:
+
 ```
 Include: decision drivers, alternatives considered, consequences, and compliance implications.
 ```
@@ -231,6 +242,7 @@ Include: decision drivers, alternatives considered, consequences, and compliance
 ### 5. One Decision Per ADR
 
 Focus on a single architectural decision:
+
 - ✅ "Document the database service selection"
 - ❌ "Document all infrastructure decisions"
 
@@ -271,6 +283,7 @@ Include: HA comparison, cost analysis, migration path, and SLA implications.
 ```
 
 **What makes this effective**:
+
 1. Specific decision (Availability Set vs. Zones)
 2. Application context (stateless, load balanced)
 3. SLA considerations (target vs. actual)

@@ -9,6 +9,7 @@
 ### Demo Objectives
 
 By the end of this demo, participants will understand:
+
 1. How GitHub Copilot accelerates Azure troubleshooting (83% time savings)
 2. Techniques for generating KQL queries from natural language
 3. Automated diagnostic script creation for common issues
@@ -79,6 +80,7 @@ By the end of this demo, participants will understand:
 > "Meet RetailMax Online, a Fortune 500 retailer with an $800M e-commerce platform on Azure."
 
 **Key Points to Emphasize**:
+
 - Platform criticality: $22K revenue loss per hour
 - Business pressure: Black Friday in 3 days
 - SLA at risk: 99.9% uptime commitment
@@ -128,6 +130,7 @@ By the end of this demo, participants will understand:
 **Action**: Create new file `Get-AzureHealthSnapshot.ps1`
 
 **Prompt to Copilot** (type slowly, narrate):
+
 ```
 # Create a PowerShell function to check Azure resource health
 # Function name: Get-AzureHealthSnapshot
@@ -142,6 +145,7 @@ By the end of this demo, participants will understand:
 > "Notice how it's suggesting parameter validation, proper error handling, and even color-coded output for better readability."
 
 **Accept Suggestions** (demonstrate tab-completion):
+
 - Accept function scaffold
 - Accept parameter block
 - Accept resource health query logic
@@ -151,6 +155,7 @@ By the end of this demo, participants will understand:
 > "In 3 minutes, we have a production-ready diagnostic script. Manually, this would take 2 hours to research, write, and debug."
 
 **Quick Test**:
+
 ```powershell
 # Load the function
 . .\Get-AzureHealthSnapshot.ps1
@@ -171,6 +176,7 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
 **Action**: Create new file `Invoke-DiagnosticQuery.ps1`
 
 **Prompt to Copilot**:
+
 ```
 # Create a PowerShell function to generate and execute KQL diagnostic queries
 # Function name: Invoke-DiagnosticQuery
@@ -189,6 +195,7 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
 **Accept Suggestions, Highlighting Key Parts**:
 
 1. **Symptom Translation Logic**:
+
    ```powershell
    switch -Wildcard ($Symptom) {
        "*high latency*" { $query = "requests | where..." }
@@ -200,6 +207,7 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
    > "Copilot generated pattern matching for common symptoms. This is knowledge capture happening in real-time."
 
 2. **KQL Query Structure**:
+
    ```kql
    requests
    | where timestamp > ago(2h)
@@ -211,6 +219,7 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
    > "Look at this KQL - perfectly formatted, with time filtering, aggregation, and sorting. Writing this manually would take 20-30 minutes if you're experienced, hours if you're learning KQL."
 
 3. **Next Steps Suggestions**:
+
    ```powershell
    Write-Host "Suggested Next Steps:" -ForegroundColor Yellow
    Write-Host "1. Check backend dependencies: $query2"
@@ -244,6 +253,7 @@ Invoke-DiagnosticQuery -Symptom "Intermittent 5xx errors during checkout, starte
 **Action**: Create `Resolve-CommonIssues.ps1`
 
 **Prompt** (faster now, show momentum):
+
 ```
 # Create a function to automatically resolve common Azure issues
 # Function name: Resolve-CommonIssues
@@ -258,6 +268,7 @@ Invoke-DiagnosticQuery -Symptom "Intermittent 5xx errors during checkout, starte
 > "It's suggesting solutions: CPU scaling, connection pool adjustment, query optimization. This is years of Azure operational knowledge, accessible instantly."
 
 **Quick Demo**:
+
 ```powershell
 # Dry run first
 Resolve-CommonIssues -Issue 'ConnectionTimeout' -WhatIf
@@ -275,6 +286,7 @@ Resolve-CommonIssues -Issue 'ConnectionTimeout' -Confirm:$false
 **Action**: Create `New-TroubleshootingReport.ps1`
 
 **Prompt**:
+
 ```
 # Generate incident post-mortem report
 # Function: New-TroubleshootingReport
@@ -286,6 +298,7 @@ Resolve-CommonIssues -Issue 'ConnectionTimeout' -Confirm:$false
 > "Last pain point: Documentation. Manually writing a post-mortem takes 2 hours when you're exhausted after a long incident. Copilot does it in 15 minutes."
 
 **Show Example Output**:
+
 ```powershell
 New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPath "incident-report.md"
 ```
@@ -301,27 +314,35 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 **Run the Complete Workflow**:
 
 1. **Health Check**:
+
    ```powershell
    Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
    ```
+
    > "Step 1: Quick triage - identify degraded SQL Database in 30 seconds vs. 15 minutes manually."
 
 2. **Diagnostic Query**:
+
    ```powershell
    Invoke-DiagnosticQuery -Symptom "High database CPU with slow queries"
    ```
+
    > "Step 2: KQL analysis - found top 5 CPU-intensive queries in 2 minutes vs. 45 minutes manually."
 
 3. **Remediation**:
+
    ```powershell
    Resolve-CommonIssues -Issue 'SlowQueries' -AddMissingIndexes
    ```
+
    > "Step 3: Applied index recommendations in 5 minutes vs. 2 hours of manual optimization."
 
 4. **Documentation**:
+
    ```powershell
    New-TroubleshootingReport -IncidentTitle "Checkout Performance Degradation"
    ```
+
    > "Step 4: Generated comprehensive post-mortem in 10 minutes vs. 2 hours of writing."
 
 #### Show Time Savings Visual (1 minute)
@@ -339,6 +360,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 
 **Emphasize Business Impact**:
 > "Let's talk real dollars:"
+>
 > - **Labor savings**: $3,750 per incident
 > - **Annual savings** (12 incidents): **$45,000**
 > - **Downtime cost avoidance**: 25 hours faster resolution = **$2.5M saved per incident**
@@ -370,12 +392,14 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 #### Next Steps (30 seconds)
 
 **For the Audience**:
+
 - Try the scripts in your environment (all open source)
 - Customize for your specific issues
 - Track your MTTR improvements
 - Share results with your team
 
 **For Partners**:
+
 - Integrate into managed services offering
 - Use in customer incident response
 - Demonstrate during Azure support engagements
@@ -384,6 +408,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 #### Q&A Teaser (30 seconds)
 
 > "Questions I often get:"
+>
 > - "What if Copilot suggests wrong solution?" → You're the expert, validate before applying
 > - "Does it work with non-Azure resources?" → Yes, same principles for AWS, on-prem, etc.
 > - "Security concerns?" → Code stays in your environment, Microsoft privacy policy applies
@@ -397,6 +422,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 ### If Copilot is Slow/Unresponsive
 
 **Plan B**: Use Pre-Generated Scripts
+
 - All 4 scripts are pre-built in `with-copilot/` folder
 - Narrate: "I pre-generated this earlier with Copilot..."
 - Focus demo on **explaining the code** Copilot created
@@ -405,6 +431,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 ### If Azure Connection Fails
 
 **Plan C**: Use Screenshots/Recordings
+
 - Show pre-recorded video of script execution
 - Walk through code in VS Code (no execution needed)
 - Emphasize: "The real value is in the code generation speed, which we already demonstrated"
@@ -435,6 +462,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 
 **Response**:
 > "These are intentionally beginner-friendly queries for demo purposes. In production, ask Copilot for advanced scenarios:"
+>
 > - "Create KQL with percentile calculations and anomaly detection"
 > - "Generate query with cross-workspace joins"
 > - "Write time-series analysis with regression"
@@ -455,6 +483,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 
 **Response**:
 > "Valid concern. Key facts:"
+>
 > - Code stays in your VS Code environment
 > - Microsoft's privacy policy: No code retention for training without permission
 > - You control what code is shared (prompts only, not full codebase)
@@ -476,6 +505,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
    - Ask Copilot to enhance: "Add error handling", "Include progress bars", "Export to CSV"
 
 3. **Leverage Comments for Context**:
+
    ```powershell
    # RetailMax uses Premium P2 tier SQL Database in East US region
    # High CPU detected during peak hours (6PM-9PM UTC)
@@ -496,6 +526,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 - **For Partners**: Highlight managed services differentiation, margin improvement
 
 **Industry-Specific Scenarios**:
+
 - **Financial Services**: Replace "e-commerce" with "trading platform" ($500K/hour downtime)
 - **Healthcare**: Focus on patient portal availability, HIPAA compliance
 - **Manufacturing**: IoT device connectivity issues, predictive maintenance
@@ -514,6 +545,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 ### Success Metrics to Track
 
 Encourage participants to measure:
+
 - **MTTR Before/After**: Baseline current incident resolution time
 - **First-Time Fix Rate**: Percentage of issues resolved without escalation
 - **Documentation Quality**: Time spent writing post-mortems

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Planned
+
 - Cost estimation for architecture recommendations
 - Dependency visualization in infrastructure plans
 - Progressive implementation patterns
@@ -23,17 +24,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 #### All Agents
+
 - Version tracking in agent definitions
 - Success criteria documentation
 - Error handling guidance
 
 #### ADR Generator Agent
+
 - Context-gathering phase before ADR creation
 - ADR status workflow documentation
 - Automatic relationship detection
 - Template customization support
 
 #### Azure Principal Architect Agent
+
 - Scoring system for WAF pillar assessment (X/10 format)
 - Confidence levels (High/Medium/Low) for recommendations
 - Cost estimation patterns using Azure Pricing Calculator
@@ -42,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reference architecture search from Azure Architecture Center
 
 #### Bicep Planning Specialist Agent
+
 - Resource dependency visualization using Mermaid diagrams
 - Testing strategy section in plans
 - Cost estimation table in plan template
@@ -49,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Parameter file structure generation
 
 #### Bicep Implementation Specialist Agent
+
 - Progressive implementation pattern (phase-based deployment)
 - Security scanning with Bicep linter SARIF output
 - Module reusability check before creating new modules
@@ -59,31 +65,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 #### ADR Generator Agent
+
 - Enhanced quality checklist with more validation items
 - Improved coding system (POS-XXX, NEG-XXX, ALT-XXX)
 - Better handoff prompts to other agents
 
 #### Azure Principal Architect Agent
+
 - Explicit requirement clarification before making assumptions
 - Stronger emphasis on Microsoft documentation lookup
 - More detailed trade-off discussions
 
 #### Bicep Planning Specialist Agent
+
 - More deterministic, machine-readable plan format
 - Enhanced resource block YAML structure
 - Improved phase-based implementation guidance
 
 #### Bicep Implementation Specialist Agent
+
 - Stricter validation requirements (restore, build, lint, format)
 - Better dead code detection
 - Enhanced best practices checklist
 
 ### Testing
+
 - Created test suite framework structure
 - Added baseline test scenarios
 - Documented manual testing procedures
 
 ### Documentation
+
 - Created agent improvements roadmap
 - Added this changelog
 - Updated FIVE-MODE-WORKFLOW.md with new capabilities
@@ -93,6 +105,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2025-11-15
 
 ### Added
+
 - Initial release of four custom agents:
   - ADR Generator Agent
   - Azure Principal Architect Agent
@@ -103,6 +116,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Integration with demo repository structure
 
 ### Features
+
 - Structured ADR generation with coded bullet points
 - WAF pillar assessment (5 pillars)
 - Machine-readable infrastructure planning
@@ -127,17 +141,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Breaking Changes:** None
 
 **New Features:**
+
 1. **Cost Estimation**: Architecture recommendations now include cost ranges
 2. **Dependency Diagrams**: Plans include Mermaid diagrams automatically
 3. **Progressive Implementation**: Complex deployments split into validated phases
 
 **Migration Steps:**
+
 1. Review existing ADRs and plans - no changes required
 2. New outputs will include enhanced features automatically
 3. Update any custom agent variants to include new sections
 4. Run test suite to validate agent behavior
 
 **Testing Recommendations:**
+
 - Test cost estimation with known architectures
 - Verify dependency diagrams render correctly
 - Validate progressive implementation phases deploy successfully
@@ -147,9 +164,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Deprecation Notices
 
 ### Version 1.x
+
 - None currently
 
 ### Future Deprecations
+
 - Will notify 2 releases in advance of any breaking changes
 
 ---

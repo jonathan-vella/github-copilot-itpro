@@ -68,9 +68,11 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 ## Well-Architected Framework Assessment
 
 ### 🔒 Security: 9/10
+
 **Strong - Production Ready**
 
 **Strengths:**
+
 - Azure App Service with managed identity eliminates credential management
 - Azure SQL Database TDE (Transparent Data Encryption) enabled by default for HIPAA compliance
 - Azure Key Vault for centralized secrets management
@@ -80,10 +82,12 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 - Diagnostic logging for audit trails required by HIPAA
 
 **Minor Gaps:**
+
 - Initial deployment without WAF (Application Gateway) due to budget constraints
 - Consider Always Encrypted for PHI columns in future phases
 
 **HIPAA Compliance Mapping:**
+
 - ✅ Encryption at rest (SQL TDE enabled by default)
 - ✅ Encryption in transit (TLS 1.2 minimum enforced)
 - ✅ Access controls (Azure AD + RBAC + Row-Level Security)
@@ -94,19 +98,23 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 ---
 
 ### 🔄 Reliability: 7/10
+
 **Good - Minor Improvements Needed**
 
 **Strengths:**
+
 - App Service Standard tier includes zone redundancy (99.95% SLA)
 - Azure SQL Database Standard tier with automated backups
 - 99.9% SLA achievable with current architecture
 - Health monitoring via Application Insights
 
 **Gaps:**
+
 - Single region deployment (no DR region due to budget)
 - No active geo-replication for SQL Database
 
 **SLA Calculation:**
+
 - App Service Standard: 99.95%
 - Azure SQL Database Standard: 99.99%
 - Private Link: 99.99%
@@ -118,9 +126,11 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 ---
 
 ### ⚡ Performance Efficiency: 8/10
+
 **Good - Meets Requirements**
 
 **Strengths:**
+
 - App Service Standard S1 with autoscaling (up to 10 instances)
 - Azure SQL Database Standard S2 (50 DTUs) sufficient for 10,000 users
 - Application Insights for performance monitoring
@@ -128,20 +138,24 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 - Connection pooling via App Service
 
 **Validated Performance:**
+
 - Expected response time: <1.5 seconds for typical operations
 - Supports ~100 concurrent users per S1 instance
 - Database supports ~500 concurrent connections
 
 **Optimization Opportunities:**
+
 - Add Redis Cache in Phase 2 if performance degrades
 - Consider Premium tier for auto-healing capabilities
 
 ---
 
 ### 💰 Cost Optimization: 8/10
+
 **Good - Within Budget**
 
 **Strengths:**
+
 - Managed PaaS services reduce operational overhead
 - Pay-as-you-go with autoscaling prevents over-provisioning
 - Shared infrastructure (no dedicated VMs to manage)
@@ -161,6 +175,7 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 | **Total** | | | **~$765/month** |
 
 **Cost Optimization Notes:**
+
 - Front Door adds ~$431/month but provides global CDN, SSL offloading, and DDoS protection
 - Alternative: Use App Service custom domain + managed certificate ($0) + Traffic Manager ($7) = Save $424/month (total: $341/month)
 - **Recommended for budget:** Skip Front Door initially, add later if performance requires
@@ -170,20 +185,24 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 ---
 
 ### 🔧 Operational Excellence: 7/10
+
 **Good - Some Automation Gaps**
 
 **Strengths:**
+
 - Fully managed services (no OS patching)
 - Application Insights for monitoring and alerting
 - Built-in backup and restore capabilities
 - Azure DevOps/GitHub Actions integration
 
 **Gaps:**
+
 - Manual deployment initially (recommend IaC with Bicep)
 - No formalized runbook for incident response
 - Limited automated testing in deployment pipeline
 
 **Recommendations:**
+
 - Implement Blue-Green deployments using staging slots
 - Create runbook for HIPAA breach notification procedures
 - Set up Azure Monitor alerts for SLA violations
@@ -195,6 +214,7 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 ### Core Services
 
 **1. Azure App Service (Standard S1)**
+
 - **Purpose:** Host patient portal web application
 - **Configuration:**
   - Minimum 2 instances (zone-redundant)
@@ -209,6 +229,7 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 - **Region:** East US 2 (primary), Central US (future DR)
 
 **2. Azure SQL Database (Standard S2)**
+
 - **Purpose:** Store appointment data and patient records
 - **Configuration:**
   - Standard tier, 50 DTUs
@@ -224,6 +245,7 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
   - Dynamic Data Masking for sensitive columns
 
 **3. Azure Key Vault (Standard)**
+
 - **Purpose:** Store connection strings, API keys, encryption keys
 - **Configuration:**
   - Soft delete enabled (90 days)
@@ -232,6 +254,7 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 - **Access:** App Service managed identity only
 
 **4. Application Insights**
+
 - **Purpose:** Application performance monitoring, diagnostics
 - **Configuration:**
   - Connected to Log Analytics workspace
@@ -239,6 +262,7 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
   - Custom telemetry for critical user flows
 
 **5. Azure Monitor + Log Analytics**
+
 - **Purpose:** Centralized logging for HIPAA audit trails
 - **Configuration:**
   - Collect App Service logs, SQL audit logs, Key Vault access logs
@@ -248,6 +272,7 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 **Optional (Budget Permitting):**
 
 **6. Azure Front Door (Standard)** - *$431/month*
+
 - Global CDN and SSL offloading
 - WAF for DDoS protection
 - Alternative: Use App Service custom domain ($0) + Traffic Manager ($7)
@@ -273,6 +298,7 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 ```
 
 **Network Flow:**
+
 1. Users authenticate via Azure AD (SSO)
 2. HTTPS traffic to App Service (TLS 1.2)
 3. App Service uses managed identity to access Key Vault
@@ -284,12 +310,15 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 ## Trade-Off Analysis
 
 ### Primary Optimization: Cost Efficiency
+
 **What we're sacrificing:**
+
 - Multi-region disaster recovery (single region deployment)
 - Premium performance features (Redis cache, Premium App Service)
 - Web Application Firewall initially (can add later)
 
 **What we're gaining:**
+
 - $334/month operating cost (58% under budget)
 - Simplified operations (fewer resources to manage)
 - Room for growth without immediate re-architecture
@@ -303,15 +332,18 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 ### HIPAA/HITECH Compliance Checklist
 
 ✅ **Administrative Safeguards:**
+
 - Azure AD with MFA for all administrators
 - RBAC for least-privilege access
 - Security training for operations team
 
 ✅ **Physical Safeguards:**
+
 - Azure datacenters are HIPAA-compliant (HITRUST certified)
 - US data residency enforced (East US 2)
 
 ✅ **Technical Safeguards:**
+
 - Encryption at rest (SQL TDE)
 - Encryption in transit (TLS 1.2)
 - Access controls (Azure AD + SQL Row-Level Security)
@@ -319,6 +351,7 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 - Automatic backup (7-day point-in-time restore)
 
 ✅ **Business Associate Agreement (BAA):**
+
 - Automatically included in Azure Product Terms for qualifying services
 - Covers App Service, SQL Database, Key Vault, Storage
 
@@ -335,24 +368,28 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 ## Implementation Recommendations
 
 ### Phase 1: Foundation (Week 1-2)
+
 - Deploy resource group in East US 2
 - Provision Azure SQL Database with TDE
 - Set up Azure Key Vault with private endpoint
 - Configure Application Insights
 
 ### Phase 2: Application (Week 3-6)
+
 - Deploy App Service with managed identity
 - Configure Azure AD authentication
 - Implement private endpoint to SQL Database
 - Deploy application code with connection pooling
 
 ### Phase 3: Security Hardening (Week 7-8)
+
 - Enable SQL auditing to Log Analytics
 - Configure Row-Level Security policies
 - Set up Dynamic Data Masking
 - Create Azure Monitor alerts
 
 ### Phase 4: Testing & Launch (Week 9-12)
+
 - Load testing (simulate 500 concurrent users)
 - Security penetration testing
 - HIPAA compliance audit
@@ -360,6 +397,7 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 - Go-live
 
 ### Post-Launch Enhancements (Future Budget)
+
 - Add Azure Front Door with WAF ($431/month)
 - Implement geo-replication to Central US ($150/month additional)
 - Add Azure Cache for Redis ($16/month)
@@ -369,16 +407,19 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 ## Reference Documentation
 
 **HIPAA Compliance:**
+
 - [Azure HIPAA/HITECH Compliance](https://learn.microsoft.com/en-us/azure/compliance/offerings/offering-hipaa-us)
 - [Azure SQL Database HIPAA Controls](https://learn.microsoft.com/en-us/azure/azure-sql/database/security-controls-policy)
 - [App Service Security Best Practices](https://learn.microsoft.com/en-us/azure/app-service/overview-security)
 
 **Azure Services:**
+
 - [App Service SLA](https://azure.microsoft.com/support/legal/sla/app-service/)
 - [SQL Database SLA](https://azure.microsoft.com/support/legal/sla/azure-sql-database/)
 - [Well-Architected Framework - Reliability](https://learn.microsoft.com/en-us/azure/well-architected/reliability/)
 
 **Security:**
+
 - [Managed Identities](https://learn.microsoft.com/en-us/azure/app-service/overview-managed-identity)
 - [Private Endpoints](https://learn.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
 - [Transparent Data Encryption](https://learn.microsoft.com/en-us/azure/azure-sql/database/transparent-data-encryption-tde-overview)

@@ -15,12 +15,14 @@ This demo shows how GitHub Copilot transforms documentation from a tedious, time
 ## Business Value
 
 ### Per-Project Impact
+
 - **Time Reduction**: 20 hours → 2 hours (90% faster)
 - **Cost Savings**: $2,700 per documentation project (@ $150/hour)
 - **Quality Improvement**: Consistent formatting, complete coverage, fewer errors
 - **Maintenance**: 75% reduction in update time (regenerate vs. manual edit)
 
 ### Annual Impact (8 Major Documentation Projects)
+
 - **Time Saved**: 144 hours (3.6 work weeks)
 - **Cost Avoided**: $21,600 in labor
 - **Quality Benefits**: 95% documentation completeness (vs. 60% manual)
@@ -29,12 +31,14 @@ This demo shows how GitHub Copilot transforms documentation from a tedious, time
 ## Scenario: TechCorp Cloud Migration
 
 **Company**: TechCorp Solutions (Mid-market MSP)
+
 - **Project**: Azure migration for 50-server environment
 - **Challenge**: Must deliver comprehensive documentation for customer handoff
 - **Timeline**: 3 weeks for migration + documentation
 - **Requirement**: Architecture diagrams, runbooks, disaster recovery procedures, API docs
 
 ### Documentation Required
+
 1. **Architecture Documentation**: System topology, network diagrams, resource inventory
 2. **Operational Runbooks**: Deployment procedures, monitoring setup, scaling guidelines
 3. **Troubleshooting Guides**: Common issues, diagnostic procedures, resolution steps
@@ -85,17 +89,20 @@ This demo shows how GitHub Copilot transforms documentation from a tedious, time
 ## Prerequisites
 
 ### Azure Resources
+
 - Azure subscription with resources to document
 - Resource Graph Reader permissions
 - Access to infrastructure code (Bicep/ARM/Terraform)
 
 ### Local Environment
+
 - PowerShell 7.0+ (`$PSVersionTable.PSVersion`)
 - Azure PowerShell module (`Install-Module -Name Az`)
 - VS Code with GitHub Copilot extension
 - Markdown preview extension (optional)
 
 ### Permissions Required
+
 - **Reader** role on resources to document
 - **Resource Graph Reader** for cross-resource queries
 - Access to source code repositories
@@ -103,6 +110,7 @@ This demo shows how GitHub Copilot transforms documentation from a tedious, time
 ## Demo Metrics
 
 ### Manual Approach Breakdown (20 hours)
+
 - **Architecture Documentation** (6 hours): Inventory resources, create diagrams in Visio, write descriptions
 - **Runbook Creation** (5 hours): Document procedures, screenshot steps, format consistently
 - **Troubleshooting Guides** (4 hours): Compile common issues, write resolution steps
@@ -110,6 +118,7 @@ This demo shows how GitHub Copilot transforms documentation from a tedious, time
 - **Review & Formatting** (2 hours): Ensure consistency, fix formatting, validate accuracy
 
 ### With Copilot Breakdown (2 hours)
+
 - **Architecture Doc Generation** (20 min): Copilot generates from Azure resources
 - **Runbook Generation** (20 min): Copilot extracts from infrastructure code
 - **Troubleshooting Guide** (30 min): Copilot creates from common patterns
@@ -129,12 +138,14 @@ This demo shows how GitHub Copilot transforms documentation from a tedious, time
 ## Target Audience
 
 ### Primary
+
 - **Cloud Architects**: Need to document solution designs
 - **DevOps Engineers**: Create operational runbooks
 - **Platform Engineers**: Document infrastructure and procedures
 - **Technical Writers**: Accelerate documentation creation
 
 ### Secondary
+
 - **Managed Service Providers**: Customer handoff documentation
 - **Consultants**: Deliverables for engagements
 - **Training Teams**: Create learning materials from infrastructure
@@ -142,16 +153,19 @@ This demo shows how GitHub Copilot transforms documentation from a tedious, time
 ## ROI Calculation
 
 ### Single Project
+
 - Manual time: 20 hours × $150/hour = **$3,000**
 - Copilot time: 2 hours × $150/hour = **$300**
 - **Savings per project: $2,700**
 
 ### Annual Impact (8 Documentation Projects)
+
 - Manual cost: 160 hours × $150 = **$24,000**
 - Copilot cost: 16 hours × $150 = **$2,400**
 - **Annual savings: $21,600**
 
 ### Quality Benefits (Non-Financial)
+
 - **Completeness**: 95% vs. 60% manual (documentation coverage)
 - **Consistency**: 100% template compliance vs. 70% manual
 - **Maintainability**: 90% faster updates (regenerate vs. rewrite)
@@ -159,6 +173,7 @@ This demo shows how GitHub Copilot transforms documentation from a tedious, time
 - **Knowledge Retention**: Documentation always current with code
 
 ### Intangible Benefits
+
 - **Reduced Frustration**: Developers/engineers hate writing docs
 - **Better Quality**: AI catches gaps humans miss
 - **Version Control**: Docs in Git alongside code
@@ -168,18 +183,21 @@ This demo shows how GitHub Copilot transforms documentation from a tedious, time
 ## Success Criteria
 
 ### Technical Metrics
+
 - ✅ Generate architecture diagram in <5 minutes
 - ✅ Create 10-page runbook in <20 minutes
 - ✅ Extract API documentation from code in <30 minutes
 - ✅ 95%+ documentation completeness (vs. 60% manual)
 
 ### Business Metrics
+
 - ✅ Reduce documentation time from 20 hours to 2 hours
 - ✅ Save $21,600 annually in labor costs
 - ✅ Improve documentation consistency to 100%
 - ✅ Accelerate customer handoffs by 50%
 
 ### Qualitative Outcomes
+
 - ✅ Engineers no longer dread documentation tasks
 - ✅ Documentation stays current with code changes
 - ✅ New team members onboard 50% faster
@@ -236,6 +254,7 @@ This demo shows how GitHub Copilot transforms documentation from a tedious, time
 ## Getting Started
 
 ### Quick Start (10 Minutes)
+
 ```powershell
 # 1. Clone repository
 git clone https://github.com/your-org/github-copilot-itpro.git
@@ -253,6 +272,7 @@ code .\docs\architecture.md
 ```
 
 ### Full Demo Setup (20 Minutes)
+
 See [DEMO-SCRIPT.md](./DEMO-SCRIPT.md) for complete setup instructions.
 
 ## Common Use Cases
@@ -262,6 +282,7 @@ See [DEMO-SCRIPT.md](./DEMO-SCRIPT.md) for complete setup instructions.
 **Challenge**: Migrate 50 servers to Azure, need comprehensive docs for customer
 
 **Manual Approach** (20 hours):
+
 - Manually inventory all resources
 - Create network diagrams in Visio
 - Write deployment procedures
@@ -269,6 +290,7 @@ See [DEMO-SCRIPT.md](./DEMO-SCRIPT.md) for complete setup instructions.
 - Create troubleshooting guides
 
 **With Copilot** (2 hours):
+
 ```powershell
 # Generate complete documentation suite
 New-ArchitectureDoc -ResourceGroupName "rg-migration" -IncludeDiagrams
@@ -283,12 +305,14 @@ New-TroubleshootingGuide -ApplicationInsights "app-insights-prod"
 **Challenge**: Document 30 REST API endpoints for developer portal
 
 **Manual Approach** (3 hours):
+
 - Write endpoint descriptions manually
 - Create request/response examples
 - Format in Markdown
 - Ensure consistency across endpoints
 
 **With Copilot** (15 minutes):
+
 ```powershell
 # Generate from OpenAPI spec or code comments
 New-APIDocumentation -SourcePath ".\Controllers" -OutputFormat "Markdown"
@@ -301,12 +325,14 @@ New-APIDocumentation -SourcePath ".\Controllers" -OutputFormat "Markdown"
 **Challenge**: Create DR procedures for production environment
 
 **Manual Approach** (4 hours):
+
 - Document backup procedures
 - Write failover steps
 - Create recovery checklists
 - Format and validate
 
 **With Copilot** (20 minutes):
+
 ```powershell
 # Generate from infrastructure code and backup configs
 New-RunbookDoc -Type "DisasterRecovery" -ResourceGroupName "rg-prod"
@@ -317,18 +343,21 @@ New-RunbookDoc -Type "DisasterRecovery" -ResourceGroupName "rg-prod"
 ## Key Takeaways
 
 ### For IT Professionals
+
 - ✅ **No More Doc Dread**: Automate the boring parts
 - ✅ **Always Current**: Regenerate docs as code changes
 - ✅ **Consistent Quality**: Templates ensure completeness
 - ✅ **Version Controlled**: Docs in Git alongside code
 
 ### For Management
+
 - ✅ **Cost Savings**: $21,600 annually in labor reduction
 - ✅ **Faster Delivery**: 90% faster documentation creation
 - ✅ **Better Quality**: 95% completeness vs. 60% manual
 - ✅ **Customer Satisfaction**: Professional deliverables
 
 ### For Partners
+
 - ✅ **Differentiation**: Deliver better documentation faster
 - ✅ **Margin Improvement**: 18 hours saved per project
 - ✅ **Scalability**: Handle more projects with same team

@@ -3,6 +3,7 @@
 ## Semantic Versioning
 
 This repository follows [Semantic Versioning 2.0.0](https://semver.org/):
+
 - **MAJOR.MINOR.PATCH** (e.g., 1.2.3)
 - **MAJOR**: Breaking changes to demos or workflow
 - **MINOR**: New demos, agents, or significant features
@@ -13,11 +14,13 @@ This repository follows [Semantic Versioning 2.0.0](https://semver.org/):
 ## Version 1.0.0 (2025-11-18) - Initial Release ✨
 
 ### Summary
+
 Production-ready repository with 7 comprehensive demos, 4 custom agents with automatic handoffs, and complete workflow documentation. Demonstrates 60-95% time savings across Azure infrastructure scenarios.
 
 ### Added
 
 #### Demos (7 modules, ~85 files)
+
 1. **Demo 01: Bicep Quickstart** (14 files)
    - 3-tier web app deployment
    - Hub-spoke networking
@@ -54,18 +57,21 @@ Production-ready repository with 7 comprehensive demos, 4 custom agents with aut
    - 95% time savings (18 hrs → 45 min)
 
 #### Custom Agents (4 agents with handoffs)
+
 - **ADR Generator** - Architectural decision documentation
 - **Azure Principal Architect** - Well-Architected Framework assessment
 - **Bicep Planning Specialist** - Machine-readable implementation plans
 - **Bicep Implementation Specialist** - Production-ready Bicep code generation
 
 #### Infrastructure Code
+
 - **Contoso Patient Portal** (15 Bicep files)
   - Production-ready templates with AVM modules
   - HIPAA-compliant architecture
   - Deployment automation scripts
 
 #### Documentation (~25 files)
+
 - Complete workflow guide (683 lines)
 - Agent handoff demo script (15-20 min)
 - Repository instructions for Copilot
@@ -73,6 +79,7 @@ Production-ready repository with 7 comprehensive demos, 4 custom agents with aut
 - 2 Architectural Decision Records (ADRs)
 
 ### Key Features
+
 - ✅ Automatic agent handoffs with context preservation
 - ✅ Machine-readable implementation plans (YAML)
 - ✅ Production-ready code with security defaults
@@ -81,6 +88,7 @@ Production-ready repository with 7 comprehensive demos, 4 custom agents with aut
 - ✅ Real-world scenarios (healthcare, retail, finance)
 
 ### Metrics
+
 - **Total Files**: ~110 production files
 - **Code Lines**: ~8,000 lines (PowerShell + Bicep)
 - **Documentation**: ~15,000 lines (Markdown)
@@ -88,6 +96,7 @@ Production-ready repository with 7 comprehensive demos, 4 custom agents with aut
 - **Annual ROI**: $21,000+ for specialization partners
 
 ### Known Limitations
+
 - Case studies (3) - Planned for v1.1.0
 - Skills bridge (3 learning paths) - Planned for v1.2.0
 - Video walkthroughs - Planned for v1.3.0
@@ -97,21 +106,25 @@ Production-ready repository with 7 comprehensive demos, 4 custom agents with aut
 ## Upcoming Releases
 
 ### Version 1.1.0 (Planned: Q1 2026) - Case Studies
+
 - Arc SQL at Scale: 500+ servers (80 hrs → 8 hrs)
 - Multi-Region Network: Hub-spoke across 5 regions (3 weeks → 3 days)
 - Governance at Scale: Policy enforcement automation
 
 ### Version 1.2.0 (Planned: Q1 2026) - Skills Bridge
+
 - IaC for VM Admins learning path
 - DevOps Practices hands-on labs
 - Modern Automation training modules
 
 ### Version 1.3.0 (Planned: Q2 2026) - Enhanced Media
+
 - Video walkthroughs for all demos
 - Presentation recordings
 - Customer testimonials
 
 ### Version 2.0.0 (Planned: Q2 2026) - Expanded Cloud Support
+
 - AWS custom agents and workflow
 - GCP custom agents and workflow
 - Multi-cloud scenarios

@@ -15,12 +15,14 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 ## Business Value
 
 ### Per-Incident Impact
+
 - **Time Reduction**: 30 hours → 5 hours (83% faster)
 - **Cost Savings**: $3,750 per incident (@ $150/hour)
 - **MTTR Improvement**: Mean Time To Resolution reduced by 83%
 - **Business Impact**: Minimize downtime costs ($50K-$500K per hour for critical systems)
 
 ### Annual Impact (12 Major Incidents)
+
 - **Time Saved**: 300 hours (7.5 work weeks)
 - **Cost Avoided**: $45,000 in labor
 - **Downtime Reduction**: 300 hours of faster resolution = potential $15M-$150M business value saved
@@ -29,6 +31,7 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 ## Scenario: E-Commerce Platform Incident
 
 **Company**: RetailMax Online (Fortune 500 retailer)
+
 - **Platform**: Azure-hosted e-commerce ($800M annual revenue)
 - **Incident**: Intermittent checkout failures (15% error rate)
 - **Business Impact**: $22K revenue loss per hour
@@ -36,6 +39,7 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 - **Pressure**: Black Friday in 3 days
 
 ### Typical Issues Covered
+
 1. **Performance**: Slow API responses, high latency
 2. **Availability**: Service outages, failed health checks
 3. **Connectivity**: Network issues, DNS resolution
@@ -85,18 +89,21 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 ## Prerequisites
 
 ### Azure Resources
+
 - Azure subscription with resources to monitor
 - Log Analytics workspace with data
 - Application Insights (optional, for demo depth)
 - Resource Graph permissions (Reader role)
 
 ### Local Environment
+
 - PowerShell 7.0+ (`$PSVersionTable.PSVersion`)
 - Azure PowerShell module (`Install-Module -Name Az -AllowClobber`)
 - VS Code with GitHub Copilot extension
 - Azure CLI (optional, for some diagnostics)
 
 ### Permissions Required
+
 - **Monitoring Reader** role (view metrics and logs)
 - **Log Analytics Reader** role (query Log Analytics)
 - **Resource Graph Reader** (query resources)
@@ -105,6 +112,7 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 ## Demo Metrics
 
 ### Manual Approach Breakdown (30 hours)
+
 - **Initial Triage** (2 hours): Check dashboards, alerts, recent changes
 - **Documentation Search** (4 hours): Azure docs, Stack Overflow, forums
 - **Log Analysis** (8 hours): Manual KQL query writing, log diving
@@ -114,6 +122,7 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 - **Documentation** (2 hours): Write post-mortem, update runbooks
 
 ### With Copilot Breakdown (5 hours)
+
 - **AI-Assisted Triage** (20 min): Copilot generates health check script
 - **Automated Log Analysis** (1 hour): Copilot creates KQL queries from symptoms
 - **Guided Remediation** (2 hours): Copilot suggests fixes, validates configuration
@@ -133,12 +142,14 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 ## Target Audience
 
 ### Primary
+
 - **Site Reliability Engineers**: On-call incident response
 - **Platform Engineers**: Azure infrastructure troubleshooting
 - **DevOps Engineers**: Application performance issues
 - **Cloud Operations Teams**: Day-to-day Azure support
 
 ### Secondary
+
 - **IT Support Teams**: Escalated issue resolution
 - **Solutions Architects**: Production issue assistance
 - **Development Teams**: Debugging Azure integrations
@@ -146,22 +157,26 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 ## ROI Calculation
 
 ### Single Incident
+
 - Manual time: 30 hours × $150/hour = **$4,500**
 - Copilot time: 5 hours × $150/hour = **$750**
 - **Savings per incident: $3,750**
 
 ### Annual Impact (Conservative: 12 Major Incidents)
+
 - Manual cost: 360 hours × $150 = **$54,000**
 - Copilot cost: 60 hours × $150 = **$9,000**
 - **Annual savings: $45,000**
 
 ### Downtime Value
+
 - Average incident MTTR reduction: 25 hours
 - Business downtime cost: $100K/hour (conservative for e-commerce)
 - **Downtime cost avoided: $2.5M per incident**
 - **Annual downtime savings: $30M** (12 incidents)
 
 ### Intangible Benefits
+
 - **Reduced Stress**: 83% faster resolution = better work-life balance
 - **Knowledge Transfer**: Every Copilot interaction teaches best practices
 - **Confidence**: AI-suggested solutions have higher success rates
@@ -170,18 +185,21 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 ## Success Criteria
 
 ### Technical Metrics
+
 - ✅ Generate working KQL queries in <3 minutes
 - ✅ Identify root cause 83% faster than manual approach
 - ✅ First-time fix rate >70% (vs. 40% manual trial-and-error)
 - ✅ Complete incident report in <20 minutes
 
 ### Business Metrics
+
 - ✅ Reduce MTTR from 30 hours to 5 hours
 - ✅ Save $45K annually in labor costs
 - ✅ Avoid $30M annually in downtime costs
 - ✅ Improve SLA compliance (fewer breaches)
 
 ### Qualitative Outcomes
+
 - ✅ Engineers feel more confident troubleshooting
 - ✅ On-call stress reduced (faster resolution)
 - ✅ Knowledge gaps closed (Copilot teaches during incidents)
@@ -237,6 +255,7 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 ## Getting Started
 
 ### Quick Start (10 Minutes)
+
 ```powershell
 # 1. Clone repository
 git clone https://github.com/your-org/github-copilot-itpro.git
@@ -254,14 +273,17 @@ Set-AzContext -SubscriptionId "<your-subscription-id>"
 ```
 
 ### Full Demo Setup (20 Minutes)
+
 See [DEMO-SCRIPT.md](./DEMO-SCRIPT.md) for complete setup instructions.
 
 ## Common Use Cases
 
 ### 1. Performance Degradation
+
 **Symptom**: "API response times increased from 200ms to 3000ms"
 
 **Manual Approach** (8 hours):
+
 - Check Azure Monitor metrics manually
 - Write KQL queries to find slow requests
 - Analyze Application Insights traces
@@ -269,6 +291,7 @@ See [DEMO-SCRIPT.md](./DEMO-SCRIPT.md) for complete setup instructions.
 - Test hypothesis with configuration changes
 
 **With Copilot** (45 minutes):
+
 ```powershell
 # Copilot generates diagnostic query from natural language
 Invoke-DiagnosticQuery -Symptom "API response times increased from 200ms to 3000ms"
@@ -278,9 +301,11 @@ Invoke-DiagnosticQuery -Symptom "API response times increased from 200ms to 3000
 ```
 
 ### 2. Intermittent Connectivity Issues
+
 **Symptom**: "Users report 5xx errors during checkout (15% failure rate)"
 
 **Manual Approach** (6 hours):
+
 - Check load balancer health probes
 - Review NSG/firewall rules
 - Analyze network flow logs
@@ -288,6 +313,7 @@ Invoke-DiagnosticQuery -Symptom "API response times increased from 200ms to 3000
 - Review DNS resolution
 
 **With Copilot** (30 minutes):
+
 ```powershell
 # Copilot creates comprehensive connectivity check
 Get-AzureHealthSnapshot -ResourceGroupName "rg-ecommerce" -IncludeNetworking
@@ -297,9 +323,11 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-ecommerce" -IncludeNetworking
 ```
 
 ### 3. Resource Exhaustion
+
 **Symptom**: "Database CPU at 100%, queries timing out"
 
 **Manual Approach** (4 hours):
+
 - Check Azure SQL metrics
 - Review query performance insights
 - Analyze missing indexes
@@ -307,6 +335,7 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-ecommerce" -IncludeNetworking
 - Test different tier configurations
 
 **With Copilot** (20 minutes):
+
 ```powershell
 # Copilot generates SQL diagnostics
 Invoke-DiagnosticQuery -Symptom "Database CPU at 100%, queries timing out" -ResourceType "SqlDatabase"
@@ -318,18 +347,21 @@ Invoke-DiagnosticQuery -Symptom "Database CPU at 100%, queries timing out" -Reso
 ## Key Takeaways
 
 ### For IT Professionals
+
 - ✅ **Faster Resolution**: 83% time reduction (30 hours → 5 hours)
 - ✅ **Less Stress**: Guided troubleshooting reduces on-call burden
 - ✅ **Continuous Learning**: Copilot teaches best practices during incidents
 - ✅ **Better Documentation**: Auto-generated reports save 88% time
 
 ### For Management
+
 - ✅ **Cost Savings**: $45K annual labor + $30M downtime cost avoidance
 - ✅ **Improved SLAs**: 83% faster MTTR improves uptime
 - ✅ **Team Efficiency**: 300 hours/year freed for strategic work
 - ✅ **Risk Reduction**: Higher first-time fix rates reduce escalations
 
 ### For Partners
+
 - ✅ **Differentiation**: Offer AI-assisted support services
 - ✅ **Margin Improvement**: Resolve incidents 83% faster = better profitability
 - ✅ **Customer Satisfaction**: Faster resolution = happier customers

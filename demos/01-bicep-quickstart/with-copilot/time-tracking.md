@@ -25,11 +25,13 @@
 ### Phase 1: Network Infrastructure (4 minutes)
 
 **00:00-00:30** - Create `network.bicep` file
+
 - Open VS Code
 - Create new file with `.bicep` extension
 - Enable GitHub Copilot (verify status bar)
 
 **00:30-02:00** - Generate VNet and Subnets (1.5 min)
+
 - Type prompt: "Create an Azure Virtual Network named 'vnet-demo' with address space 10.0.0.0/16"
 - Accept Copilot suggestion (Tab)
 - Type prompt: "Include three subnets: web-tier (10.0.1.0/24), app-tier (10.0.2.0/24), data-tier (10.0.3.0/24)"
@@ -38,6 +40,7 @@
 - **Result**: Complete VNet with 3 subnets
 
 **02:00-04:00** - Generate Network Security Groups (2 min)
+
 - Type prompt: "Add a Network Security Group for the web tier subnet"
 - Accept Copilot suggestion
 - Type prompt: "Allow inbound HTTP (80) and HTTPS (443) from Internet"
@@ -55,10 +58,12 @@
 ### Phase 2: Storage Infrastructure (3 minutes)
 
 **04:00-04:30** - Create `storage.bicep` file (30 sec)
+
 - Create new file
 - Add header comments
 
 **04:30-06:30** - Generate Storage Account (2 min)
+
 - Type prompt: "Create a secure storage account for the application"
 - Type prompt: "Requirements: Blob storage with hot tier, HTTPS only, TLS 1.2 minimum"
 - Accept Copilot suggestion
@@ -69,6 +74,7 @@
 - **Result**: Fully secured storage account with all configurations
 
 **06:30-07:00** - Add Blob Service Configuration (30 sec)
+
 - Type prompt: "Configure blob services with container delete retention"
 - Accept Copilot suggestion
 - Add default container with `publicAccess: 'None'`
@@ -81,10 +87,12 @@
 ### Phase 3: Main Orchestration (2 minutes)
 
 **07:00-07:30** - Create `main.bicep` file (30 sec)
+
 - Create new file
 - Add header comments and description
 
 **07:30-09:00** - Generate Module References (1.5 min)
+
 - Type prompt: "Main orchestration template"
 - Type prompt: "Deploy the network and storage modules"
 - Accept Copilot suggestion
@@ -135,16 +143,19 @@ az deployment group validate `
 ## Key Copilot Benefits Observed
 
 ### 1. Instant Code Generation
+
 - **Observation**: Typed natural language prompts, got production code in seconds
 - **Example**: "Create a secure storage account with TLS 1.2" → 50+ lines of code
 - **Value**: No need to memorize Bicep syntax or look up documentation
 
 ### 2. Latest API Versions
+
 - **Observation**: Copilot always suggested current API versions (2023-05-01, 2023-01-01)
 - **Example**: `Microsoft.Network/virtualNetworks@2023-05-01`
 - **Value**: No need to check documentation for version compatibility
 
 ### 3. Built-In Best Practices
+
 - **Observation**: Security configurations included automatically
 - **Examples**:
   - `supportsHttpsTrafficOnly: true`
@@ -154,6 +165,7 @@ az deployment group validate `
 - **Value**: Production-ready security without research
 
 ### 4. Context Awareness
+
 - **Observation**: Copilot understood relationships between resources
 - **Examples**:
   - NSG automatically associated with subnets
@@ -162,6 +174,7 @@ az deployment group validate `
 - **Value**: Reduced cognitive load, fewer mistakes
 
 ### 5. Comprehensive Outputs
+
 - **Observation**: Copilot added useful outputs without being asked
 - **Examples**:
   - VNet ID, subnet IDs
@@ -170,6 +183,7 @@ az deployment group validate `
 - **Value**: Easier to connect resources later
 
 ### 6. Zero Errors
+
 - **Observation**: Code validated on first try
 - **Impact**: No debugging cycles, no frustration
 - **Value**: 10+ minutes saved, better developer experience
@@ -228,17 +242,21 @@ Even with Copilot, some tasks still required manual effort:
 ## ROI Calculation
 
 ### Time Savings
+
 - **Manual approach**: 55 minutes
 - **With Copilot**: 10 minutes
 - **Time saved**: 45 minutes (82% reduction)
 
 ### Cost Savings (for a team)
+
 Assuming:
+
 - Team of 5 engineers
 - Deploying infrastructure 3x per week
 - Engineer hourly rate: $75/hour
 
 **Monthly Savings**:
+
 - Time saved per deployment: 45 min
 - Deployments per month: 3 × 4 = 12
 - Total time saved: 12 × 45 min = 9 hours
@@ -248,6 +266,7 @@ Assuming:
 **Annual Savings**: **$40,500** for a team of 5
 
 ### Productivity Gains
+
 - **Faster delivery**: Infrastructure ready in 10 min instead of 1 hour
 - **Reduced errors**: Zero bugs on first deployment
 - **Learning acceleration**: No training required, learn by doing

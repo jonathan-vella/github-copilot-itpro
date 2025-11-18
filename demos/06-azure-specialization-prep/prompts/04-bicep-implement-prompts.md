@@ -81,6 +81,7 @@ Generate the complete main.bicep file with all module calls, parameter definitio
 ```
 
 **Why this works**:
+
 - ✅ Clear module structure and dependencies
 - ✅ Comprehensive parameter list with security considerations
 - ✅ Specific deployment scope
@@ -149,6 +150,7 @@ Generate the complete network.bicep module with all resources, parameters, and o
 ```
 
 **Why this works**:
+
 - ✅ Detailed resource specifications with CIDR blocks
 - ✅ Complete NSG rule definitions with priorities
 - ✅ Security-first design (deny-by-default)
@@ -196,11 +198,13 @@ New-Item -Path 'C:\inetpub\wwwroot\TaskManager' -ItemType Directory
 ```
 
 **Azure Monitor Agent Extension**:
+
 - Connect to Log Analytics workspace (ID passed as parameter)
 - Enable performance counters collection
 - Enable Windows Event Logs collection
 
 **Parameters**:
+
 - location: string (default: resourceGroup().location)
 - environment: string (allowed values: dev, staging, prod)
 - adminUsername: string
@@ -213,6 +217,7 @@ New-Item -Path 'C:\inetpub\wwwroot\TaskManager' -ItemType Directory
 - tags: object
 
 **Outputs Required**:
+
 - vmIds: array of VM resource IDs
 - vmNames: array of VM names
 - privateIpAddresses: array of private IP addresses
@@ -220,6 +225,7 @@ New-Item -Path 'C:\inetpub\wwwroot\TaskManager' -ItemType Directory
 - networkInterfaceIds: array of NIC resource IDs
 
 **Implementation Requirements**:
+
 - Use loop to create multiple VMs (based on vmCount parameter)
 - Use Azure Verified Module for Virtual Machines if available
 - Name VMs sequentially: vm-web01-prod, vm-web02-prod
@@ -229,12 +235,14 @@ New-Item -Path 'C:\inetpub\wwwroot\TaskManager' -ItemType Directory
 - Configure automatic updates
 
 **Security Best Practices**:
+
 - Use @secure() decorator for adminPassword
 - No hardcoded credentials
 - Parameterize sensitive values
 - Enable VM encryption at rest (managed disk encryption)
 
 Generate the complete compute.bicep module with all resources, extensions, parameters, and outputs.
+
 ```
 
 **Why this works**:
@@ -250,9 +258,11 @@ Generate the complete compute.bicep module with all resources, extensions, param
 ### Prompt 4: Database Module with Security
 
 ```
+
 Generate a Bicep module (database.bicep) for Azure SQL Database with comprehensive security:
 
 **Resources to Create**:
+
 1. Azure SQL Server (logical server)
 2. Azure SQL Database
 3. Firewall Rules (Azure services, web subnet)
@@ -261,6 +271,7 @@ Generate a Bicep module (database.bicep) for Azure SQL Database with comprehensi
 6. Advanced Data Security (Azure Defender for SQL)
 
 **SQL Server Configuration**:
+
 - Server Name: sql-taskmanager-<environment>-<uniqueString> (globally unique)
 - Version: 12.0 (latest)
 - Administrator Login: Parameterized username
@@ -270,6 +281,7 @@ Generate a Bicep module (database.bicep) for Azure SQL Database with comprehensi
 - Azure AD Administrator: Optional, parameterized
 
 **SQL Database Configuration**:
+
 - Database Name: sqldb-taskmanager-<environment>
 - SKU: Standard S2 (50 DTUs)
 - Max Size: 10 GB
@@ -279,11 +291,13 @@ Generate a Bicep module (database.bicep) for Azure SQL Database with comprehensi
 - Read Scale: Disabled
 
 **Firewall Rules**:
+
 1. Allow Azure Services: Start IP 0.0.0.0, End IP 0.0.0.0
 2. Allow Web Subnet: Use subnet address range from parameters
 3. Allow Management IP: Parameterized corporate IP for management access
 
 **Security Features**:
+
 - Transparent Data Encryption: Enabled (default)
 - Advanced Data Security: Enabled with vulnerability assessments
 - Auditing: Enabled, send logs to Log Analytics workspace
@@ -291,12 +305,14 @@ Generate a Bicep module (database.bicep) for Azure SQL Database with comprehensi
 - Data Classification: Configure sensitivity labels (optional)
 
 **Backup Configuration**:
+
 - Short-term retention: 7 days (included in Standard tier)
 - Long-term retention: Monthly backups, 30-day retention
 - Geo-redundant backup: Enabled
 - Point-in-time restore: Enabled (automatic)
 
 **Parameters**:
+
 - location: string (default: resourceGroup().location)
 - environment: string (allowed values: dev, staging, prod)
 - sqlServerName: string (provide uniqueString in default)
@@ -312,6 +328,7 @@ Generate a Bicep module (database.bicep) for Azure SQL Database with comprehensi
 - tags: object
 
 **Outputs Required**:
+
 - sqlServerId: SQL Server resource ID
 - sqlServerName: SQL Server fully qualified domain name
 - databaseId: Database resource ID
@@ -319,6 +336,7 @@ Generate a Bicep module (database.bicep) for Azure SQL Database with comprehensi
 - connectionString: Connection string template (without password)
 
 **Implementation Requirements**:
+
 - Use Azure Verified Module for SQL Server if available
 - Generate globally unique server name using uniqueString()
 - Implement conditional deployment based on environment
@@ -327,6 +345,7 @@ Generate a Bicep module (database.bicep) for Azure SQL Database with comprehensi
 - Output connection string with placeholder for password
 
 **Security Best Practices**:
+
 - Use @secure() decorator for SQL admin password
 - Minimum TLS 1.2 enforcement
 - Enable auditing and threat detection
@@ -335,11 +354,13 @@ Generate a Bicep module (database.bicep) for Azure SQL Database with comprehensi
 - Use parameterized alert email addresses
 
 **Example Connection String Output**:
+
 ```
 Server=tcp:{serverName}.database.windows.net,1433;Initial Catalog={databaseName};Persist Security Info=False;User ID={username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
 ```
 
 Generate the complete database.bicep module with all resources, security configurations, parameters, and outputs.
+
 ```
 
 **Why this works**:
@@ -355,9 +376,11 @@ Generate the complete database.bicep module with all resources, security configu
 ### Prompt 5: Load Balancer Module
 
 ```
+
 Generate a Bicep module (loadbalancer.bicep) for Azure Load Balancer:
 
 **Resources to Create**:
+
 1. Azure Load Balancer (Standard SKU)
 2. Frontend IP Configuration (using existing public IP)
 3. Backend Address Pool
@@ -366,16 +389,19 @@ Generate a Bicep module (loadbalancer.bicep) for Azure Load Balancer:
 6. Optional: NAT Rules for RDP access to VMs
 
 **Load Balancer Configuration**:
+
 - Name: lb-web-<environment>
 - SKU: Standard
 - Tier: Regional
 - Frontend IP: Use existing public IP (passed as parameter)
 
 **Backend Pool Configuration**:
+
 - Name: be-pool-web
 - VMs: Add network interfaces (passed as array parameter)
 
 **Health Probe Configuration**:
+
 - Name: health-probe-http
 - Protocol: HTTP
 - Port: 80
@@ -384,6 +410,7 @@ Generate a Bicep module (loadbalancer.bicep) for Azure Load Balancer:
 - Request Path: /
 
 **Load Balancing Rules**:
+
 1. HTTP Rule:
    - Name: lb-rule-http
    - Frontend Port: 80
@@ -403,10 +430,12 @@ Generate a Bicep module (loadbalancer.bicep) for Azure Load Balancer:
    - Enable Floating IP: false
 
 **Optional NAT Rules** (for management):
+
 - NAT Rule 1: Frontend Port 50001 → VM1 RDP Port 3389
 - NAT Rule 2: Frontend Port 50002 → VM2 RDP Port 3389
 
 **Parameters**:
+
 - location: string (default: resourceGroup().location)
 - environment: string (allowed values: dev, staging, prod)
 - publicIpId: string (existing public IP resource ID)
@@ -415,6 +444,7 @@ Generate a Bicep module (loadbalancer.bicep) for Azure Load Balancer:
 - tags: object
 
 **Outputs Required**:
+
 - loadBalancerId: Load balancer resource ID
 - loadBalancerName: Load balancer name
 - backendPoolId: Backend address pool resource ID
@@ -422,6 +452,7 @@ Generate a Bicep module (loadbalancer.bicep) for Azure Load Balancer:
 - healthProbeId: Health probe resource ID
 
 **Implementation Requirements**:
+
 - Use Azure Verified Module for Load Balancer if available
 - Add diagnostic settings for Load Balancer metrics
 - Include @description() decorators for all parameters
@@ -429,18 +460,21 @@ Generate a Bicep module (loadbalancer.bicep) for Azure Load Balancer:
 - Conditional NAT rules based on parameter
 
 **Monitoring Requirements**:
+
 - Enable diagnostic logs for:
   - LoadBalancerAlertEvent
   - LoadBalancerProbeHealthStatus
 - Send logs to Log Analytics workspace (ID passed as parameter)
 
 **Best Practices**:
+
 - Use Standard SKU for zone redundancy support
 - Configure appropriate health probe intervals
 - Set idle timeout based on application behavior
 - Document NAT rule port mappings
 
 Generate the complete loadbalancer.bicep module with all resources, rules, parameters, and outputs.
+
 ```
 
 **Why this works**:
@@ -456,9 +490,11 @@ Generate the complete loadbalancer.bicep module with all resources, rules, param
 ### Prompt 6: Monitoring Module
 
 ```
+
 Generate a Bicep module (monitoring.bicep) for comprehensive Azure Monitor configuration:
 
 **Resources to Create**:
+
 1. Log Analytics Workspace
 2. Application Insights
 3. Diagnostic Settings for all infrastructure resources
@@ -466,12 +502,14 @@ Generate a Bicep module (monitoring.bicep) for comprehensive Azure Monitor confi
 5. Action Group for notifications
 
 **Log Analytics Workspace Configuration**:
+
 - Name: log-taskmanager-<environment>
 - SKU: PerGB2018 (pay-as-you-go)
 - Retention: 30 days (dev), 90 days (prod)
 - Daily Quota: 1 GB (dev), 5 GB (prod)
 
 **Application Insights Configuration**:
+
 - Name: appi-taskmanager-<environment>
 - Application Type: web
 - Kind: web
@@ -479,6 +517,7 @@ Generate a Bicep module (monitoring.bicep) for comprehensive Azure Monitor confi
 - Sampling: 100% for dev, 50% for prod
 
 **Diagnostic Settings** (create for each resource type):
+
 1. Virtual Machines: Performance counters, Windows Event Logs
 2. SQL Database: QueryStoreRuntimeStatistics, Errors, Deadlocks, SQLInsights
 3. Load Balancer: LoadBalancerAlertEvent, LoadBalancerProbeHealthStatus
@@ -519,6 +558,7 @@ Generate a Bicep module (monitoring.bicep) for comprehensive Azure Monitor confi
    - Severity: Critical (0)
 
 **Action Group Configuration**:
+
 - Name: ag-taskmanager-ops
 - Short Name: tm-ops
 - Email Notifications: ops-team@contoso.com
@@ -526,6 +566,7 @@ Generate a Bicep module (monitoring.bicep) for comprehensive Azure Monitor confi
 - Webhook: Optional integration URL
 
 **Parameters**:
+
 - location: string (default: resourceGroup().location)
 - environment: string (allowed values: dev, staging, prod)
 - retentionInDays: int (default based on environment)
@@ -539,6 +580,7 @@ Generate a Bicep module (monitoring.bicep) for comprehensive Azure Monitor confi
 - tags: object
 
 **Outputs Required**:
+
 - logAnalyticsWorkspaceId: Workspace resource ID
 - logAnalyticsWorkspaceName: Workspace name
 - applicationInsightsId: App Insights resource ID
@@ -547,6 +589,7 @@ Generate a Bicep module (monitoring.bicep) for comprehensive Azure Monitor confi
 - actionGroupId: Action group resource ID
 
 **Implementation Requirements**:
+
 - Use loop to create diagnostic settings for multiple resources
 - Use conditional logic for environment-specific configurations
 - Include @description() decorators for all parameters
@@ -554,6 +597,7 @@ Generate a Bicep module (monitoring.bicep) for comprehensive Azure Monitor confi
 - Support different retention periods per environment
 
 **Best Practices**:
+
 - Separate critical, error, and warning alert severities
 - Configure appropriate evaluation frequencies
 - Set realistic thresholds based on workload
@@ -561,6 +605,7 @@ Generate a Bicep module (monitoring.bicep) for comprehensive Azure Monitor confi
 - Use workspace-based Application Insights
 
 Generate the complete monitoring.bicep module with all resources, alert rules, diagnostic settings, parameters, and outputs.
+
 ```
 
 **Why this works**:
@@ -578,7 +623,9 @@ Generate the complete monitoring.bicep module with all resources, alert rules, d
 ### ❌ Too Generic
 
 ```
+
 Generate a Bicep template for VMs in Azure.
+
 ```
 
 **Problems**:
@@ -593,7 +640,9 @@ Generate a Bicep template for VMs in Azure.
 ### ❌ Missing Resource Properties
 
 ```
+
 Create a network.bicep module with a VNet and two subnets.
+
 ```
 
 **Problems**:
@@ -608,7 +657,9 @@ Create a network.bicep module with a VNet and two subnets.
 ### ❌ No Parameter Strategy
 
 ```
+
 Generate database.bicep for Azure SQL with all features enabled.
+
 ```
 
 **Problems**:
@@ -626,68 +677,86 @@ Generate database.bicep for Azure SQL with all features enabled.
 
 Be explicit about every property:
 ```
+
 SQL Database Configuration:
+
 - SKU: Standard S2 (50 DTUs)
 - Max Size: 10 GB
 - Collation: SQL_Latin1_General_CP1_CI_AS
 - Zone Redundant: false
 - TLS Version: 1.2 minimum
+
 ```
 
 ### 2. Define Comprehensive Parameter Lists
 
 Include all parameters with types and defaults:
 ```
+
 Parameters:
+
 - location: string (default: resourceGroup().location)
 - environment: string (allowed: dev, staging, prod)
 - adminUsername: string
 - adminPassword: securestring (use @secure decorator)
 - vmSize: string (default: 'Standard_D2s_v3')
+
 ```
 
 ### 3. Request All Necessary Outputs
 
 Specify outputs for dependent modules:
 ```
+
 Outputs Required:
+
 - vnetId: Virtual network resource ID
 - subnetId: Subnet resource ID
 - nsgId: NSG resource ID
 - publicIpAddress: Public IP address value
+
 ```
 
 ### 4. Emphasize Security Best Practices
 
 Always mention security requirements:
 ```
+
 Security Requirements:
+
 - Use @secure() decorator for passwords
 - Minimum TLS 1.2
 - NSG deny-by-default rules
 - Enable encryption at rest
 - No hardcoded credentials
+
 ```
 
 ### 5. Include Decorators and Comments
 
 Request documentation in code:
 ```
+
 Implementation Requirements:
+
 - Use @description() for all parameters
 - Use @allowed() for enumerated values
 - Use @minValue/@maxValue for numeric constraints
 - Add comments explaining complex configurations
+
 ```
 
 ### 6. Reference Azure Verified Modules
 
 Direct to use official modules:
 ```
+
 Best Practices:
+
 - Use Azure Verified Module for Virtual Network (avm/res/network/virtual-network)
 - Reference AVM parameters and outputs
 - Document any custom modifications
+
 ```
 
 ---
@@ -714,9 +783,11 @@ Before submitting your prompt:
 ### Excellent Example: Complete Module Implementation
 
 ```
+
 Generate a complete Bicep module (network.bicep) for network infrastructure supporting a high-availability web application for Azure Infrastructure and Database Migration Specialization audit evidence:
 
 **Business Context**:
+
 - Application: ASP.NET Task Manager on IIS
 - Environment: Production deployment for audit
 - Security: Public endpoints for demo (document deviation from private endpoint best practice)
@@ -735,7 +806,7 @@ Generate a complete Bicep module (network.bicep) for network infrastructure supp
       - Name: snet-web-prod
       - Address Prefix: 10.0.1.0/24
       - Service Endpoints: Microsoft.Sql (for future private endpoint)
-   
+
    b. Data Tier Subnet:
       - Name: snet-data-prod
       - Address Prefix: 10.0.2.0/24
@@ -772,6 +843,7 @@ Generate a complete Bicep module (network.bicep) for network infrastructure supp
    - Traffic Analytics: Enabled
 
 **Parameters**:
+
 ```bicep
 @description('Azure region for all resources')
 param location string = resourceGroup().location
@@ -809,6 +881,7 @@ param tags object = {
 ```
 
 **Outputs Required**:
+
 ```bicep
 @description('Virtual network resource ID')
 output vnetId string
@@ -882,12 +955,14 @@ output publicIpFqdn string
    - Demonstrate security configuration
 
 **Azure Landing Zone Alignment**:
+
 - ✅ **Identity**: Not applicable (network layer)
 - ✅ **Networking**: Hub-spoke consideration, security zones, NSG segmentation
 - ✅ **Resource Organization**: Consistent naming, comprehensive tagging
 - ✅ **Security**: NSG deny-by-default, least privilege access, flow logs
 
 **Expected Module Structure**:
+
 ```bicep
 // network.bicep - Network Infrastructure Module
 // Purpose: Deploys VNet, subnets, NSGs, and public IP for Contoso Task Manager
@@ -933,6 +1008,7 @@ resource dataNsgDiagnostics 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
 ```
 
 **Validation Requirements**:
+
 - Bicep build should complete without errors or warnings
 - Resource names should follow naming conventions consistently
 - All NSG rules should have descriptive comments
@@ -940,6 +1016,7 @@ resource dataNsgDiagnostics 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
 - Outputs should provide all necessary values for dependent modules
 
 Generate the complete network.bicep module following all requirements above, including comprehensive comments, proper decorators, security best practices, and audit-ready documentation.
+
 ```
 
 **What makes this excellent**:

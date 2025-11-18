@@ -14,6 +14,7 @@ The four-agent workflow provides a systematic approach to infrastructure develop
 > **Note**: The ADR Generator agent is optional. For quick demos focused on speed, you can start directly with the Azure Principal Architect agent (step 2). The ADR agent is most valuable for enterprise teams needing audit trails and governance documentation.
 
 **How to Use Custom Agents:**
+
 - Press `Ctrl+Shift+A` or click the **Agent** button in Copilot Chat
 - Select the agent from the dropdown: `adr_generator`, `azure-principal-architect`, `bicep-plan`, or `bicep-implement`
 - Type your prompt and submit
@@ -58,27 +59,32 @@ graph TB
 > **Use Case**: Best for enterprise teams, large projects, or when governance/audit trails are required. **Skip for quick demos** focused on showing infrastructure development speed.
 
 **When to Use:**
+
 - Making architectural decisions that impact multiple teams or components
 - Choosing between significant alternatives (e.g., hub-spoke vs. Virtual WAN)
 - Documenting security, compliance, or governance decisions
 - Establishing patterns to be reused across demos or projects
 
 **Inputs:**
+
 - Business requirements
 - Technical constraints
 - Alternatives considered
 - Decision rationale
 
 **Outputs:**
+
 - Structured ADR in `/docs/adr/adr-NNNN-{title}.md`
 - Includes: Status, Context, Decision, Consequences, Alternatives, Implementation Notes, References
 
 **How to Invoke:**
+
 1. Press `Ctrl+Shift+A` or click Agent button
 2. Select `adr_generator` from dropdown
 3. Enter your prompt
 
 **Example Prompt:**
+
 ```markdown
 Create an ADR for choosing Azure Bastion over Jump Boxes 
 for secure VM access in our demo infrastructure.
@@ -96,6 +102,7 @@ Alternatives to consider:
 ```
 
 **Output Example:**
+
 ```markdown
 # ADR-0002: Azure Bastion for Secure VM Access
 
@@ -128,17 +135,20 @@ NEG-002: Cannot demonstrate Jump Box patterns
 **Purpose:** Provide Azure Well-Architected Framework (WAF) expertise and best practices guidance.
 
 **When to Use:**
+
 - Evaluating architecture against WAF pillars (Security, Reliability, Performance, Cost, Operations)
 - Need Azure-specific recommendations and patterns
 - Assessing trade-offs between approaches
 - Planning multi-region or HA architectures
 
 **Inputs:**
+
 - Architecture description or requirements
 - Specific WAF concerns (security, cost, etc.)
 - Constraints (budget, timeline, skills)
 
 **Outputs:**
+
 - Architecture recommendations
 - WAF assessment against all 5 pillars
 - Trade-off analysis
@@ -146,11 +156,13 @@ NEG-002: Cannot demonstrate Jump Box patterns
 - Reference to Azure Architecture Center patterns
 
 **How to Invoke:**
+
 1. Press `Ctrl+Shift+A` or click Agent button
 2. Select `azure-principal-architect` from dropdown
 3. Enter your prompt
 
 **Example Prompt:**
+
 ```markdown
 Assess this architecture:
 
@@ -171,6 +183,7 @@ Assess against all WAF pillars and suggest improvements.
 ```
 
 **Output Example:**
+
 ```markdown
 ## Architecture Assessment
 
@@ -203,17 +216,20 @@ Assess against all WAF pillars and suggest improvements.
 **Purpose:** Create structured, machine-readable infrastructure plans before implementation.
 
 **When to Use:**
+
 - Planning complex multi-resource deployments
 - Breaking down requirements into implementation tasks
 - Creating reusable planning artifacts
 - Need team review before coding
 
 **Inputs:**
+
 - Infrastructure requirements
 - Architecture recommendations (from Principal Architect)
 - Constraints and dependencies
 
 **Outputs:**
+
 - Structured planning file in `.bicep-planning-files/INFRA.{name}.md`
 - Resource breakdown with dependencies
 - Parameter definitions
@@ -221,11 +237,13 @@ Assess against all WAF pillars and suggest improvements.
 - Implementation tasks with priority
 
 **How to Invoke:**
+
 1. Press `Ctrl+Shift+A` or click Agent button
 2. Select `bicep-plan` from dropdown
 3. Enter your prompt
 
 **Example Prompt:**
+
 ```markdown
 Create a plan for implementing the multi-region 
 architecture assessed by the Azure Principal Architect.
@@ -242,6 +260,7 @@ Create a modular Bicep structure with proper dependencies.
 ```
 
 **Output Example:**
+
 ```markdown
 # Infrastructure Plan: Multi-Region Hub-Spoke Network
 
@@ -301,28 +320,33 @@ This plan implements a hub-spoke network topology across two Azure regions...
 **Purpose:** Generate production-ready Bicep templates following Azure best practices.
 
 **When to Use:**
+
 - Implementing infrastructure plans
 - Converting ARM templates to Bicep
 - Adding resources to existing templates
 - Following naming conventions and security defaults
 
 **Inputs:**
+
 - Planning file from Bicep Planning Mode
 - Specific module or task to implement
 - Parameter requirements
 
 **Outputs:**
+
 - Complete Bicep templates (`.bicep` files)
 - Parameter files (`.bicepparam` or JSON)
 - Deployment scripts
 - Validation and testing guidance
 
 **How to Invoke:**
+
 1. Press `Ctrl+Shift+A` or click Agent button
 2. Select `bicep-implement` from dropdown
 3. Enter your prompt
 
 **Example Prompt:**
+
 ```markdown
 Implement Module 1 (Network Foundation) from 
 .bicep-planning-files/INFRA.multi-region-network.md
@@ -336,6 +360,7 @@ Requirements:
 ```
 
 **Output Example:**
+
 ```bicep
 // network-foundation.bicep
 // Module 1: Network Foundation
@@ -435,6 +460,7 @@ output bastionSubnetId string = hubVNet.properties.subnets[0].id
 **Agent:** Select `adr_generator` from Agent dropdown (Ctrl+Shift+A)
 
 **Prompt:**
+
 ```markdown
 Document the decision to use separate VNets for dev/staging/prod 
 vs. subnet segmentation within a single VNet.
@@ -455,6 +481,7 @@ Requirements:
 **Agent:** Select `azure-principal-architect` from Agent dropdown (Ctrl+Shift+A)
 
 **Prompt:**
+
 ```markdown
 Design a development environment with:
 - Network isolation per ADR-0003
@@ -474,6 +501,7 @@ Assess against WAF pillars and provide detailed recommendations.
 **Agent:** Select `bicep-plan` from Agent dropdown (Ctrl+Shift+A)
 
 **Prompt:**
+
 ```markdown
 Create a detailed plan implementing the architecture from step 2.
 
@@ -493,6 +521,7 @@ Include:
 #### Step 4: Implement (Bicep Implementation)
 
 **Prompt 1:**
+
 ```markdown
 Using bicep-implement mode, implement the network foundation module 
 from .bicep-planning-files/INFRA.dev-environment.md
@@ -501,6 +530,7 @@ from .bicep-planning-files/INFRA.dev-environment.md
 **Output 1:** `modules/network-foundation.bicep`
 
 **Prompt 2:**
+
 ```markdown
 Using bicep-implement mode, implement the compute module for VMs 
 from .bicep-planning-files/INFRA.dev-environment.md
@@ -509,6 +539,7 @@ from .bicep-planning-files/INFRA.dev-environment.md
 **Output 2:** `modules/compute.bicep`
 
 **Prompt 3:**
+
 ```markdown
 Using bicep-implement mode, create the main orchestration template 
 referencing the network and compute modules.
@@ -521,6 +552,7 @@ referencing the network and compute modules.
 #### Step 5: Deploy & Validate
 
 **Deployment:**
+
 ```powershell
 # Validate template
 az deployment sub what-if --location westeurope --template-file main.bicep
@@ -533,6 +565,7 @@ az deployment sub create \
 ```
 
 **If Issues:** Use debug mode
+
 ```markdown
 Using debug mode, analyze this deployment error:
 [paste error message]
@@ -604,26 +637,31 @@ graph TD
 ## Best Practices
 
 ### 1. Always Document Significant Decisions
+
 - Use ADR Generator for choices that impact multiple teams or long-term direction
 - Don't over-document: routine resource creation doesn't need ADRs
 - Link ADRs from planning files and code comments
 
 ### 2. Get Architecture Right First
+
 - Consult Azure Principal Architect before creating plans
 - Consider all WAF pillars, not just functional requirements
 - Document trade-offs explicitly
 
 ### 3. Plan Before Coding
+
 - Use Bicep Planning for anything with 3+ resources or modules
 - Machine-readable plans enable better AI implementation
 - Planning files serve as documentation
 
 ### 4. Implement Incrementally
+
 - Break large plans into multiple implementation prompts
 - Test each module independently
 - Use debug mode proactively when errors occur
 
 ### 5. Maintain Context
+
 - Reference previous outputs: ADRs, plans, existing code
 - Use consistent naming across modes
 - Keep artifacts in designated locations
@@ -643,12 +681,14 @@ graph TD
 Each demo in `demos/` can showcase the four-mode workflow:
 
 ### Demo 1: Bicep Quickstart
+
 - **ADR:** Choice of Bicep over ARM/Terraform
 - **Architect:** WAF assessment of 3-tier network
 - **Planning:** Network module breakdown
 - **Implementation:** Generated Bicep templates
 
 ### Demo 5: Documentation Generator
+
 - **ADR:** Documentation-as-code strategy
 - **Architect:** N/A (not infrastructure-focused)
 - **Planning:** Documentation structure plan
@@ -657,18 +697,23 @@ Each demo in `demos/` can showcase the four-mode workflow:
 ## Troubleshooting
 
 ### Issue: Mode Not Activating
+
 **Solution:** Ensure you're using `@workspace` context and exact mode name
 
 ### Issue: Wrong Mode Output
+
 **Solution:** Be explicit: "Using bicep-plan mode" at start of prompt
 
 ### Issue: Planning File Not Found
+
 **Solution:** Check `.bicep-planning-files/` directory, ensure file created
 
 ### Issue: ADR Numbering Conflict
+
 **Solution:** Check `/docs/adr/` for highest number, ADR Generator auto-increments
 
 ### Issue: Implementation Doesn't Match Plan
+
 **Solution:** Explicitly reference plan file in implementation prompt
 
 ## Resources

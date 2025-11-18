@@ -7,18 +7,22 @@ This document contains proven prompts for generating SBOM-related PowerShell scr
 ## General Principles
 
 ### 1. Be Specific About Format
+
 ✅ **Good**: "Generate a CycloneDX 1.5 SBOM in JSON format"  
 ❌ **Poor**: "Create an SBOM"
 
 ### 2. Include Schema Requirements
+
 ✅ **Good**: "Include required fields: bomFormat, specVersion, serialNumber, version, metadata, components"  
 ❌ **Poor**: "Make it complete"
 
 ### 3. Specify Error Handling
+
 ✅ **Good**: "Include try/catch blocks and validate file existence"  
 ❌ **Poor**: "Make it robust"
 
 ### 4. Request Examples
+
 ✅ **Good**: "Add usage examples in .EXAMPLE sections"  
 ❌ **Poor**: "Add documentation"
 
@@ -42,6 +46,7 @@ Create a PowerShell script that:
 **Expected Output**: Complete PowerShell script with parameter validation, JSON generation, and error handling
 
 **Refinement Prompts**:
+
 - "Add support for filtering devDependencies"
 - "Include license information from package.json"
 - "Add colored console output for better UX"
@@ -81,6 +86,7 @@ Create a PowerShell script that:
 **Expected Output**: Script that parses Dockerfile and generates component list
 
 **Refinement Prompts**:
+
 - "Add integration with Syft CLI tool for comprehensive scanning"
 - "Detect Alpine vs Debian vs Ubuntu base images"
 - "Extract environment variables and exposed ports"
@@ -120,6 +126,7 @@ Create a PowerShell script that:
 **Expected Output**: Script that queries Azure and generates infrastructure SBOM
 
 **Refinement Prompts**:
+
 - "Add support for subscription-wide scanning"
 - "Filter out resource types (e.g., exclude network interfaces)"
 - "Include resource tags as component metadata"
@@ -160,6 +167,7 @@ Create a PowerShell script that:
 **Expected Output**: Script that combines multiple SBOMs intelligently
 
 **Refinement Prompts**:
+
 - "Add conflict resolution for components with same name but different versions"
 - "Preserve component relationships and dependencies"
 - "Track provenance (which source file each component came from)"
@@ -202,6 +210,7 @@ Create a PowerShell script that:
 **Expected Output**: Beautiful, interactive HTML dashboard
 
 **Refinement Prompts**:
+
 - "Add search/filter functionality for components"
 - "Highlight components with known vulnerabilities (red badge)"
 - "Include download buttons for CSV and JSON exports"
@@ -249,6 +258,7 @@ Create a validation script that:
 **Expected Output**: Comprehensive validation script
 
 **Refinement Prompts**:
+
 - "Add warnings for optional but recommended fields"
 - "Validate PURL syntax against spec"
 - "Check for common mistakes (duplicate bom-refs, invalid version strings)"
@@ -340,6 +350,7 @@ Create a script that analyzes SBOM for license compliance:
 ### Technique 3: Specify Edge Cases
 
 **Prompt**: "Handle these scenarios:
+
 - package.json doesn't exist (error message)
 - No dependencies (empty components array)
 - Version has ^ or ~ prefix (remove before PURL)

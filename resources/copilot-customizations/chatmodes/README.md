@@ -26,9 +26,11 @@ Three chat modes (azure-principal-architect, bicep-plan, bicep-implement) have b
 ---
 
 #### bicep-plan.chatmode.md
+
 **Purpose:** Create structured, machine-readable infrastructure plans
 
 **Use When:**
+
 - Planning complex Azure deployments before coding
 - Breaking down requirements into implementation tasks
 - Creating reusable planning artifacts
@@ -37,6 +39,7 @@ Three chat modes (azure-principal-architect, bicep-plan, bicep-implement) have b
 **Output Location:** `.bicep-planning-files/INFRA.{project-name}.md`
 
 **Example:**
+
 ```markdown
 Using bicep-plan mode, create a plan for deploying a hub-spoke network 
 with 3 spokes, Azure Firewall, and Private DNS zones.
@@ -45,15 +48,17 @@ with 3 spokes, Azure Firewall, and Private DNS zones.
 ---
 
 #### bicep-implement.chatmode.md
-**Purpose:** Generate production-ready Bicep templates
 
+**Purpose:** Generate production-ready Bicep templates
 
 ### Azure Verified Modules (AVM) Modes
 
 #### azure-verified-modules-bicep.chatmode.md
+
 **Purpose:** Integrate Azure Verified Modules (Bicep) for enterprise-grade infrastructure
 
 **Use When:**
+
 - Building production infrastructure with Microsoft-verified patterns
 - Need enterprise features (RBAC, monitoring, compliance)
 - Want consistent, well-tested modules
@@ -61,6 +66,7 @@ with 3 spokes, Azure Firewall, and Private DNS zones.
 - **Supplementing** the primary @bicep-implement agent with specific AVM guidance
 
 **Example:**
+
 ```markdown
 Using azure-verified-modules-bicep mode, create a Virtual Network using 
 the AVM pattern with proper tagging and diagnostic settings.
@@ -69,9 +75,11 @@ the AVM pattern with proper tagging and diagnostic settings.
 ---
 
 #### azure-verified-modules-terraform.chatmode.md
+
 **Purpose:** Integrate Azure Verified Modules (Terraform) for multi-cloud infrastructure
 
 **Use When:**
+
 - Managing multi-cloud environments
 - Existing Terraform investment
 - Need Terraform-specific patterns
@@ -82,9 +90,11 @@ the AVM pattern with proper tagging and diagnostic settings.
 ### SaaS Architecture Mode
 
 #### azure-saas-architect.chatmode.md
+
 **Purpose:** Multi-tenant SaaS architecture on Azure
 
 **Use When:**
+
 - Designing SaaS applications
 - Implementing tenant isolation strategies
 - Planning SaaS pricing models
@@ -92,6 +102,7 @@ the AVM pattern with proper tagging and diagnostic settings.
 - **Specialized guidance** beyond the general @azure-principal-architect agent
 
 **Example:**
+
 ```markdown
 Using azure-saas-architect mode, design a tenant isolation strategy 
 using Azure AD B2C and database-per-tenant pattern.
@@ -102,9 +113,11 @@ using Azure AD B2C and database-per-tenant pattern.
 ### Terraform Modes (Alternative IaC Workflow)
 
 #### terraform-azure-planning.chatmode.md
+
 **Purpose:** Create Terraform infrastructure plans for Azure
 
 **Use When:**
+
 - Planning Terraform-based Azure deployments (alternative to Bicep)
 - Converting existing infrastructure to Terraform
 - Creating reusable Terraform modules
@@ -112,9 +125,11 @@ using Azure AD B2C and database-per-tenant pattern.
 ---
 
 #### terraform-azure-implement.chatmode.md
+
 **Purpose:** Generate production-ready Terraform code for Azure
 
 **Use When:**
+
 - Implementing Terraform plans (alternative to Bicep)
 - Creating Azure provider configurations
 - Building Terraform modules
@@ -124,9 +139,11 @@ using Azure AD B2C and database-per-tenant pattern.
 ### Utility Modes
 
 #### plan.chatmode.md
+
 **Purpose:** General task planning and decomposition
 
 **Use When:**
+
 - Breaking down complex tasks
 - Creating implementation roadmaps
 - Planning multi-phase projects
@@ -135,9 +152,11 @@ using Azure AD B2C and database-per-tenant pattern.
 ---
 
 #### planner.chatmode.md
+
 **Purpose:** Strategic planning and roadmapping
 
 **Use When:**
+
 - Long-term technical planning
 - Architecture evolution planning
 - Technology adoption strategies
@@ -145,12 +164,15 @@ using Azure AD B2C and database-per-tenant pattern.
 ---
 
 #### debug.chatmode.md
+
 **Purpose:** Troubleshooting and diagnostics assistance
 
 #### debug.chatmode.md
+
 **Purpose:** Debug infrastructure deployment issues
 
 **Use When:**
+
 - Debugging Bicep/Terraform deployment failures
 - Analyzing Azure resource errors
 - Troubleshooting infrastructure issues
@@ -158,6 +180,7 @@ using Azure AD B2C and database-per-tenant pattern.
 - **Supplementing** the primary agents with debugging expertise
 
 **Example:**
+
 ```markdown
 Using debug mode, analyze this Bicep deployment error: 
 "The subscription is not registered to use namespace Microsoft.Network"
@@ -181,6 +204,7 @@ For the main Azure infrastructure workflow, **always use Custom Agents** (invoke
 ### When to Use Chat Modes
 
 Use these **supplementary chat modes** for:
+
 - ✅ Alternative IaC approaches (Terraform)
 - ✅ Specialized scenarios (SaaS architecture, AVM deep-dives)
 - ✅ Debugging and troubleshooting
@@ -189,6 +213,7 @@ Use these **supplementary chat modes** for:
 ### Activating Chat Modes
 
 **In VS Code:**
+
 1. Open GitHub Copilot Chat
 2. Type `@workspace` to invoke workspace context (optional)
 3. Reference the mode: "Using terraform-azure-planning mode, create a plan for..."
@@ -227,10 +252,12 @@ graph TD
 ```
 
 **Legend:**
+
 - 🟢 **Green** = Custom Agents (Primary Workflow)
 - 🟡 **Yellow** = Chat Modes (Supplementary Tools)
     style G fill:#e8f5e8
     style H fill:#ffe8f5
+
 ```
 
 ### Best Practices
@@ -261,6 +288,7 @@ Using bicep-implement mode, generate Bicep templates from the plan.
 ```
 
 **4. Mode-Specific Context**
+
 - Each mode has access to workspace context
 - Reference existing files: `.bicep-planning-files/`, `/docs/adr/`
 - Modes understand Azure naming conventions and tagging standards
@@ -287,18 +315,21 @@ Using bicep-implement mode, generate Bicep templates from the plan.
 ### Complete Workflow Example: Three-Tier Network
 
 **Step 1: Document Decision**
+
 ```markdown
 @adr-generator Create an ADR for using hub-spoke network topology 
 vs. virtual WAN for a multi-region deployment.
 ```
 
 **Step 2: Architecture Guidance**
+
 ```markdown
 Using azure-principal-architect mode, assess the hub-spoke design 
 against WAF pillars for a requirement of 99.95% SLA.
 ```
 
 **Step 3: Create Plan**
+
 ```markdown
 Using bicep-plan mode, create a detailed plan for implementing 
 a hub-spoke network with:
@@ -309,6 +340,7 @@ a hub-spoke network with:
 ```
 
 **Step 4: Implement**
+
 ```markdown
 Using bicep-implement mode, implement the hub network from 
 .bicep-planning-files/INFRA.hub-spoke-network.md
@@ -331,6 +363,7 @@ Subnets must have an NSG attached.
 ```
 
 **Debug Mode Response:**
+
 ```markdown
 Analysis:
 - Azure Policy is blocking subnet creation without NSG

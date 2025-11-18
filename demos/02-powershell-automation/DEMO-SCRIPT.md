@@ -19,13 +19,17 @@
 ### Environment Setup
 
 \\\powershell
+
 # Verify PowerShell version (need 7+)
+
 \System.Management.Automation.PSVersionHashTable.PSVersion
 
 # Verify Az module
+
 Get-Module -ListAvailable Az.* | Select-Object Name, Version
 
 # Connect to Azure
+
 Connect-AzAccount
 Get-AzContext
 \\\
@@ -40,6 +44,7 @@ Get-AzContext
 
 **Script:**
 > "Today we're helping an enterprise IT operations team that manages 200+ Azure subscriptions. Their daily challenges include:
+>
 > - Generating reports for the finance team (2 hours/day manually)
 > - Finding untagged resources for compliance (4 hours/week)
 > - Cleaning up orphaned resources wasting /month
@@ -47,6 +52,7 @@ Get-AzContext
 > Traditionally, building these PowerShell automation scripts takes 60-90 minutes per script. With GitHub Copilot, we'll build a complete automation toolkit in 15 minutes."
 
 **Show the scenario:**
+
 - Open [scenario/requirements.md](./scenario/requirements.md)
 - Highlight: 200+ subscriptions, daily reporting needs, cost optimization goals
 
@@ -54,6 +60,7 @@ Get-AzContext
 
 **Script:**
 > "The traditional approach involves:
+>
 > - Looking up Azure PowerShell cmdlet syntax
 > - Copy-pasting from documentation
 > - Debugging parameter errors
@@ -75,15 +82,20 @@ Get-AzContext
 
 **Type this comment:**
 \\\powershell
+
 # Create a function to get all Azure resources with details
+
 # Export to CSV, JSON, or HTML based on file extension
+
 # Include progress indicator
+
 \\\
 
 **PAUSE** and let Copilot suggest.
 
 **Script:**
 > "Look what Copilot generated:
+>
 > - Comment-based help with .SYNOPSIS, .DESCRIPTION
 > - Parameter validation with patterns
 > - Module import with error handling
@@ -110,16 +122,22 @@ Get-AzContext
 
 **Type this prompt:**
 \\\powershell
+
 # Find all Azure resources missing required tags
+
 # Required tags: Environment, Owner, CostCenter
+
 # Display results with color coding (red for non-compliant)
+
 # Export to CSV if output path specified
+
 \\\
 
 **Accept Copilot's suggestion**
 
 **Script:**
 > "Copilot generated:
+>
 > - Parameter for RequiredTags array
 > - Logic to check each resource's tags
 > - Custom object creation for missing tags
@@ -130,7 +148,9 @@ Get-AzContext
 
 **Test the logic:**
 \\\powershell
+
 # Run against your subscription
+
 .\\Find-UntaggedResources.ps1 -RequiredTags @('Environment','Owner') -OutputPath 'untagged.csv'
 \\\
 
@@ -144,18 +164,26 @@ Get-AzContext
 
 **Type this prompt:**
 \\\powershell
+
 # Find and remove orphaned Azure resources
+
 # Find unattached managed disks
+
 # Find unused public IPs
+
 # Find NICs not attached to VMs
+
 # Add confirmation prompt before deletion
+
 # Calculate cost savings
+
 \\\
 
 **Accept Copilot's suggestions**
 
 **Script:**
 > "Copilot understands the concept of 'orphaned resources' and generated:
+>
 > - Separate queries for disks, public IPs, and NICs
 > - Filter logic to identify unused resources
 > - Confirmation prompt with resource details
@@ -166,7 +194,9 @@ Get-AzContext
 
 **Demo dry-run mode:**
 \\\powershell
+
 # Show what would be deleted (don't actually delete)
+
 .\\Remove-OrphanedResources.ps1 -WhatIf
 \\\
 
@@ -178,17 +208,24 @@ Get-AzContext
 
 **Type this prompt:**
 \\\powershell
+
 # Apply tags to all resources in a resource group
+
 # Support hashtable of tag name/value pairs
+
 # Add dry-run mode to preview changes
+
 # Use parallel processing for faster execution
+
 # Show progress bar
+
 \\\
 
 **Accept Copilot's suggestion**
 
 **Script:**
 > "Copilot generated advanced features:
+>
 > - ForEach-Object -Parallel for 10x faster execution
 > - -WhatIf parameter for safe testing
 > - Progress tracking across parallel operations
@@ -198,7 +235,9 @@ Get-AzContext
 
 **Demo:**
 \\\powershell
+
 # Preview changes without applying
+
 .\\Set-BulkTags.ps1 -ResourceGroupName 'rg-demo' -Tags @{Owner='IT Ops'; Environment='Production'} -WhatIf
 \\\
 
@@ -212,22 +251,26 @@ Get-AzContext
 > "Let's recap what GitHub Copilot enabled:
 >
 > **Speed**: 15 minutes vs. 70 minutes (79% faster)
+>
 > - Generated 400+ lines of code from natural language prompts
 > - Zero syntax errors on first run
 > - All functions have complete error handling
 >
 > **Quality**:
+>
 > - Comment-based help on every function
 > - Parameter validation with proper attributes
 > - Progress indicators for better UX
 > - Parallel processing for performance
 >
 > **Learning Accelerator**:
+>
 > - No need to memorize cmdlet syntax
 > - Learn PowerShell best practices by seeing examples
 > - Context-aware suggestions teach proper patterns
 >
 > **Business Impact**:
+>
 > - 20+ hours saved per month per admin
 > - \,600 annual savings for 12-person team
 > - Better quality code = easier maintenance
@@ -247,10 +290,13 @@ Get-AzContext
 **Run one of the scripts against your Azure subscription:**
 
 \\\powershell
+
 # Generate resource report
+
 .\\Get-AzResourceReport.ps1 -OutputPath 'azure-resources.html'
 
 # Open HTML report
+
 Start-Process 'azure-resources.html'
 \\\
 
@@ -258,6 +304,7 @@ Start-Process 'azure-resources.html'
 
 **Script:**
 > "This report would typically require:
+>
 > - 30 minutes to build the PowerShell logic
 > - 20 minutes to create HTML formatting
 > - 10 minutes to debug and test
@@ -272,17 +319,20 @@ Start-Process 'azure-resources.html'
 > "Here's how to get started:
 >
 > **For IT Operations Teams:**
+>
 > 1. Clone this repository
 > 2. Try the scripts in your environment
 > 3. Customize for your specific needs
 > 4. Build your own automation library
 >
 > **For Managers:**
+>
 > 1. Calculate your team's ROI
 > 2. Use the cost savings data to justify Copilot licenses
 > 3. Track time savings over first month
 >
 > **Next Demos:**
+>
 > - [Demo 3: Azure Arc Onboarding](../03-azure-arc-onboarding/) - Hybrid management at scale
 > - [Demo 4: Troubleshooting Assistant](../04-troubleshooting-assistant/) - Faster problem resolution"
 
@@ -295,6 +345,7 @@ Start-Process 'azure-resources.html'
 **Issue:** No suggestions appear
 
 **Solutions:**
+
 1. Ensure file has \.ps1\ extension
 2. Check PowerShell extension is active (bottom right of VS Code)
 3. Press \Ctrl+Enter\ to open Copilot panel
@@ -306,16 +357,21 @@ Start-Process 'azure-resources.html'
 
 **Solutions:**
 \\\powershell
+
 # Re-authenticate
+
 Connect-AzAccount
 
 # Check current context
+
 Get-AzContext
 
 # List available subscriptions
+
 Get-AzSubscription
 
 # Set specific subscription
+
 Set-AzContext -SubscriptionId 'your-sub-id'
 \\\
 
