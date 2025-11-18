@@ -5,6 +5,7 @@ This directory contains Bicep templates for deploying a HIPAA-compliant patient 
 ## 📋 Overview
 
 The infrastructure includes:
+
 - **Networking**: Virtual Network with segmented subnets and Network Security Groups
 - **Compute**: Azure App Service Plan (Standard S1, zone-redundant)
 - **Database**: Azure SQL Database (Standard S2) with TDE encryption
@@ -15,7 +16,7 @@ The infrastructure includes:
 
 ## 🏗️ Architecture
 
-```
+```text
 Internet → App Service (VNet Integrated)
             ↓ (Managed Identity)
             → Key Vault (Private Endpoint)
@@ -25,7 +26,7 @@ Internet → App Service (VNet Integrated)
 
 ## 📁 File Structure
 
-```
+```bicep
 contoso-patient-portal/
 ├── main.bicep                      # Main orchestration template
 ├── main.bicepparam                 # Production parameters file
@@ -66,7 +67,7 @@ cd infra/bicep/contoso-patient-portal
 
 # What-if analysis (dry run)
 .\deploy.ps1 -WhatIf
-```
+```bicep
 
 **Option 2: Using Azure CLI**
 
@@ -114,11 +115,13 @@ az deployment sub create `
 The deployment follows a 4-phase approach:
 
 ### Phase 1: Foundation & Networking (5-10 minutes)
+
 - Resource Group
 - Virtual Network with 3 subnets
 - Network Security Groups
 
 ### Phase 2: Platform Services (10-15 minutes)
+
 - App Service Plan
 - SQL Server (logical server)
 - Key Vault
@@ -126,12 +129,14 @@ The deployment follows a 4-phase approach:
 - Application Insights
 
 ### Phase 3: Security & Application (10-15 minutes)
+
 - SQL Database
 - Private Endpoints (Key Vault, SQL Server)
 - App Service deployment
 - VNet integration
 
 ### Phase 4: Configuration (5 minutes)
+
 - Key Vault secrets
 - RBAC role assignments
 - App Service settings
@@ -151,7 +156,7 @@ bicep lint main.bicep
 
 # What-if analysis
 az deployment sub what-if --location eastus2 --template-file main.bicep --parameters main.bicepparam
-```
+```bicep
 
 ### Post-Deployment Validation
 
@@ -196,6 +201,7 @@ az keyvault secret list --vault-name <keyvault-name>
 Create additional parameter files for different environments:
 
 **Development** (`main.dev.bicepparam`):
+
 ```bicep
 using './main.bicep'
 
@@ -203,9 +209,10 @@ param environment = 'dev'
 param location = 'eastus2'
 param projectName = 'contoso-patient-portal'
 // Use lower SKUs for cost savings
-```
+```bicep
 
 **Staging** (`main.staging.bicepparam`):
+
 ```bicep
 using './main.bicep'
 
@@ -228,24 +235,28 @@ Edit module files in `modules/` directory:
 ### Common Issues
 
 **Issue**: Bicep build fails with module not found error
-```
+
+```yaml
 Solution: Run `bicep restore main.bicep` to download AVM modules
 ```
 
 **Issue**: SQL Server name already exists
-```
+
+```yaml
 Solution: SQL Server names are globally unique. The template includes uniqueString() 
           to generate unique names. If deployment fails, delete failed resources and retry.
 ```
 
 **Issue**: Private endpoint deployment fails
-```
+
+```yaml
 Solution: Ensure Key Vault and SQL Server are deployed first. Check that subnet 
           has privateEndpointNetworkPolicies set to 'Disabled'.
 ```
 
 **Issue**: App Service can't access Key Vault
-```
+
+```yaml
 Solution: Verify RBAC role assignment completed. App Service needs 'Key Vault Secrets User' 
           role. Check managed identity is enabled and role assignment exists.
 ```
@@ -253,11 +264,13 @@ Solution: Verify RBAC role assignment completed. App Service needs 'Key Vault Se
 ### Rollback
 
 **Delete entire deployment**:
+
 ```powershell
 az group delete --name rg-contoso-patient-portal-prod --yes --no-wait
-```
+```bicep
 
 **Delete specific resource**:
+
 ```powershell
 az resource delete --ids <resource-id>
 ```

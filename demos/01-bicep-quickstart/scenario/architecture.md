@@ -46,7 +46,7 @@ graph TB
     style NSG2 fill:#FFE66D,stroke:#C7A800,color:#000
     style NSG3 fill:#FFE66D,stroke:#C7A800,color:#000
     style PE fill:#A8DADC,stroke:#457B9D,color:#000
-```
+```text
 
 ## Network Segmentation
 
@@ -102,7 +102,7 @@ graph TB
     style L4 fill:#45B7D1,stroke:#2E86AB,color:#fff
     style L5 fill:#5F27CD,stroke:#341F97,color:#fff
     style L6 fill:#0078D4,stroke:#004578,color:#fff
-```
+```bicep
 
 ### Security Controls Implemented
 
@@ -172,7 +172,7 @@ graph LR
     style Storage fill:#50E6FF,stroke:#00B7C3,color:#000
     style Output1 fill:#E8F4F8,stroke:#0078D4,color:#000
     style Output2 fill:#E8F4F8,stroke:#0078D4,color:#000
-```
+```text
 
 ### Parameter Flow
 
@@ -233,7 +233,7 @@ gantt
     Initial (5 DBs)       :2025-01, 1M
     Phase 1 (10 DBs)      :2025-03, 3M
     Phase 2 (20 DBs)      :2025-06, 6M
-```
+```bicep
 
 ## Cost Projection
 
@@ -311,7 +311,7 @@ flowchart TD
 
 ### Validation Script Output
 
-```
+```bicep
 Running deployment validation...
 
 ✅ Resource Group: rg-digitalbanking-prod

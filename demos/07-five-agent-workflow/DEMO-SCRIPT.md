@@ -7,6 +7,7 @@
 ## 🎯 Demo Objectives
 
 By the end of this demo, the audience will:
+
 1. Understand how custom agents streamline infrastructure design
 2. See the value of automatic context handoffs between agents
 3. Recognize 95% time savings vs. traditional approaches
@@ -43,6 +44,7 @@ By the end of this demo, the audience will:
 **[Open `scenario/business-requirements.md`]**
 
 **Scroll through key points:**
+
 - 10,000 patients, $800/month budget
 - HIPAA mandatory
 - 99.9% SLA requirement
@@ -51,6 +53,7 @@ By the end of this demo, the audience will:
 **The Traditional Approach:**
 
 "Traditionally, this would take 2-3 days:
+
 - Day 1: Architect reviews requirements, creates architecture document (4-6 hours)
 - Day 2: Infrastructure engineer translates to Bicep templates (6-8 hours)
 - Day 3: Security review, cost optimization, revisions (4 hours)
@@ -77,7 +80,7 @@ But what if we could do this in 30-45 minutes?"
 
 **Paste prompt and submit:**
 
-```
+```text
 You are designing Azure infrastructure for Contoso Healthcare's patient portal.
 
 **Business Context:**
@@ -103,32 +106,35 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
 **Highlight key sections:**
 
 1. **WAF Scores:**
-   ```
+
+```yaml
    Security: 9/10 (High confidence) - Private endpoints, managed identities
    Reliability: 7/10 (Medium) - Zone redundancy limited by budget
    Cost: 8/10 (High) - $334/month well under $800 budget
-   ```
+```
 
    "Notice it scored each pillar and provided confidence levels. This helps us understand trade-offs."
 
 2. **Service Recommendations:**
-   ```
+
+```yaml
    - App Service Standard S1 (zone-redundant, 2 instances) - $146/month
    - SQL Database Standard S2 (50 DTUs) - $150/month
    - Key Vault for secrets management - $3/month
    ...
-   ```
+```
 
    "It recommended specific SKUs with justifications and costs."
 
 3. **HIPAA Compliance:**
-   ```
+
+```text
    ✅ Encryption at rest (TDE for SQL Database)
    ✅ Encryption in transit (TLS 1.2 minimum)
    ✅ Private endpoints for network isolation
    ✅ Audit logging to Log Analytics
    ...
-   ```
+```
 
    "Compliance requirements are automatically mapped."
 
@@ -151,6 +157,7 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
 **Scroll through output, highlighting:**
 
 1. **Resource Definitions:**
+
    ```yaml
    - resourceGroup:
        name: rg-contoso-patient-portal
@@ -159,38 +166,42 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
        estimatedCost:
          sku: N/A
          monthlyRange: $0
-   ```
+
+```bicep
 
    "Each resource is fully specified with purpose, dependencies, parameters, and costs."
 
 2. **Mermaid Dependency Diagram:**
+
    ```mermaid
    graph TD
        RG[Resource Group] --> VNet[Virtual Network]
        VNet --> NSGs[Network Security Groups]
        ...
-   ```
+```
 
    "Visual dependency graph shows deployment order."
 
 3. **4-Phase Implementation:**
-   ```
+
+```yaml
    Phase 1: Foundation (8 tasks)
    Phase 2: Platform Services (8 tasks)
    Phase 3: Security & Application (9 tasks)
    Phase 4: Configuration & Access (10 tasks)
-   ```
+```
 
    "Progressive deployment ensures dependencies are met."
 
 4. **Cost Table:**
-   ```
+
+```bicep
    | Resource | Monthly Cost |
    |----------|--------------|
    | App Service Plan | $146 |
    | SQL Database | $150 |
    | Total | $331-346 |
-   ```
+```
 
    "Detailed cost breakdown with optimization opportunities."
 
@@ -223,13 +234,14 @@ targetScope = 'subscription'
 param location string = 'eastus2'
 param environment string = 'prod'
 ...
-```
+```bicep
 
 "Clean, modular main orchestrator with clear structure."
 
 **[Open `modules/` directory]**
 
 "11 separate module files - each with single responsibility:
+
 - `networking.bicep` - VNet, subnets, NSGs
 - `app-service.bicep` - Web application hosting
 - `sql-database.bicep` - Database with TDE encryption
@@ -257,7 +269,7 @@ function Test-Prerequisites {
 ```powershell
 cd infra/bicep/contoso-patient-portal
 bicep build main.bicep --stdout --no-restore
-```
+```text
 
 **[Show successful compilation]**
 
@@ -286,12 +298,14 @@ bicep lint main.bicep
 "Let's recap what we just accomplished in 30-45 minutes:
 
 **Traditional Approach:**
+
 - Architecture Assessment: 4-6 hours
 - Implementation Planning: 3-6 hours  
 - Bicep Template Creation: 6-8 hours
 - **Total: 13-20 hours**
 
 **With 4-Agent Workflow:**
+
 - Stage 1 (Architecture): 5 minutes
 - Stage 2 (Planning): 5 minutes
 - Stage 3 (Implementation): 10 minutes
@@ -300,6 +314,7 @@ bicep lint main.bicep
 **Time Savings: 95%**
 
 **ROI Calculation:**
+
 - SI Partner Rate: $150/hour
 - Traditional: 20 hours × $150 = **$3,000**
 - With Copilot: 1 hour × $150 = **$150**
@@ -363,21 +378,25 @@ If short on time, use this condensed version:
 ## 🎨 Presentation Variations
 
 ### For Executives
+
 - Focus on ROI ($2,850 savings per project)
 - Emphasize speed to market (12-week timeline achievable)
 - Highlight risk reduction (security defaults, compliance automation)
 
 ### For Architects
+
 - Deep-dive WAF scores and trade-off analysis
 - Show architecture diagram generation
 - Discuss customization of agent instructions
 
 ### For Developers
+
 - Focus on code quality (modular templates, security defaults)
 - Show validation commands (bicep build/lint)
 - Demonstrate deployment automation
 
 ### For IT Pros
+
 - Emphasize operational benefits (standardization, reproducibility)
 - Show deployment script pre-flight checks
 - Discuss rollback and troubleshooting procedures
@@ -391,6 +410,7 @@ If short on time, use this condensed version:
 3. **Complexity Vote**: Ask if they want simpler (Basic tier) or more complex (multi-region) version
 
 ### Live Demos
+
 - Deploy to actual Azure subscription (requires 30-45 min total)
 - Show Azure Portal resources after deployment
 - Test App Service URL accessibility
@@ -398,17 +418,20 @@ If short on time, use this condensed version:
 ## 📝 Presenter Notes
 
 ### Timing Tips
+
 - **Stage 1 generation**: ~30-60 seconds (talk about WAF pillars while waiting)
 - **Stage 2 generation**: ~45-90 seconds (explain Mermaid diagram benefits)
 - **Stage 3 generation**: ~60-120 seconds (discuss modular design principles)
 
 ### Things That Can Go Wrong
+
 - **Agent not available**: Verify GitHub Copilot subscription and agent configuration
 - **Handoff button missing**: Manually copy Stage 2 prompt with architecture output
 - **Bicep validation fails**: Use pre-generated templates from `outputs/` directory
 - **Audience questions derail timing**: "Great question - let's discuss after the demo"
 
 ### Energy Management
+
 - Pause after each agent output to let audience absorb
 - Use humor: "I'm pressing a button and getting production-ready code - this still amazes me"
 - Invite reactions: "Have you seen anything like this before?"

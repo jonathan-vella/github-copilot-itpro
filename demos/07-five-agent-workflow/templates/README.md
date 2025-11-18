@@ -14,7 +14,7 @@ The generated Bicep templates for this demo are located in:
 
 ## File Structure
 
-```
+```bicep
 infra/bicep/contoso-patient-portal/
 ├── main.bicep                      # Orchestration template
 ├── main.bicepparam                 # Production parameters
@@ -40,7 +40,7 @@ infra/bicep/contoso-patient-portal/
 ```powershell
 cd ../../infra/bicep/contoso-patient-portal
 .\deploy.ps1 -Environment prod -Location eastus2
-```
+```text
 
 ## Validation
 

@@ -1,6 +1,7 @@
 # GitHub Copilot for IT Pros - ROI Calculator
 
 ## Customer Information
+
 - **Customer Name**: _______________________
 - **Industry**: _______________________
 - **IT Team Size**: _______ professionals
@@ -11,6 +12,7 @@
 ## Scenario 1: Infrastructure as Code (Bicep/ARM Templates)
 
 ### Current State (Manual)
+
 | Task | Frequency | Time per Task | Annual Hours |
 |------|-----------|---------------|--------------|
 | Create VNet with subnets | 24 per year | 45 min | 18 hours |
@@ -21,6 +23,7 @@
 | **TOTAL** | | | **111 hours** |
 
 ### With GitHub Copilot
+
 | Task | Frequency | Time per Task | Annual Hours | Time Savings |
 |------|-----------|---------------|--------------|--------------|
 | Create VNet with subnets | 24 per year | 10 min | 4 hours | 78% |
@@ -31,7 +34,8 @@
 | **TOTAL** | | | **25.2 hours** | **77%** |
 
 ### ROI Calculation
-```
+
+```powershell
 Annual Hours Saved: 111 - 25.2 = 85.8 hours
 Cost Savings per Engineer: 85.8 × $150 = $12,870
 Total Team Savings: $12,870 × [Team Size] = $________
@@ -42,6 +46,7 @@ Total Team Savings: $12,870 × [Team Size] = $________
 ## Scenario 2: PowerShell Automation
 
 ### Current State (Manual)
+
 | Task | Frequency | Time per Task | Annual Hours |
 |------|-----------|---------------|--------------|
 | Resource inventory reports | 52 per year | 60 min | 52 hours |
@@ -52,6 +57,7 @@ Total Team Savings: $12,870 × [Team Size] = $________
 | **TOTAL** | | | **155.3 hours** |
 
 ### With GitHub Copilot
+
 | Task | Frequency | Time per Task | Annual Hours | Time Savings |
 |------|-----------|---------------|--------------|--------------|
 | Resource inventory reports | 52 per year | 10 min | 8.7 hours | 85% |
@@ -62,7 +68,8 @@ Total Team Savings: $12,870 × [Team Size] = $________
 | **TOTAL** | | | **24.7 hours** | **84%** |
 
 ### ROI Calculation
-```
+
+```powershell
 Annual Hours Saved: 155.3 - 24.7 = 130.6 hours
 Cost Savings per Engineer: 130.6 × $150 = $19,590
 Total Team Savings: $19,590 × [Team Size] = $________
@@ -75,6 +82,7 @@ Additional Azure Cost Savings (orphaned resources): $244,000 / [# subscriptions]
 ## Scenario 3: Azure Arc Onboarding (Hybrid Cloud)
 
 ### Current State (Manual)
+
 | Task | Servers | Time per Server | Total Hours |
 |------|---------|-----------------|-------------|
 | Arc agent deployment | 500 | 8 min | 66.7 hours |
@@ -85,6 +93,7 @@ Additional Azure Cost Savings (orphaned resources): $244,000 / [# subscriptions]
 | **TOTAL** | | | **126.9 hours** |
 
 ### With GitHub Copilot
+
 | Task | Servers | Time per Server | Total Hours | Time Savings |
 |------|---------|-----------------|-------------|--------------|
 | Arc agent deployment | 500 | 0.5 min | 4.2 hours | 94% |
@@ -95,7 +104,8 @@ Additional Azure Cost Savings (orphaned resources): $244,000 / [# subscriptions]
 | **TOTAL** | | | **9.7 hours** | **92%** |
 
 ### Project ROI
-```
+
+```yaml
 Project Hours Saved: 126.9 - 9.7 = 117.2 hours
 Project Cost Savings: 117.2 × $150 = $17,580 per 500 servers
 
@@ -107,6 +117,7 @@ Annual Value (4 projects): $17,580 × 4 = $70,320
 ## Scenario 4: Troubleshooting & Issue Resolution
 
 ### Current State (Manual)
+
 | Issue Type | Frequency | Avg Time | Annual Hours |
 |------------|-----------|----------|--------------|
 | Network connectivity issues | 48 per year | 45 min | 36 hours |
@@ -117,6 +128,7 @@ Annual Value (4 projects): $17,580 × 4 = $70,320
 | **TOTAL** | | | **118 hours** |
 
 ### With GitHub Copilot
+
 | Issue Type | Frequency | Avg Time | Annual Hours | Time Savings |
 |------------|-----------|----------|--------------|--------------|
 | Network connectivity issues | 48 per year | 8 min | 6.4 hours | 82% |
@@ -127,7 +139,8 @@ Annual Value (4 projects): $17,580 × 4 = $70,320
 | **TOTAL** | | | **21.8 hours** | **82%** |
 
 ### ROI Calculation
-```
+
+```powershell
 Annual Hours Saved: 118 - 21.8 = 96.2 hours
 Cost Savings per Engineer: 96.2 × $150 = $14,430
 Total Team Savings: $14,430 × [Team Size] = $________
@@ -138,6 +151,7 @@ Total Team Savings: $14,430 × [Team Size] = $________
 ## Scenario 5: Documentation & Knowledge Transfer
 
 ### Current State (Manual)
+
 | Task | Frequency | Time per Task | Annual Hours |
 |------|-----------|---------------|--------------|
 | Architecture documentation | 12 per year | 180 min | 36 hours |
@@ -147,6 +161,7 @@ Total Team Savings: $14,430 × [Team Size] = $________
 | **TOTAL** | | | **124 hours** |
 
 ### With GitHub Copilot
+
 | Task | Frequency | Time per Task | Annual Hours | Time Savings |
 |------|-----------|---------------|--------------|--------------|
 | Architecture documentation | 12 per year | 30 min | 6 hours | 83% |
@@ -156,7 +171,8 @@ Total Team Savings: $14,430 × [Team Size] = $________
 | **TOTAL** | | | **23 hours** | **81%** |
 
 ### ROI Calculation
-```
+
+```powershell
 Annual Hours Saved: 124 - 23 = 101 hours
 Cost Savings per Engineer: 101 × $150 = $15,150
 Total Team Savings: $15,150 × [Team Size] = $________
@@ -178,7 +194,7 @@ Total Team Savings: $15,150 × [Team Size] = $________
 
 ### Team Savings Calculation
 
-```
+```powershell
 Team Size: _______ engineers
 Annual Savings: $62,040 × [Team Size] = $__________
 
@@ -198,14 +214,16 @@ TOTAL ANNUAL VALUE: $__________
 ## GitHub Copilot Investment
 
 ### Costs
-```
+
+```powershell
 GitHub Copilot Enterprise: $39/user/month
 Annual cost per user: $39 × 12 = $468
 Total annual investment: $468 × [Team Size] = $__________
 ```
 
 ### ROI Calculation
-```
+
+```powershell
 Total Annual Savings: $__________
 Total Annual Investment: $__________
 Net Annual Benefit: $__________
@@ -220,18 +238,21 @@ Payback Period: [Investment] / ([Savings] / 12 months) = _______ months
 ## Typical ROI Examples
 
 ### Small Team (5 IT Pros)
+
 - **Annual Savings**: $310,200 ($62,040 × 5)
 - **Investment**: $2,340 ($468 × 5)
 - **ROI**: 13,156%
 - **Payback**: 0.09 months (~3 days)
 
 ### Medium Team (15 IT Pros)
+
 - **Annual Savings**: $930,600 ($62,040 × 15)
 - **Investment**: $7,020 ($468 × 15)
 - **ROI**: 13,156%
 - **Payback**: 0.09 months (~3 days)
 
 ### Large Team (50 IT Pros)
+
 - **Annual Savings**: $3,102,000 ($62,040 × 50)
 - **Investment**: $23,400 ($468 × 50)
 - **ROI**: 13,156%

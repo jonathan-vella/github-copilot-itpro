@@ -25,12 +25,14 @@ By completing this demo, participants will learn to:
 **Customer Profile**: Enterprise IT Operations team managing 200+ Azure subscriptions
 
 **Challenge**: The team needs to audit and manage Azure resources across multiple subscriptions. Daily tasks include:
+
 - Generating cost reports for finance team
 - Finding and tagging untagged resources
 - Identifying orphaned resources (unused NICs, disks, IPs)
 - Bulk operations (start/stop VMs, apply tags)
 
-**Traditional Approach**: 
+**Traditional Approach**:
+
 - Write PowerShell scripts from scratch or copy-paste from docs
 - Debug syntax errors and parameter issues
 - Research Azure cmdlets and their parameters
@@ -38,12 +40,14 @@ By completing this demo, participants will learn to:
 - **Time: 60-90 minutes per script**
 
 **With Copilot**:
+
 - Describe what you need in natural language comments
 - Accept Copilot's cmdlet suggestions
 - Generate error handling automatically
 - **Time: 15-20 minutes per script**
 
-**Business Impact**: 
+**Business Impact**:
+
 - ⚡ 75% faster script development
 - 📊 Better quality with built-in error handling
 - 🎓 Learn Azure PowerShell by doing
@@ -91,6 +95,7 @@ graph TB
 ```
 
 **Features**:
+
 - 📊 Resource inventory across multiple subscriptions
 - 💰 Cost analysis with 30-day trending
 - 🏷️ Tag compliance checking and bulk remediation
@@ -102,6 +107,7 @@ graph TB
 ## Prerequisites
 
 ### Required Tools
+
 - ✅ [PowerShell 7+](https://learn.microsoft.com/powershell/scripting/install/installing-powershell)
 - ✅ [Azure PowerShell Module (Az)](https://learn.microsoft.com/powershell/azure/install-azure-powershell)
 - ✅ [VS Code](https://code.visualstudio.com/) with [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
@@ -122,13 +128,16 @@ $PSVersionTable.PSVersion
 ```
 
 ### Knowledge Prerequisites
+
 - Basic PowerShell scripting knowledge
 - Understanding of Azure resources (VMs, storage, networking)
 - Familiarity with Azure Portal
 - No advanced PowerShell experience required!
 
 ### Azure Resources
+
 This demo uses **read-only operations** by default. Optional write operations (tagging, cleanup) require:
+
 - Tag Contributor role (for Set-BulkTags)
 - Contributor role (for Remove-OrphanedResources)
 - Estimated cost: **$0** (reporting only)
@@ -136,24 +145,29 @@ This demo uses **read-only operations** by default. Optional write operations (t
 ## Demo Components
 
 ### 📁 [scenario/](./scenario/)
+
 - **requirements.md**: Enterprise IT operations use case
 - **architecture.md**: Solution architecture and workflow diagrams
 
 ### 📁 [manual-approach/](./manual-approach/)
+
 - **Get-Resources-Manual.ps1**: Basic script without Copilot
 - **time-tracking.md**: Manual effort breakdown (130 min total)
 
 ### 📁 [with-copilot/](./with-copilot/)
+
 - **Get-AzResourceReport.ps1**: Comprehensive inventory script (generated with Copilot)
 - **Set-BulkTags.ps1**: Bulk tagging automation
 - **Remove-OrphanedResources.ps1**: Resource cleanup script
 - **time-tracking.md**: Copilot-assisted effort (15 min)
 
 ### 📁 [prompts/](./prompts/)
+
 - **effective-prompts.md**: Production-tested PowerShell prompts
 - **prompt-patterns.md**: Reusable prompt templates
 
 ### 📁 [validation/](./validation/)
+
 - **Test-AzureOps.ps1**: Script validation and testing
 
 ---
@@ -204,6 +218,7 @@ Get-AzSubscription
 ## Key Copilot Features Demonstrated
 
 ### 1. Intelligent Function Generation
+
 ```powershell
 # Prompt: Create function Get-AzResourceReport with parameters for subscription, 
 # cost analysis, tag compliance, and multiple export formats
@@ -211,22 +226,26 @@ Get-AzSubscription
 ```
 
 ### 2. Error Handling Patterns
+
 - Copilot automatically suggests try-catch blocks
 - Generates retry logic for transient failures
 - Creates detailed error logging
 
 ### 3. Advanced PowerShell Features
+
 - Pipeline support with Begin/Process/End blocks
 - Parallel processing with ForEach-Object -Parallel
 - Progress bars with Write-Progress
 - SupportsShouldProcess for WhatIf
 
 ### 4. Azure Cmdlet Knowledge
+
 - Knows latest Az module cmdlets
 - Suggests appropriate parameters
 - Understands resource properties (e.g., ManagedBy for disks)
 
 ### 5. Best Practices Built-In
+
 - Comment-based help documentation
 - Parameter validation attributes
 - Approved verb-noun naming
@@ -255,6 +274,7 @@ Track these metrics during your demo:
 ### Common Issues
 
 **Az Module Not Found:**
+
 ```powershell
 # Check if Az modules are installed
 Get-Module -ListAvailable Az*
@@ -267,6 +287,7 @@ Import-Module Az.Accounts, Az.Resources, Az.CostManagement
 ```
 
 **Authentication Errors:**
+
 ```powershell
 # Clear cached credentials
 Clear-AzContext -Force
@@ -279,6 +300,7 @@ Get-AzContext
 ```
 
 **Permission Denied:**
+
 ```powershell
 # Check current role assignments
 Get-AzRoleAssignment -SignInName (Get-AzContext).Account
@@ -290,6 +312,7 @@ Get-AzRoleAssignment -SignInName (Get-AzContext).Account
 ```
 
 **Copilot Not Suggesting:**
+
 - Ensure GitHub Copilot extension is active (check status bar)
 - Verify file is saved with .ps1 extension
 - Try pressing `Ctrl+Enter` to open Copilot panel
@@ -302,12 +325,14 @@ Get-AzRoleAssignment -SignInName (Get-AzContext).Account
 ### Adapting for Your Environment
 
 1. **Modify Required Tags**:
+
    ```powershell
    # Edit RequiredTags parameter default
    [string[]]$RequiredTags = @('Environment', 'Owner', 'CostCenter', 'Application')
    ```
 
 2. **Change Output Locations**:
+
    ```powershell
    # Update default output path
    [string]$OutputPath = "\\fileserver\reports\azure"
@@ -322,6 +347,7 @@ Get-AzRoleAssignment -SignInName (Get-AzContext).Account
    - Copilot adds email functionality
 
 5. **Schedule Execution**:
+
    ```powershell
    # Create scheduled task
    $action = New-ScheduledTaskAction -Execute 'pwsh.exe' `
@@ -336,17 +362,20 @@ Get-AzRoleAssignment -SignInName (Get-AzContext).Account
 ## Next Steps
 
 ### For Demo Presenters
+
 1. ✅ Practice generating scripts with Copilot prompts
 2. ✅ Test scripts in your Azure environment
 3. ✅ Prepare comparison: manual script vs. Copilot-generated
 4. ✅ Customize examples for your audience's scenarios
 
 ### For Learners
+
 1. 🎯 Complete [Demo 3: Azure Arc Onboarding](../03-azure-arc-onboarding/)
 2. 🎯 Explore [Demo 4: Troubleshooting Assistant](../04-troubleshooting-assistant/)
 3. 🎯 Review [Skills Bridge: PowerShell Best Practices](../../skills-bridge/powershell-best-practices/)
 
 ### For Partners
+
 1. 📊 Calculate ROI using [partner-toolkit/roi-calculator.xlsx](../../partner-toolkit/roi-calculator.xlsx)
 2. 📝 Customize [partner-toolkit/demo-delivery-guide.md](../../partner-toolkit/demo-delivery-guide.md)
 3. 💼 Review [case-studies/enterprise-ops-automation.md](../../case-studies/enterprise-ops-automation.md)
@@ -356,12 +385,14 @@ Get-AzRoleAssignment -SignInName (Get-AzContext).Account
 ## Related Resources
 
 ### Microsoft Learn
+
 - [PowerShell Fundamentals](https://learn.microsoft.com/training/paths/powershell/)
 - [Azure PowerShell Documentation](https://learn.microsoft.com/powershell/azure/)
 - [Az Module Reference](https://learn.microsoft.com/powershell/module/az)
 - [GitHub Copilot for PowerShell](https://github.blog/2023-11-08-universe-2023-copilot-transforms-github-into-the-ai-powered-developer-platform/)
 
 ### Repository Content
+
 - [Demo Script](./DEMO-SCRIPT.md) - Step-by-step walkthrough
 - [Effective Prompts](./prompts/effective-prompts.md) - Production-tested prompts
 - [Prompt Patterns](./prompts/prompt-patterns.md) - Reusable templates

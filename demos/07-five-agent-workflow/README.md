@@ -15,12 +15,14 @@ This demo showcases GitHub Copilot's **5-agent workflow** for designing and impl
 ## 🌟 Why This Matters
 
 Traditional infrastructure design involves:
+
 - ⏱️ **Hours of manual work**: Requirements → Architecture → Code
 - 📝 **Context loss**: Switching between tools and formats
 - 🔄 **Rework**: Architectural decisions not reflected in code
 - 📚 **Documentation lag**: Code and docs out of sync
 
 **With 5-Agent Workflow**:
+
 - ⚡ **45 minutes**: Complete workflow from requirements to deployable code (vs. 18 hours manual)
 - 🔗 **Automatic handoffs**: Context preserved between agents
 - ✅ **Aligned outputs**: Architecture drives implementation
@@ -30,6 +32,7 @@ Traditional infrastructure design involves:
 ## 🤖 The Five Agents
 
 ### 0. Plan Agent (`@plan`) - *Start Here*
+
 - **Purpose**: Break down complex infrastructure projects into step-by-step implementation plans
 - **Input**: Business requirements, constraints, budget, compliance needs
 - **Output**: Interactive planning session with clarifying questions, detailed implementation plan with phases, resource breakdown with cost estimates, deployment sequence
@@ -39,18 +42,21 @@ Traditional infrastructure design involves:
 **Usage**: Always start with `@plan` for multi-step infrastructure projects
 
 ### 1. Azure Principal Architect (`azure-principal-architect`)
+
 - **Purpose**: Azure Well-Architected Framework assessment
 - **Input**: Business requirements, constraints, technical needs
 - **Output**: WAF scores, service recommendations, cost estimates, HIPAA compliance mapping
 - **Handoff**: Architecture assessment → Bicep Planning Specialist
 
 ### 3. Bicep Planning Specialist (`bicep-plan`)
+
 - **Purpose**: Machine-readable implementation plan
 - **Input**: Architecture assessment
 - **Output**: Resource definitions, dependencies, cost tables, deployment phases
 - **Handoff**: Implementation plan → Bicep Implementation Specialist
 
 ### 4. Bicep Implementation Specialist (`bicep-implement`)
+
 - **Purpose**: Production-ready Bicep templates
 - **Input**: Implementation plan
 - **Output**: Modular Bicep templates, parameter files, deployment scripts
@@ -59,6 +65,7 @@ Traditional infrastructure design involves:
 - **Naming Convention**: Generates unique suffixes using `uniqueString()` to prevent resource name collisions
 
 ### 2. ADR Generator (`adr_generator`) - *Optional*
+
 - **Purpose**: Document architectural decisions for enterprise governance
 - **Input**: Architecture discussions, trade-offs, decisions from Plan agent
 - **Output**: Structured ADR in markdown format (saved to `/docs/adr/`)
@@ -68,6 +75,7 @@ Traditional infrastructure design involves:
 ## 📋 Scenario: Contoso Healthcare Patient Portal
 
 **Business Context**:
+
 - **Organization**: Contoso Healthcare (mid-sized healthcare provider)
 - **Need**: Secure patient portal for appointment scheduling, medical records access
 - **Patients**: 10,000 active patients
@@ -75,6 +83,7 @@ Traditional infrastructure design involves:
 - **Compliance**: HIPAA mandatory (BAA required)
 
 **Technical Requirements**:
+
 - **Budget**: $800/month maximum
 - **SLA**: 99.9% uptime minimum
 - **Region**: Default `swedencentral` (can adjust for latency/compliance)
@@ -82,6 +91,7 @@ Traditional infrastructure design involves:
 - **Security**: Encryption at rest and in transit, audit logging, unique resource names
 
 **Constraints**:
+
 - Must deploy within 4 weeks
 - Team has Azure experience but limited IaC expertise
 - Prefer managed services over IaaS
@@ -97,14 +107,17 @@ Traditional infrastructure design involves:
 ### Run the Demo
 
 1. **Navigate to prompts directory**:
+
    ```powershell
    cd demos/07-five-agent-workflow/prompts
-   ```
+
+```yaml
 
 2. **Open VS Code**:
+
    ```powershell
    code .
-   ```
+```
 
 3. **Open GitHub Copilot Chat** (`Ctrl+Shift+I`)
 
@@ -119,7 +132,7 @@ See [DEMO-SCRIPT.md](DEMO-SCRIPT.md) for detailed walkthrough.
 
 ## 📁 Demo Structure
 
-```
+```bicep
 07-five-agent-workflow/
 ├── README.md                           # This file
 ├── DEMO-SCRIPT.md                      # Step-by-step presentation guide
@@ -182,15 +195,19 @@ See [DEMO-SCRIPT.md](DEMO-SCRIPT.md) for detailed walkthrough.
    - Parameter files for environments
    - Deployment automation script
 3. Validate templates:
+
    ```powershell
    cd templates
    bicep build main.bicep --stdout --no-restore
    bicep lint main.bicep
-   ```
+
+```yaml
+
 4. (Optional) What-if deployment:
+
    ```powershell
    .\deploy.ps1 -WhatIf
-   ```
+```
 
 **Key Takeaway**: Production-ready templates in minutes, following Azure best practices and security defaults.
 
@@ -206,7 +223,8 @@ See [DEMO-SCRIPT.md](DEMO-SCRIPT.md) for detailed walkthrough.
 | **Context Loss** | High (multiple handoffs) | None (automatic) | **Eliminated** |
 | **Documentation** | Manual, often outdated | Auto-generated | **Always current** |
 
-**ROI Example**: 
+**ROI Example**:
+
 - SI Partner hourly rate: $150/hour
 - Traditional approach: 18 hours × $150 = **$2,700**
 - With Copilot: 1 hour × $150 = **$150**
@@ -215,11 +233,13 @@ See [DEMO-SCRIPT.md](DEMO-SCRIPT.md) for detailed walkthrough.
 ## 🔑 Key Features Demonstrated
 
 ### Agent Handoffs
+
 - **Automatic context transfer** between agents
 - **No copy/paste required** - seamless workflow
 - **Preserved decisions** - architecture drives implementation
 
 ### Security Defaults
+
 - HTTPS-only enforcement
 - TLS 1.2 minimum on all services
 - Private endpoints for data tier
@@ -227,18 +247,21 @@ See [DEMO-SCRIPT.md](DEMO-SCRIPT.md) for detailed walkthrough.
 - NSG deny-all defaults
 
 ### Cost Optimization
+
 - Service recommendations within budget
 - Reservation opportunities identified
 - Monthly cost breakdown with drivers
 - Alternative SKU suggestions
 
 ### Compliance
+
 - HIPAA compliance mapping
 - Azure BAA coverage confirmation
 - Encryption at rest and in transit
 - Audit logging to Log Analytics
 
 ### Production Readiness
+
 - Modular, maintainable templates
 - Environment-specific parameters
 - Deployment automation
@@ -261,12 +284,14 @@ By the end of this demo, participants will:
 ### Adjust Scenario Complexity
 
 **Simpler** (20-min demo):
+
 - Remove private endpoints
 - Use Basic tier services
 - Single region deployment
 - Skip ADR generation
 
 **More Complex** (60-min demo):
+
 - Add Azure Front Door with WAF
 - Multi-region with Traffic Manager
 - Azure Firewall for network security
@@ -289,6 +314,7 @@ By the end of this demo, participants will:
 ## 📚 Resources
 
 ### Documentation
+
 - [Five-Agent Workflow Guide](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md) - Complete documentation with Plan agent
 - [15-Minute Demo Script](../../resources/copilot-customizations/AGENT-HANDOFF-DEMO.md) - Quick demonstration
 - [Custom Agent Configuration](../../.github/agents/) - Agent definitions with swedencentral defaults
@@ -297,10 +323,12 @@ By the end of this demo, participants will:
 - [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/)
 
 ### Related Demos
+
 - [Demo 01: Bicep Quick Start](../01-bicep-quickstart/) - Intro to Bicep with Copilot
 - [Demo 06: Azure Specialization Prep](../06-azure-specialization-prep/) - Advanced architectures
 
 ### Implementation Files
+
 - [Bicep Templates](../../infra/bicep/contoso-patient-portal/)
 - [Implementation Summary](../../infra/bicep/contoso-patient-portal/IMPLEMENTATION-SUMMARY.md)
 - [Validation Checklist](../../infra/bicep/contoso-patient-portal/VALIDATION-CHECKLIST.md)
@@ -308,17 +336,20 @@ By the end of this demo, participants will:
 ## 🎤 Presentation Tips
 
 ### Opening (2 minutes)
+
 - **Hook**: "What if you could go from customer requirements to production-ready infrastructure in 30 minutes?"
 - Present traditional timeline (2-3 days)
 - Introduce 4-agent workflow concept
 
 ### During Demo (35 minutes)
+
 - **Pause after each agent output** - let audience absorb
 - **Highlight surprises** - "Notice Copilot included HIPAA compliance automatically"
 - **Show before/after** - manual effort vs. agent output
 - **Invite questions** - engage audience throughout
 
 ### Closing (3 minutes)
+
 - **Summarize metrics** - 95% time reduction, $2,550 savings
 - **Emphasize production-readiness** - not just quick, but correct
 - **Call to action** - "Try this with your next project"
@@ -359,6 +390,7 @@ A: No - it augments their capabilities. Architects still make decisions; agents 
 ## ✅ Success Criteria
 
 Demo is successful when audience:
+
 - [ ] Understands the 5-agent workflow concept (starting with Plan agent)
 - [ ] Sees value in automatic context handoffs
 - [ ] Recognizes time savings (96% reduction, 18 hours → 45 minutes)

@@ -19,6 +19,7 @@ superseded_by: ""
 The github-copilot-itpro repository serves Microsoft field personnel and SI partners demonstrating GitHub Copilot value for Azure infrastructure work. The repository contains 5 complete demos showcasing 60-90% time savings across Bicep IaC, PowerShell automation, Azure Arc onboarding, troubleshooting, and documentation generation.
 
 **Current Challenges:**
+
 - Multiple Copilot customizations exist without clear workflow integration
 - Architectural decisions in demos are implicit rather than documented
 - No standardized process from architecture through implementation
@@ -26,6 +27,7 @@ The github-copilot-itpro repository serves Microsoft field personnel and SI part
 - Lack of architectural documentation for demo patterns
 
 **Business Requirements:**
+
 - Enable partners to deliver consistent demos
 - Provide clear guidance on customization usage
 - Document architectural patterns for reusability
@@ -33,6 +35,7 @@ The github-copilot-itpro repository serves Microsoft field personnel and SI part
 - Support IT professionals learning cloud infrastructure
 
 **Technical Constraints:**
+
 - Must work with GitHub Copilot Chat and Custom Agents in VS Code
 - Should leverage existing awesome-copilot community assets
 - Must maintain 30-minute demo format compatibility
@@ -48,13 +51,15 @@ Adopt a **four-mode workflow** integrating:
 4. **Bicep Implementation (Chat Mode)** - Generate Bicep code from plans
 
 **Workflow Stages:**
-```
+
+```text
 Decision → Architecture → Planning → Implementation
     ↓           ↓            ↓           ↓
 ADR Gen → Principal → Bicep Plan → Bicep Impl
 ```
 
 **Integration Points:**
+
 - ADRs reference architecture decisions made with Principal Architect mode
 - Bicep Planning mode consumes architectural recommendations
 - Bicep Implementation mode reads planning files from `.bicep-planning-files/`
@@ -112,12 +117,14 @@ ADR Gen → Principal → Bicep Plan → Bicep Impl
 - **IMP-006**: **Success Metrics**: Track partner adoption, demo quality scores, ADR count, usage analytics
 
 **Migration Strategy:**
+
 - Existing demos continue functioning unchanged
 - Enhanced demos showcase four-mode workflow
 - Partners adopt progressively, not required immediately
 - Backward compatibility maintained for custom instructions
 
 **Monitoring and Success Criteria:**
+
 - Minimum 5 ADRs created within 2 weeks
 - All 3 chat modes documented with clear usage guidance
 - Demo scripts updated with mode references
@@ -134,4 +141,5 @@ ADR Gen → Principal → Bicep Plan → Bicep Impl
 ---
 
 **Decision History:**
+
 - 2025-11-17: Initial proposal and acceptance

@@ -23,7 +23,7 @@ az account set --subscription "your-subscription-id"
 
 # Navigate to demo folder
 cd c:\Repos\github-copilot-itpro\demos\08-sbom-generator
-```
+```text
 
 ### 2. VS Code Setup
 
@@ -33,6 +33,7 @@ code .
 ```
 
 **Checklist**:
+
 - ✅ GitHub Copilot extension enabled (check status bar)
 - ✅ Copilot Chat panel accessible (Ctrl+Shift+I)
 - ✅ Sample app folder visible in Explorer
@@ -57,18 +58,21 @@ Keep `examples/` folder available in case live generation has issues. These pre-
 **Customer**: HealthTech Solutions - Healthcare SaaS provider  
 **Application**: Patient ToDo tracking system (similar to their real portal)  
 **Challenge**: Must provide SBOM for:
+
 - HIPAA compliance audit (quarterly requirement)
 - Enterprise customer security questionnaire
 - Vulnerability management program
 - Supply chain risk assessment
 
 **Show the Sample Application**:
+
 ```powershell
 # Open sample app structure
 code sample-app/
-```
+```powershell
 
 Point out:
+
 - `src/api/package.json` - **20+ npm dependencies**
 - `src/api/Dockerfile` - **node:20-alpine base image**
 - `infra/main.bicep` - **Azure App Service, Cosmos DB, Key Vault**
@@ -78,15 +82,17 @@ Point out:
 **Display**: `manual-approach/time-tracking.md`
 
 > "Traditionally, this takes 6 hours:
+>
 > - 90 minutes: Manually list npm packages from package.json
 > - 120 minutes: Research container base image components
 > - 60 minutes: Document Azure resources and API versions
 > - 90 minutes: Format into CycloneDX or SPDX JSON
 > - 60 minutes: Generate reports and validate completeness
-> 
+>
 > And you have to do this **quarterly** - or more frequently when vulnerabilities are disclosed."
 
 **Key Pain Points**:
+
 - ❌ Error-prone manual tracking (typically miss 20% of components)
 - ❌ Difficult to keep current (quarterly updates lag reality)
 - ❌ Format complexity (CycloneDX/SPDX schemas are intricate)
@@ -108,7 +114,8 @@ code with-copilot/New-ApplicationSBOM.ps1
 ```
 
 **Prompt in Copilot Chat**:
-```
+
+```bicep
 Create a PowerShell script that:
 1. Reads a package.json file and extracts all dependencies and devDependencies
 2. Generates a CycloneDX 1.5 SBOM in JSON format
@@ -122,6 +129,7 @@ Create a PowerShell script that:
 **Action**: Accept Copilot's suggestions and refine iteratively
 
 **Key Points to Highlight**:
+
 - 🎯 Copilot understands CycloneDX schema structure
 - 🎯 Generates proper PURL format (pkg:npm/package@version)
 - 🎯 Includes metadata section with timestamp
@@ -137,9 +145,10 @@ Create a PowerShell script that:
 
 # Display results
 code examples/application-sbom.json
-```
+```powershell
 
 **Expected Results**:
+
 - ✅ ~20-25 components identified
 - ✅ Proper CycloneDX format
 - ✅ Complete with metadata
@@ -161,7 +170,8 @@ code with-copilot/New-ContainerSBOM.ps1
 ```
 
 **Prompt in Copilot Chat**:
-```
+
+```bicep
 Create a PowerShell script that:
 1. Uses Syft (if available) or parses a Dockerfile to generate container SBOM
 2. Extracts base image information (node:20-alpine)
@@ -175,6 +185,7 @@ Create a PowerShell script that:
 **Action**: Let Copilot generate the script
 
 **Key Points to Highlight**:
+
 - 🎯 Copilot suggests industry-standard tool (Syft)
 - 🎯 Provides fallback approach (Dockerfile parsing)
 - 🎯 Understands container layer concepts
@@ -189,9 +200,10 @@ Create a PowerShell script that:
 
 # Otherwise, show pre-generated example:
 code examples/container-sbom.json
-```
+```powershell
 
 **Expected Results**:
+
 - ✅ Base image identified (node:20-alpine)
 - ✅ OS packages listed (Alpine Linux packages)
 - ✅ Node.js runtime version captured
@@ -213,7 +225,8 @@ code with-copilot/New-InfrastructureSBOM.ps1
 ```
 
 **Prompt in Copilot Chat**:
-```
+
+```bicep
 Create a PowerShell script that:
 1. Uses Azure Resource Graph to query all resources in a resource group
 2. Extracts resource type, SKU, API version, location for each resource
@@ -227,6 +240,7 @@ Create a PowerShell script that:
 **Action**: Accept Copilot's suggestions
 
 **Key Points to Highlight**:
+
 - 🎯 Copilot knows Azure Resource Graph query syntax
 - 🎯 Understands Azure resource types and API versions
 - 🎯 Generates appropriate PURL format for cloud resources
@@ -241,9 +255,10 @@ Create a PowerShell script that:
 
 # Otherwise, show Bicep template scanning:
 code examples/infrastructure-sbom.json
-```
+```bicep
 
 **Expected Results**:
+
 - ✅ App Service identified with SKU
 - ✅ Cosmos DB with API version
 - ✅ Key Vault with tier
@@ -266,7 +281,8 @@ code with-copilot/Merge-SBOMDocuments.ps1
 ```
 
 **Prompt in Copilot Chat**:
-```
+
+```bicep
 Create a PowerShell script that:
 1. Reads multiple CycloneDX SBOM JSON files from a directory
 2. Merges all components into a single unified SBOM
@@ -282,11 +298,14 @@ Create a PowerShell script that:
 ```powershell
 # Create new file
 code with-copilot/Export-SBOMReport.ps1
-```
+```yaml
 
 **Prompt in Copilot Chat**:
+
 ```
+
 Create a PowerShell script that:
+
 1. Reads a CycloneDX SBOM JSON file
 2. Generates an HTML report with:
    - Summary statistics (total components, component types)
@@ -296,7 +315,8 @@ Create a PowerShell script that:
 3. Also exports CSV format for spreadsheet analysis
 4. Includes filtering by component type
 5. Parameters for input file, output format (HTML/CSV), and output path
-```
+
+```yaml
 
 **Step 3**: Run the scripts
 
@@ -317,6 +337,7 @@ start examples/sbom-report.html
 ```
 
 **Expected Results**:
+
 - ✅ Single unified SBOM with ~60+ components
 - ✅ Beautiful HTML dashboard
 - ✅ Component statistics and breakdown
@@ -346,7 +367,8 @@ start examples/sbom-report.html
 #### Business Value Discussion
 
 **ROI Calculation**:
-```
+
+```yaml
 Per SBOM:
 - Manual: 6 hours × $150/hr = $900
 - With Copilot: 1 hour × $150/hr = $150
@@ -362,6 +384,7 @@ Enterprise (100 apps):
 ```
 
 **Use Cases Enabled**:
+
 1. ✅ **Vulnerability Response**: Query SBOMs when CVE disclosed (hours vs. days)
 2. ✅ **Customer Compliance**: Provide SBOM to enterprise customers immediately
 3. ✅ **Regulatory Audits**: Always audit-ready (HIPAA, SOC2, PCI-DSS)
@@ -379,16 +402,19 @@ Enterprise (100 apps):
 #### Key Takeaways
 
 **For Security Teams**:
+
 - ✅ Comprehensive visibility into all software components
 - ✅ Faster vulnerability response (hours instead of days)
 - ✅ Continuous compliance (automate in CI/CD)
 
 **For IT Professionals**:
+
 - ✅ 85% time reduction (6 hours → 1 hour)
 - ✅ Higher accuracy (98% vs. 80% manual)
 - ✅ Multi-format support (CycloneDX, SPDX, HTML, CSV)
 
 **For Management**:
+
 - ✅ Cost savings: $3,000/year per application
 - ✅ Risk reduction: Proactive vulnerability management
 - ✅ Compliance: Always audit-ready

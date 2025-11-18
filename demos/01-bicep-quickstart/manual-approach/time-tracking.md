@@ -26,6 +26,7 @@
 ### Phase 1: Research & Planning (15 minutes)
 
 **00:00-05:00** - Research Bicep Syntax (5 min)
+
 - Open Microsoft Learn documentation
 - Search for "Azure VNet Bicep examples"
 - Search for "Network Security Group Bicep"
@@ -33,6 +34,7 @@
 - Copy example snippets to reference file
 
 **05:00-10:00** - Review API Versions (5 min)
+
 - Check current API versions for:
   - `Microsoft.Network/virtualNetworks`
   - `Microsoft.Network/networkSecurityGroups`
@@ -41,6 +43,7 @@
 - **Challenge**: Different examples use different versions—which is correct?
 
 **10:00-15:00** - Plan Architecture (5 min)
+
 - Sketch network layout
 - Define subnet CIDRs
 - Plan NSG rules
@@ -52,17 +55,21 @@
 ### Phase 2: Network Infrastructure (20 minutes)
 
 **15:00-20:00** - VNet Basic Structure (5 min)
+
 - Create `network.bicep` file
 - Write parameters section:
+
   ```bicep
   param location string = resourceGroup().location
   param vnetName string
   param addressPrefix string
   ```
+
 - Start VNet resource block
 - **Challenge**: Forgot `@description()` decorators—add them later
 
 **20:00-30:00** - VNet with Subnets (10 min)
+
 - Add addressSpace property
 - Add subnets array
 - Define 3 subnets (web, app, data)
@@ -72,6 +79,7 @@
   - Missing comma in subnets array
 
 **30:00-35:00** - Network Security Groups (5 min)
+
 - Create NSG for web tier
 - Add security rules
 - **Challenge**: What's the right priority order for rules?
@@ -86,6 +94,7 @@
 ### Phase 3: Storage Infrastructure (10 minutes)
 
 **35:00-40:00** - Storage Account Basics (5 min)
+
 - Create `storage.bicep` file
 - Add parameters
 - Start storage account resource
@@ -93,6 +102,7 @@
 - **Solution**: Use `uniqueString(resourceGroup().id)`
 
 **40:00-45:00** - Storage Security Configuration (5 min)
+
 - Add `supportsHttpsTrafficOnly: true`
 - **Challenge**: What's the property name for minimum TLS version?
 - Look up documentation: `minimumTlsVersion`
@@ -106,6 +116,7 @@
 ### Phase 4: Main Orchestration (5 minutes)
 
 **45:00-50:00** - Create Main Template (5 min)
+
 - Create `main.bicep` file
 - Add module references
 - **Challenge**: What's the correct syntax for modules?
@@ -119,12 +130,15 @@
 ### Phase 5: First Deployment Attempt (10 minutes)
 
 **50:00-52:00** - Validate Template (2 min)
+
 ```powershell
 az bicep build --file main.bicep
 ```
+
 **Result**: ❌ Error - "Property 'addressPrefixes' expected array but got string"
 
 **52:00-55:00** - Fix Validation Error (3 min)
+
 - Open network.bicep
 - Find issue: `addressPrefixes` should be an array
 - Change to: `addressPrefixes: [ addressPrefix ]`
@@ -132,12 +146,14 @@ az bicep build --file main.bicep
 **Result**: ✅ Validation passed
 
 **55:00-58:00** - Deploy to Azure (3 min)
+
 ```powershell
 az deployment group create `
   --resource-group rg-demo `
   --template-file main.bicep `
   --parameters environment=demo
 ```
+
 **Result**: ❌ Deployment failed - "Resource 'nsg-web-demo' not found when referenced by subnet"
 
 ---
@@ -145,15 +161,18 @@ az deployment group create `
 ### Phase 6: Second Deployment Attempt (5 minutes)
 
 **58:00-60:00** - Debug NSG Association Error (2 min)
+
 - **Issue**: NSG must exist before VNet references it
 - **Solution**: Need `dependsOn` or change structure
 - Open network.bicep
 - Ensure NSGs are defined before VNet resource
 
 **60:00-63:00** - Redeploy (3 min)
+
 ```powershell
 az deployment group create ...
 ```
+
 **Result**: ❌ Deployment failed - "Storage account name 'stdemoXXXXX' contains invalid characters"
 
 ---
@@ -161,6 +180,7 @@ az deployment group create ...
 ### Phase 7: Third Deployment Attempt (5 minutes)
 
 **63:00-65:00** - Fix Storage Account Name (2 min)
+
 - **Issue**: Storage account names can't have uppercase or hyphens
 - Open storage.bicep
 - Change to all lowercase: `st${toLower(environment)}${uniqueString(...)}`
@@ -168,12 +188,15 @@ az deployment group create ...
 - Shorten to: `st${environment}${uniqueString(...).substring(0,8)}`
 
 **65:00-68:00** - Deploy Again (3 min)
+
 ```powershell
 az deployment group create ...
 ```
+
 **Result**: ✅ Deployment succeeded!
 
 **68:00-70:00** - Verify Resources (2 min)
+
 - Check VNet in Azure Portal
 - Check subnets and NSGs
 - Check storage account
@@ -185,11 +208,13 @@ az deployment group create ...
 ### Phase 8: Documentation (10 minutes)
 
 **70:00-75:00** - Write Comments (5 min)
+
 - Add `@description()` decorators to parameters
 - Add header comments to each file
 - Document security configurations
 
 **75:00-80:00** - Create README (5 min)
+
 - Write deployment instructions
 - Document prerequisites
 - List resources created
@@ -200,6 +225,7 @@ az deployment group create ...
 ## Common Errors Encountered
 
 ### Syntax Errors (5 occurrences)
+
 1. ❌ `addressPrefixes` as string instead of array
 2. ❌ Missing comma in array
 3. ❌ Wrong indentation level
@@ -209,6 +235,7 @@ az deployment group create ...
 **Time Lost**: ~8 minutes
 
 ### Logic Errors (3 occurrences)
+
 1. ❌ NSG not available when referenced by subnet
 2. ❌ Storage account name invalid characters
 3. ❌ Storage account name too long
@@ -216,6 +243,7 @@ az deployment group create ...
 **Time Lost**: ~10 minutes
 
 ### Configuration Mistakes (2 occurrences)
+
 1. ❌ Public access enabled on storage (security risk)
 2. ❌ Forgot to pass environment parameter to module
 
@@ -228,16 +256,19 @@ az deployment group create ...
 ## Challenges Faced
 
 ### 1. Documentation Lookup
+
 - **Issue**: Constantly switching between editor and browser
 - **Impact**: 10+ minutes spent searching documentation
 - **Example**: "What's the property for minimum TLS version?"
 
 ### 2. API Version Confusion
+
 - **Issue**: Different examples use different API versions
 - **Impact**: 5 minutes deciding which version to use
 - **Risk**: Using outdated versions can cause issues later
 
 ### 3. Syntax Memorization
+
 - **Issue**: Don't remember exact Bicep syntax
 - **Impact**: Frequent errors, need to reference examples
 - **Examples**:
@@ -246,11 +277,13 @@ az deployment group create ...
   - Resource referencing: `resource.id` vs `resource.name`
 
 ### 4. Copy-Paste Errors
+
 - **Issue**: Copying NSG rules, forgot to update IP addresses
 - **Impact**: 3 minutes debugging why rules weren't working
 - **Risk**: Security vulnerabilities if rules are wrong
 
 ### 5. Debugging Cryptic Errors
+
 - **Issue**: ARM errors are not always clear
 - **Example**: "Resource not found when referenced" (which resource?)
 - **Impact**: 10 minutes trial-and-error debugging
@@ -288,6 +321,7 @@ az deployment group create ...
 To complete this task manually, you need:
 
 ### Technical Skills
+
 - ✅ Bicep syntax and structure
 - ✅ Azure networking concepts (VNets, subnets, NSGs)
 - ✅ Azure storage security best practices
@@ -295,6 +329,7 @@ To complete this task manually, you need:
 - ✅ PowerShell or Azure CLI proficiency
 
 ### Domain Knowledge
+
 - ✅ Understanding of network segmentation
 - ✅ Security rule priorities and defaults
 - ✅ Azure naming conventions
@@ -302,6 +337,7 @@ To complete this task manually, you need:
 - ✅ Resource dependencies
 
 ### Tools
+
 - ✅ VS Code with Bicep extension
 - ✅ Azure CLI
 - ✅ Access to Azure documentation
@@ -314,17 +350,20 @@ To complete this task manually, you need:
 ## Cost of Manual Approach
 
 ### Direct Costs
+
 - **Engineer time**: 81 minutes = 1.35 hours
 - **Hourly rate**: $75/hour (average cloud engineer)
 - **Cost per deployment**: $101.25
 
 ### Indirect Costs
+
 - **Delayed delivery**: 1+ hour longer than with Copilot
 - **Error correction**: 3 failed deployments (wasted Azure compute)
 - **Knowledge gaps**: Need experienced engineer ($100-150/hour)
 - **Opportunity cost**: Could have worked on strategic tasks
 
 ### Team Impact (5 engineers, 3 deployments/week)
+
 - **Monthly time**: 81 min × 3 × 4 = 16.2 hours
 - **Monthly cost**: 16.2 × $75 × 5 = **$6,075**
 - **Annual cost**: **$72,900**
@@ -334,16 +373,19 @@ To complete this task manually, you need:
 ## Lessons Learned (Manual Approach)
 
 ### What Worked
+
 ✅ **Modular approach**: Separating network and storage into modules kept code organized  
 ✅ **Validation first**: Running `az bicep build` before deployment caught syntax errors early  
 ✅ **Incremental development**: Building one resource at a time reduced debugging complexity  
 
 ### What Didn't Work
+
 ❌ **Copying from docs**: Examples were outdated or incomplete, caused errors  
 ❌ **Trial and error**: Guessing API properties wasted time, should have read docs fully  
 ❌ **Rushing deployment**: Should have validated more thoroughly before first deployment  
 
 ### What Could Have Helped
+
 💡 **Better IDE support**: More autocomplete for Bicep properties  
 💡 **Error messages**: Clearer deployment errors would have saved debugging time  
 💡 **Templates/snippets**: Pre-built code snippets for common scenarios  
@@ -355,6 +397,7 @@ To complete this task manually, you need:
 The manual approach took **81 minutes** of development time, with over **25% spent debugging errors**. The process required extensive Azure and Bicep knowledge, frequent documentation lookups, and multiple deployment attempts.
 
 **Key Challenges**:
+
 1. Memorizing Bicep syntax and Azure resource schemas
 2. Debugging cryptic error messages
 3. Finding correct API versions

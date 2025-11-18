@@ -161,6 +161,7 @@ graph TB
 | Download | `download.microsoft.com` | 443 | Agent updates |
 
 **Network Requirements**:
+
 - Outbound HTTPS (443) connectivity from servers to Azure endpoints
 - Proxy support for environments with restricted internet access
 - Minimum bandwidth: 100 Kbps per server (1.5 GB/month per server)
@@ -340,22 +341,26 @@ graph TB
 **Data Collection**:
 
 **Performance Metrics** (collected every 60 seconds):
+
 - CPU utilization (total, per-core)
 - Memory (available, used, percentage)
 - Disk I/O (read/write bytes, IOPS)
 - Network (bytes sent/received, errors)
 
 **Log Collection**:
+
 - **Windows**: Security, Application, System event logs
 - **Linux**: Syslog (auth, daemon, kern, user)
 - **Custom**: Application-specific logs (MES, ERP, IoT collectors)
 
 **Data Collection Rules**:
+
 - **DCR-Production-Windows**: Windows Server performance + Security/System logs
 - **DCR-Production-Linux**: Linux performance + Syslog
 - **DCR-Custom-Applications**: Application-specific log files
 
 **Alerting Examples**:
+
 - High CPU: > 90% for 10 minutes
 - Low memory: < 10% available for 5 minutes
 - Disk space: < 10% free
@@ -418,6 +423,7 @@ graph TB
 **Security Components**:
 
 **Identity & Access Management**:
+
 - **Service Principal**: Least-privilege SP for Arc onboarding
   - Role: Azure Connected Machine Onboarding (subscription scope)
   - Role: Log Analytics Contributor (workspace scope)
@@ -425,13 +431,15 @@ graph TB
 - **RBAC**: Role assignments at subscription, resource group, resource levels
 
 **Secret Management**:
+
 - **Azure Key Vault**: Centralized secret storage
   - Service Principal credentials (expires every 90 days)
   - Certificates for TLS mutual authentication
   - Access policies restrict retrieval to authorized identities
 
 **Security Services**:
-- **Microsoft Defender for Servers**: 
+
+- **Microsoft Defender for Servers**:
   - Vulnerability assessment scanning
   - Just-in-time VM access
   - File integrity monitoring
@@ -440,6 +448,7 @@ graph TB
 - **Change Tracking**: Configuration change detection
 
 **Network Security**:
+
 - All communication over TLS 1.2+
 - Outbound-only connectivity (no inbound ports opened)
 - Corporate proxy for internet access control
@@ -473,7 +482,7 @@ graph LR
 
 - **Azure Arc Service**: Built-in 99.9% SLA, multi-region availability
 - **Log Analytics Workspace**: Data replication within region
-- **Agent Resilience**: 
+- **Agent Resilience**:
   - Local buffering of telemetry (up to 24 hours)
   - Automatic reconnection after network outages
   - Retry logic with exponential backoff
@@ -483,7 +492,7 @@ graph LR
 - **Backup Log Analytics Workspace**: Geo-redundant workspace in secondary region
 - **Policy Definitions**: Stored in ARM (automatically replicated)
 - **Arc Agent Reinstall**: Scripts and documentation for rapid re-onboarding
-- **RTO/RPO**: 
+- **RTO/RPO**:
   - Agent reconnection: < 15 minutes
   - Full workspace failover: < 4 hours
   - Data loss: < 1 hour (buffered telemetry)
@@ -493,11 +502,13 @@ graph LR
 ## Scalability Considerations
 
 **Current Scale**:
+
 - 500 servers across 12 facilities
 - 320 Windows + 180 Linux
 - 3 Azure subscriptions
 
 **Future Scale Targets**:
+
 - 2,000 servers (planned server expansion)
 - 5 additional facilities (global growth)
 - Multi-cloud (AWS/GCP hybrid in roadmap)
@@ -551,6 +562,7 @@ graph TB
 | **Total** | - | - | **$6,500** | **$78,000** |
 
 **Cost Optimization**:
+
 - Use data collection rules to filter unnecessary logs
 - Set retention policies based on compliance requirements (31/90/365 days)
 - Leverage commitment tiers for Log Analytics (save 15-30%)
@@ -558,6 +570,7 @@ graph TB
 - Monitor with Azure Cost Management + Budgets
 
 **ROI Comparison**:
+
 - Azure costs: $78,000/year
 - Operational savings: $300,000+/year
 - **Net savings: $222,000+/year**
@@ -582,16 +595,19 @@ graph TB
 ## Deployment Tooling
 
 **Infrastructure as Code**:
+
 - **PowerShell Scripts**: Agent deployment, policy configuration, monitoring setup
 - **Azure Bicep** (future): Policy definitions, RBAC assignments, workspaces
 - **ARM Templates** (legacy): Extension deployments
 
 **Automation Platform**:
+
 - **Local Execution**: PowerShell scripts run from jump box
 - **Azure Automation** (future): Scheduled runs, runbook execution
 - **GitHub Actions** (future): CI/CD for policy updates
 
 **Version Control**:
+
 - **GitHub Repository**: All scripts, documentation, IaC stored in Git
 - **Branching Strategy**: Main (production), develop (testing), feature branches
 
@@ -600,12 +616,14 @@ graph TB
 ## Integration Points
 
 **Existing Systems**:
+
 - **SCCM**: Phased decommissioning, coordinate with Arc Update Management
 - **Ansible**: Continue for configuration management, integrate with Arc Guest Configuration
 - **Monitoring Tools**: Migrate from Nagios/Zabbix to Azure Monitor over 6 months
 - **ServiceNow**: ITSM integration via Azure Monitor alerts (webhook)
 
 **Future Integrations**:
+
 - **Azure Sentinel**: SIEM integration for security analytics
 - **Azure Automation**: Runbook execution for remediation
 - **Azure DevOps**: CI/CD pipelines for policy updates

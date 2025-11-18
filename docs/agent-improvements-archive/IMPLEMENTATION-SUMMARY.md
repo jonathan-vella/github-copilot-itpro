@@ -23,9 +23,11 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 ### 1. Agent Enhancements
 
 #### Azure Principal Architect Agent (v1.1.0)
+
 **File:** `.github/agents/azure-principal-architect.agent.md`
 
 **New Features:**
+
 - ✅ WAF pillar scoring system (X/10 with confidence levels)
 - ✅ Cost estimation guidelines with Azure pricing patterns
 - ✅ Monthly cost breakdown tables
@@ -33,14 +35,17 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 - ✅ Regional cost variations
 
 **Benefits:**
+
 - More actionable recommendations with quantified trade-offs
 - Business stakeholders can make informed cost decisions
 - Reduces follow-up questions about pricing
 
 #### Bicep Planning Specialist Agent (v1.1.0)
+
 **File:** `.github/agents/bicep-plan.agent.md`
 
 **New Features:**
+
 - ✅ Cost estimation section in plan template
 - ✅ Mermaid dependency diagrams
 - ✅ Resource dependency visualization
@@ -49,14 +54,17 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 - ✅ Deployment order guidance
 
 **Benefits:**
+
 - Visual understanding of infrastructure relationships
 - Clear cost expectations before implementation
 - Reduced deployment failures with testing strategy
 
 #### Bicep Implementation Specialist Agent (v1.1.0)
+
 **File:** `.github/agents/bicep-implement.agent.md`
 
 **New Features:**
+
 - ✅ Progressive implementation pattern (4-phase approach)
 - ✅ Validation gates between phases
 - ✅ Security scanning with SARIF output
@@ -66,6 +74,7 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 - ✅ What-if analysis before deployment
 
 **Benefits:**
+
 - Safer deployments with incremental rollout
 - Catches issues early with validation gates
 - Reuses existing modules (DRY principle)
@@ -73,27 +82,33 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 ### 2. Documentation & Tracking
 
 #### Roadmap Document
+
 **File:** `docs/agent-improvements/ROADMAP.md`
 
 **Contents:**
+
 - Implementation phases with timelines
 - Success metrics (baseline and targets)
 - Risk assessment and mitigation
 - Stakeholder communication plan
 
 #### Changelog
+
 **File:** `docs/agent-improvements/CHANGELOG.md`
 
 **Contents:**
+
 - Version history (1.0.0 → 1.1.0)
 - Detailed change log for each agent
 - Breaking changes (none in 1.1.0)
 - Upgrade notes
 
 #### Testing Results Tracker
+
 **File:** `docs/agent-improvements/TESTING-RESULTS.md`
 
 **Contents:**
+
 - Test execution history
 - Performance metrics tracking
 - Known issues log
@@ -102,9 +117,11 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 ### 3. Testing Framework
 
 #### Test Suite Structure
+
 **Location:** `demos/agent-testing/`
 
 **Components:**
+
 - ✅ README.md - Overview and quick start
 - ✅ Run-AgentTests.ps1 - Automated test runner
 - ✅ TESTING-PROCEDURES.md - Step-by-step testing guide
@@ -112,6 +129,7 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 - ✅ Directory structure for outputs and baselines
 
 **Capabilities:**
+
 - Functional testing (output format validation)
 - Quality testing (content accuracy)
 - Integration testing (agent handoffs)
@@ -119,9 +137,11 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 - Performance benchmarking
 
 #### Test Runner Script
+
 **File:** `demos/agent-testing/Run-AgentTests.ps1`
 
 **Features:**
+
 - PowerShell 7+ compatible
 - Parameterized execution (agent, scenario, test type)
 - JSON result export
@@ -129,9 +149,11 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 - Verbose logging
 
 ### 4. Troubleshooting Guide
+
 **File:** `resources/copilot-customizations/AGENT-TROUBLESHOOTING.md`
 
 **Sections:**
+
 - Common issues (6 major scenarios)
 - Agent-specific troubleshooting
 - Performance issues
@@ -141,6 +163,7 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 - Quick reference commands
 
 **Coverage:**
+
 - 15+ common issues with solutions
 - Agent-specific problems
 - Step-by-step diagnostics
@@ -163,6 +186,7 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 ### Qualitative Improvements
 
 **Before:**
+
 - ❌ No cost information in recommendations
 - ❌ Complex dependencies hard to understand
 - ❌ Large deployments risky (all-or-nothing)
@@ -170,6 +194,7 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 - ❌ Limited troubleshooting guidance
 
 **After:**
+
 - ✅ Every recommendation includes cost estimates
 - ✅ Visual diagrams show dependencies clearly
 - ✅ Safe, incremental deployments with rollback
@@ -183,6 +208,7 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 ### New Files Created (15)
 
 **Documentation:**
+
 1. `docs/agent-improvements/ROADMAP.md`
 2. `docs/agent-improvements/CHANGELOG.md`
 3. `docs/agent-improvements/TESTING-RESULTS.md`
@@ -205,6 +231,7 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 ### Modified Files (4)
 
 **Agent Definitions:**
+
 1. `.github/agents/azure-principal-architect.agent.md`
    - Added WAF scoring guidelines
    - Added cost estimation section
@@ -232,19 +259,22 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 ### Immediate (Week 1)
 
 1. **Test Agent Updates**
+
    ```powershell
    # Reload VS Code to load updated agents
    # Ctrl+Shift+P > Developer: Reload Window
    
    # Test each agent with simple prompts
    # Verify new features appear in outputs
-   ```
+
+```text
 
 2. **Run Baseline Tests**
+
    ```powershell
    cd demos/agent-testing
    .\Run-AgentTests.ps1 -Agent all -Baseline -Verbose
-   ```
+```
 
 3. **Review Documentation**
    - Read FIVE-MODE-WORKFLOW.md for updated workflow
@@ -292,6 +322,7 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 ### Example 1: Using Cost Estimation
 
 **Before (v1.0.0):**
+
 ```markdown
 Agent: azure-principal-architect
 Prompt: Design a web app architecture
@@ -301,9 +332,10 @@ Output:
 - Add Azure SQL Database
 - Implement Application Gateway
 [No cost information]
-```
+```yaml
 
 **After (v1.1.0):**
+
 ```markdown
 Agent: azure-principal-architect
 Prompt: Design a web app architecture with budget of $500/month
@@ -328,6 +360,7 @@ Fits within $500 budget with $165 margin for data transfer/storage.
 ### Example 2: Using Dependency Visualization
 
 **Before (v1.0.0):**
+
 ```markdown
 Agent: bicep-plan
 Prompt: Plan a hub-spoke network
@@ -337,9 +370,10 @@ Phase 1: Deploy hub VNet
 Phase 2: Deploy spoke VNets
 Phase 3: Configure peering
 [Text description only]
-```
+```bicep
 
 **After (v1.1.0):**
+
 ```markdown
 Agent: bicep-plan
 Prompt: Plan a hub-spoke network
@@ -359,11 +393,13 @@ graph TD
 ```
 
 **Deployment Order:**
+
 1. Resource Group
 2. Hub VNet + Spoke VNets (parallel)
 3. Azure Firewall + Bastion
 4. VNet peering connections
-```
+
+```yaml
 
 ### Example 3: Using Progressive Implementation
 
@@ -379,6 +415,7 @@ Output:
 ```
 
 **After (v1.1.0):**
+
 ```markdown
 Agent: bicep-implement
 Prompt: Implement the network plan
@@ -396,11 +433,12 @@ Generating network-foundation.bicep...
 bicep build network-foundation.bicep
 az deployment group what-if --template-file network-foundation.bicep
 az deployment group create --template-file network-foundation.bicep
-```
+```text
 
 **Phase 1 Complete. Proceed to Phase 2? (y/n)**
 
 [Continues with Phases 2, 3, 4...]
+
 ```
 
 ---
@@ -448,16 +486,19 @@ az deployment group create --template-file network-foundation.bicep
 ### Metrics to Track
 
 **Time Savings:**
+
 - Workflow completion time (target: 40 min vs. 60 min baseline)
 - Time spent on cost research (should approach 0)
 - Time spent understanding dependencies (50% reduction)
 
 **Quality Improvements:**
+
 - Cost estimate accuracy (target: ±20%)
 - Deployment success rate (target: 90%+)
 - Number of clarification questions (target: <5 per session)
 
 **User Satisfaction:**
+
 - Partner feedback scores (target: 8.5/10)
 - Feature usage rates (cost estimation: 90%+)
 - Support ticket reduction (target: 30% reduction)
@@ -478,7 +519,7 @@ $metrics = @{
 # Save to tracking file
 $metrics | ConvertTo-Json | 
     Add-Content "docs/agent-improvements/metrics-tracking.json"
-```
+```powershell
 
 ---
 
@@ -487,6 +528,7 @@ $metrics | ConvertTo-Json |
 Use this checklist to verify the implementation:
 
 ### Agent Files
+
 - [ ] All 4 agent files updated to v1.1.0
 - [ ] Cost estimation patterns present in architect agent
 - [ ] Dependency visualization in planning agent template
@@ -494,6 +536,7 @@ Use this checklist to verify the implementation:
 - [ ] No syntax errors in agent definitions
 
 ### Documentation
+
 - [ ] ROADMAP.md created and comprehensive
 - [ ] CHANGELOG.md tracks all changes
 - [ ] TESTING-RESULTS.md ready for data
@@ -501,6 +544,7 @@ Use this checklist to verify the implementation:
 - [ ] TESTING-PROCEDURES.md provides step-by-step guide
 
 ### Testing Framework
+
 - [ ] Directory structure created
 - [ ] Run-AgentTests.ps1 script functional
 - [ ] Test cases documented
@@ -508,6 +552,7 @@ Use this checklist to verify the implementation:
 - [ ] README.md explains usage
 
 ### Functional Verification
+
 - [ ] VS Code reloaded with new agents
 - [ ] Agents appear in selector (Ctrl+Shift+A)
 - [ ] Cost estimates appear in architect outputs
@@ -528,12 +573,14 @@ Use this checklist to verify the implementation:
 ### Providing Feedback
 
 We want to hear from you:
+
 - What's working well?
 - What could be improved?
 - What features are missing?
 - What's confusing?
 
 **Feedback Channels:**
+
 - GitHub Issues (for bugs/features)
 - GitHub Discussions (for questions)
 - Partner Slack channels

@@ -22,11 +22,13 @@
 ### Issue 1: Agent Not Responding
 
 **Symptoms:**
+
 - No output after selecting agent
 - VS Code appears frozen
 - Agent dropdown doesn't show custom agents
 
 **Common Causes:**
+
 1. Agent definition file has syntax errors
 2. VS Code hasn't loaded custom agents
 3. GitHub Copilot extension not activated
@@ -46,6 +48,7 @@ Get-ChildItem .github\agents\*.agent.md
 ```
 
 **Fix 1: Reload VS Code Window**
+
 1. Press `Ctrl+Shift+P`
 2. Type "Reload Window"
 3. Select "Developer: Reload Window"
@@ -53,6 +56,7 @@ Get-ChildItem .github\agents\*.agent.md
 5. Try again with `Ctrl+Shift+A`
 
 **Fix 2: Check Agent File Syntax**
+
 ```powershell
 # Validate YAML front matter
 $agentFile = ".github\agents\azure-principal-architect.agent.md"
@@ -67,6 +71,7 @@ if ($content -match '^```chatagent\s+---(.+?)---') {
 ```
 
 **Fix 3: Verify GitHub Copilot Extension**
+
 1. Open Extensions view (`Ctrl+Shift+X`)
 2. Search for "GitHub Copilot"
 3. Ensure extension is enabled and up to date
@@ -77,11 +82,13 @@ if ($content -match '^```chatagent\s+---(.+?)---') {
 ### Issue 2: Agent Produces Incomplete Output
 
 **Symptoms:**
+
 - Output cuts off mid-sentence
 - Missing expected sections
 - Partial responses
 
 **Common Causes:**
+
 1. Token limit reached
 2. Prompt too complex
 3. Context overflow
@@ -90,6 +97,7 @@ if ($content -match '^```chatagent\s+---(.+?)---') {
 **Solutions:**
 
 **Fix 1: Simplify Prompt**
+
 ```markdown
 ❌ Too Complex:
 Design a complete enterprise architecture with multi-region HA, 
@@ -102,6 +110,7 @@ Design a multi-region HA architecture for a web application.
 ```
 
 **Fix 2: Break Into Multiple Prompts**
+
 ```markdown
 # Step 1: Get architecture
 Agent: azure-principal-architect
@@ -117,6 +126,7 @@ Prompt: Implement Phase 1 from the plan
 ```
 
 **Fix 3: Use Agent Handoffs**
+
 - Instead of asking one agent to do everything
 - Use handoff buttons to pass context to next agent
 - Each agent focuses on its specialty
@@ -126,11 +136,13 @@ Prompt: Implement Phase 1 from the plan
 ### Issue 3: Cost Estimates Missing or Inaccurate
 
 **Symptoms:**
+
 - No cost information in architect recommendations
 - Cost estimates significantly off from Azure pricing
 - Cost table not formatted correctly
 
 **Common Causes:**
+
 1. Agent definition not updated with cost estimation feature
 2. Microsoft Docs MCP server not accessible
 3. Prompt doesn't explicitly request cost info
@@ -138,6 +150,7 @@ Prompt: Implement Phase 1 from the plan
 **Solutions:**
 
 **Fix 1: Verify Agent Version**
+
 ```powershell
 # Check if agent has cost estimation feature
 $agentFile = ".github\agents\azure-principal-architect.agent.md"
@@ -152,6 +165,7 @@ if ($content -match 'Cost Estimation|cost estimate') {
 ```
 
 **Fix 2: Explicitly Request Cost Info**
+
 ```markdown
 ❌ Vague:
 Design an architecture for my web app
@@ -161,6 +175,7 @@ Design an architecture for my web app and provide detailed cost estimates
 ```
 
 **Fix 3: Validate Against Azure Pricing Calculator**
+
 - Use [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/)
 - Compare agent estimates with calculator
 - Report discrepancies if > 30% difference
@@ -170,11 +185,13 @@ Design an architecture for my web app and provide detailed cost estimates
 ### Issue 4: Dependency Diagrams Not Rendering
 
 **Symptoms:**
+
 - Mermaid code appears but doesn't render
 - Diagram shows as plain text
 - Syntax errors in Mermaid code
 
 **Common Causes:**
+
 1. Mermaid extension not installed
 2. Markdown preview not showing diagrams
 3. Syntax errors in Mermaid code
@@ -182,17 +199,20 @@ Design an architecture for my web app and provide detailed cost estimates
 **Solutions:**
 
 **Fix 1: Install Mermaid Extension**
+
 1. Press `Ctrl+Shift+X`
 2. Search for "Markdown Preview Mermaid Support"
 3. Install extension by Matt Bierner
 4. Reload window
 
 **Fix 2: Use Markdown Preview**
+
 1. Open .md file with diagram
 2. Press `Ctrl+Shift+V` for preview
 3. Diagram should render automatically
 
 **Fix 3: Validate Mermaid Syntax**
+
 ```powershell
 # Copy Mermaid code and validate at:
 # https://mermaid.live/
@@ -208,11 +228,13 @@ Design an architecture for my web app and provide detailed cost estimates
 ### Issue 5: Progressive Implementation Not Used
 
 **Symptoms:**
+
 - Implementation agent generates all code at once
 - No phase-based deployment
 - Complex infrastructure not broken down
 
 **Common Causes:**
+
 1. Prompt doesn't indicate complexity
 2. Agent determines infrastructure is simple enough
 3. Implementation plan doesn't have phases
@@ -220,12 +242,14 @@ Design an architecture for my web app and provide detailed cost estimates
 **Solutions:**
 
 **Fix 1: Explicitly Request Progressive Implementation**
+
 ```markdown
 Implement the infrastructure using progressive implementation pattern.
 Deploy in phases with validation between each phase.
 ```
 
 **Fix 2: Ensure Plan Has Phases**
+
 ```markdown
 # When using bicep-plan agent:
 Create a plan with at least 3 phases:
@@ -235,6 +259,7 @@ Create a plan with at least 3 phases:
 ```
 
 **Fix 3: Verify Complexity Threshold**
+
 - Progressive implementation recommended for:
   - 10+ resources
   - 3+ modules
@@ -250,10 +275,12 @@ Create a plan with at least 3 phases:
 #### Issue: ADR Number Conflict
 
 **Symptoms:**
+
 - Agent creates ADR with number that already exists
 - File overwrite warning
 
 **Solution:**
+
 ```powershell
 # List existing ADRs
 Get-ChildItem docs\adr\adr-*.md | Sort-Object Name
@@ -265,10 +292,12 @@ Get-ChildItem docs\adr\adr-*.md | Sort-Object Name
 #### Issue: Missing Alternatives Section
 
 **Symptoms:**
+
 - Generated ADR has no alternatives
 - Only one option documented
 
 **Solution:**
+
 ```markdown
 # Explicitly provide alternatives in prompt:
 Document the decision to use Azure Bastion.
@@ -288,10 +317,12 @@ Provide analysis of why each alternative was accepted or rejected.
 #### Issue: WAF Scores Too High/Low
 
 **Symptoms:**
+
 - All pillars scored 9-10 (unrealistic)
 - All pillars scored 1-3 (overly critical)
 
 **Solution:**
+
 ```markdown
 # Provide context for realistic assessment:
 Assess this architecture:
@@ -306,10 +337,12 @@ Provide realistic WAF scores based on production readiness standards.
 #### Issue: No Microsoft Documentation Links
 
 **Symptoms:**
+
 - Recommendations without reference links
 - Generic advice not backed by official docs
 
 **Solution:**
+
 1. Verify Microsoft Docs MCP server is active
 2. Check agent has Microsoft Docs tools enabled
 3. Explicitly request documentation:
@@ -326,11 +359,13 @@ documentation and Azure Architecture Center patterns.
 #### Issue: Plan Too High-Level
 
 **Symptoms:**
+
 - Vague resource descriptions
 - Missing parameter details
 - No specific SKUs or configurations
 
 **Solution:**
+
 ```markdown
 # Request detailed plan:
 Create a detailed implementation plan with:
@@ -343,10 +378,12 @@ Create a detailed implementation plan with:
 #### Issue: Cost Table Has No Values
 
 **Symptoms:**
+
 - Cost table present but shows $TBD or $X
 - No actual cost estimates
 
 **Solution:**
+
 ```markdown
 # Provide usage context:
 Create a plan with detailed cost estimates.
@@ -365,10 +402,12 @@ Context for costing:
 #### Issue: Bicep Build Fails
 
 **Symptoms:**
+
 - `bicep build` command returns errors
 - Syntax errors in generated code
 
 **Solution:**
+
 ```powershell
 # 1. Check Bicep CLI version
 bicep --version
@@ -391,10 +430,12 @@ bicep build main.bicep
 #### Issue: Missing Required Tags
 
 **Symptoms:**
+
 - Resources deployed without tags
 - Tagging validation fails
 
 **Solution:**
+
 ```markdown
 # Explicitly request tagging:
 Generate Bicep code with these required tags on all resources:
@@ -411,10 +452,12 @@ Generate Bicep code with these required tags on all resources:
 ### Issue: Agent Takes Too Long to Respond
 
 **Symptoms:**
+
 - Wait times > 60 seconds
 - VS Code appears to hang
 
 **Causes:**
+
 1. Complex prompt requiring deep analysis
 2. Multiple documentation lookups
 3. Network latency to API
@@ -422,11 +465,13 @@ Generate Bicep code with these required tags on all resources:
 **Solutions:**
 
 **Fix 1: Simplify Complexity**
+
 - Break complex requests into smaller prompts
 - Use agent handoffs for multi-step workflows
 - Avoid "do everything" prompts
 
 **Fix 2: Check Network Connection**
+
 ```powershell
 # Test connectivity to GitHub
 Test-NetConnection -ComputerName github.com -Port 443
@@ -436,6 +481,7 @@ Test-NetConnection -ComputerName github.com -Port 443
 ```
 
 **Fix 3: Use Caching**
+
 - Reuse previous agent outputs as context
 - Reference existing ADRs, plans, or code
 - Avoid re-requesting same information
@@ -447,6 +493,7 @@ Test-NetConnection -ComputerName github.com -Port 443
 ### Issue: Generic Recommendations
 
 **Symptoms:**
+
 - Vague advice ("use best practices")
 - No specific Azure services mentioned
 - No actionable guidance
@@ -454,6 +501,7 @@ Test-NetConnection -ComputerName github.com -Port 443
 **Solutions:**
 
 **Fix 1: Provide Specific Context**
+
 ```markdown
 ❌ Generic:
 Design a secure web application
@@ -468,6 +516,7 @@ Design a secure web application for:
 ```
 
 **Fix 2: Request Specificity**
+
 ```markdown
 Provide specific Azure service recommendations with:
 - Exact SKUs and configurations
@@ -481,6 +530,7 @@ Provide specific Azure service recommendations with:
 ### Issue: Outdated Information
 
 **Symptoms:**
+
 - References to deprecated services
 - Old API versions
 - Pricing from previous years
@@ -488,18 +538,21 @@ Provide specific Azure service recommendations with:
 **Solutions:**
 
 **Fix 1: Verify Agent Uses Latest Tools**
+
 ```markdown
 # Check agent definition has Microsoft Docs tools:
 tools: ['Microsoft Docs/*', 'Azure MCP/*', 'Bicep (EXPERIMENTAL)/*']
 ```
 
 **Fix 2: Explicitly Request Current Info**
+
 ```markdown
 Provide recommendations using the latest Azure services and pricing 
 as of November 2025. Use latest stable API versions (2023-05-01 or newer).
 ```
 
 **Fix 3: Validate Against Microsoft Learn**
+
 - Cross-check recommendations with [Microsoft Learn](https://learn.microsoft.com/)
 - Verify service availability and pricing
 - Report inaccuracies
@@ -511,6 +564,7 @@ as of November 2025. Use latest stable API versions (2023-05-01 or newer).
 ### Issue: Handoff Context Lost
 
 **Symptoms:**
+
 - Next agent doesn't know about previous agent's output
 - Need to re-explain requirements
 - Disconnected workflow
@@ -518,11 +572,13 @@ as of November 2025. Use latest stable API versions (2023-05-01 or newer).
 **Solutions:**
 
 **Fix 1: Use Handoff Buttons**
+
 - Don't manually switch agents mid-conversation
 - Use the handoff buttons in agent interface
 - Context automatically preserved
 
 **Fix 2: Reference Previous Outputs**
+
 ```markdown
 # When manually switching agents:
 Implement the plan from .bicep-planning-files/INFRA.web-app.md
@@ -530,6 +586,7 @@ Use the architecture assessment from the previous conversation.
 ```
 
 **Fix 3: Save Intermediate Outputs**
+
 - ADRs saved to `/docs/adr/`
 - Plans saved to `.bicep-planning-files/`
 - Reference these files in subsequent prompts
@@ -541,6 +598,7 @@ Use the architecture assessment from the previous conversation.
 ### Debugging Agent Behavior
 
 **Enable Verbose Logging:**
+
 ```powershell
 # VS Code Developer Tools
 # Help > Toggle Developer Tools
@@ -548,6 +606,7 @@ Use the architecture assessment from the previous conversation.
 ```
 
 **Check Agent Configuration:**
+
 ```powershell
 # Validate agent YAML syntax
 $agentPath = ".github\agents\azure-principal-architect.agent.md"
@@ -563,6 +622,7 @@ if ($content -match '```chatagent\s+---\s+(.+?)\s+---') {
 ```
 
 **Test Agent in Isolation:**
+
 1. Create minimal test prompt
 2. Test without workspace context
 3. Compare with expected behavior
@@ -573,12 +633,14 @@ if ($content -match '```chatagent\s+---\s+(.+?)\s+---') {
 ### Reporting Issues
 
 **Before Reporting:**
+
 1. Check this troubleshooting guide
 2. Verify agent version is current
 3. Try with a simplified prompt
 4. Test with different agent
 
 **What to Include in Issue Report:**
+
 1. **Agent Name:** Which agent had the issue
 2. **Agent Version:** Check front matter or CHANGELOG.md
 3. **Prompt Used:** Exact prompt that caused issue
@@ -588,6 +650,7 @@ if ($content -match '```chatagent\s+---\s+(.+?)\s+---') {
 7. **Environment:** VS Code version, OS, Copilot version
 
 **Where to Report:**
+
 - GitHub Issues: [Repository Issues](https://github.com/jonathan-vella/github-copilot-itpro/issues)
 - Use label: `agent-issue`
 

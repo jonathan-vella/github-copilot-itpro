@@ -59,7 +59,7 @@ graph TB
     style CSV fill:#50e6ff,color:#000
     style JSON fill:#50e6ff,color:#000
     style HTML fill:#50e6ff,color:#000
-```
+```bicep
 
 ---
 
@@ -112,6 +112,7 @@ sequenceDiagram
 **Purpose**: Comprehensive resource inventory and reporting
 
 **Capabilities**:
+
 - Multi-subscription support
 - Resource inventory with tags
 - Cost analysis (last 30 days)
@@ -120,13 +121,15 @@ sequenceDiagram
 - Multiple export formats (CSV, JSON, HTML)
 
 **Data Flow**:
-```
+
+```bicep
 Azure Subscriptions → Authentication → Resource Query → 
 Data Processing → Compliance Checks → Report Generation → 
 File Export + Console Summary
 ```
 
 **Key Features**:
+
 - Parallel subscription processing
 - Progress indicators for long operations
 - Error handling with detailed logging
@@ -140,6 +143,7 @@ File Export + Console Summary
 **Purpose**: Apply tags to multiple resources efficiently
 
 **Capabilities**:
+
 - Filter by resource group, type, or existing tags
 - Merge or replace tag modes
 - Dry-run preview before applying
@@ -147,7 +151,8 @@ File Export + Console Summary
 - Detailed change logging
 
 **Data Flow**:
-```
+
+```bicep
 Filter Criteria → Resource Discovery → 
 Tag Validation → WhatIf Preview → 
 User Confirmation → Parallel Tag Application → 
@@ -155,6 +160,7 @@ Change Logging + Summary Report
 ```
 
 **Key Features**:
+
 - SupportsShouldProcess for WhatIf
 - Configurable parallelism (throttle limit)
 - Rollback on error
@@ -167,6 +173,7 @@ Change Logging + Summary Report
 **Purpose**: Identify and clean up unused Azure resources
 
 **Capabilities**:
+
 - Detect unattached managed disks
 - Find unused public IP addresses
 - Identify disconnected network interfaces
@@ -174,7 +181,8 @@ Change Logging + Summary Report
 - Calculate cost savings
 
 **Data Flow**:
-```
+
+```bicep
 Resource Discovery → Orphan Detection → 
 Cost Estimation → User Confirmation → 
 Resource Deletion → Audit Log → 
@@ -182,6 +190,7 @@ Savings Report
 ```
 
 **Key Features**:
+
 - Multiple safety confirmations
 - Cost impact analysis
 - Optional snapshot backup before deletion
@@ -207,7 +216,7 @@ Get-AzResourceReport.ps1 `
 Send-MailMessage -To "ops-team@company.com" `
     -Subject "Daily Azure Resource Report" `
     -Attachments "ResourceInventory_*.html"
-```
+```powershell
 
 ---
 
@@ -249,7 +258,7 @@ Remove-OrphanedResources.ps1 `
 Remove-OrphanedResources.ps1 `
     -ResourceGroupPattern "rg-projectx-*" `
     -BackupFirst
-```
+```powershell
 
 ---
 
@@ -287,6 +296,7 @@ Set-BulkTags.ps1 `
 ### Audit Trail
 
 All scripts log to:
+
 - **Console**: Real-time progress and summary
 - **Log Files**: Detailed timestamp logs with all operations
 - **Change Logs**: Specific files for resource modifications
@@ -307,6 +317,7 @@ Log location: `$OutputPath\*_timestamp.log`
 | > 5000 | 5-15 minutes | 500 MB - 1 GB |
 
 **Optimization Tips**:
+
 - Use `-ResourceGroupName` to limit scope
 - Disable cost data with `-IncludeCost:$false` if not needed
 - Process subscriptions serially for resource-constrained systems
@@ -316,11 +327,13 @@ Log location: `$OutputPath\*_timestamp.log`
 ### Set-BulkTags Performance
 
 **Parallel Processing**:
+
 - Default throttle limit: 10 concurrent operations
 - Recommended for > 50 resources
 - Can adjust with `-MaxParallelJobs` parameter
 
 **Serial Processing**:
+
 - Best for < 50 resources
 - More predictable progress tracking
 - Lower memory footprint
@@ -339,7 +352,7 @@ Log location: `$OutputPath\*_timestamp.log`
     ScriptPath: 'Get-AzResourceReport.ps1'
     ScriptArguments: '-IncludeCost -OutputFormat JSON'
     azurePowerShellVersion: 'LatestVersion'
-```
+```powershell
 
 ---
 
@@ -375,7 +388,7 @@ Invoke-AzOperationalInsightsDataCollection `
     -SharedKey $sharedKey `
     -LogType "AzureResourceInventory" `
     -Body ($report | ConvertTo-Json -Depth 10)
-```
+```bicep
 
 ---
 
@@ -384,6 +397,7 @@ Invoke-AzOperationalInsightsDataCollection `
 ### Retry Logic
 
 All scripts implement:
+
 - **Transient error detection**: 429 (Too Many Requests), 503 (Service Unavailable)
 - **Exponential backoff**: 2s, 4s, 8s retry delays
 - **Maximum retries**: 3 attempts before failing
@@ -409,6 +423,7 @@ All scripts implement:
 ### Sample Monitoring Dashboard
 
 ```
+
 ┌─────────────────────────────────────────────┐
 │ Azure Resource Health Dashboard             │
 ├─────────────────────────────────────────────┤
@@ -420,6 +435,7 @@ All scripts implement:
 │ Last Report: 2025-11-18 06:00 ✅           │
 │ Next Report: 2025-11-19 06:00              │
 └─────────────────────────────────────────────┘
+
 ```
 
 ---
@@ -444,21 +460,25 @@ All scripts implement:
 ### Implementation Phases
 
 **Phase 1: Discovery (Week 1)**
+
 - Deploy Get-AzResourceReport.ps1
 - Run initial inventory across all subscriptions
 - Identify tag compliance gaps
 
 **Phase 2: Standardization (Week 2-3)**
+
 - Define tagging standards
 - Use Set-BulkTags.ps1 for bulk remediation
 - Implement automated tagging for new resources
 
 **Phase 3: Optimization (Week 4)**
+
 - Identify orphaned resources
 - Calculate cost savings opportunities
 - Execute cleanup with Remove-OrphanedResources.ps1
 
 **Phase 4: Automation (Week 5+)**
+
 - Schedule daily/weekly reports
 - Set up alerting for compliance drift
 - Integrate with ITSM/monitoring tools

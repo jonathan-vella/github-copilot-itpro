@@ -26,7 +26,8 @@ This document provides reusable prompt templates for common Azure infrastructure
 5. **Review and adjust** the suggestions
 
 **Example**:
-```
+
+```yaml
 Pattern: // Create a {resourceType} named '{name}' in {location}
 Your use: // Create a storage account named 'stproddata' in eastus
 ```
@@ -41,9 +42,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Create an Azure Virtual Network named '{vnetName}' with address space {addressSpace}
 // Include {number} subnets: {subnet1Name} ({cidr1}), {subnet2Name} ({cidr2}), {subnet3Name} ({cidr3})
 // Add parameters for location and environment
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Create an Azure Virtual Network named 'vnet-prod-app' with address space 10.1.0.0/16
 // Include 3 subnets: frontend (10.1.1.0/24), backend (10.1.2.0/24), database (10.1.3.0/24)
@@ -59,9 +61,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Allow inbound {protocol} on port {port} from {source}
 // Allow outbound to {destination} on port {port}
 // Deny all other inbound traffic at priority 4096
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Create a Network Security Group for the frontend subnet
 // Allow inbound TCP on port 443 from Internet
@@ -77,9 +80,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Add a subnet named '{subnetName}' with address prefix {cidr}
 // Attach Network Security Group '{nsgName}'
 // {optionalFeature: Enable service endpoints for {services}}
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Add a subnet named 'snet-data-prod' with address prefix 10.0.3.0/24
 // Attach Network Security Group 'nsg-data-prod'
@@ -95,9 +99,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Connect to the {subnetName} subnet
 // Add a private DNS zone for {dnsZoneName}
 // Link the DNS zone to the virtual network
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Create a private endpoint for the storage account named 'stproddata'
 // Connect to the snet-data-prod subnet
@@ -113,9 +118,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Create VNet peering between '{vnet1Name}' and '{vnet2Name}'
 // {option: Allow gateway transit / Use remote gateway}
 // {option: Allow forwarded traffic}
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Create VNet peering between 'vnet-hub-prod' and 'vnet-spoke-app'
 // Allow gateway transit from hub to spoke
@@ -135,9 +141,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Disable public blob access
 // Enable blob soft delete with {days} day retention
 // {optional: Enable versioning and change feed}
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Create a storage account named 'stproddataapp01'
 // Use Standard_GRS replication and Hot access tier
@@ -157,9 +164,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Enable soft delete with {days} day retention
 // Enable purge protection
 // {optional: Configure network rules to allow access from {source}}
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Create an Azure Key Vault named 'kv-prod-app-01'
 // Use RBAC authorization
@@ -175,9 +183,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 ```bicep
 // Create a {type: user-assigned / system-assigned} managed identity named '{identityName}'
 // Grant it {roleName} role on the {resourceType} named '{resourceName}'
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Create a user-assigned managed identity named 'id-app-prod'
 // Grant it Storage Blob Data Contributor role on the storage account named 'stproddata'
@@ -191,9 +200,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Assign {roleName} role to {principalType} '{principalName}'
 // Scope: {scope: subscription / resource group / resource}
 // {optional: Add description '{description}'}
-```
+```bicep
 
 **Example**:
+
 ```bicep
 // Assign Contributor role to service principal 'sp-devops-prod'
 // Scope: resource group
@@ -210,9 +220,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Create a blob container named '{containerName}'
 // Set public access to {level: None / Blob / Container}
 // {optional: Add immutability policy with {days} day retention}
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Create a blob container named 'backups'
 // Set public access to None
@@ -228,9 +239,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Move blobs to {tier: Cool / Archive} after {days} days
 // Delete blobs older than {days} days
 // {optional: Apply to containers matching '{prefix}'}
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Add lifecycle management policy to the storage account
 // Move blobs to Cool tier after 30 days
@@ -247,9 +259,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Set quota to {size} GB
 // Use {tier: TransactionOptimized / Hot / Cool} tier
 // Enable {protocol: SMB / NFS} protocol
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Create an Azure File Share named 'appdata'
 // Set quota to 100 GB
@@ -269,9 +282,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Deploy to '{subnetName}' subnet
 // Use {authType: SSH key / password} authentication
 // {optional: Attach {number} managed disk(s) for data ({size} GB, {sku: Premium_LRS / Standard_LRS})}
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Create a Ubuntu 22.04 LTS virtual machine named 'vm-app-prod-01'
 // Use Standard_D2s_v3 SKU
@@ -290,9 +304,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Deploy to '{subnetName}' subnet
 // Use password authentication with admin user '{adminUsername}'
 // Install {extension: IIS / SQL Server / custom}
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Create a Windows Server 2022 Datacenter virtual machine named 'vm-web-prod-01'
 // Use Standard_D4s_v3 SKU
@@ -312,9 +327,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Use autoscale based on {metric: CPU / Memory / Custom} > {threshold}%
 // Deploy to '{subnetName}' subnet
 // {optional: Add load balancer with health probe on port {port}}
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Create a Virtual Machine Scale Set named 'vmss-web-prod'
 // Use Ubuntu 22.04 LTS image and Standard_B2s SKU
@@ -334,9 +350,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Expose port {port} with {ipType: public / private} IP
 // Use {cpu} CPU cores and {memory} GB memory
 // {optional: Add environment variables: {key1}={value1}, {key2}={value2}}
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Create an Azure Container Instance named 'aci-api-dev'
 // Run container image 'myapp:latest'
@@ -356,9 +373,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Set retention to {days} days
 // Use {sku: PerGB2018 / CapacityReservation} pricing tier
 // {optional: Set daily cap to {gb} GB}
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Create a Log Analytics workspace named 'log-prod-monitoring'
 // Set retention to 90 days
@@ -375,9 +393,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Send {logCategories: all logs / specific categories} to Log Analytics workspace
 // Include {metrics: all metrics / specific metrics}
 // {optional: Also send to storage account for long-term retention}
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Add diagnostic settings for the storage account named 'stproddata'
 // Send all logs to Log Analytics workspace
@@ -394,9 +413,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Set application type to {type: web / other}
 // Connect to Log Analytics workspace '{workspaceName}'
 // {optional: Enable {features: profiler / snapshot debugger / live metrics}}
-```
+```bicep
 
 **Example**:
+
 ```bicep
 // Create an Application Insights resource named 'appi-prod-web'
 // Set application type to web
@@ -414,9 +434,10 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Trigger when {condition} for {duration} minutes
 // Send notification to {actionGroup}
 // Set severity to {severity: 0-4}
-```
+```yaml
 
 **Example**:
+
 ```bicep
 // Create an alert rule named 'alert-high-cpu'
 // Monitor CPU percentage on virtual machine 'vm-app-prod-01'
@@ -439,7 +460,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Add NSGs with appropriate security rules for each tier
 // Include Load Balancer for web tier
 // Add Log Analytics and diagnostic settings for all resources
-```
+```yaml
 
 ---
 
@@ -466,7 +487,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Connect private endpoints to '{subnetName}' subnet
 // Create private DNS zones for each service
 // Link DNS zones to VNet '{vnetName}'
-```
+```yaml
 
 ---
 
@@ -490,7 +511,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Pattern: {resourceType}-{environment}-{application}-{instance}
 // Example: storage account = st{env}{app}{uniqueString}
 // Ensure names follow Azure naming rules (length, allowed characters)
-```
+```bicep
 
 ---
 
@@ -503,10 +524,11 @@ Your use: // Create a storage account named 'stproddata' in eastus
 ```
 
 **Example**:
+
 ```bicep
 // Create Azure Bastion only if environment is 'prod'
 // Use parameter 'environment' to control deployment
-```
+```bicep
 
 ---
 
@@ -520,12 +542,13 @@ Your use: // Create a storage account named 'stproddata' in eastus
 ```
 
 **Example**:
+
 ```bicep
 // Create 5 storage accounts using a loop
 // Base name: 'stproddata'
 // Append index to each resource (e.g., 'stproddata01', 'stproddata02')
 // Use range(1, 5)
-```
+```bicep
 
 ---
 
@@ -557,6 +580,7 @@ Here's how to combine multiple patterns to build a complete solution:
 ### Scenario: Secure Web Application with Database
 
 **Step 1 - Network Foundation**
+
 ```bicep
 // Create an Azure Virtual Network named 'vnet-prod-webapp' with address space 10.2.0.0/16
 // Include 3 subnets: web (10.2.1.0/24), app (10.2.2.0/24), data (10.2.3.0/24)
@@ -564,14 +588,16 @@ Here's how to combine multiple patterns to build a complete solution:
 ```
 
 **Step 2 - Network Security**
+
 ```bicep
 // Create a Network Security Group for the web subnet
 // Allow inbound HTTPS on port 443 from Internet
 // Allow outbound to app subnet on port 8080
 // Deny all other inbound traffic at priority 4096
-```
+```text
 
 **Step 3 - Compute Resources**
+
 ```bicep
 // Create a Virtual Machine Scale Set named 'vmss-web-prod'
 // Use Ubuntu 22.04 LTS image and Standard_B2s SKU
@@ -582,15 +608,17 @@ Here's how to combine multiple patterns to build a complete solution:
 ```
 
 **Step 4 - Data Storage**
+
 ```bicep
 // Create a storage account named 'stprodwebappdata'
 // Use Standard_GRS replication and Hot access tier
 // Enable HTTPS only, minimum TLS 1.2
 // Disable public blob access
 // Enable blob soft delete with 30 day retention
-```
+```text
 
 **Step 5 - Private Connectivity**
+
 ```bicep
 // Create a private endpoint for the storage account named 'stprodwebappdata'
 // Connect to the snet-data-prod subnet
@@ -599,11 +627,12 @@ Here's how to combine multiple patterns to build a complete solution:
 ```
 
 **Step 6 - Monitoring**
+
 ```bicep
 // Create a Log Analytics workspace named 'log-prod-webapp'
 // Set retention to 90 days
 // Use PerGB2018 pricing tier
-```
+```text
 
 ```bicep
 // Add diagnostic settings for the storage account named 'stprodwebappdata'

@@ -55,6 +55,7 @@ By the end of this demo, participants will understand how to:
 **Customer**: Contoso Manufacturing needs to migrate their critical Task Manager application to Azure with a 99.99% SLA requirement.
 
 **Your Challenge**: You need to prepare comprehensive audit evidence for:
+
 - **Module A**: 6 control points (Azure Essentials Cloud Foundation)
 - **Module B**: 7 control points (Infrastructure and Database Migration)
 - **Typical time**: 40-80 hours of work
@@ -66,9 +67,10 @@ By the end of this demo, participants will understand how to:
 ```powershell
 # Open the audit checklist
 code demos/06-azure-specialization-prep/azure-specialization-audit-checklist.md
-```
+```yaml
 
 **Talking Points**:
+
 - "Notice the extensive evidence requirements"
 - "Each control point needs specific documentation"
 - "Manual preparation is time-consuming and error-prone"
@@ -85,9 +87,12 @@ code demos/06-azure-specialization-prep/azure-specialization-audit-checklist.md
 **Press `Ctrl+Shift+A`** to open agent selector, choose **`adr_generator`**
 
 **Prompt** (Copy exactly):
+
 ```
-Document the architectural decision to use Azure SQL Database instead of SQL Managed Instance 
+
+Document the architectural decision to use Azure SQL Database instead of SQL Managed Instance
 for the Contoso Task Manager application migration. Consider the following context:
+
 - Application: ASP.NET web app with 2GB database
 - Performance: 100 transactions per second required
 - SLA: 99.99% uptime target
@@ -95,15 +100,18 @@ for the Contoso Task Manager application migration. Consider the following conte
 - Management: Limited DBA resources available
 
 Include: decision drivers, alternatives considered, consequences, and compliance implications.
-```
+
+```bicep
 
 **Expected Output**:
+
 - Structured ADR document
 - Decision rationale
 - Trade-off analysis
 - Compliance considerations
 
 **Talking Points**:
+
 - "This ADR satisfies Module A Control 2.1 documentation requirements"
 - "Notice how Copilot structures the decision logically"
 - "This is reusable for future audits"
@@ -118,10 +126,13 @@ Include: decision drivers, alternatives considered, consequences, and compliance
 **Press `Ctrl+Shift+A`**, select **`azure-principal-architect`**
 
 **Prompt** (Copy exactly):
+
 ```
+
 Conduct a comprehensive Well-Architected Framework assessment for the following architecture:
 
 **Infrastructure**:
+
 - 2 Windows Server 2022 VMs running IIS with ASP.NET application
 - Azure Load Balancer with public IP for high availability
 - Azure SQL Database (Standard S2 tier)
@@ -129,28 +140,33 @@ Conduct a comprehensive Well-Architected Framework assessment for the following 
 - Azure Monitor for observability
 
 **Requirements**:
+
 - 99.99% availability SLA
 - Support 100 transactions per second
 - Security is a priority (but using public endpoints for demo)
 - Cost optimization within reasonable limits
 
-Assess all five WAF pillars (Reliability, Security, Cost Optimization, Operational Excellence, 
+Assess all five WAF pillars (Reliability, Security, Cost Optimization, Operational Excellence,
 Performance Efficiency) and provide specific recommendations with priority levels.
-```
+
+```bicep
 
 **Expected Output**:
+
 - Assessment against all 5 WAF pillars
 - Prioritized recommendations
 - Risk identification
 - Best practice alignment
 
 **Talking Points**:
+
 - "This satisfies Module A Control 2.2 (Well-Architected Workloads)"
 - "And Module B Control 2.2 (Well-Architected Review)"
 - "Notice the specific, actionable recommendations"
 - "Copilot identifies risks we might miss manually"
 
 **Save the output**:
+
 ```powershell
 # Create evidence folder
 New-Item -ItemType Directory -Path evidence/waf-assessment -Force
@@ -168,7 +184,8 @@ New-Item -ItemType Directory -Path evidence/waf-assessment -Force
 **Press `Ctrl+Shift+A`**, select **`bicep-plan`**
 
 **Prompt** (Copy exactly):
-```
+
+```bicep
 Create a detailed Bicep implementation plan for the following Azure infrastructure deployment:
 
 **Requirements**:
@@ -197,6 +214,7 @@ Provide: module structure, parameter strategy, deployment sequence, and validati
 ```
 
 **Expected Output**:
+
 - Detailed implementation plan
 - Module breakdown
 - Parameter strategy
@@ -204,16 +222,18 @@ Provide: module structure, parameter strategy, deployment sequence, and validati
 - AVM module recommendations
 
 **Talking Points**:
+
 - "This plan satisfies Module A Control 3.1 (Repeatable Deployment)"
 - "Notice the use of Azure Verified Modules"
 - "Copilot structures the deployment logically"
 - "This becomes our blueprint for implementation"
 
 **Save the plan**:
+
 ```powershell
 # Save to planning document
 # Copy chat output to: infrastructure/IMPLEMENTATION-PLAN.md
-```
+```yaml
 
 ---
 
@@ -224,11 +244,14 @@ Provide: module structure, parameter strategy, deployment sequence, and validati
 **Press `Ctrl+Shift+A`**, select **`bicep-implement`**
 
 **Prompt** (Copy exactly):
+
 ```
-Generate complete Bicep templates based on the implementation plan provided by the 
-Bicep Planning Specialist. 
+
+Generate complete Bicep templates based on the implementation plan provided by the
+Bicep Planning Specialist.
 
 Create the following structure:
+
 1. main.bicep - Main orchestration template
 2. modules/network.bicep - VNet, subnets, NSGs
 3. modules/compute.bicep - VMs, availability set, VM extensions for IIS
@@ -237,6 +260,7 @@ Create the following structure:
 6. parameters/prod.bicepparam - Production parameters
 
 **Requirements**:
+
 - Use latest API versions (2023-05-01 or newer)
 - Include comprehensive @description decorators
 - Add security by default (HTTPS only, TLS 1.2, firewall rules)
@@ -245,15 +269,18 @@ Create the following structure:
 - Include all required tags
 
 Start with main.bicep and provide complete, deployable code.
-```
+
+```bicep
 
 **Expected Output**:
+
 - Complete Bicep templates
 - Modular structure
 - Security configurations
 - Comprehensive outputs
 
 **Talking Points**:
+
 - "This generates audit-ready infrastructure code"
 - "Satisfies Module B Control 3.1 (Infrastructure Deployment)"
 - "And Control 3.4 (Automated Deployment)"
@@ -264,9 +291,10 @@ Start with main.bicep and provide complete, deployable code.
 
 1. **Click the file icons** in Copilot Chat to accept each generated file
 2. **Verify the structure**:
+
    ```powershell
    tree infrastructure /F
-   ```
+```
 
 ---
 
@@ -283,9 +311,10 @@ az deployment group validate `
   --resource-group rg-audit-demo-prod `
   --template-file infrastructure/main.bicep `
   --parameters infrastructure/parameters/prod.bicepparam
-```
+```bicep
 
 **Talking Points**:
+
 - "Validation catches errors before deployment"
 - "Bicep provides better error messages than ARM"
 - "This validates syntax and parameter types"
@@ -305,18 +334,20 @@ az deployment group create `
 ```
 
 **Talking Points**:
+
 - "Deployment typically takes 10-15 minutes"
 - "All resources created with consistent configuration"
 - "Outputs provide documentation for audit evidence"
 
 **Alternative** (If not deploying live):
+
 ```powershell
 # Show what-if analysis instead
 az deployment group what-if `
   --resource-group rg-audit-demo-prod `
   --template-file infrastructure/main.bicep `
   --parameters infrastructure/parameters/prod.bicepparam
-```
+```yaml
 
 ---
 
@@ -327,11 +358,13 @@ az deployment group what-if `
 #### Overview of Validation Framework
 
 **Open validation guide**:
+
 ```powershell
 code validation/VALIDATION-TESTING-GUIDE.md
 ```
 
 **Talking Points**:
+
 - "Microsoft CAF Migrate requires comprehensive testing across all migration phases"
 - "We've created a complete validation framework aligned with Well-Architected Framework RE:08"
 - "This covers chaos engineering, load testing, UAT, and continuous validation"
@@ -346,7 +379,8 @@ code validation/VALIDATION-TESTING-GUIDE.md
 **Press `Ctrl+Shift+A`**, select **`azure-principal-architect`**
 
 **Prompt** (Copy exactly):
-```
+
+```yaml
 Using Well-Architected Framework RE:08 principles, design a chaos engineering experiment 
 for our deployed Task Manager infrastructure to test load balancer failover resilience.
 
@@ -363,13 +397,15 @@ Provide: Azure Chaos Studio experiment configuration, monitoring approach, and s
 ```
 
 **Show existing chaos scenario**:
+
 ```powershell
 # Open the comprehensive guide section on chaos engineering
 code validation/VALIDATION-TESTING-GUIDE.md
 # Navigate to Section 4: Chaos Engineering & Fault Injection
-```
+```bicep
 
 **Talking Points**:
+
 - "This satisfies Module B Control 3.1 (post-migration validation)"
 - "Well-Architected Framework RE:08 recommends chaos engineering for production readiness"
 - "Azure Chaos Studio allows controlled fault injection without manual intervention"
@@ -377,6 +413,7 @@ code validation/VALIDATION-TESTING-GUIDE.md
 - "Each experiment includes JSON template, PowerShell deployment, and KQL monitoring queries"
 
 **Key Features to Highlight**:
+
 - **VM Failure Test**: Validates load balancer automatic failover (30-60s recovery)
 - **Database Connection Failure**: Tests retry logic and graceful degradation
 - **High CPU Stress**: Validates auto-scaling triggers (scale-out within 5 min)
@@ -389,25 +426,31 @@ code validation/VALIDATION-TESTING-GUIDE.md
 **Purpose**: Validate performance under various load conditions
 
 **Prompt for Azure Principal Architect** (Copy exactly):
+
 ```
-Design a comprehensive load testing strategy for the Task Manager application using 
+
+Design a comprehensive load testing strategy for the Task Manager application using
 Azure Load Testing service.
 
 **Requirements**:
+
 - Baseline: 100 concurrent users, 30 minutes, <2s response time
 - Peak Load: 500 concurrent users, 1 hour, validate SLA
 - Stress Test: Incremental to 1000 users, identify breaking point
 - Endurance: 200 concurrent users, 8 hours, validate stability
 
 **Application Profile**:
+
 - ASP.NET web app with database backend
 - Critical operations: Login, task CRUD, search, reporting
 - SLA: 99.99% availability, <2s response time for 95th percentile
 
 Provide: JMeter test plan structure, failure criteria, and resource utilization thresholds.
-```
+
+```yaml
 
 **Show load testing documentation**:
+
 ```powershell
 # Navigate to Section 5 in validation guide
 code validation/VALIDATION-TESTING-GUIDE.md
@@ -415,6 +458,7 @@ code validation/VALIDATION-TESTING-GUIDE.md
 ```
 
 **Talking Points**:
+
 - "Azure Load Testing provides cloud-scale performance validation"
 - "Four test types cover different performance aspects"
 - "Baseline test validates normal operations meet SLA requirements"
@@ -422,6 +466,7 @@ code validation/VALIDATION-TESTING-GUIDE.md
 - "Endurance test catches memory leaks and degradation over time"
 
 **Key Metrics to Monitor**:
+
 - Response time: 95th percentile <2s (baseline), <3s (peak)
 - Error rate: <1% (baseline), <5% (stress)
 - Throughput: 100 TPS (baseline), 250 TPS (peak)
@@ -434,13 +479,14 @@ code validation/VALIDATION-TESTING-GUIDE.md
 **Purpose**: Demonstrate business user validation with realistic test data
 
 **Show UAT tracking templates**:
+
 ```powershell
 # Open UAT templates in Excel (or show CSV)
 Start-Process "validation/uat-tracking-template.csv"
 Start-Process "validation/uat-defect-tracking.csv"
 Start-Process "validation/uat-summary-by-category.csv"
 Start-Process "validation/uat-tester-assignments.csv"
-```
+```bicep
 
 **Walk through the realistic dummy data**:
 
@@ -449,7 +495,7 @@ Start-Process "validation/uat-tester-assignments.csv"
    - **Results**: 37 Pass (92.5%), 1 Fail, 5 Pass with Comments = **95% pass rate**
    - **Categories**: Authentication, CRUD, Search, Reporting, Performance, Mobile, Security, API, Accessibility
    - **Execution**: 17 unique testers from multiple departments (Jan 15-22, 2024)
-   - **Example Tests**: 
+   - **Example Tests**:
      - UAT-001: User Login - Valid Credentials (Pass, 1.5 min)
      - UAT-021: Task Title Validation (Fail → DEF-001, fixed in v1.0.1)
      - UAT-035: System Under 500 Concurrent Users (Pass, 45 min load test)
@@ -476,6 +522,7 @@ Start-Process "validation/uat-tester-assignments.csv"
    - **Cross-functional involvement**: Manufacturing supervisors, plant managers, business analysts, security analysts
 
 **Talking Points**:
+
 - "This demonstrates comprehensive business user involvement, not just IT testing"
 - "18 testers from 8 departments show cross-functional validation"
 - "95% pass rate meets production go-live criteria"
@@ -485,11 +532,13 @@ Start-Process "validation/uat-tester-assignments.csv"
 - "Excel import methods provided for easy reporting and dashboards"
 
 **Show usage guide**:
+
 ```powershell
 code validation/UAT-TEMPLATES-README.md
 ```
 
 **Key Features**:
+
 - Three use cases: Demos, actual projects, audit evidence
 - PowerShell scripts for Excel import with formatting
 - Pivot table examples for pass rate by category
@@ -502,11 +551,13 @@ code validation/UAT-TEMPLATES-README.md
 **Purpose**: Automated database validation for migration scenarios
 
 **Show validation script**:
+
 ```powershell
 code scripts/validate-data-integrity.ps1
-```
+```yaml
 
 **Demo the script** (if source/target DBs available):
+
 ```powershell
 .\scripts\validate-data-integrity.ps1 `
   -SourceServer "on-prem-sql.contoso.com" `
@@ -516,6 +567,7 @@ code scripts/validate-data-integrity.ps1
 ```
 
 **Script Features**:
+
 - **Connection validation**: Tests source + target connectivity
 - **Schema validation**: Table count comparison, identifies missing/extra tables
 - **Row count comparison**: Per-table counts with color-coded output
@@ -523,6 +575,7 @@ code scripts/validate-data-integrity.ps1
 - **HTML report generation**: Professional report with embedded CSS
 
 **Talking Points**:
+
 - "This satisfies Module B Control 3.2 (Database Migration validation)"
 - "Automated validation eliminates manual comparison errors"
 - "Checksums catch data corruption that row counts miss"
@@ -536,14 +589,15 @@ code scripts/validate-data-integrity.ps1
 **Purpose**: Ongoing production monitoring and synthetic testing
 
 **Show continuous validation section**:
+
 ```powershell
 code validation/VALIDATION-TESTING-GUIDE.md
 # Navigate to Section 7: Continuous Validation
-```
+```bicep
 
 **Key Components**:
 
-1. **Synthetic Monitoring**: 
+1. **Synthetic Monitoring**:
    - Multi-step availability tests using Playwright
    - Simulates user journeys (login → create task → search → logout)
    - Runs every 5 minutes from multiple Azure regions
@@ -566,6 +620,7 @@ code validation/VALIDATION-TESTING-GUIDE.md
    - Monthly SLA compliance reporting
 
 **Talking Points**:
+
 - "Continuous validation ensures production remains healthy post-migration"
 - "Satisfies Module B Control 3.4 (Automated Deployment monitoring)"
 - "Synthetic tests catch issues before real users experience them"
@@ -598,6 +653,7 @@ Get-ChildItem evidence/ -Recurse | Select-Object FullName
 11. ✅ **Continuous Monitoring** (Module B 3.4): Synthetic tests, alerts, dashboards
 
 **Talking Points**:
+
 - "All evidence generated in under 40 minutes including comprehensive validation framework"
 - "Manual process would take 60-80 hours for these artifacts"
 - "Validation content aligned with Microsoft CAF Migrate methodology and Well-Architected Framework RE:08"
@@ -638,6 +694,7 @@ Get-ChildItem evidence/ -Recurse | Select-Object FullName
 ### Business Impact
 
 For a partner completing **4 specialization audits per year**:
+
 - **Time saved**: 230 hours/year (57.5 hours per audit × 4 audits)
 - **Cost savings**: $34,500/year (at $150/hour blended rate)
 - **ROI**: 35x return on Copilot investment ($34,500 saved vs ~$1,000 annual cost)
@@ -694,6 +751,7 @@ A: Pick what's relevant. Small migrations may skip chaos engineering. Large ente
 ## 📚 Resources
 
 ### Specialization & Architecture
+
 - [Azure Specializations](https://partner.microsoft.com/partnership/specialization)
 - [Azure Well-Architected Framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure Verified Modules](https://aka.ms/avm)
@@ -701,6 +759,7 @@ A: Pick what's relevant. Small migrations may skip chaos engineering. Large ente
 - [GitHub Copilot for Azure](https://learn.microsoft.com/azure/developer/github/github-copilot-azure)
 
 ### Validation & Testing
+
 - [Cloud Adoption Framework - Migrate Methodology](https://learn.microsoft.com/azure/cloud-adoption-framework/migrate/)
 - [Azure Chaos Studio Documentation](https://learn.microsoft.com/azure/chaos-studio/)
 - [Azure Load Testing](https://learn.microsoft.com/azure/load-testing/)

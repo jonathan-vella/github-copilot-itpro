@@ -11,6 +11,7 @@
 This document tracks testing results for GitHub Copilot custom agent improvements.
 
 ### Current Status
+
 - **Total Test Scenarios:** 0 (baseline)
 - **Tests Passing:** N/A
 - **Tests Failing:** N/A
@@ -18,6 +19,7 @@ This document tracks testing results for GitHub Copilot custom agent improvement
 - **Coverage:** 0%
 
 ### Next Steps
+
 1. Create baseline test scenarios
 2. Implement automated test runner
 3. Run initial test suite
@@ -28,9 +30,11 @@ This document tracks testing results for GitHub Copilot custom agent improvement
 ## Test Execution History
 
 ### Run #1 - Baseline (Planned: 2025-11-22)
+
 **Objective:** Establish baseline before improvements
 
 **Test Scenarios:**
+
 - [ ] ADR Generator: Basic decision documentation
 - [ ] Azure Architect: Simple WAF assessment
 - [ ] Bicep Planning: Single-region infrastructure
@@ -41,9 +45,11 @@ This document tracks testing results for GitHub Copilot custom agent improvement
 ---
 
 ### Run #2 - Priority 1 Implementation (Planned: 2025-11-29)
+
 **Objective:** Validate cost estimation features
 
 **Test Scenarios:**
+
 - [ ] Architect provides cost estimates
 - [ ] Planning includes cost breakdown
 - [ ] Cost accuracy validation
@@ -54,9 +60,11 @@ This document tracks testing results for GitHub Copilot custom agent improvement
 ---
 
 ### Run #3 - Priority 2 Implementation (Planned: 2025-12-06)
+
 **Objective:** Validate dependency visualization
 
 **Test Scenarios:**
+
 - [ ] Mermaid diagrams generated
 - [ ] Diagrams render correctly
 - [ ] Dependencies accurately represented
@@ -67,9 +75,11 @@ This document tracks testing results for GitHub Copilot custom agent improvement
 ---
 
 ### Run #4 - Priority 3 Implementation (Planned: 2025-12-13)
+
 **Objective:** Validate progressive implementation
 
 **Test Scenarios:**
+
 - [ ] Phases properly defined
 - [ ] Validation gates work
 - [ ] Rollback strategies documented
@@ -84,15 +94,18 @@ This document tracks testing results for GitHub Copilot custom agent improvement
 ### ADR Generator Agent
 
 #### Test: Basic Decision Documentation
+
 **Status:** Not Started  
 **Last Run:** N/A
 
 **Test Input:**
+
 ```markdown
 Create an ADR for choosing Azure Bastion over Jump Boxes
 ```
 
 **Expected Outputs:**
+
 - [ ] ADR file created in /docs/adr/
 - [ ] Proper numbering (adr-NNNN-*.md)
 - [ ] All sections complete
@@ -106,15 +119,18 @@ Create an ADR for choosing Azure Bastion over Jump Boxes
 ---
 
 #### Test: ADR with Missing Context
+
 **Status:** Not Started  
 **Last Run:** N/A
 
 **Test Input:**
+
 ```markdown
 Document the decision to use microservices
 ```
 
 **Expected Outputs:**
+
 - [ ] Agent asks clarifying questions
 - [ ] Context gathered before creating ADR
 - [ ] ADR includes business justification
@@ -128,10 +144,12 @@ Document the decision to use microservices
 ### Azure Principal Architect Agent
 
 #### Test: Simple WAF Assessment
+
 **Status:** Not Started  
 **Last Run:** N/A
 
 **Test Input:**
+
 ```markdown
 Assess this architecture:
 - Azure App Service (B1)
@@ -141,6 +159,7 @@ Assess this architecture:
 ```
 
 **Expected Outputs:**
+
 - [ ] All 5 WAF pillars assessed
 - [ ] Scores provided (X/10 format)
 - [ ] Cost estimate included
@@ -155,10 +174,12 @@ Assess this architecture:
 ---
 
 #### Test: Multi-Region Architecture
+
 **Status:** Not Started  
 **Last Run:** N/A
 
 **Test Input:**
+
 ```markdown
 Design a global web application:
 - Users in North America, Europe, Asia
@@ -168,6 +189,7 @@ Design a global web application:
 ```
 
 **Expected Outputs:**
+
 - [ ] Multi-region strategy recommended
 - [ ] Front Door or Traffic Manager suggested
 - [ ] Regional service recommendations
@@ -184,10 +206,12 @@ Design a global web application:
 ### Bicep Planning Specialist Agent
 
 #### Test: Single-Region Infrastructure
+
 **Status:** Not Started  
 **Last Run:** N/A
 
 **Test Input:**
+
 ```markdown
 Create a plan for:
 - Development VNet (10.1.0.0/16)
@@ -198,6 +222,7 @@ Create a plan for:
 ```
 
 **Expected Outputs:**
+
 - [ ] Plan file created in .bicep-planning-files/
 - [ ] Resource breakdown with dependencies
 - [ ] Mermaid dependency diagram
@@ -212,10 +237,12 @@ Create a plan for:
 ---
 
 #### Test: Hub-Spoke Network
+
 **Status:** Not Started  
 **Last Run:** N/A
 
 **Test Input:**
+
 ```markdown
 Plan hub-spoke network:
 - Hub in West Europe (10.0.0.0/16)
@@ -227,6 +254,7 @@ Plan hub-spoke network:
 ```
 
 **Expected Outputs:**
+
 - [ ] Complex topology accurately planned
 - [ ] Network diagram included
 - [ ] VNet peering dependencies shown
@@ -242,10 +270,12 @@ Plan hub-spoke network:
 ### Bicep Implementation Specialist Agent
 
 #### Test: Basic VNet Implementation
+
 **Status:** Not Started  
 **Last Run:** N/A
 
 **Test Input:**
+
 ```markdown
 Implement the network foundation from the plan:
 - VNet: 10.1.0.0/16
@@ -254,6 +284,7 @@ Implement the network foundation from the plan:
 ```
 
 **Expected Outputs:**
+
 - [ ] Valid Bicep template generated
 - [ ] bicep build succeeds
 - [ ] bicep lint passes
@@ -268,10 +299,12 @@ Implement the network foundation from the plan:
 ---
 
 #### Test: Progressive Implementation
+
 **Status:** Not Started  
 **Last Run:** N/A
 
 **Test Input:**
+
 ```markdown
 Implement complex infrastructure:
 - 20+ resources
@@ -280,6 +313,7 @@ Implement complex infrastructure:
 ```
 
 **Expected Outputs:**
+
 - [ ] Implementation split into phases
 - [ ] Validation between phases
 - [ ] Deployment scripts per phase
@@ -294,6 +328,7 @@ Implement complex infrastructure:
 ## Performance Metrics
 
 ### Response Time
+
 | Agent | Avg Time (before) | Avg Time (after) | Change |
 |-------|-------------------|------------------|--------|
 | ADR Generator | N/A | N/A | N/A |
@@ -302,6 +337,7 @@ Implement complex infrastructure:
 | Bicep Implementation | N/A | N/A | N/A |
 
 ### Output Quality
+
 | Metric | Before | After | Improvement |
 |--------|--------|-------|-------------|
 | Cost accuracy | N/A | N/A | N/A |
@@ -314,9 +350,11 @@ Implement complex infrastructure:
 ## Known Issues
 
 ### Open Issues
+
 None currently
 
 ### Resolved Issues
+
 None currently
 
 ---
@@ -324,12 +362,14 @@ None currently
 ## Test Coverage
 
 ### By Agent
+
 - **ADR Generator:** 0/10 scenarios (0%)
 - **Azure Architect:** 0/10 scenarios (0%)
 - **Bicep Planning:** 0/10 scenarios (0%)
 - **Bicep Implementation:** 0/10 scenarios (0%)
 
 ### By Feature
+
 - **Cost Estimation:** 0/5 scenarios (0%)
 - **Dependency Visualization:** 0/5 scenarios (0%)
 - **Progressive Implementation:** 0/5 scenarios (0%)
@@ -341,9 +381,11 @@ None currently
 ## Regression Testing
 
 ### Version 1.0.0 → 1.1.0
+
 **Status:** Not Started
 
 **Critical Paths to Test:**
+
 - [ ] Basic ADR generation still works
 - [ ] Simple WAF assessment unchanged
 - [ ] Basic Bicep planning functional
@@ -361,6 +403,7 @@ None currently
 **Resources:** 1 tester
 
 **Preparation:**
+
 - [ ] Finalize test scenarios
 - [ ] Create test runner script
 - [ ] Set up output comparison

@@ -25,7 +25,7 @@ Before deploying, ensure you have:
 ```powershell
 az login
 az account set --subscription "<your-subscription-id>"
-```
+```text
 
 ### 2. Deploy Infrastructure
 
@@ -35,6 +35,7 @@ cd demos/06-azure-specialization-prep/scripts
 ```
 
 **Prompts during deployment:**
+
 - VM Administrator password (12+ chars, complex)
 - SQL Administrator password (12+ chars, complex)
 
@@ -44,14 +45,17 @@ cd demos/06-azure-specialization-prep/scripts
 
 ```powershell
 .\validate.ps1 -ResourceGroupName "rg-taskmanager-demo"
-```
+```text
 
 ### 4. Access Application
 
 Navigate to the public IP address displayed in deployment outputs:
+
 ```
+
 http://<public-ip-address>
-```
+
+```yaml
 
 ---
 
@@ -62,6 +66,7 @@ http://<public-ip-address>
 The deployment creates:
 
 ```
+
 Resource Group (rg-taskmanager-prod)
 ├── Virtual Network (10.0.0.0/16)
 │   ├── Web Subnet (10.0.1.0/24) with NSG
@@ -82,7 +87,8 @@ Resource Group (rg-taskmanager-prod)
     ├── Log Analytics workspace
     ├── Application Insights
     └── Alert rules for CPU, memory, SQL, LB
-```
+
+```bicep
 
 **Total estimated cost:** ~$374/month
 
@@ -121,7 +127,7 @@ Preview changes before deploying:
     -Location "eastus" `
     -Environment "prod" `
     -WhatIf
-```
+```text
 
 This shows what resources will be created without making changes.
 
@@ -139,6 +145,7 @@ This shows what resources will be created without making changes.
 ```
 
 The script will prompt for:
+
 1. VM Administrator password
 2. SQL Administrator password
 
@@ -154,15 +161,18 @@ $sqlPassword = ConvertTo-SecureString "YourSqlPassword456!" -AsPlainText -Force
     -Environment "prod" `
     -AdminPassword $adminPassword `
     -SqlAdminPassword $sqlPassword
-```
+```yaml
 
 ---
 
 ### Step 5: Monitor Deployment Progress
 
 #### PowerShell Output
+
 Watch the deployment progress in your terminal:
+
 ```
+
 ▶️  Checking prerequisites...
 ✅ Azure CLI version: 2.55.0
 ✅ Bicep CLI: 0.24.24
@@ -175,10 +185,13 @@ Watch the deployment progress in your terminal:
 
 ▶️  Deploying infrastructure...
    This may take 15-20 minutes...
-```
+
+```bicep
 
 #### Azure Portal
+
 Monitor in real-time:
+
 1. Navigate to [Azure Portal](https://portal.azure.com)
 2. Search for your resource group
 3. Click **Deployments** in left menu
@@ -195,6 +208,7 @@ Run comprehensive validation tests:
 ```
 
 **Validation checks:**
+
 - ✅ Resource group exists
 - ✅ Virtual network and subnets configured
 - ✅ NSG rules properly set
@@ -211,7 +225,8 @@ Run comprehensive validation tests:
 - ✅ Resource tags applied
 
 **Expected output:**
-```
+
+```yaml
    Passed: 25 / 25 tests (100%)
    
    ✅ All validation tests passed!
@@ -230,7 +245,7 @@ Run comprehensive validation tests:
 
 Using Azure Data Studio or SSMS:
 
-```
+```yaml
 Server: sql-taskmanager-prod-<unique>.database.windows.net
 Database: sqldb-taskmanager-prod
 Authentication: SQL Authentication
@@ -245,11 +260,12 @@ Execute the schema script:
 ```powershell
 cd demos/06-azure-specialization-prep/application/database
 sqlcmd -S <sql-server>.database.windows.net -d <database-name> -U sqladmin -P <password> -i schema.sql
-```
+```markdown
 
 Or open `schema.sql` in Azure Data Studio and execute.
 
 **This creates:**
+
 - Tasks table with indexes
 - 10 sample tasks for testing
 
@@ -260,22 +276,25 @@ Or open `schema.sql` in Azure Data Studio and execute.
 ### Option 1: Manual Deployment via RDP
 
 1. **Connect to VM1:**
+
    ```powershell
    # Get VM public IP from load balancer NAT rules
    mstsc /v:<public-ip>:50001
-   ```
+```
 
 2. **Upload application files:**
    - Copy `application/TaskManager.Web/*` to `C:\inetpub\wwwroot\TaskManager\`
 
 3. **Update Web.config:**
+
    ```xml
    <connectionStrings>
      <add name="TaskManagerDb" 
           connectionString="Server=tcp:sql-taskmanager-prod-<unique>.database.windows.net,1433;Database=sqldb-taskmanager-prod;User ID=sqladmin;Password=<your-password>;Encrypt=True;TrustServerCertificate=False;" 
           providerName="System.Data.SqlClient" />
    </connectionStrings>
-   ```
+
+```sql
 
 4. **Repeat for VM2**
 
@@ -292,6 +311,7 @@ Create a pipeline using `azure-pipelines.yml` (not included in this demo).
 Navigate to: `http://<public-ip-address>`
 
 **Expected page:**
+
 - Server name displayed (VM hostname)
 - Database connection status: ✓ Connected
 - Task statistics: Total: 10, Completed: 3, Pending: 7
@@ -300,6 +320,7 @@ Navigate to: `http://<public-ip-address>`
 ### 2. Test Load Balancing
 
 Refresh the page multiple times. Server name should alternate between:
+
 - TASKWEB01
 - TASKWEB02
 
@@ -312,20 +333,23 @@ Refresh the page multiple times. Server name should alternate between:
 ### 4. Test Monitoring
 
 **Azure Portal:**
+
 1. Navigate to Application Insights
 2. View **Live Metrics** - should show requests
 3. Check **Performance** - response times
 4. Review **Failures** - should be none
 
 **Log Analytics:**
+
 1. Navigate to Log Analytics workspace
 2. Run query:
+
    ```kql
    AzureDiagnostics
    | where ResourceType == "LOADBALANCERS"
    | where TimeGenerated > ago(1h)
    | summarize count() by TimeGenerated
-   ```
+```
 
 ---
 
@@ -336,53 +360,67 @@ Refresh the page multiple times. Server name should alternate between:
 **Symptom:** Deployment times out or returns error
 
 **Solutions:**
+
 1. Check quota limits:
+
    ```powershell
    az vm list-usage --location eastus --output table
-   ```
+
+```text
 
 2. Review deployment logs in Azure Portal
 
 3. Verify Bicep templates:
+
    ```powershell
    cd infrastructure
    bicep build main.bicep
-   ```
+```
 
 ### Issue: VMs Not Responding
 
 **Symptom:** HTTP endpoint returns timeout
 
 **Solutions:**
+
 1. Check VM status:
+
    ```powershell
    az vm get-instance-view --resource-group rg-taskmanager-demo --name vm-web01-prod --query "instanceView.statuses[?starts_with(code, 'PowerState/')].displayStatus"
-   ```
+
+```bicep
 
 2. Verify NSG rules allow HTTP:
+
    ```powershell
    az network nsg rule list --resource-group rg-taskmanager-demo --nsg-name nsg-web-prod --output table
-   ```
+```
 
 3. Check IIS installation (via RDP):
+
    ```powershell
    Get-WindowsFeature -Name Web-Server
-   ```
+
+```bicep
 
 ### Issue: SQL Connection Fails
 
 **Symptom:** Application shows "Connection Error"
 
 **Solutions:**
+
 1. Verify firewall rules:
+
    ```powershell
    az sql server firewall-rule list --resource-group rg-taskmanager-demo --server <sql-server-name> --output table
-   ```
+```
 
 2. Test connectivity from VM:
+
    ```powershell
    Test-NetConnection -ComputerName <sql-server>.database.windows.net -Port 1433
-   ```
+
+```bash
 
 3. Verify connection string in Web.config
 
@@ -391,15 +429,19 @@ Refresh the page multiple times. Server name should alternate between:
 **Symptom:** Always see same server name
 
 **Solutions:**
+
 1. Check backend pool health:
+
    ```powershell
    az network lb show --resource-group rg-taskmanager-demo --name lb-web-prod --query "backendAddressPools[0].backendIPConfigurations[].id"
-   ```
+```
 
 2. Verify health probe:
+
    ```powershell
    az network lb probe show --resource-group rg-taskmanager-demo --lb-name lb-web-prod --name health-probe-http
-   ```
+
+```sql
 
 3. Check VM health in Azure Portal > Load Balancer > Backend Pools
 
@@ -415,14 +457,16 @@ cd demos/06-azure-specialization-prep/scripts
 ```
 
 **Prompts for confirmation:**
-```
+
+```text
 Type 'DELETE' to confirm deletion
 ```
 
 **Or force delete without confirmation:**
+
 ```powershell
 .\cleanup.ps1 -ResourceGroupName "rg-taskmanager-demo" -Force
-```
+```bicep
 
 ---
 
@@ -444,6 +488,7 @@ Type 'DELETE' to confirm deletion
 ### Cost Optimization Tips
 
 **For Dev/Testing:**
+
 ```bicep
 param vmSize = 'Standard_B2s' // $38/month (74% savings)
 param databaseSku = 'Basic' // $5/month (97% savings)
@@ -453,6 +498,7 @@ param dailyQuotaGb = 1 // $7/month (80% savings)
 **Estimated dev cost:** ~$95/month (75% savings)
 
 **Shutdown VMs when not in use:**
+
 ```powershell
 az vm deallocate --resource-group rg-taskmanager-demo --name vm-web01-prod
 az vm deallocate --resource-group rg-taskmanager-demo --name vm-web02-prod

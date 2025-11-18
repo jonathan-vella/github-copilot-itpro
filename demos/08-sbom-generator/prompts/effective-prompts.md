@@ -7,18 +7,22 @@ This document contains proven prompts for generating SBOM-related PowerShell scr
 ## General Principles
 
 ### 1. Be Specific About Format
+
 ✅ **Good**: "Generate a CycloneDX 1.5 SBOM in JSON format"  
 ❌ **Poor**: "Create an SBOM"
 
 ### 2. Include Schema Requirements
+
 ✅ **Good**: "Include required fields: bomFormat, specVersion, serialNumber, version, metadata, components"  
 ❌ **Poor**: "Make it complete"
 
 ### 3. Specify Error Handling
+
 ✅ **Good**: "Include try/catch blocks and validate file existence"  
 ❌ **Poor**: "Make it robust"
 
 ### 4. Request Examples
+
 ✅ **Good**: "Add usage examples in .EXAMPLE sections"  
 ❌ **Poor**: "Add documentation"
 
@@ -28,7 +32,7 @@ This document contains proven prompts for generating SBOM-related PowerShell scr
 
 ### Prompt 1: Basic npm Package Scanner
 
-```
+```bicep
 Create a PowerShell script that:
 1. Reads a package.json file and extracts all dependencies and devDependencies
 2. Generates a CycloneDX 1.5 SBOM in JSON format
@@ -42,6 +46,7 @@ Create a PowerShell script that:
 **Expected Output**: Complete PowerShell script with parameter validation, JSON generation, and error handling
 
 **Refinement Prompts**:
+
 - "Add support for filtering devDependencies"
 - "Include license information from package.json"
 - "Add colored console output for better UX"
@@ -49,7 +54,7 @@ Create a PowerShell script that:
 
 ### Prompt 2: Multi-Language Dependency Scanner
 
-```
+```yaml
 Extend the script to support multiple package managers:
 - npm (package.json)
 - NuGet (packages.config or .csproj)
@@ -67,7 +72,7 @@ Detect package manager type automatically and parse accordingly.
 
 ### Prompt 3: Dockerfile Parser
 
-```
+```bicep
 Create a PowerShell script that:
 1. Parses a Dockerfile to extract base image information
 2. Identifies FROM statements and extracts image name and tag
@@ -81,6 +86,7 @@ Create a PowerShell script that:
 **Expected Output**: Script that parses Dockerfile and generates component list
 
 **Refinement Prompts**:
+
 - "Add integration with Syft CLI tool for comprehensive scanning"
 - "Detect Alpine vs Debian vs Ubuntu base images"
 - "Extract environment variables and exposed ports"
@@ -88,7 +94,7 @@ Create a PowerShell script that:
 
 ### Prompt 4: Syft Integration
 
-```
+```yaml
 Create a wrapper script that:
 1. Checks if Syft is installed (syft version command)
 2. If available, uses Syft to scan Docker image: syft <image> -o cyclonedx-json
@@ -105,7 +111,7 @@ Create a wrapper script that:
 
 ### Prompt 5: Azure Resource Graph Query
 
-```
+```bicep
 Create a PowerShell script that:
 1. Uses Azure CLI to query resources in a resource group
 2. Executes Azure Resource Graph query: "Resources | where resourceGroup =~ 'name'"
@@ -120,6 +126,7 @@ Create a PowerShell script that:
 **Expected Output**: Script that queries Azure and generates infrastructure SBOM
 
 **Refinement Prompts**:
+
 - "Add support for subscription-wide scanning"
 - "Filter out resource types (e.g., exclude network interfaces)"
 - "Include resource tags as component metadata"
@@ -127,7 +134,7 @@ Create a PowerShell script that:
 
 ### Prompt 6: Bicep Template Parsing
 
-```
+```bicep
 Create a script that parses Bicep templates:
 1. Read .bicep files recursively from a directory
 2. Extract resource declarations (resource keyword)
@@ -145,7 +152,7 @@ Create a script that parses Bicep templates:
 
 ### Prompt 7: Multi-Source SBOM Merger
 
-```
+```bicep
 Create a PowerShell script that:
 1. Reads multiple CycloneDX SBOM JSON files from a directory
 2. Merges all components into a single unified SBOM
@@ -160,6 +167,7 @@ Create a PowerShell script that:
 **Expected Output**: Script that combines multiple SBOMs intelligently
 
 **Refinement Prompts**:
+
 - "Add conflict resolution for components with same name but different versions"
 - "Preserve component relationships and dependencies"
 - "Track provenance (which source file each component came from)"
@@ -167,7 +175,7 @@ Create a PowerShell script that:
 
 ### Prompt 8: Format Conversion
 
-```
+```yaml
 Create a script to convert between SBOM formats:
 - Input: CycloneDX JSON
 - Output: SPDX 2.3 JSON
@@ -186,7 +194,7 @@ Map CycloneDX fields to SPDX equivalents:
 
 ### Prompt 9: HTML Dashboard Generator
 
-```
+```bicep
 Create a PowerShell script that:
 1. Reads a CycloneDX SBOM JSON file
 2. Generates an HTML report with:
@@ -202,6 +210,7 @@ Create a PowerShell script that:
 **Expected Output**: Beautiful, interactive HTML dashboard
 
 **Refinement Prompts**:
+
 - "Add search/filter functionality for components"
 - "Highlight components with known vulnerabilities (red badge)"
 - "Include download buttons for CSV and JSON exports"
@@ -209,7 +218,7 @@ Create a PowerShell script that:
 
 ### Prompt 10: CSV Export for Analysis
 
-```
+```powershell
 Create a function to flatten SBOM to CSV:
 1. Read CycloneDX SBOM JSON
 2. Extract key fields: component name, version, type, PURL, license, bom-ref
@@ -227,7 +236,7 @@ Create a function to flatten SBOM to CSV:
 
 ### Prompt 11: SBOM Validator
 
-```
+```yaml
 Create a validation script that:
 1. Reads a CycloneDX SBOM JSON file
 2. Validates against CycloneDX 1.5 schema
@@ -249,6 +258,7 @@ Create a validation script that:
 **Expected Output**: Comprehensive validation script
 
 **Refinement Prompts**:
+
 - "Add warnings for optional but recommended fields"
 - "Validate PURL syntax against spec"
 - "Check for common mistakes (duplicate bom-refs, invalid version strings)"
@@ -260,7 +270,7 @@ Create a validation script that:
 
 ### Prompt 12: Azure DevOps Pipeline Task
 
-```
+```yaml
 Create a PowerShell script suitable for Azure Pipelines:
 1. Accept parameters via environment variables (AGENT_BUILDDIRECTORY, etc.)
 2. Scan application, container, and infrastructure
@@ -275,7 +285,7 @@ Create a PowerShell script suitable for Azure Pipelines:
 
 ### Prompt 13: GitHub Actions Workflow
 
-```
+```yaml
 Create a GitHub Actions workflow YAML that:
 1. Triggers on push to main branch
 2. Checks out repository
@@ -293,7 +303,7 @@ Create a GitHub Actions workflow YAML that:
 
 ### Prompt 14: Vulnerability Integration
 
-```
+```yaml
 Extend the SBOM script to query vulnerability databases:
 1. For each component, query NVD (National Vulnerability Database)
 2. Check GitHub Advisory Database via API
@@ -306,7 +316,7 @@ Extend the SBOM script to query vulnerability databases:
 
 ### Prompt 15: License Compliance Checker
 
-```
+```bash
 Create a script that analyzes SBOM for license compliance:
 1. Extract all license information from components
 2. Categorize licenses: Permissive (MIT, Apache), Copyleft (GPL), Proprietary
@@ -340,6 +350,7 @@ Create a script that analyzes SBOM for license compliance:
 ### Technique 3: Specify Edge Cases
 
 **Prompt**: "Handle these scenarios:
+
 - package.json doesn't exist (error message)
 - No dependencies (empty components array)
 - Version has ^ or ~ prefix (remove before PURL)
@@ -381,7 +392,7 @@ Create a script that analyzes SBOM for license compliance:
 
 ### Template 1: Script Generation
 
-```
+```bicep
 Create a PowerShell script that:
 1. [Primary function]
 2. [Input processing]
@@ -394,7 +405,7 @@ Create a PowerShell script that:
 
 ### Template 2: Function Addition
 
-```
+```powershell
 Add a function to the existing script that:
 - Name: [function name]
 - Purpose: [what it does]
@@ -405,7 +416,7 @@ Add a function to the existing script that:
 
 ### Template 3: Enhancement Request
 
-```
+```yaml
 Enhance the script to:
 - Add feature: [describe new capability]
 - Improve: [existing aspect to improve]

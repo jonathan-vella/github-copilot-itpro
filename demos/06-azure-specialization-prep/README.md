@@ -21,6 +21,7 @@ This demo showcases how GitHub Copilot's custom agents dramatically accelerate t
 ### ROI Calculator
 
 For a System Integrator partner with:
+
 - **Consultant rate**: $150/hour
 - **Projects per year**: 4 specialization audits
 - **Time saved per audit**: 35 hours
@@ -33,7 +34,7 @@ This demo implements a high-availability web application with:
 
 ### Infrastructure Components
 
-```
+```bicep
 ┌─────────────────────────────────────────────────────────────┐
 │                     Azure Subscription                       │
 │  ┌───────────────────────────────────────────────────────┐  │
@@ -70,6 +71,7 @@ This demo implements a high-availability web application with:
 ### Application
 
 **Simple Task Manager Web App**
+
 - ASP.NET web application running on IIS
 - CRUD operations (Create, Read, Update, Delete)
 - SQL Server backend
@@ -80,39 +82,47 @@ This demo implements a high-availability web application with:
 This demo uses the four custom agents in sequence:
 
 ### 1️⃣ ADR Generator (Optional)
+
 **Purpose**: Document architectural decisions for enterprise governance
 
 **Example Prompts**:
-```
+
+```text
 Document the decision to use Azure SQL Database instead of SQL Managed Instance 
 for this web application workload, considering cost, performance, and management overhead.
 ```
 
 ### 2️⃣ Azure Principal Architect
+
 **Purpose**: Apply Azure Well-Architected Framework best practices
 
 **Example Prompts**:
-```
+
+```text
 Review this architecture for a high-availability web application with 99.99% SLA target.
 The solution uses 2 IIS VMs behind Azure Load Balancer with Azure SQL Database backend.
 Assess against all five WAF pillars and provide recommendations.
 ```
 
 ### 3️⃣ Bicep Planning Specialist
+
 **Purpose**: Create implementation plan using Azure Verified Modules
 
 **Example Prompts**:
-```
+
+```text
 Create an implementation plan for a high-availability web application infrastructure.
 Requirements: 2 Windows VMs with IIS, Azure Load Balancer with public IP, Azure SQL Database 
 supporting 100 TPS, NSGs for security. Use Azure Verified Modules where available.
 ```
 
 ### 4️⃣ Bicep Implementation Specialist
+
 **Purpose**: Generate Bicep templates from the plan
 
 **Example Prompts**:
-```
+
+```text
 Generate Bicep templates based on the implementation plan. Include main.bicep and modules 
 for network, compute, database, and load balancer. Follow security best practices and 
 include comprehensive outputs for audit documentation.
@@ -120,7 +130,7 @@ include comprehensive outputs for audit documentation.
 
 ## 📁 Demo Structure
 
-```
+```bicep
 06-azure-specialization-prep/
 ├── README.md                          # This file
 ├── DEMO-SCRIPT.md                     # 30-minute walkthrough
@@ -179,37 +189,46 @@ include comprehensive outputs for audit documentation.
 ### Deploy the Demo
 
 1. **Clone the repository**:
+
    ```powershell
    git clone https://github.com/jonathan-vella/github-copilot-itpro.git
    cd github-copilot-itpro/demos/06-azure-specialization-prep
-   ```
+
+```bash
 
 2. **Login to Azure**:
+
    ```powershell
    az login
    az account set --subscription "Your-Subscription-Name"
-   ```
+```
 
 3. **Run the demo script**:
+
    ```powershell
    # Follow the demo script
    code DEMO-SCRIPT.md
-   ```
+
+```yaml
 
 4. **Deploy infrastructure** (generated with agents):
+
    ```powershell
    ./scripts/deploy.ps1 -Environment prod -Location eastus
-   ```
+```
 
 5. **Validate deployment**:
+
    ```powershell
    ./scripts/validate.ps1 -ResourceGroupName rg-audit-demo-prod
-   ```
+
+```yaml
 
 6. **Cleanup resources**:
+
    ```powershell
    ./scripts/cleanup.ps1 -ResourceGroupName rg-audit-demo-prod
-   ```
+```
 
 ## 📚 Learning Objectives
 
