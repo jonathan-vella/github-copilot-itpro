@@ -13,6 +13,9 @@ param environment string
 @description('Project name for resource naming')
 param projectName string
 
+@description('Unique suffix for resource naming (generated from resource group ID)')
+param uniqueSuffix string
+
 @description('Resource tags')
 param tags object
 
@@ -20,8 +23,8 @@ param tags object
 // VARIABLES
 // ============================================================================
 
-var logAnalyticsWorkspaceName = 'log-${projectName}-${environment}'
-var applicationInsightsName = 'appi-${projectName}-${environment}'
+var logAnalyticsWorkspaceName = 'log-${take(replace(projectName, '-', ''), 10)}-${take(environment, 3)}-${take(uniqueSuffix, 6)}'
+var applicationInsightsName = 'appi-${take(replace(projectName, '-', ''), 9)}-${take(environment, 3)}-${take(uniqueSuffix, 6)}'
 
 // ============================================================================
 // LOG ANALYTICS WORKSPACE

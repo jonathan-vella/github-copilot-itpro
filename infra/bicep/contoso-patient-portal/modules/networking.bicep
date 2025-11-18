@@ -13,6 +13,9 @@ param environment string
 @description('Project name for resource naming')
 param projectName string
 
+@description('Unique suffix for resource naming (generated from resource group ID)')
+param uniqueSuffix string
+
 @description('Resource tags')
 param tags object
 
@@ -20,9 +23,9 @@ param tags object
 // VARIABLES
 // ============================================================================
 
-var vnetName = 'vnet-${projectName}-${environment}-${location}'
-var nsgWebName = 'nsg-web-${environment}'
-var nsgDataName = 'nsg-data-${environment}'
+var vnetName = 'vnet-${take(replace(projectName, '-', ''), 10)}-${take(environment, 3)}-${take(uniqueSuffix, 6)}'
+var nsgWebName = 'nsg-web-${take(environment, 3)}-${take(uniqueSuffix, 6)}'
+var nsgDataName = 'nsg-data-${take(environment, 3)}-${take(uniqueSuffix, 6)}'
 
 var addressPrefix = '10.0.0.0/16'
 var webSubnetPrefix = '10.0.1.0/24'

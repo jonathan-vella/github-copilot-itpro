@@ -13,6 +13,9 @@ param environment string
 @description('Project name for resource naming')
 param projectName string
 
+@description('Unique suffix for resource naming (generated from resource group ID)')
+param uniqueSuffix string
+
 @description('SQL administrator username')
 param sqlAdminUsername string
 
@@ -27,7 +30,7 @@ param tags object
 // VARIABLES
 // ============================================================================
 
-var sqlServerName = 'sql-${projectName}-${environment}-${uniqueString(resourceGroup().id)}'
+var sqlServerName = 'sql-${take(replace(projectName, '-', ''), 10)}-${take(environment, 3)}-${take(uniqueSuffix, 6)}'
 
 // ============================================================================
 // SQL SERVER

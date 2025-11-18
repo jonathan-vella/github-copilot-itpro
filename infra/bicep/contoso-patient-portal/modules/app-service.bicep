@@ -13,6 +13,9 @@ param environment string
 @description('Project name for resource naming')
 param projectName string
 
+@description('Unique suffix for resource naming (generated from resource group ID)')
+param uniqueSuffix string
+
 @description('App Service Plan resource ID')
 param appServicePlanId string
 
@@ -30,7 +33,7 @@ param tags object
 // VARIABLES
 // ============================================================================
 
-var appServiceName = 'app-${projectName}-${environment}'
+var appServiceName = 'app-${take(replace(projectName, '-', ''), 10)}-${take(environment, 3)}-${take(uniqueSuffix, 6)}'
 
 // ============================================================================
 // APP SERVICE

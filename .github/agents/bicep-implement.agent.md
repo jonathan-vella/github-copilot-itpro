@@ -136,3 +136,101 @@ az deployment group show \
 - **Security defaults**: HTTPS only, TLS 1.2+, no public access where possible, private endpoints preferred
 - **Generate deployment scripts**: Create deploy.ps1 for each main template with proper parameter handling
 - **What-if before deploy**: Always run what-if analysis and summarize changes before actual deployment
+
+## Naming Conventions & Uniqueness
+
+**CRITICAL: All Azure resources MUST use unique names with random suffix**
+
+### Generate Unique Suffix
+
+In main.bicep, generate a unique suffix from resource group ID:
+
+```bicep
+// Generate unique suffix (5-6 characters) from resource group ID
+var uniqueSuffix = uniqueString(resourceGroup().id)
+```
+
+### Resource Naming Pattern
+
+All resources must follow this pattern: `{prefix}-{project}-{env}-{uniqueSuffix}`
+
+**Examples:**
+- Key Vault: `kv-project-dev-a1b2c3` (max 24 chars)
+- Storage Account: `stprojectdeva1b2c3` (no hyphens, max 24 chars, lowercase only)
+- SQL Server: `sql-project-dev-a1b2c3` (max 63 chars)
+- App Service: `app-project-dev-a1b2c3` (max 60 chars)
+- Virtual Network: `vnet-project-dev-a1b2c3` (max 64 chars)
+- Log Analytics: `log-project-dev-a1b2c3` (max 63 chars)
+
+### Length Constraints (Critical)
+
+**Always enforce Azure naming limits:**
+- Storage Account: 3-24 characters, lowercase letters and numbers only, globally unique
+- Key Vault: 3-24 characters, alphanumeric and hyphens, globally unique
+- SQL Server: 1-63 characters, lowercase letters, numbers, hyphens (no hyphen at start/end)
+- App Service: 2-60 characters
+- CosmosDB: 3-44 characters, lowercase letters, numbers, hyphens
+
+**Implementation Strategy:**
+```bicep
+// For resources with tight limits (e.g., Key Vault 24 chars, Storage 24 chars):
+var kvName = 'kv-${take(projectName, 8)}-${environment}-${take(uniqueSuffix, 6)}'
+var stName = 'st${take(replace(projectName, '-', ''), 11)}${environment}${take(uniqueSuffix, 6)}'
+
+// For resources with generous limits:
+var sqlServerName = 'sql-${projectName}-${environment}-${uniqueSuffix}'
+var vnetName = 'vnet-${projectName}-${environment}-${uniqueSuffix}'
+```
+
+### Pass Suffix to Modules
+
+**Always pass uniqueSuffix parameter to ALL modules:**
+
+```bicep
+module keyVault 'modules/key-vault.bicep' = {
+  name: 'key-vault-deployment'
+  params: {
+    location: location
+    environment: environment
+    projectName: projectName
+    uniqueSuffix: uniqueSuffix  // ← REQUIRED
+    tags: tags
+  }
+}
+```
+
+### Module Parameter Requirements
+
+**Every module MUST accept uniqueSuffix parameter:**
+
+```bicep
+@description('Unique suffix for resource naming (generated from resource group ID)')
+param uniqueSuffix string
+
+@description('Project name used for resource naming')
+param projectName string
+
+@description('Environment name')
+param environment string
+
+// Generate resource name with suffix
+var resourceName = '${prefix}-${take(projectName, maxLength)}-${environment}-${take(uniqueSuffix, 6)}'
+```
+
+### Why This Matters
+
+- **Prevents deployment failures**: Azure rejects duplicate names for globally unique resources
+- **Enables parallel deployments**: Multiple environments can coexist
+- **Supports testing**: Developers can deploy without naming conflicts
+- **Azure requirements**: Storage, Key Vault, SQL Server, CosmosDB, etc. require globally unique names
+
+### Validation Checklist
+
+Before completing implementation, verify:
+- [ ] main.bicep generates `uniqueSuffix` from `resourceGroup().id`
+- [ ] All modules accept `uniqueSuffix` parameter
+- [ ] All resource names include the suffix
+- [ ] Storage account names use lowercase, no hyphens, include suffix
+- [ ] Key Vault names are ≤24 characters including suffix
+- [ ] SQL Server names are lowercase with suffix
+- [ ] No hardcoded resource names anywhere

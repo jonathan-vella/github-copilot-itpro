@@ -13,6 +13,9 @@ param environment string
 @description('Project name for resource naming')
 param projectName string
 
+@description('Unique suffix for resource naming (generated from resource group ID)')
+param uniqueSuffix string
+
 @description('Resource tags')
 param tags object
 
@@ -20,7 +23,9 @@ param tags object
 // VARIABLES
 // ============================================================================
 
-var keyVaultName = 'kv-${take(replace(projectName, '-', ''), 15)}-${environment}-${uniqueString(resourceGroup().id)}'
+// Key Vault name must be <= 24 chars: kv-{project}-{env}-{unique} format
+// Example: kv-contoso-dev-abc123 (max 24 chars)
+var keyVaultName = 'kv-${take(replace(projectName, '-', ''), 8)}-${take(environment, 3)}-${take(uniqueSuffix, 6)}'
 
 // ============================================================================
 // KEY VAULT

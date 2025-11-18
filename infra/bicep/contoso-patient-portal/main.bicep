@@ -45,6 +45,9 @@ param tags object = {
 // VARIABLES
 // ============================================================================
 
+// Generate unique suffix for resource names (5-6 characters from resource group ID)
+var uniqueSuffix = uniqueString(subscription().subscriptionId, resourceGroupName)
+
 var resourceGroupName = 'rg-${projectName}-${environment}'
 var deploymentNamePrefix = '${projectName}-${environment}'
 
@@ -69,6 +72,7 @@ module networking 'modules/networking.bicep' = {
     location: location
     environment: environment
     projectName: projectName
+    uniqueSuffix: uniqueSuffix
     tags: tags
   }
 }
@@ -84,6 +88,7 @@ module monitoring 'modules/monitoring.bicep' = {
     location: location
     environment: environment
     projectName: projectName
+    uniqueSuffix: uniqueSuffix
     tags: tags
   }
 }
@@ -95,6 +100,7 @@ module appServicePlan 'modules/app-service-plan.bicep' = {
     location: location
     environment: environment
     projectName: projectName
+    uniqueSuffix: uniqueSuffix
     tags: tags
   }
 }
@@ -106,6 +112,7 @@ module sqlServer 'modules/sql-server.bicep' = {
     location: location
     environment: environment
     projectName: projectName
+    uniqueSuffix: uniqueSuffix
     sqlAdminUsername: sqlAdminUsername
     sqlAdminPassword: sqlAdminPassword
     tags: tags
@@ -119,6 +126,7 @@ module keyVault 'modules/key-vault.bicep' = {
     location: location
     environment: environment
     projectName: projectName
+    uniqueSuffix: uniqueSuffix
     tags: tags
   }
 }
@@ -133,6 +141,7 @@ module sqlDatabase 'modules/sql-database.bicep' = {
   params: {
     location: location
     environment: environment
+    uniqueSuffix: uniqueSuffix
     sqlServerName: sqlServer.outputs.sqlServerName
     tags: tags
   }
@@ -144,6 +153,7 @@ module privateEndpoints 'modules/private-endpoints.bicep' = {
   params: {
     location: location
     environment: environment
+    uniqueSuffix: uniqueSuffix
     keyVaultId: keyVault.outputs.keyVaultId
     sqlServerId: sqlServer.outputs.sqlServerId
     privateEndpointSubnetId: networking.outputs.privateEndpointSubnetId
@@ -158,6 +168,7 @@ module appService 'modules/app-service.bicep' = {
     location: location
     environment: environment
     projectName: projectName
+    uniqueSuffix: uniqueSuffix
     appServicePlanId: appServicePlan.outputs.appServicePlanId
     webSubnetId: networking.outputs.webSubnetId
     applicationInsightsConnectionString: monitoring.outputs.applicationInsightsConnectionString

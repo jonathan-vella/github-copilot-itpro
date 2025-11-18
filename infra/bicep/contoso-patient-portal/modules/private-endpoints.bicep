@@ -10,6 +10,9 @@ param location string
 @description('Environment name')
 param environment string
 
+@description('Unique suffix for resource naming (generated from resource group ID)')
+param uniqueSuffix string
+
 @description('Key Vault resource ID')
 param keyVaultId string
 
@@ -26,8 +29,8 @@ param tags object
 // VARIABLES
 // ============================================================================
 
-var privateEndpointKeyVaultName = 'pe-keyvault-${environment}'
-var privateEndpointSqlServerName = 'pe-sqlserver-${environment}'
+var privateEndpointKeyVaultName = 'pe-keyvault-${take(environment, 3)}-${take(uniqueSuffix, 6)}'
+var privateEndpointSqlServerName = 'pe-sqlserver-${take(environment, 3)}-${take(uniqueSuffix, 6)}'
 
 // ============================================================================
 // PRIVATE DNS ZONES

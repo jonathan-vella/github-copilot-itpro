@@ -10,6 +10,9 @@ param location string
 @description('Environment name')
 param environment string
 
+@description('Unique suffix for resource naming (generated from resource group ID)')
+param uniqueSuffix string
+
 @description('SQL Server name (parent resource)')
 param sqlServerName string
 
@@ -20,7 +23,7 @@ param tags object
 // VARIABLES
 // ============================================================================
 
-var databaseName = 'sqldb-patients-${environment}'
+var databaseName = 'sqldb-patients-${take(environment, 3)}-${take(uniqueSuffix, 6)}'
 
 // ============================================================================
 // SQL DATABASE

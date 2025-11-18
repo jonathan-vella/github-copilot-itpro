@@ -57,9 +57,6 @@ param(
     [SecureString]$SqlAdminPassword,
 
     [Parameter()]
-    [switch]$WhatIf,
-
-    [Parameter()]
     [switch]$SkipValidation
 )
 
@@ -207,14 +204,17 @@ function Invoke-BicepValidation {
     # Bicep lint
     Write-Info "Linting Bicep template..."
     $lintResult = bicep lint $TemplateFile 2>&1
+    $lintExitCode = $LASTEXITCODE
+    
     if ($lintResult -match 'Error') {
         Write-ErrorMessage "Bicep lint found errors:"
         Write-Host $lintResult -ForegroundColor Red
         return $false
     }
     if ($lintResult -match 'Warning') {
-        Write-Warning "Bicep lint found warnings:"
+        Write-Warning "Bicep lint found warnings (non-blocking):"
         Write-Host $lintResult -ForegroundColor Yellow
+        # Warnings are non-blocking, continue with deployment
     }
     else {
         Write-Success "Bicep lint passed"
@@ -327,7 +327,7 @@ try {
     }
     
     # Confirm deployment
-    if (-not $WhatIf -and $PSCmdlet.ShouldProcess("Azure Subscription", "Deploy Infrastructure")) {
+    if (-not $WhatIfPreference -and $PSCmdlet.ShouldProcess("Azure Subscription", "Deploy Infrastructure")) {
         Write-Host "`n"
         Write-Warning "This will deploy resources to your Azure subscription."
         Write-Warning "Estimated monthly cost: `$331-346"
@@ -340,12 +340,12 @@ try {
     }
     
     # Execute deployment
-    if (-not (Invoke-Deployment -Password $sqlPassword -DryRun:$WhatIf)) {
+    if (-not (Invoke-Deployment -Password $sqlPassword -DryRun:$WhatIfPreference)) {
         exit 1
     }
     
     # Show outputs (skip for what-if)
-    if (-not $WhatIf) {
+    if (-not $WhatIfPreference) {
         Show-DeploymentOutputs
         
         Write-Header "Next Steps"
