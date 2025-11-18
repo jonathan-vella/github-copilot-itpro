@@ -67,7 +67,7 @@ By the end of this demo, participants will understand how to:
 ```powershell
 # Open the audit checklist
 code demos/06-azure-specialization-prep/azure-specialization-audit-checklist.md
-```
+```yaml
 
 **Talking Points**:
 
@@ -89,8 +89,10 @@ code demos/06-azure-specialization-prep/azure-specialization-audit-checklist.md
 **Prompt** (Copy exactly):
 
 ```
-Document the architectural decision to use Azure SQL Database instead of SQL Managed Instance 
+
+Document the architectural decision to use Azure SQL Database instead of SQL Managed Instance
 for the Contoso Task Manager application migration. Consider the following context:
+
 - Application: ASP.NET web app with 2GB database
 - Performance: 100 transactions per second required
 - SLA: 99.99% uptime target
@@ -98,7 +100,8 @@ for the Contoso Task Manager application migration. Consider the following conte
 - Management: Limited DBA resources available
 
 Include: decision drivers, alternatives considered, consequences, and compliance implications.
-```
+
+```bicep
 
 **Expected Output**:
 
@@ -125,9 +128,11 @@ Include: decision drivers, alternatives considered, consequences, and compliance
 **Prompt** (Copy exactly):
 
 ```
+
 Conduct a comprehensive Well-Architected Framework assessment for the following architecture:
 
 **Infrastructure**:
+
 - 2 Windows Server 2022 VMs running IIS with ASP.NET application
 - Azure Load Balancer with public IP for high availability
 - Azure SQL Database (Standard S2 tier)
@@ -135,14 +140,16 @@ Conduct a comprehensive Well-Architected Framework assessment for the following 
 - Azure Monitor for observability
 
 **Requirements**:
+
 - 99.99% availability SLA
 - Support 100 transactions per second
 - Security is a priority (but using public endpoints for demo)
 - Cost optimization within reasonable limits
 
-Assess all five WAF pillars (Reliability, Security, Cost Optimization, Operational Excellence, 
+Assess all five WAF pillars (Reliability, Security, Cost Optimization, Operational Excellence,
 Performance Efficiency) and provide specific recommendations with priority levels.
-```
+
+```bicep
 
 **Expected Output**:
 
@@ -178,7 +185,7 @@ New-Item -ItemType Directory -Path evidence/waf-assessment -Force
 
 **Prompt** (Copy exactly):
 
-```
+```bicep
 Create a detailed Bicep implementation plan for the following Azure infrastructure deployment:
 
 **Requirements**:
@@ -226,7 +233,7 @@ Provide: module structure, parameter strategy, deployment sequence, and validati
 ```powershell
 # Save to planning document
 # Copy chat output to: infrastructure/IMPLEMENTATION-PLAN.md
-```
+```yaml
 
 ---
 
@@ -239,10 +246,12 @@ Provide: module structure, parameter strategy, deployment sequence, and validati
 **Prompt** (Copy exactly):
 
 ```
-Generate complete Bicep templates based on the implementation plan provided by the 
-Bicep Planning Specialist. 
+
+Generate complete Bicep templates based on the implementation plan provided by the
+Bicep Planning Specialist.
 
 Create the following structure:
+
 1. main.bicep - Main orchestration template
 2. modules/network.bicep - VNet, subnets, NSGs
 3. modules/compute.bicep - VMs, availability set, VM extensions for IIS
@@ -251,6 +260,7 @@ Create the following structure:
 6. parameters/prod.bicepparam - Production parameters
 
 **Requirements**:
+
 - Use latest API versions (2023-05-01 or newer)
 - Include comprehensive @description decorators
 - Add security by default (HTTPS only, TLS 1.2, firewall rules)
@@ -259,7 +269,8 @@ Create the following structure:
 - Include all required tags
 
 Start with main.bicep and provide complete, deployable code.
-```
+
+```bicep
 
 **Expected Output**:
 
@@ -283,7 +294,7 @@ Start with main.bicep and provide complete, deployable code.
 
    ```powershell
    tree infrastructure /F
-   ```
+```
 
 ---
 
@@ -300,7 +311,7 @@ az deployment group validate `
   --resource-group rg-audit-demo-prod `
   --template-file infrastructure/main.bicep `
   --parameters infrastructure/parameters/prod.bicepparam
-```
+```bicep
 
 **Talking Points**:
 
@@ -336,7 +347,7 @@ az deployment group what-if `
   --resource-group rg-audit-demo-prod `
   --template-file infrastructure/main.bicep `
   --parameters infrastructure/parameters/prod.bicepparam
-```
+```yaml
 
 ---
 
@@ -369,7 +380,7 @@ code validation/VALIDATION-TESTING-GUIDE.md
 
 **Prompt** (Copy exactly):
 
-```
+```yaml
 Using Well-Architected Framework RE:08 principles, design a chaos engineering experiment 
 for our deployed Task Manager infrastructure to test load balancer failover resilience.
 
@@ -391,7 +402,7 @@ Provide: Azure Chaos Studio experiment configuration, monitoring approach, and s
 # Open the comprehensive guide section on chaos engineering
 code validation/VALIDATION-TESTING-GUIDE.md
 # Navigate to Section 4: Chaos Engineering & Fault Injection
-```
+```bicep
 
 **Talking Points**:
 
@@ -417,22 +428,26 @@ code validation/VALIDATION-TESTING-GUIDE.md
 **Prompt for Azure Principal Architect** (Copy exactly):
 
 ```
-Design a comprehensive load testing strategy for the Task Manager application using 
+
+Design a comprehensive load testing strategy for the Task Manager application using
 Azure Load Testing service.
 
 **Requirements**:
+
 - Baseline: 100 concurrent users, 30 minutes, <2s response time
 - Peak Load: 500 concurrent users, 1 hour, validate SLA
 - Stress Test: Incremental to 1000 users, identify breaking point
 - Endurance: 200 concurrent users, 8 hours, validate stability
 
 **Application Profile**:
+
 - ASP.NET web app with database backend
 - Critical operations: Login, task CRUD, search, reporting
 - SLA: 99.99% availability, <2s response time for 95th percentile
 
 Provide: JMeter test plan structure, failure criteria, and resource utilization thresholds.
-```
+
+```yaml
 
 **Show load testing documentation**:
 
@@ -471,7 +486,7 @@ Start-Process "validation/uat-tracking-template.csv"
 Start-Process "validation/uat-defect-tracking.csv"
 Start-Process "validation/uat-summary-by-category.csv"
 Start-Process "validation/uat-tester-assignments.csv"
-```
+```bicep
 
 **Walk through the realistic dummy data**:
 
@@ -539,7 +554,7 @@ code validation/UAT-TEMPLATES-README.md
 
 ```powershell
 code scripts/validate-data-integrity.ps1
-```
+```yaml
 
 **Demo the script** (if source/target DBs available):
 
@@ -578,7 +593,7 @@ code scripts/validate-data-integrity.ps1
 ```powershell
 code validation/VALIDATION-TESTING-GUIDE.md
 # Navigate to Section 7: Continuous Validation
-```
+```bicep
 
 **Key Components**:
 

@@ -52,7 +52,7 @@ Adopt a **four-mode workflow** integrating:
 
 **Workflow Stages:**
 
-```
+```text
 Decision → Architecture → Planning → Implementation
     ↓           ↓            ↓           ↓
 ADR Gen → Principal → Bicep Plan → Bicep Impl

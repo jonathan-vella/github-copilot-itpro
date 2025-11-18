@@ -43,7 +43,7 @@ Three chat modes (azure-principal-architect, bicep-plan, bicep-implement) have b
 ```markdown
 Using bicep-plan mode, create a plan for deploying a hub-spoke network 
 with 3 spokes, Azure Firewall, and Private DNS zones.
-```
+```yaml
 
 ---
 
@@ -106,7 +106,7 @@ the AVM pattern with proper tagging and diagnostic settings.
 ```markdown
 Using azure-saas-architect mode, design a tenant isolation strategy 
 using Azure AD B2C and database-per-tenant pattern.
-```
+```bicep
 
 ---
 
@@ -194,7 +194,7 @@ Using debug mode, analyze this Bicep deployment error:
 
 For the main Azure infrastructure workflow, **always use Custom Agents** (invoked with `@agent-name`):
 
-```
+```text
 @adr-generator Document the decision to use hub-spoke topology
 @azure-principal-architect Assess the security implications of this design
 @bicep-plan Create an implementation plan for the hub-spoke network
@@ -249,7 +249,7 @@ graph TD
     style L fill:#FFC107
     style M fill:#FFC107
     style N fill:#FFC107
-```
+```yaml
 
 **Legend:**
 
@@ -263,17 +263,20 @@ graph TD
 ### Best Practices
 
 **1. Follow the Workflow Sequence**
+
 - Start with decisions (ADR Generator)
 - Get architectural guidance (Principal Architect)
 - Create a plan (Bicep Planning)
 - Implement code (Bicep Implementation)
 
 **2. Use Mode-Specific Outputs**
+
 - ADR Generator → `/docs/adr/adr-NNNN-*.md`
 - Bicep Planning → `.bicep-planning-files/INFRA.*.md`
 - Bicep Implementation → `infrastructure/*.bicep`
 
 **3. Combine Modes for Complex Tasks**
+
 ```markdown
 # Step 1: Architecture Assessment
 Using azure-principal-architect mode, evaluate security requirements 
@@ -285,7 +288,7 @@ recommendations from the architecture assessment.
 
 # Step 3: Implement
 Using bicep-implement mode, generate Bicep templates from the plan.
-```
+```sql
 
 **4. Mode-Specific Context**
 
@@ -326,7 +329,7 @@ vs. virtual WAN for a multi-region deployment.
 ```markdown
 Using azure-principal-architect mode, assess the hub-spoke design 
 against WAF pillars for a requirement of 99.95% SLA.
-```
+```yaml
 
 **Step 3: Create Plan**
 
@@ -344,7 +347,7 @@ a hub-spoke network with:
 ```markdown
 Using bicep-implement mode, implement the hub network from 
 .bicep-planning-files/INFRA.hub-spoke-network.md
-```
+```yaml
 
 ---
 

@@ -8,7 +8,7 @@
 
 ## Input Prompt
 
-```
+```text
 Design an Azure architecture for Contoso Healthcare's patient portal.
 
 **Business Context:**
@@ -281,7 +281,7 @@ Based on current Microsoft documentation and HIPAA compliance guidance, I recomm
 
 ## Architecture Diagram Description
 
-```
+```text
 [Users] 
    ↓ HTTPS
 [Azure AD SSO]

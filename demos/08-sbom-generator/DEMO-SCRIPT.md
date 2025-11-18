@@ -23,7 +23,7 @@ az account set --subscription "your-subscription-id"
 
 # Navigate to demo folder
 cd c:\Repos\github-copilot-itpro\demos\08-sbom-generator
-```
+```text
 
 ### 2. VS Code Setup
 
@@ -69,7 +69,7 @@ Keep `examples/` folder available in case live generation has issues. These pre-
 ```powershell
 # Open sample app structure
 code sample-app/
-```
+```powershell
 
 Point out:
 
@@ -115,7 +115,7 @@ code with-copilot/New-ApplicationSBOM.ps1
 
 **Prompt in Copilot Chat**:
 
-```
+```bicep
 Create a PowerShell script that:
 1. Reads a package.json file and extracts all dependencies and devDependencies
 2. Generates a CycloneDX 1.5 SBOM in JSON format
@@ -145,7 +145,7 @@ Create a PowerShell script that:
 
 # Display results
 code examples/application-sbom.json
-```
+```powershell
 
 **Expected Results**:
 
@@ -171,7 +171,7 @@ code with-copilot/New-ContainerSBOM.ps1
 
 **Prompt in Copilot Chat**:
 
-```
+```bicep
 Create a PowerShell script that:
 1. Uses Syft (if available) or parses a Dockerfile to generate container SBOM
 2. Extracts base image information (node:20-alpine)
@@ -200,7 +200,7 @@ Create a PowerShell script that:
 
 # Otherwise, show pre-generated example:
 code examples/container-sbom.json
-```
+```powershell
 
 **Expected Results**:
 
@@ -226,7 +226,7 @@ code with-copilot/New-InfrastructureSBOM.ps1
 
 **Prompt in Copilot Chat**:
 
-```
+```bicep
 Create a PowerShell script that:
 1. Uses Azure Resource Graph to query all resources in a resource group
 2. Extracts resource type, SKU, API version, location for each resource
@@ -255,7 +255,7 @@ Create a PowerShell script that:
 
 # Otherwise, show Bicep template scanning:
 code examples/infrastructure-sbom.json
-```
+```bicep
 
 **Expected Results**:
 
@@ -282,7 +282,7 @@ code with-copilot/Merge-SBOMDocuments.ps1
 
 **Prompt in Copilot Chat**:
 
-```
+```bicep
 Create a PowerShell script that:
 1. Reads multiple CycloneDX SBOM JSON files from a directory
 2. Merges all components into a single unified SBOM
@@ -298,12 +298,14 @@ Create a PowerShell script that:
 ```powershell
 # Create new file
 code with-copilot/Export-SBOMReport.ps1
-```
+```yaml
 
 **Prompt in Copilot Chat**:
 
 ```
+
 Create a PowerShell script that:
+
 1. Reads a CycloneDX SBOM JSON file
 2. Generates an HTML report with:
    - Summary statistics (total components, component types)
@@ -313,7 +315,8 @@ Create a PowerShell script that:
 3. Also exports CSV format for spreadsheet analysis
 4. Includes filtering by component type
 5. Parameters for input file, output format (HTML/CSV), and output path
-```
+
+```yaml
 
 **Step 3**: Run the scripts
 
@@ -365,7 +368,7 @@ start examples/sbom-report.html
 
 **ROI Calculation**:
 
-```
+```yaml
 Per SBOM:
 - Manual: 6 hours × $150/hr = $900
 - With Copilot: 1 hour × $150/hr = $150

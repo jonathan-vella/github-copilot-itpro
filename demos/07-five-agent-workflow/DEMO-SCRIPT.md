@@ -80,7 +80,7 @@ But what if we could do this in 30-45 minutes?"
 
 **Paste prompt and submit:**
 
-```
+```text
 You are designing Azure infrastructure for Contoso Healthcare's patient portal.
 
 **Business Context:**
@@ -107,34 +107,34 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
 
 1. **WAF Scores:**
 
-   ```
+```yaml
    Security: 9/10 (High confidence) - Private endpoints, managed identities
    Reliability: 7/10 (Medium) - Zone redundancy limited by budget
    Cost: 8/10 (High) - $334/month well under $800 budget
-   ```
+```
 
    "Notice it scored each pillar and provided confidence levels. This helps us understand trade-offs."
 
 2. **Service Recommendations:**
 
-   ```
+```yaml
    - App Service Standard S1 (zone-redundant, 2 instances) - $146/month
    - SQL Database Standard S2 (50 DTUs) - $150/month
    - Key Vault for secrets management - $3/month
    ...
-   ```
+```
 
    "It recommended specific SKUs with justifications and costs."
 
 3. **HIPAA Compliance:**
 
-   ```
+```text
    ✅ Encryption at rest (TDE for SQL Database)
    ✅ Encryption in transit (TLS 1.2 minimum)
    ✅ Private endpoints for network isolation
    ✅ Audit logging to Log Analytics
    ...
-   ```
+```
 
    "Compliance requirements are automatically mapped."
 
@@ -166,7 +166,8 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
        estimatedCost:
          sku: N/A
          monthlyRange: $0
-   ```
+
+```bicep
 
    "Each resource is fully specified with purpose, dependencies, parameters, and costs."
 
@@ -177,30 +178,30 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
        RG[Resource Group] --> VNet[Virtual Network]
        VNet --> NSGs[Network Security Groups]
        ...
-   ```
+```
 
    "Visual dependency graph shows deployment order."
 
 3. **4-Phase Implementation:**
 
-   ```
+```yaml
    Phase 1: Foundation (8 tasks)
    Phase 2: Platform Services (8 tasks)
    Phase 3: Security & Application (9 tasks)
    Phase 4: Configuration & Access (10 tasks)
-   ```
+```
 
    "Progressive deployment ensures dependencies are met."
 
 4. **Cost Table:**
 
-   ```
+```bicep
    | Resource | Monthly Cost |
    |----------|--------------|
    | App Service Plan | $146 |
    | SQL Database | $150 |
    | Total | $331-346 |
-   ```
+```
 
    "Detailed cost breakdown with optimization opportunities."
 
@@ -233,7 +234,7 @@ targetScope = 'subscription'
 param location string = 'eastus2'
 param environment string = 'prod'
 ...
-```
+```bicep
 
 "Clean, modular main orchestrator with clear structure."
 
@@ -268,7 +269,7 @@ function Test-Prerequisites {
 ```powershell
 cd infra/bicep/contoso-patient-portal
 bicep build main.bicep --stdout --no-restore
-```
+```text
 
 **[Show successful compilation]**
 

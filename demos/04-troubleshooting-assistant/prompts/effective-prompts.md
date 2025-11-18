@@ -45,7 +45,7 @@ This guide provides proven prompting patterns for using GitHub Copilot to accele
 
 **Basic Health Check**:
 
-```
+```bicep
 Create a PowerShell function to check Azure resource health
 Function name: Get-AzureHealthSnapshot
 Parameters: ResourceGroupName (mandatory), IncludeMetrics (switch)
@@ -56,7 +56,7 @@ Include error handling and logging
 
 **Comprehensive Diagnostics**:
 
-```
+```bicep
 Create Azure health check script that validates:
 - App Service instance health and response time
 - SQL Database DTU usage and connection count
@@ -68,7 +68,7 @@ Output structured JSON for automation
 
 **Network Connectivity**:
 
-```
+```bicep
 Create PowerShell function to test Azure networking
 Check: VNet connectivity, NSG rules, route tables, DNS resolution
 Parameters: ResourceGroupName, TestEndpoint
@@ -95,7 +95,7 @@ Output detailed connection report
 
 **Performance Analysis**:
 
-```
+```text
 Generate KQL query to analyze API performance
 Workspace: Application Insights
 Show: P50, P95, P99 latency by operation in last 2 hours
@@ -106,7 +106,7 @@ Limit to top 20 operations
 
 **Error Investigation**:
 
-```
+```text
 Create KQL query for 5xx error analysis
 Show: Error count by operation, result code, and time (5-min bins)
 Calculate: Error rate as percentage of total requests
@@ -116,7 +116,7 @@ Time range: Last 4 hours
 
 **Dependency Analysis**:
 
-```
+```text
 Generate KQL query to find slow database dependencies
 Filter: Type = SQL, duration > 5000ms
 Show: Avg/max duration, query count, sample query text
@@ -127,7 +127,7 @@ Order by: Average duration descending
 
 **Timeline Correlation**:
 
-```
+```text
 Create KQL query to correlate requests with exceptions
 Join: requests table with exceptions on operation_Id
 Show: Request duration, exception type, exception message
@@ -137,7 +137,7 @@ Render: Time chart showing correlation
 
 **Resource Usage**:
 
-```
+```text
 Generate KQL query for CPU usage analysis
 Source: performanceCounters
 Metric: % Processor Time
@@ -166,7 +166,7 @@ Identify: Instances with sustained high CPU (>30 minutes)
 
 **Natural Language to KQL**:
 
-```
+```yaml
 Create PowerShell function: Invoke-DiagnosticQuery
 Input: Natural language symptom description
 Output: Appropriate KQL query based on symptom
@@ -181,7 +181,7 @@ Return results with suggested next steps
 
 **Automated Issue Detection**:
 
-```
+```text
 Create PowerShell script to detect common Azure issues
 Checks:
 - App Service CPU/memory over threshold (80%)
@@ -195,7 +195,7 @@ Output: JSON report with findings
 
 **Log Analyzer**:
 
-```
+```powershell
 Create function to parse Azure App Service logs
 Input: Log file path or stream from Azure
 Detect patterns:
@@ -227,7 +227,7 @@ Include: Charts of error trends over time
 
 **Configuration Fixes**:
 
-```
+```powershell
 Create PowerShell function to fix connection pool issues
 Actions:
 - Update App Service connection string with MaxPoolSize=200
@@ -240,7 +240,7 @@ Output: Success/failure with before/after metrics
 
 **Scaling Operations**:
 
-```
+```text
 Create script to scale Azure resources based on metrics
 If CPU > 85% for 10 minutes: Scale up App Service plan
 If DTU > 90% for 5 minutes: Scale up SQL Database tier
@@ -251,7 +251,7 @@ Validation: Check if scaling is already in progress
 
 **Network Troubleshooting**:
 
-```
+```powershell
 Create function to resolve connectivity issues
 Checks and fixes:
 - NSG rules: Add missing allow rules
@@ -282,7 +282,7 @@ Output: Detailed report of checks and fixes applied
 
 **Incident Post-Mortem**:
 
-```
+```bicep
 Generate incident post-mortem report in Markdown
 Input parameters:
 - Incident title, start/end time, severity
@@ -301,7 +301,7 @@ Format: Professional markdown suitable for management
 
 **Troubleshooting Runbook**:
 
-```
+```text
 Create troubleshooting runbook for [specific issue]
 Include:
 - Symptom description and detection methods
@@ -315,7 +315,7 @@ Format: Markdown with code blocks and decision tree
 
 **Architecture Documentation**:
 
-```
+```bicep
 Document Azure architecture from resource inspection
 Input: Resource group name or subscription
 Generate:
@@ -348,7 +348,7 @@ Output: Comprehensive markdown documentation
 
 **Concept Explanation**:
 
-```
+```text
 Explain Azure SQL connection pooling
 Include:
 - How connection pools work in Azure App Service
@@ -362,7 +362,7 @@ Target audience: Intermediate Azure developers
 
 **Best Practices**:
 
-```
+```text
 Provide Azure App Service best practices for high-traffic applications
 Cover:
 - Connection pooling configuration
@@ -375,7 +375,7 @@ Include: Example configurations and code snippets
 
 **Troubleshooting Guidance**:
 
-```
+```text
 Explain how to troubleshoot Azure [specific issue]
 Provide:
 - Step-by-step diagnostic process
@@ -428,7 +428,7 @@ Provide context in comments before prompting:
 # Business impact: $22K revenue loss per hour
 
 # Create diagnostic script to identify root cause
-```
+```text
 
 Then Copilot has full context for generating relevant solutions.
 
@@ -439,31 +439,39 @@ Break complex tasks into steps:
 **Step 1 - Detect**:
 
 ```
+
 Create function to detect Azure App Service issues
 Check: CPU, memory, response time, error rate
 Return: List of detected issues with severity
-```
+
+```yaml
 
 **Step 2 - Analyze**:
 
 ```
+
 For each detected issue, generate KQL query to analyze root cause
 Return: Query results with insights
-```
+
+```yaml
 
 **Step 3 - Remediate**:
 
 ```
+
 For each root cause, suggest and optionally apply remediation
 Include: WhatIf mode for safety
-```
+
+```yaml
 
 **Step 4 - Document**:
 
 ```
+
 Generate incident report from detection, analysis, and remediation steps
 Format: Markdown with timeline and lessons learned
-```
+
+```markdown
 
 ## Real-World Examples
 
@@ -472,11 +480,13 @@ Format: Markdown with timeline and lessons learned
 **Initial Prompt**:
 
 ```
+
 Create PowerShell function to diagnose intermittent 5xx errors in Azure App Service checkout API
 Check: Request success rate, response time percentiles, dependency health
 Include: Automatic KQL query generation for Log Analytics
 Output: Suspected root cause with confidence level
-```
+
+```yaml
 
 **Result**: Generated script that identified connection pool exhaustion in 10 minutes vs. 8 hours manual KQL iteration.
 
@@ -485,11 +495,13 @@ Output: Suspected root cause with confidence level
 **Initial Prompt**:
 
 ```
+
 Generate KQL query to find slow SQL queries causing API timeouts
 Show: Query duration (avg, P95, P99), execution count, sample query text
 Filter: Duration > 5 seconds in last 4 hours
 Correlate with: Application Insights request failures
-```
+
+```yaml
 
 **Result**: Identified 3 missing indexes causing 12-second query times vs. 2 hours manual investigation.
 
@@ -498,10 +510,12 @@ Correlate with: Application Insights request failures
 **Initial Prompt**:
 
 ```
+
 Create PowerShell function to automatically scale Azure resources based on metrics
 If App Service CPU > 85% for 10 min: Scale from P2v3 to P3v3
 If SQL DTU > 90% for 5 min: Scale from P2 to P4
 Include: Cost estimation, approval workflow, rollback capability
+
 ```
 
 **Result**: Implemented self-healing that prevented 3 outages in first month.

@@ -16,7 +16,7 @@ The infrastructure includes:
 
 ## 🏗️ Architecture
 
-```
+```text
 Internet → App Service (VNet Integrated)
             ↓ (Managed Identity)
             → Key Vault (Private Endpoint)
@@ -26,7 +26,7 @@ Internet → App Service (VNet Integrated)
 
 ## 📁 File Structure
 
-```
+```bicep
 contoso-patient-portal/
 ├── main.bicep                      # Main orchestration template
 ├── main.bicepparam                 # Production parameters file
@@ -67,7 +67,7 @@ cd infra/bicep/contoso-patient-portal
 
 # What-if analysis (dry run)
 .\deploy.ps1 -WhatIf
-```
+```bicep
 
 **Option 2: Using Azure CLI**
 
@@ -156,7 +156,7 @@ bicep lint main.bicep
 
 # What-if analysis
 az deployment sub what-if --location eastus2 --template-file main.bicep --parameters main.bicepparam
-```
+```bicep
 
 ### Post-Deployment Validation
 
@@ -209,7 +209,7 @@ param environment = 'dev'
 param location = 'eastus2'
 param projectName = 'contoso-patient-portal'
 // Use lower SKUs for cost savings
-```
+```bicep
 
 **Staging** (`main.staging.bicepparam`):
 
@@ -236,27 +236,27 @@ Edit module files in `modules/` directory:
 
 **Issue**: Bicep build fails with module not found error
 
-```
+```yaml
 Solution: Run `bicep restore main.bicep` to download AVM modules
 ```
 
 **Issue**: SQL Server name already exists
 
-```
+```yaml
 Solution: SQL Server names are globally unique. The template includes uniqueString() 
           to generate unique names. If deployment fails, delete failed resources and retry.
 ```
 
 **Issue**: Private endpoint deployment fails
 
-```
+```yaml
 Solution: Ensure Key Vault and SQL Server are deployed first. Check that subnet 
           has privateEndpointNetworkPolicies set to 'Disabled'.
 ```
 
 **Issue**: App Service can't access Key Vault
 
-```
+```yaml
 Solution: Verify RBAC role assignment completed. App Service needs 'Key Vault Secrets User' 
           role. Check managed identity is enabled and role assignment exists.
 ```
@@ -267,7 +267,7 @@ Solution: Verify RBAC role assignment completed. App Service needs 'Key Vault Se
 
 ```powershell
 az group delete --name rg-contoso-patient-portal-prod --yes --no-wait
-```
+```bicep
 
 **Delete specific resource**:
 

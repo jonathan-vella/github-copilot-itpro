@@ -131,7 +131,7 @@ By the end of this demo, participants will understand:
 
 **Prompt to Copilot** (type slowly, narrate):
 
-```
+```bicep
 # Create a PowerShell function to check Azure resource health
 # Function name: Get-AzureHealthSnapshot
 # Parameters: ResourceGroupName (mandatory), IncludeNetworking (switch)
@@ -162,7 +162,7 @@ By the end of this demo, participants will understand:
 
 # Run against demo resource group
 Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
-```
+```yaml
 
 **Narrate Results**:
 > "Look at this output: We instantly see that our App Service is healthy, but there's a SQL Database with 'Degraded' status. That's our first clue."
@@ -178,15 +178,24 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
 **Prompt to Copilot**:
 
 ```
+
 # Create a PowerShell function to generate and execute KQL diagnostic queries
+
 # Function name: Invoke-DiagnosticQuery
+
 # Parameters: Symptom (string), WorkspaceName, TimeRange (default 2 hours)
-# The function should:
+
+# The function should
+
 # 1. Translate natural language symptom into appropriate KQL query
+
 # 2. Execute against Log Analytics workspace
+
 # 3. Return results in structured format
+
 # 4. Suggest next troubleshooting steps based on findings
-```
+
+```yaml
 
 **This is the "WOW" Moment** - Talk Through It:
 
@@ -202,7 +211,7 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
        "*5xx errors*" { $query = "requests | where resultCode startswith '5'..." }
        "*timeout*" { $query = "exceptions | where type contains 'Timeout'..." }
    }
-   ```
+```
 
    > "Copilot generated pattern matching for common symptoms. This is knowledge capture happening in real-time."
 
@@ -214,7 +223,8 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
    | where resultCode startswith '5'
    | summarize FailureCount = count(), AvgDuration = avg(duration) by operation_Name
    | order by FailureCount desc
-   ```
+
+```powershell
 
    > "Look at this KQL - perfectly formatted, with time filtering, aggregation, and sorting. Writing this manually would take 20-30 minutes if you're experienced, hours if you're learning KQL."
 
@@ -225,7 +235,7 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
    Write-Host "1. Check backend dependencies: $query2"
    Write-Host "2. Review recent deployments"
    Write-Host "3. Analyze database performance"
-   ```
+```
 
    > "Copilot isn't just diagnosing - it's teaching. It suggests what to check next based on common troubleshooting patterns."
 
@@ -234,7 +244,7 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
 ```powershell
 # Simulate the RetailMax incident
 Invoke-DiagnosticQuery -Symptom "Intermittent 5xx errors during checkout, started 2 hours ago" -WorkspaceName "law-retailmax-prod"
-```
+```yaml
 
 **Narrate Results** (even if demo data is synthetic):
 > "Within seconds, we have actionable intelligence: 127 failures in the payment processing operation, average duration spiked from 200ms to 3400ms. Without Copilot, we'd still be crafting the first query."
@@ -255,12 +265,18 @@ Invoke-DiagnosticQuery -Symptom "Intermittent 5xx errors during checkout, starte
 **Prompt** (faster now, show momentum):
 
 ```
+
 # Create a function to automatically resolve common Azure issues
+
 # Function name: Resolve-CommonIssues
+
 # Parameter: Issue (ValidateSet: 'HighCPU', 'OutOfMemory', 'ConnectionTimeout', 'SlowQueries')
+
 # Include: Issue detection, automated fix application, validation
+
 # Add WhatIf support for safe testing
-```
+
+```yaml
 
 **Quick Generation** - Narrate Highlights:
 > "Copilot is now generating remediation logic. Notice the `WhatIf` support - best practice for production scripts."
@@ -287,7 +303,7 @@ Resolve-CommonIssues -Issue 'ConnectionTimeout' -Confirm:$false
 
 **Prompt**:
 
-```
+```powershell
 # Generate incident post-mortem report
 # Function: New-TroubleshootingReport
 # Parameters: IncidentTitle, Timeline (array of events), RootCause, Resolution, LessonsLearned
@@ -301,7 +317,7 @@ Resolve-CommonIssues -Issue 'ConnectionTimeout' -Confirm:$false
 
 ```powershell
 New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPath "incident-report.md"
-```
+```powershell
 
 > "Professional, comprehensive documentation. Ready to share with management and teammates."
 
@@ -317,7 +333,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 
    ```powershell
    Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
-   ```
+```
 
    > "Step 1: Quick triage - identify degraded SQL Database in 30 seconds vs. 15 minutes manually."
 
@@ -325,7 +341,8 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 
    ```powershell
    Invoke-DiagnosticQuery -Symptom "High database CPU with slow queries"
-   ```
+
+```yaml
 
    > "Step 2: KQL analysis - found top 5 CPU-intensive queries in 2 minutes vs. 45 minutes manually."
 
@@ -333,7 +350,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 
    ```powershell
    Resolve-CommonIssues -Issue 'SlowQueries' -AddMissingIndexes
-   ```
+```
 
    > "Step 3: Applied index recommendations in 5 minutes vs. 2 hours of manual optimization."
 
@@ -341,7 +358,8 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 
    ```powershell
    New-TroubleshootingReport -IncidentTitle "Checkout Performance Degradation"
-   ```
+
+```bicep
 
    > "Step 4: Generated comprehensive post-mortem in 10 minutes vs. 2 hours of writing."
 
@@ -510,7 +528,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
    # RetailMax uses Premium P2 tier SQL Database in East US region
    # High CPU detected during peak hours (6PM-9PM UTC)
    # Need query to identify blocking queries and missing indexes
-   ```
+```
 
 4. **Request Multiple Options**:
    - Type prompt, then: "Show me 3 different approaches to this"
@@ -576,7 +594,7 @@ Invoke-AzOperationalInsightsQuery -WorkspaceId "<workspace-id>" -Query "requests
 
 # Check Resource Health
 Get-AzResourceHealth -ResourceId "<resource-id>"
-```
+```text
 
 ### Common KQL Patterns
 

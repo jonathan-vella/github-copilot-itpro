@@ -35,7 +35,7 @@
 
 ### ROI Calculation
 
-```
+```powershell
 Annual Hours Saved: 111 - 25.2 = 85.8 hours
 Cost Savings per Engineer: 85.8 × $150 = $12,870
 Total Team Savings: $12,870 × [Team Size] = $________
@@ -69,7 +69,7 @@ Total Team Savings: $12,870 × [Team Size] = $________
 
 ### ROI Calculation
 
-```
+```powershell
 Annual Hours Saved: 155.3 - 24.7 = 130.6 hours
 Cost Savings per Engineer: 130.6 × $150 = $19,590
 Total Team Savings: $19,590 × [Team Size] = $________
@@ -105,7 +105,7 @@ Additional Azure Cost Savings (orphaned resources): $244,000 / [# subscriptions]
 
 ### Project ROI
 
-```
+```yaml
 Project Hours Saved: 126.9 - 9.7 = 117.2 hours
 Project Cost Savings: 117.2 × $150 = $17,580 per 500 servers
 
@@ -140,7 +140,7 @@ Annual Value (4 projects): $17,580 × 4 = $70,320
 
 ### ROI Calculation
 
-```
+```powershell
 Annual Hours Saved: 118 - 21.8 = 96.2 hours
 Cost Savings per Engineer: 96.2 × $150 = $14,430
 Total Team Savings: $14,430 × [Team Size] = $________
@@ -172,7 +172,7 @@ Total Team Savings: $14,430 × [Team Size] = $________
 
 ### ROI Calculation
 
-```
+```powershell
 Annual Hours Saved: 124 - 23 = 101 hours
 Cost Savings per Engineer: 101 × $150 = $15,150
 Total Team Savings: $15,150 × [Team Size] = $________
@@ -194,7 +194,7 @@ Total Team Savings: $15,150 × [Team Size] = $________
 
 ### Team Savings Calculation
 
-```
+```powershell
 Team Size: _______ engineers
 Annual Savings: $62,040 × [Team Size] = $__________
 
@@ -215,7 +215,7 @@ TOTAL ANNUAL VALUE: $__________
 
 ### Costs
 
-```
+```powershell
 GitHub Copilot Enterprise: $39/user/month
 Annual cost per user: $39 × 12 = $468
 Total annual investment: $468 × [Team Size] = $__________
@@ -223,7 +223,7 @@ Total annual investment: $468 × [Team Size] = $__________
 
 ### ROI Calculation
 
-```
+```powershell
 Total Annual Savings: $__________
 Total Annual Investment: $__________
 Net Annual Benefit: $__________

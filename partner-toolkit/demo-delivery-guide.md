@@ -34,7 +34,7 @@ bicep --version
 
 # Verify GitHub Copilot
 code --list-extensions | Select-String copilot
-```
+```text
 
 ### 2. Customer Discovery (Before Demo)
 
@@ -85,8 +85,10 @@ IT Pros responsible for infrastructure deployment, cloud architects, DevOps engi
 **Show the pain:**
 
 ```
+
 "Before we start, let me show you what infrastructure deployment looks like WITHOUT Copilot..."
-```
+
+```text
 
 1. Open `demos/01-bicep-quickstart/manual-approach/time-tracking.md`
 2. Walk through: 81 minutes, 3 failed deployments, syntax errors
@@ -95,9 +97,11 @@ IT Pros responsible for infrastructure deployment, cloud architects, DevOps engi
 **State the goal:**
 
 ```
-"Today we'll deploy a secure Azure network with 3 subnets, 3 NSGs with security rules, 
+
+"Today we'll deploy a secure Azure network with 3 subnets, 3 NSGs with security rules,
 and a storage account with blob services. Typically 45 minutes. Let's do it in 10."
-```
+
+```bicep
 
 #### Phase 2: Live Copilot Development (18 minutes)
 
@@ -128,9 +132,11 @@ and a storage account with blob services. Typically 45 minutes. Let's do it in 1
 **Key Message:**
 
 ```
+
 "Copilot knows Azure security best practices. It's suggesting priority 100 for allow rules,
 priority 4096 for deny rules, and properly structured rule properties."
-```
+
+```yaml
 
 **Step 3: Storage Account (5 minutes)**
 
@@ -144,9 +150,11 @@ priority 4096 for deny rules, and properly structured rule properties."
 **Key Message:**
 
 ```
-"Security by default. Copilot learned from millions of repositories and knows 
+
+"Security by default. Copilot learned from millions of repositories and knows
 that modern storage accounts should have these security settings."
-```
+
+```yaml
 
 #### Phase 3: Validation & Deployment (5 minutes)
 
@@ -168,7 +176,7 @@ cd demos/01-bicep-quickstart/validation
 
 **Show the metrics:**
 
-```
+```yaml
 Manual Approach: 81 minutes, 3 failed deployments
 With Copilot: 10 minutes, zero errors
 Time Savings: 78%
@@ -179,7 +187,7 @@ Annual savings: $40,500
 
 **Ask for commitment:**
 
-```
+```javascript
 "Based on what you've seen, how many infrastructure deployments does your team do per month?
 Let me calculate your specific ROI..."
 ```
@@ -202,7 +210,7 @@ IT operations teams, Azure administrators, compliance officers
 
 **Show the pain:**
 
-```
+```javascript
 "Let me show you what IT operations teams tell us they struggle with..."
 ```
 
@@ -215,7 +223,7 @@ IT operations teams, Azure administrators, compliance officers
 
 **State the goal:**
 
-```
+```bicep
 "We'll build 4 production-ready PowerShell scripts in 15 minutes:
 1. Resource reporting with multiple export formats
 2. Compliance auditing for untagged resources
@@ -235,7 +243,7 @@ IT operations teams, Azure administrators, compliance officers
 .SYNOPSIS
     Generate comprehensive Azure resource inventory report
 #>
-```
+```bicep
 
 3. Accept Copilot's comment-based help completion
 4. Type: `[CmdletBinding()]` and let Copilot suggest parameters
@@ -258,9 +266,11 @@ IT operations teams, Azure administrators, compliance officers
 **Key Message:**
 
 ```
+
 "This script will save you $244,000 per year by finding and removing orphaned resources.
 Copilot just generated the logic to identify them and calculate savings."
-```
+
+```powershell
 
 **Script 3: Bulk Tagging (7 minutes)**
 
@@ -273,9 +283,11 @@ Copilot just generated the logic to identify them and calculate savings."
 **Key Message:**
 
 ```
-"Notice the safety features Copilot added? Dry-run mode, confirmation prompts, 
+
+"Notice the safety features Copilot added? Dry-run mode, confirmation prompts,
 parallel processing - these are production-ready patterns."
-```
+
+```yaml
 
 #### Phase 3: Show Results (5 minutes)
 
@@ -297,15 +309,18 @@ parallel processing - these are production-ready patterns."
 **Show the metrics:**
 
 ```
+
 Manual Development: 130 minutes
 With Copilot: 15 minutes
 Time Savings: 88%
 
 Operational Savings:
+
 - 2 hours/day reporting → 15 minutes: $842,400/year for 12-person team
 - Orphaned resource cleanup: $244,000/year Azure cost reduction
 Total Annual Value: $1,086,000
-```
+
+```yaml
 
 ---
 
@@ -322,8 +337,10 @@ Total Annual Value: $1,086,000
 **Response:**
 
 ```
-"Great question. Copilot learns from millions of public repositories, including Microsoft's own 
+
+"Great question. Copilot learns from millions of public repositories, including Microsoft's own
 Azure patterns. Notice how it automatically suggested:
+
 - HTTPS only on storage accounts
 - TLS 1.2 minimum
 - No public blob access
@@ -331,52 +348,62 @@ Azure patterns. Notice how it automatically suggested:
 
 These are security best practices built-in. Plus, YOU review every suggestion before accepting it.
 Copilot accelerates, but you're still in control."
-```
+
+```yaml
 
 ### Objection 2: "What about our junior engineers?"
 
 **Response:**
 
 ```
-"This is actually one of the biggest benefits! Junior engineers learn WHILE they work. Copilot 
-suggests best practices, proper patterns, and correct syntax. It's like having a senior engineer 
+
+"This is actually one of the biggest benefits! Junior engineers learn WHILE they work. Copilot
+suggests best practices, proper patterns, and correct syntax. It's like having a senior engineer
 pair programming with them. We've seen junior engineers become productive 60% faster."
-```
+
+```yaml
 
 ### Objection 3: "We have specific company standards"
 
 **Response:**
 
 ```
-"Perfect! Copilot learns from your existing codebase. Store your templates and scripts in the 
-same repository, and Copilot will suggest patterns that match YOUR standards. You can also use 
+
+"Perfect! Copilot learns from your existing codebase. Store your templates and scripts in the
+same repository, and Copilot will suggest patterns that match YOUR standards. You can also use
 .copilot-instructions.md files to specify company-specific guidelines."
-```
+
+```yaml
 
 ### Objection 4: "How much does it cost?"
 
 **Response:**
 
 ```
+
 "GitHub Copilot is $39/user/month for enterprise. Let's do the math:
+
 - Investment for 15-person team: $7,020/year
 - Savings based on what we just demonstrated: $930,600/year
 - ROI: 13,156%
 - Payback period: 3 days
 
-And that's just time savings. We haven't counted reduced errors, better security, 
+And that's just time savings. We haven't counted reduced errors, better security,
 or the Azure cost reduction from orphaned resource cleanup."
-```
+
+```yaml
 
 ### Objection 5: "Our code is proprietary/confidential"
 
 **Response:**
 
 ```
-"Your code never leaves your environment for training. Copilot uses the model Microsoft trained, 
-but your proprietary code stays private. You can also use GitHub Copilot Enterprise which has 
+
+"Your code never leaves your environment for training. Copilot uses the model Microsoft trained,
+but your proprietary code stays private. You can also use GitHub Copilot Enterprise which has
 additional compliance and privacy features."
-```
+
+```yaml
 
 ---
 
@@ -392,16 +419,19 @@ additional compliance and privacy features."
 
 2. **Pilot Program Proposal**
 
-   ```
+```
+
    Suggested Pilot:
-   - Duration: 30 days
-   - Team: 5-10 early adopters
-   - Success Metrics: 
-     * Time savings on 3 specific tasks
-     * Error reduction rate
-     * Developer satisfaction survey
-   - Cost: $195-390 for pilot period
-   ```
+
+- Duration: 30 days
+- Team: 5-10 early adopters
+- Success Metrics:
+  - Time savings on 3 specific tasks
+  - Error reduction rate
+  - Developer satisfaction survey
+- Cost: $195-390 for pilot period
+
+```javascript
 
 3. **Technical Setup**
    - Schedule 30-minute setup session
@@ -538,8 +568,10 @@ additional compliance and privacy features."
 ### If Customer Asks Question You Can't Answer
 
 ```
-"That's a great question. Let me make a note and get you a detailed answer 
+
+"That's a great question. Let me make a note and get you a detailed answer
 from our technical team within 24 hours. In the meantime, let me show you..."
+
 ```
 
 ### If Running Long

@@ -59,7 +59,7 @@ graph TB
     style CSV fill:#50e6ff,color:#000
     style JSON fill:#50e6ff,color:#000
     style HTML fill:#50e6ff,color:#000
-```
+```bicep
 
 ---
 
@@ -122,7 +122,7 @@ sequenceDiagram
 
 **Data Flow**:
 
-```
+```bicep
 Azure Subscriptions → Authentication → Resource Query → 
 Data Processing → Compliance Checks → Report Generation → 
 File Export + Console Summary
@@ -152,7 +152,7 @@ File Export + Console Summary
 
 **Data Flow**:
 
-```
+```bicep
 Filter Criteria → Resource Discovery → 
 Tag Validation → WhatIf Preview → 
 User Confirmation → Parallel Tag Application → 
@@ -182,7 +182,7 @@ Change Logging + Summary Report
 
 **Data Flow**:
 
-```
+```bicep
 Resource Discovery → Orphan Detection → 
 Cost Estimation → User Confirmation → 
 Resource Deletion → Audit Log → 
@@ -216,7 +216,7 @@ Get-AzResourceReport.ps1 `
 Send-MailMessage -To "ops-team@company.com" `
     -Subject "Daily Azure Resource Report" `
     -Attachments "ResourceInventory_*.html"
-```
+```powershell
 
 ---
 
@@ -258,7 +258,7 @@ Remove-OrphanedResources.ps1 `
 Remove-OrphanedResources.ps1 `
     -ResourceGroupPattern "rg-projectx-*" `
     -BackupFirst
-```
+```powershell
 
 ---
 
@@ -352,7 +352,7 @@ Log location: `$OutputPath\*_timestamp.log`
     ScriptPath: 'Get-AzResourceReport.ps1'
     ScriptArguments: '-IncludeCost -OutputFormat JSON'
     azurePowerShellVersion: 'LatestVersion'
-```
+```powershell
 
 ---
 
@@ -388,7 +388,7 @@ Invoke-AzOperationalInsightsDataCollection `
     -SharedKey $sharedKey `
     -LogType "AzureResourceInventory" `
     -Body ($report | ConvertTo-Json -Depth 10)
-```
+```bicep
 
 ---
 
@@ -423,6 +423,7 @@ All scripts implement:
 ### Sample Monitoring Dashboard
 
 ```
+
 ┌─────────────────────────────────────────────┐
 │ Azure Resource Health Dashboard             │
 ├─────────────────────────────────────────────┤
@@ -434,6 +435,7 @@ All scripts implement:
 │ Last Report: 2025-11-18 06:00 ✅           │
 │ Next Report: 2025-11-19 06:00              │
 └─────────────────────────────────────────────┘
+
 ```
 
 ---

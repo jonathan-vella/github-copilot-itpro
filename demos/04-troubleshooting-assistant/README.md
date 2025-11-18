@@ -230,7 +230,7 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 
 ## Files in This Demo
 
-```
+```bicep
 04-troubleshooting-assistant/
 ├── README.md                           # This file
 ├── DEMO-SCRIPT.md                      # Detailed presenter guide
@@ -270,7 +270,7 @@ Set-AzContext -SubscriptionId "<your-subscription-id>"
 
 # 4. Generate diagnostic query
 .\with-copilot\Invoke-DiagnosticQuery.ps1 -Symptom "High API latency in last 2 hours"
-```
+```text
 
 ### Full Demo Setup (20 Minutes)
 
@@ -320,7 +320,7 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-ecommerce" -IncludeNetworking
 
 # Suggests checking: Backend pool health, timeout settings, SNAT exhaustion
 # Auto-generates remediation: Resolve-CommonIssues -Issue "LoadBalancerSNAT"
-```
+```bicep
 
 ### 3. Resource Exhaustion
 

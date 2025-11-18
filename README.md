@@ -58,7 +58,7 @@ cat demos/01-bicep-quickstart/DEMO-SCRIPT.md
 # Test in your Azure subscription
 cd demos/01-bicep-quickstart/validation
 ./deploy.ps1
-```
+```yaml
 
 **Time to First Demo:** 45 minutes (including review and test)
 
@@ -80,6 +80,7 @@ cd demos/01-bicep-quickstart/validation
 ## 📁 Repository Structure
 
 ```
+
 github-copilot-itpro/
 ├── .github/
 │   ├── agents/                         # 4 custom agents (Plan agent is built-in)
@@ -121,7 +122,8 @@ github-copilot-itpro/
 │
 └── docs/                               # Additional documentation
     └── adr/                            # Architectural Decision Records
-```
+
+```yaml
 
 ---
 
@@ -167,7 +169,7 @@ graph LR
 
 **Usage**:
 
-```
+```yaml
 @plan Create a complete Azure infrastructure deployment plan for a HIPAA-compliant healthcare application with:
 - Hub-spoke network topology
 - Azure SQL Database with private endpoints
@@ -221,7 +223,7 @@ graph LR
 
 **Usage**:
 
-```
+```text
 Document the decision to use Azure Bastion vs. Jump Boxes for secure VM access.
 Include context, alternatives, and consequences.
 ```
@@ -242,7 +244,7 @@ Include context, alternatives, and consequences.
 
 **Usage**:
 
-```
+```text
 Assess the hub network topology against Azure Well-Architected Framework.
 Evaluate all 5 pillars and provide recommendations.
 ```
@@ -267,7 +269,7 @@ Evaluate all 5 pillars and provide recommendations.
 
 **Usage**:
 
-```
+```text
 Create a detailed implementation plan for deploying a hub network.
 Include all resources, dependencies, and security configurations.
 ```
@@ -293,7 +295,7 @@ Include all resources, dependencies, and security configurations.
 
 **Usage**:
 
-```
+```bicep
 Implement the Bicep templates based on the implementation plan.
 Output to: infrastructure/my-project/
 ```
@@ -326,7 +328,7 @@ Output to: infrastructure/my-project/
 
 **Step 0 - Create Implementation Plan** (5 minutes)
 
-```
+```yaml
 @plan Create a complete Azure infrastructure deployment plan for a patient portal with:
 - 10,000 active patients
 - HIPAA compliance required
@@ -341,7 +343,7 @@ Output to: infrastructure/my-project/
 
 **Step 1 - Document Key Decisions** (2 minutes)
 
-```
+```text
 (Automatically switches to adr_generator)
 Document the architectural decisions from this plan, focusing on
 HIPAA compliance choices and cost optimization strategies.
@@ -352,7 +354,7 @@ HIPAA compliance choices and cost optimization strategies.
 
 **Step 2 - WAF Assessment** (3 minutes)
 
-```
+```text
 (Automatically switches to azure-principal-architect)
 Assess the hub network topology against Azure Well-Architected Framework...
 ```
@@ -362,7 +364,7 @@ Assess the hub network topology against Azure Well-Architected Framework...
 
 **Step 3 - Create Plan** (5 minutes)
 
-```
+```text
 (Automatically switches to bicep-plan)
 Create detailed implementation plan for the hub network...
 ```
@@ -372,7 +374,7 @@ Create detailed implementation plan for the hub network...
 
 **Step 4 - Implement Code** (10 minutes)
 
-```
+```text
 (Automatically switches to bicep-implement)
 Implement the Bicep templates based on the plan...
 ```
@@ -698,7 +700,7 @@ Showcase the complete 5-agent workflow from business requirements to deployable 
     "ms-azuretools.vscode-bicep"
   ]
 }
-```
+```text
 
 ### 🎯 Supercharge Your Copilot (NEW!)
 

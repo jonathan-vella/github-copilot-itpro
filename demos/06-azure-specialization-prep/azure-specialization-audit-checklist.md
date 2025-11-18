@@ -275,7 +275,7 @@ In either case, the output evidence must demonstrate the configuration of the id
 > **⚠️ Special Evidence Note:**  
 > **For Analytics on Azure specialization deployments and Data Warehouse Migration to Azure specialization deployments only:**  
 > If no Identity or Networking components are deployed in the Azure Landing Zone, a documented focus on Resource organization attributes is sufficient to pass this control. Identity and Networking repeatable deployment attributes only are waived.  
-> 
+>
 > Demonstration of the approach type for ALZ is required for two (2) unique customers for Analytics on Azure and Data Warehouse Migration to Azure specializations.
 
 ---\

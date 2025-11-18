@@ -8,7 +8,7 @@ The Bicep Planning Specialist agent creates detailed infrastructure implementati
 
 ## 📝 Prompt Template
 
-```
+```bicep
 Create a detailed Bicep implementation plan for the following Azure infrastructure deployment:
 
 **Requirements**:
@@ -29,7 +29,7 @@ Provide: module structure, parameter strategy, deployment sequence, and validati
 
 ### Prompt 1: Complete High-Availability Infrastructure Plan
 
-```
+```bicep
 Create a detailed Bicep implementation plan for the following Azure infrastructure deployment:
 
 **Requirements**:
@@ -70,7 +70,7 @@ Provide: module structure, parameter strategy, deployment sequence, validation a
 
 ### Prompt 2: Network Infrastructure Focus
 
-```
+```bicep
 Create a Bicep implementation plan focused on network infrastructure for a high-availability web application:
 
 **Requirements**:
@@ -110,7 +110,7 @@ Provide: module breakdown for network components, NSG rule definitions, paramete
 
 ### Prompt 3: Compute Infrastructure with VM Extensions
 
-```
+```bicep
 Create a Bicep implementation plan for compute infrastructure with automated IIS installation:
 
 **Requirements**:
@@ -158,7 +158,7 @@ Provide: module structure for VMs and extensions, parameter strategy for credent
 
 ### Prompt 4: Database Infrastructure Plan
 
-```
+```bicep
 Create a Bicep implementation plan for Azure SQL Database with security and backup configuration:
 
 **Requirements**:
@@ -213,7 +213,7 @@ Provide: module structure for SQL resources, parameter strategy for credentials,
 
 ### Prompt 5: Monitoring and Observability Plan
 
-```
+```bicep
 Create a Bicep implementation plan for comprehensive monitoring and observability:
 
 **Requirements**:
@@ -263,7 +263,7 @@ Provide: module structure for monitoring components, alert rule definitions, par
 
 ### Prompt 6: Complete End-to-End Deployment Plan
 
-```
+```bicep
 Create a comprehensive Bicep implementation plan for the entire Contoso Task Manager infrastructure:
 
 **Infrastructure Overview**:
@@ -342,7 +342,7 @@ Provide: Complete module structure with file names, detailed parameter file stru
 
 ### ❌ Too Vague
 
-```
+```text
 Create a plan for deploying Azure infrastructure using Bicep.
 ```
 
@@ -357,7 +357,7 @@ Create a plan for deploying Azure infrastructure using Bicep.
 
 ### ❌ Missing Technical Details
 
-```
+```text
 Plan the deployment of VMs and a database in Azure.
 ```
 
@@ -372,7 +372,7 @@ Plan the deployment of VMs and a database in Azure.
 
 ### ❌ Only Listing Components Without Context
 
-```
+```yaml
 Create a plan for: VNet, 2 VMs, Load Balancer, SQL Database, NSGs.
 ```
 
@@ -392,7 +392,7 @@ Create a plan for: VNet, 2 VMs, Load Balancer, SQL Database, NSGs.
 
 List all components with relationships:
 
-```
+```yaml
 Requirements:
 1. Virtual Network with subnets (specify CIDR ranges)
 2. VMs (specify size, OS, quantity, configuration)
@@ -414,7 +414,7 @@ Be explicit about:
 
 Direct the agent to use verified modules:
 
-```
+```yaml
 Constraints:
 - Use Azure Verified Modules (AVM) where available
 - Specify which AVM modules to use: avm/res/network/virtual-network
@@ -425,7 +425,7 @@ Constraints:
 
 Ask for specific deliverables:
 
-```
+```bicep
 Provide:
 - Module structure with file names
 - Parameter strategy for each environment
@@ -438,7 +438,7 @@ Provide:
 
 Always mention:
 
-```
+```yaml
 Security Requirements:
 - NSG rules following least privilege
 - SQL firewall rules
@@ -451,7 +451,7 @@ Security Requirements:
 
 Specify how to handle different values:
 
-```
+```yaml
 Parameters:
 - Environment-specific: VM size, database tier
 - Sensitive: Passwords, connection strings (Key Vault)
@@ -481,7 +481,7 @@ Before submitting your prompt:
 
 ### Excellent Example: Complete Planning Prompt
 
-```
+```bicep
 Create a detailed Bicep implementation plan for a high-availability web application infrastructure for the Azure Infrastructure and Database Migration Specialization audit:
 
 **Business Context**:

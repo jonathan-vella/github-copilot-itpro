@@ -14,7 +14,7 @@ This guide helps System Integrator partners address common concerns and objectio
 
 **Response:**
 
-```
+```javascript
 "Excellent security-first thinking! Let me address this directly:
 
 1. **Best Practices Built-In**: Copilot learns from millions of repositories, including 
@@ -52,7 +52,7 @@ Would you like me to show you how Copilot suggests security configurations in ou
 
 **Response:**
 
-```
+```yaml
 "Data privacy is critical, and GitHub takes this seriously:
 
 1. **No Training on Your Code**: Your proprietary code is NEVER used to train Copilot's model. 
@@ -91,7 +91,7 @@ Here's the privacy documentation [show link]. Would you like to review it with y
 
 **Response:**
 
-```
+```yaml
 "Compliance is non-negotiable, and GitHub Copilot is designed with regulated industries in mind:
 
 **GitHub Copilot Compliance:**
@@ -138,7 +138,7 @@ Would you like me to connect you with GitHub's compliance team for a detailed re
 
 **Response:**
 
-```
+```bicep
 "Let's look at the actual numbers for YOUR team specifically:
 
 **Investment:**
@@ -184,7 +184,7 @@ The real question is: Can you afford NOT to invest $[Y] to save $[Total value]?"
 
 **Response:**
 
-```
+```yaml
 "Absolutely reasonable! Let's structure a pilot to prove the value:
 
 **Proposed 30-Day Pilot:**
@@ -236,7 +236,7 @@ Sound fair?"
 
 **Response:**
 
-```
+```python
 "GitHub Copilot supports a wide range of tools and languages. Let me show you how it works 
 with your specific stack:
 
@@ -279,7 +279,7 @@ Would you like to see a demo specifically with [your tools]?"
 
 **Response:**
 
-```
+```yaml
 "Complex infrastructure is exactly where Copilot provides the MOST value. Here's why:
 
 1. **Context-Aware**: Copilot analyzes your entire codebase. It learns YOUR patterns, YOUR 
@@ -320,7 +320,7 @@ Would it help if I showed you how Copilot handles [specific complex aspect they 
 
 **Response:**
 
-```
+```yaml
 "Senior engineers are actually some of the BIGGEST fans of Copilot. Here's why:
 
 **What Senior Engineers Tell Us:**
@@ -364,7 +364,7 @@ Which is more valuable to your business?"
 
 **Response:**
 
-```
+```yaml
 "This is actually one of the BEST use cases for Copilot - accelerated learning! Here's why:
 
 **Copilot as a Teaching Tool:**
@@ -414,7 +414,7 @@ tools available, including automation, while maintaining full understanding and 
 
 **Response:**
 
-```
+```yaml
 "The beauty of Copilot is it works WITH your existing workflow. Here's the reality:
 
 **Time to Productivity:**
@@ -464,7 +464,7 @@ How much time is your team currently spending on [task they mentioned]?"
 
 **Response:**
 
-```
+```javascript
 "I completely understand competing priorities. Let me ask: Are any of your current priorities...
 
 - Azure infrastructure deployment/migration?
@@ -516,7 +516,7 @@ of avoiding a 30-minute introduction?"
 
 **Response:**
 
-```
+```javascript
 "That's actually helpful to know. Let me understand what you're currently using:
 
 [Identify the tool: AWS CodeWhisperer, Tabnine, Codeium, etc.]
@@ -566,7 +566,7 @@ Would that help you make a data-driven decision?"
 
 **Response:**
 
-```
+```javascript
 "Absolutely - getting the right stakeholders involved is critical for success. Let me help you 
 make the business case:
 

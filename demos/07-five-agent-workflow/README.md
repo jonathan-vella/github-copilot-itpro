@@ -110,13 +110,14 @@ Traditional infrastructure design involves:
 
    ```powershell
    cd demos/07-five-agent-workflow/prompts
-   ```
+
+```yaml
 
 2. **Open VS Code**:
 
    ```powershell
    code .
-   ```
+```
 
 3. **Open GitHub Copilot Chat** (`Ctrl+Shift+I`)
 
@@ -131,7 +132,7 @@ See [DEMO-SCRIPT.md](DEMO-SCRIPT.md) for detailed walkthrough.
 
 ## 📁 Demo Structure
 
-```
+```bicep
 07-five-agent-workflow/
 ├── README.md                           # This file
 ├── DEMO-SCRIPT.md                      # Step-by-step presentation guide
@@ -199,13 +200,14 @@ See [DEMO-SCRIPT.md](DEMO-SCRIPT.md) for detailed walkthrough.
    cd templates
    bicep build main.bicep --stdout --no-restore
    bicep lint main.bicep
-   ```
+
+```yaml
 
 4. (Optional) What-if deployment:
 
    ```powershell
    .\deploy.ps1 -WhatIf
-   ```
+```
 
 **Key Takeaway**: Production-ready templates in minutes, following Azure best practices and security defaults.
 

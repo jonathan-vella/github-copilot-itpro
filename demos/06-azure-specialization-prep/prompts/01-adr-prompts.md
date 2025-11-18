@@ -8,7 +8,7 @@ The ADR (Architectural Decision Record) Generator agent helps document architect
 
 ## 📝 Prompt Template
 
-```
+```text
 Document the architectural decision to [DECISION] for [CONTEXT].
 
 Consider the following:
@@ -26,7 +26,7 @@ Include: decision drivers, alternatives considered, consequences, and compliance
 
 ### Prompt 1: Database Selection Decision
 
-```
+```text
 Document the architectural decision to use Azure SQL Database instead of SQL Managed Instance 
 for the Contoso Task Manager application migration.
 
@@ -51,7 +51,7 @@ Include: decision drivers, alternatives considered, consequences, and compliance
 
 ### Prompt 2: High Availability Architecture
 
-```
+```text
 Document the architectural decision to implement high availability using Azure Load Balancer 
 with multiple Virtual Machines instead of Azure App Service for the Contoso Task Manager 
 web application.
@@ -78,7 +78,7 @@ Include: decision rationale, risk assessment, migration complexity, and long-ter
 
 ### Prompt 3: Network Security Design
 
-```
+```text
 Document the architectural decision to use public endpoints with Network Security Groups 
 instead of Private Endpoints for the demo deployment of the Task Manager application.
 
@@ -106,7 +106,7 @@ and recommendations for production deployments.
 
 ### Prompt 4: VM Sizing Decision
 
-```
+```powershell
 Document the architectural decision to use Standard_D2s_v3 VM size for the IIS web servers 
 in the Contoso Task Manager deployment.
 
@@ -133,7 +133,7 @@ and scale-out strategy.
 
 ### Prompt 5: Backup and DR Strategy
 
-```
+```text
 Document the architectural decision for backup and disaster recovery strategy using 
 Azure SQL Database automated backups instead of implementing geo-replication.
 
@@ -163,7 +163,7 @@ and future enhancements.
 
 ### ❌ Too Vague
 
-```
+```text
 Document why we chose Azure SQL Database.
 ```
 
@@ -178,7 +178,7 @@ Document why we chose Azure SQL Database.
 
 ### ❌ Too Technical, No Business Context
 
-```
+```text
 Document the decision to use Azure SQL Database Standard S2 tier with 50 DTUs, 
 point-in-time restore enabled, TDE encryption, and geo-redundant backups.
 ```
@@ -194,7 +194,7 @@ point-in-time restore enabled, TDE encryption, and geo-redundant backups.
 
 ### ❌ Multiple Decisions in One Prompt
 
-```
+```text
 Document all the architectural decisions for the Contoso migration including database, 
 networking, compute, security, monitoring, and backup.
 ```
@@ -221,7 +221,7 @@ Always include:
 
 Help Copilot understand what you considered:
 
-```
+```text
 Compare Azure SQL Database vs. SQL Managed Instance vs. SQL Server on VM
 ```
 
@@ -229,7 +229,7 @@ Compare Azure SQL Database vs. SQL Managed Instance vs. SQL Server on VM
 
 Guide the structure:
 
-```
+```yaml
 Include: decision drivers, alternatives considered, consequences, and compliance implications.
 ```
 
@@ -267,7 +267,7 @@ Before submitting your prompt, verify:
 
 ### Good Example: Complete Context
 
-```
+```text
 Document the architectural decision to deploy VMs in an Availability Set rather than 
 Availability Zones for the Contoso Task Manager application.
 

@@ -36,7 +36,7 @@
 
 **Prompt**:
 
-```
+```bicep
 Generate comprehensive Azure architecture documentation for resource group [name].
 
 Include:
@@ -57,7 +57,7 @@ Output format: Markdown with embedded Mermaid diagrams
 
 **Prompt**:
 
-```
+```bicep
 Generate Azure architecture documentation for [resource group] with focus on compliance.
 
 Required sections:
@@ -90,7 +90,7 @@ Output: Markdown with Mermaid diagrams, compliance matrix table
 
 **Prompt**:
 
-```
+```bicep
 Generate operational runbook from Bicep template at [path/to/template.bicep].
 
 Extract and document:
@@ -117,7 +117,7 @@ Output: Markdown with PowerShell/Bash code blocks
 
 **Prompt**:
 
-```
+```text
 Create operational procedures runbook for [application name] deployed in Azure.
 
 Sections:
@@ -159,7 +159,7 @@ Output: Wiki-style Markdown with linked table of contents
 
 **Prompt**:
 
-```
+```bicep
 Generate troubleshooting guide from Application Insights telemetry.
 
 Analyze past [30/60/90] days of data from Application Insights [resource name].
@@ -196,7 +196,7 @@ Output: Markdown with Mermaid flowcharts and KQL code blocks
 
 **Prompt**:
 
-```
+```text
 Create troubleshooting guide for [Azure service/application].
 
 Structure as decision tree:
@@ -237,7 +237,7 @@ Output: Markdown with Mermaid diagrams
 
 **Prompt**:
 
-```
+```text
 Generate API documentation from C# Web API project at [path].
 
 Extract from XML documentation comments:
@@ -273,7 +273,7 @@ Output: Markdown with OpenAPI/Swagger-style formatting
 
 **Prompt**:
 
-```
+```text
 Convert OpenAPI specification at [path/to/openapi.yaml] to user-friendly API documentation.
 
 Generate:
@@ -314,7 +314,7 @@ Output: Developer-friendly Markdown with extensive examples
 
 **Prompt**:
 
-```
+```sql
 Generate disaster recovery runbook for [application/infrastructure name].
 
 Based on:
@@ -375,7 +375,7 @@ Output: PDF-ready Markdown
 
 **Prompt**:
 
-```
+```bicep
 Generate Mermaid architecture diagram for Azure infrastructure.
 
 Resources:
@@ -420,19 +420,21 @@ graph TB
     AppSvc -->|queries| SQL
     AppSvc -->|reads/writes| Blob
     Functions -->|writes| Cosmos
-```
+```sql
 
 ### Network Topology Diagrams
 
 **Prompt**:
 
 ```
+
 Create network topology diagram in Mermaid for Azure virtual network.
 
 VNet configuration:
 [paste VNet details: name, address space, subnets, NSGs, peering]
 
 Diagram should show:
+
 - VNet boundary with address space
 - Subnets with address prefixes
 - NSG associations
@@ -443,16 +445,19 @@ Diagram should show:
 Use `graph LR` (left-to-right) layout for network flow visualization.
 
 Output: Mermaid syntax
-```
+
+```text
 
 ### Sequence Diagrams for Workflows
 
 **Prompt**:
 
 ```
+
 Generate Mermaid sequence diagram for [workflow/process name].
 
 Actors:
+
 - User
 - Application
 - Authentication Service (Azure AD)
@@ -463,13 +468,15 @@ Flow:
 [describe or paste workflow steps]
 
 Diagram requirements:
+
 - Show authentication flow
 - Include success and error paths
 - Note async operations
 - Show retry logic if applicable
 
 Output: Mermaid sequence diagram syntax
-```
+
+```yaml
 
 ---
 
@@ -480,40 +487,51 @@ Output: Mermaid sequence diagram syntax
 **Step 1 - Generate Basic Version**:
 
 ```
+
 Generate basic architecture documentation for [resource group].
 Include resource inventory and simple diagram.
-```
+
+```yaml
 
 **Step 2 - Enhance Specific Section**:
 
 ```
+
 Expand the network security section of the architecture document.
 Add details on:
+
 - NSG rules and their purposes
 - Azure Firewall configuration
 - DDoS protection
 - Private endpoints
 - Service endpoints
-```
+
+```yaml
 
 **Step 3 - Add Cross-References**:
 
 ```
+
 Add cross-references throughout the document:
+
 - Link troubleshooting guide for common issues
 - Reference runbook for operational procedures
 - Link to compliance documentation
 - Add related Azure documentation links
-```
+
+```yaml
 
 **Step 4 - Customize Tone**:
 
 ```
+
 Adjust document tone for [audience]:
+
 - Executive summary: Business-focused, non-technical
 - Technical sections: Detailed for operations team
 - Appendix: Reference information for support staff
-```
+
+```bicep
 
 ### Technique 2: Template-Based Generation
 
@@ -539,7 +557,7 @@ Adjust document tone for [audience]:
 
 **Prompt for Each Project**:
 
-```
+```bicep
 Fill this architecture template for resource group [name]:
 [paste template]
 
@@ -552,7 +570,7 @@ Calculate cost estimates from resource SKUs.
 
 **Prompt for Complete Documentation Suite**:
 
-```
+```bicep
 Generate complete documentation suite for [project name]:
 
 1. Architecture Documentation (architecture.md)
@@ -587,7 +605,7 @@ Output: 6 separate Markdown files
 
 **Prompt**:
 
-```
+```text
 Generate customer handoff documentation for completed Azure migration.
 
 Context:
@@ -626,7 +644,7 @@ Output: 4 linked Markdown documents
 
 **Prompt**:
 
-```
+```text
 Generate audit-ready documentation for [environment name].
 
 Purpose: SOC 2 Type II compliance audit
@@ -666,7 +684,7 @@ Output: Structured Markdown for PDF conversion
 
 **Prompt**:
 
-```
+```text
 Generate knowledge transfer documentation for [system name].
 
 Capture:
@@ -704,7 +722,7 @@ Format: Wiki-style with lots of examples
 
 **Completeness**:
 
-```
+```text
 Generate documentation completeness checklist for [doc type].
 List all required sections, verify each is present and adequate.
 Report completeness percentage.
@@ -712,7 +730,7 @@ Report completeness percentage.
 
 **Accuracy Validation**:
 
-```
+```text
 Compare generated documentation against actual Azure resources.
 Verify:
 - All resources documented
@@ -742,7 +760,7 @@ Report discrepancies for manual review.
 **Problem**: Documentation lacks specific details  
 **Solution**: Provide more context in prompt
 
-```
+```yaml
 # Instead of:
 "Generate architecture documentation"
 
@@ -760,7 +778,7 @@ Include specific configuration details for each component."
 **Problem**: Mermaid diagram won't render  
 **Solution**: Request validation and fix
 
-```
+```text
 Generate Mermaid architecture diagram for [resources].
 After generation, validate Mermaid syntax is correct.
 Fix any syntax errors.
@@ -772,7 +790,7 @@ Test in Mermaid Live Editor.
 **Problem**: Documentation references old Azure Portal or deprecated features  
 **Solution**: Specify current best practices
 
-```
+```text
 Generate documentation using current Azure best practices (2024).
 Use:
 - Azure CLI (latest version)
@@ -787,7 +805,7 @@ Use:
 **Problem**: Multiple documents have different styles  
 **Solution**: Use consistent template
 
-```
+```javascript
 Generate all documents using this template structure:
 [paste template with heading styles, section order, formatting rules]
 

@@ -7,7 +7,7 @@ This document shows how the Copilot customizations improve the Bicep Quickstart 
 ```bash
 # Add Bicep best practices to project
 cat resources/copilot-customizations/instructions/bicep-code-best-practices.instructions.md >> .github/copilot-instructions.md
-```
+```bicep
 
 ## Before vs. After Comparison
 
@@ -93,7 +93,7 @@ output storageAccountName string = storageAccount.name
 
 @description('Primary endpoints for the storage account')
 output primaryEndpoints object = storageAccount.properties.primaryEndpoints
-```
+```bicep
 
 ## Key Improvements Applied
 
@@ -158,7 +158,7 @@ az deployment group create \
 
 Using the Bicep implementation chat mode, ask:
 
-```
+```text
 Review this storage account template against Azure best practices
 ```
 
@@ -209,7 +209,7 @@ After installing `chatmodes/bicep-implement.chatmode.md`:
 
 **Prompt in chat**:
 
-```
+```yaml
 Create a storage account for demo 01 with:
 - Premium tier for app data
 - Geo-redundant storage
@@ -237,7 +237,7 @@ properties: {
   }
   isVersioningEnabled: true
 }
-```
+```bash
 
 ## DevOps Integration
 
@@ -299,7 +299,7 @@ With `powershell-pester-5.instructions.md`:
 
 ```powershell
 # Create tests for a deployment validation script
-```
+```bash
 
 **Copilot generates**:
 
@@ -344,7 +344,7 @@ Describe 'Test-BicepDeployment' {
 
 **Prompt**:
 
-```
+```text
 Generate a how-to guide for deploying demo 01 network template
 Target audience: IT Pros new to Bicep
 Include: Prerequisites, steps, validation, troubleshooting
@@ -376,7 +376,7 @@ cd github-copilot-itpro/demos/01-bicep-quickstart/with-copilot
 
 # Open in VS Code
 code network.bicep
-```
+```text
 
 [... rest of detailed guide ...]
 

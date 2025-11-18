@@ -277,7 +277,7 @@ Metrics, ROI calculation, customer-specific value
 
 ## Files in This Demo
 
-```
+```bicep
 demos/03-azure-arc-onboarding/
 ├── README.md (this file)
 ├── DEMO-SCRIPT.md (presenter guide with exact timing)

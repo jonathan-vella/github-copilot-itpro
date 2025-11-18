@@ -27,7 +27,7 @@ This document provides reusable prompt templates for common Azure infrastructure
 
 **Example**:
 
-```
+```yaml
 Pattern: // Create a {resourceType} named '{name}' in {location}
 Your use: // Create a storage account named 'stproddata' in eastus
 ```
@@ -42,7 +42,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Create an Azure Virtual Network named '{vnetName}' with address space {addressSpace}
 // Include {number} subnets: {subnet1Name} ({cidr1}), {subnet2Name} ({cidr2}), {subnet3Name} ({cidr3})
 // Add parameters for location and environment
-```
+```yaml
 
 **Example**:
 
@@ -61,7 +61,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Allow inbound {protocol} on port {port} from {source}
 // Allow outbound to {destination} on port {port}
 // Deny all other inbound traffic at priority 4096
-```
+```yaml
 
 **Example**:
 
@@ -80,7 +80,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Add a subnet named '{subnetName}' with address prefix {cidr}
 // Attach Network Security Group '{nsgName}'
 // {optionalFeature: Enable service endpoints for {services}}
-```
+```yaml
 
 **Example**:
 
@@ -99,7 +99,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Connect to the {subnetName} subnet
 // Add a private DNS zone for {dnsZoneName}
 // Link the DNS zone to the virtual network
-```
+```yaml
 
 **Example**:
 
@@ -118,7 +118,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Create VNet peering between '{vnet1Name}' and '{vnet2Name}'
 // {option: Allow gateway transit / Use remote gateway}
 // {option: Allow forwarded traffic}
-```
+```yaml
 
 **Example**:
 
@@ -141,7 +141,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Disable public blob access
 // Enable blob soft delete with {days} day retention
 // {optional: Enable versioning and change feed}
-```
+```yaml
 
 **Example**:
 
@@ -164,7 +164,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Enable soft delete with {days} day retention
 // Enable purge protection
 // {optional: Configure network rules to allow access from {source}}
-```
+```yaml
 
 **Example**:
 
@@ -183,7 +183,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 ```bicep
 // Create a {type: user-assigned / system-assigned} managed identity named '{identityName}'
 // Grant it {roleName} role on the {resourceType} named '{resourceName}'
-```
+```yaml
 
 **Example**:
 
@@ -200,7 +200,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Assign {roleName} role to {principalType} '{principalName}'
 // Scope: {scope: subscription / resource group / resource}
 // {optional: Add description '{description}'}
-```
+```bicep
 
 **Example**:
 
@@ -220,7 +220,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Create a blob container named '{containerName}'
 // Set public access to {level: None / Blob / Container}
 // {optional: Add immutability policy with {days} day retention}
-```
+```yaml
 
 **Example**:
 
@@ -239,7 +239,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Move blobs to {tier: Cool / Archive} after {days} days
 // Delete blobs older than {days} days
 // {optional: Apply to containers matching '{prefix}'}
-```
+```yaml
 
 **Example**:
 
@@ -259,7 +259,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Set quota to {size} GB
 // Use {tier: TransactionOptimized / Hot / Cool} tier
 // Enable {protocol: SMB / NFS} protocol
-```
+```yaml
 
 **Example**:
 
@@ -282,7 +282,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Deploy to '{subnetName}' subnet
 // Use {authType: SSH key / password} authentication
 // {optional: Attach {number} managed disk(s) for data ({size} GB, {sku: Premium_LRS / Standard_LRS})}
-```
+```yaml
 
 **Example**:
 
@@ -304,7 +304,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Deploy to '{subnetName}' subnet
 // Use password authentication with admin user '{adminUsername}'
 // Install {extension: IIS / SQL Server / custom}
-```
+```yaml
 
 **Example**:
 
@@ -327,7 +327,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Use autoscale based on {metric: CPU / Memory / Custom} > {threshold}%
 // Deploy to '{subnetName}' subnet
 // {optional: Add load balancer with health probe on port {port}}
-```
+```yaml
 
 **Example**:
 
@@ -350,7 +350,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Expose port {port} with {ipType: public / private} IP
 // Use {cpu} CPU cores and {memory} GB memory
 // {optional: Add environment variables: {key1}={value1}, {key2}={value2}}
-```
+```yaml
 
 **Example**:
 
@@ -373,7 +373,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Set retention to {days} days
 // Use {sku: PerGB2018 / CapacityReservation} pricing tier
 // {optional: Set daily cap to {gb} GB}
-```
+```yaml
 
 **Example**:
 
@@ -393,7 +393,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Send {logCategories: all logs / specific categories} to Log Analytics workspace
 // Include {metrics: all metrics / specific metrics}
 // {optional: Also send to storage account for long-term retention}
-```
+```yaml
 
 **Example**:
 
@@ -413,7 +413,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Set application type to {type: web / other}
 // Connect to Log Analytics workspace '{workspaceName}'
 // {optional: Enable {features: profiler / snapshot debugger / live metrics}}
-```
+```bicep
 
 **Example**:
 
@@ -434,7 +434,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Trigger when {condition} for {duration} minutes
 // Send notification to {actionGroup}
 // Set severity to {severity: 0-4}
-```
+```yaml
 
 **Example**:
 
@@ -460,7 +460,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Add NSGs with appropriate security rules for each tier
 // Include Load Balancer for web tier
 // Add Log Analytics and diagnostic settings for all resources
-```
+```yaml
 
 ---
 
@@ -487,7 +487,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Connect private endpoints to '{subnetName}' subnet
 // Create private DNS zones for each service
 // Link DNS zones to VNet '{vnetName}'
-```
+```yaml
 
 ---
 
@@ -511,7 +511,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Pattern: {resourceType}-{environment}-{application}-{instance}
 // Example: storage account = st{env}{app}{uniqueString}
 // Ensure names follow Azure naming rules (length, allowed characters)
-```
+```bicep
 
 ---
 
@@ -528,7 +528,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 ```bicep
 // Create Azure Bastion only if environment is 'prod'
 // Use parameter 'environment' to control deployment
-```
+```bicep
 
 ---
 
@@ -548,7 +548,7 @@ Your use: // Create a storage account named 'stproddata' in eastus
 // Base name: 'stproddata'
 // Append index to each resource (e.g., 'stproddata01', 'stproddata02')
 // Use range(1, 5)
-```
+```bicep
 
 ---
 
@@ -594,7 +594,7 @@ Here's how to combine multiple patterns to build a complete solution:
 // Allow inbound HTTPS on port 443 from Internet
 // Allow outbound to app subnet on port 8080
 // Deny all other inbound traffic at priority 4096
-```
+```text
 
 **Step 3 - Compute Resources**
 
@@ -615,7 +615,7 @@ Here's how to combine multiple patterns to build a complete solution:
 // Enable HTTPS only, minimum TLS 1.2
 // Disable public blob access
 // Enable blob soft delete with 30 day retention
-```
+```text
 
 **Step 5 - Private Connectivity**
 
@@ -632,7 +632,7 @@ Here's how to combine multiple patterns to build a complete solution:
 // Create a Log Analytics workspace named 'log-prod-webapp'
 // Set retention to 90 days
 // Use PerGB2018 pricing tier
-```
+```text
 
 ```bicep
 // Add diagnostic settings for the storage account named 'stprodwebappdata'

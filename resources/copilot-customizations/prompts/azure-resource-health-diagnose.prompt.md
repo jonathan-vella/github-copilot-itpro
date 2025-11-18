@@ -99,7 +99,8 @@ This workflow analyzes a specific Azure resource to assess its health status, di
    | where Level == "Error" or ResultType != "Success"
    | summarize ErrorCount=count() by Resource, ResultType, bin(TimeGenerated, 1h)
    | order by TimeGenerated desc
-   ```
+
+```yaml
 
    **Performance Analysis**:
 
@@ -110,7 +111,7 @@ This workflow analyzes a specific Azure resource to assess its health status, di
    | where ObjectName == "Processor" and CounterName == "% Processor Time"
    | summarize avg(CounterValue) by Computer, bin(TimeGenerated, 1h)
    | where avg_CounterValue > 80
-   ```
+```
 
    **Application-Specific Queries**:
 
@@ -128,7 +129,7 @@ This workflow analyzes a specific Azure resource to assess its health status, di
    | where Category == "SQLSecurityAuditEvents"
    | where action_name_s == "CONNECTION_FAILED"
    | summarize ConnectionFailures=count() by bin(TimeGenerated, 1h)
-   ```
+```bicep
 
 3. **Pattern Recognition**:
    - Identify recurring error patterns or anomalies
@@ -193,34 +194,37 @@ This workflow analyzes a specific Azure resource to assess its health status, di
 
 1. **Display Health Assessment Summary**:
 
-   ```
+```
+
    🏥 Azure Resource Health Assessment
-   
+
    📊 Resource Overview:
    • Resource: [Name] ([Type])
    • Status: [Healthy/Warning/Critical]
    • Location: [Region]
    • Last Analyzed: [Timestamp]
-   
+
    🚨 Issues Identified:
    • Critical: X issues requiring immediate attention
    • High: Y issues affecting performance/reliability  
    • Medium: Z issues for optimization
    • Low: N informational items
-   
+
    🔍 Top Issues:
+
    1. [Issue Type]: [Description] - Impact: [High/Medium/Low]
    2. [Issue Type]: [Description] - Impact: [High/Medium/Low]
    3. [Issue Type]: [Description] - Impact: [High/Medium/Low]
-   
+
    🛠️ Remediation Plan:
    • Immediate Actions: X items
    • Short-term Fixes: Y items  
    • Long-term Improvements: Z items
    • Estimated Resolution Time: [Timeline]
-   
+
    ❓ Proceed with detailed remediation plan? (y/n)
-   ```
+
+```bicep
 
 2. **Generate Detailed Report**:
 
@@ -260,41 +264,41 @@ This workflow analyzes a specific Azure resource to assess its health status, di
    ```bash
    # Critical fixes to restore service
    [Azure CLI commands with explanations]
-   ```
+```
 
-   ### Phase 2: Short-term Fixes (2-24 hours)
+### Phase 2: Short-term Fixes (2-24 hours)
 
    ```bash
    # Performance and reliability improvements
    [Azure CLI commands with explanations]
-   ```
+```yaml
 
    ### Phase 3: Long-term Improvements (1-4 weeks)
 
    ```bash
    # Architectural and preventive measures
    [Azure CLI commands and configuration changes]
-   ```
+```
 
-   ## 📈 Monitoring Recommendations
+## 📈 Monitoring Recommendations
 
-   - **Alerts to Configure**: [List of recommended alerts]
-   - **Dashboards to Create**: [Monitoring dashboard suggestions]
-   - **Regular Health Checks**: [Recommended frequency and scope]
+- **Alerts to Configure**: [List of recommended alerts]
+- **Dashboards to Create**: [Monitoring dashboard suggestions]
+- **Regular Health Checks**: [Recommended frequency and scope]
 
-   ## ✅ Validation Steps
+## ✅ Validation Steps
 
-   - [ ] Verify issue resolution through logs
-   - [ ] Confirm performance improvements
-   - [ ] Test application functionality
-   - [ ] Update monitoring and alerting
-   - [ ] Document lessons learned
+- [ ] Verify issue resolution through logs
+- [ ] Confirm performance improvements
+- [ ] Test application functionality
+- [ ] Update monitoring and alerting
+- [ ] Document lessons learned
 
-   ## 📝 Prevention Measures
+## 📝 Prevention Measures
 
-   - [Recommendations to prevent similar issues]
-   - [Process improvements]
-   - [Monitoring enhancements]
+- [Recommendations to prevent similar issues]
+- [Process improvements]
+- [Monitoring enhancements]
 
    ```
 

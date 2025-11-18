@@ -8,7 +8,7 @@ A comprehensive demonstration showing how GitHub Copilot's **four custom agents*
 
 ## 📂 Project Structure
 
-```
+```text
 demos/06-azure-specialization-prep/
 ├── README.md                          # ✅ Complete overview and quick start guide
 ├── DEMO-SCRIPT.md                     # ✅ 30-minute demo walkthrough
@@ -147,7 +147,7 @@ For a System Integrator pursuing 4 specializations/year:
 
 ### ADR Generator
 
-```
+```text
 Document the architectural decision to [DECISION] for [CONTEXT].
 
 Consider: [REQUIREMENTS], [CONSTRAINTS]
@@ -157,7 +157,7 @@ Include: decision drivers, alternatives considered, consequences, compliance imp
 
 ### Azure Principal Architect
 
-```
+```yaml
 Conduct a comprehensive Well-Architected Framework assessment for:
 
 Infrastructure: [COMPONENTS]

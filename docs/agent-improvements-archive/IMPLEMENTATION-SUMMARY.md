@@ -266,14 +266,15 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
    
    # Test each agent with simple prompts
    # Verify new features appear in outputs
-   ```
+
+```text
 
 2. **Run Baseline Tests**
 
    ```powershell
    cd demos/agent-testing
    .\Run-AgentTests.ps1 -Agent all -Baseline -Verbose
-   ```
+```
 
 3. **Review Documentation**
    - Read FIVE-MODE-WORKFLOW.md for updated workflow
@@ -331,7 +332,7 @@ Output:
 - Add Azure SQL Database
 - Implement Application Gateway
 [No cost information]
-```
+```yaml
 
 **After (v1.1.0):**
 
@@ -369,7 +370,7 @@ Phase 1: Deploy hub VNet
 Phase 2: Deploy spoke VNets
 Phase 3: Configure peering
 [Text description only]
-```
+```bicep
 
 **After (v1.1.0):**
 
@@ -398,7 +399,7 @@ graph TD
 3. Azure Firewall + Bastion
 4. VNet peering connections
 
-```
+```yaml
 
 ### Example 3: Using Progressive Implementation
 
@@ -432,7 +433,7 @@ Generating network-foundation.bicep...
 bicep build network-foundation.bicep
 az deployment group what-if --template-file network-foundation.bicep
 az deployment group create --template-file network-foundation.bicep
-```
+```text
 
 **Phase 1 Complete. Proceed to Phase 2? (y/n)**
 
@@ -485,16 +486,19 @@ az deployment group create --template-file network-foundation.bicep
 ### Metrics to Track
 
 **Time Savings:**
+
 - Workflow completion time (target: 40 min vs. 60 min baseline)
 - Time spent on cost research (should approach 0)
 - Time spent understanding dependencies (50% reduction)
 
 **Quality Improvements:**
+
 - Cost estimate accuracy (target: ±20%)
 - Deployment success rate (target: 90%+)
 - Number of clarification questions (target: <5 per session)
 
 **User Satisfaction:**
+
 - Partner feedback scores (target: 8.5/10)
 - Feature usage rates (cost estimation: 90%+)
 - Support ticket reduction (target: 30% reduction)
@@ -515,7 +519,7 @@ $metrics = @{
 # Save to tracking file
 $metrics | ConvertTo-Json | 
     Add-Content "docs/agent-improvements/metrics-tracking.json"
-```
+```powershell
 
 ---
 

@@ -49,7 +49,7 @@ Thank you for your interest in contributing! This repository is designed to help
 
 All demos must follow this structure:
 
-```
+```bicep
 demos/XX-demo-name/
 ├── README.md                   # Overview & learning objectives
 ├── DEMO-SCRIPT.md              # Step-by-step walkthrough with timing
@@ -78,7 +78,7 @@ demos/XX-demo-name/
 # Include comment-based help
 # Implement proper error handling
 # Follow PSScriptAnalyzer rules
-```
+```bicep
 
 **Bicep:**
 
@@ -106,7 +106,7 @@ demos/XX-demo-name/
 git clone https://github.com/YOUR-USERNAME/github-copilot-itpro.git
 cd github-copilot-itpro
 git remote add upstream https://github.com/jonathan-vella/github-copilot-itpro.git
-```
+```text
 
 ### 2. Create a Branch
 
@@ -138,7 +138,7 @@ az resource list --resource-group <your-rg> --output table
 
 # Verify cleanup
 az resource list --resource-group <your-rg> --output table
-```
+```text
 
 ### 5. Commit & Push
 
@@ -207,7 +207,7 @@ Before submitting:
 **Bold** for emphasis
 *Italic* for terms
 `code` for inline code
-```
+```powershell
 
 ### Code Blocks
 
@@ -219,7 +219,7 @@ Get-AzResourceGroup -Name "rg-demo"
 ```bicep
 // Bicep with syntax highlighting
 param location string = resourceGroup().location
-```
+```text
 
 ### Mermaid Diagrams
 

@@ -28,7 +28,7 @@ code --version        # Verify VS Code
 # Set Azure subscription
 az account set --subscription "your-subscription-id"
 az account show --output table
-```
+```bicep
 
 ---
 
@@ -138,7 +138,7 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2023-05-01' = {
 
 output vnetId string = virtualNetwork.id
 output subnetIds array = [for (subnet, i) in virtualNetwork.properties.subnets: subnet.id]
-```
+```text
 
 **Accept suggestion** (Tab or Enter).
 
@@ -190,7 +190,7 @@ output subnetIds array = [for (subnet, i) in virtualNetwork.properties.subnets: 
 // - Disable public blob access
 // - Enable blob soft delete (7 days)
 // - Use location and tags parameters
-```
+```bicep
 
 **Accept Copilot's suggestion.**
 
@@ -256,7 +256,7 @@ output blobEndpoint string = storageAccount.properties.primaryEndpoints.blob
 // Main orchestration template
 // Deploy the network and storage modules
 // Use parameters for location, environment (dev/prod), and tags
-```
+```bicep
 
 **Accept Copilot's suggestion.**
 
@@ -322,7 +322,7 @@ az deployment group validate `
   --resource-group rg-copilot-demo `
   --template-file with-copilot/main.bicep `
   --parameters location=eastus environment=demo
-```
+```yaml
 
 **Script:**
 > "Bicep compilation succeeded. No syntax errors. Now validating against Azure to ensure the deployment will work."
@@ -368,11 +368,12 @@ cd validation
 
 ```powershell
 ./verify.ps1 -ResourceGroupName "rg-copilot-demo"
-```
+```yaml
 
 **Expected output:**
 
 ```
+
 ✅ Resource Group: rg-copilot-demo exists
 ✅ VNet: vnet-demo-demo deployed
 ✅ Subnets: 3 subnets configured
@@ -384,7 +385,8 @@ cd validation
 Deployment Status: SUCCESS ✅
 Total Resources: 6
 Deployment Time: 3m 42s
-```
+
+```bash
 
 **Script:**
 > "All resources deployed successfully. Everything is configured exactly as specified. Let's review what we created..."
@@ -497,7 +499,7 @@ az deployment group validate --resource-group rg-copilot-demo --template-file ma
 
 # Check Azure quota/limits
 az vm list-usage --location eastus --output table
-```
+```bash
 
 ### Authentication Issues
 

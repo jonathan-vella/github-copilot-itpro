@@ -13,7 +13,7 @@
 
 ### Prompt
 
-```
+```text
 Design an Azure architecture for Contoso Healthcare's patient portal.
 
 **Business Context:**
@@ -88,7 +88,7 @@ After your assessment, hand off to the Bicep Planning Specialist for detailed im
 
 ### Prompt
 
-```
+```bicep
 Create a detailed Bicep implementation plan for the Contoso Healthcare patient portal architecture recommended in the previous assessment.
 
 **Context from Architecture Assessment:**
@@ -154,7 +154,7 @@ After creating the plan, hand off to the Bicep Implementation Specialist to gene
 
 ### Prompt
 
-```
+```bicep
 Implement the Bicep templates for the Contoso Healthcare patient portal based on the implementation plan in .bicep-planning-files/INFRA.contoso-patient-portal.md
 
 **Implementation Approach:**

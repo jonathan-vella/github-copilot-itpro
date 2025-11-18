@@ -34,7 +34,7 @@ This demo implements a high-availability web application with:
 
 ### Infrastructure Components
 
-```
+```bicep
 ┌─────────────────────────────────────────────────────────────┐
 │                     Azure Subscription                       │
 │  ┌───────────────────────────────────────────────────────┐  │
@@ -87,7 +87,7 @@ This demo uses the four custom agents in sequence:
 
 **Example Prompts**:
 
-```
+```text
 Document the decision to use Azure SQL Database instead of SQL Managed Instance 
 for this web application workload, considering cost, performance, and management overhead.
 ```
@@ -98,7 +98,7 @@ for this web application workload, considering cost, performance, and management
 
 **Example Prompts**:
 
-```
+```text
 Review this architecture for a high-availability web application with 99.99% SLA target.
 The solution uses 2 IIS VMs behind Azure Load Balancer with Azure SQL Database backend.
 Assess against all five WAF pillars and provide recommendations.
@@ -110,7 +110,7 @@ Assess against all five WAF pillars and provide recommendations.
 
 **Example Prompts**:
 
-```
+```text
 Create an implementation plan for a high-availability web application infrastructure.
 Requirements: 2 Windows VMs with IIS, Azure Load Balancer with public IP, Azure SQL Database 
 supporting 100 TPS, NSGs for security. Use Azure Verified Modules where available.
@@ -122,7 +122,7 @@ supporting 100 TPS, NSGs for security. Use Azure Verified Modules where availabl
 
 **Example Prompts**:
 
-```
+```text
 Generate Bicep templates based on the implementation plan. Include main.bicep and modules 
 for network, compute, database, and load balancer. Follow security best practices and 
 include comprehensive outputs for audit documentation.
@@ -130,7 +130,7 @@ include comprehensive outputs for audit documentation.
 
 ## 📁 Demo Structure
 
-```
+```bicep
 06-azure-specialization-prep/
 ├── README.md                          # This file
 ├── DEMO-SCRIPT.md                     # 30-minute walkthrough
@@ -193,39 +193,42 @@ include comprehensive outputs for audit documentation.
    ```powershell
    git clone https://github.com/jonathan-vella/github-copilot-itpro.git
    cd github-copilot-itpro/demos/06-azure-specialization-prep
-   ```
+
+```bash
 
 2. **Login to Azure**:
 
    ```powershell
    az login
    az account set --subscription "Your-Subscription-Name"
-   ```
+```
 
 3. **Run the demo script**:
 
    ```powershell
    # Follow the demo script
    code DEMO-SCRIPT.md
-   ```
+
+```yaml
 
 4. **Deploy infrastructure** (generated with agents):
 
    ```powershell
    ./scripts/deploy.ps1 -Environment prod -Location eastus
-   ```
+```
 
 5. **Validate deployment**:
 
    ```powershell
    ./scripts/validate.ps1 -ResourceGroupName rg-audit-demo-prod
-   ```
+
+```yaml
 
 6. **Cleanup resources**:
 
    ```powershell
    ./scripts/cleanup.ps1 -ResourceGroupName rg-audit-demo-prod
-   ```
+```
 
 ## 📚 Learning Objectives
 

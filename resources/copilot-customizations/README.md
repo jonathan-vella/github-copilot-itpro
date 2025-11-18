@@ -34,7 +34,7 @@ This repository uses **four custom GitHub Copilot agents** with automatic handof
 
 **Example**:
 
-```
+```text
 (Using adr_generator agent)
 Document the decision to use hub network topology.
 Include rationale and alternatives.
@@ -54,7 +54,7 @@ These customizations provide Copilot with specialized knowledge about:
 
 ## 📁 Directory Structure
 
-```
+```text
 copilot-customizations/
 ├── FOUR-MODE-WORKFLOW.md # Complete four-mode workflow guide
 ├── instructions/          # Project-wide coding standards and conventions
@@ -104,7 +104,8 @@ The most effective way to use GitHub Copilot for Azure infrastructure is through
        A[ADR Generator] --> B[Principal Architect]
        B --> C[Bicep Planning]
        C --> D[Bicep Implementation]
-   ```
+
+```text
 
 4. **Learn by Example**
    - See [FOUR-MODE-WORKFLOW.md](FOUR-MODE-WORKFLOW.md) for complete examples
@@ -133,7 +134,7 @@ For file-pattern-specific guidance, use the `applyTo` frontmatter in the instruc
 ---
 applyTo: '**/*.bicep'
 ---
-```
+```bicep
 
 ### Option 3: Install Chat Modes in VS Code
 
@@ -230,7 +231,7 @@ Ensures consistent module structure:
 # main.tf, variables.tf, outputs.tf separation
 # Proper provider version constraints
 # Remote backend configuration
-```
+```bicep
 
 #### `devops-core-principles.instructions.md`
 
@@ -365,13 +366,13 @@ The more context you provide, the better results you'll get:
 
 **❌ Vague**:
 
-```
+```text
 Create a storage account
 ```
 
 **✅ Specific**:
 
-```
+```yaml
 Create a Bicep template for an Azure Storage Account with:
 - HTTPS only
 - TLS 1.2 minimum

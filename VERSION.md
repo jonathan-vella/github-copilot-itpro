@@ -133,7 +133,7 @@ Production-ready repository with 7 comprehensive demos, 4 custom agents with aut
 
 ## Version Schema
 
-```
+```text
 MAJOR.MINOR.PATCH
 
 MAJOR (Breaking Changes):
