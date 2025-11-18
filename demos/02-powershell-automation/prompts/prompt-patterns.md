@@ -43,7 +43,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Include comment-based help with SYNOPSIS, DESCRIPTION, PARAMETER, and EXAMPLE sections
 # Add [CmdletBinding()] for advanced function features
 # {optional: Add SupportsShouldProcess for WhatIf support}
-```powershell
+```
 
 **Example**:
 
@@ -64,7 +64,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # - {Parameter2Name} ({mandatory/optional}, {type}, {validation})
 # - {Parameter3Name} ({mandatory/optional}, {type}, {validation})
 # {optional: Add parameter sets for mutually exclusive parameters}
-```yaml
+```
 
 **Example**:
 
@@ -85,7 +85,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Set error action preference to {Stop/Continue/SilentlyContinue}
 # Define color constants for console output (Success, Warning, Error, Info)
 # {optional: Initialize logging to file}
-```bicep
+```
 
 **Example**:
 
@@ -109,7 +109,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Select subscription {SubscriptionId}
 # Display connected account, subscription name, and tenant ID
 # Handle connection errors with try-catch
-```powershell
+```
 
 **Example**:
 
@@ -132,7 +132,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Include properties: {property1}, {property2}, {property3}
 # {optional: Sort by {property}}
 # {optional: Select first {number} results}
-```yaml
+```
 
 **Example**:
 
@@ -153,7 +153,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # - {criterion2}
 # - {criterion3}
 # Return as array of PSCustomObjects with properties: {properties}
-```yaml
+```
 
 **Example**:
 
@@ -175,7 +175,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Handle pagination for results > {page size}
 # {optional: Query across all accessible subscriptions}
 # Return results as array
-```bicep
+```
 
 **Example**:
 
@@ -199,7 +199,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Export to file: {filename pattern with timestamp}
 # Display summary statistics: {statistic1}, {statistic2}
 # {optional: Send email with report as attachment}
-```bash
+```
 
 **Example**:
 
@@ -222,7 +222,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Include charts: {chart type} showing {data}
 # {optional: Embed images/logos}
 # Save to file: {filename}
-```yaml
+```
 
 **Example**:
 
@@ -245,7 +245,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Pretty-print with indentation
 # Save to file: {filename}
 # {optional: Compress JSON file}
-```bicep
+```
 
 **Example**:
 
@@ -265,7 +265,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Calculate: {metric1}, {metric2}, {metric3}
 # Format as PSCustomObject with properties matching dashboard schema
 # {optional: Upload to {destination: Log Analytics / Storage / API endpoint}}
-```yaml
+```
 
 **Example**:
 
@@ -291,7 +291,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Log all changes to file: {logfile}
 # Handle errors: {error handling strategy}
 # Return summary: {success count}, {failure count}, {skipped count}
-```bicep
+```
 
 **Example**:
 
@@ -318,7 +318,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Handle already {running/stopped} VMs gracefully
 # Collect results: {success list}, {failure list with reasons}
 # Display summary table at completion
-```yaml
+```
 
 **Example**:
 
@@ -345,7 +345,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Process deletions {serially / in parallel}
 # Log all deletions with timestamp
 # Return list of deleted resources and any failures
-```yaml
+```
 
 **Example**:
 
@@ -373,7 +373,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Use transactions (rollback on failure)
 # Include dry-run mode with -WhatIf
 # Track changes in changelog
-```yaml
+```
 
 **Example**:
 
@@ -402,7 +402,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 #   - {Continue processing / Exit / Retry}
 # Maintain error counter
 # Display error summary at end: Total errors, Error types
-```bicep
+```
 
 **Example**:
 
@@ -427,7 +427,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Catch specific exceptions: {exception1}, {exception2}
 # Log each retry attempt with attempt number
 # Throw exception after all retries exhausted
-```powershell
+```
 
 **Example**:
 
@@ -451,7 +451,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # - Check existence: {existence check}
 # If validation fails: {Throw error / Return $false / Display warning}
 # Error message: {error message template}
-```yaml
+```
 
 **Example**:
 
@@ -478,7 +478,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Handle errors in parallel execution (log to shared error collection)
 # Wait for all jobs to complete before proceeding
 # Display combined results
-```yaml
+```
 
 **Example**:
 
@@ -503,7 +503,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # In Process block: Handle each pipeline object
 # {optional: Support ValueFromPipelineByPropertyName for {PropertyName}}
 # Return results that can be piped to next cmdlet
-```bicep
+```
 
 **Example**:
 
@@ -529,7 +529,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 #   - CurrentOperation: {current item}
 # Update progress every {interval}
 # Clear progress bar when complete: Write-Progress -Completed
-```bicep
+```
 
 **Example**:
 
@@ -555,7 +555,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Provide default values for optional keys
 # If configuration invalid: {Throw error / Use defaults / Prompt user}
 # Return configuration as PSCustomObject
-```yaml
+```
 
 **Example**:
 
@@ -579,7 +579,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Task action: Run PowerShell with this script path and parameters: {parameters}
 # Trigger: {Daily at time / Weekly on days / On event}
 # {optional: Send notification email when task completes}
-```powershell
+```
 
 **Example**:
 
@@ -642,7 +642,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Create a PowerShell function named Invoke-AzResourceAudit
 # Include comment-based help with SYNOPSIS, DESCRIPTION, PARAMETER, and EXAMPLE sections
 # Add [CmdletBinding()] for advanced function features
-```markdown
+```
 
 **Step 2 - Parameters**
 
@@ -660,7 +660,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Set error action preference to Stop
 # Define color constants for console output (Success, Warning, Error, Info)
 # Initialize logging to file with timestamp
-```powershell
+```
 
 **Step 4 - Authentication**
 
@@ -681,7 +681,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 #   - Location not in approved list (eastus, westus2, centralus)
 #   - Resources older than 90 days without Owner tag
 # Add progress bar showing current resource / total resources
-```bicep
+```
 
 **Step 6 - Analysis**
 
@@ -701,7 +701,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 # Add CSS styling for professional appearance
 # Include charts: Pie chart showing compliance percentage
 # Save to file in OutputPath with timestamp
-```text
+```
 
 **Step 8 - Error Handling**
 

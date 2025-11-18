@@ -144,18 +144,18 @@ Always specify the language for syntax highlighting:
 ✅ **Good:**
 
 ````markdown
-```powershell
+```
 Get-AzResourceGroup -Name "rg-demo"
 ```
 
-```bicep
+```
 param location string = 'swedencentral'
 ```
 
-```bash
+```
 az group create --name rg-demo --location swedencentral
 ```
-````
+```
 
 ❌ **Bad:**
 
@@ -163,7 +163,7 @@ az group create --name rg-demo --location swedencentral
 ```
 Get-AzResourceGroup -Name "rg-demo"
 ```
-````
+```
 
 #### Supported Languages
 
@@ -286,12 +286,12 @@ Use blockquotes for important notes:
 Use mermaid code blocks for diagrams:
 
 ````markdown
-```mermaid
+```
 graph LR
     A[On-Premises] --> B[Azure Arc]
     B --> C[Azure Portal]
 ```
-````
+```
 
 #### Diagram Best Practices
 
@@ -450,15 +450,15 @@ Related demos or resources.
 ```
 Get-AzResourceGroup
 ```
-````
+```
 
 ✅ **Solution:**
 
 ````markdown
-```powershell
+```
 Get-AzResourceGroup
 ```
-````
+```
 
 ### Issue: Lists Without Blank Lines
 

@@ -23,7 +23,7 @@ az account set --subscription "your-subscription-id"
 
 # Navigate to demo folder
 cd c:\Repos\github-copilot-itpro\demos\08-sbom-generator
-```text
+```
 
 ### 2. VS Code Setup
 
@@ -69,7 +69,7 @@ Keep `examples/` folder available in case live generation has issues. These pre-
 ```powershell
 # Open sample app structure
 code sample-app/
-```powershell
+```
 
 Point out:
 
@@ -145,7 +145,7 @@ Create a PowerShell script that:
 
 # Display results
 code examples/application-sbom.json
-```powershell
+```
 
 **Expected Results**:
 
@@ -200,7 +200,7 @@ Create a PowerShell script that:
 
 # Otherwise, show pre-generated example:
 code examples/container-sbom.json
-```powershell
+```
 
 **Expected Results**:
 
@@ -255,7 +255,7 @@ Create a PowerShell script that:
 
 # Otherwise, show Bicep template scanning:
 code examples/infrastructure-sbom.json
-```bicep
+```
 
 **Expected Results**:
 
@@ -298,7 +298,7 @@ Create a PowerShell script that:
 ```powershell
 # Create new file
 code with-copilot/Export-SBOMReport.ps1
-```yaml
+```
 
 **Prompt in Copilot Chat**:
 
@@ -316,7 +316,7 @@ Create a PowerShell script that:
 4. Includes filtering by component type
 5. Parameters for input file, output format (HTML/CSV), and output path
 
-```yaml
+```
 
 **Step 3**: Run the scripts
 

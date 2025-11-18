@@ -40,7 +40,7 @@ infra/bicep/contoso-patient-portal/
 ```powershell
 cd ../../infra/bicep/contoso-patient-portal
 .\deploy.ps1 -Environment prod -Location eastus2
-```text
+```
 
 ## Validation
 

@@ -428,7 +428,7 @@ Provide context in comments before prompting:
 # Business impact: $22K revenue loss per hour
 
 # Create diagnostic script to identify root cause
-```text
+```
 
 Then Copilot has full context for generating relevant solutions.
 
@@ -444,7 +444,7 @@ Create function to detect Azure App Service issues
 Check: CPU, memory, response time, error rate
 Return: List of detected issues with severity
 
-```yaml
+```
 
 **Step 2 - Analyze**:
 
@@ -453,7 +453,7 @@ Return: List of detected issues with severity
 For each detected issue, generate KQL query to analyze root cause
 Return: Query results with insights
 
-```yaml
+```
 
 **Step 3 - Remediate**:
 
@@ -462,7 +462,7 @@ Return: Query results with insights
 For each root cause, suggest and optionally apply remediation
 Include: WhatIf mode for safety
 
-```yaml
+```
 
 **Step 4 - Document**:
 
@@ -471,7 +471,7 @@ Include: WhatIf mode for safety
 Generate incident report from detection, analysis, and remediation steps
 Format: Markdown with timeline and lessons learned
 
-```markdown
+```
 
 ## Real-World Examples
 
@@ -486,7 +486,7 @@ Check: Request success rate, response time percentiles, dependency health
 Include: Automatic KQL query generation for Log Analytics
 Output: Suspected root cause with confidence level
 
-```yaml
+```
 
 **Result**: Generated script that identified connection pool exhaustion in 10 minutes vs. 8 hours manual KQL iteration.
 
@@ -501,7 +501,7 @@ Show: Query duration (avg, P95, P99), execution count, sample query text
 Filter: Duration > 5 seconds in last 4 hours
 Correlate with: Application Insights request failures
 
-```yaml
+```
 
 **Result**: Identified 3 missing indexes causing 12-second query times vs. 2 hours manual investigation.
 

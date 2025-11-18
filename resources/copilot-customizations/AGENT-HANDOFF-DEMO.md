@@ -112,7 +112,7 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
          apiVersion: 2023-05-01
          properties: {...}
 
-```bicep
+```
 
      - **Implementation Phases**: Logical grouping (Network, Security, Monitoring, Governance)
      - **Architecture Diagram**: Mermaid diagram showing relationships
@@ -139,7 +139,7 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
      
      Output to: infrastructure/hub-network-demo/
 
-```yaml
+```
 
    - (Using `bicep-implement` agent from dropdown)
 

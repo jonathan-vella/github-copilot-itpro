@@ -162,7 +162,7 @@ By the end of this demo, participants will understand:
 
 # Run against demo resource group
 Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
-```yaml
+```
 
 **Narrate Results**:
 > "Look at this output: We instantly see that our App Service is healthy, but there's a SQL Database with 'Degraded' status. That's our first clue."
@@ -195,7 +195,7 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
 
 # 4. Suggest next troubleshooting steps based on findings
 
-```yaml
+```
 
 **This is the "WOW" Moment** - Talk Through It:
 
@@ -224,7 +224,7 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
    | summarize FailureCount = count(), AvgDuration = avg(duration) by operation_Name
    | order by FailureCount desc
 
-```powershell
+```
 
    > "Look at this KQL - perfectly formatted, with time filtering, aggregation, and sorting. Writing this manually would take 20-30 minutes if you're experienced, hours if you're learning KQL."
 
@@ -244,7 +244,7 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
 ```powershell
 # Simulate the RetailMax incident
 Invoke-DiagnosticQuery -Symptom "Intermittent 5xx errors during checkout, started 2 hours ago" -WorkspaceName "law-retailmax-prod"
-```yaml
+```
 
 **Narrate Results** (even if demo data is synthetic):
 > "Within seconds, we have actionable intelligence: 127 failures in the payment processing operation, average duration spiked from 200ms to 3400ms. Without Copilot, we'd still be crafting the first query."
@@ -276,7 +276,7 @@ Invoke-DiagnosticQuery -Symptom "Intermittent 5xx errors during checkout, starte
 
 # Add WhatIf support for safe testing
 
-```yaml
+```
 
 **Quick Generation** - Narrate Highlights:
 > "Copilot is now generating remediation logic. Notice the `WhatIf` support - best practice for production scripts."
@@ -317,7 +317,7 @@ Resolve-CommonIssues -Issue 'ConnectionTimeout' -Confirm:$false
 
 ```powershell
 New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPath "incident-report.md"
-```powershell
+```
 
 > "Professional, comprehensive documentation. Ready to share with management and teammates."
 
@@ -342,7 +342,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
    ```powershell
    Invoke-DiagnosticQuery -Symptom "High database CPU with slow queries"
 
-```yaml
+```
 
    > "Step 2: KQL analysis - found top 5 CPU-intensive queries in 2 minutes vs. 45 minutes manually."
 
@@ -359,7 +359,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
    ```powershell
    New-TroubleshootingReport -IncidentTitle "Checkout Performance Degradation"
 
-```bicep
+```
 
    > "Step 4: Generated comprehensive post-mortem in 10 minutes vs. 2 hours of writing."
 
@@ -594,7 +594,7 @@ Invoke-AzOperationalInsightsQuery -WorkspaceId "<workspace-id>" -Query "requests
 
 # Check Resource Health
 Get-AzResourceHealth -ResourceId "<resource-id>"
-```text
+```
 
 ### Common KQL Patterns
 

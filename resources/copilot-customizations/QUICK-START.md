@@ -14,7 +14,7 @@ cat resources/copilot-customizations/instructions/bicep-code-best-practices.inst
 
 # Add DevOps principles
 cat resources/copilot-customizations/instructions/devops-core-principles.instructions.md >> .github/copilot-instructions.md
-```yaml
+```
 
 **What you get**: Copilot now knows Bicep naming conventions and DevOps best practices across all files.
 
@@ -26,7 +26,7 @@ Open `demos/01-bicep-quickstart/scenario/requirements.md` in VS Code and ask Cop
 
 Create a Bicep template for a virtual network with 3 subnets
 
-```bicep
+```
 
 **Expected improvement**:
 
@@ -61,7 +61,7 @@ Create a storage account with:
 - No public access
 - Geo-redundant storage
 
-```yaml
+```
 
 **What you get**:
 
@@ -129,7 +129,7 @@ Use when you need to generate:
 // - Data subnet (10.0.2.0/24)
 // - Management subnet (10.0.3.0/24)
 // - NSGs on all subnets
-```powershell
+```
 
 4. Let Copilot generate the template
 5. Review and accept
@@ -155,7 +155,7 @@ Create Pester tests for Get-AzureResources function that:
 - Tests error handling
 - Tests filtering by resource type
 
-```text
+```
 
 4. Review generated test structure
 
@@ -179,7 +179,7 @@ Review for:
 2. Cost optimization
 3. Reliability (HA, DR)
 
-```bicep
+```
 
 4. Get structured feedback with recommendations
 
@@ -214,7 +214,7 @@ Audience: IT Pros new to Bicep
 Goal: Deploy demo 01 infrastructure
 Include: Prerequisites, steps, validation, troubleshooting
 
-```bicep
+```
 
 3. Review proposed structure
 4. Generate full documentation

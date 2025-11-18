@@ -269,7 +269,7 @@ Set-AzContext -SubscriptionId "<your-subscription-id>"
 
 # 4. View generated documentation
 code .\docs\architecture.md
-```powershell
+```
 
 ### Full Demo Setup (20 Minutes)
 
@@ -316,7 +316,7 @@ New-TroubleshootingGuide -ApplicationInsights "app-insights-prod"
 ```powershell
 # Generate from OpenAPI spec or code comments
 New-APIDocumentation -SourcePath ".\Controllers" -OutputFormat "Markdown"
-```powershell
+```
 
 **Result**: Complete API docs in 15 minutes vs. 3 hours (92% faster)
 

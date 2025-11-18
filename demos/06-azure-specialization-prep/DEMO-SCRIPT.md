@@ -67,7 +67,7 @@ By the end of this demo, participants will understand how to:
 ```powershell
 # Open the audit checklist
 code demos/06-azure-specialization-prep/azure-specialization-audit-checklist.md
-```yaml
+```
 
 **Talking Points**:
 
@@ -101,7 +101,7 @@ for the Contoso Task Manager application migration. Consider the following conte
 
 Include: decision drivers, alternatives considered, consequences, and compliance implications.
 
-```bicep
+```
 
 **Expected Output**:
 
@@ -149,7 +149,7 @@ Conduct a comprehensive Well-Architected Framework assessment for the following 
 Assess all five WAF pillars (Reliability, Security, Cost Optimization, Operational Excellence,
 Performance Efficiency) and provide specific recommendations with priority levels.
 
-```bicep
+```
 
 **Expected Output**:
 
@@ -233,7 +233,7 @@ Provide: module structure, parameter strategy, deployment sequence, and validati
 ```powershell
 # Save to planning document
 # Copy chat output to: infrastructure/IMPLEMENTATION-PLAN.md
-```yaml
+```
 
 ---
 
@@ -270,7 +270,7 @@ Create the following structure:
 
 Start with main.bicep and provide complete, deployable code.
 
-```bicep
+```
 
 **Expected Output**:
 
@@ -311,7 +311,7 @@ az deployment group validate `
   --resource-group rg-audit-demo-prod `
   --template-file infrastructure/main.bicep `
   --parameters infrastructure/parameters/prod.bicepparam
-```bicep
+```
 
 **Talking Points**:
 
@@ -347,7 +347,7 @@ az deployment group what-if `
   --resource-group rg-audit-demo-prod `
   --template-file infrastructure/main.bicep `
   --parameters infrastructure/parameters/prod.bicepparam
-```yaml
+```
 
 ---
 
@@ -402,7 +402,7 @@ Provide: Azure Chaos Studio experiment configuration, monitoring approach, and s
 # Open the comprehensive guide section on chaos engineering
 code validation/VALIDATION-TESTING-GUIDE.md
 # Navigate to Section 4: Chaos Engineering & Fault Injection
-```bicep
+```
 
 **Talking Points**:
 
@@ -447,7 +447,7 @@ Azure Load Testing service.
 
 Provide: JMeter test plan structure, failure criteria, and resource utilization thresholds.
 
-```yaml
+```
 
 **Show load testing documentation**:
 
@@ -486,7 +486,7 @@ Start-Process "validation/uat-tracking-template.csv"
 Start-Process "validation/uat-defect-tracking.csv"
 Start-Process "validation/uat-summary-by-category.csv"
 Start-Process "validation/uat-tester-assignments.csv"
-```bicep
+```
 
 **Walk through the realistic dummy data**:
 
@@ -554,7 +554,7 @@ code validation/UAT-TEMPLATES-README.md
 
 ```powershell
 code scripts/validate-data-integrity.ps1
-```yaml
+```
 
 **Demo the script** (if source/target DBs available):
 
@@ -593,7 +593,7 @@ code scripts/validate-data-integrity.ps1
 ```powershell
 code validation/VALIDATION-TESTING-GUIDE.md
 # Navigate to Section 7: Continuous Validation
-```bicep
+```
 
 **Key Components**:
 

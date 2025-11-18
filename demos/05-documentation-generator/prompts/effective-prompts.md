@@ -420,7 +420,7 @@ graph TB
     AppSvc -->|queries| SQL
     AppSvc -->|reads/writes| Blob
     Functions -->|writes| Cosmos
-```sql
+```
 
 ### Network Topology Diagrams
 
@@ -446,7 +446,7 @@ Use `graph LR` (left-to-right) layout for network flow visualization.
 
 Output: Mermaid syntax
 
-```text
+```
 
 ### Sequence Diagrams for Workflows
 
@@ -476,7 +476,7 @@ Diagram requirements:
 
 Output: Mermaid sequence diagram syntax
 
-```yaml
+```
 
 ---
 
@@ -491,7 +491,7 @@ Output: Mermaid sequence diagram syntax
 Generate basic architecture documentation for [resource group].
 Include resource inventory and simple diagram.
 
-```yaml
+```
 
 **Step 2 - Enhance Specific Section**:
 
@@ -506,7 +506,7 @@ Add details on:
 - Private endpoints
 - Service endpoints
 
-```yaml
+```
 
 **Step 3 - Add Cross-References**:
 
@@ -519,7 +519,7 @@ Add cross-references throughout the document:
 - Link to compliance documentation
 - Add related Azure documentation links
 
-```yaml
+```
 
 **Step 4 - Customize Tone**:
 
@@ -531,7 +531,7 @@ Adjust document tone for [audience]:
 - Technical sections: Detailed for operations team
 - Appendix: Reference information for support staff
 
-```bicep
+```
 
 ### Technique 2: Template-Based Generation
 

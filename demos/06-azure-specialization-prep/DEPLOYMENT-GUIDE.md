@@ -25,7 +25,7 @@ Before deploying, ensure you have:
 ```powershell
 az login
 az account set --subscription "<your-subscription-id>"
-```text
+```
 
 ### 2. Deploy Infrastructure
 
@@ -45,7 +45,7 @@ cd demos/06-azure-specialization-prep/scripts
 
 ```powershell
 .\validate.ps1 -ResourceGroupName "rg-taskmanager-demo"
-```text
+```
 
 ### 4. Access Application
 
@@ -55,7 +55,7 @@ Navigate to the public IP address displayed in deployment outputs:
 
 http://<public-ip-address>
 
-```yaml
+```
 
 ---
 
@@ -88,7 +88,7 @@ Resource Group (rg-taskmanager-prod)
     ├── Application Insights
     └── Alert rules for CPU, memory, SQL, LB
 
-```bicep
+```
 
 **Total estimated cost:** ~$374/month
 
@@ -127,7 +127,7 @@ Preview changes before deploying:
     -Location "eastus" `
     -Environment "prod" `
     -WhatIf
-```text
+```
 
 This shows what resources will be created without making changes.
 
@@ -161,7 +161,7 @@ $sqlPassword = ConvertTo-SecureString "YourSqlPassword456!" -AsPlainText -Force
     -Environment "prod" `
     -AdminPassword $adminPassword `
     -SqlAdminPassword $sqlPassword
-```yaml
+```
 
 ---
 
@@ -186,7 +186,7 @@ Watch the deployment progress in your terminal:
 ▶️  Deploying infrastructure...
    This may take 15-20 minutes...
 
-```bicep
+```
 
 #### Azure Portal
 
@@ -260,7 +260,7 @@ Execute the schema script:
 ```powershell
 cd demos/06-azure-specialization-prep/application/database
 sqlcmd -S <sql-server>.database.windows.net -d <database-name> -U sqladmin -P <password> -i schema.sql
-```markdown
+```
 
 Or open `schema.sql` in Azure Data Studio and execute.
 
@@ -294,7 +294,7 @@ Or open `schema.sql` in Azure Data Studio and execute.
           providerName="System.Data.SqlClient" />
    </connectionStrings>
 
-```sql
+```
 
 4. **Repeat for VM2**
 
@@ -366,7 +366,7 @@ Refresh the page multiple times. Server name should alternate between:
    ```powershell
    az vm list-usage --location eastus --output table
 
-```text
+```
 
 2. Review deployment logs in Azure Portal
 
@@ -388,7 +388,7 @@ Refresh the page multiple times. Server name should alternate between:
    ```powershell
    az vm get-instance-view --resource-group rg-taskmanager-demo --name vm-web01-prod --query "instanceView.statuses[?starts_with(code, 'PowerState/')].displayStatus"
 
-```bicep
+```
 
 2. Verify NSG rules allow HTTP:
 
@@ -401,7 +401,7 @@ Refresh the page multiple times. Server name should alternate between:
    ```powershell
    Get-WindowsFeature -Name Web-Server
 
-```bicep
+```
 
 ### Issue: SQL Connection Fails
 
@@ -420,7 +420,7 @@ Refresh the page multiple times. Server name should alternate between:
    ```powershell
    Test-NetConnection -ComputerName <sql-server>.database.windows.net -Port 1433
 
-```bash
+```
 
 3. Verify connection string in Web.config
 
@@ -441,7 +441,7 @@ Refresh the page multiple times. Server name should alternate between:
    ```powershell
    az network lb probe show --resource-group rg-taskmanager-demo --lb-name lb-web-prod --name health-probe-http
 
-```sql
+```
 
 3. Check VM health in Azure Portal > Load Balancer > Backend Pools
 
@@ -466,7 +466,7 @@ Type 'DELETE' to confirm deletion
 
 ```powershell
 .\cleanup.ps1 -ResourceGroupName "rg-taskmanager-demo" -Force
-```bicep
+```
 
 ---
 

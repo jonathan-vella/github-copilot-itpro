@@ -105,7 +105,7 @@ The most effective way to use GitHub Copilot for Azure infrastructure is through
        B --> C[Bicep Planning]
        C --> D[Bicep Implementation]
 
-```text
+```
 
 4. **Learn by Example**
    - See [FOUR-MODE-WORKFLOW.md](FOUR-MODE-WORKFLOW.md) for complete examples
@@ -134,7 +134,7 @@ For file-pattern-specific guidance, use the `applyTo` frontmatter in the instruc
 ---
 applyTo: '**/*.bicep'
 ---
-```bicep
+```
 
 ### Option 3: Install Chat Modes in VS Code
 
@@ -231,7 +231,7 @@ Ensures consistent module structure:
 # main.tf, variables.tf, outputs.tf separation
 # Proper provider version constraints
 # Remote backend configuration
-```bicep
+```
 
 #### `devops-core-principles.instructions.md`
 

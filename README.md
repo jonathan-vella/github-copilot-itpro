@@ -58,7 +58,7 @@ cat demos/01-bicep-quickstart/DEMO-SCRIPT.md
 # Test in your Azure subscription
 cd demos/01-bicep-quickstart/validation
 ./deploy.ps1
-```yaml
+```
 
 **Time to First Demo:** 45 minutes (including review and test)
 
@@ -123,7 +123,7 @@ github-copilot-itpro/
 └── docs/                               # Additional documentation
     └── adr/                            # Architectural Decision Records
 
-```yaml
+```
 
 ---
 
@@ -700,7 +700,7 @@ Showcase the complete 5-agent workflow from business requirements to deployable 
     "ms-azuretools.vscode-bicep"
   ]
 }
-```text
+```
 
 ### 🎯 Supercharge Your Copilot (NEW!)
 

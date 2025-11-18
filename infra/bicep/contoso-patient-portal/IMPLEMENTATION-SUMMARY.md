@@ -181,7 +181,7 @@ Successfully implemented Bicep templates for HIPAA-compliant patient portal infr
 
 ```powershell
 bicep build main.bicep --stdout --no-restore
-```yaml
+```
 
 **Result**: ✅ Success  
 **Warnings**: 1 (Application Insights types not available - non-blocking)  
@@ -201,7 +201,7 @@ bicep lint main.bicep
 
 ```powershell
 bicep format main.bicep
-```bicep
+```
 
 **Result**: ✅ All files formatted successfully
 
@@ -286,7 +286,7 @@ cd infra/bicep/contoso-patient-portal
 
 # Run deployment script
 .\deploy.ps1 -Environment prod -Location eastus2
-```text
+```
 
 ### What-If Analysis
 
@@ -303,7 +303,7 @@ az deployment sub create \
   --template-file main.bicep \
   --parameters main.bicepparam \
   --parameters sqlAdminPassword='SecureP@ssw0rd123!'
-```sql
+```
 
 ## 🚀 Next Steps
 
@@ -321,7 +321,7 @@ az deployment sub create \
    az group show --name rg-contoso-patient-portal-dev
    az resource list --resource-group rg-contoso-patient-portal-dev -o table
 
-```yaml
+```
 
 3. **Test Connectivity**: Verify App Service and database
 

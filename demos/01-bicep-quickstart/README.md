@@ -75,7 +75,7 @@ graph TB
     style Storage fill:#0078D4,color:#fff
     style NSG1 fill:#50E6FF,color:#000
     style NSG2 fill:#50E6FF,color:#000
-```bicep
+```
 
 ## Prerequisites
 
@@ -157,7 +157,7 @@ cd demos/01-bicep-quickstart/validation
 
 # Clean up when done
 ./cleanup.ps1 -ResourceGroupName "rg-copilot-demo"
-```text
+```
 
 ## Key Copilot Features Demonstrated
 
@@ -168,7 +168,7 @@ cd demos/01-bicep-quickstart/validation
 Prompt: "Create a Bicep template for an Azure VNet with three subnets for web, app, and data tiers"
 Result: Complete VNet resource with subnet definitions
 
-```bicep
+```
 
 ### 2. Context-Aware Suggestions
 
