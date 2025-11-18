@@ -24,7 +24,7 @@ This is a hands-on collection of **30-minute demos** showing how GitHub Copilot 
 | **Troubleshooting diagnostics** | 30 min | 8 min | **73%** ⚡ |
 | **Documentation** (runbook) | 90 min | 20 min | **78%** ⚡ |
 | **Specialization audit prep** | 60 hrs | 10 hrs | **83%** ⚡ |
-| **4-agent workflow** (architecture → code) | 18 hrs | 45 min | **95%** ⚡ |
+| **5-agent workflow** (requirements → code) | 18 hrs | 45 min | **96%** ⚡ |
 
 ### Who This Is For
 
@@ -50,7 +50,7 @@ cd github-copilot-itpro
 # - Hybrid Infrastructure → demos/03-azure-arc-onboarding
 # - Operational Teams → demos/04-troubleshooting-assistant
 # - Specialization Partners → demos/06-azure-specialization-prep
-# - Complete Workflow → demos/07-four-agent-workflow
+# - Complete Workflow → demos/07-five-agent-workflow
 
 # Read the demo script
 cat demos/01-bicep-quickstart/DEMO-SCRIPT.md
@@ -68,10 +68,10 @@ cd demos/01-bicep-quickstart/validation
 2. **Foundation** (30 min): [PowerShell Automation](demos/02-powershell-automation) - See automation best practices emerge
 3. **Modern IaC** (30 min): [Bicep Quickstart](demos/01-bicep-quickstart) - Bridge to Infrastructure as Code
 4. **Advanced** (30 min): [Azure Arc](demos/03-azure-arc-onboarding) - Hybrid infrastructure at scale
-5. **Specialization** (30 min): [Azure Specialization Prep](demos/06-azure-specialization-prep) - Audit preparation with custom agents
-6. **Complete Workflow** (45 min): [Four-Agent Workflow](demos/07-four-agent-workflow) - Architecture to code in minutes
+5. **Specialization** (40 min): [Azure Specialization Prep](demos/06-azure-specialization-prep) - Audit preparation with validation
+6. **Complete Workflow** (45 min): [Five-Agent Workflow](demos/07-five-agent-workflow) - Requirements to code in minutes
 
-**Total Investment:** 3 hours | **Outcome:** Confident in modern Azure practices + specialization readiness + agent workflow mastery
+**Total Investment:** 3.5 hours | **Outcome:** Confident in modern Azure practices + specialization readiness + agent workflow mastery
 
 ---
 
@@ -80,7 +80,7 @@ cd demos/01-bicep-quickstart/validation
 ```
 github-copilot-itpro/
 ├── .github/
-│   ├── agents/                         # 4 custom agents with automatic handoffs
+│   ├── agents/                         # 4 custom agents (Plan agent is built-in)
 │   │   ├── adr-generator.agent.md
 │   │   ├── azure-principal-architect.agent.md
 │   │   ├── bicep-plan.agent.md
@@ -94,7 +94,7 @@ github-copilot-itpro/
 │   ├── 04-troubleshooting-assistant/   # AI-powered diagnostics
 │   ├── 05-documentation-generator/     # Runbooks & diagrams at speed
 │   ├── 06-azure-specialization-prep/   # Audit preparation accelerated
-│   └── 07-four-agent-workflow/         # Complete workflow demo (NEW!)
+│   └── 07-five-agent-workflow/         # Complete workflow demo (NEW!)
 │
 ├── resources/copilot-customizations/   # Workflow guides & instructions
 │   ├── FOUR-MODE-WORKFLOW.md           # Complete workflow documentation
@@ -125,33 +125,85 @@ github-copilot-itpro/
 
 ## 🤖 Custom Agents & Workflow
 
-This repository includes **four custom GitHub Copilot agents** that work together through automatic handoffs to accelerate Azure infrastructure development:
+This repository includes **five custom GitHub Copilot agents** that work together through automatic handoffs to accelerate Azure infrastructure development from business requirements to production-ready code:
 
-### Four-Agent Workflow
+### Five-Agent Workflow
 
 ```mermaid
 graph LR
-    A[1. ADR Generator<br/>Agent<br/><i>Optional</i>] -.->|Handoff| B[2. Azure Principal<br/>Architect Agent]
+    P[0. Plan Agent<br/><i>Start Here</i>] -->|Handoff| A[1. ADR Generator<br/>Agent<br/><i>Optional</i>]
+    P -.->|Skip ADR| B[2. Azure Principal<br/>Architect Agent]
+    A -.->|Handoff| B
     B -->|Handoff| C[3. Bicep Planning<br/>Specialist Agent]
     C -->|Handoff| D[4. Bicep Implementation<br/>Specialist Agent]
     
+    style P fill:#f0e6ff
     style A fill:#e1f5ff
     style B fill:#fff4e1
     style C fill:#e8f5e8
     style D fill:#ffe8f5
 ```
 
-**Time Savings**: 94% (5.25 hours → 20 minutes) for complete infrastructure development
+**Time Savings**: 96% (18 hours → 45 minutes) for complete infrastructure development from requirements to code
 
 ### How to Use Custom Agents
 
 1. **Open Copilot Chat** (`Ctrl+Alt+I` or `Cmd+Alt+I`)
-2. **Click the Agent button** (`Ctrl+Shift+A`) or click the **Agent** dropdown
-3. **Select an agent**: `adr_generator`, `azure-principal-architect`, `bicep-plan`, or `bicep-implement`
-4. **Type your prompt** and submit
-5. **Use handoff buttons** at the bottom of responses to automatically switch agents with context
+2. **Start with Plan**: Type `@plan` followed by your requirements, or click the Agent dropdown and select **Plan**
+3. **Follow the workflow**: Use handoff buttons to move between agents:
+   - Plan → ADR Generator (optional) → Azure Architect → Bicep Planning → Bicep Implementation
+4. **Alternative**: Click the Agent button (`Ctrl+Shift+A`) to manually select agents: `@plan`, `adr_generator`, `azure-principal-architect`, `bicep-plan`, or `bicep-implement`
+5. **Context preservation**: All handoffs automatically carry forward your requirements and decisions
 
-### The Four Agents
+### The Five Agents
+
+#### 0. Plan Agent (`@plan`) - *Start Here*
+**Purpose**: Break down complex tasks into step-by-step implementation plans before any code is written
+
+> **Best practice**: Always start with the Plan agent for multi-step infrastructure projects. It ensures all requirements and context are captured upfront.
+
+**Usage**:
+```
+@plan Create a complete Azure infrastructure deployment plan for a HIPAA-compliant healthcare application with:
+- Hub-spoke network topology
+- Azure SQL Database with private endpoints
+- Application Gateway with WAF
+- Azure Key Vault for secrets
+- Log Analytics for monitoring
+- Budget: $800/month, 99.9% SLA requirement
+```
+
+**Output**: Interactive planning session with:
+- Clarifying questions about requirements
+- Detailed implementation plan with phases
+- Resource breakdown with cost estimates
+- Security and compliance considerations
+- Deployment sequence and dependencies
+- Validation checkpoints
+
+**Key Features**:
+- **Iterative refinement**: Spend time improving the plan before implementation
+- **Requirement capture**: Ensures nothing is missed through guided questions
+- **Scope adjustment**: Easily modify requirements before code generation
+- **Implementation options**: Deploy locally in VS Code or via GitHub Copilot coding agent
+- **Custom planning**: Create your own plan agent tailored to your team's workflow
+
+**Handoff Buttons**: 
+- "Document This Decision" → Invokes ADR Generator to create architectural decision records
+- "Skip to Architecture Review" → Directly invokes Azure Principal Architect
+- "Start Implementation" → Proceeds to Bicep Planning Specialist
+
+**When to Use**:
+- ✅ Multi-step infrastructure projects with multiple components
+- ✅ Complex requirements needing clarification
+- ✅ Projects requiring cost estimates and resource planning
+- ✅ When you need stakeholder approval before implementation
+- ❌ Skip for simple, single-resource deployments
+- ❌ Skip when requirements are already fully documented
+
+**Learn More**: [Planning in VS Code Chat](https://code.visualstudio.com/docs/copilot/chat/chat-planning) | [VS Code 1.106 Release Notes](https://code.visualstudio.com/updates/v1_106#_plan-agent)
+
+---
 
 #### 1. ADR Generator (`adr_generator`) - *Optional*
 **Purpose**: Document architectural decisions with structured ADRs for enterprise governance
@@ -246,15 +298,28 @@ Output to: infrastructure/my-project/
 
 ### Complete Workflow Example
 
-**Scenario**: Deploy a secure hub network for testing
+**Scenario**: Deploy a HIPAA-compliant healthcare application infrastructure
 
-**Step 1 - Document Decision** (2 minutes)
+**Step 0 - Create Implementation Plan** (5 minutes)
 ```
-(Using adr_generator agent)
-Document the decision to use a hub network topology for our test environment.
-Single region, minimal cost, must support future spoke networks.
+@plan Create a complete Azure infrastructure deployment plan for a patient portal with:
+- 10,000 active patients
+- HIPAA compliance required
+- Budget: $800/month
+- 99.9% availability SLA
+- Need: web app, database, API backend, file storage
 ```
-→ Creates ADR-0003 with full context, alternatives, consequences
+→ Plan agent asks clarifying questions (region, scaling needs, backup requirements)
+→ Generates detailed plan with cost breakdown, 8 Azure resources, 4 deployment phases
+→ Click **"Document This Decision"** button to create ADR
+
+**Step 1 - Document Key Decisions** (2 minutes)
+```
+(Automatically switches to adr_generator)
+Document the architectural decisions from this plan, focusing on
+HIPAA compliance choices and cost optimization strategies.
+```
+→ Creates ADR-0004 with HIPAA compliance rationale, alternatives, security controls
 → Click **"Review Against WAF Pillars"** button
 
 **Step 2 - WAF Assessment** (3 minutes)
@@ -282,22 +347,26 @@ Implement the Bicep templates based on the plan...
 → Validates and formats all templates
 → Creates comprehensive README
 
-**Total Time**: 20 minutes (vs. 5.25 hours manual)
+**Total Time**: 30-45 minutes (vs. 18 hours manual) | **Improvement**: 96% time savings
 
 ---
 
 ### Key Features
 
-✅ **Automatic Handoffs**: Click buttons to switch agents with full context  
+✅ **Interactive Planning**: Plan agent asks questions to capture all requirements upfront  
+✅ **Automatic Handoffs**: Click buttons to switch agents with full context preserved  
+✅ **Iterative Refinement**: Improve plans before implementation to reduce rework  
 ✅ **Machine-Readable Plans**: Structured YAML for deterministic code generation  
-✅ **Production-Ready Code**: Latest APIs, security best practices, validation  
+✅ **Production-Ready Code**: Latest APIs, security best practices, validation built-in  
 ✅ **Complete Documentation**: Each agent creates comprehensive outputs  
+✅ **Cost Visibility**: Plan agent provides budget estimates before deployment  
 ✅ **Tested Workflow**: All handoffs and agents validated and working  
 
 ### Quick Start Guide
 
-📖 **[Complete Workflow Documentation](resources/copilot-customizations/FOUR-MODE-WORKFLOW.md)** (683 lines)  
-🎬 **[15-Minute Demo Script](resources/copilot-customizations/AGENT-HANDOFF-DEMO.md)**  
+📖 **[Complete Workflow Documentation](resources/copilot-customizations/FOUR-MODE-WORKFLOW.md)** (includes Plan agent guidance)  
+🎬 **[15-Minute Demo Script](resources/copilot-customizations/AGENT-HANDOFF-DEMO.md)** (start with `@plan`)  
+📚 **[Plan Agent Documentation](https://code.visualstudio.com/docs/copilot/chat/chat-planning)** (official VS Code docs)  
 📚 **[Index of All Customizations](resources/copilot-customizations/INDEX.md)**  
 
 ---
@@ -320,16 +389,17 @@ Maintain standards across infrastructure deployments with AI-assisted templates 
 
 ## 🎓 Learning Paths
 
-### Path 1: Partner Onboarding (2.5 hours)
+### Path 1: Partner Onboarding (3 hours)
 **Goal:** Deliver customer demos confidently
 
 1. Read main README (this page) - 5 min
-2. Demo 5: Documentation Generator - 30 min
-3. Demo 2: PowerShell Automation - 30 min
-4. Demo 1: Bicep Quickstart - 30 min
-5. Demo 3: Azure Arc - 30 min
+2. Demo 1: Bicep Quickstart - 30 min *(Foundation: IaC basics)*
+3. Demo 2: PowerShell Automation - 30 min *(Build on: Automation patterns)*
+4. Demo 5: Documentation Generator - 30 min *(Quick win: Immediate value)*
+5. Demo 6: Azure Specialization Prep - 40 min *(Advanced: Audit preparation with validation)*
+6. Demo 7: Five-Agent Workflow - 45 min *(Complete: End-to-end workflow)*
 
-**Outcome:** Ready to deliver demos to customers
+**Outcome:** Ready to deliver demos to customers with full workflow understanding
 
 ---
 
@@ -362,8 +432,8 @@ Choose your demo based on customer profile:
    - DevOps Practices (2 hours)
    - Modern Automation (2 hours)
 
-2. **Hands-On**: Work through all 5 demos
-   - Focus on understanding prompts
+2. **Hands-On**: Work through all 7 demos
+   - Focus on understanding prompts and agent workflows
    - Experiment with variations
    - Build your own scenarios
 
@@ -475,46 +545,50 @@ Generate architecture diagrams, runbooks, and troubleshooting guides automatical
 ---
 
 ### [Demo 6: Azure Specialization Audit Preparation](demos/06-azure-specialization-prep)
-**Time:** 30 minutes | **Level:** Advanced
+**Time:** 40 minutes | **Level:** Advanced
 
-Accelerate Azure Infrastructure and Database Migration Specialization audit preparation using the four-agent workflow.
+Accelerate Azure Infrastructure and Database Migration Specialization audit preparation using the five-agent workflow with comprehensive validation.
 
 **Scenarios:**
-- Complete audit evidence generation (8 controls)
+- Complete audit evidence generation (11 controls with validation)
 - Infrastructure as Code with ALZ alignment
-- Well-Architected Framework assessments
+- Well-Architected Framework assessments including chaos engineering
 - Architecture Decision Records (ADRs)
+- Migration validation (chaos testing, load testing, UAT)
 
 **What You'll Learn:**
-- Four-agent workflow with automatic handoffs
-- ADR Generator → Azure Architect → Bicep Planning → Bicep Implementation
+- Five-agent workflow with automatic handoffs (Plan → ADR → Azure Architect → Bicep Planning → Bicep Implementation)
 - Production-ready Bicep templates with security best practices
-- Audit evidence documentation
+- Comprehensive validation framework aligned with CAF Migrate
+- Chaos engineering with Azure Chaos Studio
+- Load testing with Azure Load Testing
+- UAT tracking with realistic test data
 
 **Business Value:**
 - **Time Savings:** 60 hours → 10 hours (83% reduction)
-- **Annual ROI:** $21,000 for 4 audits/year
+- **Annual ROI:** $34,500 for 4 audits/year (includes validation framework)
 - **Audit Coverage:** 3 Module A + 5 Module B controls
 
 ---
 
-### [Demo 7: Four-Agent Workflow](demos/07-four-agent-workflow) 🆕
+### [Demo 7: Five-Agent Workflow](demos/07-five-agent-workflow) 🆕
 **Time:** 45-60 minutes | **Level:** Advanced
 
-Showcase the complete 4-agent workflow from business requirements to deployable infrastructure with automatic agent handoffs.
+Showcase the complete 5-agent workflow from business requirements to deployable infrastructure with automatic agent handoffs.
 
 **Scenario:** HIPAA-compliant patient portal for Contoso Healthcare (10k patients, $800/month budget, 99.9% SLA).
 
 **What You'll Learn:**
-- Four-agent collaboration (ADR Generator → Azure Architect → Bicep Planning → Bicep Implementation)
+- Five-agent collaboration (Plan → ADR Generator → Azure Architect → Bicep Planning → Bicep Implementation)
+- Interactive planning with clarifying questions and cost estimates
 - Automatic context handoffs between agents
 - Production-ready output quality
-- Complete workflow in 30-45 minutes vs. 18 hours manual
+- Complete workflow in 45 minutes vs. 18 hours manual
 
 **Business Value:**
-- **Time Savings:** 18 hours → 45 minutes (95% reduction)
+- **Time Savings:** 18 hours → 45 minutes (96% reduction)
 - **Cost Savings:** $2,550 per project for SI partners
-- **Output Quality:** WAF-aligned architecture, AVM-based templates, security defaults
+- **Output Quality:** Cost-validated plan, WAF-aligned architecture, AVM-based templates, security defaults
 
 ---
 
