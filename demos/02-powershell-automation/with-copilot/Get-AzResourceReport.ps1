@@ -76,7 +76,6 @@ param(
     [switch]$CheckOrphaned,
 
     [Parameter(Mandatory = $false)]
-    [ValidateScript({Test-Path $_ -PathType Container})]
     [string]$OutputPath = (Get-Location).Path,
 
     [Parameter(Mandatory = $false)]
@@ -117,7 +116,21 @@ function Write-Info { param([string]$Message) Write-ColorOutput "ℹ️  $Messag
 
 # Initialize logging
 $timestamp = Get-Date -Format 'yyyyMMdd_HHmmss'
-$logFile = Join-Path $OutputPath "ResourceReport_$timestamp.log"
+# Determine if OutputPath is a directory or file path
+$outputDir = if (Test-Path $OutputPath -PathType Container) {
+    $OutputPath
+} elseif (Test-Path $OutputPath -PathType Leaf) {
+    Split-Path $OutputPath -Parent
+} else {
+    # Path doesn't exist yet - check if it has an extension (file) or not (directory)
+    if ([System.IO.Path]::HasExtension($OutputPath)) {
+        $parent = Split-Path $OutputPath -Parent
+        if ($parent) { $parent } else { (Get-Location).Path }
+    } else {
+        $OutputPath
+    }
+}
+$logFile = Join-Path $outputDir "ResourceReport_$timestamp.log"
 
 function Write-Log {
     param([string]$Message, [string]$Level = 'INFO')
@@ -360,27 +373,32 @@ $reportFiles = @()
 # CSV Export
 if ($OutputFormat -in @('CSV', 'All')) {
     try {
-        $csvFile = Join-Path $OutputPath "ResourceInventory_$timestamp.csv"
+        # If OutputPath has a .csv extension, use it directly; otherwise generate filename
+        if ([System.IO.Path]::GetExtension($OutputPath) -eq '.csv') {
+            $csvFile = $OutputPath
+        } else {
+            $csvFile = Join-Path $outputDir "ResourceInventory_$timestamp.csv"
+        }
         $allResources | Export-Csv -Path $csvFile -NoTypeInformation
         $reportFiles += $csvFile
         Write-Success "CSV report saved: $csvFile"
         
         if ($CheckOrphaned -and $orphanedResources.Count -gt 0) {
-            $orphanedCsv = Join-Path $OutputPath "OrphanedResources_$timestamp.csv"
+            $orphanedCsv = Join-Path $outputDir "OrphanedResources_$timestamp.csv"
             $orphanedResources | Export-Csv -Path $orphanedCsv -NoTypeInformation
             $reportFiles += $orphanedCsv
             Write-Success "Orphaned resources CSV saved: $orphanedCsv"
         }
         
         if ($CheckTagCompliance -and $tagComplianceIssues.Count -gt 0) {
-            $complianceCsv = Join-Path $OutputPath "TagCompliance_$timestamp.csv"
+            $complianceCsv = Join-Path $outputDir "TagCompliance_$timestamp.csv"
             $tagComplianceIssues | Export-Csv -Path $complianceCsv -NoTypeInformation
             $reportFiles += $complianceCsv
             Write-Success "Tag compliance CSV saved: $complianceCsv"
         }
         
         if ($IncludeCost -and $costData.Count -gt 0) {
-            $costCsv = Join-Path $OutputPath "ResourceCosts_$timestamp.csv"
+            $costCsv = Join-Path $outputDir "ResourceCosts_$timestamp.csv"
             $costData | Export-Csv -Path $costCsv -NoTypeInformation
             $reportFiles += $costCsv
             Write-Success "Cost data CSV saved: $costCsv"
@@ -394,7 +412,7 @@ if ($OutputFormat -in @('CSV', 'All')) {
 # JSON Export
 if ($OutputFormat -in @('JSON', 'All')) {
     try {
-        $jsonFile = Join-Path $OutputPath "ResourceInventory_$timestamp.json"
+        $jsonFile = Join-Path $outputDir "ResourceInventory_$timestamp.json"
         $reportData = @{
             GeneratedDate = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
             Subscriptions = $subscriptions.Count
@@ -418,7 +436,7 @@ if ($OutputFormat -in @('JSON', 'All')) {
 # HTML Export
 if ($OutputFormat -in @('HTML', 'All')) {
     try {
-        $htmlFile = Join-Path $OutputPath "ResourceInventory_$timestamp.html"
+        $htmlFile = Join-Path $outputDir "ResourceInventory_$timestamp.html"
         
         $html = @"
 <!DOCTYPE html>
