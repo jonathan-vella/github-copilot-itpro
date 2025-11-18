@@ -1,6 +1,7 @@
 # GitHub Copilot for IT Pros: Your Azure Infrastructure Efficiency Multiplier
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-1.0.0-green.svg)](VERSION.md)
 [![Azure](https://img.shields.io/badge/Azure-Infrastructure-0078D4?logo=microsoft-azure)](https://azure.microsoft.com/)
 [![GitHub Copilot](https://img.shields.io/badge/GitHub-Copilot-000000?logo=github)](https://github.com/features/copilot)
 
@@ -23,6 +24,7 @@ This is a hands-on collection of **30-minute demos** showing how GitHub Copilot 
 | **Troubleshooting diagnostics** | 30 min | 8 min | **73%** ⚡ |
 | **Documentation** (runbook) | 90 min | 20 min | **78%** ⚡ |
 | **Specialization audit prep** | 60 hrs | 10 hrs | **83%** ⚡ |
+| **4-agent workflow** (architecture → code) | 18 hrs | 45 min | **95%** ⚡ |
 
 ### Who This Is For
 
@@ -48,6 +50,7 @@ cd github-copilot-itpro
 # - Hybrid Infrastructure → demos/03-azure-arc-onboarding
 # - Operational Teams → demos/04-troubleshooting-assistant
 # - Specialization Partners → demos/06-azure-specialization-prep
+# - Complete Workflow → demos/07-four-agent-workflow
 
 # Read the demo script
 cat demos/01-bicep-quickstart/DEMO-SCRIPT.md
@@ -66,8 +69,9 @@ cd demos/01-bicep-quickstart/validation
 3. **Modern IaC** (30 min): [Bicep Quickstart](demos/01-bicep-quickstart) - Bridge to Infrastructure as Code
 4. **Advanced** (30 min): [Azure Arc](demos/03-azure-arc-onboarding) - Hybrid infrastructure at scale
 5. **Specialization** (30 min): [Azure Specialization Prep](demos/06-azure-specialization-prep) - Audit preparation with custom agents
+6. **Complete Workflow** (45 min): [Four-Agent Workflow](demos/07-four-agent-workflow) - Architecture to code in minutes
 
-**Total Investment:** 2.5 hours | **Outcome:** Confident in modern Azure practices + specialization readiness
+**Total Investment:** 3 hours | **Outcome:** Confident in modern Azure practices + specialization readiness + agent workflow mastery
 
 ---
 
@@ -89,7 +93,8 @@ github-copilot-itpro/
 │   ├── 03-azure-arc-onboarding/        # Hybrid infrastructure simplified
 │   ├── 04-troubleshooting-assistant/   # AI-powered diagnostics
 │   ├── 05-documentation-generator/     # Runbooks & diagrams at speed
-│   └── 06-azure-specialization-prep/   # Audit preparation accelerated
+│   ├── 06-azure-specialization-prep/   # Audit preparation accelerated
+│   └── 07-four-agent-workflow/         # Complete workflow demo (NEW!)
 │
 ├── resources/copilot-customizations/   # Workflow guides & instructions
 │   ├── FOUR-MODE-WORKFLOW.md           # Complete workflow documentation
@@ -493,28 +498,31 @@ Accelerate Azure Infrastructure and Database Migration Specialization audit prep
 
 ---
 
-## 📊 Real-World Case Studies
+### [Demo 7: Four-Agent Workflow](demos/07-four-agent-workflow) 🆕
+**Time:** 45-60 minutes | **Level:** Advanced
 
-### [Arc SQL at Scale](case-studies/arc-sql-at-scale)
-**Challenge:** 500+ SQL Servers with no inventory or Arc enablement  
-**Solution:** Copilot-assisted discovery and bulk onboarding  
-**Results:** **80 hours → 8 hours** (90% time savings)
+Showcase the complete 4-agent workflow from business requirements to deployable infrastructure with automatic agent handoffs.
 
----
+**Scenario:** HIPAA-compliant patient portal for Contoso Healthcare (10k patients, $800/month budget, 99.9% SLA).
 
-### [Multi-Region Network](case-studies/multi-region-network)
-**Challenge:** Complex hub-spoke network across 5 Azure regions  
-**Solution:** Bicep templates generated and validated with Copilot  
-**Results:** **3 weeks → 3 days** (86% faster)
+**What You'll Learn:**
+- Four-agent collaboration (ADR Generator → Azure Architect → Bicep Planning → Bicep Implementation)
+- Automatic context handoffs between agents
+- Production-ready output quality
+- Complete workflow in 30-45 minutes vs. 18 hours manual
 
----
-
-### [Governance at Scale](case-studies/governance-at-scale)
-**Challenge:** Policy enforcement across 50 Azure subscriptions  
-**Solution:** Policy as code with automated assignment  
-**Results:** Manual → Automated compliance monitoring
+**Business Value:**
+- **Time Savings:** 18 hours → 45 minutes (95% reduction)
+- **Cost Savings:** $2,550 per project for SI partners
+- **Output Quality:** WAF-aligned architecture, AVM-based templates, security defaults
 
 ---
+
+## 📊 Case Studies & Skills Bridge (Coming Soon)
+
+**Note:** Case studies and skills bridge content are planned for future releases. Current focus is on production-ready demos and agent workflow.
+
+
 
 ## 🤝 Partner Enablement
 
@@ -530,20 +538,7 @@ Accelerate Azure Infrastructure and Database Migration Specialization audit prep
 
 ---
 
-## 🌉 Skills Bridge
 
-### For Traditional IT Pros Transitioning to Modern Practices
-
-**[IaC for VM Admins](skills-bridge/iac-for-vm-admins)**  
-Bridge from manual VM provisioning to Infrastructure as Code with Copilot assistance.
-
-**[DevOps Practices](skills-bridge/devops-practices)**  
-Understand CI/CD, version control, and automation principles with hands-on examples.
-
-**[Modern Automation](skills-bridge/modern-automation)**  
-Learn declarative vs. imperative approaches and when to use each.
-
----
 
 ## 🛠️ Getting Started with Copilot
 
