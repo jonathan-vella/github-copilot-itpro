@@ -165,6 +165,49 @@ Get-AzResourceGroup -Name "rg-demo"
 ```
 ```
 
+#### Code Fence Closures
+
+**CRITICAL**: Always close code fences with plain ` ``` ` (three backticks with NO language identifier).
+
+✅ **Correct:**
+
+````markdown
+```powershell
+Get-AzResourceGroup -Name "rg-demo"
+```
+````
+
+````markdown
+```mermaid
+graph LR
+    A --> B
+```
+````
+
+❌ **Incorrect:**
+
+````markdown
+```powershell
+Get-AzResourceGroup -Name "rg-demo"
+```powershell  ← WRONG: Do not add language to closing fence
+````
+
+````markdown
+```mermaid
+graph LR
+    A --> B
+```yaml  ← WRONG: Do not add language to closing fence
+````
+
+**Why This Matters**:
+
+- Incorrect closures break mermaid chart rendering
+- GitHub's markdown parser fails to recognize the code block end
+- Syntax highlighting doesn't work properly
+- Documentation appears unprofessional
+
+**Rule**: Opening fence gets language, closing fence is always plain ` ``` `.
+
 #### Supported Languages
 
 Common languages used in this repository:
