@@ -36,7 +36,7 @@ module appServicePlan 'br/public:avm/res/web/serverfarm:0.5.0' = {
     location: location
     tags: tags
     skuCapacity: 2
-    skuName: 'S1'
+    skuName: 'P1v3' // Premium v3 required for zone redundancy
     kind: 'linux'
     zoneRedundant: true
   }

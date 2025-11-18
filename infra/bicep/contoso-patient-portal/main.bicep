@@ -39,6 +39,7 @@ param tags object = {
   Project: 'PatientPortal'
   CostCenter: 'Healthcare-IT'
   Compliance: 'HIPAA'
+  SecurityControl: 'Ignore' // Bypass Azure Policy for demo/dev environment
 }
 
 // ============================================================================

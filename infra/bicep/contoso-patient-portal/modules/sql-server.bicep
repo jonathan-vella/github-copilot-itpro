@@ -16,12 +16,18 @@ param projectName string
 @description('Unique suffix for resource naming (generated from resource group ID)')
 param uniqueSuffix string
 
-@description('SQL administrator username')
+@description('SQL administrator username (for initial setup, Azure AD will be primary)')
 param sqlAdminUsername string
 
-@description('SQL administrator password')
+@description('SQL administrator password (for initial setup, Azure AD will be primary)')
 @secure()
 param sqlAdminPassword string
+
+@description('Azure AD administrator object ID for SQL Server')
+param azureAdAdminObjectId string = ''
+
+@description('Azure AD administrator login name for SQL Server')
+param azureAdAdminLogin string = 'SQL Administrators'
 
 @description('Resource tags')
 param tags object
@@ -31,6 +37,9 @@ param tags object
 // ============================================================================
 
 var sqlServerName = 'sql-${take(replace(projectName, '-', ''), 10)}-${take(environment, 3)}-${take(uniqueSuffix, 6)}'
+
+// Use Azure AD authentication if objectId provided, otherwise use SQL auth (non-compliant with policy)
+var useAzureAdOnly = !empty(azureAdAdminObjectId)
 
 // ============================================================================
 // SQL SERVER
@@ -47,6 +56,14 @@ module sqlServer 'br/public:avm/res/sql/server:0.21.0' = {
     minimalTlsVersion: '1.2'
     publicNetworkAccess: 'Disabled'
     restrictOutboundNetworkAccess: 'Enabled'
+    // Azure AD-only authentication required by Azure Policy
+    administrators: useAzureAdOnly ? {
+      azureADOnlyAuthentication: true
+      login: azureAdAdminLogin
+      principalType: 'Group'
+      sid: azureAdAdminObjectId
+      tenantId: subscription().tenantId
+    } : null
   }
 }
 
