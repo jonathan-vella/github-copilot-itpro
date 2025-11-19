@@ -1,0 +1,197 @@
+{
+  "name": "GitHub Copilot IT Pro Field Guide",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  
+  "features": {
+    // Infrastructure as Code Tools
+    "ghcr.io/devcontainers/features/azure-cli:1": {
+      "version": "latest",
+      "installBicep": true
+    },
+    "ghcr.io/devcontainers/features/terraform:1": {
+      "version": "1.5.0",
+      "tflint": true,
+      "terragrunt": false
+    },
+    
+    // Scripting and Automation
+    "ghcr.io/devcontainers/features/powershell:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    },
+    
+    // Development Tools
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "1.22"
+    },
+    "ghcr.io/devcontainers/features/git:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/git-lfs:1": {
+      "version": "latest"
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {
+      "version": "latest"
+    },
+    
+    // Common Utilities
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "installOhMyZsh": true,
+      "upgradePackages": true,
+      "username": "vscode",
+      "userUid": "1000",
+      "userGid": "1000"
+    }
+  },
+  
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // GitHub Copilot (Required)
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        
+        // Infrastructure as Code
+        "ms-azuretools.vscode-bicep",
+        "HashiCorp.terraform",
+        "4ops.terraform",
+        
+        // Azure Tools
+        "ms-vscode.azurecli",
+        "ms-azuretools.vscode-azureresourcegroups",
+        "ms-azuretools.vscode-azurefunctions",
+        "ms-azuretools.vscode-azurestaticwebapps",
+        
+        // PowerShell
+        "ms-vscode.powershell",
+        
+        // Languages and Frameworks
+        "golang.go",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        
+        // Documentation and Markdown
+        "yzhang.markdown-all-in-one",
+        "bierner.markdown-mermaid",
+        "DavidAnson.vscode-markdownlint",
+        
+        // Git and Version Control
+        "eamodio.gitlens",
+        "GitHub.vscode-pull-request-github",
+        
+        // Productivity and Utilities
+        "aaron-bond.better-comments",
+        "streetsidesoftware.code-spell-checker",
+        "EditorConfig.EditorConfig",
+        "redhat.vscode-yaml",
+        "ms-vscode.wordcount"
+      ],
+      
+      "settings": {
+        // GitHub Copilot Settings
+        "github.copilot.enable": {
+          "*": true,
+          "yaml": true,
+          "plaintext": true,
+          "markdown": true,
+          "bicep": true,
+          "terraform": true,
+          "powershell": true
+        },
+        
+        // Editor Settings
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll": "explicit"
+        },
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        
+        // Bicep Settings
+        "bicep.experimental.enableAzureVerifiedModules": true,
+        "[bicep]": {
+          "editor.defaultFormatter": "ms-azuretools.vscode-bicep",
+          "editor.tabSize": 2
+        },
+        
+        // Terraform Settings
+        "[terraform]": {
+          "editor.tabSize": 2,
+          "editor.formatOnSave": true
+        },
+        "[terraform-vars]": {
+          "editor.tabSize": 2,
+          "editor.formatOnSave": true
+        },
+        
+        // PowerShell Settings
+        "[powershell]": {
+          "editor.tabSize": 4,
+          "files.encoding": "utf8bom",
+          "files.autoGuessEncoding": true
+        },
+        "powershell.codeFormatting.preset": "OTBS",
+        
+        // Markdown Settings
+        "[markdown]": {
+          "editor.wordWrap": "on",
+          "editor.quickSuggestions": {
+            "comments": "on",
+            "strings": "on",
+            "other": "on"
+          }
+        },
+        "markdown.extension.toc.levels": "2..6",
+        
+        // Terminal Settings
+        "terminal.integrated.defaultProfile.linux": "pwsh",
+        "terminal.integrated.profiles.linux": {
+          "pwsh": {
+            "path": "/opt/microsoft/powershell/7/pwsh",
+            "icon": "terminal-powershell"
+          },
+          "bash": {
+            "path": "/bin/bash",
+            "icon": "terminal-bash"
+          }
+        }
+      }
+    }
+  },
+  
+  // Post-create commands to install additional tools
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  
+  // Forward ports for local testing
+  "forwardPorts": [
+    3000,  // Node.js dev server
+    5000,  // Flask/Python apps
+    8080   // General web apps
+  ],
+  
+  // Set environment variables
+  "remoteEnv": {
+    "AZURE_DEFAULTS_LOCATION": "swedencentral",
+    "TF_PLUGIN_CACHE_DIR": "${containerWorkspaceFolder}/.terraform-cache"
+  },
+  
+  // Mount workspace files
+  "mounts": [
+    "source=${localWorkspaceFolder}/.terraform-cache,target=${containerWorkspaceFolder}/.terraform-cache,type=bind,consistency=cached"
+  ],
+  
+  // Run as non-root user
+  "remoteUser": "vscode",
+  
+  // Lifecycle scripts
+  "onCreateCommand": "sudo chown -R vscode:vscode /home/vscode",
+  "updateContentCommand": "bash .devcontainer/update-tools.sh"
+}
