@@ -29,6 +29,7 @@ This document contains production-tested prompts for generating Azure infrastruc
 **Expected Result**: Complete VNet resource with parameters, addressSpace, and subnets array.
 
 **Tips**:
+
 - Be specific about subnet names and CIDR ranges
 - Mention parameter names if you want consistency
 - Copilot will use latest API version automatically
@@ -60,6 +61,7 @@ This document contains production-tested prompts for generating Azure infrastruc
 **Expected Result**: NSG resource with security rules, proper priorities, and deny rules.
 
 **Tips**:
+
 - Specify traffic direction (inbound/outbound)
 - Mention source and destination (IP ranges or tags)
 - Copilot will set deny rules at priority 4096 automatically
@@ -88,6 +90,7 @@ This document contains production-tested prompts for generating Azure infrastruc
 **Expected Result**: Private endpoint, private DNS zone, and DNS zone VNet link resources.
 
 **Tips**:
+
 - Specify which service (blob, file, queue, table)
 - Mention target subnet
 - Copilot understands private link resource types
@@ -119,6 +122,7 @@ This document contains production-tested prompts for generating Azure infrastruc
 **Expected Result**: Storage account with security properties, blob services config, soft delete enabled.
 
 **Tips**:
+
 - Be explicit about security requirements
 - Mention retention periods
 - Copilot knows `supportsHttpsTrafficOnly`, `minimumTlsVersion`, `allowBlobPublicAccess` properties
@@ -199,6 +203,7 @@ This document contains production-tested prompts for generating Azure infrastruc
 **Expected Result**: VM resource, NIC, OS disk, data disk, public key authentication.
 
 **Tips**:
+
 - Specify OS version clearly
 - Mention subnet for placement
 - Copilot will add networkProfile, storageProfile automatically
@@ -254,6 +259,7 @@ This document contains production-tested prompts for generating Azure infrastruc
 **Expected Result**: Multiple `diagnosticSettings` resources for storage account and sub-services.
 
 **Tips**:
+
 - Specify which logs/metrics categories
 - Mention destination (Log Analytics, Storage, Event Hub)
 - Copilot knows service-specific log categories
@@ -325,6 +331,7 @@ This document contains production-tested prompts for generating Azure infrastruc
 **Instead of**: "Create a complete three-tier app with VNet, NSGs, VMs, load balancer, storage, and monitoring"
 
 **Do this**:
+
 1. "Create VNet with three subnets"
 2. "Add NSGs for each subnet with appropriate rules"
 3. "Create VMs in each tier"

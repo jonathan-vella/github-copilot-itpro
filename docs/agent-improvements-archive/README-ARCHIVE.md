@@ -45,6 +45,7 @@ For **current, active agent documentation**, please refer to:
 ### Version 1.1.0 (November 18, 2025)
 
 **Features Added:**
+
 - 💰 **Cost Estimation** - Architecture and planning agents provide detailed cost breakdowns
 - 🔗 **Dependency Visualization** - Automatic Mermaid diagrams showing resource dependencies
 - 📈 **Progressive Implementation** - Phase-based deployment with validation gates
@@ -52,6 +53,7 @@ For **current, active agent documentation**, please refer to:
 - 📋 **Troubleshooting Guide** - Comprehensive issue resolution
 
 **Impact:**
+
 - Business stakeholders can make informed decisions without separate cost research
 - 300% improvement in architecture comprehension and fewer deployment errors
 - 70% reduction in deployment failures through incremental, safer rollouts

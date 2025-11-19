@@ -8,7 +8,7 @@ A comprehensive demonstration showing how GitHub Copilot's **four custom agents*
 
 ## 📂 Project Structure
 
-```
+```text
 demos/06-azure-specialization-prep/
 ├── README.md                          # ✅ Complete overview and quick start guide
 ├── DEMO-SCRIPT.md                     # ✅ 30-minute demo walkthrough
@@ -44,6 +44,7 @@ demos/06-azure-specialization-prep/
 ### 2. Application Code (100% Complete)
 
 **ASP.NET Web Application**:
+
 - ✅ Modern, responsive UI with gradient design
 - ✅ CRUD operations (Create, Read, Update tasks)
 - ✅ Real-time statistics dashboard
@@ -52,6 +53,7 @@ demos/06-azure-specialization-prep/
 - ✅ Error handling and user feedback
 
 **Database**:
+
 - ✅ SQL schema with Tasks table
 - ✅ Indexes for performance
 - ✅ Sample data (10 tasks) for demo
@@ -60,10 +62,12 @@ demos/06-azure-specialization-prep/
 ### 3. Prompt Documentation (40% Complete)
 
 **✅ Completed**:
+
 - ADR Generator prompts (5 effective examples)
 - Azure Principal Architect prompts (6 effective examples)
 
 **⏳ Remaining**:
+
 - Bicep Planning Specialist prompts
 - Bicep Implementation Specialist prompts
 
@@ -74,6 +78,7 @@ demos/06-azure-specialization-prep/
 **Customer**: Contoso Manufacturing Inc.  
 **Challenge**: Migrate critical Task Manager application to Azure  
 **Requirements**:
+
 - 99.99% SLA (52 minutes downtime/year max)
 - 100 transactions per second
 - High availability with 2 VMs + Load Balancer
@@ -87,21 +92,25 @@ demos/06-azure-specialization-prep/
 ## 🤖 Four-Agent Workflow
 
 ### Agent 1: ADR Generator (Optional)
+
 **Purpose**: Document architectural decisions  
 **Output**: Structured ADR with rationale, alternatives, consequences  
 **Audit Value**: Module A Control 2.1 evidence
 
 ### Agent 2: Azure Principal Architect
+
 **Purpose**: Apply Well-Architected Framework  
 **Output**: Assessment of 5 pillars with prioritized recommendations  
 **Audit Value**: Module A Control 2.2, Module B Control 2.2
 
 ### Agent 3: Bicep Planning Specialist
+
 **Purpose**: Create infrastructure implementation plan  
 **Output**: Module structure, parameters, deployment sequence  
 **Audit Value**: Module A Control 3.1 (ALZ deployment)
 
 ### Agent 4: Bicep Implementation Specialist
+
 **Purpose**: Generate Bicep templates  
 **Output**: Production-ready IaC code  
 **Audit Value**: Module B Control 3.1, 3.4 (deployment automation)
@@ -137,7 +146,8 @@ For a System Integrator pursuing 4 specializations/year:
 ## 🎓 Effective Prompt Patterns
 
 ### ADR Generator
-```
+
+```text
 Document the architectural decision to [DECISION] for [CONTEXT].
 
 Consider: [REQUIREMENTS], [CONSTRAINTS]
@@ -146,7 +156,8 @@ Include: decision drivers, alternatives considered, consequences, compliance imp
 ```
 
 ### Azure Principal Architect
-```
+
+```yaml
 Conduct a comprehensive Well-Architected Framework assessment for:
 
 Infrastructure: [COMPONENTS]
@@ -156,6 +167,7 @@ Assess all five WAF pillars with prioritized recommendations (High/Medium/Low).
 ```
 
 ### Key Success Factors
+
 1. ✅ Provide complete context (architecture, requirements, constraints)
 2. ✅ Use proper grammar and spelling (no typos)
 3. ✅ Be specific about what you need
@@ -233,6 +245,7 @@ Assess all five WAF pillars with prioritized recommendations (High/Medium/Low).
 ## 🎯 Success Criteria
 
 **Demo is complete when**:
+
 - ✅ All documentation written (README, DEMO-SCRIPT, requirements)
 - ✅ Application code complete and tested
 - ✅ All 4 agent prompt guides documented
@@ -244,6 +257,7 @@ Assess all five WAF pillars with prioritized recommendations (High/Medium/Low).
 **Current Status**: 70% complete
 
 **Remaining**:
+
 - Bicep Planning prompts documentation
 - Bicep Implementation prompts documentation
 - Generate Bicep templates with Agent 3 & 4
@@ -277,6 +291,7 @@ Assess all five WAF pillars with prioritized recommendations (High/Medium/Low).
 ## 📞 Support & Questions
 
 For questions about this demo:
+
 1. Review documentation in `demos/06-azure-specialization-prep/`
 2. Check prompt examples in `prompts/` folder
 3. Reference the demo script in `DEMO-SCRIPT.md`

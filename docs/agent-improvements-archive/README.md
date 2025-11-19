@@ -24,11 +24,13 @@ This directory tracks improvements to the GitHub Copilot custom agents used in t
 ## 🎯 Quick Links
 
 ### Getting Started
+
 - [Five-Mode Workflow](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md) - How to use the agents
 - [Agent Troubleshooting](../../resources/copilot-customizations/AGENT-TROUBLESHOOTING.md) - Common issues and solutions
 - [Test Suite](../../demos/agent-testing/) - Testing framework and procedures
 
 ### Agent Definitions
+
 - [ADR Generator](../../.github/agents/adr-generator.agent.md)
 - [Azure Principal Architect](../../.github/agents/azure-principal-architect.agent.md)
 - [Bicep Planning Specialist](../../.github/agents/bicep-plan.agent.md)
@@ -39,16 +41,19 @@ This directory tracks improvements to the GitHub Copilot custom agents used in t
 ## ✨ What's New in v1.1.0
 
 ### 💰 Cost Estimation
+
 Architecture and planning agents now provide detailed cost breakdowns for all Azure services recommended.
 
 **Impact:** Business stakeholders can make informed decisions without separate cost research.
 
 ### 🔗 Dependency Visualization
+
 Planning agent automatically generates Mermaid diagrams showing resource dependencies and deployment order.
 
 **Impact:** 300% improvement in architecture comprehension and fewer deployment errors.
 
 ### 📈 Progressive Implementation
+
 Implementation agent uses phase-based deployment with validation gates between each phase.
 
 **Impact:** 70% reduction in deployment failures through incremental, safer rollouts.
@@ -71,6 +76,7 @@ Implementation agent uses phase-based deployment with validation gates between e
 ### For First-Time Users
 
 1. **Read the Overview:**
+
    ```powershell
    code docs/agent-improvements/IMPLEMENTATION-SUMMARY.md
    ```
@@ -81,6 +87,7 @@ Implementation agent uses phase-based deployment with validation gates between e
    - Wait 10-15 seconds
 
 3. **Try the New Features:**
+
    ```markdown
    # Press Ctrl+Shift+A to select agent
    Agent: azure-principal-architect
@@ -92,6 +99,7 @@ Implementation agent uses phase-based deployment with validation gates between e
 ### For Existing Users
 
 1. **Review Changes:**
+
    ```powershell
    code docs/agent-improvements/CHANGELOG.md
    ```
@@ -141,6 +149,7 @@ cd demos/agent-testing
 ## 📈 Roadmap
 
 ### Completed (v1.1.0)
+
 - ✅ Cost estimation (Priority 1)
 - ✅ Dependency visualization (Priority 2)
 - ✅ Progressive implementation (Priority 3)
@@ -148,12 +157,14 @@ cd demos/agent-testing
 - ✅ Troubleshooting guide
 
 ### Planned (v1.2.0)
+
 - ⏳ Compliance mapping (PCI-DSS, HIPAA)
 - ⏳ Regional recommendations enhancement
 - ⏳ Parameter file generation
 - ⏳ Security scanning improvements
 
 ### Future (v2.0.0+)
+
 - 📋 Performance metrics dashboard
 - 📋 Industry-specific agent variants
 - 📋 Multi-cloud support
@@ -191,17 +202,20 @@ cd demos/agent-testing
 ## 📚 Documentation Index
 
 ### Core Documentation
+
 - **Getting Started:** [Five-Mode Workflow](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md)
 - **Troubleshooting:** [Agent Troubleshooting Guide](../../resources/copilot-customizations/AGENT-TROUBLESHOOTING.md)
 - **Testing:** [Test Suite README](../../demos/agent-testing/README.md)
 
 ### Reference
+
 - **Roadmap:** [ROADMAP.md](./ROADMAP.md)
 - **Changelog:** [CHANGELOG.md](./CHANGELOG.md)
 - **Test Results:** [TESTING-RESULTS.md](./TESTING-RESULTS.md)
 - **Implementation Summary:** [IMPLEMENTATION-SUMMARY.md](./IMPLEMENTATION-SUMMARY.md)
 
 ### Procedures
+
 - **Testing Procedures:** [TESTING-PROCEDURES.md](../../demos/agent-testing/TESTING-PROCEDURES.md)
 - **Test Cases:** [test-cases/](../../demos/agent-testing/test-cases/)
 
@@ -210,12 +224,14 @@ cd demos/agent-testing
 ## 📞 Support
 
 ### Getting Help
+
 1. **Documentation:** Start with troubleshooting guide
 2. **Community:** GitHub Discussions
 3. **Issues:** GitHub Issues for bugs/features
 4. **Partners:** Slack channels for SI partners
 
 ### Contact
+
 - **Repository:** [github-copilot-itpro](https://github.com/jonathan-vella/github-copilot-itpro)
 - **Owner:** Jonathan Vella
 - **Team:** GitHub Copilot IT Pro Community
@@ -225,12 +241,14 @@ cd demos/agent-testing
 ## 🎓 Learning Resources
 
 ### Demo Videos (Coming Soon)
+
 - Cost estimation in action
 - Dependency visualization walkthrough
 - Progressive implementation demo
 - End-to-end workflow example
 
 ### Training Materials
+
 - [Partner Toolkit](../../partner-toolkit/)
 - [Demo Scripts](../../demos/)
 - [Skills Bridge](../../skills-bridge/)
@@ -249,6 +267,7 @@ cd demos/agent-testing
 ## 🔐 Quality Assurance
 
 ### Standards
+
 - ✅ All agents pass linting
 - ✅ YAML front matter validated
 - ✅ Backwards compatibility maintained
@@ -256,6 +275,7 @@ cd demos/agent-testing
 - ✅ Test coverage > 80% (target)
 
 ### Review Process
+
 1. Code review by maintainers
 2. Testing across scenarios
 3. Documentation review

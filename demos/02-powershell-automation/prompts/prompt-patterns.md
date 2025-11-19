@@ -26,7 +26,8 @@ This document provides reusable prompt templates for common Azure PowerShell aut
 5. **Review and adjust** the suggestions
 
 **Example**:
-```
+
+```powershell
 Pattern: # Create function {FunctionName} to {purpose}
 Your use: # Create function Get-UntaggedResources to find resources missing required tags
 ```
@@ -45,6 +46,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Create a PowerShell function named Get-AzResourceCost
 # Include comment-based help with SYNOPSIS, DESCRIPTION, PARAMETER, and EXAMPLE sections
@@ -65,6 +67,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Add parameters:
 # - SubscriptionId (mandatory, string, validate GUID format)
@@ -85,6 +88,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Set strict mode to latest version
 # Set error action preference to Stop
@@ -108,6 +112,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Create function to connect to Azure
 # Check if already connected using Get-AzContext
@@ -130,6 +135,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Get all virtual machines in subscription
 # Filter by tag: Environment = Production
@@ -150,6 +156,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Find all storage accounts that meet these criteria:
 # - Do not have HTTPS-only enabled
@@ -171,6 +178,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Use Search-AzGraph to query Azure Resource Graph
 # KQL query: Resources | where type == "microsoft.compute/virtualmachines" | project name, location, properties.hardwareProfile.vmSize
@@ -194,6 +202,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Generate CSV report for untagged resources
 # Include columns: ResourceName, ResourceType, ResourceGroup, Location, MissingTags
@@ -216,6 +225,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Generate HTML report for compliance audit
 # Include sections: Executive Summary, Critical Issues, Warnings, Recommendations
@@ -238,6 +248,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Export resource inventory to JSON file
 # Convert objects to JSON with depth 5
@@ -257,6 +268,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Collect dashboard metrics for cost monitoring
 # Calculate: TotalCost, CostByResourceGroup, CostTrend (7 days), TopCostResources (10)
@@ -282,6 +294,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Apply tags to all resources in resource groups matching pattern "rg-prod-*"
 # Tags to apply: Environment = Production, ManagedBy = DevOps, CostCenter = 12345
@@ -308,6 +321,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Stop VMs matching tag Environment = Development
 # Parameters: TagName, TagValue, WaitForCompletion (switch)
@@ -334,6 +348,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Remove unattached managed disks older than 90 days
 # Parameters: MinimumAgeInDays, ResourceGroupName (optional), Force (switch), BackupFirst (switch)
@@ -361,6 +376,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Update minimum TLS version for storage accounts to TLS1_2
 # Current value: TLS1_0 or TLS1_1
@@ -389,6 +405,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Wrap Get-AzResource operation in try-catch block
 # In catch block:
@@ -413,6 +430,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Implement retry logic for Get-AzVM API call
 # Retry up to 5 times
@@ -436,6 +454,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Validate input parameter SubscriptionId:
 # - Check format: Must be valid GUID
@@ -462,6 +481,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Process subscriptions in parallel
 # Use ForEach-Object -Parallel -ThrottleLimit 5
@@ -486,6 +506,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Create function Get-ResourceTags that accepts pipeline input
 # Support ValueFromPipeline for parameter ResourceId
@@ -511,6 +532,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Add progress bar for resource processing loop
 # Use Write-Progress with these properties:
@@ -536,6 +558,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Load configuration from JSON file
 # Parameter: ConfigPath (validate file exists, default to "./config.json")
@@ -559,6 +582,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Example**:
+
 ```powershell
 # Create function to register scheduled task that runs Get-AzResourceReport.ps1
 # Parameters: TaskName (default "DailyResourceReport"), TriggerTime (default 6:00 AM), Credential
@@ -613,6 +637,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ### Scenario: Complete Resource Audit Script
 
 **Step 1 - Function Structure**
+
 ```powershell
 # Create a PowerShell function named Invoke-AzResourceAudit
 # Include comment-based help with SYNOPSIS, DESCRIPTION, PARAMETER, and EXAMPLE sections
@@ -620,6 +645,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Step 2 - Parameters**
+
 ```powershell
 # Add parameters:
 # - SubscriptionId (mandatory, string, validate GUID format)
@@ -628,6 +654,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Step 3 - Initialization**
+
 ```powershell
 # Set strict mode to latest version
 # Set error action preference to Stop
@@ -636,6 +663,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Step 4 - Authentication**
+
 ```powershell
 # Create function to connect to Azure
 # Check if already connected using Get-AzContext
@@ -645,6 +673,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Step 5 - Data Collection**
+
 ```powershell
 # Get all Azure resources in subscription
 # For each resource, check:
@@ -655,6 +684,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Step 6 - Analysis**
+
 ```powershell
 # Group non-compliant resources by issue type
 # Calculate compliance percentage
@@ -663,6 +693,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Step 7 - Reporting**
+
 ```powershell
 # Generate HTML report for compliance audit
 # Include sections: Executive Summary, Critical Issues, Warnings, Recommendations
@@ -673,6 +704,7 @@ Your use: # Create function Get-UntaggedResources to find resources missing requ
 ```
 
 **Step 8 - Error Handling**
+
 ```powershell
 # Wrap all operations in try-catch blocks
 # Log errors to file with timestamp and full exception details

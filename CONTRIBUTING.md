@@ -49,7 +49,7 @@ Thank you for your interest in contributing! This repository is designed to help
 
 All demos must follow this structure:
 
-```
+```bicep
 demos/XX-demo-name/
 ├── README.md                   # Overview & learning objectives
 ├── DEMO-SCRIPT.md              # Step-by-step walkthrough with timing
@@ -72,6 +72,7 @@ demos/XX-demo-name/
 ### Code Standards
 
 **PowerShell:**
+
 ```powershell
 # Use approved verbs
 # Include comment-based help
@@ -80,6 +81,7 @@ demos/XX-demo-name/
 ```
 
 **Bicep:**
+
 ```bicep
 // Use consistent naming conventions
 // Include parameter descriptions
@@ -147,6 +149,7 @@ git push origin feature/your-demo-name
 ```
 
 **Commit Message Format:**
+
 - `feat:` New feature or demo
 - `fix:` Bug fix
 - `docs:` Documentation changes
@@ -245,6 +248,7 @@ graph LR
 ## 🎁 Recognition
 
 Contributors will be:
+
 - Listed in CONTRIBUTORS.md
 - Mentioned in release notes
 - Credited in demo README files

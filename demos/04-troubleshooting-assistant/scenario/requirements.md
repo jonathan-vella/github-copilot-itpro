@@ -12,6 +12,7 @@
 ### Technology Landscape
 
 **Platform**: Azure Cloud (100% hosted)
+
 - **Compute**: Azure App Service (10 instances, Premium P2v3)
 - **Database**: Azure SQL Database (Premium P2, 250 DTU)
 - **Storage**: Azure Blob Storage (Hot tier, 50TB product images/videos)
@@ -21,6 +22,7 @@
 - **Identity**: Azure AD B2C for customer authentication
 
 **Traffic Profile**:
+
 - Average: 50,000 daily visitors
 - Peak: 200,000 visitors (seasonal events)
 - Transactions: 2,500 orders/day average, 10,000+ peak
@@ -41,7 +43,7 @@
 2. **Error Type**: HTTP 500 Internal Server Error on payment processing
 3. **Pattern**: Intermittent (not affecting all users)
 4. **Duration**: Started ~8:00 PM EST (2+ hours ago)
-5. **Customer Impact**: 
+5. **Customer Impact**:
    - 375 failed transactions in 2 hours
    - Estimated revenue loss: ~$44,000
    - Social media complaints increasing
@@ -50,6 +52,7 @@
 ### Business Context
 
 **Critical Timing**:
+
 - **Black Friday**: 3 days away (November 14, 2025)
 - **Projected Revenue**: $8M during 4-day Black Friday weekend
 - **Risk**: If unresolved, could cost $2M+ in lost sales
@@ -57,6 +60,7 @@
 - **Current Year Downtime**: 6.2 hours used (2.5 hours remaining budget)
 
 **Executive Visibility**:
+
 - CTO monitoring incident channel
 - CEO notified (due to Black Friday proximity)
 - Board meeting scheduled tomorrow morning
@@ -114,12 +118,12 @@ Sarah needs to quickly:
      - Check DTU usage → looks normal (60% average)
      - Check query performance → no obvious slow queries
      - Dead end (90 minutes wasted)
-   
+
    - **Hypothesis 2**: App Service resource exhaustion
      - Check CPU/memory → within normal range
      - Check instance health → all healthy
      - Dead end (60 minutes wasted)
-   
+
    - **Hypothesis 3**: Network/connectivity issues
      - Check NSG rules → no recent changes
      - Check Application Gateway logs → lots of 500s, but why?
@@ -226,12 +230,14 @@ Sarah needs to quickly:
 ### Hour 1: Triage or Escalate?
 
 **Decision**: Try Copilot-assisted diagnostics first
+
 - If root cause identified in 1 hour → continue resolution
 - If still unclear after 1 hour → escalate to vendor support + dev team
 
 ### Hour 3: Rollback or Fix Forward?
 
 **Decision**: Depends on root cause
+
 - If recent deployment caused issue → rollback immediately
 - If configuration issue → fix forward with targeted change
 - If infrastructure scaling → scale up resources
@@ -239,6 +245,7 @@ Sarah needs to quickly:
 ### Hour 5: Go/No-Go for Black Friday
 
 **Decision**: Platform readiness assessment
+
 - If issue resolved + validated → proceed with Black Friday plans
 - If intermittent issues remain → implement circuit breaker, feature flag checkouts
 
@@ -247,30 +254,35 @@ Sarah needs to quickly:
 ### With Copilot (5 Hours)
 
 **Hour 1** (AI-Assisted Triage):
+
 - Copilot generates health check script → runs in 10 minutes
 - Identifies SQL Database as suspicious (high connection count)
 - Copilot creates KQL query to analyze SQL connection patterns
 - Finds: Connection pool exhaustion (98% utilization)
 
 **Hour 2** (Root Cause Analysis):
+
 - Copilot generates query to correlate with failed requests
 - Discovers: Payment processing operations hold connections 3× longer than other operations
 - Copilot suggests: "Check application connection pool settings"
 - Sarah reviews app config → finds `maxPoolSize=100` (default, too low)
 
 **Hour 3** (Solution Implementation):
+
 - Copilot generates remediation script to update app config
 - Suggests: Increase to 200, add connection timeout, add retry logic
 - Sarah deploys config change + restarts app
 - Monitors with Copilot-generated dashboard query
 
 **Hour 4** (Validation):
+
 - Error rate drops from 15% → 0% within 15 minutes
 - Copilot query confirms: Connection pool now 45% utilization (healthy)
 - No customer complaints in past 30 minutes
 - Performance metrics return to baseline
 
 **Hour 5** (Documentation):
+
 - Copilot generates incident post-mortem with timeline
 - Includes: Root cause, resolution steps, prevention recommendations
 - Sarah reviews, adds context, shares with team
@@ -298,11 +310,13 @@ See "Troubleshooting Challenges" section above for detailed breakdown.
 ### Customization Ideas
 
 **For Different Industries**:
+
 - **Financial Services**: Replace e-commerce with trading platform ($500K/hour downtime)
 - **Healthcare**: Patient portal unavailable, HIPAA compliance risk
 - **SaaS**: Multi-tenant platform outage, customer churn risk
 
 **For Different Azure Services**:
+
 - **AKS**: Pod crashing, image pull errors
 - **Azure Functions**: Cold start issues, throttling
 - **Logic Apps**: Workflow failures, connector errors

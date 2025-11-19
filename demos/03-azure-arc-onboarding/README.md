@@ -15,12 +15,14 @@ This demo showcases how GitHub Copilot accelerates Azure Arc deployment for hybr
 ### The Challenge
 
 Organizations with significant on-premises infrastructure need to:
+
 - Gain visibility into hybrid environments
 - Apply consistent governance across cloud and on-prem
 - Enable Azure services for on-premises servers
 - Maintain security and compliance at scale
 
 **Traditional Approach Problems:**
+
 - Manual agent deployment across hundreds/thousands of servers
 - Inconsistent configuration leading to compliance gaps
 - Time-consuming troubleshooting for failed installations
@@ -30,6 +32,7 @@ Organizations with significant on-premises infrastructure need to:
 ### The Copilot Solution
 
 GitHub Copilot accelerates every phase of Azure Arc onboarding:
+
 1. **Deployment Scripts**: Generate parallel installation scripts with error handling
 2. **Policy as Code**: Create Azure Policy definitions for governance at scale
 3. **Monitoring Setup**: Configure Log Analytics and Azure Monitor automatically
@@ -51,15 +54,18 @@ GitHub Copilot accelerates every phase of Azure Arc onboarding:
 ### ROI Calculation
 
 **Project Savings (500 servers):**
+
 - Hours saved: 97.5 hours
 - Cost at $150/hour: **$14,625 per project**
 - Typical deployments per year: 4 projects
 - **Annual value: $58,500**
 
 **For Enterprise Scale (5,000 servers over multiple projects):**
+
 - **Annual value: $156,000+**
 
 **Additional Benefits:**
+
 - Faster time-to-value for hybrid cloud strategy
 - Reduced errors and rework (95% first-time success rate)
 - Consistent governance and compliance
@@ -70,18 +76,21 @@ GitHub Copilot accelerates every phase of Azure Arc onboarding:
 ## Prerequisites
 
 ### Required Access
+
 - Azure subscription with Contributor access
 - Permissions to create Service Principals
 - Access to on-premises servers (or VMs simulating on-prem)
 - Local admin rights on target servers
 
 ### Required Tools
+
 - VS Code with GitHub Copilot extension
 - PowerShell 7+
 - Azure CLI or Azure PowerShell module
 - (Optional) Access to Log Analytics workspace
 
 ### Knowledge Requirements
+
 - Basic Azure concepts (Resource Groups, subscriptions)
 - Basic PowerShell scripting
 - Understanding of hybrid cloud architecture
@@ -92,9 +101,10 @@ GitHub Copilot accelerates every phase of Azure Arc onboarding:
 ## Scenario Details
 
 ### Customer Profile
+
 - **Company**: Global Manufacturing Corporation
 - **Industry**: Manufacturing
-- **Infrastructure**: 
+- **Infrastructure**:
   - 500 on-premises Windows/Linux servers across 12 factories
   - Mix of physical servers and VMware VMs
   - Distributed globally (Americas, EMEA, APAC)
@@ -104,24 +114,28 @@ GitHub Copilot accelerates every phase of Azure Arc onboarding:
 ### Business Requirements
 
 **Governance & Compliance:**
+
 - Apply consistent security policies across all servers
 - Audit configurations for SOC 2 compliance
 - Track patch status and vulnerability management
 - Enforce resource tagging standards
 
 **Monitoring & Operations:**
+
 - Centralized monitoring in Azure Monitor
 - Automated alerting for critical issues
 - Performance metrics collection
 - Log aggregation and analysis
 
 **Security:**
+
 - Deploy Azure Security Center recommendations
 - Enable Update Management
 - Implement Change Tracking
 - Configure Azure Sentinel integration
 
 **Scale & Performance:**
+
 - Onboard 500 servers within 2 weeks
 - Minimize downtime (zero if possible)
 - Handle network constraints in remote locations
@@ -172,19 +186,24 @@ GitHub Copilot accelerates every phase of Azure Arc onboarding:
 ## Demo Structure
 
 ### Phase 1: Scene Setting (5 minutes)
+
 Show the complexity of manual Arc onboarding and business impact
 
 ### Phase 2: Copilot-Assisted Development (18 minutes)
+
 Live development of Arc onboarding solution:
+
 1. Service Principal creation script (3 min)
 2. Parallel Arc agent deployment (6 min)
 3. Policy-as-code for governance (5 min)
 4. Monitoring and validation (4 min)
 
 ### Phase 3: Show Results (5 minutes)
+
 Demonstrate deployed Arc-enabled servers, policy compliance, monitoring
 
 ### Phase 4: Business Value Wrap-Up (2 minutes)
+
 Metrics, ROI calculation, customer-specific value
 
 ---
@@ -212,6 +231,7 @@ Metrics, ROI calculation, customer-specific value
 ## Success Criteria
 
 ### Technical Success
+
 - [ ] 500 servers successfully Arc-enabled
 - [ ] All servers reporting to Log Analytics
 - [ ] Azure Policy applied and compliant
@@ -219,6 +239,7 @@ Metrics, ROI calculation, customer-specific value
 - [ ] Zero failed deployments (or < 2%)
 
 ### Business Success
+
 - [ ] Project completed in 8-10 hours (vs. 106 hours manual)
 - [ ] 90%+ time savings demonstrated
 - [ ] Consistent governance across all servers
@@ -230,12 +251,14 @@ Metrics, ROI calculation, customer-specific value
 ## Key Talking Points
 
 ### Why This Matters
+
 - **Hybrid cloud is reality**: 95% of enterprises have on-premises infrastructure
 - **Arc is strategic**: Enables Azure services everywhere, not just in Azure
 - **Scale is the challenge**: Manual processes don't scale to thousands of servers
 - **Governance is critical**: Inconsistent management = compliance risk
 
 ### Copilot Value Props
+
 - **Knows Arc patterns**: Trained on Microsoft's own Arc deployment scripts
 - **Handles complexity**: Parallel processing, error handling, retry logic
 - **Multi-platform**: Generates scripts for Windows and Linux
@@ -243,6 +266,7 @@ Metrics, ROI calculation, customer-specific value
 - **Complete solution**: Not just scripts, but monitoring, validation, docs
 
 ### Differentiation from Other Demos
+
 - **Highest time savings**: 90%+ reduction (vs. 78-88% in other demos)
 - **Largest scale**: 500+ servers (vs. single deployments)
 - **Hybrid focus**: Real-world enterprise scenario
@@ -253,7 +277,7 @@ Metrics, ROI calculation, customer-specific value
 
 ## Files in This Demo
 
-```
+```bicep
 demos/03-azure-arc-onboarding/
 ├── README.md (this file)
 ├── DEMO-SCRIPT.md (presenter guide with exact timing)

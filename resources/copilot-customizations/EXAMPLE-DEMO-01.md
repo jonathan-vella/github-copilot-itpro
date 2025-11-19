@@ -14,6 +14,7 @@ cat resources/copilot-customizations/instructions/bicep-code-best-practices.inst
 ### Scenario: Generate a storage account Bicep template
 
 **Without Customizations** - Typical Copilot output:
+
 ```bicep
 param storageAccountName string
 param location string = resourceGroup().location
@@ -32,6 +33,7 @@ output id string = storageAccount.id
 ```
 
 **With Customizations** - Enhanced output following best practices:
+
 ```bicep
 // Storage account for application data
 // Following Bicep best practices from copilot-customizations
@@ -96,23 +98,27 @@ output primaryEndpoints object = storageAccount.properties.primaryEndpoints
 ## Key Improvements Applied
 
 ### 1. Naming Conventions ✅
+
 - **Before**: `storageAccountName` parameter (redundant 'Name' suffix)
 - **After**: `storageAccount` symbolic name, auto-generated name using `uniqueString()`
 - **Benefit**: Cleaner code, globally unique names
 
 ### 2. Latest API Versions ✅
+
 - **Before**: `@2021-04-01` (outdated)
 - **After**: `@2023-05-01` (latest stable)
 - **Benefit**: Access to newest features and fixes
 
 ### 3. Parameter Documentation ✅
+
 - **Before**: No descriptions
 - **After**: `@description` decorators on all parameters
 - **Benefit**: Self-documenting code, better IntelliSense
 
 ### 4. Security by Default ✅
+
 - **Before**: No security properties
-- **After**: 
+- **After**:
   - `supportsHttpsTrafficOnly: true`
   - `minimumTlsVersion: 'TLS1_2'`
   - `allowBlobPublicAccess: false`
@@ -120,11 +126,13 @@ output primaryEndpoints object = storageAccount.properties.primaryEndpoints
 - **Benefit**: Production-ready security
 
 ### 5. Comprehensive Outputs ✅
+
 - **Before**: Only `id`
 - **After**: ID, name, and `primaryEndpoints` object
 - **Benefit**: More useful for downstream modules
 
 ### 6. Tags Standardization ✅
+
 - **Before**: No tags
 - **After**: Environment, ManagedBy, Project tags
 - **Benefit**: Cost tracking, resource management
@@ -149,11 +157,13 @@ az deployment group create \
 ### Check Against Best Practices
 
 Using the Bicep implementation chat mode, ask:
-```
+
+```text
 Review this storage account template against Azure best practices
 ```
 
 Expected feedback:
+
 - ✅ Security settings correct
 - ✅ Naming follows conventions
 - ✅ API version is current
@@ -166,6 +176,7 @@ Expected feedback:
 Looking at `demos/01-bicep-quickstart/with-copilot/network.bicep`:
 
 **Already Following Best Practices** (because it was generated with Copilot):
+
 - ✅ `@description` decorators on all parameters (lines 20, 23, 26, 29, 37)
 - ✅ Latest API version `@2023-05-01` (lines 49, 116, 169, 211)
 - ✅ lowerCamelCase naming (`nsgWeb`, `nsgApp`, `virtualNetwork`)
@@ -174,6 +185,7 @@ Looking at `demos/01-bicep-quickstart/with-copilot/network.bicep`:
 - ✅ Tags on all resources (lines 38-42, 52, 119, 172, 214)
 
 **What Customizations Ensure**:
+
 1. These patterns are **consistently applied** across all new Bicep files
 2. Developers learn best practices through **AI-generated examples**
 3. Code reviews are **faster** (standards already met)
@@ -196,7 +208,8 @@ Looking at `demos/01-bicep-quickstart/with-copilot/network.bicep`:
 After installing `chatmodes/bicep-implement.chatmode.md`:
 
 **Prompt in chat**:
-```
+
+```yaml
 Create a storage account for demo 01 with:
 - Premium tier for app data
 - Geo-redundant storage
@@ -205,6 +218,7 @@ Create a storage account for demo 01 with:
 ```
 
 **Expected behavior**:
+
 1. ✅ Generates template following instructions
 2. ✅ Validates against Azure Verified Modules
 3. ✅ Runs `bicep build` automatically
@@ -212,6 +226,7 @@ Create a storage account for demo 01 with:
 5. ✅ Formats with `bicep format`
 
 **Output includes**:
+
 ```bicep
 // All properties from previous example, plus:
 properties: {
@@ -231,6 +246,7 @@ With `devops-core-principles.instructions.md` added:
 ### Copilot Also Suggests
 
 **When creating deployment pipeline**:
+
 ```yaml
 # GitHub Actions suggested by Copilot
 name: Deploy Bicep
@@ -267,6 +283,7 @@ jobs:
 ```
 
 **DORA Metrics Considered**:
+
 - ✅ Deployment Frequency: Pipeline enables multiple deployments per day
 - ✅ Lead Time: Automated validation reduces manual steps
 - ✅ Change Failure Rate: What-if analysis catches issues pre-deployment
@@ -279,11 +296,13 @@ jobs:
 With `powershell-pester-5.instructions.md`:
 
 **Prompt**:
+
 ```powershell
 # Create tests for a deployment validation script
 ```
 
 **Copilot generates**:
+
 ```powershell
 BeforeAll {
     . $PSScriptRoot/Test-BicepDeployment.ps1
@@ -324,13 +343,15 @@ Describe 'Test-BicepDeployment' {
 ### Using Documentation Writer Prompt
 
 **Prompt**:
-```
+
+```text
 Generate a how-to guide for deploying demo 01 network template
 Target audience: IT Pros new to Bicep
 Include: Prerequisites, steps, validation, troubleshooting
 ```
 
 **Copilot generates** (using Diátaxis framework):
+
 ```markdown
 # How to Deploy the Three-Tier Network Infrastructure
 
@@ -348,22 +369,24 @@ virtual network with proper segmentation.
 ## Steps
 
 ### 1. Review the Template
-```bash
+```
 # Clone the repository
 git clone https://github.com/jonathan-vella/github-copilot-itpro.git
 cd github-copilot-itpro/demos/01-bicep-quickstart/with-copilot
 
 # Open in VS Code
 code network.bicep
-```
+```text
 
 [... rest of detailed guide ...]
 
 ## Troubleshooting
+
 | Issue | Cause | Solution |
 |-------|-------|----------|
 | "Address prefix overlap" | Subnet ranges conflict | Check lines 225, 234, 243 |
 [... etc ...]
+
 ```
 
 ## Summary

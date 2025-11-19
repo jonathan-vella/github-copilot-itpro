@@ -11,6 +11,7 @@ This guide helps System Integrator partners effectively deliver GitHub Copilot f
 ### 1. Environment Setup (15 minutes before demo)
 
 **Required Tools:**
+
 - [ ] VS Code with GitHub Copilot extension installed
 - [ ] Azure CLI installed and authenticated
 - [ ] PowerShell 7+ installed
@@ -19,6 +20,7 @@ This guide helps System Integrator partners effectively deliver GitHub Copilot f
 - [ ] GitHub account with Copilot license
 
 **Test Your Setup:**
+
 ```powershell
 # Verify Azure CLI
 az --version
@@ -39,11 +41,13 @@ code --list-extensions | Select-String copilot
 Ask these questions to tailor your demo:
 
 **Team Context:**
+
 - How many IT professionals manage Azure infrastructure?
 - What's the mix of senior vs. junior engineers?
 - Average hourly rate for IT staff?
 
 **Current Challenges:**
+
 - How do you currently deploy Azure infrastructure?
 - How long does it take to create a typical deployment template?
 - How often do you encounter deployment errors?
@@ -51,11 +55,13 @@ Ask these questions to tailor your demo:
 - Do you have orphaned resources or tagging issues?
 
 **Hybrid Cloud:**
+
 - Do you have on-premises servers?
 - Are you using Azure Arc?
 - Plans for hybrid cloud expansion?
 
 **Documentation:**
+
 - How do you maintain infrastructure documentation?
 - How often is documentation out of date?
 - Who creates runbooks and architecture docs?
@@ -65,9 +71,11 @@ Ask these questions to tailor your demo:
 ## Demo 1: Bicep Quickstart (30 minutes)
 
 ### Target Audience
+
 IT Pros responsible for infrastructure deployment, cloud architects, DevOps engineers
 
 ### Business Value Pitch
+
 *"Reduce infrastructure deployment time by 78% while improving quality and security. What takes 45 minutes manually can be done in 10 minutes with Copilot, with zero errors on first deployment."*
 
 ### Delivery Flow
@@ -75,8 +83,11 @@ IT Pros responsible for infrastructure deployment, cloud architects, DevOps engi
 #### Phase 1: Scene Setting (5 minutes)
 
 **Show the pain:**
+
 ```
+
 "Before we start, let me show you what infrastructure deployment looks like WITHOUT Copilot..."
+
 ```
 
 1. Open `demos/01-bicep-quickstart/manual-approach/time-tracking.md`
@@ -84,9 +95,12 @@ IT Pros responsible for infrastructure deployment, cloud architects, DevOps engi
 3. Show complexity of ARM templates (confusing JSON)
 
 **State the goal:**
+
 ```
-"Today we'll deploy a secure Azure network with 3 subnets, 3 NSGs with security rules, 
+
+"Today we'll deploy a secure Azure network with 3 subnets, 3 NSGs with security rules,
 and a storage account with blob services. Typically 45 minutes. Let's do it in 10."
+
 ```
 
 #### Phase 2: Live Copilot Development (18 minutes)
@@ -103,6 +117,7 @@ and a storage account with blob services. Typically 45 minutes. Let's do it in 1
    - Location uses parameter pattern
 
 **Copilot Magic Moments to Highlight:**
+
 - "Notice Copilot added the `@description` decorator automatically"
 - "It inferred we need address prefixes for each subnet"
 - "The naming follows Azure best practices"
@@ -115,9 +130,12 @@ and a storage account with blob services. Typically 45 minutes. Let's do it in 1
 4. Show how Copilot suggests complete security rules
 
 **Key Message:**
+
 ```
+
 "Copilot knows Azure security best practices. It's suggesting priority 100 for allow rules,
 priority 4096 for deny rules, and properly structured rule properties."
+
 ```
 
 **Step 3: Storage Account (5 minutes)**
@@ -130,20 +148,25 @@ priority 4096 for deny rules, and properly structured rule properties."
    - `allowBlobPublicAccess: false`
 
 **Key Message:**
+
 ```
-"Security by default. Copilot learned from millions of repositories and knows 
+
+"Security by default. Copilot learned from millions of repositories and knows
 that modern storage accounts should have these security settings."
+
 ```
 
 #### Phase 3: Validation & Deployment (5 minutes)
 
 **Option A: Live Deploy (if time permits)**
+
 ```powershell
 cd demos/01-bicep-quickstart/validation
 .\deploy.ps1 -ResourceGroupName "rg-demo-001" -Environment dev
 ```
 
 **Option B: Show Pre-Deployed (safer)**
+
 1. Switch to Azure Portal
 2. Show deployed resources
 3. Walk through security configurations
@@ -152,7 +175,8 @@ cd demos/01-bicep-quickstart/validation
 #### Phase 4: Business Value Wrap-Up (2 minutes)
 
 **Show the metrics:**
-```
+
+```yaml
 Manual Approach: 81 minutes, 3 failed deployments
 With Copilot: 10 minutes, zero errors
 Time Savings: 78%
@@ -162,7 +186,8 @@ Annual savings: $40,500
 ```
 
 **Ask for commitment:**
-```
+
+```javascript
 "Based on what you've seen, how many infrastructure deployments does your team do per month?
 Let me calculate your specific ROI..."
 ```
@@ -172,9 +197,11 @@ Let me calculate your specific ROI..."
 ## Demo 2: PowerShell Automation (30 minutes)
 
 ### Target Audience
+
 IT operations teams, Azure administrators, compliance officers
 
 ### Business Value Pitch
+
 *"Eliminate 2 hours per day of manual Azure operations. Automate resource reporting, compliance auditing, and cost optimization with production-ready scripts generated in minutes."*
 
 ### Delivery Flow
@@ -182,7 +209,8 @@ IT operations teams, Azure administrators, compliance officers
 #### Phase 1: Scene Setting (5 minutes)
 
 **Show the pain:**
-```
+
+```javascript
 "Let me show you what IT operations teams tell us they struggle with..."
 ```
 
@@ -194,7 +222,8 @@ IT operations teams, Azure administrators, compliance officers
 3. Show manual development time: 130 minutes
 
 **State the goal:**
-```
+
+```bicep
 "We'll build 4 production-ready PowerShell scripts in 15 minutes:
 1. Resource reporting with multiple export formats
 2. Compliance auditing for untagged resources
@@ -208,17 +237,20 @@ IT operations teams, Azure administrators, compliance officers
 
 1. Create `Get-AzResourceReport.ps1`
 2. Type:
+
 ```powershell
 <#
 .SYNOPSIS
     Generate comprehensive Azure resource inventory report
 #>
 ```
+
 3. Accept Copilot's comment-based help completion
 4. Type: `[CmdletBinding()]` and let Copilot suggest parameters
 5. Type: `# Get all resources in subscription` and accept function logic
 
 **Copilot Magic Moments:**
+
 - "See how Copilot added proper parameter validation?"
 - "It included progress bars automatically"
 - "Multiple export formats without us asking"
@@ -232,9 +264,12 @@ IT operations teams, Azure administrators, compliance officers
 5. Show Copilot adding cost estimation logic
 
 **Key Message:**
+
 ```
+
 "This script will save you $244,000 per year by finding and removing orphaned resources.
 Copilot just generated the logic to identify them and calculate savings."
+
 ```
 
 **Script 3: Bulk Tagging (7 minutes)**
@@ -246,14 +281,18 @@ Copilot just generated the logic to identify them and calculate savings."
 5. Show Copilot adding confirmation prompts
 
 **Key Message:**
+
 ```
-"Notice the safety features Copilot added? Dry-run mode, confirmation prompts, 
+
+"Notice the safety features Copilot added? Dry-run mode, confirmation prompts,
 parallel processing - these are production-ready patterns."
+
 ```
 
 #### Phase 3: Show Results (5 minutes)
 
 **Demonstrate script quality:**
+
 1. Open one complete script
 2. Show comment-based help
 3. Show parameter validation
@@ -261,21 +300,26 @@ parallel processing - these are production-ready patterns."
 5. Show progress indicators
 
 **Compare to manual:**
+
 - Manual: 130 minutes, multiple syntax errors, incomplete error handling
 - Copilot: 15 minutes, production-ready, comprehensive features
 
 #### Phase 4: Business Value Wrap-Up (2 minutes)
 
 **Show the metrics:**
+
 ```
+
 Manual Development: 130 minutes
 With Copilot: 15 minutes
 Time Savings: 88%
 
 Operational Savings:
+
 - 2 hours/day reporting → 15 minutes: $842,400/year for 12-person team
 - Orphaned resource cleanup: $244,000/year Azure cost reduction
 Total Annual Value: $1,086,000
+
 ```
 
 ---
@@ -291,9 +335,12 @@ Total Annual Value: $1,086,000
 ### Objection 1: "Is the code secure?"
 
 **Response:**
+
 ```
-"Great question. Copilot learns from millions of public repositories, including Microsoft's own 
+
+"Great question. Copilot learns from millions of public repositories, including Microsoft's own
 Azure patterns. Notice how it automatically suggested:
+
 - HTTPS only on storage accounts
 - TLS 1.2 minimum
 - No public blob access
@@ -301,47 +348,61 @@ Azure patterns. Notice how it automatically suggested:
 
 These are security best practices built-in. Plus, YOU review every suggestion before accepting it.
 Copilot accelerates, but you're still in control."
+
 ```
 
 ### Objection 2: "What about our junior engineers?"
 
 **Response:**
+
 ```
-"This is actually one of the biggest benefits! Junior engineers learn WHILE they work. Copilot 
-suggests best practices, proper patterns, and correct syntax. It's like having a senior engineer 
+
+"This is actually one of the biggest benefits! Junior engineers learn WHILE they work. Copilot
+suggests best practices, proper patterns, and correct syntax. It's like having a senior engineer
 pair programming with them. We've seen junior engineers become productive 60% faster."
+
 ```
 
 ### Objection 3: "We have specific company standards"
 
 **Response:**
+
 ```
-"Perfect! Copilot learns from your existing codebase. Store your templates and scripts in the 
-same repository, and Copilot will suggest patterns that match YOUR standards. You can also use 
+
+"Perfect! Copilot learns from your existing codebase. Store your templates and scripts in the
+same repository, and Copilot will suggest patterns that match YOUR standards. You can also use
 .copilot-instructions.md files to specify company-specific guidelines."
+
 ```
 
 ### Objection 4: "How much does it cost?"
 
 **Response:**
+
 ```
+
 "GitHub Copilot is $39/user/month for enterprise. Let's do the math:
+
 - Investment for 15-person team: $7,020/year
 - Savings based on what we just demonstrated: $930,600/year
 - ROI: 13,156%
 - Payback period: 3 days
 
-And that's just time savings. We haven't counted reduced errors, better security, 
+And that's just time savings. We haven't counted reduced errors, better security,
 or the Azure cost reduction from orphaned resource cleanup."
+
 ```
 
 ### Objection 5: "Our code is proprietary/confidential"
 
 **Response:**
+
 ```
-"Your code never leaves your environment for training. Copilot uses the model Microsoft trained, 
-but your proprietary code stays private. You can also use GitHub Copilot Enterprise which has 
+
+"Your code never leaves your environment for training. Copilot uses the model Microsoft trained,
+but your proprietary code stays private. You can also use GitHub Copilot Enterprise which has
 additional compliance and privacy features."
+
 ```
 
 ---
@@ -357,16 +418,20 @@ additional compliance and privacy features."
    - Send customized ROI summary
 
 2. **Pilot Program Proposal**
-   ```
+
+```
+
    Suggested Pilot:
-   - Duration: 30 days
-   - Team: 5-10 early adopters
-   - Success Metrics: 
-     * Time savings on 3 specific tasks
-     * Error reduction rate
-     * Developer satisfaction survey
-   - Cost: $195-390 for pilot period
-   ```
+
+- Duration: 30 days
+- Team: 5-10 early adopters
+- Success Metrics:
+  - Time savings on 3 specific tasks
+  - Error reduction rate
+  - Developer satisfaction survey
+- Cost: $195-390 for pilot period
+
+```
 
 3. **Technical Setup**
    - Schedule 30-minute setup session
@@ -503,13 +568,16 @@ additional compliance and privacy features."
 ### If Customer Asks Question You Can't Answer
 
 ```
-"That's a great question. Let me make a note and get you a detailed answer 
+
+"That's a great question. Let me make a note and get you a detailed answer
 from our technical team within 24 hours. In the meantime, let me show you..."
+
 ```
 
 ### If Running Long
 
 **Prioritize:**
+
 1. Business value discussion (don't skip)
 2. One complete demo (quality over quantity)
 3. ROI calculation
@@ -520,11 +588,13 @@ from our technical team within 24 hours. In the meantime, let me show you..."
 ## Contact & Support
 
 **Partner Questions:**
+
 - Partner Portal: [Link]
 - Technical Support: partners@github.com
 - Sales Support: Your Microsoft/GitHub account team
 
 **Customer Resources:**
+
 - GitHub Copilot Documentation: https://docs.github.com/copilot
 - Azure Bicep Documentation: https://learn.microsoft.com/azure/azure-resource-manager/bicep/
 - Azure PowerShell Documentation: https://learn.microsoft.com/powershell/azure/

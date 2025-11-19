@@ -63,6 +63,7 @@ Ask these questions while attendees join:
 **Present the scenario** (use `scenario/requirements.md` as reference):
 
 > "GlobalManu Corp is a $3.2B manufacturing company with 500 on-premises servers spread across 12 factories in 8 countries. They have:
+>
 > - 320 Windows servers and 180 Linux servers
 > - Mix of tools: SCCM, Ansible, manual scripts—all inconsistent
 > - No centralized visibility or governance
@@ -72,6 +73,7 @@ Ask these questions while attendees join:
 **Show the architecture diagram** (`scenario/architecture.md` - High-Level Architecture):
 
 Open the Mermaid diagram in VS Code preview to visualize:
+
 - 12 facilities with site-to-site VPNs
 - 500 servers connecting to Azure Arc
 - Azure Policy, Monitor, Security Center integration
@@ -399,12 +401,14 @@ Copilot will suggest:
 ### Pacing Tips for Live Demo
 
 **If You're Ahead of Schedule**:
+
 - Add more explanation of what Copilot suggested
 - Show the Azure Portal to visualize Arc servers
 - Take more audience questions
 - Show the `manual-approach/time-tracking.md` in detail
 
 **If You're Behind Schedule**:
+
 - Skip detailed explanation of Script 3 or 4
 - Say: "In the interest of time, I'll let Copilot finish this script while we move on"
 - Focus on Scripts 1 and 2 (Service Principal + Parallel Deployment)
@@ -432,6 +436,7 @@ Copilot will suggest:
 ```
 
 **Show output**:
+
 - Service Principal created
 - RBAC roles assigned
 - Credentials stored in Key Vault
@@ -450,6 +455,7 @@ Copilot will suggest:
 ```
 
 **Show output**:
+
 - Progress bar (3 servers in parallel)
 - Success messages
 - Total time (should be ~2-3 minutes for 3 servers)
@@ -511,6 +517,7 @@ Show CPU metrics from Arc-enabled servers.
 **Presenter Narrative**:
 
 > "We just built in 18 minutes what would take 20 hours manually. That's a 92% time reduction. For GlobalManu Corp:
+>
 > - Project time: 106 hours → 8.5 hours
 > - Cost savings: $14,625 per project
 > - They do this quarterly: 4 projects/year = $58,500 annual savings
@@ -519,6 +526,7 @@ Show CPU metrics from Arc-enabled servers.
 ### The ROI Story (30 Seconds)
 
 > "Here's the math:
+>
 > - GitHub Copilot: $39/month per engineer
 > - This demo alone saved 97.5 hours @ $150/hour = $14,625
 > - ROI: 38,000% on just ONE project
@@ -568,6 +576,7 @@ Show CPU metrics from Arc-enabled servers.
 ### Same Day (Within 2 Hours)
 
 **Send email with**:
+
 1. **Link to GitHub repository**: All scripts they saw in the demo
 2. **ROI Calculator**: `partner-toolkit/roi-calculator.md` customized for their environment
 3. **Recording** (if permitted): Link to demo recording
@@ -579,6 +588,7 @@ Show CPU metrics from Arc-enabled servers.
 ### Within 48 Hours
 
 **Deliver pilot proposal**:
+
 - Scope: Onboard 50 servers in 1 week
 - Cost: GitHub Copilot licenses + Azure Arc costs (estimate)
 - Success criteria: 90% first-time success rate, 80% time reduction
@@ -587,6 +597,7 @@ Show CPU metrics from Arc-enabled servers.
 ### Within 1 Week
 
 **Send implementation roadmap**:
+
 - Phase 1: Pilot (50 servers, 1 week)
 - Phase 2: Production rollout (remaining servers, 2-4 weeks)
 - Phase 3: Governance & optimization (policies, monitoring, dashboards)
@@ -601,6 +612,7 @@ Show CPU metrics from Arc-enabled servers.
 **Issue**: Copilot not suggesting code
 
 **Solution**:
+
 - Check Copilot status icon (bottom right of VS Code)
 - Restart VS Code
 - Use fallback: Type partial code and press `Tab` to trigger suggestions
@@ -611,6 +623,7 @@ Show CPU metrics from Arc-enabled servers.
 **Issue**: Azure authentication fails during deployment
 
 **Solution**:
+
 - Run `Connect-AzAccount` before the demo
 - Use `Get-AzContext` to verify subscription
 - Fallback: Show validation results from previous test run (screenshots)
@@ -620,6 +633,7 @@ Show CPU metrics from Arc-enabled servers.
 **Issue**: Test VMs not responding
 
 **Solution**:
+
 - Verify VMs are running: `Get-AzVM -Status`
 - Check NSG rules allow WinRM (5985, 5986) or SSH (22)
 - Fallback: Show Portal screenshots of previous successful deployment
@@ -636,6 +650,7 @@ If technical issues occur, switch to pre-recorded video:
 **Option 2: Walk Through Code Without Execution**
 
 Show the scripts in VS Code and explain:
+
 - Copilot suggestions (use inline comments to simulate)
 - Key logic sections
 - Business value at each step
@@ -643,6 +658,7 @@ Show the scripts in VS Code and explain:
 **Option 3: Show Results Only**
 
 Jump directly to Azure Portal:
+
 - Show Arc-enabled servers
 - Display policy compliance
 - Show monitoring dashboards
@@ -655,12 +671,14 @@ Jump directly to Azure Portal:
 ### For Technical Audiences (Add 10 Minutes)
 
 **Dive deeper into**:
+
 - Runspace vs. `Start-Job` performance comparison
 - Azure Policy DeployIfNotExists effect internals
 - Data Collection Rule JSON schema
 - Certificate-based authentication for Service Principal
 
 **Show additional scripts**:
+
 - `Test-ArcConnectivity.ps1` (validation script)
 - `cleanup.ps1` (resource removal)
 
@@ -669,12 +687,14 @@ Jump directly to Azure Portal:
 ### For Executive Audiences (Shorten to 20 Minutes)
 
 **Focus on**:
+
 - Business scenario (3 min)
 - Quick Copilot magic demo (8 min) - only Scripts 1 and 2
 - Results in Portal (4 min)
 - ROI and business value (5 min)
 
 **Skip**:
+
 - Detailed script explanations
 - PowerShell syntax discussions
 - Validation steps
@@ -684,6 +704,7 @@ Jump directly to Azure Portal:
 ### For Hands-On Workshop (Extend to 90 Minutes)
 
 **Add**:
+
 - Attendee machines with Copilot installed
 - Guided exercise: Build Script 1 together
 - Self-paced: Build Scripts 2-4 with Copilot
@@ -717,11 +738,13 @@ Jump directly to Azure Portal:
 ## Materials to Bring
 
 **Printed** (for in-person demos):
+
 - [ ] One-page ROI calculator (filled out for their environment if possible)
 - [ ] Architecture diagram (high-level view)
 - [ ] Your business card with follow-up info
 
 **Digital** (for virtual or in-person):
+
 - [ ] This demo script open in second monitor
 - [ ] Azure Portal open and logged in
 - [ ] GitHub repository cloned locally

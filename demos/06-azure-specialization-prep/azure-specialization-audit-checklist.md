@@ -18,6 +18,7 @@ Module A is required for multiple Azure specializations. It evaluates the use of
 ### Completion Requirements
 
 To complete or renew Module A, the partner needs to:
+
 - Pass all controls in Module A by providing the specified evidence, **OR**
 - Provide evidence of a recent (within two years) Module A+B Pass result
 
@@ -26,6 +27,7 @@ The relevant date for each partner is the **Module B Anniversary Date (AD)** sho
 ### Waiver Options
 
 To waiver out of Module A, the partner must provide evidence of:
+
 - A recent (within two years) Pass result for an applicable A+B audit, **OR**
 - A Pass result for the AEMSP Control 3.A within the last year
 
@@ -53,7 +55,7 @@ Partners who have passed Azure Expert MSP V1.9 and later Module 3.0 (in Full and
 Module B validates that the partner has adopted robust processes to ensure customer success across all phases of deploying Infra and Database Migration solutions, from the assessment
 phase to design, pilot, implementation, and post-implementation phases.
 
-Review the following audit checklist tables for more details about each control phase and to learn how the partner will be evaluated for an audit. The same customers may be used for Module A & B. 
+Review the following audit checklist tables for more details about each control phase and to learn how the partner will be evaluated for an audit. The same customers may be used for Module A & B.
 
 **Audit Duration:** The estimated length of both modules together is **eight (8) hours**. Each control has one (1) or more requirements and requires evidence the partner must provide for the auditor.
 
@@ -126,10 +128,12 @@ The partner must have a strategy for planning and tracking the completion of clo
 The partner must provide plan evidence for Cloud and AI adoption planning and completion with examples of **two (2) unique customer projects** that were completed in the past **twelve (12) months**.
 
 **Required for each customer project:**
+
 - ✅ Cost management reports with pricing calculator output
 - ✅ DevOps capability assessment
 
 **Optional:**
+
 - AI Center of Excellence (AI COE) documentation
 
 Accepted documentation will include **at least two (2)** of the below document outputs for each customer:
@@ -153,6 +157,7 @@ The partner must demonstrate the ability to deploy the required governance tools
 #### Required Evidence
 
 The partner must demonstrate they have established a **security baseline** with the use of:
+
 - Microsoft Defender for Cloud, **OR**
 - 3rd party solution
 
@@ -180,6 +185,7 @@ The partner must use the following guidance and assessments:
 #### Required Evidence
 
 The partner must provide evidence of their capability for:
+
 1. Aligning to architectures in **Architecture Center**
 2. Reviewing the designed architecture using one of the two assessments:
    - Well-Architected Review, **OR**
@@ -190,6 +196,7 @@ This will ensure that all production-oriented considerations are taken into acco
 **Examples must include:** Two (2) unique customer projects that were completed in the past **twelve (12) months**.
 
 ---\
+
 ## 3.0 Manage and Optimize
 
 The partner must demonstrate that they have set up their customers for operational success to deploy compliant environments with built-in policies and controls, including ALZ. All partners have a role in setting up operations management, even if they do not provide long-term managed services.
@@ -197,16 +204,19 @@ The partner must demonstrate that they have set up their customers for operation
 ### 3.1 Repeatable Deployment
 
 #### Requirement\
+
 The partner must demonstrate adherence to **Azure landing zone (ALZ)** design areas through a repeatable deployment. ALZ applies to all sizes of deployments.
 
 The deployment should configure, at minimum, the following attributes:
 
 #### 🔐 Identity
+
 - Adoption of identity management solutions, such as:
   - Microsoft Entra ID (formerly Azure Active Directory), **OR**
   - Equivalent solution
 
 #### 🌐 Networking Architecture Design (Topology)
+
 - Define an Azure network topology (see Cloud Adoption Framework | Microsoft Docs)
 - Application of hybrid architectures that use:
   - Azure ExpressRoute
@@ -214,6 +224,7 @@ The deployment should configure, at minimum, the following attributes:
   - Or equivalent services for connecting local datacenters to Azure
 
 #### 📋 Resource Organization
+
 - Implementation of tagging and naming standards during the project
 
 #### ALZ Deployment Approaches
@@ -237,11 +248,13 @@ they used to create landing zones, aligned to the Azure landing zone
 (ALZ) conceptual architecture , deployed to two (2) unique customer
 environments using Bicep or Terraform modules, and ARM (AZURE Resource
 Manager) templates, to automatically deploy the environment
+
 #### Required Evidence
 
 The partner must provide documented evidence of a **repeatable deployment** they used to create landing zones:
 
 **Requirements:**
+
 - ✅ Aligned to the **Azure landing zone (ALZ) conceptual architecture**
 - ✅ Deployed to **two (2) unique customer environments**
 - ✅ Using **Bicep** or **Terraform modules**, and ARM (Azure Resource Manager) templates
@@ -253,6 +266,7 @@ If a customer deviates from the specified architecture, the Partner must demonst
 
 **Template Sources:**  
 The provided template can be pulled directly from:
+
 - Cloud Adoption Framework Landing zone implementation options, **OR**
 - Partner's own IP (Intellectual Property)
 
@@ -261,17 +275,18 @@ In either case, the output evidence must demonstrate the configuration of the id
 > **⚠️ Special Evidence Note:**  
 > **For Analytics on Azure specialization deployments and Data Warehouse Migration to Azure specialization deployments only:**  
 > If no Identity or Networking components are deployed in the Azure Landing Zone, a documented focus on Resource organization attributes is sufficient to pass this control. Identity and Networking repeatable deployment attributes only are waived.  
->   
+>
 > Demonstration of the approach type for ALZ is required for two (2) unique customers for Analytics on Azure and Data Warehouse Migration to Azure specializations.
 
 ---\
+
 ### 3.2 Plan for Skilling
 
 #### Requirement
 
 When customers adopt the cloud, their existing technical staff will need a variety of new skills to aid in making technical decisions and to support new cloud implementations. To ensure the long-term success of the customer, the partner must document a **skilling plan** to prepare the customer's technical staff.
 
-#### Documentation Must Include:
+#### Documentation Must Include
 
 1. **Skills Assessment**  
    A description of the new skills for the technical roles the customer will need to achieve to successfully manage the new environment. The Partner must document key customer technical roles and the plan for the customer to obtain skills required such as, but not limited to:
@@ -296,6 +311,7 @@ For guidance, review **Microsoft How to Build a Skilling Readiness Plan**.
 The partner must provide a skilling plan for at least **two (2) unique customer engagements** completed within the last **twelve (12) months**.
 
 The two (2) skilling plans must include:
+
 - Customer-facing presentation, **OR**
 - Planning documents, **OR**
 - Post-deployment documentation, **OR**
@@ -318,6 +334,7 @@ The partner must demonstrate the documented deployment of **at least one (1)** o
 **Security & Compliance Artifacts:**
 
 After running automated security and compliance checks using:
+
 - GitHub Actions, **OR**
 - Azure DevOps, **OR**
 - A third-party tool integrated with Microsoft Security DevOps
@@ -333,6 +350,7 @@ Partners should provide **any one** of the following sanitized artifacts as evid
 **Artifact Requirements:**
 
 These artifacts must be:
+
 - ✅ Free of personally identifiable information (PII) and customer intellectual property (IP)
 - ✅ Timestamped
 - ✅ Traceable to specific pipeline runs to ensure they are audit-ready and demonstrate secure development practices
@@ -357,9 +375,10 @@ The partner must have a consistent approach for assessing customer requirements 
 ### 1.1 Workload Assessment
 
 #### Requirement\
+
 The partner must demonstrate how they assess each workload prior to migration to ensure that adequate pre-migration or pre-deployment planning and sizing were performed.
 
-#### Assessment Must Include:
+#### Assessment Must Include
 
 The assessment must include mapping that shows the **dependencies upstream** from the resources that will be migrated. It must also show:
 
@@ -375,14 +394,17 @@ The assessment must include mapping that shows the **dependencies upstream** fro
 The partner must provide evidence of **both** of the following scenarios within the past **twelve (12) months**:
 
 **Scenario 1:**
+
 1. Migration of Infra (Windows Server) to Azure, **OR**
 2. Migration of Linux-based applications to Azure
 
 **Scenario 2:**
+
 1. Migration of Microsoft SQL databases to Azure (can include Arc-enabled SQL Managed Instance (MI)\*, **OR**
 2. Migration of MySQL, **OR** PostgreSQL, **OR** MariaDB, **OR** MongoDB database to Azure\*
 
 **\*Notes:**
+
 - Azure includes Microsoft datacenters, Arc enabled Azure on-prem or Arc enabled multi-cloud
 - Oracle migration to PostgreSQL, Cosmos DB or Azure SQL will qualify in scenario two (2)
 
@@ -425,18 +447,21 @@ The partner must provide **two (2) unique customer examples** for each of the **
 The partner will choose within the scenarios below. For example in #1, Migration of Infra Windows Server **OR** Migration of Linux base applications to meet scenario 1. The same logic applied for scenario 2.
 
 **Scenario 1:**
+
 1. Migration of Infra (Windows Server) to Azure, **OR**
 2. Migration of Linux-based applications to Azure
 
 **Scenario 2:**
+
 1. Migration of Microsoft SQL databases to Azure (can include Arc-enabled SQL Managed Instance (MI)\*, **OR**
 2. Migration of MySQL, **OR** PostgreSQL, **OR** MariaDB, **OR** MongoDB database to Azure\*
 
 **\*Notes:**
+
 - Azure includes Microsoft datacenters, Arc enabled Azure on-prem or Arc enabled multi-cloud
 - Oracle migration to PostgreSQL, Cosmos DB or Azure SQL will qualify in scenario two (2)
 
-#### Solution Design Must Show:
+#### Solution Design Must Show
 
 The solution design must show **all of the following** in evidence for each scenario:
 
@@ -446,9 +471,9 @@ The solution design must show **all of the following** in evidence for each scen
 - 🕓 The high-level migration sequence and estimated time to finish the migration
 - ✅ The validation of the successful migration completion
 
-#### Azure Landing Zone (ALZ) Requirements The environment that supports the referenced customer deployments should address each of the design areas below required below. If an item is not relevant, the partner must document the customer's decision to deviate from applying best practices.
+#### Azure Landing Zone (ALZ) Requirements The environment that supports the referenced customer deployments should address each of the design areas below required below. If an item is not relevant, the partner must document the customer's decision to deviate from applying best practices
 
-#### ALZ Evidence Examples Include:
+#### ALZ Evidence Examples Include
 
 - 🔐 **Identity & Access Management (IAM)**  
   Role-based access control (RBAC), data sovereignty and encryption, application security, and auditing
@@ -488,6 +513,7 @@ The partner may demonstrate the required two (2) scenarios using more than two (
 **Scenario Requirement:** Both scenario 1 and scenario 2 are required. The partner chooses within the scenario, for example: Migration of Infra Windows Server **OR** Linux base applications, to meet scenario 1.
 
 **Accepted Documentation:**
+
 - Project Plan, **OR**
 - Functional Specifications, **OR**
 - Solution Design Document, **OR**
@@ -502,6 +528,7 @@ The partner can use any or all of the accepted documentation as long as the requ
 ### 2.2 Azure Well-Architected Review of Workloads
 
 #### Requirement The Azure Well-Architected Review is designed
+
 to help partners evaluate your customers' workloads against the latest
 set of industry best practices. It provides actionable guidance to
 design and improve your customers' workloads.
@@ -547,6 +574,7 @@ The partner must provide **two (2) unique customer project examples** in evidenc
 The documentation for each single scenario must include **at minimum two (2)** of the evidence items below to demonstrate the control. This will provide at minimum, a total of **four (4) artifacts**.
 
 **Accepted Documentation:**
+
 - Signed Statements of Work (SOWs) for relevant projects, **OR**
 - Solution Design Documents for all projects, **OR**
 - The Project Plan and Migration and Deployment sequence, **OR**
@@ -642,6 +670,7 @@ Show experience with third-party tools that integrate with Azure Migrate by demo
 Show experience with all other third-party tools by referencing the tools used in a project plan for successfully migrating a customer to Azure, or by providing a spreadsheet with output from and snapshots of, results in an output file from the tools that they used.
 
 **Tools may include but are not limited to:**
+
 - Cloud Sphere
 - Carbonite
 - Plate Spin
@@ -698,14 +727,17 @@ The partner must validate the deployment, including:
 The partner must demonstrate validated deployment for **both** of the scenarios below, choosing **one (1) option** inside each scenario:
 
 **Scenario 1:**
+
 1. Migration of Infra (Windows Server) to Azure, **OR**
 2. Migration of Linux-based applications to Azure
 
 **Scenario 2:**
+
 1. Migration of Microsoft SQL databases to Azure (can include Arc-enabled SQL Managed Instance (MI))*, **OR**
 2. Migration of MySQL, PostgreSQL, MariaDB **OR** MongoDB database to Azure*
 
 > **⚠️ Notes:**
+>
 > - Azure includes Microsoft datacenters, Arc enabled Azure on-prem or Arc enabled multi-cloud
 > - Oracle migration to PostgreSQL, Cosmos DB or Azure SQL will qualify in scenario two (2)
 
@@ -734,14 +766,17 @@ The partner must provide post-deployment operational documentation to show that 
 #### 🎯 Deployment Scenarios (Both Required)
 
 **Scenario 1:**
+
 1. Migration of Infra (Windows Server) to Azure, **OR**
 2. Migration of Linux-based applications to Azure
 
 **Scenario 2:**
+
 1. Migration of Microsoft SQL to Azure (including Arc-enabled SQL MI)*, **OR**
 2. Migration of MySQL, PostgreSQL, MariaDB **OR** MongoDB database to Azure*
 
 > **⚠️ Notes:**
+>
 > - Oracle migration to PostgreSQL, Cosmos DB or Azure SQL will qualify in scenario 2
 > - Azure includes Microsoft datacenters, Arc enabled Azure on-prem or Arc enabled multi-cloud
 

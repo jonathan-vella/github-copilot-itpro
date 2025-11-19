@@ -51,7 +51,7 @@ Successfully implemented Bicep templates for HIPAA-compliant patient portal infr
 
 ## 🏗️ Architecture Implemented
 
-```
+```sql
 ┌─────────────────────────────────────────────────────────────────┐
 │                          Internet                               │
 └──────────────────────────┬──────────────────────────────────────┘
@@ -310,20 +310,24 @@ az deployment sub create \
 ### Immediate Actions
 
 1. **Test Deployment**: Deploy to dev environment
+
    ```powershell
    .\deploy.ps1 -Environment dev -Location eastus2
-   ```
+```
 
 2. **Verify Resources**: Check resource provisioning
+
    ```powershell
    az group show --name rg-contoso-patient-portal-dev
    az resource list --resource-group rg-contoso-patient-portal-dev -o table
-   ```
+
+```
 
 3. **Test Connectivity**: Verify App Service and database
+
    ```powershell
    curl https://app-contoso-patient-portal-dev.azurewebsites.net
-   ```
+```
 
 ### Application Deployment
 
@@ -356,6 +360,7 @@ az deployment sub create \
 Successfully implemented production-ready Bicep templates following the 4-phase deployment pattern, applying security best practices, and using Azure Verified Modules. All templates validated successfully and are ready for deployment.
 
 **Key Achievements**:
+
 - 11 modular Bicep files (~1,200 lines)
 - 12 Azure resources configured
 - $331-346/month estimated cost (under budget)

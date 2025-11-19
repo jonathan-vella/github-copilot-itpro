@@ -311,7 +311,7 @@ flowchart TD
 
 ### Validation Script Output
 
-```
+```bicep
 Running deployment validation...
 
 ✅ Resource Group: rg-digitalbanking-prod

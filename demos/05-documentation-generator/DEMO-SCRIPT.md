@@ -9,6 +9,7 @@
 ## Pre-Demo Setup (15 minutes before)
 
 ### Environment Preparation
+
 - [ ] VS Code open with GitHub Copilot enabled
 - [ ] Azure subscription with sample resources deployed
 - [ ] PowerShell terminal ready (Az module loaded)
@@ -16,6 +17,7 @@
 - [ ] Browser tabs: Azure Portal, Architecture Center
 
 ### Validation
+
 ```powershell
 # Verify Copilot is working
 Get-AzContext  # Should show subscription
@@ -33,6 +35,7 @@ Get-AzResource -ResourceGroupName "rg-demo"  # Verify resources exist
 > "TechCorp, a mid-market MSP, just finished migrating 50 servers to Azure for a client. Great! But now they need to deliver comprehensive documentation: architecture diagrams, operational runbooks, troubleshooting guides, and API documentation."
 
 **Show Manual Approach**:
+
 - Open PowerPoint/Visio: "6 hours creating architecture diagrams"
 - Show Word document: "5 hours writing runbooks with screenshots"
 - Open Excel: "4 hours compiling troubleshooting guides"
@@ -40,6 +43,7 @@ Get-AzResource -ResourceGroupName "rg-demo"  # Verify resources exist
 - **Total: 20 hours of tedious work**
 
 **The Pain Points**:
+
 1. ❌ **Time-consuming**: 20 hours per project (2.5 workdays)
 2. ❌ **Outdated immediately**: Infrastructure changes, docs don't
 3. ❌ **Inconsistent**: Different formats, missing sections
@@ -47,6 +51,7 @@ Get-AzResource -ResourceGroupName "rg-demo"  # Verify resources exist
 5. ❌ **Tools dependency**: Visio licenses, formatting nightmares
 
 **Business Impact**:
+
 - **$3,000 in labor** per project (20 hours × $150/hr)
 - **8 projects per year** = $24,000 in documentation costs
 - **Customer dissatisfaction**: Incomplete handoffs
@@ -58,6 +63,7 @@ Get-AzResource -ResourceGroupName "rg-demo"  # Verify resources exist
 > "What if we could automate this? Generate docs from code, diagrams from Azure queries, runbooks from templates?"
 
 **Value Proposition**:
+
 - ⏱️ **Time**: 20 hours → 2 hours (90% reduction)
 - 💰 **Cost**: $3,000 → $300 per project
 - 📊 **Quality**: 95% completeness vs. 60% manual
@@ -68,6 +74,7 @@ Get-AzResource -ResourceGroupName "rg-demo"  # Verify resources exist
 ## Demo Part 1: Architecture Documentation (5 minutes)
 
 ### Scenario Setup
+>
 > "Let's document TechCorp's Azure infrastructure. They have App Services, databases, storage, networking - typical cloud migration."
 
 ### Step 1: Generate Architecture Docs (2 min)
@@ -96,19 +103,23 @@ Set-AzContext -Subscription "Demo-Subscription"
 **Open generated `architecture-documentation.md`**:
 
 **Highlight key sections**:
+
 1. **Executive Summary**: "Automatically generated from Azure"
 2. **Resource Inventory**: "Complete table with types, locations, purposes"
 3. **Architecture Diagram**: "Mermaid syntax - no Visio needed!"
+
    ```mermaid
    graph TB
        app[App Service] --> db[SQL Database]
        app --> storage[Blob Storage]
    ```
+
 4. **Network Topology**: "Subnets, address spaces, NSGs"
 5. **Cost Analysis**: "Estimated monthly/annual costs"
 6. **Best Practices**: "Automatically included - security, HA, performance"
 
 **Key Takeaways**:
+
 - ✅ **Time**: 5 minutes vs. 6 hours manually (98% faster)
 - ✅ **Completeness**: Every resource documented
 - ✅ **Diagrams as code**: Version controlled, easy to update
@@ -121,6 +132,7 @@ Set-AzContext -Subscription "Demo-Subscription"
 ### Step 1: Generate Operational Runbook (2 min)
 
 **Show Bicep template**:
+
 ```bicep
 // main.bicep - Infrastructure as Code
 resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
@@ -130,6 +142,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
 ```
 
 **Generate runbook**:
+
 ```powershell
 ./New-RunbookDoc.ps1 `
     -TemplatePath ".\main.bicep" `
@@ -144,6 +157,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
 **Open generated runbook**:
 
 **Highlight sections**:
+
 1. **Deployment Procedure**: "Step-by-step extracted from template"
 2. **Validation Checklist**: "Post-deployment checks"
 3. **Troubleshooting Guide**: "Common issues and resolutions"
@@ -170,6 +184,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
 > "This script queries Application Insights for the past 30 days, identifies common errors and patterns, and generates a troubleshooting guide with decision trees."
 
 **Review generated content**:
+
 - Common error patterns (automatically detected)
 - Resolution steps (from historical fixes)
 - Decision trees (in Mermaid format)
@@ -184,6 +199,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
 ### Generate API Docs from Code
 
 **Show code with comments**:
+
 ```csharp
 /// <summary>
 /// Retrieves customer order by ID
@@ -198,6 +214,7 @@ public async Task<IActionResult> GetOrder(string orderId)
 ```
 
 **Generate documentation**:
+
 ```powershell
 ./New-APIDocumentation.ps1 `
     -ProjectPath ".\src\api" `
@@ -207,6 +224,7 @@ public async Task<IActionResult> GetOrder(string orderId)
 ```
 
 **Review output**:
+
 - API endpoints (automatically extracted)
 - Request/response examples
 - Authentication requirements
@@ -221,6 +239,7 @@ public async Task<IActionResult> GetOrder(string orderId)
 ### Show the Numbers
 
 **Time Comparison**:
+
 | Task | Manual | With Copilot | Savings |
 |------|--------|--------------|---------|
 | Architecture Diagrams | 6 hrs | 20 min | 96% |
@@ -231,11 +250,13 @@ public async Task<IActionResult> GetOrder(string orderId)
 | **TOTAL** | **20 hrs** | **2 hrs** | **90%** |
 
 **ROI Calculation**:
+
 - **Per Project**: $3,000 → $300 = **$2,700 saved**
 - **Annual (8 projects)**: **$21,600 saved**
 - **Time recovered**: 144 hours/year = **3.6 work weeks**
 
 **Quality Improvements**:
+
 - **Completeness**: 60% → 95% (+35 percentage points)
 - **Consistency**: 70% → 100% (template-driven)
 - **Update speed**: 5 hours → 30 minutes (90% faster)
@@ -244,6 +265,7 @@ public async Task<IActionResult> GetOrder(string orderId)
 ### Live Validation
 
 **Show in Azure Portal**:
+
 - Compare generated docs to actual resources
 - Verify diagrams match reality
 - Confirm cost estimates are reasonable
@@ -262,6 +284,7 @@ public async Task<IActionResult> GetOrder(string orderId)
 ### The Copilot Advantage
 
 **Traditional Approach**:
+
 - ❌ Manual inventory of resources
 - ❌ Create diagrams in Visio
 - ❌ Write procedures from memory
@@ -269,6 +292,7 @@ public async Task<IActionResult> GetOrder(string orderId)
 - ❌ Outdated within weeks
 
 **Copilot Approach**:
+
 - ✅ Automated resource discovery
 - ✅ Diagrams as code (Mermaid)
 - ✅ Extract from infrastructure code
@@ -302,6 +326,7 @@ A: "Yes! Scans existing Azure resources, extracts from ARM/Bicep templates, and 
 ## Demo Delivery Tips
 
 ### Timing Checkpoints
+
 - ✅ 5 min: Scene setting complete
 - ✅ 10 min: Architecture docs generated
 - ✅ 15 min: Runbook generated
@@ -311,17 +336,20 @@ A: "Yes! Scans existing Azure resources, extracts from ARM/Bicep templates, and 
 - ✅ 30 min: Wrap-up and Q&A
 
 ### Key Pauses
+
 - After showing 20-hour manual estimate: "Anyone groaning yet?"
 - After first doc generates in 5 minutes: "That just saved 6 hours"
 - When showing Mermaid diagrams: "No Visio license required"
 - At final ROI slide: "144 hours per year - that's almost a month"
 
 ### Energy Points
+
 - **High energy**: Opening (documentation pain), ROI reveal
 - **Medium energy**: Demo execution (let tool speak for itself)
 - **Building energy**: Wrap-up and call to action
 
 ### Backup Plans
+
 - **If Azure connection fails**: Use pre-generated documentation examples
 - **If script errors**: Have backup screenshots of successful runs
 - **If time runs short**: Skip API documentation demo (least critical)

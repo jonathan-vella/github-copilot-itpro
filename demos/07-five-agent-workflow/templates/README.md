@@ -14,7 +14,7 @@ The generated Bicep templates for this demo are located in:
 
 ## File Structure
 
-```
+```bicep
 infra/bicep/contoso-patient-portal/
 ├── main.bicep                      # Orchestration template
 ├── main.bicepparam                 # Production parameters

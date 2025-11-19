@@ -9,28 +9,34 @@ This guide provides proven prompting patterns for using GitHub Copilot to accele
 ## General Prompting Principles
 
 ### 1. Be Specific About Context
+
 - ❌ Bad: "Check database performance"
 - ✅ Good: "Check Azure SQL Database P2 tier CPU and DTU usage over last 2 hours"
 
 ### 2. Include Symptoms and Impact
+
 - ❌ Bad: "Find errors"
 - ✅ Good: "Analyze 5xx errors in checkout API causing 15% failure rate in last 2 hours"
 
 ### 3. Specify Desired Output Format
+
 - ❌ Bad: "Create monitoring script"
 - ✅ Good: "Create PowerShell function to check Azure resource health with HTML report output"
 
 ### 4. Mention Time Ranges
+
 - ❌ Bad: "Show slow queries"
 - ✅ Good: "Generate KQL query to find SQL queries slower than 5 seconds in last 4 hours"
 
 ### 5. Request Best Practices
+
 - ❌ Bad: "Write connection pool config"
 - ✅ Good: "Write App Service connection pool configuration following Azure best practices for high-traffic applications"
 
 ## Pattern 1: Health Check Scripts
 
 ### When to Use
+
 - Initial incident triage
 - Regular health monitoring
 - Pre-deployment validation
@@ -38,7 +44,8 @@ This guide provides proven prompting patterns for using GitHub Copilot to accele
 ### Effective Prompts
 
 **Basic Health Check**:
-```
+
+```bicep
 Create a PowerShell function to check Azure resource health
 Function name: Get-AzureHealthSnapshot
 Parameters: ResourceGroupName (mandatory), IncludeMetrics (switch)
@@ -48,7 +55,8 @@ Include error handling and logging
 ```
 
 **Comprehensive Diagnostics**:
-```
+
+```bicep
 Create Azure health check script that validates:
 - App Service instance health and response time
 - SQL Database DTU usage and connection count
@@ -59,7 +67,8 @@ Output structured JSON for automation
 ```
 
 **Network Connectivity**:
-```
+
+```bicep
 Create PowerShell function to test Azure networking
 Check: VNet connectivity, NSG rules, route tables, DNS resolution
 Parameters: ResourceGroupName, TestEndpoint
@@ -68,6 +77,7 @@ Output detailed connection report
 ```
 
 ### Tips for Health Checks
+
 - Specify exact metrics to check (CPU %, DTU, connection count)
 - Request color-coded output for quick visual scanning
 - Include progress indicators for long-running checks
@@ -76,6 +86,7 @@ Output detailed connection report
 ## Pattern 2: KQL Query Generation
 
 ### When to Use
+
 - Analyzing logs in Log Analytics
 - Investigating Application Insights data
 - Correlating events across services
@@ -83,7 +94,8 @@ Output detailed connection report
 ### Effective Prompts
 
 **Performance Analysis**:
-```
+
+```text
 Generate KQL query to analyze API performance
 Workspace: Application Insights
 Show: P50, P95, P99 latency by operation in last 2 hours
@@ -93,7 +105,8 @@ Limit to top 20 operations
 ```
 
 **Error Investigation**:
-```
+
+```text
 Create KQL query for 5xx error analysis
 Show: Error count by operation, result code, and time (5-min bins)
 Calculate: Error rate as percentage of total requests
@@ -102,7 +115,8 @@ Time range: Last 4 hours
 ```
 
 **Dependency Analysis**:
-```
+
+```text
 Generate KQL query to find slow database dependencies
 Filter: Type = SQL, duration > 5000ms
 Show: Avg/max duration, query count, sample query text
@@ -112,7 +126,8 @@ Order by: Average duration descending
 ```
 
 **Timeline Correlation**:
-```
+
+```text
 Create KQL query to correlate requests with exceptions
 Join: requests table with exceptions on operation_Id
 Show: Request duration, exception type, exception message
@@ -121,7 +136,8 @@ Render: Time chart showing correlation
 ```
 
 **Resource Usage**:
-```
+
+```text
 Generate KQL query for CPU usage analysis
 Source: performanceCounters
 Metric: % Processor Time
@@ -131,6 +147,7 @@ Identify: Instances with sustained high CPU (>30 minutes)
 ```
 
 ### Tips for KQL Queries
+
 - Specify exact table names (requests, exceptions, dependencies, traces)
 - Include time filters explicitly (ago(2h), between(start..end))
 - Request aggregations (avg, max, percentile, count)
@@ -140,6 +157,7 @@ Identify: Instances with sustained high CPU (>30 minutes)
 ## Pattern 3: Diagnostic Scripts
 
 ### When to Use
+
 - Automating repetitive diagnostic tasks
 - Creating reusable troubleshooting tools
 - Building runbooks for common issues
@@ -147,7 +165,8 @@ Identify: Instances with sustained high CPU (>30 minutes)
 ### Effective Prompts
 
 **Natural Language to KQL**:
-```
+
+```yaml
 Create PowerShell function: Invoke-DiagnosticQuery
 Input: Natural language symptom description
 Output: Appropriate KQL query based on symptom
@@ -161,7 +180,8 @@ Return results with suggested next steps
 ```
 
 **Automated Issue Detection**:
-```
+
+```text
 Create PowerShell script to detect common Azure issues
 Checks:
 - App Service CPU/memory over threshold (80%)
@@ -174,7 +194,8 @@ Output: JSON report with findings
 ```
 
 **Log Analyzer**:
-```
+
+```powershell
 Create function to parse Azure App Service logs
 Input: Log file path or stream from Azure
 Detect patterns:
@@ -187,6 +208,7 @@ Include: Charts of error trends over time
 ```
 
 ### Tips for Diagnostic Scripts
+
 - Request pattern matching (switch statements for symptoms)
 - Ask for error handling and retries
 - Include progress indicators for user feedback
@@ -196,6 +218,7 @@ Include: Charts of error trends over time
 ## Pattern 4: Remediation Scripts
 
 ### When to Use
+
 - Applying fixes to identified issues
 - Automating common solutions
 - Implementing self-healing logic
@@ -203,7 +226,8 @@ Include: Charts of error trends over time
 ### Effective Prompts
 
 **Configuration Fixes**:
-```
+
+```powershell
 Create PowerShell function to fix connection pool issues
 Actions:
 - Update App Service connection string with MaxPoolSize=200
@@ -215,7 +239,8 @@ Output: Success/failure with before/after metrics
 ```
 
 **Scaling Operations**:
-```
+
+```text
 Create script to scale Azure resources based on metrics
 If CPU > 85% for 10 minutes: Scale up App Service plan
 If DTU > 90% for 5 minutes: Scale up SQL Database tier
@@ -225,7 +250,8 @@ Validation: Check if scaling is already in progress
 ```
 
 **Network Troubleshooting**:
-```
+
+```powershell
 Create function to resolve connectivity issues
 Checks and fixes:
 - NSG rules: Add missing allow rules
@@ -237,6 +263,7 @@ Output: Detailed report of checks and fixes applied
 ```
 
 ### Tips for Remediation Scripts
+
 - Always request WhatIf parameter for safety
 - Ask for validation before applying changes
 - Include rollback procedures
@@ -246,6 +273,7 @@ Output: Detailed report of checks and fixes applied
 ## Pattern 5: Documentation Generation
 
 ### When to Use
+
 - Creating post-incident reports
 - Generating runbooks from troubleshooting sessions
 - Documenting architecture and decisions
@@ -253,7 +281,8 @@ Output: Detailed report of checks and fixes applied
 ### Effective Prompts
 
 **Incident Post-Mortem**:
-```
+
+```bicep
 Generate incident post-mortem report in Markdown
 Input parameters:
 - Incident title, start/end time, severity
@@ -271,7 +300,8 @@ Format: Professional markdown suitable for management
 ```
 
 **Troubleshooting Runbook**:
-```
+
+```text
 Create troubleshooting runbook for [specific issue]
 Include:
 - Symptom description and detection methods
@@ -284,7 +314,8 @@ Format: Markdown with code blocks and decision tree
 ```
 
 **Architecture Documentation**:
-```
+
+```bicep
 Document Azure architecture from resource inspection
 Input: Resource group name or subscription
 Generate:
@@ -298,6 +329,7 @@ Output: Comprehensive markdown documentation
 ```
 
 ### Tips for Documentation
+
 - Specify exact sections needed
 - Request specific formats (Markdown, HTML, PDF)
 - Ask for diagrams in Mermaid syntax
@@ -307,6 +339,7 @@ Output: Comprehensive markdown documentation
 ## Pattern 6: Learning & Explanation
 
 ### When to Use
+
 - Understanding unfamiliar concepts
 - Getting best practices guidance
 - Learning Azure service internals
@@ -314,7 +347,8 @@ Output: Comprehensive markdown documentation
 ### Effective Prompts
 
 **Concept Explanation**:
-```
+
+```text
 Explain Azure SQL connection pooling
 Include:
 - How connection pools work in Azure App Service
@@ -327,7 +361,8 @@ Target audience: Intermediate Azure developers
 ```
 
 **Best Practices**:
-```
+
+```text
 Provide Azure App Service best practices for high-traffic applications
 Cover:
 - Connection pooling configuration
@@ -339,7 +374,8 @@ Include: Example configurations and code snippets
 ```
 
 **Troubleshooting Guidance**:
-```
+
+```text
 Explain how to troubleshoot Azure [specific issue]
 Provide:
 - Step-by-step diagnostic process
@@ -351,6 +387,7 @@ Format: Beginner-friendly tutorial
 ```
 
 ### Tips for Learning Prompts
+
 - Specify your experience level
 - Ask for examples and code snippets
 - Request step-by-step explanations
@@ -364,15 +401,19 @@ Format: Beginner-friendly tutorial
 Start broad, then narrow:
 
 **Step 1**: "Create PowerShell function to check App Service health"
+
 - Review initial suggestion
 
 **Step 2**: "Add parameter for checking last 4 hours of metrics"
+
 - Copilot adds time range parameter
 
 **Step 3**: "Include CPU, memory, and HTTP error rate metrics"
+
 - Copilot enhances with specific metrics
 
 **Step 4**: "Export results to HTML report with charts"
+
 - Copilot adds export functionality
 
 ### Context Building
@@ -396,28 +437,40 @@ Then Copilot has full context for generating relevant solutions.
 Break complex tasks into steps:
 
 **Step 1 - Detect**:
+
 ```
+
 Create function to detect Azure App Service issues
 Check: CPU, memory, response time, error rate
 Return: List of detected issues with severity
+
 ```
 
 **Step 2 - Analyze**:
+
 ```
+
 For each detected issue, generate KQL query to analyze root cause
 Return: Query results with insights
+
 ```
 
 **Step 3 - Remediate**:
+
 ```
+
 For each root cause, suggest and optionally apply remediation
 Include: WhatIf mode for safety
+
 ```
 
 **Step 4 - Document**:
+
 ```
+
 Generate incident report from detection, analysis, and remediation steps
 Format: Markdown with timeline and lessons learned
+
 ```
 
 ## Real-World Examples
@@ -425,11 +478,14 @@ Format: Markdown with timeline and lessons learned
 ### Example 1: RetailMax Incident
 
 **Initial Prompt**:
+
 ```
+
 Create PowerShell function to diagnose intermittent 5xx errors in Azure App Service checkout API
 Check: Request success rate, response time percentiles, dependency health
 Include: Automatic KQL query generation for Log Analytics
 Output: Suspected root cause with confidence level
+
 ```
 
 **Result**: Generated script that identified connection pool exhaustion in 10 minutes vs. 8 hours manual KQL iteration.
@@ -437,11 +493,14 @@ Output: Suspected root cause with confidence level
 ### Example 2: Database Performance
 
 **Initial Prompt**:
+
 ```
+
 Generate KQL query to find slow SQL queries causing API timeouts
 Show: Query duration (avg, P95, P99), execution count, sample query text
 Filter: Duration > 5 seconds in last 4 hours
 Correlate with: Application Insights request failures
+
 ```
 
 **Result**: Identified 3 missing indexes causing 12-second query times vs. 2 hours manual investigation.
@@ -449,11 +508,14 @@ Correlate with: Application Insights request failures
 ### Example 3: Auto-Remediation
 
 **Initial Prompt**:
+
 ```
+
 Create PowerShell function to automatically scale Azure resources based on metrics
 If App Service CPU > 85% for 10 min: Scale from P2v3 to P3v3
 If SQL DTU > 90% for 5 min: Scale from P2 to P4
 Include: Cost estimation, approval workflow, rollback capability
+
 ```
 
 **Result**: Implemented self-healing that prevented 3 outages in first month.
@@ -534,6 +596,7 @@ With these patterns, you can achieve the 83% time reduction demonstrated in Demo
 ---
 
 **Additional Resources**:
+
 - [GitHub Copilot Documentation](https://docs.github.com/copilot)
 - [Azure Monitor KQL Reference](https://learn.microsoft.com/azure/azure-monitor/logs/kql-quick-reference)
 - [PowerShell Best Practices](https://learn.microsoft.com/powershell/scripting/developer/cmdlet/cmdlet-development-guidelines)

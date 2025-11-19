@@ -19,9 +19,11 @@ Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contai
 ## 📁 Toolkit Contents
 
 ### 1. ROI Calculator (`roi-calculator.md`)
+
 **Purpose**: Calculate customer-specific return on investment
 
 **What It Includes:**
+
 - 5 scenario templates (IaC, PowerShell, Arc, Troubleshooting, Documentation)
 - Pre-populated time savings data from demos
 - Customizable fields for customer's team size and rates
@@ -29,12 +31,14 @@ Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contai
 - Annual savings calculations including Azure cost reductions
 
 **How to Use:**
+
 1. Meet with customer, gather: team size, hourly rates, task frequencies
 2. Fill in customer-specific numbers in calculator template
 3. Calculate ROI percentage and payback period
 4. Present customized business case with their numbers
 
 **Typical Results:**
+
 - ROI: 13,000%+
 - Payback Period: 3-7 days
 - Annual Savings: $62,040 per engineer
@@ -42,9 +46,11 @@ Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contai
 ---
 
 ### 2. Demo Delivery Guide (`demo-delivery-guide.md`)
+
 **Purpose**: Step-by-step guide for presenting demos to customers
 
 **What It Includes:**
+
 - Pre-demo environment setup checklist
 - Customer discovery questions to ask
 - Complete 30-minute demo scripts for each scenario:
@@ -59,6 +65,7 @@ Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contai
 - Do's and Don'ts for success
 
 **How to Use:**
+
 1. Review guide 24 hours before customer demo
 2. Set up environment using checklist
 3. Follow exact timing and talking points
@@ -68,9 +75,11 @@ Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contai
 ---
 
 ### 3. Objection Handling Guide (`objection-handling.md`)
+
 **Purpose**: Address common concerns and objections effectively
 
 **What It Includes:**
+
 - 13 common objections organized by category:
   - **Security & Compliance** (3 objections)
     - "Is AI-generated code secure?"
@@ -102,6 +111,7 @@ Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contai
 - Escalation guidelines for complex situations
 
 **How to Use:**
+
 1. Review before customer meetings to prepare
 2. Listen for underlying concerns, not just surface objections
 3. Use verbatim responses or adapt to your style
@@ -115,24 +125,28 @@ Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contai
 ### First-Time Partner Onboarding (2 hours)
 
 **Step 1: Review Repository (30 minutes)**
+
 1. Read main README.md for value proposition
 2. Review Demo 1 (Bicep) README and DEMO-SCRIPT
 3. Review Demo 2 (PowerShell) README and DEMO-SCRIPT
 4. Understand the metrics (78%, 88%, 90% time savings)
 
 **Step 2: Environment Setup (30 minutes)**
+
 1. Install VS Code with GitHub Copilot extension
 2. Authenticate Azure CLI
 3. Clone demos from repository
 4. Test run one script from Demo 1 or Demo 2
 
 **Step 3: Practice Demo (45 minutes)**
+
 1. Follow Demo Delivery Guide for Demo 1
 2. Practice timing (aim for 30 minutes total)
 3. Identify 3 "magic moments" to highlight
 4. Practice business value wrap-up
 
 **Step 4: Prepare Sales Materials (15 minutes)**
+
 1. Customize ROI Calculator template
 2. Print Quick Response Cheat Sheet
 3. Bookmark Objection Handling Guide
@@ -143,18 +157,21 @@ Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contai
 ## 📊 Success Metrics to Track
 
 ### Demo Effectiveness
+
 - Number of demos delivered
 - Customer engagement (questions, excitement)
 - Objections raised and successfully addressed
 - Next steps commitment rate (pilot, POC, purchase)
 
 ### Pilot Program Results
+
 - Pilot-to-production conversion rate
 - Customer-reported time savings
 - Customer satisfaction (NPS)
 - Expansion opportunities
 
 ### Business Outcomes
+
 - Revenue generated (from Copilot sales)
 - Customer success stories created
 - Reference customers secured
@@ -165,24 +182,30 @@ Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contai
 ## 🚀 Suggested Sales Process
 
 ### Stage 1: Initial Contact
+
 **Duration**: 1 week
 **Activities**:
+
 - Customer discovery call (30 min)
 - Qualify opportunity (team size, Azure usage, pain points)
 - Schedule demo (30 min)
 - Send pre-demo questionnaire
 
 ### Stage 2: Demo & Business Case
+
 **Duration**: 1-2 weeks
 **Activities**:
+
 - Deliver 30-minute demo (Demo 1 or Demo 2)
 - Present customized ROI calculation
 - Address objections using guide
 - Propose pilot program (30 days, 5-10 users)
 
 ### Stage 3: Pilot Program
+
 **Duration**: 30 days
 **Activities**:
+
 - Kickoff training (30 min)
 - Track success metrics weekly
 - Provide ongoing support
@@ -190,8 +213,10 @@ Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contai
 - Prepare pilot results report
 
 ### Stage 4: Production Rollout
+
 **Duration**: 1-2 weeks
 **Activities**:
+
 - Present pilot results to stakeholders
 - Expand to full team
 - Establish success metrics dashboard
@@ -202,24 +227,28 @@ Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contai
 ## 💡 Pro Tips for Partner Success
 
 ### Pre-Sales
+
 1. **Qualify Early**: Focus on customers with 5+ Azure professionals
 2. **Speak Business Value**: Lead with ROI, not features
 3. **Use Customer Language**: "Efficiency multiplier" not "AI assistant"
 4. **Quantify Everything**: Time savings, cost reduction, payback period
 
 ### Demo Delivery
+
 1. **Pause After Suggestions**: Let them see the "magic" happen
 2. **Make Mistakes**: Show how Copilot helps fix errors (builds trust)
 3. **Use Their Scenarios**: Customize demos to their actual work
 4. **One Complete Demo**: Better to do one well than three rushed
 
 ### Objection Handling
+
 1. **Listen for Underlying Concern**: Security objection often means "prove it's safe"
 2. **Use Proof Points**: Data, case studies, customer references
 3. **Turn into Opportunity**: "Great question" then demonstrate value
 4. **End with Question**: Move conversation forward
 
 ### Post-Demo
+
 1. **Send ROI Same Day**: While interest is fresh
 2. **Reference Similar Customer**: Social proof matters
 3. **Make Pilot Easy**: Low commitment, clear metrics, money-back guarantee
@@ -232,22 +261,26 @@ Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contai
 ### When You Need Help
 
 **Technical Questions:**
+
 - GitHub Copilot documentation: https://docs.github.com/copilot
 - Azure Bicep documentation: https://learn.microsoft.com/azure/azure-resource-manager/bicep/
 - Azure PowerShell documentation: https://learn.microsoft.com/powershell/azure/
 
 **Sales Support:**
+
 - Partner Portal: [Link to be provided]
 - Partner Success Team: partners@github.com
 - Your Microsoft Account Team
 
 **Escalations:**
+
 - Complex security/compliance questions
 - Executive-level presentations
 - Custom contract terms
 - Large enterprise deals (100+ users)
 
 **Materials Requests:**
+
 - Additional case studies
 - Industry-specific content
 - Reference customer connections
@@ -258,12 +291,14 @@ Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contai
 ## 📂 Related Resources
 
 ### In This Repository
+
 - **`../demos/`**: Complete demo modules with code
 - **`../case-studies/`**: Success stories (coming soon)
 - **`../skills-bridge/`**: Learning content for IT Pros (coming soon)
 - **`../README.md`**: Main repository overview
 
 ### External Resources
+
 - GitHub Copilot for Business: https://github.com/features/copilot
 - Azure Well-Architected Framework: https://learn.microsoft.com/azure/well-architected/
 - Microsoft Partner Network: https://partner.microsoft.com/
@@ -277,11 +312,13 @@ This toolkit is continuously updated based on partner feedback and new demos.
 **Current Version**: 1.0 (November 2025)
 
 **Recent Updates:**
+
 - Initial release with 3 core documents
 - Based on Demo 1 (Bicep) and Demo 2 (PowerShell)
 - Includes objection handling for 13 common scenarios
 
 **Coming Soon:**
+
 - Executive presentation deck template
 - Pilot program tracking dashboard
 - Customer reference template
@@ -298,6 +335,7 @@ Have suggestions for the toolkit? Contact: [partner-feedback-email]
 Print this and check off before each customer demo:
 
 **Environment**
+
 - [ ] VS Code installed with Copilot extension
 - [ ] Azure CLI authenticated to subscription
 - [ ] Demo repository cloned locally
@@ -306,6 +344,7 @@ Print this and check off before each customer demo:
 - [ ] Test script runs successfully
 
 **Preparation**
+
 - [ ] Reviewed customer discovery notes
 - [ ] Customized ROI calculator with their numbers
 - [ ] Identified 2-3 relevant scenarios
@@ -314,6 +353,7 @@ Print this and check off before each customer demo:
 - [ ] Prepared follow-up materials
 
 **Materials**
+
 - [ ] Laptop fully charged
 - [ ] Backup: Screenshots of key moments
 - [ ] ROI calculator (digital + printed)
@@ -322,6 +362,7 @@ Print this and check off before each customer demo:
 - [ ] Demo backup plan
 
 **Follow-Up Ready**
+
 - [ ] Thank you email drafted
 - [ ] Pilot program proposal ready
 - [ ] Case studies selected

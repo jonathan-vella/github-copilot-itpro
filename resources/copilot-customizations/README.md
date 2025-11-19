@@ -7,12 +7,14 @@ This directory contains curated resources from the [github/awesome-copilot](http
 This repository uses **four custom GitHub Copilot agents** with automatic handoffs for Azure infrastructure development:
 
 **Agents** (in `.github/agents/`):
+
 1. **ADR Generator** (`adr_generator`) → Document architectural decisions - *Optional: for enterprise governance*
 2. **Azure Principal Architect** (`azure-principal-architect`) → WAF assessment and guidance
 3. **Bicep Planning Specialist** (`bicep-plan`) → Create machine-readable implementation plans
 4. **Bicep Implementation Specialist** (`bicep-implement`) → Generate production-ready Bicep code
 
 **Key Features**:
+
 - ✅ **Automatic Handoffs**: Click buttons to switch agents with context
 - ✅ **Machine-Readable Plans**: Structured YAML for deterministic code generation
 - ✅ **Production-Ready Code**: Latest APIs, security best practices, validation
@@ -31,16 +33,19 @@ This repository uses **four custom GitHub Copilot agents** with automatic handof
 5. **Click handoff buttons** to automatically switch agents with context
 
 **Example**:
-```
+
+```text
 (Using adr_generator agent)
 Document the decision to use hub network topology.
 Include rationale and alternatives.
 ```
+
 → Creates ADR → Click "Review Against WAF Pillars" → Automatically switches to `azure-principal-architect`
 
 ## 🎯 What's Included
 
 These customizations provide Copilot with specialized knowledge about:
+
 - **Infrastructure as Code**: Bicep and Terraform best practices for Azure
 - **Automation**: PowerShell scripting and testing conventions
 - **DevOps**: Core principles and DORA metrics
@@ -49,7 +54,7 @@ These customizations provide Copilot with specialized knowledge about:
 
 ## 📁 Directory Structure
 
-```
+```text
 copilot-customizations/
 ├── FOUR-MODE-WORKFLOW.md # Complete four-mode workflow guide
 ├── instructions/          # Project-wide coding standards and conventions
@@ -93,12 +98,14 @@ The most effective way to use GitHub Copilot for Azure infrastructure is through
    - Reference modes: "Using azure-principal-architect mode..."
 
 3. **Follow the Workflow**
+
    ```mermaid
    graph LR
        A[ADR Generator] --> B[Principal Architect]
        B --> C[Bicep Planning]
        C --> D[Bicep Implementation]
-   ```
+
+```
 
 4. **Learn by Example**
    - See [FOUR-MODE-WORKFLOW.md](FOUR-MODE-WORKFLOW.md) for complete examples
@@ -161,23 +168,28 @@ Prompts are reusable task templates:
 ### Instructions (Coding Standards)
 
 #### `bicep-code-best-practices.instructions.md`
+
 **When to use**: Working with any `.bicep` files in this repository
 
 **What it provides**:
+
 - Naming conventions (lowerCamelCase, symbolic names)
 - Parameter and variable best practices
 - Resource reference patterns
 - Security guidelines
 - Latest API versions
 
-**Example impact**: 
+**Example impact**:
+
 - Before: `param storageAccountName string`
 - After: `param storageAccount string` (no redundant 'Name' suffix)
 
 #### `powershell-pester-5.instructions.md`
+
 **When to use**: Writing PowerShell tests in `*.Tests.ps1` files
 
 **What it provides**:
+
 - Pester v5 testing patterns
 - Mocking and assertion syntax
 - Test structure (Describe, Context, It)
@@ -185,6 +197,7 @@ Prompts are reusable task templates:
 
 **Example impact**:
 Generates proper test structure automatically:
+
 ```powershell
 Describe 'Get-VMInfo' {
     Context 'When VM exists' {
@@ -200,17 +213,20 @@ Describe 'Get-VMInfo' {
 ```
 
 #### `terraform-azure.instructions.md`
+
 **When to use**: Working with Terraform `*.tf` files for Azure
 
 **What it provides**:
+
 - Terraform and Azure provider conventions
 - Module organization patterns
 - Variable and output best practices
 - Choosing between azurerm and azapi providers
 - State management guidance
 
-**Example impact**: 
+**Example impact**:
 Ensures consistent module structure:
+
 ```hcl
 # main.tf, variables.tf, outputs.tf separation
 # Proper provider version constraints
@@ -218,15 +234,18 @@ Ensures consistent module structure:
 ```
 
 #### `devops-core-principles.instructions.md`
+
 **When to use**: Any CI/CD, automation, or infrastructure work
 
 **What it provides**:
+
 - CALMS framework (Culture, Automation, Lean, Measurement, Sharing)
 - DORA metrics understanding (Deployment Frequency, Lead Time, Change Failure Rate, MTTR)
 - Guidance on automation, monitoring, and continuous improvement
 
 **Example impact**:
 Copilot suggests adding:
+
 - Automated testing in CI/CD pipelines
 - Monitoring and alerting configurations
 - Deployment frequency optimizations
@@ -235,9 +254,11 @@ Copilot suggests adding:
 ### Chat Modes (Specialized Personas)
 
 #### `bicep-implement.chatmode.md`
+
 **Persona**: Azure Bicep IaC Specialist
 
 **Capabilities**:
+
 - Creates Bicep templates following best practices
 - Validates against Azure Verified Modules
 - Runs `bicep build`, `bicep lint`, `bicep format`
@@ -246,9 +267,11 @@ Copilot suggests adding:
 **Use case**: "Create a Bicep template for a 3-tier network with NSGs and NAT Gateway"
 
 #### `azure-principal-architect.chatmode.md`
+
 **Persona**: Azure Principal Architect
 
 **Capabilities**:
+
 - Applies Well-Architected Framework principles
 - Reviews architecture for cost, security, reliability, performance, operational excellence
 - Provides strategic guidance
@@ -256,9 +279,11 @@ Copilot suggests adding:
 **Use case**: "Review my hub-spoke network design for security and cost optimization"
 
 #### `terraform-azure-implement.chatmode.md`
+
 **Persona**: Terraform Azure IaC Specialist
 
 **Capabilities**:
+
 - Creates Terraform configurations for Azure
 - Follows Azure provider best practices
 - Implements modules and state management
@@ -269,9 +294,11 @@ Copilot suggests adding:
 ### Prompts (Task Templates)
 
 #### `documentation-writer.prompt.md`
+
 **Framework**: Diátaxis Documentation Framework
 
 **Capabilities**:
+
 - Creates tutorials, how-to guides, reference docs, or explanations
 - Proposes structure before writing
 - Ensures clarity and user-centricity
@@ -279,9 +306,11 @@ Copilot suggests adding:
 **Use case**: "Generate a how-to guide for deploying the Bicep templates in demo 01"
 
 #### `azure-resource-health-diagnose.prompt.md`
+
 **Purpose**: Azure Resource Troubleshooting
 
 **Capabilities**:
+
 - Analyzes resource health
 - Reviews logs and telemetry
 - Creates remediation plans
@@ -292,9 +321,11 @@ Copilot suggests adding:
 ### Collections (Bundled Workflows)
 
 #### `azure-cloud-development.md`
+
 **Bundle**: Complete Azure Development Toolkit
 
 **Contains**: 18 curated items including:
+
 - Azure Verified Modules (Bicep & Terraform)
 - Cost optimization prompts
 - Azure Functions patterns
@@ -306,7 +337,9 @@ Copilot suggests adding:
 ## 💡 Best Practices for Using These Customizations
 
 ### 1. Start with Project-Wide Instructions
+
 Add the most relevant instructions to `.github/copilot-instructions.md`:
+
 ```bash
 # For this IT Pro repository, we recommend:
 cat resources/copilot-customizations/instructions/bicep-code-best-practices.instructions.md >> .github/copilot-instructions.md
@@ -314,26 +347,32 @@ cat resources/copilot-customizations/instructions/devops-core-principles.instruc
 ```
 
 ### 2. Use Chat Modes for Specialized Tasks
+
 When working on a specific type of task, invoke the appropriate chat mode:
+
 - Infrastructure implementation → Bicep or Terraform chat mode
 - Architecture review → Azure Principal Architect
 - Documentation → Documentation Writer
 
 ### 3. Layer Instructions Appropriately
+
 - **Project-level** (`.github/copilot-instructions.md`): Standards that apply to all code
 - **File-level** (individual `.instructions.md` files): Language or framework-specific
 - **Chat-level** (chat modes): Task-specific expertise
 
 ### 4. Combine with Effective Prompts
+
 The more context you provide, the better results you'll get:
 
 **❌ Vague**:
-```
+
+```text
 Create a storage account
 ```
 
 **✅ Specific**:
-```
+
+```yaml
 Create a Bicep template for an Azure Storage Account with:
 - HTTPS only
 - TLS 1.2 minimum
@@ -343,7 +382,9 @@ Create a Bicep template for an Azure Storage Account with:
 ```
 
 ### 5. Iterate and Refine
+
 Don't expect perfection on the first try:
+
 1. Generate initial code with Copilot
 2. Review against the instruction guidelines
 3. Ask Copilot to refine specific sections
@@ -364,6 +405,7 @@ These customizations are designed to enhance the demo modules in this repository
 ## 📖 Learning Path
 
 ### For Partners Delivering Demos
+
 1. ✅ Read this README
 2. ✅ Install `bicep-implement.chatmode.md` in VS Code
 3. ✅ Try generating a Bicep template with the chat mode
@@ -371,6 +413,7 @@ These customizations are designed to enhance the demo modules in this repository
 5. ✅ Add project-wide instructions to `.github/copilot-instructions.md`
 
 ### For IT Pros Learning IaC
+
 1. ✅ Start with `devops-core-principles.instructions.md` (understanding)
 2. ✅ Install the language-specific instruction (Bicep or Terraform)
 3. ✅ Work through demo 01 or 02 with Copilot active
@@ -418,11 +461,13 @@ We've curated a subset specifically relevant to Azure infrastructure and IT Pro 
 ## 🔗 Related Resources
 
 ### In This Repository
+
 - [Main README](../../README.md) - Project overview
 - [Demo Modules](../../demos/) - Hands-on examples
 - [Partner Toolkit](../../partner-toolkit/) - Customer demo materials
 
 ### External Resources
+
 - [GitHub Copilot Documentation](https://docs.github.com/copilot)
 - [Awesome Copilot Repository](https://github.com/github/awesome-copilot)
 - [Azure Bicep Documentation](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)

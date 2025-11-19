@@ -11,12 +11,14 @@
 ## Business Challenge
 
 **Current Pain Points:**
+
 - Manual reporting takes 2 hours daily
 - Inconsistent resource tagging
 - $5,000/month wasted on orphaned resources
 - 4 hours/week spent on compliance auditing
 
 **Automation Goals:**
+
 - Automated daily reports (5 min)
 - Find untagged resources (10 min/week)
 - Cleanup orphaned resources (15 min/week)

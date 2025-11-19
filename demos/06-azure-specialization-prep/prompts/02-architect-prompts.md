@@ -8,7 +8,7 @@ The Azure Principal Architect agent applies Azure Well-Architected Framework (WA
 
 ## 📝 Prompt Template
 
-```
+```yaml
 Conduct a comprehensive Well-Architected Framework assessment for the following architecture:
 
 **Infrastructure**:
@@ -27,7 +27,7 @@ Performance Efficiency) and provide specific recommendations with priority level
 
 ### Prompt 1: Complete Architecture Assessment
 
-```
+```yaml
 Conduct a comprehensive Well-Architected Framework assessment for the following architecture:
 
 **Infrastructure**:
@@ -51,6 +51,7 @@ Performance Efficiency) and provide specific recommendations with priority level
 ```
 
 **Why this works**:
+
 - ✅ Complete infrastructure description
 - ✅ Clear requirements and constraints
 - ✅ Requests assessment of all 5 pillars
@@ -60,7 +61,7 @@ Performance Efficiency) and provide specific recommendations with priority level
 
 ### Prompt 2: Reliability-Focused Assessment
 
-```
+```yaml
 Conduct a Well-Architected Framework assessment focused on the Reliability pillar for this architecture:
 
 **Infrastructure**:
@@ -86,6 +87,7 @@ Provide specific recommendations to close the gap between 99.95% and 99.99% avai
 ```
 
 **Why this works**:
+
 - ✅ Focused on specific pillar (Reliability)
 - ✅ Identifies the gap (99.95% vs. 99.99%)
 - ✅ Asks targeted questions
@@ -95,7 +97,7 @@ Provide specific recommendations to close the gap between 99.95% and 99.99% avai
 
 ### Prompt 3: Security Assessment with Constraints
 
-```
+```yaml
 Conduct a Well-Architected Framework security assessment for this demo architecture:
 
 **Infrastructure**:
@@ -125,6 +127,7 @@ Provide security recommendations categorized as:
 ```
 
 **Why this works**:
+
 - ✅ Honest about demo vs. production trade-offs
 - ✅ Asks for categorized recommendations
 - ✅ Addresses audit documentation needs
@@ -134,7 +137,7 @@ Provide security recommendations categorized as:
 
 ### Prompt 4: Cost Optimization Review
 
-```
+```yaml
 Conduct a Well-Architected Framework cost optimization assessment for this architecture:
 
 **Current Monthly Costs** (East US):
@@ -164,6 +167,7 @@ Provide cost optimization recommendations with estimated monthly savings for eac
 ```
 
 **Why this works**:
+
 - ✅ Provides current cost baseline
 - ✅ Clear constraints (maintain SLA and performance)
 - ✅ Asks specific cost-related questions
@@ -173,7 +177,7 @@ Provide cost optimization recommendations with estimated monthly savings for eac
 
 ### Prompt 5: Performance Efficiency Assessment
 
-```
+```yaml
 Conduct a Well-Architected Framework performance efficiency assessment for this architecture:
 
 **Architecture**:
@@ -204,6 +208,7 @@ Provide performance optimization recommendations and monitoring strategy.
 ```
 
 **Why this works**:
+
 - ✅ Specific performance targets
 - ✅ Provides baseline metrics for comparison
 - ✅ Asks about monitoring and testing
@@ -213,7 +218,7 @@ Provide performance optimization recommendations and monitoring strategy.
 
 ### Prompt 6: Operational Excellence Assessment
 
-```
+```yaml
 Conduct a Well-Architected Framework operational excellence assessment:
 
 **Current Operations**:
@@ -248,6 +253,7 @@ Provide operational excellence recommendations prioritized for a small team with
 ```
 
 **Why this works**:
+
 - ✅ Describes current state honestly
 - ✅ Acknowledges team constraints
 - ✅ Identifies specific gaps
@@ -259,11 +265,12 @@ Provide operational excellence recommendations prioritized for a small team with
 
 ### ❌ Too Generic
 
-```
+```text
 Assess my Azure architecture for best practices.
 ```
 
 **Problems**:
+
 - No architecture description
 - No specific requirements
 - No guidance on focus areas
@@ -273,11 +280,12 @@ Assess my Azure architecture for best practices.
 
 ### ❌ Missing Requirements
 
-```
+```yaml
 Review this setup: 2 VMs, load balancer, SQL database.
 ```
 
 **Problems**:
+
 - Lacks details (VM sizes, database tier, network config)
 - No SLA or performance requirements
 - No context about workload or constraints
@@ -287,11 +295,12 @@ Review this setup: 2 VMs, load balancer, SQL database.
 
 ### ❌ Only Asking for Validation
 
-```
+```yaml
 Tell me if this architecture is good: [architecture description]
 ```
 
 **Problems**:
+
 - Asks for yes/no instead of assessment
 - Doesn't request specific recommendations
 - No prioritization guidance
@@ -304,7 +313,8 @@ Tell me if this architecture is good: [architecture description]
 ### 1. Describe Complete Architecture
 
 Include all components:
-```
+
+```yaml
 Infrastructure:
 - Compute: [VM sizes, quantity, OS]
 - Storage: [disk types, sizes]
@@ -316,6 +326,7 @@ Infrastructure:
 ### 2. State Clear Requirements
 
 Be specific about:
+
 - SLA targets (99.99% availability)
 - Performance targets (100 TPS, < 2s response time)
 - Security requirements (encryption, access controls)
@@ -325,7 +336,8 @@ Be specific about:
 ### 3. Request Prioritized Recommendations
 
 Ask for:
-```
+
+```yaml
 Provide recommendations with priority:
 - HIGH: Critical issues affecting SLA or security
 - MEDIUM: Important improvements for production readiness
@@ -335,6 +347,7 @@ Provide recommendations with priority:
 ### 4. Focus on Specific Pillars When Needed
 
 For targeted assessments:
+
 - Reliability assessment when SLA is critical
 - Security assessment for compliance requirements
 - Cost assessment when over budget
@@ -343,7 +356,8 @@ For targeted assessments:
 ### 5. Include Context About Trade-offs
 
 Help Copilot understand your constraints:
-```
+
+```powershell
 Context:
 - Demo environment (not production)
 - Learning-focused (simplicity preferred)
@@ -372,7 +386,7 @@ Before submitting your prompt:
 
 ### Excellent Example: Multi-Pillar Assessment
 
-```
+```text
 Conduct a comprehensive Well-Architected Framework assessment for the Contoso Task Manager 
 migration to Azure:
 
@@ -409,6 +423,7 @@ For each pillar, provide:
 ```
 
 **What makes this excellent**:
+
 1. Complete infrastructure description with specific SKUs
 2. Clear business requirements across all dimensions
 3. Explicit assessment scope (all 5 pillars)

@@ -14,15 +14,15 @@ Contoso Manufacturing is migrating their on-premises Task Manager application to
 ### Current State (On-Premises)
 
 - **Application**: ASP.NET web application on IIS 8.5
-- **Infrastructure**: 
+- **Infrastructure**:
   - 2 Windows Server 2012 R2 servers (no load balancing)
   - Manual failover process
   - SQL Server 2014 Standard on dedicated hardware
-- **Performance**: 
+- **Performance**:
   - 80-100 transactions per second during peak hours
   - 500 concurrent users
   - 2GB database size
-- **Availability**: 
+- **Availability**:
   - Current SLA: 99.5% (43 hours downtime/year)
   - Maintenance windows: 4 hours/month
   - Manual backups daily
@@ -129,7 +129,7 @@ Contoso Manufacturing is migrating their on-premises Task Manager application to
 - **Service**: Azure SQL Database
 - **Tier**: Standard S2 (50 DTUs) or General Purpose 2 vCores
 - **Size**: 10 GB initial allocation
-- **Backup**: 
+- **Backup**:
   - Point-in-time restore: 7 days
   - Long-term retention: 30 days
 - **Geo-replication**: Optional for future phase
@@ -167,30 +167,35 @@ tags: {
 ## 📅 Project Timeline
 
 ### Phase 1: Assessment (Week 1-2)
+
 - Workload assessment with Azure Migrate
 - Dependency mapping
 - Performance baseline
 - Risk assessment
 
 ### Phase 2: Design (Week 2-4)
+
 - Architecture design using agents
 - Well-Architected Framework review
 - Security design
 - Network topology planning
 
 ### Phase 3: Deployment (Week 4-6)
+
 - Infrastructure provisioning with Bicep
 - Application deployment and configuration
 - Load balancer setup
 - Database migration
 
 ### Phase 4: Testing & Validation (Week 6-7)
+
 - Performance testing (100 TPS validation)
 - High availability testing
 - Disaster recovery testing
 - Security validation
 
 ### Phase 5: Cutover (Week 8)
+
 - Final data sync
 - DNS cutover
 - Production monitoring
@@ -253,6 +258,7 @@ Contoso IT team will need training on:
 - High availability patterns in Azure
 
 **Recommended Certifications**:
+
 - AZ-900: Azure Fundamentals
 - AZ-104: Azure Administrator
 - AZ-305: Azure Solutions Architect

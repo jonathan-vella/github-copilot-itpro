@@ -8,7 +8,7 @@ The Bicep Planning Specialist agent creates detailed infrastructure implementati
 
 ## 📝 Prompt Template
 
-```
+```bicep
 Create a detailed Bicep implementation plan for the following Azure infrastructure deployment:
 
 **Requirements**:
@@ -29,7 +29,7 @@ Provide: module structure, parameter strategy, deployment sequence, and validati
 
 ### Prompt 1: Complete High-Availability Infrastructure Plan
 
-```
+```bicep
 Create a detailed Bicep implementation plan for the following Azure infrastructure deployment:
 
 **Requirements**:
@@ -59,6 +59,7 @@ Provide: module structure, parameter strategy, deployment sequence, validation a
 ```
 
 **Why this works**:
+
 - ✅ Complete infrastructure requirements listed
 - ✅ Specific configuration details (VM sizes, disk types, tiers)
 - ✅ Clear naming and tagging standards
@@ -69,7 +70,7 @@ Provide: module structure, parameter strategy, deployment sequence, validation a
 
 ### Prompt 2: Network Infrastructure Focus
 
-```
+```bicep
 Create a Bicep implementation plan focused on network infrastructure for a high-availability web application:
 
 **Requirements**:
@@ -98,6 +99,7 @@ Provide: module breakdown for network components, NSG rule definitions, paramete
 ```
 
 **Why this works**:
+
 - ✅ Focused on specific infrastructure layer (networking)
 - ✅ Detailed subnet planning with CIDR notation
 - ✅ Security-first approach (NSG rules, least privilege)
@@ -108,7 +110,7 @@ Provide: module breakdown for network components, NSG rule definitions, paramete
 
 ### Prompt 3: Compute Infrastructure with VM Extensions
 
-```
+```bicep
 Create a Bicep implementation plan for compute infrastructure with automated IIS installation:
 
 **Requirements**:
@@ -145,6 +147,7 @@ Provide: module structure for VMs and extensions, parameter strategy for credent
 ```
 
 **Why this works**:
+
 - ✅ Detailed VM specifications
 - ✅ Automated configuration through extensions
 - ✅ Security considerations (credential handling)
@@ -155,7 +158,7 @@ Provide: module structure for VMs and extensions, parameter strategy for credent
 
 ### Prompt 4: Database Infrastructure Plan
 
-```
+```bicep
 Create a Bicep implementation plan for Azure SQL Database with security and backup configuration:
 
 **Requirements**:
@@ -199,6 +202,7 @@ Provide: module structure for SQL resources, parameter strategy for credentials,
 ```
 
 **Why this works**:
+
 - ✅ Comprehensive database requirements
 - ✅ Security-first design (TDE, firewall, auditing)
 - ✅ Backup and disaster recovery planning
@@ -209,7 +213,7 @@ Provide: module structure for SQL resources, parameter strategy for credentials,
 
 ### Prompt 5: Monitoring and Observability Plan
 
-```
+```bicep
 Create a Bicep implementation plan for comprehensive monitoring and observability:
 
 **Requirements**:
@@ -248,6 +252,7 @@ Provide: module structure for monitoring components, alert rule definitions, par
 ```
 
 **Why this works**:
+
 - ✅ Complete observability strategy
 - ✅ Specific alert thresholds and recipients
 - ✅ Dashboard requirements defined
@@ -258,7 +263,7 @@ Provide: module structure for monitoring components, alert rule definitions, par
 
 ### Prompt 6: Complete End-to-End Deployment Plan
 
-```
+```bicep
 Create a comprehensive Bicep implementation plan for the entire Contoso Task Manager infrastructure:
 
 **Infrastructure Overview**:
@@ -322,6 +327,7 @@ Provide: Complete module structure with file names, detailed parameter file stru
 ```
 
 **Why this works**:
+
 - ✅ Comprehensive, production-ready plan
 - ✅ Clear module boundaries and dependencies
 - ✅ Environment parameterization strategy
@@ -336,11 +342,12 @@ Provide: Complete module structure with file names, detailed parameter file stru
 
 ### ❌ Too Vague
 
-```
+```text
 Create a plan for deploying Azure infrastructure using Bicep.
 ```
 
 **Problems**:
+
 - No specific requirements
 - No infrastructure components listed
 - No constraints or standards
@@ -350,11 +357,12 @@ Create a plan for deploying Azure infrastructure using Bicep.
 
 ### ❌ Missing Technical Details
 
-```
+```text
 Plan the deployment of VMs and a database in Azure.
 ```
 
 **Problems**:
+
 - No VM sizes, quantities, or OS specified
 - No database type or tier mentioned
 - No network configuration
@@ -364,11 +372,12 @@ Plan the deployment of VMs and a database in Azure.
 
 ### ❌ Only Listing Components Without Context
 
-```
+```yaml
 Create a plan for: VNet, 2 VMs, Load Balancer, SQL Database, NSGs.
 ```
 
 **Problems**:
+
 - No configuration details
 - No relationships between components
 - No deployment sequence
@@ -382,7 +391,8 @@ Create a plan for: VNet, 2 VMs, Load Balancer, SQL Database, NSGs.
 ### 1. Provide Complete Infrastructure Requirements
 
 List all components with relationships:
-```
+
+```yaml
 Requirements:
 1. Virtual Network with subnets (specify CIDR ranges)
 2. VMs (specify size, OS, quantity, configuration)
@@ -394,6 +404,7 @@ Requirements:
 ### 2. Specify Configuration Details
 
 Be explicit about:
+
 - **VM sizing**: Standard_D2s_v3, not "medium VM"
 - **Database tier**: Standard S2 (50 DTUs), not "standard database"
 - **Disk types**: Premium SSD P10, not "fast disk"
@@ -402,7 +413,8 @@ Be explicit about:
 ### 3. Emphasize AVM Usage
 
 Direct the agent to use verified modules:
-```
+
+```yaml
 Constraints:
 - Use Azure Verified Modules (AVM) where available
 - Specify which AVM modules to use: avm/res/network/virtual-network
@@ -412,7 +424,8 @@ Constraints:
 ### 4. Request Structured Output
 
 Ask for specific deliverables:
-```
+
+```bicep
 Provide:
 - Module structure with file names
 - Parameter strategy for each environment
@@ -424,7 +437,8 @@ Provide:
 ### 5. Include Security and Compliance
 
 Always mention:
-```
+
+```yaml
 Security Requirements:
 - NSG rules following least privilege
 - SQL firewall rules
@@ -436,7 +450,8 @@ Security Requirements:
 ### 6. Define Parameter Strategy
 
 Specify how to handle different values:
-```
+
+```yaml
 Parameters:
 - Environment-specific: VM size, database tier
 - Sensitive: Passwords, connection strings (Key Vault)
@@ -466,7 +481,7 @@ Before submitting your prompt:
 
 ### Excellent Example: Complete Planning Prompt
 
-```
+```bicep
 Create a detailed Bicep implementation plan for a high-availability web application infrastructure for the Azure Infrastructure and Database Migration Specialization audit:
 
 **Business Context**:
@@ -545,6 +560,7 @@ Provide a comprehensive implementation plan covering all aspects above, with spe
 ```
 
 **What makes this excellent**:
+
 1. ✅ Business context provided (customer, SLA, performance)
 2. ✅ Complete infrastructure specification with all tiers
 3. ✅ Detailed configuration (sizes, IPs, ports, rules)

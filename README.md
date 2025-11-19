@@ -80,6 +80,7 @@ cd demos/01-bicep-quickstart/validation
 ## 📁 Repository Structure
 
 ```
+
 github-copilot-itpro/
 ├── .github/
 │   ├── agents/                         # 4 custom agents (Plan agent is built-in)
@@ -121,6 +122,7 @@ github-copilot-itpro/
 │
 └── docs/                               # Additional documentation
     └── adr/                            # Architectural Decision Records
+
 ```
 
 ---
@@ -160,12 +162,14 @@ graph LR
 ### The Five Agents
 
 #### 0. Plan Agent (`@plan`) - *Start Here*
+
 **Purpose**: Break down complex tasks into step-by-step implementation plans before any code is written
 
 > **Best practice**: Always start with the Plan agent for multi-step infrastructure projects. It ensures all requirements and context are captured upfront.
 
 **Usage**:
-```
+
+```yaml
 @plan Create a complete Azure infrastructure deployment plan for a HIPAA-compliant healthcare application with:
 - Hub-spoke network topology
 - Azure SQL Database with private endpoints
@@ -176,6 +180,7 @@ graph LR
 ```
 
 **Output**: Interactive planning session with:
+
 - Clarifying questions about requirements
 - Detailed implementation plan with phases
 - Resource breakdown with cost estimates
@@ -184,18 +189,21 @@ graph LR
 - Validation checkpoints
 
 **Key Features**:
+
 - **Iterative refinement**: Spend time improving the plan before implementation
 - **Requirement capture**: Ensures nothing is missed through guided questions
 - **Scope adjustment**: Easily modify requirements before code generation
 - **Implementation options**: Deploy locally in VS Code or via GitHub Copilot coding agent
 - **Custom planning**: Create your own plan agent tailored to your team's workflow
 
-**Handoff Buttons**: 
+**Handoff Buttons**:
+
 - "Document This Decision" → Invokes ADR Generator to create architectural decision records
 - "Skip to Architecture Review" → Directly invokes Azure Principal Architect
 - "Start Implementation" → Proceeds to Bicep Planning Specialist
 
 **When to Use**:
+
 - ✅ Multi-step infrastructure projects with multiple components
 - ✅ Complex requirements needing clarification
 - ✅ Projects requiring cost estimates and resource planning
@@ -208,17 +216,20 @@ graph LR
 ---
 
 #### 1. ADR Generator (`adr_generator`) - *Optional*
+
 **Purpose**: Document architectural decisions with structured ADRs for enterprise governance
 
 > **Skip for demos** focused on speed. Most valuable for enterprise teams needing audit trails.
 
 **Usage**:
-```
+
+```text
 Document the decision to use Azure Bastion vs. Jump Boxes for secure VM access.
 Include context, alternatives, and consequences.
 ```
 
 **Output**: Creates ADR in `/docs/adr/adr-NNNN-{title}.md` with:
+
 - Status, Context, Decision, Consequences
 - Alternatives with rejection rationale
 - Implementation notes and references
@@ -228,36 +239,43 @@ Include context, alternatives, and consequences.
 ---
 
 #### 2. Azure Principal Architect (`azure-principal-architect`)
+
 **Purpose**: Azure Well-Architected Framework assessment and guidance
 
 **Usage**:
-```
+
+```text
 Assess the hub network topology against Azure Well-Architected Framework.
 Evaluate all 5 pillars and provide recommendations.
 ```
 
 **Output**: Comprehensive WAF assessment with:
+
 - Security, Reliability, Performance, Cost, Operations evaluation
 - Overall score (e.g., 7.2/10)
 - Specific recommendations for improvements
 - Risk mitigation strategies
 
-**Handoff Buttons**: 
+**Handoff Buttons**:
+
 - "Generate Implementation Plan" → Invokes Bicep Planning Specialist
 - "Create ADR from Assessment" → Returns to ADR Generator
 
 ---
 
 #### 3. Bicep Planning Specialist (`bicep-plan`)
+
 **Purpose**: Create machine-readable implementation plans
 
 **Usage**:
-```
+
+```text
 Create a detailed implementation plan for deploying a hub network.
 Include all resources, dependencies, and security configurations.
 ```
 
 **Output**: Creates plan in `.bicep-planning-files/INFRA.{goal}.md` with:
+
 - YAML resource specifications
 - Implementation phases and tasks
 - Architecture diagrams (Mermaid)
@@ -265,21 +283,25 @@ Include all resources, dependencies, and security configurations.
 - Time estimates and cost projections
 
 **Handoff Buttons**:
+
 - "Generate Bicep Code" → Invokes Bicep Implementation Specialist
 - "Validate Against WAF" → Returns to Azure Principal Architect
 
 ---
 
 #### 4. Bicep Implementation Specialist (`bicep-implement`)
+
 **Purpose**: Generate production-ready Bicep templates
 
 **Usage**:
-```
+
+```bicep
 Implement the Bicep templates based on the implementation plan.
 Output to: infrastructure/my-project/
 ```
 
 **Output**: Creates complete infrastructure code:
+
 - `main.bicep` - Orchestration template
 - `modules/*.bicep` - Modular resource templates
 - `parameters/*.json` - Environment configurations
@@ -287,12 +309,14 @@ Output to: infrastructure/my-project/
 - `README.md` - Complete documentation
 
 **Features**:
+
 - Latest API versions (2023-05-01+)
 - Security best practices (TLS 1.2, NSG rules)
 - Modular architecture
 - Automatic validation (build, lint, format)
 
 **Handoff Buttons**:
+
 - "Review Security & Compliance" → Returns to Azure Principal Architect
 - "Update Plan Status" → Updates planning file
 
@@ -303,7 +327,8 @@ Output to: infrastructure/my-project/
 **Scenario**: Deploy a HIPAA-compliant healthcare application infrastructure
 
 **Step 0 - Create Implementation Plan** (5 minutes)
-```
+
+```yaml
 @plan Create a complete Azure infrastructure deployment plan for a patient portal with:
 - 10,000 active patients
 - HIPAA compliance required
@@ -311,40 +336,49 @@ Output to: infrastructure/my-project/
 - 99.9% availability SLA
 - Need: web app, database, API backend, file storage
 ```
+
 → Plan agent asks clarifying questions (region, scaling needs, backup requirements)
 → Generates detailed plan with cost breakdown, 8 Azure resources, 4 deployment phases
 → Click **"Document This Decision"** button to create ADR
 
 **Step 1 - Document Key Decisions** (2 minutes)
-```
+
+```text
 (Automatically switches to adr_generator)
 Document the architectural decisions from this plan, focusing on
 HIPAA compliance choices and cost optimization strategies.
 ```
+
 → Creates ADR-0004 with HIPAA compliance rationale, alternatives, security controls
 → Click **"Review Against WAF Pillars"** button
 
 **Step 2 - WAF Assessment** (3 minutes)
-```
+
+```text
 (Automatically switches to azure-principal-architect)
 Assess the hub network topology against Azure Well-Architected Framework...
 ```
+
 → Provides 7.2/10 score with detailed pillar analysis
 → Click **"Generate Implementation Plan"** button
 
 **Step 3 - Create Plan** (5 minutes)
-```
+
+```text
 (Automatically switches to bicep-plan)
 Create detailed implementation plan for the hub network...
 ```
+
 → Creates INFRA.hub-network.md with 10 resources, 5 phases, diagrams
 → Click **"Generate Bicep Code"** button
 
 **Step 4 - Implement Code** (10 minutes)
-```
+
+```text
 (Automatically switches to bicep-implement)
 Implement the Bicep templates based on the plan...
 ```
+
 → Generates 7 modules, main template, parameters, deployment scripts
 → Validates and formats all templates
 → Creates comprehensive README
@@ -376,15 +410,19 @@ Implement the Bicep templates based on the plan...
 ## 💡 Core Value Propositions
 
 ### 1. Work Faster ⚡
+
 Cut deployment time by 60-75% on common infrastructure tasks. What took hours now takes minutes.
 
 ### 2. Work Smarter 🎯
+
 Generate production-ready Infrastructure as Code without deep IaC expertise. Best practices built-in.
 
 ### 3. Learn Continuously 📚
+
 Bridge skills gaps in DevOps, automation, and modern practices while delivering real work.
 
 ### 4. Stay Consistent 🔄
+
 Maintain standards across infrastructure deployments with AI-assisted templates and patterns.
 
 ---
@@ -392,6 +430,7 @@ Maintain standards across infrastructure deployments with AI-assisted templates 
 ## 🎓 Learning Paths
 
 ### Path 1: Partner Onboarding (3 hours)
+
 **Goal:** Deliver customer demos confidently
 
 1. Read main README (this page) - 5 min
@@ -406,6 +445,7 @@ Maintain standards across infrastructure deployments with AI-assisted templates 
 ---
 
 ### Path 2: Customer Demo Delivery (30 min)
+
 **Goal:** Compelling demo for decision makers
 
 Choose your demo based on customer profile:
@@ -419,6 +459,7 @@ Choose your demo based on customer profile:
 | Governance Focus | Arc + Policy | "Compliance at scale, automated" |
 
 **Demo Delivery Checklist:**
+
 - [ ] Review DEMO-SCRIPT.md (10 min)
 - [ ] Test in Azure subscription (20 min)
 - [ ] Customize for customer scenario (10 min)
@@ -427,6 +468,7 @@ Choose your demo based on customer profile:
 ---
 
 ### Path 3: Deep Skills Development (8-10 hours)
+
 **Goal:** Bridge skills gaps completely
 
 1. **Foundations**: Complete Skills Bridge modules
@@ -449,6 +491,7 @@ Choose your demo based on customer profile:
 ---
 
 ### Path 4: Executive Briefing (35 min)
+
 **Goal:** Understand business value and ROI
 
 1. **Business Case**: Review ROI calculator (10 min)
@@ -465,6 +508,7 @@ Choose your demo based on customer profile:
 ## 🌟 Featured Demos
 
 ### [Demo 1: Bicep Quickstart](demos/01-bicep-quickstart)
+
 **Time:** 30 minutes | **Level:** Intermediate
 
 Generate production-ready Bicep templates for complex Azure infrastructure without deep IaC expertise.
@@ -472,6 +516,7 @@ Generate production-ready Bicep templates for complex Azure infrastructure witho
 **Scenario:** Deploy a secure 3-tier Azure network with proper segmentation, NSGs, and NAT Gateway.
 
 **What You'll Learn:**
+
 - Effective prompts for Bicep generation
 - Before/after comparison (45 min manual vs. 10 min with Copilot)
 - Validation and deployment workflow
@@ -479,16 +524,19 @@ Generate production-ready Bicep templates for complex Azure infrastructure witho
 ---
 
 ### [Demo 2: PowerShell Automation](demos/02-powershell-automation)
+
 **Time:** 30 minutes | **Level:** Beginner
 
 Automate operational tasks with best practices built-in. Familiar PowerShell, amplified capabilities.
 
 **Scenarios:**
+
 - VM lifecycle automation
 - Compliance reporting across subscriptions
 - Cost optimization (identify idle resources)
 
 **What You'll Learn:**
+
 - Production-ready error handling
 - Logging patterns
 - At-scale automation
@@ -496,16 +544,19 @@ Automate operational tasks with best practices built-in. Familiar PowerShell, am
 ---
 
 ### [Demo 3: Azure Arc Onboarding](demos/03-azure-arc-onboarding)
+
 **Time:** 30 minutes | **Level:** Advanced
 
 Onboard and manage hybrid infrastructure at scale with automated Arc enablement.
 
 **Scenarios:**
+
 - Bulk server onboarding (100+ servers)
 - SQL Server Arc discovery and enablement
 - At-scale policy assignment
 
 **What You'll Learn:**
+
 - Bulk automation patterns
 - Error handling for distributed systems
 - Policy as code
@@ -513,16 +564,19 @@ Onboard and manage hybrid infrastructure at scale with automated Arc enablement.
 ---
 
 ### [Demo 4: Troubleshooting Assistant](demos/04-troubleshooting-assistant)
+
 **Time:** 30 minutes | **Level:** Intermediate
 
 AI-assisted diagnostics and remediation for common Azure infrastructure issues.
 
 **Scenarios:**
+
 - VM performance diagnostics
 - Network connectivity troubleshooting
 - Log analysis with Kusto queries
 
 **What You'll Learn:**
+
 - Diagnostic script generation
 - Automated remediation
 - Pattern recognition
@@ -530,16 +584,19 @@ AI-assisted diagnostics and remediation for common Azure infrastructure issues.
 ---
 
 ### [Demo 5: Documentation Generator](demos/05-documentation-generator)
+
 **Time:** 30 minutes | **Level:** Beginner
 
 Generate architecture diagrams, runbooks, and troubleshooting guides automatically.
 
 **Examples:**
+
 - Mermaid architecture diagrams from descriptions
 - DR runbooks from infrastructure state
 - Troubleshooting guides from common issues
 
 **What You'll Learn:**
+
 - Documentation as code
 - Diagram generation
 - Template reuse
@@ -547,11 +604,13 @@ Generate architecture diagrams, runbooks, and troubleshooting guides automatical
 ---
 
 ### [Demo 6: Azure Specialization Audit Preparation](demos/06-azure-specialization-prep)
+
 **Time:** 40 minutes | **Level:** Advanced
 
 Accelerate Azure Infrastructure and Database Migration Specialization audit preparation using the five-agent workflow with comprehensive validation.
 
 **Scenarios:**
+
 - Complete audit evidence generation (11 controls with validation)
 - Infrastructure as Code with ALZ alignment
 - Well-Architected Framework assessments including chaos engineering
@@ -559,6 +618,7 @@ Accelerate Azure Infrastructure and Database Migration Specialization audit prep
 - Migration validation (chaos testing, load testing, UAT)
 
 **What You'll Learn:**
+
 - Five-agent workflow with automatic handoffs (Plan → ADR → Azure Architect → Bicep Planning → Bicep Implementation)
 - Production-ready Bicep templates with security best practices
 - Comprehensive validation framework aligned with CAF Migrate
@@ -567,6 +627,7 @@ Accelerate Azure Infrastructure and Database Migration Specialization audit prep
 - UAT tracking with realistic test data
 
 **Business Value:**
+
 - **Time Savings:** 60 hours → 10 hours (83% reduction)
 - **Annual ROI:** $34,500 for 4 audits/year (includes validation framework)
 - **Audit Coverage:** 3 Module A + 5 Module B controls
@@ -574,6 +635,7 @@ Accelerate Azure Infrastructure and Database Migration Specialization audit prep
 ---
 
 ### [Demo 7: Five-Agent Workflow](infra/bicep/contoso-patient-portal) 🆕
+
 **Time:** 45-60 minutes | **Level:** Advanced
 
 > **Implementation Note**: This demo is implemented as production-ready infrastructure in `infra/bicep/contoso-patient-portal/` (1,070 lines of Bicep across 10 modules), serving as the working demonstration of the complete five-agent workflow. See [`FIVE-MODE-WORKFLOW.md`](resources/copilot-customizations/FIVE-MODE-WORKFLOW.md) for detailed documentation.
@@ -583,6 +645,7 @@ Showcase the complete 5-agent workflow from business requirements to deployable 
 **Scenario:** HIPAA-compliant patient portal for Contoso Healthcare (10k patients, $800/month budget, 99.9% SLA).
 
 **What You'll Learn:**
+
 - Five-agent collaboration (Plan → ADR Generator → Azure Architect → Bicep Planning → Bicep Implementation)
 - Interactive planning with clarifying questions and cost estimates
 - Automatic context handoffs between agents
@@ -590,6 +653,7 @@ Showcase the complete 5-agent workflow from business requirements to deployable 
 - Complete workflow in 45 minutes vs. 18 hours manual
 
 **Business Value:**
+
 - **Time Savings:** 18 hours → 45 minutes (96% reduction)
 - **Cost Savings:** $2,550 per project for SI partners
 - **Output Quality:** Cost-validated plan, WAF-aligned architecture, AVM-based templates, security defaults
@@ -599,8 +663,6 @@ Showcase the complete 5-agent workflow from business requirements to deployable 
 ## 📊 Case Studies & Skills Bridge (Coming Soon)
 
 **Note:** Case studies and skills bridge content are planned for future releases. Current focus is on production-ready demos and agent workflow.
-
-
 
 ## 🤝 Partner Enablement
 
@@ -615,8 +677,6 @@ Showcase the complete 5-agent workflow from business requirements to deployable 
 **Access:** [partner-toolkit/](partner-toolkit/)
 
 ---
-
-
 
 ## 🛠️ Getting Started with Copilot
 
@@ -649,12 +709,14 @@ Enhance Copilot with curated customizations from the [Awesome Copilot](https://g
 **[📦 Copilot Customizations for IT Pros](resources/copilot-customizations/)**
 
 Get started in 5 minutes with:
+
 - ✅ **Bicep Best Practices**: Auto-applied naming conventions and security standards
 - ✅ **PowerShell Testing**: Pester v5 patterns built-in
 - ✅ **Azure Architecture**: Well-Architected Framework guidance
 - ✅ **DevOps Principles**: DORA metrics and automation patterns
 
 **Quick Setup**:
+
 ```bash
 # Add Bicep and DevOps standards (recommended)
 cat resources/copilot-customizations/instructions/bicep-code-best-practices.instructions.md >> .github/copilot-instructions.md
@@ -674,6 +736,7 @@ cat resources/copilot-customizations/instructions/devops-core-principles.instruc
 We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 **Ways to Contribute:**
+
 - Submit new demo scenarios
 - Share effective prompts
 - Add industry-specific examples
