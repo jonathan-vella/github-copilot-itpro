@@ -12,6 +12,12 @@ targetScope = 'subscription'
 // ============================================================================
 
 @description('Azure region for all resources')
+@allowed([
+  'swedencentral'
+  'germanywestcentral'
+  'westeurope'
+  'northeurope'
+])
 param location string = 'swedencentral'
 
 @description('Environment name (dev, staging, prod)')

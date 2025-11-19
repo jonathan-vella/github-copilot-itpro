@@ -9,7 +9,7 @@ using './main.bicep'
 // REQUIRED PARAMETERS
 // ============================================================================
 
-param location = 'eastus2'
+param location = 'swedencentral'
 param environment = 'prod'
 param projectName = 'contoso-patient-portal'
 

@@ -6,31 +6,37 @@ This file provides context and guidance for GitHub Copilot when assisting with t
 
 **Essential Knowledge for Immediate Productivity:**
 
-1. **Default Region**: Always use `swedencentral` unless specified otherwise
+1. **Default Region**: Always use `swedencentral` (alternative: `germanywestcentral` for German data residency)
 2. **Unique Resource Names**: Generate `var uniqueSuffix = uniqueString(resourceGroup().id)` in main.bicep, pass to ALL modules
 3. **Name Length Limits**: Key Vault ≤24 chars, Storage ≤24 chars (no hyphens), SQL ≤63 chars
 4. **Demo Policy Bypass**: Add `SecurityControl: 'Ignore'` tag to bypass Azure AD-only auth for SQL Server
 5. **Zone Redundancy**: App Service Plans need P1v3 SKU (not S1) for zone redundancy
-6. **Four-Agent Workflow**: azure-principal-architect → bicep-plan → bicep-implement (ADR optional)
+6. **Five-Agent Workflow**: Start with `@plan` → (optional) adr_generator → azure-principal-architect → bicep-plan → bicep-implement
 7. **Working Example**: `infra/bicep/contoso-patient-portal/` demonstrates all patterns correctly
 8. **Deploy Script Pattern**: Use `[CmdletBinding(SupportsShouldProcess)]` + `$WhatIfPreference` (NOT explicit `$WhatIf` param)
+9. **Dev Container**: Pre-configured Ubuntu 24.04 with all tools (Terraform, Azure CLI, Bicep, PowerShell 7)
+10. **Line Endings**: Use `.gitattributes` with `* text=auto eol=lf` for cross-platform consistency
 
 **Critical Files:**
 - Agent definitions: `.github/agents/*.agent.md`
 - Workflow guide: `resources/copilot-customizations/FIVE-MODE-WORKFLOW.md`
 - Production example: `infra/bicep/contoso-patient-portal/`
 - Bicep implement agent: `.github/agents/bicep-implement.agent.md` (has unique suffix guidance)
+- Dev container config: `.devcontainer/devcontainer.json` (includes post-create.sh tool installation)
+- Line ending rules: `.gitattributes` (normalizes CRLF→LF for cross-platform development)
 
 ## Regional Selection Guidelines
 
 **Default Region**: `swedencentral` (sustainable operations with renewable energy)
+
+**Alternative Region**: `germanywestcentral` (German data residency requirements)
 
 **When to Use Other Regions:**
 
 ### Geographic Latency Optimization
 - **Americas**: Use `eastus`, `eastus2`, `westus2`, or `centralus` for users primarily in North/South America
 - **Asia Pacific**: Use `southeastasia`, `eastasia`, or `australiaeast` for users in APAC region
-- **Europe (alternatives)**: Use `germanywestcentral` or `northeurope` if swedencentral doesn't meet requirements
+- **Europe (other alternatives)**: Use `westeurope` or `northeurope` if swedencentral/germanywestcentral don't meet requirements
 
 ### Compliance & Data Sovereignty
 - **Germany**: Use `germanywestcentral` for German data residency requirements
@@ -59,10 +65,11 @@ This repository demonstrates how GitHub Copilot serves as an **efficiency multip
 - **Primary**: System Integrator (SI) partners delivering Azure infrastructure projects
 - **Secondary**: IT Pros learning cloud/IaC, customers evaluating GitHub Copilot
 
-## Four-Agent Workflow Architecture
+## Five-Agent Workflow Architecture
 
-This repository uses a **four-agent workflow** for Azure infrastructure development:
+This repository uses a **five-agent workflow** for Azure infrastructure development:
 
+0. **Plan Agent** (Built-in) - Create implementation plans with cost estimates (invoke with `@plan`)
 1. **ADR Generator** (Optional) - Document architectural decisions (`.github/agents/adr-generator.agent.md`)
 2. **Azure Principal Architect** - Azure Well-Architected Framework guidance (`.github/agents/azure-principal-architect.agent.md`)
 3. **Bicep Planning Specialist** - Infrastructure planning with AVM modules (`.github/agents/bicep-plan.agent.md`)
@@ -70,12 +77,36 @@ This repository uses a **four-agent workflow** for Azure infrastructure developm
 
 **How to Use Custom Agents:**
 1. Press `Ctrl+Shift+A` or click the **Agent** button in Copilot Chat
-2. Select agent from dropdown: `adr_generator`, `azure-principal-architect`, `bicep-plan`, or `bicep-implement`
+2. Select agent from dropdown: `@plan`, `adr_generator`, `azure-principal-architect`, `bicep-plan`, or `bicep-implement`
 3. Type your prompt and submit
 
-**Example Workflow:**
+**Recommended Workflow with Plan Agent:**
 ```
-Agent: azure-principal-architect (skip ADR for quick demos)
+Agent: @plan (START HERE for multi-step projects)
+Prompt: Create deployment plan for HIPAA-compliant patient portal with cost estimates
+
+[Plan agent asks clarifying questions and generates detailed plan]
+Click "Document This Decision" button → Switches to adr_generator
+
+Agent: adr_generator (auto-selected via handoff)
+[Documents architectural decisions]
+Click "Review Against WAF Pillars" button → Switches to azure-principal-architect
+
+Agent: azure-principal-architect (auto-selected via handoff)
+Prompt: Assess architecture against WAF pillars
+Click "Generate Implementation Plan" button → Switches to bicep-plan
+
+Agent: bicep-plan (auto-selected via handoff)
+[Creates machine-readable YAML plan in .bicep-planning-files/]
+Click "Generate Bicep Code" button → Switches to bicep-implement
+
+Agent: bicep-implement (auto-selected via handoff)
+[Generates production-ready Bicep templates]
+```
+
+**Quick Workflow (Skip Planning):**
+```
+Agent: azure-principal-architect (skip ADR and Plan for quick demos)
 Prompt: Assess HIPAA-compliant patient portal architecture
 
 Agent: bicep-plan
@@ -88,7 +119,7 @@ Prompt: Generate Bicep templates from the plan
 📖 **Full Documentation:** See `resources/copilot-customizations/FIVE-MODE-WORKFLOW.md`
 
 **Critical Agent Behaviors:**
-- **All agents default to `swedencentral` region** unless explicitly specified
+- **All agents default to `swedencentral` region** (alternative: `germanywestcentral`), unless explicitly specified
 - **Bicep agents ALWAYS generate unique resource name suffixes** using `uniqueString(resourceGroup().id)` to prevent naming collisions
 - **Key Vault names**: Must be ≤24 chars (pattern: `kv-{shortname}-{env}-{suffix}`)
 - **App Service Plans**: Use P1v3 (Premium) or higher for zone redundancy (Standard SKU doesn't support it)
@@ -100,23 +131,39 @@ Prompt: Generate Bicep templates from the plan
 
 ```
 github-copilot-itpro/
-├── .github/agents/                      # 4 custom agents for workflow
+├── .devcontainer/                       # Pre-configured dev environment
+│   ├── devcontainer.json                # Container configuration
+│   ├── post-create.sh                   # Tool installation script
+│   └── TROUBLESHOOTING.md               # Setup issues & fixes
+├── .github/
+│   ├── agents/                          # 4 custom agents (Plan is built-in)
+│   │   ├── adr-generator.agent.md
+│   │   ├── azure-principal-architect.agent.md
+│   │   ├── bicep-plan.agent.md
+│   │   └── bicep-implement.agent.md
+│   └── copilot-instructions.md          # THIS FILE - AI agent guidance
 ├── demos/                               # Self-contained 30-minute demo modules
 │   ├── 01-bicep-quickstart/
 │   ├── 02-powershell-automation/
-│   ├── 03-terraform-infrastructure/
+│   ├── 03-terraform-infrastructure/     # Multi-cloud IaC with Terraform
 │   ├── 04-troubleshooting-assistant/
 │   ├── 05-documentation-generator/
-│   └── 06-azure-specialization-prep/
+│   ├── 06-azure-specialization-prep/
+│   ├── 07-five-agent-workflow/          # Workflow demo (points to infra/)
+│   └── 08-sbom-generator/               # Software Bill of Materials
 ├── infra/bicep/                         # Production-ready Bicep examples
-│   └── contoso-patient-portal/         # HIPAA-compliant multi-tier app
+│   └── contoso-patient-portal/         # HIPAA-compliant multi-tier app (Demo 07 implementation)
 ├── partner-toolkit/                     # Materials for SI partners
 ├── case-studies/                        # Real-world success stories
 ├── skills-bridge/                       # Learning content for IT Pros
 └── resources/copilot-customizations/    # Workflow guides & chat modes
+    ├── FIVE-MODE-WORKFLOW.md            # Complete workflow documentation
+    ├── chatmodes/                       # Supplementary chat modes
+    ├── instructions/                    # Bicep, PowerShell, Terraform best practices
+    └── prompts/                         # Curated prompt examples
 ```
 
-**Note**: Demo 07 (Five-Agent Workflow) is referenced in README but lives in `infra/bicep/contoso-patient-portal/` - this is the actual working implementation of the workflow.
+**Note**: Demo 07 (Five-Agent Workflow) is referenced in README but lives in `infra/bicep/contoso-patient-portal/` - this is the actual working implementation of the workflow showing 96% time savings (18 hours → 45 minutes).
 
 ## Content Format Standards
 
@@ -173,7 +220,7 @@ tags: {
 When generating Bicep code:
 
 1. **Always use latest API versions** (2023-05-01 or newer)
-2. **Default location**: `swedencentral` (unless specified otherwise)
+2. **Default location**: `swedencentral` (alternative: `germanywestcentral` for German data residency)
 3. **CRITICAL - Unique resource names**: Generate suffix in main.bicep and pass to ALL modules:
    ```bicep
    var uniqueSuffix = uniqueString(resourceGroup().id)
@@ -197,6 +244,12 @@ When generating Bicep code:
 Example parameter documentation:
 ```bicep
 @description('Azure region for all resources')
+@allowed([
+  'swedencentral'
+  'germanywestcentral'
+  'westeurope'
+  'northeurope'
+])
 param location string = 'swedencentral'
 
 @description('Unique suffix for resource naming (generated from resource group ID)')
@@ -230,14 +283,18 @@ When generating PowerShell code:
 
 ### Documentation (Markdown)
 
+**BEFORE generating any markdown, read `.github/instructions/markdown.instructions.md` and `MARKDOWN-STYLE-GUIDE.md`**
+
 When generating documentation:
 
-1. **Use Mermaid diagrams** for architecture and workflows
-2. **Include metrics** for time savings (e.g., "45 min → 10 min (78% reduction)")
-3. **Add prerequisites** section with tool versions
-4. **Provide multiple examples** (quick start, detailed walkthrough)
-5. **Use emoji sparingly** for visual hierarchy (✅ ❌ ⚠️ 💡 🚀)
-6. **Include troubleshooting** section
+1. **Follow markdown standards** (ATX headers, 120-char line length, fenced code blocks with language)
+2. **Use Mermaid diagrams** for architecture and workflows
+3. **Include metrics** for time savings (e.g., "45 min → 10 min (78% reduction)")
+4. **Add prerequisites** section with tool versions
+5. **Provide multiple examples** (quick start, detailed walkthrough)
+6. **Use emoji sparingly** for visual hierarchy (✅ ❌ ⚠️ 💡 🚀)
+7. **Include troubleshooting** section
+8. **Validate before committing**: Run `markdownlint '**/*.md' --ignore node_modules --config .markdownlint.json`
 
 ## Value Messaging
 
@@ -412,12 +469,14 @@ Between each phase: `bicep build` → `bicep lint` → `az deployment` → valid
 
 ### Technologies Used
 
-- **IaC**: Bicep (primary), ARM templates (legacy examples)
-- **Automation**: PowerShell 7+, Azure CLI
-- **Platform**: Azure (public cloud)
-- **Tooling**: VS Code, GitHub Copilot, Azure CLI, Bicep CLI
-- **Version Control**: Git/GitHub
+- **IaC**: Bicep (primary), Terraform (demos/03), ARM templates (legacy examples)
+- **Automation**: PowerShell 7+, Azure CLI, Bash scripts
+- **Platform**: Azure (public cloud), multi-cloud patterns (Terraform)
+- **Tooling**: VS Code, GitHub Copilot, Azure CLI, Bicep CLI, Terraform CLI
+- **Security Scanning**: tfsec, Checkov, PSScriptAnalyzer
+- **Version Control**: Git/GitHub with `.gitattributes` for line ending normalization
 - **Documentation**: Markdown, Mermaid diagrams
+- **Containerization**: Dev Containers with Ubuntu 24.04 LTS base
 
 ### Target Environments
 
@@ -465,9 +524,9 @@ Critical patterns from `infra/bicep/contoso-patient-portal/deploy.ps1`:
    return $true  # Continue deployment
    ```
 
-3. **Region validation**: Add `swedencentral` to ValidateSet
+3. **Region validation**: Add allowed regions to ValidateSet
    ```powershell
-   [ValidateSet('swedencentral', 'eastus', 'eastus2', 'westus2', 'westeurope', 'northeurope')]
+   [ValidateSet('swedencentral', 'germanywestcentral', 'westeurope', 'northeurope')]
    [string]$Location = 'swedencentral'
    ```
 
@@ -490,11 +549,50 @@ Critical patterns from `infra/bicep/contoso-patient-portal/deploy.ps1`:
 
 ### When Editing Markdown Files
 
+**CRITICAL: Always follow markdown standards defined in `.github/instructions/markdown.instructions.md` and `MARKDOWN-STYLE-GUIDE.md`**
+
+Key requirements (see full standards in referenced files):
 - Use ATX-style headers (`#` not `===`)
 - Add empty lines before/after headers
-- Use fenced code blocks with language identifiers
-- Keep line length reasonable (80-120 chars when possible)
+- Use fenced code blocks with language identifiers (always specify language)
+- Maximum line length: 120 characters (150 for code blocks)
+- Use `-` for bullet points (not `*` or `+`)
 - Use relative links for internal navigation
+- Ensure LF line endings (handled automatically by `.gitattributes`)
+- Validate with: `markdownlint '**/*.md' --ignore node_modules --config .markdownlint.json`
+- Auto-fix with: `markdownlint '**/*.md' --ignore node_modules --config .markdownlint.json --fix`
+
+**Before creating/editing any markdown file:**
+1. Read `.github/instructions/markdown.instructions.md` for validation requirements
+2. Check `MARKDOWN-STYLE-GUIDE.md` for formatting examples
+3. Follow `.markdownlint.json` configuration rules
+
+### When Creating .gitattributes Files
+
+For cross-platform development (Windows/Linux/macOS):
+
+```gitattributes
+# Auto-normalize all text files to LF
+* text=auto eol=lf
+
+# Explicit LF for code files
+*.bicep text eol=lf
+*.tf text eol=lf
+*.md text eol=lf
+*.sh text eol=lf
+*.ps1 text working-tree-encoding=UTF-8 eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.zip binary
+*.exe binary
+```
+
+**Critical Pattern**: PowerShell files need `working-tree-encoding=UTF-8` to preserve BOM while using LF
 
 ## Suitable Tasks for Copilot Coding Agent
 
@@ -597,9 +695,45 @@ When users request changes or additions:
 
 ## Development Environment
 
-### Required Tools
+### Option 1: Dev Container (Recommended)
 
-To work with this repository effectively, ensure the following tools are installed:
+This repository includes a pre-configured dev container with all tools installed:
+
+**Included Tools:**
+- **Terraform** (latest) with tfsec, Checkov validation
+- **Azure CLI** (latest) with Bicep CLI embedded
+- **PowerShell 7+** (cross-platform)
+- **Git** (built from source, latest version)
+- **Go, Python, Node.js** runtimes
+- **25+ VS Code extensions** (Copilot, Azure, Terraform, PowerShell)
+
+**Quick Start:**
+```bash
+# Clone and open in VS Code
+git clone https://github.com/jonathan-vella/github-copilot-itpro.git
+code github-copilot-itpro
+
+# Reopen in container (F1 → "Dev Containers: Reopen in Container")
+# Wait 3-5 minutes for post-create.sh to install tools
+
+# Verify setup
+terraform --version
+az --version
+bicep --version
+pwsh --version
+```
+
+**Environment Details:**
+- OS: Ubuntu 24.04.3 LTS on WSL2 (if using Windows)
+- Container runs as `vscode` user with sudo access
+- Working directory: `/workspaces/github-copilot-itpro`
+- Persistent storage for Azure CLI credentials and VS Code extensions
+
+**Troubleshooting:** See `.devcontainer/TROUBLESHOOTING.md`
+
+### Option 2: Manual Setup
+
+To work with this repository without dev containers, ensure the following tools are installed:
 
 - **Visual Studio Code** (latest version)
 - **GitHub Copilot extension** for VS Code
@@ -607,6 +741,7 @@ To work with this repository effectively, ensure the following tools are install
 - **Bicep CLI** (version 0.20.0 or newer) - Often included with Azure CLI
 - **PowerShell 7+** (cross-platform)
 - **Git** (version 2.30.0 or newer)
+- **Terraform CLI** (version 1.5.0 or newer) - For Terraform demos
 
 ### Recommended VS Code Extensions
 
@@ -623,16 +758,36 @@ To work with this repository effectively, ensure the following tools are install
 
 Before committing changes:
 
-```powershell
-# Validate Bicep templates
-bicep build demos/01-bicep-quickstart/with-copilot/main.bicep
+```bash
+# Validate Bicep templates (build, lint, format)
+bicep build infra/bicep/contoso-patient-portal/main.bicep
+bicep lint infra/bicep/contoso-patient-portal/main.bicep
+bicep format infra/bicep/contoso-patient-portal/main.bicep
+
+# Validate Terraform configurations
+cd demos/03-terraform-infrastructure/with-copilot
+terraform init
+terraform fmt -check -recursive
+terraform validate
+tfsec .
+checkov -d .
 
 # Run PowerShell script analyzer
-Invoke-ScriptAnalyzer -Path demos/02-powershell-automation/ -Recurse
+pwsh -Command "Invoke-ScriptAnalyzer -Path demos/02-powershell-automation/ -Recurse -Settings PSGallery"
 
 # Check markdown links (if markdownlint-cli installed)
-markdownlint **/*.md --ignore node_modules
+markdownlint '**/*.md' --ignore node_modules
+
+# Verify line endings (should be LF in repository)
+git ls-files --eol | grep 'w/crlf' || echo "✓ All files use LF"
 ```
+
+**Key Validation Patterns:**
+
+1. **Bicep**: Always run `build` → `lint` → `format` before commit
+2. **Terraform**: Run `fmt` → `validate` → `tfsec` → `checkov` for security
+3. **PowerShell**: Use PSGallery settings for strict analysis
+4. **Line Endings**: Ensure `.gitattributes` normalizes to LF (cross-platform consistency)
 
 ### Azure Subscription Requirements
 
@@ -645,10 +800,87 @@ For testing demos:
 ## Resources
 
 - [Azure Bicep Documentation](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
+- [Terraform Azure Provider](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs)
 - [PowerShell Best Practices](https://learn.microsoft.com/powershell/scripting/developer/cmdlet/cmdlet-development-guidelines)
 - [Azure Naming Conventions](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging)
 - [GitHub Copilot for Azure](https://learn.microsoft.com/azure/developer/github/github-copilot-azure)
 - [GitHub Copilot Best Practices](https://docs.github.com/en/copilot/tutorials/coding-agent/get-the-best-results)
+- [VS Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers)
+- [Plan Agent Documentation](https://code.visualstudio.com/docs/copilot/chat/chat-planning)
+
+---
+
+## Terraform Workflow (Alternative to Bicep)
+
+This repository includes Terraform infrastructure examples in `demos/03-terraform-infrastructure/` for multi-cloud scenarios.
+
+### When to Use Terraform vs. Bicep
+
+**Use Terraform:**
+- Multi-cloud environments (Azure + AWS/GCP)
+- Existing Terraform investment
+- Need Terraform-specific providers
+- Team expertise in HCL
+
+**Use Bicep:**
+- Azure-only deployments
+- Want native Azure integration
+- Prefer declarative DSL over HCL
+- Need latest Azure features first
+
+### Terraform Best Practices
+
+When generating Terraform code:
+
+1. **Use latest provider versions** (azurerm 3.0+)
+2. **Modular design**: Separate network, compute, data modules
+3. **State management**: Use Azure Storage backend
+   ```hcl
+   terraform {
+     backend "azurerm" {
+       resource_group_name  = "rg-terraform-state"
+       storage_account_name = "sttfstate<random>"
+       container_name       = "tfstate"
+       key                  = "dev.terraform.tfstate"
+     }
+   }
+   ```
+4. **Security scanning**: Run `tfsec .` and `checkov -d .` before commit
+5. **Formatting**: Always run `terraform fmt -recursive` before commit
+6. **Validation workflow**: `terraform init` → `terraform validate` → `terraform plan`
+7. **Variable validation**: Add validation blocks
+   ```hcl
+   variable "environment" {
+     type = string
+     validation {
+       condition     = contains(["dev", "staging", "prod"], var.environment)
+       error_message = "Environment must be dev, staging, or prod."
+     }
+   }
+   ```
+
+### Terraform Demo Structure
+
+```
+demos/03-terraform-infrastructure/
+├── with-copilot/
+│   ├── main.tf              # Root module
+│   ├── variables.tf         # Input variables
+│   ├── outputs.tf           # Output values
+│   ├── providers.tf         # Provider configuration
+│   ├── terraform.tfvars     # Variable values
+│   └── modules/
+│       ├── network/         # Network resources
+│       ├── compute/         # VM resources
+│       └── storage/         # Storage resources
+└── validation/
+    ├── deploy.sh            # Deployment script
+    └── cleanup.sh           # Resource cleanup
+```
+
+**Supplementary Chat Modes for Terraform:**
+- `resources/copilot-customizations/chatmodes/terraform-azure-planning.chatmode.md`
+- `resources/copilot-customizations/chatmodes/terraform-azure-implement.chatmode.md`
 
 ---
 
