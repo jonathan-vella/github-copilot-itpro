@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Azure Arc Onboarding Validation Report</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        h1 { color: #0078d4; border-bottom: 3px solid #0078d4; padding-bottom: 10px; }
+        h2 { color: #333; margin-top: 30px; }
+        .summary { background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .stats { display: flex; justify-content: space-around; margin: 20px 0; }
+        .stat { text-align: center; padding: 20px; background-color: #fff; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); flex: 1; margin: 0 10px; }
+        .stat-value { font-size: 36px; font-weight: bold; margin: 10px 0; }
+        .stat-label { color: #666; font-size: 14px; text-transform: uppercase; }
+        .pass { color: #107c10; }
+        .fail { color: #d13438; }
+        .warning { color: #ffb900; }
+        table { width: 100%; border-collapse: collapse; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin: 20px 0; }
+        th { background-color: #0078d4; color: white; padding: 12px; text-align: left; }
+        td { padding: 10px; border-bottom: 1px solid #ddd; }
+        tr:hover { background-color: #f0f0f0; }
+        .status-icon { font-size: 18px; }
+        .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Azure Arc Onboarding Validation Report</h1>
+    
+    <div class="summary">
+        <p><strong>Subscription:</strong> 00858ffc-dded-4f0f-8bbf-e17fff0d47d9</p>
+        <p><strong>Resource Group:</strong> rg-arc-itpro-swc01</p>
+        <p><strong>Generated:</strong> 2025-11-19 12:52:39</p>
+        <p><strong>Duration:</strong> 18.5 seconds</p>
+    </div>
+    
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-value pass">9</div>
+            <div class="stat-label">Passed</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value fail">3</div>
+            <div class="stat-label">Failed</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value warning">2</div>
+            <div class="stat-label">Warnings</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">78.6%</div>
+            <div class="stat-label">Success Rate</div>
+        </div>
+    </div>
+    
+    <h2>Test Results</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Test Name</th>
+                <th>Message</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>            <tr>
+                <td class="status-icon pass">✅</td>
+                <td>Azure Connection</td>
+                <td>Connected as jonathan@lordofthecloud.eu</td>
+                <td>12:52:20</td>
+            </tr>            <tr>
+                <td class="status-icon pass">✅</td>
+                <td>Az.ConnectedMachine Module</td>
+                <td>Version 1.1.1</td>
+                <td>12:52:20</td>
+            </tr>            <tr>
+                <td class="status-icon pass">✅</td>
+                <td>Az.Resources Module</td>
+                <td>Version 8.1.1</td>
+                <td>12:52:22</td>
+            </tr>            <tr>
+                <td class="status-icon pass">✅</td>
+                <td>Az.Monitor Module</td>
+                <td>Version 6.0.3</td>
+                <td>12:52:23</td>
+            </tr>            <tr>
+                <td class="status-icon pass">✅</td>
+                <td>Az.PolicyInsights Module</td>
+                <td>Version 1.7.1</td>
+                <td>12:52:23</td>
+            </tr>            <tr>
+                <td class="status-icon pass">✅</td>
+                <td>Subscription Access</td>
+                <td>noalz</td>
+                <td>12:52:28</td>
+            </tr>            <tr>
+                <td class="status-icon pass">✅</td>
+                <td>Arc Servers Found</td>
+                <td>Found 5 Arc-enabled servers</td>
+                <td>12:52:30</td>
+            </tr>            <tr>
+                <td class="status-icon pass">✅</td>
+                <td>Connected Servers</td>
+                <td>0 / 5 connected</td>
+                <td>12:52:34</td>
+            </tr>            <tr>
+                <td class="status-icon warning">⚠️</td>
+                <td>Disconnected Servers</td>
+                <td>5 servers disconnected</td>
+                <td>12:52:34</td>
+            </tr>            <tr>
+                <td class="status-icon fail">❌</td>
+                <td>Connectivity Rate</td>
+                <td>0%</td>
+                <td>12:52:34</td>
+            </tr>            <tr>
+                <td class="status-icon pass">✅</td>
+                <td>Azure Monitor Agent</td>
+                <td>Deployed on sampled servers</td>
+                <td>12:52:36</td>
+            </tr>            <tr>
+                <td class="status-icon warning">⚠️</td>
+                <td>Guest Configuration</td>
+                <td>Not found on sampled servers</td>
+                <td>12:52:36</td>
+            </tr>            <tr>
+                <td class="status-icon fail">❌</td>
+                <td>Tag Compliance</td>
+                <td>0% (0 / 5 servers)</td>
+                <td>12:52:36</td>
+            </tr>            <tr>
+                <td class="status-icon fail">❌</td>
+                <td>Policy Compliance</td>
+                <td>62.5% compliant (55 / 88 policy evaluations)</td>
+                <td>12:52:39</td>
+            </tr>        </tbody>
+    </table>
+    
+    <div class="footer">
+        Generated by Azure Arc Validation Suite | GitHub Copilot for IT Pros
+    </div>
+</body>
+</html>
