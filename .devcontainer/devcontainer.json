@@ -167,9 +167,6 @@
     }
   },
   
-  // Post-create commands to install additional tools
-  "postCreateCommand": "bash .devcontainer/post-create.sh",
-  
   // Forward ports for local testing
   "forwardPorts": [
     3000,  // Node.js dev server
@@ -180,18 +177,12 @@
   // Set environment variables
   "remoteEnv": {
     "AZURE_DEFAULTS_LOCATION": "swedencentral",
-    "TF_PLUGIN_CACHE_DIR": "${containerWorkspaceFolder}/.terraform-cache"
+    "TF_PLUGIN_CACHE_DIR": "/home/vscode/.terraform-cache"
   },
-  
-  // Mount workspace files
-  "mounts": [
-    "source=${localWorkspaceFolder}/.terraform-cache,target=${containerWorkspaceFolder}/.terraform-cache,type=bind,consistency=cached"
-  ],
   
   // Run as non-root user
   "remoteUser": "vscode",
   
   // Lifecycle scripts
-  "onCreateCommand": "sudo chown -R vscode:vscode /home/vscode",
-  "updateContentCommand": "bash .devcontainer/update-tools.sh"
+  "postCreateCommand": "bash .devcontainer/post-create.sh"
 }

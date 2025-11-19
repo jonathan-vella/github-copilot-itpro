@@ -37,7 +37,36 @@ This is a hands-on collection of **30-minute demos** showing how GitHub Copilot 
 
 ## 🚀 Quick Start
 
-### For Partners: Deliver Your First Demo
+### Option 1: Using Devcontainer (Recommended)
+
+Get a pre-configured environment with all tools installed:
+
+```powershell
+# 1. Clone the repository
+git clone https://github.com/jonathan-vella/github-copilot-itpro.git
+cd github-copilot-itpro
+
+# 2. Open in VS Code
+code .
+
+# 3. Reopen in container (when prompted, or press F1 → "Dev Containers: Reopen in Container")
+# Wait 3-5 minutes for setup
+
+# 4. Inside container, authenticate with Azure
+az login
+az account set --subscription "<your-subscription-id>"
+
+# 5. Start exploring demos
+cd demos/
+```
+
+**Tools Pre-installed:** Terraform, Azure CLI, Bicep, PowerShell 7, Go, Python, Node.js, tfsec, Checkov, and 25+ VS Code extensions including GitHub Copilot.
+
+📖 **Troubleshooting?** See [`.devcontainer/TROUBLESHOOTING.md`](.devcontainer/TROUBLESHOOTING.md)
+
+### Option 2: Manual Setup
+
+Install tools directly on your machine:
 
 ```powershell
 # Clone the repository
@@ -60,6 +89,7 @@ cd demos/01-bicep-quickstart/validation
 ./deploy.ps1
 ```
 
+**Prerequisites:** Azure CLI, Bicep CLI, PowerShell 7+, VS Code with GitHub Copilot  
 **Time to First Demo:** 45 minutes (including review and test)
 
 ### For IT Pros: Start Learning
@@ -82,6 +112,12 @@ cd demos/01-bicep-quickstart/validation
 ```
 
 github-copilot-itpro/
+├── .devcontainer/                      # Pre-configured dev environment
+│   ├── devcontainer.json               # Container configuration
+│   ├── post-create.sh                  # Tool installation script
+│   ├── README.md                       # Setup documentation
+│   └── TROUBLESHOOTING.md              # Common issues & fixes
+│
 ├── .github/
 │   ├── agents/                         # 4 custom agents (Plan agent is built-in)
 │   │   ├── adr-generator.agent.md
