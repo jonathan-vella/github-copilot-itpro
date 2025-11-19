@@ -1,0 +1,44 @@
+name: Markdown Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.md'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**/*.md'
+
+jobs:
+  validate-markdown:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install markdownlint-cli
+        run: npm install -g markdownlint-cli
+      
+      - name: Run markdown validation
+        run: |
+          echo "::group::Validating markdown files"
+          markdownlint '**/*.md' --ignore node_modules --config .markdownlint.json
+          echo "::endgroup::"
+      
+      - name: Check line endings
+        run: |
+          echo "::group::Checking line endings (should all be LF)"
+          if git ls-files --eol | grep 'w/crlf'; then
+            echo "::error::Found files with CRLF line endings. Run 'git add --renormalize .' to fix."
+            exit 1
+          else
+            echo "✓ All files use LF line endings"
+          fi
+          echo "::endgroup::"

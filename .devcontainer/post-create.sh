@@ -11,6 +11,10 @@ exec 2>&1
 echo "📦 Updating package lists..."
 sudo apt-get update -qq
 
+# Install Python pip (required for Checkov)
+echo "🐍 Installing Python pip..."
+sudo apt-get install -y -qq python3-pip
+
 # Install security scanning tools for Terraform
 echo "🔒 Installing Terraform security scanners..."
 
@@ -21,10 +25,10 @@ if ! command -v tfsec &> /dev/null; then
     sudo mv tfsec /usr/local/bin/ 2>/dev/null || true
 fi
 
-# Install Checkov
+# Install Checkov (use --break-system-packages for Ubuntu 24.04)
 echo "  → Installing Checkov..."
 if ! command -v checkov &> /dev/null; then
-    pip3 install --quiet --no-cache-dir checkov || echo "Warning: Checkov installation had issues, continuing..."
+    pip3 install --quiet --no-cache-dir --break-system-packages checkov || echo "Warning: Checkov installation had issues, continuing..."
 fi
 
 # Install Azure PowerShell modules
@@ -54,14 +58,31 @@ pwsh -NoProfile -Command "
     }
 " || echo "Warning: PowerShell module installation incomplete, continuing..."
 
-# Install Terratest dependencies
+# Install Terratest dependencies (skip if Go not available)
 echo "🧪 Installing Terratest dependencies..."
-go install github.com/gruntwork-io/terratest/modules/terraform@latest 2>/dev/null || echo "Warning: Terratest installation had issues, continuing..."
+if command -v go &> /dev/null; then
+    go install github.com/gruntwork-io/terratest/modules/terraform@latest 2>/dev/null || echo "Warning: Terratest installation had issues, continuing..."
+else
+    echo "  → Skipping Terratest (Go not installed)"
+fi
 
 # Create Terraform plugin cache directory
 echo "📂 Creating Terraform plugin cache directory..."
 mkdir -p "/home/vscode/.terraform-cache"
 chmod 755 "/home/vscode/.terraform-cache"
+
+# Install Node.js and npm (for markdown validation)
+echo "📦 Installing Node.js LTS..."
+if ! command -v node &> /dev/null; then
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+    sudo apt-get install -y -qq nodejs
+fi
+
+# Install markdownlint-cli globally
+echo "📝 Installing markdownlint-cli..."
+if ! command -v markdownlint &> /dev/null; then
+    sudo npm install -g markdownlint-cli --silent
+fi
 
 # Install additional utilities
 echo "🛠️  Installing additional utilities..."
@@ -78,6 +99,13 @@ sudo apt-get install -y -qq \
 echo "🔐 Configuring Git safe directory..."
 git config --global --add safe.directory "${PWD}"
 
+# Install Bicep CLI
+echo "🔧 Installing Bicep CLI..."
+if ! az bicep version &> /dev/null; then
+    rm -rf ~/.azure/bin/bicep
+    az bicep install && chmod +x ~/.azure/bin/bicep || echo "Warning: Bicep installation had issues, continuing..."
+fi
+
 # Set up Azure CLI defaults
 echo "☁️  Configuring Azure CLI defaults..."
 az config set defaults.location=swedencentral --only-show-errors 2>/dev/null || true
@@ -85,15 +113,18 @@ az config set defaults.location=swedencentral --only-show-errors 2>/dev/null || 
 # Verify installations
 echo ""
 echo "✅ Verifying tool installations..."
-echo "  Terraform: $(terraform version | head -n1)"
-echo "  Azure CLI: $(az version --query '"azure-cli"' -o tsv)"
-echo "  Bicep: $(az bicep version)"
-echo "  PowerShell: $(pwsh --version)"
-echo "  Python: $(python3 --version)"
-echo "  Go: $(go version)"
-echo "  Node.js: $(node --version)"
-echo "  tfsec: $(tfsec --version 2>&1 | head -n1)"
-echo "  Checkov: $(checkov --version)"
+echo "  Terraform: $(terraform version 2>/dev/null | head -n1 || echo 'not installed')"
+echo "  Azure CLI: $(az version --query '"azure-cli"' -o tsv 2>/dev/null || echo 'not installed')"
+echo "  Bicep: $(az bicep version 2>/dev/null || echo 'not installed')"
+echo "  PowerShell: $(pwsh --version 2>/dev/null || echo 'not installed')"
+echo "  Python: $(python3 --version 2>/dev/null || echo 'not installed')"
+echo "  pip: $(pip3 --version 2>/dev/null | awk '{print $2}' || echo 'not installed')"
+echo "  Go: $(go version 2>/dev/null || echo 'not installed')"
+echo "  Node.js: $(node --version 2>/dev/null || echo 'not installed')"
+echo "  npm: $(npm --version 2>/dev/null || echo 'not installed')"
+echo "  markdownlint: $(markdownlint --version 2>/dev/null || echo 'not installed')"
+echo "  tfsec: $(tfsec --version 2>/dev/null || echo 'not installed')"
+echo "  Checkov: $(checkov --version 2>/dev/null || echo 'not installed')"
 
 echo ""
 echo "🎉 Post-create setup completed successfully!"
