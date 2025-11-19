@@ -30,7 +30,7 @@ This file provides context and guidance for GitHub Copilot when assisting with t
 ### Geographic Latency Optimization
 - **Americas**: Use `eastus`, `eastus2`, `westus2`, or `centralus` for users primarily in North/South America
 - **Asia Pacific**: Use `southeastasia`, `eastasia`, or `australiaeast` for users in APAC region
-- **Europe (alternatives)**: Use `westeurope` or `northeurope` if swedencentral doesn't meet requirements
+- **Europe (alternatives)**: Use `germanywestcentral` or `northeurope` if swedencentral doesn't meet requirements
 
 ### Compliance & Data Sovereignty
 - **Germany**: Use `germanywestcentral` for German data residency requirements
