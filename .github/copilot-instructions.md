@@ -104,7 +104,7 @@ github-copilot-itpro/
 ├── demos/                               # Self-contained 30-minute demo modules
 │   ├── 01-bicep-quickstart/
 │   ├── 02-powershell-automation/
-│   ├── 03-azure-arc-onboarding/
+│   ├── 03-terraform-infrastructure/
 │   ├── 04-troubleshooting-assistant/
 │   ├── 05-documentation-generator/
 │   └── 06-azure-specialization-prep/

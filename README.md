@@ -47,7 +47,7 @@ cd github-copilot-itpro
 # Choose a demo based on customer profile:
 # - Traditional IT Pros → demos/02-powershell-automation
 # - Adopting IaC → demos/01-bicep-quickstart  
-# - Hybrid Infrastructure → demos/03-azure-arc-onboarding
+# - Infrastructure as Code (Terraform) → demos/03-terraform-infrastructure
 # - Operational Teams → demos/04-troubleshooting-assistant
 # - Specialization Partners → demos/06-azure-specialization-prep
 # - Complete Workflow → infra/bicep/contoso-patient-portal (Demo 07 implementation)
@@ -67,7 +67,7 @@ cd demos/01-bicep-quickstart/validation
 1. **Quick Win** (30 min): [Documentation Generator](demos/05-documentation-generator) - Generate runbooks and diagrams
 2. **Foundation** (30 min): [PowerShell Automation](demos/02-powershell-automation) - See automation best practices emerge
 3. **Modern IaC** (30 min): [Bicep Quickstart](demos/01-bicep-quickstart) - Bridge to Infrastructure as Code
-4. **Advanced** (30 min): [Azure Arc](demos/03-azure-arc-onboarding) - Hybrid infrastructure at scale
+4. **Intermediate** (30 min): [Terraform Infrastructure](demos/03-terraform-infrastructure) - Multi-cloud IaC with 90% time savings
 5. **Specialization** (40 min): [Azure Specialization Prep](demos/06-azure-specialization-prep) - Audit preparation with validation
 6. **Complete Workflow** (45 min): [Five-Agent Workflow](infra/bicep/contoso-patient-portal) - Requirements to code in minutes
 
@@ -93,7 +93,7 @@ github-copilot-itpro/
 ├── demos/                              # 30-minute demo modules
 │   ├── 01-bicep-quickstart/            # IaC without the learning curve
 │   ├── 02-powershell-automation/       # Operational tasks automated
-│   ├── 03-azure-arc-onboarding/        # Hybrid infrastructure simplified
+│   ├── 03-terraform-infrastructure/    # Multi-cloud IaC with Terraform
 │   ├── 04-troubleshooting-assistant/   # AI-powered diagnostics
 │   ├── 05-documentation-generator/     # Runbooks & diagrams at speed
 │   ├── 06-azure-specialization-prep/   # Audit preparation accelerated
@@ -543,23 +543,24 @@ Automate operational tasks with best practices built-in. Familiar PowerShell, am
 
 ---
 
-### [Demo 3: Azure Arc Onboarding](demos/03-azure-arc-onboarding)
+### [Demo 3: Infrastructure as Code with Terraform](demos/03-terraform-infrastructure)
 
-**Time:** 30 minutes | **Level:** Advanced
+**Time:** 30 minutes | **Level:** Intermediate
 
-Onboard and manage hybrid infrastructure at scale with automated Arc enablement.
+Build production-ready, multi-environment Azure infrastructure using Terraform and GitHub Copilot.
 
 **Scenarios:**
 
-- Bulk server onboarding (100+ servers)
-- SQL Server Arc discovery and enablement
-- At-scale policy assignment
+- 3-tier web application (VNet, App Service, SQL Database)
+- Modular Terraform design with reusable components
+- Security hardening (private endpoints, managed identity, RBAC)
 
 **What You'll Learn:**
 
-- Bulk automation patterns
-- Error handling for distributed systems
-- Policy as code
+- Terraform module development with Copilot
+- Multi-cloud IaC patterns
+- Security best practices automation
+- 90% time savings (60 hours → 6 hours)
 
 ---
 
