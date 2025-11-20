@@ -15,6 +15,7 @@ We have organized the content into practical scenarios that map to real-world ta
 | **[S05 Service Validation](scenarios/S05-service-validation)** | Automated testing and validation of Azure services. | PowerShell, Pester |
 | **[S06 Troubleshooting](scenarios/S06-troubleshooting)** | Diagnosing and fixing infrastructure issues. | Azure Monitor, Log Analytics |
 | **[S07 SBOM Generator](scenarios/S07-sbom-generator)** | Generating Software Bill of Materials for compliance. | Syft, Grype |
+| **[S08 Diagrams as Code](scenarios/S08-diagrams-as-code)** | Generating architecture diagrams using Python code. | Python, Diagrams |
 
 ## 🏆 Azure Specialization Prep
 
