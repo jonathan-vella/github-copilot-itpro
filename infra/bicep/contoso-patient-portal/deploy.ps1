@@ -155,7 +155,7 @@ function Test-Prerequisites {
         $global:currentUserType = az ad signed-in-user show --query type -o tsv 2>$null
         
         if ($global:currentUserObjectId) {
-             Write-Info "Will configure SQL Server with Entra ID Admin: $global:currentUserPrincipalName"
+            Write-Info "Will configure SQL Server with Entra ID Admin: $global:currentUserPrincipalName"
         }
     }
     catch {

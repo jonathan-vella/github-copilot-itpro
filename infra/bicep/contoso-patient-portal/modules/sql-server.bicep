@@ -65,13 +65,15 @@ module sqlServer 'br/public:avm/res/sql/server:0.21.0' = {
     publicNetworkAccess: 'Disabled'
     restrictOutboundNetworkAccess: 'Enabled'
     // Azure AD-only authentication required by Azure Policy
-    administrators: useAzureAdOnly ? {
-      azureADOnlyAuthentication: true
-      login: azureAdAdminLogin
-      principalType: azureAdAdminType
-      sid: azureAdAdminObjectId
-      tenantId: subscription().tenantId
-    } : null
+    administrators: useAzureAdOnly
+      ? {
+          azureADOnlyAuthentication: true
+          login: azureAdAdminLogin
+          principalType: azureAdAdminType
+          sid: azureAdAdminObjectId
+          tenantId: subscription().tenantId
+        }
+      : null
   }
 }
 
