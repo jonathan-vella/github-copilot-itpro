@@ -201,6 +201,7 @@ Output to: temp/contoso-healthcare-portal/phase3-security/
 - Key Vault soft delete enabled
 - No public blob access on storage (if used)
 - Managed identity for App Service → Key Vault access
+- Entra ID Authentication for SQL Server (User/Group)
 
 **Validation:**
 After generating each phase:

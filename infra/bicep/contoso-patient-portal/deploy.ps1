@@ -178,24 +178,21 @@ function Get-SqlPassword {
         $password = Read-Host "Enter SQL admin password" -AsSecureString
         $confirmPassword = Read-Host "Confirm password" -AsSecureString
         
-        $passwordText = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto(
-            [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password)
-        )
+        $passwordText = [System.Net.NetworkCredential]::new('', $password).Password
         
         if ($passwordText.Length -lt 8) {
             Write-Warning "Password must be at least 8 characters"
             continue
         }
         
+        # Relaxed complexity check to avoid issues with special characters
         if ($passwordText -cnotmatch '[A-Z]' -or $passwordText -cnotmatch '[a-z]' -or 
-            $passwordText -notmatch '\d' -or $passwordText -notmatch '[^a-zA-Z0-9]') {
-            Write-Warning "Password must contain uppercase, lowercase, number, and special character"
+            $passwordText -notmatch '\d') {
+            Write-Warning "Password must contain uppercase, lowercase, and number"
             continue
         }
         
-        $confirmText = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto(
-            [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($confirmPassword)
-        )
+        $confirmText = [System.Net.NetworkCredential]::new('', $confirmPassword).Password
         
         if ($passwordText -ne $confirmText) {
             Write-Warning "Passwords do not match"
@@ -261,12 +258,8 @@ function Invoke-Deployment {
     }
     
     # Convert SecureString to plain text for Azure CLI
-    $passwordText = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto(
-        [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($Password)
-    )
+    $passwordText = [System.Net.NetworkCredential]::new('', $Password).Password
     
-    Write-Host "DEBUG: Password length: $($passwordText.Length)" -ForegroundColor Magenta
-
     # Build deployment command
     $deployCmd = @(
         'deployment', 'sub', 'create'

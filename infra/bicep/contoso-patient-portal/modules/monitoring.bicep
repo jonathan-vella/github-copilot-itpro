@@ -46,15 +46,14 @@ module logAnalyticsWorkspace 'br/public:avm/res/operational-insights/workspace:0
 // APPLICATION INSIGHTS
 // ============================================================================
 
-module applicationInsights 'br/public:avm/res/insights/component:0.7.0' = {
-  name: 'app-insights-deployment'
-  params: {
-    name: applicationInsightsName
-    location: location
-    tags: tags
-    workspaceResourceId: logAnalyticsWorkspace.outputs.resourceId
-    kind: 'web'
-    applicationType: 'web'
+resource applicationInsights 'Microsoft.Insights/components@2020-02-02' = {
+  name: applicationInsightsName
+  location: location
+  tags: tags
+  kind: 'web'
+  properties: {
+    Application_Type: 'web'
+    WorkspaceResourceId: logAnalyticsWorkspace.outputs.resourceId
     publicNetworkAccessForIngestion: 'Enabled'
     publicNetworkAccessForQuery: 'Disabled'
   }
@@ -71,15 +70,15 @@ output logAnalyticsWorkspaceId string = logAnalyticsWorkspace.outputs.resourceId
 output logAnalyticsWorkspaceName string = logAnalyticsWorkspace.outputs.name
 
 @description('Application Insights resource ID')
-output applicationInsightsId string = applicationInsights.outputs.resourceId
+output applicationInsightsId string = applicationInsights.id
 
 @description('Application Insights name')
-output applicationInsightsName string = applicationInsights.outputs.name
+output applicationInsightsName string = applicationInsights.name
 
 @description('Application Insights instrumentation key')
 @secure()
-output applicationInsightsInstrumentationKey string = applicationInsights.outputs.instrumentationKey
+output applicationInsightsInstrumentationKey string = applicationInsights.properties.InstrumentationKey
 
 @description('Application Insights connection string')
 @secure()
-output applicationInsightsConnectionString string = applicationInsights.outputs.connectionString
+output applicationInsightsConnectionString string = applicationInsights.properties.ConnectionString
