@@ -445,7 +445,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 
 **Plan B**: Use Pre-Generated Scripts
 
-- All 4 scripts are pre-built in `with-copilot/` folder
+- All 4 scripts are pre-built in `solution/` folder
 - Narrate: "I pre-generated this earlier with Copilot..."
 - Focus demo on **explaining the code** Copilot created
 - Still emphasizes value: "This script took 3 minutes with Copilot vs. 2 hours manually"

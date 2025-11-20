@@ -240,7 +240,7 @@ S06-troubleshooting/
 ├── manual-approach/
 │   ├── time-tracking.md                # 30-hour baseline breakdown
 │   └── typical-process.md              # Manual troubleshooting workflow
-├── with-copilot/
+├── solution/
 │   ├── Get-AzureHealthSnapshot.ps1     # Resource health diagnostics
 │   ├── Invoke-DiagnosticQuery.ps1      # KQL query generator
 │   ├── Resolve-CommonIssues.ps1        # Automated remediation
@@ -266,10 +266,10 @@ Connect-AzAccount
 Set-AzContext -SubscriptionId "<your-subscription-id>"
 
 # 3. Run health snapshot
-.\with-copilot\Get-AzureHealthSnapshot.ps1 -ResourceGroupName "rg-production"
+.\solution\Get-AzureHealthSnapshot.ps1 -ResourceGroupName "rg-production"
 
 # 4. Generate diagnostic query
-.\with-copilot\Invoke-DiagnosticQuery.ps1 -Symptom "High API latency in last 2 hours"
+.\solution\Invoke-DiagnosticQuery.ps1 -Symptom "High API latency in last 2 hours"
 ```
 
 ### Full Demo Setup (20 Minutes)

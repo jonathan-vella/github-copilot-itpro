@@ -36,9 +36,6 @@ param vmCount int = 2
 @description('Web subnet resource ID')
 param subnetId string
 
-@description('Log Analytics workspace resource ID for monitoring')
-param logAnalyticsWorkspaceId string
-
 @description('Common tags applied to all resources')
 param tags object
 
@@ -128,123 +125,131 @@ resource availabilitySet 'Microsoft.Compute/availabilitySets@2023-03-01' = {
 }
 
 // Network Interfaces (loop for multiple VMs)
-resource networkInterfaces 'Microsoft.Network/networkInterfaces@2023-05-01' = [for i in range(0, vmCount): {
-  name: '${nicNamePrefix}${padLeft(i + 1, 2, '0')}-${environment}'
-  location: location
-  tags: tags
-  properties: {
-    ipConfigurations: [
-      {
-        name: 'ipconfig1'
-        properties: {
-          subnet: {
-            id: subnetId
-          }
-          privateIPAllocationMethod: 'Dynamic'
-        }
-      }
-    ]
-    enableAcceleratedNetworking: false
-    enableIPForwarding: false
-  }
-}]
-
-// Virtual Machines (loop for multiple VMs)
-resource virtualMachines 'Microsoft.Compute/virtualMachines@2023-03-01' = [for i in range(0, vmCount): {
-  name: '${vmNamePrefix}${padLeft(i + 1, 2, '0')}-${environment}'
-  location: location
-  tags: tags
-  properties: {
-    availabilitySet: {
-      id: availabilitySet.id
-    }
-    hardwareProfile: {
-      vmSize: vmSize
-    }
-    storageProfile: {
-      imageReference: {
-        publisher: 'MicrosoftWindowsServer'
-        offer: 'WindowsServer'
-        sku: '2022-datacenter-azure-edition'
-        version: 'latest'
-      }
-      osDisk: {
-        name: '${osDiskPrefix}${padLeft(i + 1, 2, '0')}-${environment}'
-        createOption: 'FromImage'
-        managedDisk: {
-          storageAccountType: 'Premium_LRS'
-        }
-        diskSizeGB: 128
-        caching: 'ReadWrite'
-      }
-    }
-    osProfile: {
-      computerName: 'TASKWEB${padLeft(i + 1, 2, '0')}'
-      adminUsername: adminUsername
-      adminPassword: adminPassword
-      windowsConfiguration: {
-        enableAutomaticUpdates: true
-        provisionVMAgent: true
-        patchSettings: {
-          patchMode: 'AutomaticByOS'
-          assessmentMode: 'ImageDefault'
-        }
-        timeZone: 'Eastern Standard Time'
-      }
-    }
-    networkProfile: {
-      networkInterfaces: [
+resource networkInterfaces 'Microsoft.Network/networkInterfaces@2023-05-01' = [
+  for i in range(0, vmCount): {
+    name: '${nicNamePrefix}${padLeft(i + 1, 2, '0')}-${environment}'
+    location: location
+    tags: tags
+    properties: {
+      ipConfigurations: [
         {
-          id: networkInterfaces[i].id
+          name: 'ipconfig1'
           properties: {
-            primary: true
+            subnet: {
+              id: subnetId
+            }
+            privateIPAllocationMethod: 'Dynamic'
           }
         }
       ]
+      enableAcceleratedNetworking: false
+      enableIPForwarding: false
     }
-    diagnosticsProfile: {
-      bootDiagnostics: {
-        enabled: true
-      }
-    }
-    licenseType: 'Windows_Server'
   }
-}]
+]
+
+// Virtual Machines (loop for multiple VMs)
+resource virtualMachines 'Microsoft.Compute/virtualMachines@2023-03-01' = [
+  for i in range(0, vmCount): {
+    name: '${vmNamePrefix}${padLeft(i + 1, 2, '0')}-${environment}'
+    location: location
+    tags: tags
+    properties: {
+      availabilitySet: {
+        id: availabilitySet.id
+      }
+      hardwareProfile: {
+        vmSize: vmSize
+      }
+      storageProfile: {
+        imageReference: {
+          publisher: 'MicrosoftWindowsServer'
+          offer: 'WindowsServer'
+          sku: '2022-datacenter-azure-edition'
+          version: 'latest'
+        }
+        osDisk: {
+          name: '${osDiskPrefix}${padLeft(i + 1, 2, '0')}-${environment}'
+          createOption: 'FromImage'
+          managedDisk: {
+            storageAccountType: 'Premium_LRS'
+          }
+          diskSizeGB: 128
+          caching: 'ReadWrite'
+        }
+      }
+      osProfile: {
+        computerName: 'TASKWEB${padLeft(i + 1, 2, '0')}'
+        adminUsername: adminUsername
+        adminPassword: adminPassword
+        windowsConfiguration: {
+          enableAutomaticUpdates: true
+          provisionVMAgent: true
+          patchSettings: {
+            patchMode: 'AutomaticByOS'
+            assessmentMode: 'ImageDefault'
+          }
+          timeZone: 'Eastern Standard Time'
+        }
+      }
+      networkProfile: {
+        networkInterfaces: [
+          {
+            id: networkInterfaces[i].id
+            properties: {
+              primary: true
+            }
+          }
+        ]
+      }
+      diagnosticsProfile: {
+        bootDiagnostics: {
+          enabled: true
+        }
+      }
+      licenseType: 'Windows_Server'
+    }
+  }
+]
 
 // Custom Script Extension for IIS Installation
-resource iisExtension 'Microsoft.Compute/virtualMachines/extensions@2023-03-01' = [for i in range(0, vmCount): {
-  name: 'InstallIIS'
-  parent: virtualMachines[i]
-  location: location
-  tags: tags
-  properties: {
-    publisher: 'Microsoft.Compute'
-    type: 'CustomScriptExtension'
-    typeHandlerVersion: '1.10'
-    autoUpgradeMinorVersion: true
-    settings: {
-      commandToExecute: 'powershell -ExecutionPolicy Unrestricted -Command "${customScriptContent}"'
+resource iisExtension 'Microsoft.Compute/virtualMachines/extensions@2023-03-01' = [
+  for i in range(0, vmCount): {
+    name: 'InstallIIS'
+    parent: virtualMachines[i]
+    location: location
+    tags: tags
+    properties: {
+      publisher: 'Microsoft.Compute'
+      type: 'CustomScriptExtension'
+      typeHandlerVersion: '1.10'
+      autoUpgradeMinorVersion: true
+      settings: {
+        commandToExecute: 'powershell -ExecutionPolicy Unrestricted -Command "${customScriptContent}"'
+      }
     }
   }
-}]
+]
 
 // Azure Monitor Agent Extension
-resource monitoringExtension 'Microsoft.Compute/virtualMachines/extensions@2023-03-01' = [for i in range(0, vmCount): {
-  name: 'AzureMonitorWindowsAgent'
-  parent: virtualMachines[i]
-  location: location
-  tags: tags
-  properties: {
-    publisher: 'Microsoft.Azure.Monitor'
-    type: 'AzureMonitorWindowsAgent'
-    typeHandlerVersion: '1.0'
-    autoUpgradeMinorVersion: true
-    enableAutomaticUpgrade: true
+resource monitoringExtension 'Microsoft.Compute/virtualMachines/extensions@2023-03-01' = [
+  for i in range(0, vmCount): {
+    name: 'AzureMonitorWindowsAgent'
+    parent: virtualMachines[i]
+    location: location
+    tags: tags
+    properties: {
+      publisher: 'Microsoft.Azure.Monitor'
+      type: 'AzureMonitorWindowsAgent'
+      typeHandlerVersion: '1.0'
+      autoUpgradeMinorVersion: true
+      enableAutomaticUpgrade: true
+    }
+    dependsOn: [
+      iisExtension[i]
+    ]
   }
-  dependsOn: [
-    iisExtension[i]
-  ]
-}]
+]
 
 // ============================================
 // OUTPUTS
@@ -257,7 +262,9 @@ output vmIds array = [for i in range(0, vmCount): virtualMachines[i].id]
 output vmNames array = [for i in range(0, vmCount): virtualMachines[i].name]
 
 @description('Array of private IP addresses')
-output privateIpAddresses array = [for i in range(0, vmCount): networkInterfaces[i].properties.ipConfigurations[0].properties.privateIPAddress]
+output privateIpAddresses array = [
+  for i in range(0, vmCount): networkInterfaces[i].properties.ipConfigurations[0].properties.privateIPAddress
+]
 
 @description('Availability set resource ID')
 output availabilitySetId string = availabilitySet.id

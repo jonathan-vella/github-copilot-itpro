@@ -80,6 +80,9 @@ param tags object = {
   DeploymentDate: utcNow('yyyy-MM-dd')
 }
 
+@description('Timestamp for deployment (auto-generated)')
+param deploymentTime string = utcNow()
+
 // ============================================
 // VARIABLES
 // ============================================
@@ -131,9 +134,6 @@ module database 'modules/database.bicep' = {
     logAnalyticsWorkspaceId: monitoring.outputs.logAnalyticsWorkspaceId
     tags: tags
   }
-  dependsOn: [
-    network
-  ]
 }
 
 // 4. Compute Infrastructure (VMs, Availability Set, Extensions)
@@ -147,13 +147,8 @@ module compute 'modules/compute.bicep' = {
     vmSize: vmSize
     vmCount: vmCount
     subnetId: network.outputs.webSubnetId
-    logAnalyticsWorkspaceId: monitoring.outputs.logAnalyticsWorkspaceId
     tags: tags
   }
-  dependsOn: [
-    network
-    monitoring
-  ]
 }
 
 // 5. Load Balancer (depends on compute for backend pool)
@@ -167,16 +162,12 @@ module loadbalancer 'modules/loadbalancer.bicep' = {
     logAnalyticsWorkspaceId: monitoring.outputs.logAnalyticsWorkspaceId
     tags: tags
   }
-  dependsOn: [
-    compute
-  ]
 }
 
 // 6. Update Application Insights with alert rules for infrastructure
 module alerts 'modules/alerts.bicep' = {
   name: 'deploy-alerts-${deploymentId}'
   params: {
-    location: location
     environment: environment
     vmResourceIds: compute.outputs.vmIds
     sqlDatabaseId: database.outputs.databaseId
@@ -184,12 +175,6 @@ module alerts 'modules/alerts.bicep' = {
     actionGroupId: monitoring.outputs.actionGroupId
     tags: tags
   }
-  dependsOn: [
-    monitoring
-    compute
-    database
-    loadbalancer
-  ]
 }
 
 // ============================================
@@ -254,7 +239,7 @@ output appInsightsConnectionString string = monitoring.outputs.applicationInsigh
 
 // Deployment Summary
 @description('Deployment timestamp')
-output deploymentTimestamp string = deployment().properties.timestamp
+output deploymentTimestamp string = deploymentTime
 
 @description('Deployment status message')
 output statusMessage string = 'Deployment completed successfully. Access application at: http://${network.outputs.publicIpAddress}'

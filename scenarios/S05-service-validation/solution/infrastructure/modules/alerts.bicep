@@ -7,9 +7,6 @@ targetScope = 'resourceGroup'
 // PARAMETERS
 // ============================================
 
-@description('Azure region for all resources')
-param location string = resourceGroup().location
-
 @description('Environment name (dev, staging, prod)')
 @allowed([
   'dev'
@@ -44,76 +41,80 @@ var alertPrefix = 'alert-${environment}'
 // ============================================
 
 // VM CPU Alert (for each VM)
-resource vmCpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = [for (vmId, i) in vmResourceIds: {
-  name: '${alertPrefix}-vm${i + 1}-cpu-high'
-  location: 'global'
-  tags: tags
-  properties: {
-    description: 'Alert when VM CPU usage exceeds 80%'
-    severity: 2
-    enabled: true
-    scopes: [
-      vmId
-    ]
-    evaluationFrequency: 'PT5M'
-    windowSize: 'PT15M'
-    criteria: {
-      'odata.type': 'Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria'
-      allOf: [
+resource vmCpuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = [
+  for (vmId, i) in vmResourceIds: {
+    name: '${alertPrefix}-vm${i + 1}-cpu-high'
+    location: 'global'
+    tags: tags
+    properties: {
+      description: 'Alert when VM CPU usage exceeds 80%'
+      severity: 2
+      enabled: true
+      scopes: [
+        vmId
+      ]
+      evaluationFrequency: 'PT5M'
+      windowSize: 'PT15M'
+      criteria: {
+        'odata.type': 'Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria'
+        allOf: [
+          {
+            name: 'CPU-High'
+            metricName: 'Percentage CPU'
+            operator: 'GreaterThan'
+            threshold: 80
+            timeAggregation: 'Average'
+            criterionType: 'StaticThresholdCriterion'
+          }
+        ]
+      }
+      autoMitigate: true
+      actions: [
         {
-          name: 'CPU-High'
-          metricName: 'Percentage CPU'
-          operator: 'GreaterThan'
-          threshold: 80
-          timeAggregation: 'Average'
-          criterionType: 'StaticThresholdCriterion'
+          actionGroupId: actionGroupId
         }
       ]
     }
-    autoMitigate: true
-    actions: [
-      {
-        actionGroupId: actionGroupId
-      }
-    ]
   }
-}]
+]
 
 // VM Available Memory Alert (for each VM)
-resource vmMemoryAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = [for (vmId, i) in vmResourceIds: {
-  name: '${alertPrefix}-vm${i + 1}-memory-low'
-  location: 'global'
-  tags: tags
-  properties: {
-    description: 'Alert when VM available memory is less than 1 GB'
-    severity: 2
-    enabled: true
-    scopes: [
-      vmId
-    ]
-    evaluationFrequency: 'PT5M'
-    windowSize: 'PT15M'
-    criteria: {
-      'odata.type': 'Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria'
-      allOf: [
+resource vmMemoryAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = [
+  for (vmId, i) in vmResourceIds: {
+    name: '${alertPrefix}-vm${i + 1}-memory-low'
+    location: 'global'
+    tags: tags
+    properties: {
+      description: 'Alert when VM available memory is less than 1 GB'
+      severity: 2
+      enabled: true
+      scopes: [
+        vmId
+      ]
+      evaluationFrequency: 'PT5M'
+      windowSize: 'PT15M'
+      criteria: {
+        'odata.type': 'Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria'
+        allOf: [
+          {
+            name: 'Memory-Low'
+            metricName: 'Available Memory Bytes'
+            operator: 'LessThan'
+            threshold: 1073741824 // 1 GB in bytes
+            timeAggregation: 'Average'
+            criterionType: 'StaticThresholdCriterion'
+          }
+        ]
+      }
+      autoMitigate: true
+      actions: [
         {
-          name: 'Memory-Low'
-          metricName: 'Available Memory Bytes'
-          operator: 'LessThan'
-          threshold: 1073741824 // 1 GB in bytes
-          timeAggregation: 'Average'
-          criterionType: 'StaticThresholdCriterion'
+          actionGroupId: actionGroupId
         }
       ]
     }
-    autoMitigate: true
-    actions: [
-      {
-        actionGroupId: actionGroupId
-      }
-    ]
   }
-}]
+]
 
 // SQL Database DTU Alert
 resource sqlDtuAlert 'Microsoft.Insights/metricAlerts@2018-03-01' = {

@@ -148,7 +148,7 @@ Real-world ToDo application from Azure Samples:
 - **manual-sbom-example.json**: Sample manually-created SBOM
 - **pain-points.md**: Common challenges with manual approach
 
-### 📁 [with-copilot/](./with-copilot/)
+### 📁 [solution/](./solution/)
 
 - **New-ApplicationSBOM.ps1**: Scan npm/NuGet/pip dependencies
 - **New-ContainerSBOM.ps1**: Analyze Docker images with Syft integration
@@ -195,8 +195,8 @@ code DEMO-SCRIPT.md
 ### Option 2: Run Pre-Built Scripts (10 min)
 
 ```powershell
-# Navigate to with-copilot folder
-cd scenarios/S07-sbom-generator/with-copilot
+# Navigate to solution folder
+cd scenarios/S07-sbom-generator/solution
 
 # Generate application SBOM (npm dependencies)
 ./New-ApplicationSBOM.ps1 -PackageJsonPath "../sample-app/src/api/package.json" -OutputPath "../examples"

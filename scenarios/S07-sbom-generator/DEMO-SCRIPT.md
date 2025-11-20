@@ -110,7 +110,7 @@ Point out:
 
 ```powershell
 # Create new file
-code with-copilot/New-ApplicationSBOM.ps1
+code solution/New-ApplicationSBOM.ps1
 ```
 
 **Prompt in Copilot Chat**:
@@ -139,7 +139,7 @@ Create a PowerShell script that:
 
 ```powershell
 # Execute the generated script
-./with-copilot/New-ApplicationSBOM.ps1 `
+./solution/New-ApplicationSBOM.ps1 `
     -PackageJsonPath "sample-app/src/api/package.json" `
     -OutputPath "examples/application-sbom.json"
 
@@ -166,7 +166,7 @@ code examples/application-sbom.json
 
 ```powershell
 # Create new file
-code with-copilot/New-ContainerSBOM.ps1
+code solution/New-ContainerSBOM.ps1
 ```
 
 **Prompt in Copilot Chat**:
@@ -194,7 +194,7 @@ Create a PowerShell script that:
 
 ```powershell
 # If Syft is installed:
-./with-copilot/New-ContainerSBOM.ps1 `
+./solution/New-ContainerSBOM.ps1 `
     -ImageName "node:20-alpine" `
     -OutputPath "examples/container-sbom.json"
 
@@ -221,7 +221,7 @@ code examples/container-sbom.json
 
 ```powershell
 # Create new file
-code with-copilot/New-InfrastructureSBOM.ps1
+code solution/New-InfrastructureSBOM.ps1
 ```
 
 **Prompt in Copilot Chat**:
@@ -249,7 +249,7 @@ Create a PowerShell script that:
 
 ```powershell
 # If Azure resources are deployed:
-./with-copilot/New-InfrastructureSBOM.ps1 `
+./solution/New-InfrastructureSBOM.ps1 `
     -ResourceGroupName "rg-todo-app-prod" `
     -OutputPath "examples/infrastructure-sbom.json"
 
@@ -277,7 +277,7 @@ code examples/infrastructure-sbom.json
 
 ```powershell
 # Create new file
-code with-copilot/Merge-SBOMDocuments.ps1
+code solution/Merge-SBOMDocuments.ps1
 ```
 
 **Prompt in Copilot Chat**:
@@ -297,7 +297,7 @@ Create a PowerShell script that:
 
 ```powershell
 # Create new file
-code with-copilot/Export-SBOMReport.ps1
+code solution/Export-SBOMReport.ps1
 ```
 
 **Prompt in Copilot Chat**:
@@ -322,12 +322,12 @@ Create a PowerShell script that:
 
 ```powershell
 # Merge all SBOMs
-./with-copilot/Merge-SBOMDocuments.ps1 `
+./solution/Merge-SBOMDocuments.ps1 `
     -InputPath "examples" `
     -OutputFile "examples/merged-sbom.json"
 
 # Generate HTML report
-./with-copilot/Export-SBOMReport.ps1 `
+./solution/Export-SBOMReport.ps1 `
     -SBOMPath "examples/merged-sbom.json" `
     -OutputFormat "HTML" `
     -OutputPath "examples/sbom-report.html"

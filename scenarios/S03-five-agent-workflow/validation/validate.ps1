@@ -1,11 +1,11 @@
 $ErrorActionPreference = 'Stop'
 
 $result = @{
-    Status = "Passed"
+    Status  = "Passed"
     Content = "Passed"
     Prompts = "Passed"
-    Infra = "Passed"
-    Notes = @()
+    Infra   = "Passed"
+    Notes   = @()
 }
 
 # 1. Content Validation
@@ -31,7 +31,8 @@ if (-not (Test-Path $infraPath)) {
     $result.Infra = "Failed"
     $result.Status = "Failed"
     $result.Notes += "Infra folder not found at $infraPath"
-} else {
+}
+else {
     if (Get-Command bicep -ErrorAction SilentlyContinue) {
         $mainBicep = Join-Path $infraPath "main.bicep"
         if (Test-Path $mainBicep) {
@@ -39,7 +40,8 @@ if (-not (Test-Path $infraPath)) {
             $lintOutput = $null
             try {
                 $lintOutput = bicep lint $mainBicep 2>&1
-            } catch {
+            }
+            catch {
                 $lintOutput = $_.Exception.Message
             }
             
@@ -48,12 +50,14 @@ if (-not (Test-Path $infraPath)) {
                 $result.Status = "Failed"
                 $result.Notes += "Bicep lint errors in main.bicep"
             }
-        } else {
+        }
+        else {
             $result.Infra = "Failed"
             $result.Status = "Failed"
             $result.Notes += "main.bicep not found in infra folder"
         }
-    } else {
+    }
+    else {
         $result.Infra = "Warning"
         $result.Notes += "Bicep CLI not installed, skipping lint"
     }
