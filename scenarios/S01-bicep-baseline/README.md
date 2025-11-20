@@ -107,17 +107,11 @@ graph TB
 - **requirements.md**: Detailed customer requirements
 - **architecture.md**: Target architecture with diagrams
 
-### 📁 [manual-approach/](./manual-approach/)
-
-- **template.json**: Traditional ARM template example
-- **time-tracking.md**: Manual effort breakdown (45 min)
-
-### 📁 [with-copilot/](./with-copilot/)
+### 📁 [solution/](./solution/)
 
 - **network.bicep**: VNet, subnets, NSGs (generated with Copilot)
 - **storage.bicep**: Storage account configuration
 - **main.bicep**: Main orchestration template
-- **time-tracking.md**: Copilot-assisted effort (10 min)
 
 ### 📁 [prompts/](./prompts/)
 

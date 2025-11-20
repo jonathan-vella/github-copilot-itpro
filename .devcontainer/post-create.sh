@@ -31,6 +31,10 @@ if ! command -v checkov &> /dev/null; then
     pip3 install --quiet --no-cache-dir --break-system-packages checkov || echo "Warning: Checkov installation had issues, continuing..."
 fi
 
+# Install Diagrams library for S08
+echo "📊 Installing Diagrams library..."
+pip3 install --quiet --no-cache-dir --break-system-packages diagrams || echo "Warning: Diagrams installation had issues, continuing..."
+
 # Install Azure PowerShell modules
 echo "🔧 Installing Azure PowerShell modules..."
 pwsh -NoProfile -Command "

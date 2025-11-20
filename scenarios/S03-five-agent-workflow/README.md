@@ -140,9 +140,7 @@ S03-five-agent-workflow/
 │   ├── business-requirements.md        # Customer scenario details
 │   └── architecture-diagram.md         # Target architecture visual
 ├── prompts/
-│   ├── stage1-architecture.md          # Azure Principal Architect prompt
-│   ├── stage2-planning.md              # Bicep Planning Specialist prompt
-│   └── stage3-implementation.md        # Bicep Implementation Specialist prompt
+│   └── workflow-prompts.md             # All prompts for the workflow stages
 ├── solution/
 │   ├── outputs/
 │   │   ├── stage1-architecture-assessment.md   # WAF scores, recommendations

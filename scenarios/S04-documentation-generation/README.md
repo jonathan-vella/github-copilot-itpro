@@ -238,7 +238,7 @@ S04-documentation-generation/
 ├── manual-approach/
 │   ├── time-tracking.md                # 20-hour baseline breakdown
 │   └── typical-output-examples.md      # Manual documentation samples
-├── with-copilot/
+├── solution/
 │   ├── New-ArchitectureDoc.ps1         # Architecture documentation generator
 │   ├── New-RunbookDoc.ps1              # Operational runbook generator
 │   ├── New-TroubleshootingGuide.ps1    # Troubleshooting guide generator
@@ -265,7 +265,7 @@ Connect-AzAccount
 Set-AzContext -SubscriptionId "<your-subscription-id>"
 
 # 3. Generate architecture documentation
-.\with-copilot\New-ArchitectureDoc.ps1 -ResourceGroupName "rg-production" -OutputPath ".\docs"
+.\solution\New-ArchitectureDoc.ps1 -ResourceGroupName "rg-production" -OutputPath ".\docs"
 
 # 4. View generated documentation
 code .\docs\architecture.md

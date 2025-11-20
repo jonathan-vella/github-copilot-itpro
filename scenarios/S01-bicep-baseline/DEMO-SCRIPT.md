@@ -49,22 +49,16 @@ az account show --output table
 - Highlight: VNet with 3 subnets, NSGs, storage account
 - Mention security requirements (NSGs, private endpoints)
 
-#### 1.2 Show Traditional Approach (3 min)
-
-**Open**: [manual-approach/template.json](./manual-approach/template.json)
+#### 1.2 Discuss Traditional Approach (3 min)
 
 **Script:**
-> "Here's what a traditional ARM template looks like. Notice:
+> "In a traditional ARM template approach, you would see:
 >
 > - 250+ lines of JSON
 > - Complex syntax and nested objects
 > - Easy to make mistakes
 > - Difficult to read and maintain
 > - No IntelliSense for resource properties"
-
-**Scroll through** the JSON file slowly, highlighting complexity.
-
-**Open**: [manual-approach/time-tracking.md](./manual-approach/time-tracking.md)
 
 **Script:**
 > "The manual approach breaks down like this:
@@ -82,7 +76,7 @@ az account show --output table
 
 #### 2.1 Create Network Infrastructure (7 min)
 
-**Action:** Create new file `with-copilot/network.bicep`
+**Action:** Create new file `solution/network.bicep`
 
 **Script:**
 > "I'll start with a natural language comment describing what I need."
@@ -178,7 +172,7 @@ output subnetIds array = [for (subnet, i) in virtualNetwork.properties.subnets: 
 
 #### 2.2 Create Storage Infrastructure (4 min)
 
-**Action:** Create new file `with-copilot/storage.bicep`
+**Action:** Create new file `solution/storage.bicep`
 
 **Type this prompt:**
 
@@ -248,7 +242,7 @@ output blobEndpoint string = storageAccount.properties.primaryEndpoints.blob
 
 #### 2.3 Create Main Orchestration File (4 min)
 
-**Action:** Create new file `with-copilot/main.bicep`
+**Action:** Create new file `solution/main.bicep`
 
 **Type this prompt:**
 
@@ -315,12 +309,12 @@ output blobEndpoint string = storage.outputs.blobEndpoint
 
 ```powershell
 # Build/compile the Bicep template
-az bicep build --file with-copilot/main.bicep
+az bicep build --file solution/main.bicep
 
 # Validate against Azure
 az deployment group validate `
   --resource-group rg-copilot-demo `
-  --template-file with-copilot/main.bicep `
+  --template-file solution/main.bicep `
   --parameters location=eastus environment=demo
 ```
 

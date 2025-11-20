@@ -263,12 +263,9 @@ scenarios/S02-terraform-baseline/
 ├── scenario/
 │   ├── requirements.md              # Detailed customer scenario
 │   └── architecture.md              # Target architecture diagrams
-├── manual-approach/
-│   ├── example-code/                # Traditional Terraform code
-│   └── time-tracking.md             # Manual effort metrics
-├── with-copilot/
-│   ├── example-code/                # Copilot-generated Terraform
-│   └── time-tracking.md             # Time saved metrics
+├── solution/
+│   ├── modules/                     # Terraform modules
+│   └── environments/                # Environment configurations
 ├── prompts/
 │   └── effective-prompts.md         # Curated Copilot prompts
 └── validation/

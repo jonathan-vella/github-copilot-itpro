@@ -26,7 +26,7 @@ code scenarios/S02-terraform-baseline
 
 ### Backup Plan
 
-- Have completed Terraform code ready in `with-copilot/example-code/`
+- Have completed Terraform code ready in `solution/`
 - Pre-deploy infrastructure if live deployment might fail
 - Have screenshots of successful `terraform apply` output
 - Prepare HTML validation report if time is limited
@@ -57,7 +57,7 @@ code scenarios/S02-terraform-baseline
 
 **Say**: "Let's look at what manually-written Terraform typically looks like..."
 
-**Show**: `manual-approach/example-code/main.tf`
+**Discuss**: Traditional Terraform challenges (monolithic files, hard-coded values).
 
 **Point Out**:
 
@@ -80,7 +80,7 @@ code scenarios/S02-terraform-baseline
 
 **Live Coding**:
 
-1. Create `with-copilot/example-code/modules/networking/main.tf`
+1. Create `solution/modules/networking/main.tf`
 2. Type the prompt as a comment:
 
 ```hcl
@@ -343,7 +343,7 @@ A: Absolutely. Copilot can suggest module extraction, variable improvements, and
 
 ### If Time Runs Short
 
-- Skip live coding, show completed code in `with-copilot/example-code/`
+- Skip live coding, show completed code in `solution/`
 - Show pre-generated `terraform plan` output
 - Focus on ROI metrics and comparison table
 - Use backup HTML report in `validation/`
@@ -369,8 +369,7 @@ terraform destroy --auto-approve
 
 - ✅ `scenario/requirements.md` - Customer scenario
 - ✅ `scenario/architecture.md` - Architecture diagrams
-- ✅ `manual-approach/example-code/` - Manual Terraform code
-- ✅ `with-copilot/example-code/` - Copilot-generated code (backup)
+- ✅ `solution/` - Completed Terraform code
 - ✅ `prompts/effective-prompts.md` - Prompt library
 - ✅ `validation/deploy.sh` - Deployment automation
 

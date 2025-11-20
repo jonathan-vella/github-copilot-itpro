@@ -87,7 +87,7 @@ Connect-AzAccount
 Set-AzContext -Subscription "Demo-Subscription"
 
 # Generate architecture documentation
-./New-ArchitectureDoc.ps1 `
+./solution/New-ArchitectureDoc.ps1 `
     -ResourceGroupName "rg-techcorp-prod" `
     -OutputPath ".\docs" `
     -IncludeDiagrams `
@@ -144,7 +144,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
 **Generate runbook**:
 
 ```powershell
-./New-RunbookDoc.ps1 `
+./solution/New-RunbookDoc.ps1 `
     -TemplatePath ".\main.bicep" `
     -OutputPath ".\docs" `
     -IncludeDeploymentSteps `
@@ -174,7 +174,7 @@ resource vnet 'Microsoft.Network/virtualNetworks@2023-05-01' = {
 ### Generate Troubleshooting Documentation
 
 ```powershell
-./New-TroubleshootingGuide.ps1 `
+./solution/New-TroubleshootingGuide.ps1 `
     -ResourceGroupName "rg-techcorp-prod" `
     -LookbackDays 30 `
     -OutputPath ".\docs"
@@ -216,7 +216,7 @@ public async Task<IActionResult> GetOrder(string orderId)
 **Generate documentation**:
 
 ```powershell
-./New-APIDocumentation.ps1 `
+./solution/New-APIDocumentation.ps1 `
     -ProjectPath ".\src\api" `
     -OutputPath ".\docs" `
     -Format "Markdown" `
