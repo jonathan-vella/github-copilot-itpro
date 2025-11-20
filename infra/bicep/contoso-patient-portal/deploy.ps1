@@ -23,6 +23,9 @@
 .PARAMETER SkipValidation
     Skips pre-deployment validation checks
 
+.PARAMETER Force
+    Bypasses interactive confirmation prompt (use with caution)
+
 .EXAMPLE
     .\deploy.ps1 -Environment prod -Location eastus2
 
@@ -57,7 +60,10 @@ param(
     [SecureString]$SqlAdminPassword,
 
     [Parameter()]
-    [switch]$SkipValidation
+    [switch]$SkipValidation,
+
+    [Parameter()]
+    [switch]$Force
 )
 
 #Requires -Version 7.0
@@ -327,7 +333,7 @@ try {
     }
     
     # Confirm deployment
-    if (-not $WhatIfPreference -and $PSCmdlet.ShouldProcess("Azure Subscription", "Deploy Infrastructure")) {
+    if (-not $WhatIfPreference -and -not $Force -and $PSCmdlet.ShouldProcess("Azure Subscription", "Deploy Infrastructure")) {
         Write-Host "`n"
         Write-Warning "This will deploy resources to your Azure subscription."
         Write-Warning "Estimated monthly cost: `$331-346"
@@ -338,7 +344,7 @@ try {
             exit 0
         }
     }
-    
+
     # Execute deployment
     if (-not (Invoke-Deployment -Password $sqlPassword -DryRun:$WhatIfPreference)) {
         exit 1
@@ -359,7 +365,8 @@ try {
     Write-Host "`n"
     Write-Success "Deployment script completed successfully!"
     
-} catch {
+}
+catch {
     Write-ErrorMessage "Deployment failed with error:"
     Write-Host $_.Exception.Message -ForegroundColor Red
     Write-Host $_.ScriptStackTrace -ForegroundColor Gray

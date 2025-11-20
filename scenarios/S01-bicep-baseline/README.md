@@ -116,7 +116,6 @@ graph TB
 ### 📁 [prompts/](./prompts/)
 
 - **effective-prompts.md**: Curated prompts for this scenario
-- **prompt-patterns.md**: Reusable prompt templates
 
 ### 📁 [validation/](./validation/)
 
@@ -263,8 +262,7 @@ az account set --subscription "your-subscription-id"
 
 1. ✅ Practice the demo script 2-3 times
 2. ✅ Customize prompts for your audience
-3. ✅ Prepare backup examples (see [prompts/prompt-patterns.md](./prompts/prompt-patterns.md))
-4. ✅ Test deployment in your subscription
+3. ✅ Test deployment in your subscription
 
 ### For Learners
 

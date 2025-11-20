@@ -485,4 +485,4 @@ Here's a real-world example of building a complete infrastructure using these pr
 
 **💡 Pro Tip**: Save your successful prompts in a personal library. Over time, you'll build a collection of prompts that work well for your specific scenarios.
 
-[🏠 Back to Demo README](../README.md) | [📚 View Prompt Patterns](./prompt-patterns.md)
+[🏠 Back to Demo README](../README.md)

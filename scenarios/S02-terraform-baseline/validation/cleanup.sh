@@ -14,7 +14,7 @@ NC='\033[0m'
 
 ENVIRONMENT="${1:-dev}"
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-TF_DIR="$PROJECT_ROOT/with-copilot/example-code/environments/$ENVIRONMENT"
+TF_DIR="$PROJECT_ROOT/solution/environments/$ENVIRONMENT"
 
 echo -e "${CYAN}╔════════════════════════════════════════════════════════════╗${NC}"
 echo -e "${CYAN}║     Terraform Infrastructure - Cleanup Script              ║${NC}"

@@ -5,7 +5,7 @@ resource "azurerm_mssql_server" "sql" {
   version                      = "12.0"
   administrator_login          = var.admin_username
   administrator_login_password = var.admin_password
-  
+
   azuread_administrator {
     login_username = var.aad_admin_login
     object_id      = var.aad_admin_object_id
