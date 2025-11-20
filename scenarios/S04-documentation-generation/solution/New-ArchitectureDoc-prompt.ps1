@@ -352,18 +352,22 @@ if ($CopyToClipboard) {
         if ($IsWindows -or $env:OS -match "Windows") {
             $prompt | Set-Clipboard
             Write-Log "✅ Prompt copied to clipboard!" -Level Success
-        } elseif ($IsLinux) {
+        }
+        elseif ($IsLinux) {
             $prompt | xclip -selection clipboard 2>$null
             if ($?) {
                 Write-Log "✅ Prompt copied to clipboard (xclip)!" -Level Success
-            } else {
+            }
+            else {
                 Write-Log "⚠️  xclip not available. Install with: sudo apt install xclip" -Level Warning
             }
-        } elseif ($IsMacOS) {
+        }
+        elseif ($IsMacOS) {
             $prompt | pbcopy
             Write-Log "✅ Prompt copied to clipboard!" -Level Success
         }
-    } catch {
+    }
+    catch {
         Write-Log "⚠️  Failed to copy to clipboard: $_" -Level Warning
     }
 }
@@ -378,9 +382,9 @@ Write-Log "`n⏱️  Time Savings: 5hrs 40min (95% faster than manual creation)"
 
 return [PSCustomObject]@{
     ResourceGroupName = $ResourceGroupName
-    ResourceCount = $resources.Count
-    PromptFile = $promptFile
-    OutputPath = $OutputPath
-    Timestamp = Get-Date
+    ResourceCount     = $resources.Count
+    PromptFile        = $promptFile
+    OutputPath        = $OutputPath
+    Timestamp         = Get-Date
     CopiedToClipboard = $CopyToClipboard.IsPresent
 }
