@@ -148,6 +148,20 @@ function Test-Prerequisites {
     Write-Success "Logged in as: $($account.user.name)"
     Write-Info "Subscription: $($account.name) ($($account.id))"
     
+    # Get User Details for Entra ID Auth
+    try {
+        $global:currentUserObjectId = az ad signed-in-user show --query id -o tsv 2>$null
+        $global:currentUserPrincipalName = az ad signed-in-user show --query userPrincipalName -o tsv 2>$null
+        $global:currentUserType = az ad signed-in-user show --query type -o tsv 2>$null
+        
+        if ($global:currentUserObjectId) {
+             Write-Info "Will configure SQL Server with Entra ID Admin: $global:currentUserPrincipalName"
+        }
+    }
+    catch {
+        Write-Warning "Could not retrieve signed-in user details for Entra ID auth. SQL Server will use SQL Auth only."
+    }
+    
     return $true
 }
 
@@ -251,6 +265,8 @@ function Invoke-Deployment {
         [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($Password)
     )
     
+    Write-Host "DEBUG: Password length: $($passwordText.Length)" -ForegroundColor Magenta
+
     # Build deployment command
     $deployCmd = @(
         'deployment', 'sub', 'create'
@@ -262,6 +278,16 @@ function Invoke-Deployment {
         '--parameters', "projectName=$ProjectName"
         '--parameters', "sqlAdminPassword=$passwordText"
     )
+
+    if ($global:currentUserObjectId) {
+        $deployCmd += '--parameters'
+        $deployCmd += "azureAdAdminObjectId=$global:currentUserObjectId"
+        $deployCmd += '--parameters'
+        $deployCmd += "azureAdAdminLogin=$global:currentUserPrincipalName"
+        # Assuming 'User' type for signed-in user, but could be ServicePrincipal
+        # $deployCmd += '--parameters'
+        # $deployCmd += "azureAdAdminType=User" 
+    }
     
     if ($DryRun) {
         $deployCmd += '--what-if'

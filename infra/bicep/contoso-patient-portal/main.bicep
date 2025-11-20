@@ -38,6 +38,12 @@ param sqlAdminUsername string = 'sqladmin'
 @secure()
 param sqlAdminPassword string
 
+@description('Azure AD administrator object ID for SQL Server')
+param azureAdAdminObjectId string = ''
+
+@description('Azure AD administrator login name for SQL Server')
+param azureAdAdminLogin string = ''
+
 @description('Resource tags for governance')
 param tags object = {
   Environment: environment
@@ -122,6 +128,9 @@ module sqlServer 'modules/sql-server.bicep' = {
     uniqueSuffix: uniqueSuffix
     sqlAdminUsername: sqlAdminUsername
     sqlAdminPassword: sqlAdminPassword
+    azureAdAdminObjectId: azureAdAdminObjectId
+    azureAdAdminLogin: azureAdAdminLogin
+    azureAdAdminType: 'User'
     tags: tags
   }
 }

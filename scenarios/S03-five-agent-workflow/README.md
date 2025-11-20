@@ -243,6 +243,7 @@ S03-five-agent-workflow/
 - TLS 1.2 minimum on all services
 - Private endpoints for data tier
 - Managed identities (no passwords)
+- Entra ID Authentication for SQL Server
 - NSG deny-all defaults
 
 ### Cost Optimization

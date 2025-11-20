@@ -29,6 +29,14 @@ param azureAdAdminObjectId string = ''
 @description('Azure AD administrator login name for SQL Server')
 param azureAdAdminLogin string = 'SQL Administrators'
 
+@description('Azure AD administrator principal type')
+@allowed([
+  'User'
+  'Group'
+  'Application'
+])
+param azureAdAdminType string = 'Group'
+
 @description('Resource tags')
 param tags object
 
@@ -60,7 +68,7 @@ module sqlServer 'br/public:avm/res/sql/server:0.21.0' = {
     administrators: useAzureAdOnly ? {
       azureADOnlyAuthentication: true
       login: azureAdAdminLogin
-      principalType: 'Group'
+      principalType: azureAdAdminType
       sid: azureAdAdminObjectId
       tenantId: subscription().tenantId
     } : null
