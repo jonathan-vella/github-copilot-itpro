@@ -30,6 +30,7 @@ param storageAccountName string = 'stdemo${uniqueString(resourceGroup().id)}'
   'dev'
   'staging'
   'prod'
+  'demo'
 ])
 param environment string = 'dev'
 
@@ -80,16 +81,16 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
   properties: {
     // Access tier for blob storage
     accessTier: accessTier
-    
+
     // Security settings
-    supportsHttpsTrafficOnly: true          // Enforce HTTPS
-    minimumTlsVersion: 'TLS1_2'             // Require TLS 1.2 or higher
-    allowBlobPublicAccess: false            // Disable anonymous blob access
-    allowSharedKeyAccess: true              // Allow access keys (can be disabled for AAD-only)
-    
+    supportsHttpsTrafficOnly: true // Enforce HTTPS
+    minimumTlsVersion: 'TLS1_2' // Require TLS 1.2 or higher
+    allowBlobPublicAccess: false // Disable anonymous blob access
+    allowSharedKeyAccess: true // Allow access keys (can be disabled for AAD-only)
+
     // Network access
     publicNetworkAccess: allowPublicAccess ? 'Enabled' : 'Disabled'
-    
+
     // Default network rules (deny by default if public access disabled)
     networkAcls: {
       defaultAction: allowPublicAccess ? 'Allow' : 'Deny'
@@ -97,7 +98,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
       ipRules: []
       virtualNetworkRules: []
     }
-    
+
     // Encryption
     encryption: {
       services: {
@@ -129,16 +130,16 @@ resource blobServices 'Microsoft.Storage/storageAccounts/blobServices@2023-01-01
       enabled: true
       days: softDeleteRetentionDays
     }
-    
+
     // Soft delete for containers
     containerDeleteRetentionPolicy: {
       enabled: true
       days: softDeleteRetentionDays
     }
-    
+
     // Versioning (optional, can enable for audit trail)
     isVersioningEnabled: false
-    
+
     // Change feed (for monitoring blob changes)
     changeFeed: {
       enabled: false
@@ -154,7 +155,7 @@ resource blobContainer 'Microsoft.Storage/storageAccounts/blobServices/container
   parent: blobServices
   name: 'appdata'
   properties: {
-    publicAccess: 'None'  // No anonymous access
+    publicAccess: 'None' // No anonymous access
     metadata: {
       purpose: 'Application data storage'
       environment: environment

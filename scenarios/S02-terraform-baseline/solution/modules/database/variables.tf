@@ -27,3 +27,18 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+
+variable "aad_admin_login" {
+  type        = string
+  description = "The login username of the Azure AD Administrator of this SQL Server."
+}
+
+variable "aad_admin_object_id" {
+  type        = string
+  description = "The object id of the Azure AD Administrator of this SQL Server."
+}
+
+variable "aad_admin_tenant_id" {
+  type        = string
+  description = "The tenant id of the Azure AD Administrator of this SQL Server."
+}

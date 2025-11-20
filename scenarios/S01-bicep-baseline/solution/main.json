@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.36.1.42791",
-      "templateHash": "18422817038067473567"
+      "version": "0.39.26.7824",
+      "templateHash": "17486613577581791092"
     }
   },
   "parameters": {
@@ -22,7 +22,8 @@
       "allowedValues": [
         "dev",
         "staging",
-        "prod"
+        "prod",
+        "demo"
       ],
       "metadata": {
         "description": "Environment name (dev, staging, prod)"
@@ -89,7 +90,7 @@
   "resources": [
     {
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2022-09-01",
+      "apiVersion": "2025-04-01",
       "name": "[format('network-deployment-{0}', parameters('environment'))]",
       "properties": {
         "expressionEvaluationOptions": {
@@ -119,8 +120,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.36.1.42791",
-              "templateHash": "405931369904352818"
+              "version": "0.39.26.7824",
+              "templateHash": "13939212206182642275"
             }
           },
           "parameters": {
@@ -151,7 +152,8 @@
               "allowedValues": [
                 "dev",
                 "staging",
-                "prod"
+                "prod",
+                "demo"
               ],
               "metadata": {
                 "description": "Environment name (dev, staging, prod)"
@@ -433,7 +435,7 @@
     },
     {
       "type": "Microsoft.Resources/deployments",
-      "apiVersion": "2022-09-01",
+      "apiVersion": "2025-04-01",
       "name": "[format('storage-deployment-{0}', parameters('environment'))]",
       "properties": {
         "expressionEvaluationOptions": {
@@ -472,8 +474,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.36.1.42791",
-              "templateHash": "2474389701266999435"
+              "version": "0.39.26.7824",
+              "templateHash": "17881622811561929117"
             }
           },
           "parameters": {
@@ -499,7 +501,8 @@
               "allowedValues": [
                 "dev",
                 "staging",
-                "prod"
+                "prod",
+                "demo"
               ],
               "metadata": {
                 "description": "Environment name (dev, staging, prod)"
@@ -704,10 +707,10 @@
         "description": "Network infrastructure outputs"
       },
       "value": {
-        "vnetId": "[reference(resourceId('Microsoft.Resources/deployments', format('network-deployment-{0}', parameters('environment'))), '2022-09-01').outputs.vnetId.value]",
-        "vnetName": "[reference(resourceId('Microsoft.Resources/deployments', format('network-deployment-{0}', parameters('environment'))), '2022-09-01').outputs.vnetName.value]",
-        "subnets": "[reference(resourceId('Microsoft.Resources/deployments', format('network-deployment-{0}', parameters('environment'))), '2022-09-01').outputs.subnets.value]",
-        "nsgIds": "[reference(resourceId('Microsoft.Resources/deployments', format('network-deployment-{0}', parameters('environment'))), '2022-09-01').outputs.nsgIds.value]"
+        "vnetId": "[reference(resourceId('Microsoft.Resources/deployments', format('network-deployment-{0}', parameters('environment'))), '2025-04-01').outputs.vnetId.value]",
+        "vnetName": "[reference(resourceId('Microsoft.Resources/deployments', format('network-deployment-{0}', parameters('environment'))), '2025-04-01').outputs.vnetName.value]",
+        "subnets": "[reference(resourceId('Microsoft.Resources/deployments', format('network-deployment-{0}', parameters('environment'))), '2025-04-01').outputs.subnets.value]",
+        "nsgIds": "[reference(resourceId('Microsoft.Resources/deployments', format('network-deployment-{0}', parameters('environment'))), '2025-04-01').outputs.nsgIds.value]"
       }
     },
     "storage": {
@@ -716,11 +719,11 @@
         "description": "Storage infrastructure outputs"
       },
       "value": {
-        "storageAccountId": "[reference(resourceId('Microsoft.Resources/deployments', format('storage-deployment-{0}', parameters('environment'))), '2022-09-01').outputs.storageAccountId.value]",
-        "storageAccountName": "[reference(resourceId('Microsoft.Resources/deployments', format('storage-deployment-{0}', parameters('environment'))), '2022-09-01').outputs.storageAccountName.value]",
-        "blobEndpoint": "[reference(resourceId('Microsoft.Resources/deployments', format('storage-deployment-{0}', parameters('environment'))), '2022-09-01').outputs.blobEndpoint.value]",
-        "fileEndpoint": "[reference(resourceId('Microsoft.Resources/deployments', format('storage-deployment-{0}', parameters('environment'))), '2022-09-01').outputs.fileEndpoint.value]",
-        "properties": "[reference(resourceId('Microsoft.Resources/deployments', format('storage-deployment-{0}', parameters('environment'))), '2022-09-01').outputs.storageProperties.value]"
+        "storageAccountId": "[reference(resourceId('Microsoft.Resources/deployments', format('storage-deployment-{0}', parameters('environment'))), '2025-04-01').outputs.storageAccountId.value]",
+        "storageAccountName": "[reference(resourceId('Microsoft.Resources/deployments', format('storage-deployment-{0}', parameters('environment'))), '2025-04-01').outputs.storageAccountName.value]",
+        "blobEndpoint": "[reference(resourceId('Microsoft.Resources/deployments', format('storage-deployment-{0}', parameters('environment'))), '2025-04-01').outputs.blobEndpoint.value]",
+        "fileEndpoint": "[reference(resourceId('Microsoft.Resources/deployments', format('storage-deployment-{0}', parameters('environment'))), '2025-04-01').outputs.fileEndpoint.value]",
+        "properties": "[reference(resourceId('Microsoft.Resources/deployments', format('storage-deployment-{0}', parameters('environment'))), '2025-04-01').outputs.storageProperties.value]"
       }
     },
     "azurePortalUrls": {
@@ -730,8 +733,8 @@
       },
       "value": {
         "resourceGroup": "[format('https://portal.azure.com/#@/resource{0}', resourceGroup().id)]",
-        "vnet": "[format('https://portal.azure.com/#@/resource{0}', reference(resourceId('Microsoft.Resources/deployments', format('network-deployment-{0}', parameters('environment'))), '2022-09-01').outputs.vnetId.value)]",
-        "storage": "[format('https://portal.azure.com/#@/resource{0}', reference(resourceId('Microsoft.Resources/deployments', format('storage-deployment-{0}', parameters('environment'))), '2022-09-01').outputs.storageAccountId.value)]"
+        "vnet": "[format('https://portal.azure.com/#@/resource{0}', reference(resourceId('Microsoft.Resources/deployments', format('network-deployment-{0}', parameters('environment'))), '2025-04-01').outputs.vnetId.value)]",
+        "storage": "[format('https://portal.azure.com/#@/resource{0}', reference(resourceId('Microsoft.Resources/deployments', format('storage-deployment-{0}', parameters('environment'))), '2025-04-01').outputs.storageAccountId.value)]"
       }
     },
     "nextSteps": {

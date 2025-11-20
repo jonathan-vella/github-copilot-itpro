@@ -57,7 +57,7 @@ $ErrorActionPreference = 'Stop'
 
 # Get script directory
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$TemplateDir = Join-Path (Split-Path -Parent $ScriptDir) "with-copilot"
+$TemplateDir = Join-Path (Split-Path -Parent $ScriptDir) "solution"
 $MainBicepFile = Join-Path $TemplateDir "main.bicep"
 
 # Colors for output
@@ -77,7 +77,8 @@ function Write-ColorOutput {
     
     if ($NoNewline) {
         Write-Host $Message -ForegroundColor $Color -NoNewline
-    } else {
+    }
+    else {
         Write-Host $Message -ForegroundColor $Color
     }
 }
@@ -122,7 +123,8 @@ try {
     try {
         $azVersion = az version --output json 2>$null | ConvertFrom-Json
         Write-Success "Azure CLI version: $($azVersion.'azure-cli')"
-    } catch {
+    }
+    catch {
         Write-ErrorMessage "Azure CLI not found. Please install: https://aka.ms/installazurecli"
         exit 1
     }
@@ -131,7 +133,8 @@ try {
     try {
         $bicepVersion = bicep --version 2>$null
         Write-Success "Bicep version: $bicepVersion"
-    } catch {
+    }
+    catch {
         Write-ErrorMessage "Bicep CLI not found. Please install: az bicep install"
         exit 1
     }
@@ -162,7 +165,8 @@ try {
             exit 1
         }
         Write-Success "Bicep template validated successfully"
-    } else {
+    }
+    else {
         Write-Warning "Skipping Bicep validation (--SkipValidation flag set)"
     }
 
@@ -175,7 +179,8 @@ try {
         $rg = az group show --name $ResourceGroupName --output json | ConvertFrom-Json
         Write-Host "  Location: $($rg.location)"
         Write-Host "  Tags: $($rg.tags | ConvertTo-Json -Compress)"
-    } else {
+    }
+    else {
         Write-Step "Creating resource group: $ResourceGroupName in $Location..."
         az group create --name $ResourceGroupName --location $Location --tags "Environment=$Environment" "ManagedBy=Bicep" "Demo=BicepQuickstart" --output none
         
@@ -315,7 +320,8 @@ try {
 ╚════════════════════════════════════════════════════════════════╝
 "@ -Color $ColorSuccess
 
-} catch {
+}
+catch {
     Write-ErrorMessage "An unexpected error occurred:"
     Write-Host $_.Exception.Message
     Write-Host $_.ScriptStackTrace

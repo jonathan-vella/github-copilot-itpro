@@ -5,7 +5,16 @@ resource "azurerm_mssql_server" "sql" {
   version                      = "12.0"
   administrator_login          = var.admin_username
   administrator_login_password = var.admin_password
-  tags                         = var.tags
+  
+  azuread_administrator {
+    login_username = var.aad_admin_login
+    object_id      = var.aad_admin_object_id
+    tenant_id      = var.aad_admin_tenant_id
+  }
+
+  tags = merge(var.tags, {
+    SecurityControl = "Ignore"
+  })
 }
 
 resource "azurerm_mssql_database" "db" {

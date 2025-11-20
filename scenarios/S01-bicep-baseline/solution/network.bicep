@@ -31,6 +31,7 @@ param addressPrefix string = '10.0.0.0/16'
   'dev'
   'staging'
   'prod'
+  'demo'
 ])
 param environment string = 'dev'
 

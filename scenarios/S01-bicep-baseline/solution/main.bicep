@@ -29,6 +29,7 @@ param location string = resourceGroup().location
   'dev'
   'staging'
   'prod'
+  'demo'
 ])
 param environment string = 'dev'
 
