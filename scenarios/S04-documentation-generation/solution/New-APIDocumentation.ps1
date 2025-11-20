@@ -27,6 +27,9 @@
 .PARAMETER CopyToClipboard
     Copy the generated Copilot prompt to clipboard.
 
+.PARAMETER GenerateDirectly
+    Use GitHub CLI to send prompt directly to Copilot (requires gh CLI with copilot extension).
+
 .EXAMPLE
     New-APIDocumentation -ResourceGroupName "rg-production" -OutputPath ".\output" -IncludeAuthentication -IncludeExamples -CopyToClipboard
 
@@ -53,11 +56,16 @@ param(
     [switch]$IncludeSDKs,
 
     [Parameter(Mandatory = $false)]
-    [switch]$CopyToClipboard
+    [switch]$CopyToClipboard,
+
+    [Parameter(Mandatory = $false)]
+    [switch]$GenerateDirectly
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
+
+#region Helper Functions
 
 function Write-Log {
     param([string]$Message, [string]$Level = 'Info')
@@ -65,95 +73,121 @@ function Write-Log {
     Write-Host "[$(Get-Date -Format 'HH:mm:ss')] $Message" -ForegroundColor $colors[$Level]
 }
 
-Write-Log "Starting API documentation prompt generation..." -Level Info
-
-# Check Azure authentication
-$context = Get-AzContext
-if (-not $context) {
-    throw "Not authenticated to Azure. Run 'Connect-AzAccount' first."
-}
-
-Write-Log "Connected to subscription: $($context.Subscription.Name)" -Level Success
-
-# Get resource inventory
-Write-Log "Discovering API resources in '$ResourceGroupName'..."
-$resources = Get-AzResource -ResourceGroupName $ResourceGroupName -ExpandProperties
-
-if ($resources.Count -eq 0) {
-    Write-Log "No resources found in resource group." -Level Warning
-    return
-}
-
-Write-Log "Found $($resources.Count) resource(s)" -Level Success
-
-# Identify API-related resources
-$webApps = $resources | Where-Object { $_.ResourceType -eq 'Microsoft.Web/sites' }
-$functionApps = $resources | Where-Object { $_.ResourceType -eq 'Microsoft.Web/sites' -and $_.Kind -match 'functionapp' }
-$containerApps = $resources | Where-Object { $_.ResourceType -eq 'Microsoft.App/containerApps' }
-$apiManagement = $resources | Where-Object { $_.ResourceType -eq 'Microsoft.ApiManagement/service' }
-$appInsights = $resources | Where-Object { $_.ResourceType -eq 'Microsoft.Insights/components' }
-$keyVaults = $resources | Where-Object { $_.ResourceType -eq 'Microsoft.KeyVault/vaults' }
-
-# Build API inventory
-$apiSummary = ""
-$apiSummary += "## API Services`n"
-
-if ($webApps.Count -gt 0) {
-    $apiSummary += "`n### App Services ($(@($webApps).Count))`n"
-    foreach ($app in $webApps) {
-        $apiSummary += "- **Name**: ``$($app.Name)``"
-        if ($app.Properties.defaultHostName) {
-            $apiSummary += " - **URL**: ``https://$($app.Properties.defaultHostName)``"
-        }
-        if ($app.Properties.httpsOnly) {
-            $apiSummary += " - **HTTPS Only**: Yes"
-        }
-        $apiSummary += "`n"
+function Get-AzureContext {
+    Write-Log "Checking Azure authentication..."
+    
+    $context = Get-AzContext
+    if (-not $context) {
+        throw "Not authenticated to Azure. Run 'Connect-AzAccount' first."
     }
+    
+    Write-Log "Connected to subscription: $($context.Subscription.Name)" -Level Success
+    return $context
 }
 
-if ($functionApps.Count -gt 0) {
-    $apiSummary += "`n### Function Apps ($(@($functionApps).Count))`n"
-    foreach ($app in $functionApps) {
-        $apiSummary += "- **Name**: ``$($app.Name)``"
-        if ($app.Properties.defaultHostName) {
-            $apiSummary += " - **URL**: ``https://$($app.Properties.defaultHostName)``"
+function Get-ResourceInventory {
+    param([string]$ResourceGroupName)
+    
+    Write-Log "Discovering resources in '$ResourceGroupName'..."
+    
+    # Check if resource group exists
+    $rg = Get-AzResourceGroup -Name $ResourceGroupName -ErrorAction SilentlyContinue
+    if (-not $rg) {
+        throw "Resource group '$ResourceGroupName' not found."
+    }
+    
+    # Get all resources
+    $resources = Get-AzResource -ResourceGroupName $ResourceGroupName -ExpandProperties
+    
+    if ($resources.Count -eq 0) {
+        Write-Log "No resources found in resource group." -Level Warning
+        return @()
+    }
+    
+    Write-Log "Found $($resources.Count) resource(s)" -Level Success
+    
+    return $resources
+}
+
+function New-CopilotPrompt {
+    param(
+        [array]$Resources, 
+        [string]$ResourceGroupName,
+        [switch]$IncludeAuthentication,
+        [switch]$IncludeExamples,
+        [switch]$IncludeSDKs
+    )
+    
+    Write-Log "Generating Copilot prompt..."
+
+    # Identify API-related resources
+    $webApps = @($Resources | Where-Object { $_.ResourceType -eq 'Microsoft.Web/sites' })
+    $functionApps = @($Resources | Where-Object { $_.ResourceType -eq 'Microsoft.Web/sites' -and $_.Kind -match 'functionapp' })
+    $containerApps = @($Resources | Where-Object { $_.ResourceType -eq 'Microsoft.App/containerApps' })
+    $apiManagement = @($Resources | Where-Object { $_.ResourceType -eq 'Microsoft.ApiManagement/service' })
+    $appInsights = @($Resources | Where-Object { $_.ResourceType -eq 'Microsoft.Insights/components' })
+    $keyVaults = @($Resources | Where-Object { $_.ResourceType -eq 'Microsoft.KeyVault/vaults' })
+
+    # Build API inventory
+    $apiSummary = ""
+    $apiSummary += "## API Services`n"
+
+    if ($webApps.Count -gt 0) {
+        $apiSummary += "`n### App Services ($($webApps.Count))`n"
+        foreach ($app in $webApps) {
+            $apiSummary += "- **Name**: ``$($app.Name)``"
+            if ($app.Properties.defaultHostName) {
+                $apiSummary += " - **URL**: ``https://$($app.Properties.defaultHostName)``"
+            }
+            if ($app.Properties.httpsOnly) {
+                $apiSummary += " - **HTTPS Only**: Yes"
+            }
+            $apiSummary += "`n"
         }
-        $apiSummary += "`n"
     }
-}
 
-if ($containerApps.Count -gt 0) {
-    $apiSummary += "`n### Container Apps ($(@($containerApps).Count))`n"
-    foreach ($app in $containerApps) {
-        $apiSummary += "- **Name**: ``$($app.Name)``"
-        $apiSummary += "`n"
-    }
-}
-
-if ($apiManagement.Count -gt 0) {
-    $apiSummary += "`n### API Management ($(@($apiManagement).Count))`n"
-    foreach ($apim in $apiManagement) {
-        $apiSummary += "- **Name**: ``$($apim.Name)``"
-        if ($apim.Properties.gatewayUrl) {
-            $apiSummary += " - **Gateway URL**: ``$($apim.Properties.gatewayUrl)``"
+    if ($functionApps.Count -gt 0) {
+        $apiSummary += "`n### Function Apps ($($functionApps.Count))`n"
+        foreach ($app in $functionApps) {
+            $apiSummary += "- **Name**: ``$($app.Name)``"
+            if ($app.Properties.defaultHostName) {
+                $apiSummary += " - **URL**: ``https://$($app.Properties.defaultHostName)``"
+            }
+            $apiSummary += "`n"
         }
-        $apiSummary += "`n"
     }
-}
 
-$apiSummary += "`n## Supporting Services`n"
+    if ($containerApps.Count -gt 0) {
+        $apiSummary += "`n### Container Apps ($($containerApps.Count))`n"
+        foreach ($app in $containerApps) {
+            $apiSummary += "- **Name**: ``$($app.Name)``"
+            $apiSummary += "`n"
+        }
+    }
 
-if ($appInsights.Count -gt 0) {
-    $apiSummary += "- **Application Insights**: ``$($appInsights[0].Name)`` (for telemetry and monitoring)`n"
-}
+    if ($apiManagement.Count -gt 0) {
+        $apiSummary += "`n### API Management ($($apiManagement.Count))`n"
+        foreach ($apim in $apiManagement) {
+            $apiSummary += "- **Name**: ``$($apim.Name)``"
+            if ($apim.Properties.gatewayUrl) {
+                $apiSummary += " - **Gateway URL**: ``$($apim.Properties.gatewayUrl)``"
+            }
+            $apiSummary += "`n"
+        }
+    }
 
-if ($keyVaults.Count -gt 0) {
-    $apiSummary += "- **Key Vault**: ``$($keyVaults[0].Name)`` (for secrets management)`n"
-}
+    $apiSummary += "`n## Supporting Services`n"
 
-# Build Copilot prompt
-$prompt = @"
+    if ($appInsights.Count -gt 0) {
+        $apiSummary += "- **Application Insights**: ``$($appInsights[0].Name)`` (for telemetry and monitoring)`n"
+    }
+
+    if ($keyVaults.Count -gt 0) {
+        $apiSummary += "- **Key Vault**: ``$($keyVaults[0].Name)`` (for secrets management)`n"
+    }
+    
+    # Build Copilot prompt
+    $prompt = @"
 # Generate API Documentation
 
 Please create comprehensive **API Documentation** for the following Azure API services in resource group **$ResourceGroupName**:
@@ -184,24 +218,24 @@ $apiSummary
 Provide a simple "Hello World" example:
 
 **Using curl:**
-``````bash
+\`\`\`bash
 curl -X GET "https://<api-url>/api/health" \
   -H "Content-Type: application/json"
-``````
+\`\`\`
 
 **Expected Response:**
-``````json
+\`\`\`json
 {
   "status": "healthy",
   "version": "1.0.0",
   "timestamp": "2025-01-20T12:00:00Z"
 }
-``````
+\`\`\`
 
 "@
 
-if ($IncludeAuthentication) {
-    $prompt += @"
+    if ($IncludeAuthentication) {
+        $prompt += @"
 
 
 ### 3. Authentication & Authorization
@@ -275,9 +309,9 @@ Document required permissions/scopes:
 ``````
 
 "@
-}
+    }
 
-$prompt += @"
+    $prompt += @"
 
 
 ### 4. API Endpoints
@@ -409,8 +443,8 @@ Content-Type: application/json
 
 "@
 
-if ($IncludeExamples) {
-    $prompt += @"
+    if ($IncludeExamples) {
+        $prompt += @"
 
 
 ### 5. Code Examples
@@ -630,10 +664,10 @@ Write-Output "Patient created: $($newPatient | ConvertTo-Json)"
 ``````
 
 "@
-}
+    }
 
-if ($IncludeSDKs) {
-    $prompt += @"
+    if ($IncludeSDKs) {
+        $prompt += @"
 
 
 ### 6. Client SDK Generation
@@ -678,9 +712,9 @@ nswag openapi2csclient /input:swagger.json /output:ApiClient.cs
 ``````
 
 "@
-}
+    }
 
-$prompt += @"
+    $prompt += @"
 
 
 ### 7. Error Handling
@@ -821,6 +855,29 @@ GET /api/patients?page=2&pageSize=50
 Please generate comprehensive API documentation following this structure. Make it developer-friendly, complete, and ready for publication.
 "@
 
+    return $prompt
+}
+
+#endregion
+
+#region Main Execution
+
+Write-Log "Starting API documentation prompt generation..." -Level Info
+
+# Validate Azure authentication
+$context = Get-AzureContext
+
+# Get resource inventory
+$resources = Get-ResourceInventory -ResourceGroupName $ResourceGroupName
+
+if ($resources.Count -eq 0) {
+    Write-Log "Cannot generate documentation without resources. Exiting." -Level Warning
+    return
+}
+
+# Generate Copilot prompt
+$copilotPrompt = New-CopilotPrompt -Resources $resources -ResourceGroupName $ResourceGroupName -IncludeAuthentication:$IncludeAuthentication -IncludeExamples:$IncludeExamples -IncludeSDKs:$IncludeSDKs
+
 # Ensure output directory exists
 if (-not (Test-Path $OutputPath)) {
     New-Item -ItemType Directory -Path $OutputPath | Out-Null
@@ -828,37 +885,66 @@ if (-not (Test-Path $OutputPath)) {
 
 # Save prompt to file
 $promptFile = Join-Path $OutputPath "api-documentation-prompt.txt"
-$prompt | Out-File -FilePath $promptFile -Encoding UTF8
+$copilotPrompt | Out-File -FilePath $promptFile -Encoding UTF8
 
 Write-Log "`n========================================" -Level Success
-Write-Log "API Documentation Prompt Generated!" -Level Success
+Write-Log "Copilot Prompt Generated!" -Level Success
 Write-Log "========================================`n" -Level Success
 Write-Log "Prompt file: $promptFile" -Level Success
-Write-Log "API Services Found:" -Level Success
-Write-Log "  - App Services: $(@($webApps).Count)" -Level Info
-Write-Log "  - Function Apps: $(@($functionApps).Count)" -Level Info
-Write-Log "  - Container Apps: $(@($containerApps).Count)" -Level Info
-Write-Log "  - API Management: $(@($apiManagement).Count)" -Level Info
+Write-Log "Resources analyzed: $($resources.Count)" -Level Success
 
 # Copy to clipboard if requested
 if ($CopyToClipboard) {
     try {
         if ($IsWindows -or $env:OS -match "Windows") {
-            $prompt | Set-Clipboard
-            Write-Log "✅ Prompt copied to clipboard!" -Level Success
-        } elseif ($IsLinux) {
-            $prompt | xclip -selection clipboard 2>$null
-            if ($?) {
-                Write-Log "✅ Prompt copied to clipboard (xclip)!" -Level Success
-            } else {
-                Write-Log "⚠️  xclip not available. Install with: sudo apt install xclip" -Level Warning
-            }
-        } elseif ($IsMacOS) {
-            $prompt | pbcopy
+            $copilotPrompt | Set-Clipboard
             Write-Log "✅ Prompt copied to clipboard!" -Level Success
         }
-    } catch {
+        elseif ($IsLinux) {
+            $copilotPrompt | xclip -selection clipboard 2>$null
+            if ($?) {
+                Write-Log "✅ Prompt copied to clipboard (xclip)!" -Level Success
+            }
+            else {
+                Write-Log "⚠️  xclip not available. Install with: sudo apt install xclip" -Level Warning
+            }
+        }
+        elseif ($IsMacOS) {
+            $copilotPrompt | pbcopy
+            Write-Log "✅ Prompt copied to clipboard!" -Level Success
+        }
+    }
+    catch {
         Write-Log "⚠️  Failed to copy to clipboard: $_" -Level Warning
+    }
+}
+
+# Generate directly with GitHub CLI if requested
+if ($GenerateDirectly) {
+    Write-Log "Attempting to use GitHub CLI with Copilot extension..." -Level Info
+    
+    $ghAvailable = Get-Command gh -ErrorAction SilentlyContinue
+    if (-not $ghAvailable) {
+        Write-Log "❌ GitHub CLI (gh) not found. Install from: https://cli.github.com/" -Level Error
+        Write-Log "   After installing gh, install copilot extension: gh extension install github/gh-copilot" -Level Error
+    }
+    else {
+        Write-Log "Sending prompt to GitHub Copilot (this may take 30-60 seconds)..." -Level Info
+        
+        try {
+            # Use gh copilot with prompt text
+            $response = $copilotPrompt | gh copilot explain --stdin 2>&1
+            
+            # Save response
+            $outputFile = Join-Path $OutputPath "api-documentation.md"
+            $response | Out-File -FilePath $outputFile -Encoding UTF8
+            
+            Write-Log "✅ API Documentation generated: $outputFile" -Level Success
+        }
+        catch {
+            Write-Log "❌ Failed to generate with gh CLI: $_" -Level Error
+            Write-Log "   Fallback: Use the prompt file and paste into Copilot Chat manually" -Level Info
+        }
     }
 }
 
@@ -872,12 +958,11 @@ Write-Log "`n⏱️  Time Savings: 3hrs 30min (88% faster than manual creation)"
 
 return [PSCustomObject]@{
     ResourceGroupName = $ResourceGroupName
-    AppServices = @($webApps).Count
-    FunctionApps = @($functionApps).Count
-    ContainerApps = @($containerApps).Count
-    APIManagement = @($apiManagement).Count
-    PromptFile = $promptFile
-    OutputPath = $OutputPath
-    Timestamp = Get-Date
+    ResourceCount     = $resources.Count
+    PromptFile        = $promptFile
+    OutputPath        = $OutputPath
+    Timestamp         = Get-Date
     CopiedToClipboard = $CopyToClipboard.IsPresent
 }
+
+#endregion
