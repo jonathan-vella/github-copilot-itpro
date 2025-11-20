@@ -75,12 +75,14 @@ function Get-AppInsightsResources {
     Write-Log "Discovering Application Insights resources..."
     
     if ($AppInsightsName) {
-        $resources = @(Get-AzResource -ResourceGroupName $ResourceGroupName -Name $AppInsightsName -ResourceType "Microsoft.Insights/components")
-    } else {
-        $resources = Get-AzResource -ResourceGroupName $ResourceGroupName -ResourceType "Microsoft.Insights/components"
+        $resources = @(Get-AzResource -ResourceGroupName $ResourceGroupName -Name $AppInsightsName -ResourceType "Microsoft.Insights/components" -ExpandProperties)
+    }
+    else {
+        $resources = @(Get-AzResource -ResourceGroupName $ResourceGroupName -ResourceType "Microsoft.Insights/components" -ExpandProperties)
     }
     
-    Write-Log "Found $($resources.Count) Application Insights instance(s)" -Level Success
+    $count = if ($resources) { $resources.Count } else { 0 }
+    Write-Log "Found $count Application Insights instance(s)" -Level Success
     return $resources
 }
 
@@ -107,7 +109,8 @@ exceptions
     try {
         $results = Invoke-AzOperationalInsightsQuery -WorkspaceId $AppInsightsId -Query $query -ErrorAction SilentlyContinue
         return $results.Results
-    } catch {
+    }
+    catch {
         Write-Log "Note: Using simulated exception data (query may require Log Analytics)" -Level Warning
         return @(
             [PSCustomObject]@{ type = "SqlException"; Count = 145; AffectedUsers = 23; SampleMessage = "Connection timeout"; problemId = "sql-001" }
@@ -140,7 +143,8 @@ requests
     try {
         $results = Invoke-AzOperationalInsightsQuery -WorkspaceId $AppInsightsId -Query $query -ErrorAction SilentlyContinue
         return $results.Results
-    } catch {
+    }
+    catch {
         Write-Log "Note: Using simulated performance data" -Level Warning
         return @(
             [PSCustomObject]@{ name = "/api/orders"; SlowRequestCount = 234; AvgDuration = 8500; MaxDuration = 25000; AffectedUsers = 78 }
@@ -171,7 +175,8 @@ dependencies
     try {
         $results = Invoke-AzOperationalInsightsQuery -WorkspaceId $AppInsightsId -Query $query -ErrorAction SilentlyContinue
         return $results.Results
-    } catch {
+    }
+    catch {
         Write-Log "Note: Using simulated dependency data" -Level Warning
         return @(
             [PSCustomObject]@{ target = "sql-database.database.windows.net"; type = "SQL"; FailureCount = 89; SampleResult = "Timeout" }
@@ -243,7 +248,8 @@ Write-Log "Starting troubleshooting guide generation..." -Level Info
 # Get Application Insights resources
 $aiResources = Get-AppInsightsResources -ResourceGroupName $ResourceGroupName -AppInsightsName $AppInsightsName
 
-if ($aiResources.Count -eq 0) {
+$resourceCount = if ($aiResources) { @($aiResources).Count } else { 0 }
+if ($resourceCount -eq 0) {
     Write-Log "No Application Insights resources found!" -Level Error
     return
 }
@@ -327,14 +333,15 @@ $guide += "`n## Common Exceptions ($($exceptions.Count) patterns identified)`n`n
 
 $issueNumber = 1
 foreach ($exception in $exceptions) {
-    $guide += "### Issue #$issueNumber: $($exception.type)`n`n"
+    $guide += "### Issue #${issueNumber}: $($exception.type)`n`n"
     $guide += "**Frequency**: $($exception.Count) occurrences in past $LookbackDays days  `n"
     $guide += "**Affected Users**: $($exception.AffectedUsers)  `n"
     $guide += "**Sample Message**: ``$($exception.SampleMessage)```n`n"
     
     # Add context-specific troubleshooting based on exception type
     $troubleshooting = switch -Wildcard ($exception.type) {
-        "*SqlException*" { @"
+        "*SqlException*" {
+            @"
 **Root Causes**:
 - Database connection pool exhaustion
 - Network connectivity issues to SQL Database
@@ -368,8 +375,10 @@ exceptions
 - Set appropriate query timeouts
 - Monitor database performance metrics
 - Use elastic pools for variable workloads
-"@ }
-        "*NullReferenceException*" { @"
+"@ 
+        }
+        "*NullReferenceException*" {
+            @"
 **Root Causes**:
 - Unvalidated user input or API responses
 - Async timing issues (race conditions)
@@ -402,8 +411,10 @@ exceptions
 - Use code analysis tools (SonarQube, Roslyn analyzers)
 - Implement comprehensive unit tests
 - Code review focus on null handling
-"@ }
-        "*TimeoutException*" { @"
+"@ 
+        }
+        "*TimeoutException*" {
+            @"
 **Root Causes**:
 - External API slow response or unavailable
 - Database query taking too long
@@ -438,8 +449,10 @@ dependencies
 - Use circuit breaker pattern (Polly library)
 - Monitor external dependency SLAs
 - Implement bulkhead isolation pattern
-"@ }
-        default { @"
+"@ 
+        }
+        default {
+            @"
 **Root Causes**:
 - Application logic error
 - Unexpected input or state
@@ -466,7 +479,8 @@ exceptions
 | order by timestamp desc
 | take 50
 ``````
-"@ }
+"@ 
+        }
     }
     
     $guide += "$troubleshooting`n`n---`n`n"
@@ -720,13 +734,13 @@ Write-Log "Time saved: 3hrs 30min (87.5% faster than manual)" -Level Success
 Start-Process $outputFile
 
 return [PSCustomObject]@{
-    AppInsightsName = $primaryAI.Name
-    ExceptionPatterns = $exceptions.Count
-    PerformanceIssues = $performanceIssues.Count
+    AppInsightsName    = $primaryAI.Name
+    ExceptionPatterns  = $exceptions.Count
+    PerformanceIssues  = $performanceIssues.Count
     DependencyFailures = $dependencyFailures.Count
-    OutputFile = $outputFile
-    AnalysisPeriod = $LookbackDays
-    Timestamp = Get-Date
+    OutputFile         = $outputFile
+    AnalysisPeriod     = $LookbackDays
+    Timestamp          = Get-Date
 }
 
 #endregion

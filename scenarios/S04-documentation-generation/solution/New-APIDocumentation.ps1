@@ -82,9 +82,10 @@ function Find-ControllerFiles {
     }
     
     # Find C# controller files
-    $controllers = Get-ChildItem -Path $ProjectPath -Recurse -Filter "*Controller.cs" -File
+    $controllers = @(Get-ChildItem -Path $ProjectPath -Recurse -Filter "*Controller.cs" -File)
     
-    Write-Log "Found $($controllers.Count) controller(s)" -Level Success
+    $count = if ($controllers) { $controllers.Count } else { 0 }
+    Write-Log "Found $count controller(s)" -Level Success
     return $controllers
 }
 
@@ -114,11 +115,11 @@ function Parse-ControllerEndpoints {
         $description = if ($lastSummary.Success) { $lastSummary.Groups[1].Value.Trim() } else { "" }
         
         $endpoints += [PSCustomObject]@{
-            HttpMethod = $httpMethod
-            Route = $route
-            ReturnType = $returnType
+            HttpMethod  = $httpMethod
+            Route       = $route
+            ReturnType  = $returnType
             Description = $description
-            Controller = $ControllerFile.BaseName -replace 'Controller$', ''
+            Controller  = $ControllerFile.BaseName -replace 'Controller$', ''
         }
     }
     
@@ -140,7 +141,8 @@ function Get-OpenApiSpec {
         $spec = $content | ConvertFrom-Json
         Write-Log "Loaded OpenAPI spec: $($spec.info.title) v$($spec.info.version)" -Level Success
         return $spec
-    } catch {
+    }
+    catch {
         Write-Log "Failed to parse OpenAPI spec: $_" -Level Warning
         return $null
     }
@@ -263,7 +265,8 @@ curl -X GET https://api.example.com/api/resource \
                     $doc += "curl -X GET '$route' \`n"
                     $doc += "  -H 'Authorization: Bearer {token}' \`n"
                     $doc += "  -H 'Accept: application/json'`n"
-                } elseif ($httpMethod -eq "POST" -or $httpMethod -eq "PUT") {
+                }
+                elseif ($httpMethod -eq "POST" -or $httpMethod -eq "PUT") {
                     $doc += "curl -X $httpMethod '$route' \`n"
                     $doc += "  -H 'Authorization: Bearer {token}' \`n"
                     $doc += "  -H 'Content-Type: application/json' \`n"
@@ -272,7 +275,8 @@ curl -X GET https://api.example.com/api/resource \
                     $doc += "    ""property1"": ""value1"",`n"
                     $doc += "    ""property2"": ""value2""`n"
                     $doc += "  }'`n"
-                } elseif ($httpMethod -eq "DELETE") {
+                }
+                elseif ($httpMethod -eq "DELETE") {
                     $doc += "curl -X DELETE '$route' \`n"
                     $doc += "  -H 'Authorization: Bearer {token}'`n"
                 }
@@ -285,11 +289,13 @@ curl -X GET https://api.example.com/api/resource \
                 if ($httpMethod -eq "GET") {
                     $doc += "`$headers = @{ 'Authorization' = 'Bearer {token}' }`n"
                     $doc += "Invoke-RestMethod -Uri '$route' -Method Get -Headers `$headers`n"
-                } elseif ($httpMethod -eq "POST" -or $httpMethod -eq "PUT") {
+                }
+                elseif ($httpMethod -eq "POST" -or $httpMethod -eq "PUT") {
                     $doc += "`$headers = @{ 'Authorization' = 'Bearer {token}'; 'Content-Type' = 'application/json' }`n"
                     $doc += "`$body = @{ property1 = 'value1'; property2 = 'value2' } | ConvertTo-Json`n"
                     $doc += "Invoke-RestMethod -Uri '$route' -Method $httpMethod -Headers `$headers -Body `$body`n"
-                } elseif ($httpMethod -eq "DELETE") {
+                }
+                elseif ($httpMethod -eq "DELETE") {
                     $doc += "`$headers = @{ 'Authorization' = 'Bearer {token}' }`n"
                     $doc += "Invoke-RestMethod -Uri '$route' -Method Delete -Headers `$headers`n"
                 }
@@ -531,33 +537,33 @@ class ApiClient {
   }
 
   async get(endpoint) {
-    const response = await fetch(`${this.baseUrl}${endpoint}`, {
+    const response = await fetch(`+"`$"+`{this.baseUrl}`+"`$"+`{endpoint}`, {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${this.accessToken}`,
+        'Authorization': `+"`Bearer `$"+`{this.accessToken}`,
         'Accept': 'application/json'
       }
     });
     
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`+"`HTTP error! status: `$"+`{response.status}`);
     }
     
     return await response.json();
   }
 
   async post(endpoint, data) {
-    const response = await fetch(`${this.baseUrl}${endpoint}`, {
+    const response = await fetch(`+"`$"+`{this.baseUrl}`+"`$"+`{endpoint}`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${this.accessToken}`,
+        'Authorization': `+"`Bearer `$"+`{this.accessToken}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
     });
     
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      throw new Error(`+"`HTTP error! status: `$"+`{response.status}`);
     }
     
     return await response.json();
@@ -637,7 +643,8 @@ $openApiSpec = if ($OpenApiSpecPath) { Get-OpenApiSpec -OpenApiSpecPath $OpenApi
 # Find and parse controllers
 $controllers = Find-ControllerFiles -ProjectPath $ProjectPath
 
-if ($controllers.Count -eq 0) {
+$controllerCount = if ($controllers) { @($controllers).Count } else { 0 }
+if ($controllerCount -eq 0) {
     Write-Log "No controllers found. Creating template documentation..." -Level Warning
     $endpoints = @(
         [PSCustomObject]@{ HttpMethod = "HttpGet"; Route = ""; ReturnType = "IActionResult"; Description = "Get all resources"; Controller = "Resource" }
@@ -646,7 +653,8 @@ if ($controllers.Count -eq 0) {
         [PSCustomObject]@{ HttpMethod = "HttpPut"; Route = "{id}"; ReturnType = "IActionResult"; Description = "Update resource"; Controller = "Resource" }
         [PSCustomObject]@{ HttpMethod = "HttpDelete"; Route = "{id}"; ReturnType = "IActionResult"; Description = "Delete resource"; Controller = "Resource" }
     )
-} else {
+}
+else {
     $endpoints = @()
     foreach ($controller in $controllers) {
         Write-Log "Parsing $($controller.Name)..."
@@ -677,12 +685,12 @@ Write-Log "Time saved: 2hrs 30min (83% faster than manual)" -Level Success
 Start-Process $outputFile
 
 return [PSCustomObject]@{
-    ProjectPath = $ProjectPath
-    EndpointCount = $endpoints.Count
+    ProjectPath     = $ProjectPath
+    EndpointCount   = $endpoints.Count
     ControllerCount = $controllers.Count
-    OutputFile = $outputFile
-    Format = $Format
-    Timestamp = Get-Date
+    OutputFile      = $outputFile
+    Format          = $Format
+    Timestamp       = Get-Date
 }
 
 #endregion

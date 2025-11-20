@@ -89,11 +89,11 @@ function Get-ResourceInventory {
     
     $inventory = $resources | ForEach-Object {
         [PSCustomObject]@{
-            Name = $_.Name
-            Type = $_.ResourceType
+            Name     = $_.Name
+            Type     = $_.ResourceType
             Location = $_.Location
-            Tags = $_.Tags
-            Id = $_.ResourceId
+            Tags     = $_.Tags
+            Id       = $_.ResourceId
         }
     }
     
@@ -206,8 +206,8 @@ function New-CostAnalysis {
         }
         
         $costEstimates += [PSCustomObject]@{
-            ResourceName = $resource.Name
-            ResourceType = $resource.ResourceType.Split('/')[-1]
+            ResourceName         = $resource.Name
+            ResourceType         = $resource.ResourceType.Split('/')[-1]
             EstimatedMonthlyCost = $estimatedMonthlyCost
         }
     }
@@ -215,9 +215,9 @@ function New-CostAnalysis {
     $totalEstimatedCost = ($costEstimates | Measure-Object -Property EstimatedMonthlyCost -Sum).Sum
     
     return @{
-        Resources = $costEstimates
+        Resources    = $costEstimates
         TotalMonthly = $totalEstimatedCost
-        TotalAnnual = $totalEstimatedCost * 12
+        TotalAnnual  = $totalEstimatedCost * 12
     }
 }
 
@@ -233,7 +233,13 @@ if ($SubscriptionId) {
 }
 
 $context = Get-AzContext
-Write-Log "Subscription: $($context.Subscription.Name)"
+if ($context) {
+    Write-Log "Subscription: $($context.Subscription.Name)"
+}
+else {
+    Write-Log "No Azure context found. Please run Connect-AzAccount" -Level Error
+    throw "Azure authentication required"
+}
 
 # Ensure output directory exists
 if (-not (Test-Path $OutputPath)) {
@@ -432,12 +438,12 @@ if ($IncludeCostAnalysis) {
 Start-Process $outputFile
 
 return [PSCustomObject]@{
-    ResourceGroup = $ResourceGroupName
-    ResourceCount = $resources.Count
-    OutputFile = $outputFile
-    Format = $Format
+    ResourceGroup    = $ResourceGroupName
+    ResourceCount    = $resources.Count
+    OutputFile       = $outputFile
+    Format           = $Format
     DiagramsIncluded = $IncludeDiagrams.IsPresent
-    Timestamp = Get-Date
+    Timestamp        = Get-Date
 }
 
 #endregion
