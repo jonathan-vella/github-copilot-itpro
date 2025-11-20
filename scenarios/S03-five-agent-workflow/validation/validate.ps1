@@ -63,5 +63,57 @@ else {
     }
 }
 
+# 4. Deployed Resources Validation
+$result.Deployment = "Passed"
+$resourceGroupName = "rg-contoso-patient-portal-dev"
+
+if (Get-Command az -ErrorAction SilentlyContinue) {
+    # Check if resource group exists
+    $rgExists = az group exists --name $resourceGroupName 2>$null
+    if ($rgExists -eq "true") {
+        # Get list of deployed resources
+        $resources = az resource list --resource-group $resourceGroupName --query "[].{name:name, type:type}" -o json 2>$null | ConvertFrom-Json
+        
+        if ($resources.Count -eq 0) {
+            $result.Deployment = "Failed"
+            $result.Status = "Failed"
+            $result.Notes += "No resources found in $resourceGroupName"
+        }
+        else {
+            # Expected resource types
+            $expectedTypes = @(
+                'Microsoft.Network/virtualNetworks',
+                'Microsoft.Network/networkSecurityGroups',
+                'Microsoft.KeyVault/vaults',
+                'Microsoft.Sql/servers',
+                'Microsoft.Sql/servers/databases',
+                'Microsoft.Web/serverfarms',
+                'Microsoft.Web/sites',
+                'Microsoft.Insights/components',
+                'Microsoft.OperationalInsights/workspaces'
+            )
+            
+            $deployedTypes = $resources | Select-Object -ExpandProperty type -Unique
+            $missingTypes = $expectedTypes | Where-Object { $_ -notin $deployedTypes }
+            
+            if ($missingTypes.Count -gt 0) {
+                $result.Deployment = "Warning"
+                $result.Notes += "Missing expected resource types: $($missingTypes -join ', ')"
+            }
+            
+            $result.Notes += "Found $($resources.Count) resources in $resourceGroupName"
+        }
+    }
+    else {
+        $result.Deployment = "Failed"
+        $result.Status = "Failed"
+        $result.Notes += "Resource group $resourceGroupName does not exist"
+    }
+}
+else {
+    $result.Deployment = "Skipped"
+    $result.Notes += "Azure CLI not installed, skipping deployment validation"
+}
+
 # Return JSON
 $result | ConvertTo-Json -Compress

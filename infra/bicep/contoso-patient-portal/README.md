@@ -62,12 +62,17 @@ contoso-patient-portal/
 # Navigate to template directory
 cd infra/bicep/contoso-patient-portal
 
-# Run deployment script
+# Run deployment script (will prompt for SQL password)
 .\deploy.ps1 -Environment prod -Location eastus2
+
+# Or provide password inline
+.\deploy.ps1 -Environment prod -Location eastus2 -SqlAdminPassword (ConvertTo-SecureString 'YourSecurePassword123!' -AsPlainText -Force)
 
 # What-if analysis (dry run)
 .\deploy.ps1 -WhatIf
 ```
+
+> **Note**: If `-SqlAdminPassword` is not provided, the script will interactively prompt for a password. Password requirements: 8+ characters, uppercase, lowercase, and number.
 
 **Option 2: Using Azure CLI**
 
