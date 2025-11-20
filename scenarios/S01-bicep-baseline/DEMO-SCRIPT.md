@@ -586,8 +586,8 @@ From [prompts/effective-prompts.md](./prompts/effective-prompts.md):
 
 ### Related Demos
 
-- **[Demo 2: PowerShell Automation](../02-powershell-automation/)** - Build on this with automated operations
-- **[Demo 3: Azure Arc Onboarding](../03-azure-arc-onboarding/)** - Extend to hybrid scenarios
+- **[Demo 2: Terraform Baseline](../S02-terraform-baseline/)** - Build on this with automated operations
+- **[Demo 3: Five Agent Workflow](../S03-five-agent-workflow/)** - Extend to hybrid scenarios
 - **[Skills Bridge: IaC Fundamentals](../../skills-bridge/iac-fundamentals/)** - Deep dive for learners
 
 ---

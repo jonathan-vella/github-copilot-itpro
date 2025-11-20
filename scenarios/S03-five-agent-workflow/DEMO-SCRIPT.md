@@ -18,7 +18,7 @@ By the end of this demo, the audience will:
 ### Environment Setup (10 minutes before)
 
 - [ ] VS Code open with GitHub Copilot installed
-- [ ] Open `scenarios/07-five-agent-workflow/` directory
+- [ ] Open `scenarios/S03-five-agent-workflow/` directory
 - [ ] GitHub Copilot Chat visible (`Ctrl+Shift+I`)
 - [ ] Test agent selection (`Ctrl+Shift+A`) - verify all 4 agents available
 - [ ] Have `prompts/workflow-prompts.md` ready in second window
@@ -358,7 +358,7 @@ A: The workflow pattern applies universally. You'd need to create cloud-specific
 
 **Where to Find Everything:**
 
-- Demo Files: `scenarios/07-five-agent-workflow/`
+- Demo Files: `scenarios/S03-five-agent-workflow/`
 - Agent Configuration: `.github/agents/`
 - Full Workflow Guide: `resources/copilot-customizations/FIVE-MODE-WORKFLOW.md`
 - Bicep Templates: `infra/bicep/contoso-patient-portal/`
@@ -427,7 +427,7 @@ If short on time, use this condensed version:
 
 - **Agent not available**: Verify GitHub Copilot subscription and agent configuration
 - **Handoff button missing**: Manually copy Stage 2 prompt with architecture output
-- **Bicep validation fails**: Use pre-generated templates from `outputs/` directory
+- **Bicep validation fails**: Use pre-generated templates from `solution/outputs/` directory
 - **Audience questions derail timing**: "Great question - let's discuss after the demo"
 
 ### Energy Management

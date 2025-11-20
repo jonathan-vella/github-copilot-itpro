@@ -183,7 +183,7 @@ Real-world ToDo application from Azure Samples:
 
 ```powershell
 # 1. Navigate to the demo folder
-cd scenarios/08-sbom-generator
+cd scenarios/S07-sbom-generator
 
 # 2. Open the demo script
 code DEMO-SCRIPT.md
@@ -196,7 +196,7 @@ code DEMO-SCRIPT.md
 
 ```powershell
 # Navigate to with-copilot folder
-cd scenarios/08-sbom-generator/with-copilot
+cd scenarios/S07-sbom-generator/with-copilot
 
 # Generate application SBOM (npm dependencies)
 ./New-ApplicationSBOM.ps1 -PackageJsonPath "../sample-app/src/api/package.json" -OutputPath "../examples"
@@ -218,7 +218,7 @@ cd scenarios/08-sbom-generator/with-copilot
 
 ```powershell
 # View pre-generated SBOM examples
-cd scenarios/08-sbom-generator/examples
+cd scenarios/S07-sbom-generator/examples
 code application-sbom.json
 code merged-sbom.json
 code sbom-report.html
@@ -452,8 +452,8 @@ docker build -t todo-app .
 
 ### For Learners
 
-1. 🎯 Complete [Demo 4: Troubleshooting Assistant](../04-troubleshooting-assistant/)
-2. 🎯 Explore [Demo 5: Documentation Generator](../05-documentation-generator/)
+1. 🎯 Complete [Demo 6: Troubleshooting (S06)](../S06-troubleshooting/)
+2. 🎯 Explore [Demo 4: Documentation Generation (S04)](../S04-documentation-generation/)
 3. 🎯 Review [Skills Bridge: Security & Compliance](../../skills-bridge/security-compliance/)
 
 ### For Security Teams
@@ -526,6 +526,6 @@ docker build -t todo-app .
 
 **⏱️ Time Investment**: 30 minutes  
 **💰 Value Delivered**: $3,000/year saved per application  
-**🎯 Next Demo**: [Troubleshooting Assistant](../04-troubleshooting-assistant/)
+**🎯 Next Demo**: [Troubleshooting (S06)](../S06-troubleshooting/)
 
 [🏠 Back to Main README](../../README.md) | [📚 View All Demos](../../README.md#-featured-demos)

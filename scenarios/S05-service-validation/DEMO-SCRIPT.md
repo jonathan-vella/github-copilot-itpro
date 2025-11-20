@@ -66,7 +66,7 @@ By the end of this demo, participants will understand how to:
 
 ```powershell
 # Open the audit checklist
-code scenarios/06-azure-specialization-prep/azure-specialization-audit-checklist.md
+code scenarios/S05-service-validation/azure-specialization-audit-checklist.md
 ```
 
 **Talking Points**:
@@ -169,10 +169,10 @@ Performance Efficiency) and provide specific recommendations with priority level
 
 ```powershell
 # Create evidence folder
-New-Item -ItemType Directory -Path evidence/waf-assessment -Force
+New-Item -ItemType Directory -Path solution/evidence/waf-assessment -Force
 
 # Save Copilot output to file
-# Copy the chat response to: evidence/waf-assessment/contoso-taskmanager-waf-assessment.md
+# Copy the chat response to: solution/evidence/waf-assessment/contoso-taskmanager-waf-assessment.md
 ```
 
 ---
@@ -232,7 +232,7 @@ Provide: module structure, parameter strategy, deployment sequence, and validati
 
 ```powershell
 # Save to planning document
-# Copy chat output to: infrastructure/IMPLEMENTATION-PLAN.md
+# Copy chat output to: solution/infrastructure/IMPLEMENTATION-PLAN.md
 ```
 
 ---
@@ -293,7 +293,7 @@ Start with main.bicep and provide complete, deployable code.
 2. **Verify the structure**:
 
    ```powershell
-   tree infrastructure /F
+   tree solution/infrastructure /F
 
 ```
 
@@ -305,13 +305,13 @@ Start with main.bicep and provide complete, deployable code.
 
 ```powershell
 # Validate the main template
-bicep build infrastructure/main.bicep
+bicep build solution/infrastructure/main.bicep
 
 # Check for errors
 az deployment group validate `
   --resource-group rg-audit-demo-prod `
-  --template-file infrastructure/main.bicep `
-  --parameters infrastructure/parameters/prod.bicepparam
+  --template-file solution/infrastructure/main.bicep `
+  --parameters solution/infrastructure/parameters/prod.bicepparam
 ```
 
 **Talking Points**:
@@ -329,8 +329,8 @@ az group create --name rg-audit-demo-prod --location eastus
 # Deploy infrastructure
 az deployment group create `
   --resource-group rg-audit-demo-prod `
-  --template-file infrastructure/main.bicep `
-  --parameters infrastructure/parameters/prod.bicepparam `
+  --template-file solution/infrastructure/main.bicep `
+  --parameters solution/infrastructure/parameters/prod.bicepparam `
   --name contoso-taskmanager-deployment
 ```
 
@@ -346,8 +346,8 @@ az deployment group create `
 # Show what-if analysis instead
 az deployment group what-if `
   --resource-group rg-audit-demo-prod `
-  --template-file infrastructure/main.bicep `
-  --parameters infrastructure/parameters/prod.bicepparam
+  --template-file solution/infrastructure/main.bicep `
+  --parameters solution/infrastructure/parameters/prod.bicepparam
 ```
 
 ---
@@ -361,7 +361,7 @@ az deployment group what-if `
 **Open validation guide**:
 
 ```powershell
-code validation/VALIDATION-TESTING-GUIDE.md
+code solution/validation/VALIDATION-TESTING-GUIDE.md
 ```
 
 **Talking Points**:
@@ -401,7 +401,7 @@ Provide: Azure Chaos Studio experiment configuration, monitoring approach, and s
 
 ```powershell
 # Open the comprehensive guide section on chaos engineering
-code validation/VALIDATION-TESTING-GUIDE.md
+code solution/validation/VALIDATION-TESTING-GUIDE.md
 # Navigate to Section 4: Chaos Engineering & Fault Injection
 ```
 
@@ -454,7 +454,7 @@ Provide: JMeter test plan structure, failure criteria, and resource utilization 
 
 ```powershell
 # Navigate to Section 5 in validation guide
-code validation/VALIDATION-TESTING-GUIDE.md
+code solution/validation/VALIDATION-TESTING-GUIDE.md
 # Show the 4 load testing scenarios
 ```
 
@@ -483,10 +483,10 @@ code validation/VALIDATION-TESTING-GUIDE.md
 
 ```powershell
 # Open UAT templates in Excel (or show CSV)
-Start-Process "validation/uat-tracking-template.csv"
-Start-Process "validation/uat-defect-tracking.csv"
-Start-Process "validation/uat-summary-by-category.csv"
-Start-Process "validation/uat-tester-assignments.csv"
+Start-Process "solution/validation/uat-tracking-template.csv"
+Start-Process "solution/validation/uat-defect-tracking.csv"
+Start-Process "solution/validation/uat-summary-by-category.csv"
+Start-Process "solution/validation/uat-tester-assignments.csv"
 ```
 
 **Walk through the realistic dummy data**:
@@ -535,7 +535,7 @@ Start-Process "validation/uat-tester-assignments.csv"
 **Show usage guide**:
 
 ```powershell
-code validation/UAT-TEMPLATES-README.md
+code solution/validation/UAT-TEMPLATES-README.md
 ```
 
 **Key Features**:
@@ -554,17 +554,17 @@ code validation/UAT-TEMPLATES-README.md
 **Show validation script**:
 
 ```powershell
-code scripts/validate-data-integrity.ps1
+code solution/scripts/validate-data-integrity.ps1
 ```
 
 **Demo the script** (if source/target DBs available):
 
 ```powershell
-.\scripts\validate-data-integrity.ps1 `
+.\solution\scripts\validate-data-integrity.ps1 `
   -SourceServer "on-prem-sql.contoso.com" `
   -TargetServer "sql-taskmanager-prod.database.windows.net" `
   -DatabaseName "TaskManagerDB" `
-  -OutputReport "evidence/data-integrity-report.html"
+  -OutputReport "solution/evidence/data-integrity-report.html"
 ```
 
 **Script Features**:
@@ -592,7 +592,7 @@ code scripts/validate-data-integrity.ps1
 **Show continuous validation section**:
 
 ```powershell
-code validation/VALIDATION-TESTING-GUIDE.md
+code solution/validation/VALIDATION-TESTING-GUIDE.md
 # Navigate to Section 7: Continuous Validation
 ```
 
@@ -636,7 +636,7 @@ code validation/VALIDATION-TESTING-GUIDE.md
 
 ```powershell
 # List generated evidence files
-Get-ChildItem evidence/ -Recurse | Select-Object FullName
+Get-ChildItem solution/evidence/ -Recurse | Select-Object FullName
 ```
 
 **Audit Evidence Created**:

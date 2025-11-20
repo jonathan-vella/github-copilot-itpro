@@ -131,45 +131,46 @@ include comprehensive outputs for audit documentation.
 ## 📁 Demo Structure
 
 ```bicep
-06-azure-specialization-prep/
+S05-service-validation/
 ├── README.md                          # This file
 ├── DEMO-SCRIPT.md                     # 30-minute walkthrough
 ├── azure-specialization-audit-checklist.md  # Audit requirements
 ├── scenario/
 │   ├── business-requirements.md       # Customer scenario
 │   └── architecture-diagram.md        # Target architecture
-├── application/
-│   ├── TaskManager.Web/              # ASP.NET web app
-│   │   ├── Default.aspx              # UI
-│   │   ├── Default.aspx.cs           # Code-behind
-│   │   ├── Web.config                # Configuration
-│   │   └── TaskManager.Web.csproj    # Project file
-│   └── database/
-│       └── schema.sql                # Database schema
 ├── prompts/
 │   ├── 01-adr-prompts.md             # ADR Generator prompts
 │   ├── 02-architect-prompts.md       # Azure Architect prompts
 │   ├── 03-bicep-plan-prompts.md      # Planning prompts
 │   └── 04-bicep-implement-prompts.md # Implementation prompts
-├── infrastructure/
-│   ├── main.bicep                    # Main template
-│   ├── parameters/
-│   │   ├── dev.bicepparam           # Dev parameters
-│   │   └── prod.bicepparam          # Prod parameters
-│   └── modules/
-│       ├── network.bicep            # VNet, NSGs
-│       ├── compute.bicep            # VMs, extensions
-│       ├── database.bicep           # Azure SQL
-│       └── loadbalancer.bicep       # Load Balancer
-├── evidence/
-│   ├── adr/                         # Architectural Decision Records
-│   ├── waf-assessment/              # Well-Architected reviews
-│   ├── deployment-logs/             # Deployment evidence
-│   └── validation-reports/          # Post-deployment validation
-└── scripts/
-    ├── deploy.ps1                   # Deployment script
-    ├── validate.ps1                 # Validation script
-    └── cleanup.ps1                  # Resource cleanup
+├── solution/
+│   ├── application/
+│   │   ├── TaskManager.Web/              # ASP.NET web app
+│   │   │   ├── Default.aspx              # UI
+│   │   │   ├── Default.aspx.cs           # Code-behind
+│   │   │   ├── Web.config                # Configuration
+│   │   │   └── TaskManager.Web.csproj    # Project file
+│   │   └── database/
+│   │       └── schema.sql                # Database schema
+│   ├── infrastructure/
+│   │   ├── main.bicep                    # Main template
+│   │   ├── parameters/
+│   │   │   ├── dev.bicepparam           # Dev parameters
+│   │   │   └── prod.bicepparam          # Prod parameters
+│   │   └── modules/
+│   │       ├── network.bicep            # VNet, NSGs
+│   │       ├── compute.bicep            # VMs, extensions
+│   │       ├── database.bicep           # Azure SQL
+│   │       └── loadbalancer.bicep       # Load Balancer
+│   ├── evidence/
+│   │   ├── adr/                         # Architectural Decision Records
+│   │   ├── waf-assessment/              # Well-Architected reviews
+│   │   ├── deployment-logs/             # Deployment evidence
+│   │   └── validation-reports/          # Post-deployment validation
+│   └── scripts/
+│       ├── deploy.ps1                   # Deployment script
+│       ├── validate.ps1                 # Validation script
+│       └── cleanup.ps1                  # Resource cleanup
 ```
 
 ## 🚀 Quick Start
@@ -192,7 +193,7 @@ include comprehensive outputs for audit documentation.
 
    ```powershell
    git clone https://github.com/jonathan-vella/github-copilot-itpro.git
-   cd github-copilot-itpro/scenarios/06-azure-specialization-prep
+   cd github-copilot-itpro/scenarios/S05-service-validation
 
 ```
 
@@ -214,20 +215,20 @@ include comprehensive outputs for audit documentation.
 4. **Deploy infrastructure** (generated with agents):
 
    ```powershell
-   ./scripts/deploy.ps1 -Environment prod -Location eastus
+   ./solution/scripts/deploy.ps1 -Environment prod -Location eastus
 ```
 
 1. **Validate deployment**:
 
    ```powershell
-   ./scripts/validate.ps1 -ResourceGroupName rg-audit-demo-prod
+   ./solution/scripts/validate.ps1 -ResourceGroupName rg-audit-demo-prod
 
 ```
 
 6. **Cleanup resources**:
 
    ```powershell
-   ./scripts/cleanup.ps1 -ResourceGroupName rg-audit-demo-prod
+   ./solution/scripts/cleanup.ps1 -ResourceGroupName rg-audit-demo-prod
 ```
 
 ## 📚 Learning Objectives

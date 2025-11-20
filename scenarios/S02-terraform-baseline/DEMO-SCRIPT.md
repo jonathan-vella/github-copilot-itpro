@@ -21,7 +21,7 @@ az login
 az account set --subscription "<your-subscription-id>"
 
 # Open VS Code in demo directory
-code scenarios/03-terraform-infrastructure
+code scenarios/S02-terraform-baseline
 ```
 
 ### Backup Plan
@@ -311,9 +311,9 @@ A: Absolutely. Copilot can suggest module extraction, variable improvements, and
 
 **For Attendees**:
 
-1. Try the demo yourself: `scenarios/03-terraform-infrastructure/`
+1. Try the demo yourself: `scenarios/S02-terraform-baseline/`
 2. Review prompts: `prompts/effective-prompts.md`
-3. Explore other demos: Bicep (01), PowerShell (02), Troubleshooting (04)
+3. Explore other demos: Bicep (S01), Five Agent Workflow (S03), Troubleshooting (S06)
 4. Access partner toolkit: Sales decks, ROI calculators, customer pitch templates
 
 **For Partners**:

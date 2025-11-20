@@ -20,7 +20,7 @@ We have organized the content into practical scenarios that map to real-world ta
 
 This repository is designed to help partners prepare for the **Infrastructure and Database Migration to Microsoft Azure Specialization**.
 
-- [Audit Checklist & Scenario Mapping](scenarios/azure-specialization/azure-specialization-audit-checklist.md)
+- [Audit Checklist & Scenario Mapping](scenarios/S05-service-validation/azure-specialization-audit-checklist.md)
 
 ## 🚀 Getting Started
 

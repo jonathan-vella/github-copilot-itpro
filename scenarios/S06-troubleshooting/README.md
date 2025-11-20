@@ -231,7 +231,7 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 ## Files in This Demo
 
 ```bicep
-04-troubleshooting-assistant/
+S06-troubleshooting/
 ├── README.md                           # This file
 ├── DEMO-SCRIPT.md                      # Detailed presenter guide
 ├── scenario/
@@ -259,7 +259,7 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 ```powershell
 # 1. Clone repository
 git clone https://github.com/your-org/github-copilot-itpro.git
-cd github-copilot-itpro/scenarios/04-troubleshooting-assistant
+cd github-copilot-itpro/scenarios/S06-troubleshooting
 
 # 2. Connect to Azure
 Connect-AzAccount
@@ -377,10 +377,10 @@ Invoke-DiagnosticQuery -Symptom "Database CPU at 100%, queries timing out" -Reso
 
 ## Related Demos
 
-- **Demo 1**: Bicep Quickstart - Infrastructure troubleshooting
-- **Demo 2**: PowerShell Automation - Automated remediation
-- **Demo 3**: Azure Arc Onboarding - Hybrid cloud diagnostics
-- **Demo 5**: Documentation Generator - Post-incident reports
+- **Demo 1**: Bicep Baseline (S01) - Infrastructure troubleshooting
+- **Demo 2**: Terraform Baseline (S02) - Infrastructure as Code
+- **Demo 3**: Five Agent Workflow (S03) - Advanced planning
+- **Demo 4**: Documentation Generation (S04) - Post-incident reports
 
 ## Resources
 

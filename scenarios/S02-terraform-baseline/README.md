@@ -257,7 +257,7 @@ terraform/
 ## Files in This Demo
 
 ```
-scenarios/03-terraform-infrastructure/
+scenarios/S02-terraform-baseline/
 ├── README.md                        # This file
 ├── DEMO-SCRIPT.md                   # Step-by-step walkthrough
 ├── scenario/

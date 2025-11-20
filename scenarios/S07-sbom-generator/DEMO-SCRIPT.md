@@ -22,7 +22,7 @@ az login
 az account set --subscription "your-subscription-id"
 
 # Navigate to demo folder
-cd c:\Repos\github-copilot-itpro\demos\08-sbom-generator
+cd c:\Repos\github-copilot-itpro\scenarios\S07-sbom-generator
 ```
 
 ### 2. VS Code Setup

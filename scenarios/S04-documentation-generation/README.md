@@ -229,7 +229,7 @@ This demo shows how GitHub Copilot transforms documentation from a tedious, time
 ## Files in This Demo
 
 ```powershell
-05-documentation-generator/
+S04-documentation-generation/
 ├── README.md                           # This file
 ├── DEMO-SCRIPT.md                      # Detailed presenter guide
 ├── scenario/
@@ -258,7 +258,7 @@ This demo shows how GitHub Copilot transforms documentation from a tedious, time
 ```powershell
 # 1. Clone repository
 git clone https://github.com/your-org/github-copilot-itpro.git
-cd github-copilot-itpro/scenarios/05-documentation-generator
+cd github-copilot-itpro/scenarios/S04-documentation-generation
 
 # 2. Connect to Azure
 Connect-AzAccount
@@ -373,10 +373,10 @@ New-RunbookDoc -Type "DisasterRecovery" -ResourceGroupName "rg-prod"
 
 ## Related Demos
 
-- **Demo 1**: Bicep Quickstart - Infrastructure to document
-- **Demo 2**: PowerShell Automation - Scripts to document
-- **Demo 3**: Azure Arc Onboarding - Hybrid documentation needs
-- **Demo 4**: Troubleshooting Assistant - Generate troubleshooting docs
+- **Demo 1**: Bicep Baseline - Infrastructure to document
+- **Demo 2**: Terraform Baseline - Scripts to document
+- **Demo 3**: Five Agent Workflow - Hybrid documentation needs
+- **Demo 4**: Troubleshooting - Generate troubleshooting docs
 
 ## Resources
 

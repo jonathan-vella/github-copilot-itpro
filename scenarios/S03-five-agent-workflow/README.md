@@ -1,4 +1,4 @@
-# Demo 07: Five-Agent Workflow for Azure Infrastructure
+# Demo 03: Five-Agent Workflow for Azure Infrastructure
 
 ## 🎯 Overview
 
@@ -109,7 +109,7 @@ Traditional infrastructure design involves:
 1. **Navigate to prompts directory**:
 
    ```powershell
-   cd scenarios/07-five-agent-workflow/prompts
+   cd scenarios/S03-five-agent-workflow/prompts
 
 ```
 
@@ -133,7 +133,7 @@ See [DEMO-SCRIPT.md](DEMO-SCRIPT.md) for detailed walkthrough.
 ## 📁 Demo Structure
 
 ```bicep
-07-five-agent-workflow/
+S03-five-agent-workflow/
 ├── README.md                           # This file
 ├── DEMO-SCRIPT.md                      # Step-by-step presentation guide
 ├── scenario/
@@ -143,12 +143,13 @@ See [DEMO-SCRIPT.md](DEMO-SCRIPT.md) for detailed walkthrough.
 │   ├── stage1-architecture.md          # Azure Principal Architect prompt
 │   ├── stage2-planning.md              # Bicep Planning Specialist prompt
 │   └── stage3-implementation.md        # Bicep Implementation Specialist prompt
-├── outputs/
-│   ├── stage1-architecture-assessment.md   # WAF scores, recommendations
-│   ├── stage2-implementation-plan.md       # Resource definitions, dependencies
-│   └── stage3-validation-results.md        # Bicep validation outcomes
-└── templates/
-    └── [Link to infra/bicep/contoso-patient-portal/]
+├── solution/
+│   ├── outputs/
+│   │   ├── stage1-architecture-assessment.md   # WAF scores, recommendations
+│   │   ├── stage2-implementation-plan.md       # Resource definitions, dependencies
+│   │   └── stage3-validation-results.md        # Bicep validation outcomes
+│   └── templates/
+│       └── [Link to infra/bicep/contoso-patient-portal/]
 ```
 
 ## 🎬 Demo Flow
@@ -197,7 +198,7 @@ See [DEMO-SCRIPT.md](DEMO-SCRIPT.md) for detailed walkthrough.
 3. Validate templates:
 
    ```powershell
-   cd templates
+   cd solution/templates
    bicep build main.bicep --stdout --no-restore
    bicep lint main.bicep
 
@@ -324,7 +325,7 @@ By the end of this demo, participants will:
 
 ### Related Demos
 
-- [Demo 01: Bicep Quick Start](../01-bicep-quickstart/) - Intro to Bicep with Copilot
+- [Demo 01: Bicep Baseline (S01)](../S01-bicep-baseline/) - Intro to Bicep with Copilot
 - [Demo 06: Azure Specialization Prep](../06-azure-specialization-prep/) - Advanced architectures
 
 ### Implementation Files

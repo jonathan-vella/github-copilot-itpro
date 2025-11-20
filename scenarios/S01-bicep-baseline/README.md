@@ -136,7 +136,7 @@ graph TB
 
 ```bash
 # 1. Open the demo script
-code scenarios/01-bicep-quickstart/DEMO-SCRIPT.md
+code scenarios/S01-bicep-baseline/DEMO-SCRIPT.md
 
 # 2. Follow step-by-step instructions
 # 3. Use provided prompts
@@ -147,7 +147,7 @@ code scenarios/01-bicep-quickstart/DEMO-SCRIPT.md
 
 ```powershell
 # Navigate to validation folder
-cd scenarios/01-bicep-quickstart/validation
+cd scenarios/S01-bicep-baseline/validation
 
 # Run deployment script
 ./deploy.ps1 -ResourceGroupName "rg-copilot-demo" -Location "eastus"
@@ -274,8 +274,8 @@ az account set --subscription "your-subscription-id"
 
 ### For Learners
 
-1. 🎯 Complete [Demo 2: PowerShell Automation](../02-powershell-automation/)
-2. 🎯 Explore [Demo 3: Azure Arc Onboarding](../03-azure-arc-onboarding/)
+1. 🎯 Complete [Demo 2: Terraform Baseline](../S02-terraform-baseline/)
+2. 🎯 Explore [Demo 3: Five Agent Workflow](../S03-five-agent-workflow/)
 3. 🎯 Review [Skills Bridge: IaC Fundamentals](../../skills-bridge/iac-fundamentals/)
 
 ### For Partners
@@ -302,6 +302,6 @@ az account set --subscription "your-subscription-id"
 
 **⏱️ Time Investment**: 30 minutes  
 **💰 Value Delivered**: 10+ hours saved per week for your team  
-**🎯 Next Demo**: [PowerShell Automation](../02-powershell-automation/)
+**🎯 Next Demo**: [Terraform Baseline](../S02-terraform-baseline/)
 
 [🏠 Back to Main README](../../README.md) | [📚 View All Demos](../../README.md#-featured-demos)
