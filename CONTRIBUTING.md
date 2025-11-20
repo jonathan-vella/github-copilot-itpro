@@ -50,7 +50,7 @@ Thank you for your interest in contributing! This repository is designed to help
 All demos must follow this structure:
 
 ```bicep
-demos/XX-demo-name/
+scenarios/XX-demo-name/
 ├── README.md                   # Overview & learning objectives
 ├── DEMO-SCRIPT.md              # Step-by-step walkthrough with timing
 ├── scenario/
@@ -127,7 +127,7 @@ git checkout -b fix/issue-description
 
 ```powershell
 # Test deployment
-cd demos/your-demo-name/validation
+cd scenarios/your-demo-name/validation
 ./deploy.ps1
 
 # Verify resources created

@@ -142,7 +142,7 @@ output primaryEndpoints object = storageAccount.properties.primaryEndpoints
 ### Test the Enhanced Template
 
 ```bash
-cd demos/01-bicep-quickstart/with-copilot
+cd scenarios/01-bicep-quickstart/with-copilot
 
 # Validate syntax
 az bicep build --file storage.bicep
@@ -173,7 +173,7 @@ Expected feedback:
 
 ### Demo 01 Network Template Analysis
 
-Looking at `demos/01-bicep-quickstart/with-copilot/network.bicep`:
+Looking at `scenarios/01-bicep-quickstart/with-copilot/network.bicep`:
 
 **Already Following Best Practices** (because it was generated with Copilot):
 
@@ -255,7 +255,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'demos/01-bicep-quickstart/**'
+      - 'scenarios/01-bicep-quickstart/**'
 
 jobs:
   deploy:
@@ -374,7 +374,7 @@ virtual network with proper segmentation.
 # Clone the repository
 
 git clone https://github.com/jonathan-vella/github-copilot-itpro.git
-cd github-copilot-itpro/demos/01-bicep-quickstart/with-copilot
+cd github-copilot-itpro/scenarios/01-bicep-quickstart/with-copilot
 
 # Open in VS Code
 

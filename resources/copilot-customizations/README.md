@@ -463,7 +463,7 @@ We've curated a subset specifically relevant to Azure infrastructure and IT Pro 
 ### In This Repository
 
 - [Main README](../../README.md) - Project overview
-- [Demo Modules](../../demos/) - Hands-on examples
+- [Demo Modules](../../scenarios/) - Hands-on examples
 - [Partner Toolkit](../../partner-toolkit/) - Customer demo materials
 
 ### External Resources

@@ -27,7 +27,7 @@ This directory tracks improvements to the GitHub Copilot custom agents used in t
 
 - [Five-Mode Workflow](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md) - How to use the agents
 - [Agent Troubleshooting](../../resources/copilot-customizations/AGENT-TROUBLESHOOTING.md) - Common issues and solutions
-- [Test Suite](../../demos/agent-testing/) - Testing framework and procedures
+- [Test Suite](../../scenarios/agent-testing/) - Testing framework and procedures
 
 ### Agent Definitions
 
@@ -119,14 +119,14 @@ Implementation agent uses phase-based deployment with validation gates between e
 ### Run Test Suite
 
 ```powershell
-cd demos/agent-testing
+cd scenarios/agent-testing
 .\Run-AgentTests.ps1 -Agent all -Verbose
 ```
 
 ### Manual Testing
 
-1. Follow procedures in [TESTING-PROCEDURES.md](../../demos/agent-testing/TESTING-PROCEDURES.md)
-2. Use test cases from `demos/agent-testing/test-cases/`
+1. Follow procedures in [TESTING-PROCEDURES.md](../../scenarios/agent-testing/TESTING-PROCEDURES.md)
+2. Use test cases from `scenarios/agent-testing/test-cases/`
 3. Record results in [TESTING-RESULTS.md](./TESTING-RESULTS.md)
 
 ---
@@ -205,7 +205,7 @@ cd demos/agent-testing
 
 - **Getting Started:** [Five-Mode Workflow](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md)
 - **Troubleshooting:** [Agent Troubleshooting Guide](../../resources/copilot-customizations/AGENT-TROUBLESHOOTING.md)
-- **Testing:** [Test Suite README](../../demos/agent-testing/README.md)
+- **Testing:** [Test Suite README](../../scenarios/agent-testing/README.md)
 
 ### Reference
 
@@ -216,8 +216,8 @@ cd demos/agent-testing
 
 ### Procedures
 
-- **Testing Procedures:** [TESTING-PROCEDURES.md](../../demos/agent-testing/TESTING-PROCEDURES.md)
-- **Test Cases:** [test-cases/](../../demos/agent-testing/test-cases/)
+- **Testing Procedures:** [TESTING-PROCEDURES.md](../../scenarios/agent-testing/TESTING-PROCEDURES.md)
+- **Test Cases:** [test-cases/](../../scenarios/agent-testing/test-cases/)
 
 ---
 
@@ -250,7 +250,7 @@ cd demos/agent-testing
 ### Training Materials
 
 - [Partner Toolkit](../../partner-toolkit/)
-- [Demo Scripts](../../demos/)
+- [Demo Scripts](../../scenarios/)
 - [Skills Bridge](../../skills-bridge/)
 
 ---

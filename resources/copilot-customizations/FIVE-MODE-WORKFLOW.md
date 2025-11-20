@@ -678,7 +678,7 @@ graph TD
 
 ## Integration with Demos
 
-Each demo in `demos/` can showcase the four-mode workflow:
+Each demo in `scenarios/` can showcase the four-mode workflow:
 
 ### Demo 1: Bicep Quickstart
 
@@ -722,7 +722,7 @@ Each demo in `demos/` can showcase the four-mode workflow:
 - **Chat Modes:** `resources/copilot-customizations/chatmodes/`
 - **ADR Examples:** `/docs/adr/`
 - **Planning Examples:** `.bicep-planning-files/`
-- **Demo Scripts:** `demos/*/DEMO-SCRIPT.md`
+- **Demo Scripts:** `scenarios/*/DEMO-SCRIPT.md`
 
 ---
 

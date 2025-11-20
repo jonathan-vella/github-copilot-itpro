@@ -422,7 +422,7 @@ Code Fix:
 - Check `/docs/adr/` for architectural decisions
 - Review `.bicep-planning-files/` for planning examples
 - See `resources/copilot-customizations/FOUR-MODE-WORKFLOW.md` for detailed workflow documentation
-- Reference demo scripts in `demos/` for practical examples
+- Reference demo scripts in `scenarios/` for practical examples
 
 ## Resources
 

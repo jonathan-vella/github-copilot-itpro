@@ -33,7 +33,7 @@ This roadmap tracks improvements to the four custom GitHub Copilot agents used i
 **Deliverables:**
 
 - `docs/agent-improvements/` structure
-- `demos/agent-testing/` framework
+- `scenarios/agent-testing/` framework
 - Baseline test scenarios
 
 ---
@@ -229,7 +229,7 @@ This roadmap tracks improvements to the four custom GitHub Copilot agents used i
 
 - [Five-Mode Workflow](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md)
 - [Agent Definitions](../../.github/agents/)
-- [Test Suite](../../demos/agent-testing/)
+- [Test Suite](../../scenarios/agent-testing/)
 
 ### Tools
 

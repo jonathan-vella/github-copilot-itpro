@@ -292,7 +292,7 @@ Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contai
 
 ### In This Repository
 
-- **`../demos/`**: Complete demo modules with code
+- **`../scenarios/`**: Complete demo modules with code
 - **`../case-studies/`**: Success stories (coming soon)
 - **`../skills-bridge/`**: Learning content for IT Pros (coming soon)
 - **`../README.md`**: Main repository overview

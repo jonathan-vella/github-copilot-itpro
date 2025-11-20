@@ -90,7 +90,7 @@ IT Pros responsible for infrastructure deployment, cloud architects, DevOps engi
 
 ```
 
-1. Open `demos/01-bicep-quickstart/manual-approach/time-tracking.md`
+1. Open `scenarios/01-bicep-quickstart/manual-approach/time-tracking.md`
 2. Walk through: 81 minutes, 3 failed deployments, syntax errors
 3. Show complexity of ARM templates (confusing JSON)
 
@@ -161,7 +161,7 @@ that modern storage accounts should have these security settings."
 **Option A: Live Deploy (if time permits)**
 
 ```powershell
-cd demos/01-bicep-quickstart/validation
+cd scenarios/01-bicep-quickstart/validation
 .\deploy.ps1 -ResourceGroupName "rg-demo-001" -Environment dev
 ```
 
@@ -214,7 +214,7 @@ IT operations teams, Azure administrators, compliance officers
 "Let me show you what IT operations teams tell us they struggle with..."
 ```
 
-1. Open `demos/02-powershell-automation/scenario/requirements.md`
+1. Open `scenarios/02-powershell-automation/scenario/requirements.md`
 2. Highlight:
    - 2 hours/day manual reporting
    - $5K/month wasted on orphaned resources

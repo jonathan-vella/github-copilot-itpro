@@ -78,7 +78,7 @@ tfsec --version
 checkov --version
 
 # 4. Explore demos
-cd demos/
+cd scenarios/
 tree -L 2
 ```
 
@@ -112,11 +112,11 @@ Run these commands to validate your setup:
 
 ```bash
 # Test Bicep compilation (Demo 01)
-cd demos/01-bicep-quickstart/with-copilot/example-code/
+cd scenarios/01-bicep-quickstart/with-copilot/example-code/
 bicep build main.bicep
 
 # Test Terraform validation (Demo 03)
-cd demos/03-terraform-infrastructure/manual-approach/example-code/
+cd scenarios/03-terraform-infrastructure/manual-approach/example-code/
 terraform init
 terraform validate
 
@@ -282,9 +282,9 @@ az login --service-principal
 
 ## 📚 Related Documentation
 
-- [Demo 01: Bicep Quickstart](../demos/01-bicep-quickstart/README.md)
-- [Demo 02: PowerShell Automation](../demos/02-powershell-automation/README.md)
-- [Demo 03: Terraform Infrastructure](../demos/03-terraform-infrastructure/README.md)
+- [Demo 01: Bicep Quickstart](../scenarios/01-bicep-quickstart/README.md)
+- [Demo 02: PowerShell Automation](../scenarios/02-powershell-automation/README.md)
+- [Demo 03: Terraform Infrastructure](../scenarios/03-terraform-infrastructure/README.md)
 - [Copilot Instructions](.github/copilot-instructions.md)
 - [VS Code Dev Containers Documentation](https://code.visualstudio.com/docs/devcontainers/containers)
 

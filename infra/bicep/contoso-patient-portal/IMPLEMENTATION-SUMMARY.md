@@ -351,7 +351,7 @@ az deployment sub create \
 ## 📖 References
 
 - [Implementation Plan](.bicep-planning-files/INFRA.contoso-patient-portal.md)
-- [Architecture Assessment](demos/agent-testing/example-outputs/stage1-architecture-assessment.md)
+- [Architecture Assessment](scenarios/agent-testing/example-outputs/stage1-architecture-assessment.md)
 - [Azure Bicep Documentation](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
 - [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/)
 - [HIPAA Compliance on Azure](https://learn.microsoft.com/azure/compliance/offerings/offering-hipaa-us)

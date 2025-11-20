@@ -142,7 +142,7 @@ github-copilot-itpro/
 │   │   ├── bicep-plan.agent.md
 │   │   └── bicep-implement.agent.md
 │   └── copilot-instructions.md          # THIS FILE - AI agent guidance
-├── demos/                               # Self-contained 30-minute demo modules
+├── scenarios/                               # Self-contained 30-minute demo modules
 │   ├── 01-bicep-quickstart/
 │   ├── 02-powershell-automation/
 │   ├── 03-terraform-infrastructure/     # Multi-cloud IaC with Terraform
@@ -172,7 +172,7 @@ github-copilot-itpro/
 Each demo follows this structure:
 
 ```
-demos/XX-demo-name/
+scenarios/XX-demo-name/
 ├── README.md                   # Overview, objectives, prerequisites
 ├── DEMO-SCRIPT.md              # Step-by-step walkthrough (30 min)
 ├── scenario/
@@ -469,7 +469,7 @@ Between each phase: `bicep build` → `bicep lint` → `az deployment` → valid
 
 ### Technologies Used
 
-- **IaC**: Bicep (primary), Terraform (demos/03), ARM templates (legacy examples)
+- **IaC**: Bicep (primary), Terraform (scenarios/03), ARM templates (legacy examples)
 - **Automation**: PowerShell 7+, Azure CLI, Bash scripts
 - **Platform**: Azure (public cloud), multi-cloud patterns (Terraform)
 - **Tooling**: VS Code, GitHub Copilot, Azure CLI, Bicep CLI, Terraform CLI
@@ -625,7 +625,7 @@ For best results when assigning issues to Copilot:
 
 - ✅ **Be specific**: "Add NSG rules to network.bicep for web tier allowing HTTP/HTTPS"
 - ✅ **Include acceptance criteria**: "Must include outputs for NSG ID and include comments"
-- ✅ **Reference files**: "Update demos/01-bicep-quickstart/with-copilot/network.bicep"
+- ✅ **Reference files**: "Update scenarios/01-bicep-quickstart/with-copilot/network.bicep"
 - ✅ **Specify standards**: "Follow security baseline and use latest API versions"
 - ❌ **Avoid vague requests**: "Make the demo better" or "Add more content"
 
@@ -765,7 +765,7 @@ bicep lint infra/bicep/contoso-patient-portal/main.bicep
 bicep format infra/bicep/contoso-patient-portal/main.bicep
 
 # Validate Terraform configurations
-cd demos/03-terraform-infrastructure/with-copilot
+cd scenarios/03-terraform-infrastructure/with-copilot
 terraform init
 terraform fmt -check -recursive
 terraform validate
@@ -773,7 +773,7 @@ tfsec .
 checkov -d .
 
 # Run PowerShell script analyzer
-pwsh -Command "Invoke-ScriptAnalyzer -Path demos/02-powershell-automation/ -Recurse -Settings PSGallery"
+pwsh -Command "Invoke-ScriptAnalyzer -Path scenarios/02-powershell-automation/ -Recurse -Settings PSGallery"
 
 # Check markdown links (if markdownlint-cli installed)
 markdownlint '**/*.md' --ignore node_modules
@@ -812,7 +812,7 @@ For testing demos:
 
 ## Terraform Workflow (Alternative to Bicep)
 
-This repository includes Terraform infrastructure examples in `demos/03-terraform-infrastructure/` for multi-cloud scenarios.
+This repository includes Terraform infrastructure examples in `scenarios/03-terraform-infrastructure/` for multi-cloud scenarios.
 
 ### When to Use Terraform vs. Bicep
 
@@ -862,7 +862,7 @@ When generating Terraform code:
 ### Terraform Demo Structure
 
 ```
-demos/03-terraform-infrastructure/
+scenarios/03-terraform-infrastructure/
 ├── with-copilot/
 │   ├── main.tf              # Root module
 │   ├── variables.tf         # Input variables

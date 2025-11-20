@@ -20,7 +20,7 @@ cat resources/copilot-customizations/instructions/devops-core-principles.instruc
 
 ### Step 2: Test It
 
-Open `demos/01-bicep-quickstart/scenario/requirements.md` in VS Code and ask Copilot:
+Open `scenarios/01-bicep-quickstart/scenario/requirements.md` in VS Code and ask Copilot:
 
 ```
 
@@ -342,7 +342,7 @@ After completing this quick start:
 ## 📚 Additional Resources
 
 - **Full Documentation**: [README.md](README.md) - Complete guide to all customizations
-- **Demo Modules**: [../../demos/](../../demos/) - Hands-on examples
+- **Demo Modules**: [../../scenarios/](../../scenarios/) - Hands-on examples
 - **Awesome Copilot**: https://github.com/github/awesome-copilot - Source repository
 - **Copilot Docs**: https://docs.github.com/copilot - Official documentation
 

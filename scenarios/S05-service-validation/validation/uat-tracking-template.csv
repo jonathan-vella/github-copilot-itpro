@@ -1,0 +1,136 @@
+Test ID,Test Scenario,Category,Priority,Test Steps,Expected Result,Actual Result,Status,Tester,Test Date,Defect ID,Notes,Environment,Browser/Device,Duration (min)
+UAT-001,User Login - Valid Credentials,Authentication,P0,"1. Navigate to http://taskmanager-uat.eastus.cloudapp.azure.com
+2. Enter username: john.doe@contoso.com
+3. Enter password: [valid password]
+4. Click 'Sign In' button",User successfully authenticated and redirected to dashboard within 2 seconds,User authenticated successfully. Redirect time: 1.2 seconds,✅ Pass,John Doe,2025-11-18,,"Fast login, good user experience",UAT,Chrome 119,1.5
+UAT-002,User Login - Invalid Password,Authentication,P0,"1. Navigate to application URL
+2. Enter valid username
+3. Enter incorrect password
+4. Click 'Sign In' button",Error message displayed: 'Invalid username or password'. No system details exposed.,Error message shown correctly. No sensitive information leaked.,✅ Pass,Sarah Miller,2025-11-18,,Security validation passed,UAT,Firefox 120,2
+UAT-003,User Login - Account Lockout,Authentication,P1,"1. Attempt login with wrong password 5 times
+2. Try logging in with correct password on 6th attempt",Account locked after 5 failed attempts. Error message: 'Account temporarily locked. Try again in 15 minutes.',Account locked correctly after 5 attempts. Lockout message displayed.,✅ Pass,Mike Chen,2025-11-18,,Lockout mechanism working as designed,UAT,Edge 119,8
+UAT-004,Create New Task - All Fields,Task Management,P0,"1. Click 'New Task' button
+2. Enter Title: 'Inspect Machine A-103'
+3. Enter Description: 'Monthly maintenance inspection'
+4. Select Due Date: 2025-11-25
+5. Select Priority: High
+6. Click 'Save'",Task created successfully and appears in task list with all entered details,Task created. All fields saved correctly. Task ID: 12847 generated.,✅ Pass,Lisa Wong,2025-11-18,,Task creation smooth,UAT,Chrome 119,2
+UAT-005,Create New Task - Required Fields Only,Task Management,P0,"1. Click 'New Task' button
+2. Enter Title: 'Update inventory'
+3. Leave Description blank
+4. Leave Due Date blank
+5. Click 'Save'",Task created with title only. Optional fields remain empty.,Task created successfully with minimal data.,✅ Pass,David Park,2025-11-18,,Works as expected,UAT,Safari 17,1.5
+UAT-006,Create Task - Missing Title,Task Management,P0,"1. Click 'New Task' button
+2. Leave Title blank
+3. Enter Description: 'Test task'
+4. Click 'Save'",Validation error displayed: 'Title is required'. Task not saved.,Error message: 'Title cannot be empty',✅ Pass,Emma Davis,2025-11-18,,Good validation,UAT,Chrome 119,1
+UAT-007,Update Task Status - In Progress to Completed,Task Management,P0,"1. Find task with status 'In Progress'
+2. Click on task to open details
+3. Change status to 'Completed'
+4. Click 'Save'",Task status updated to 'Completed'. Completion timestamp recorded.,Status changed. Timestamp: 2025-11-18 14:23:45,✅ Pass,Robert Taylor,2025-11-18,,Status change works correctly,UAT,Firefox 120,2
+UAT-008,Update Task - Edit Title and Description,Task Management,P0,"1. Open existing task
+2. Modify title from 'Check valve' to 'Inspect valve pressure'
+3. Update description
+4. Click 'Save'",Task updated with new title and description. Modified timestamp updated.,Changes saved successfully. Modified by: robert.taylor@contoso.com,✅ Pass,Amy Johnson,2025-11-18,,Edit functionality working,UAT,Edge 119,2.5
+UAT-009,Delete Task - With Confirmation,Task Management,P0,"1. Select task from list
+2. Click 'Delete' button
+3. Confirm deletion in popup dialog",Confirmation dialog appears. Task deleted after confirmation. Task removed from list.,Confirmation prompt shown. Task deleted successfully.,✅ Pass,Tom Wilson,2025-11-18,,Confirmation prevents accidental deletion,UAT,Chrome 119,1.5
+UAT-010,Delete Task - Cancel Operation,Task Management,P1,"1. Select task
+2. Click 'Delete'
+3. Click 'Cancel' in confirmation dialog",Task not deleted. Remains in task list.,Task remained in list after cancel.,✅ Pass,Jessica Brown,2025-11-18,,Cancel works correctly,UAT,Chrome 119,1
+UAT-011,Filter Tasks by Status,Search & Filter,P1,"1. Navigate to task list
+2. Use status filter dropdown
+3. Select 'Completed'",Only tasks with 'Completed' status displayed. Count updated.,Filter applied. Showing 47 completed tasks.,✅ Pass,Kevin Martinez,2025-11-18,,Filter works but slightly slow,UAT,Firefox 120,2
+UAT-012,Filter Tasks by Date Range,Search & Filter,P1,"1. Open date filter
+2. Set start date: 2025-11-01
+3. Set end date: 2025-11-18
+4. Click 'Apply'",Tasks within date range displayed. Other tasks hidden.,Date filter applied correctly. 128 tasks in range.,✅ Pass,Linda Anderson,2025-11-18,,Works as expected,UAT,Chrome 119,2.5
+UAT-013,Search Tasks by Keyword,Search & Filter,P1,"1. Enter 'inspection' in search box
+2. Press Enter or click Search",All tasks containing 'inspection' in title or description displayed. Case-insensitive search.,Search returned 23 matching tasks. Highlighting of keyword would be nice.,⚠️ Pass with Comments,Paul Garcia,2025-11-18,,Consider adding keyword highlighting,UAT,Edge 119,1.5
+UAT-014,Export Tasks to Excel,Reporting,P1,"1. Navigate to Reports section
+2. Select date range
+3. Select 'All Tasks' report
+4. Click 'Export to Excel'",Excel file downloaded with all tasks in selected range. Properly formatted.,File downloaded: tasks_20251118_142356.xlsx. Format correct.,✅ Pass,Nancy Lee,2025-11-18,,Export working perfectly,UAT,Chrome 119,3
+UAT-015,View Task History,Audit Trail,P2,"1. Open task details
+2. Click 'History' tab",Complete audit trail displayed showing all changes with timestamps and user names.,History shows: Created by john.doe (11/15), Status changed by sarah.miller (11/17), Updated by mike.chen (11/18),✅ Pass,Chris Rodriguez,2025-11-18,,Good audit trail,UAT,Firefox 120,2
+UAT-016,Load Balancing - Simultaneous Access,Performance,P0,"1. 5 users access application simultaneously
+2. Each user creates and updates tasks
+3. Monitor response times",All users can access and use app. Response time remains < 3 seconds. No errors.,All 5 test users successful. Avg response: 1.4s. No errors.,✅ Pass,Test Team,2025-11-18,,Good performance under load,UAT,Multiple,15
+UAT-017,Database Connection Failure Handling,Error Handling,P1,"1. Simulate database disconnect (test environment)
+2. Attempt to save task
+3. Observe error handling",User-friendly error message displayed. 'Unable to save task. Please try again.' Retry option available.,Error message displayed correctly. Retry button present.,✅ Pass,David Park,2025-11-18,,"Good error handling, user-friendly",UAT,Chrome 119,5
+UAT-018,Session Timeout - Auto Logout,Security,P1,"1. Login to application
+2. Remain idle for 30 minutes
+3. Attempt to perform action",Session expires. User redirected to login with message 'Session expired. Please log in again.',Session timeout after 30 min. Redirect to login worked.,✅ Pass,Emma Davis,2025-11-18,,Timeout working as designed,UAT,Edge 119,35
+UAT-019,Mobile Responsive - Task List View,Mobile UX,P2,"1. Access app on mobile device
+2. Navigate to task list
+3. Test scrolling and task selection",Task list displays properly. Touch-friendly buttons. Smooth scrolling.,Layout responsive. Buttons appropriate size for touch.,✅ Pass,Lisa Wong,2025-11-18,,Mobile experience good,UAT,iPhone 15 Safari,3
+UAT-020,Mobile Responsive - Create Task,Mobile UX,P2,"1. On mobile device
+2. Click 'New Task'
+3. Fill in form fields
+4. Save task",Form displays properly on mobile. Keyboard doesn't obscure fields. Save successful.,Form usable on mobile. Some fields slightly cramped.,⚠️ Pass with Comments,Mike Chen,2025-11-18,DEF-007,"Consider larger input fields on mobile",UAT,Samsung Galaxy S24,4
+UAT-021,Task Title Maximum Length Validation,Validation,P1,"1. Create new task
+2. Enter title with 300 characters
+3. Attempt to save",Validation error: 'Title must be 255 characters or less'. Client-side and server-side validation.,Client validation missing. Server returned 500 error instead of validation message.,❌ Fail,Sarah Miller,2025-11-18,DEF-001,Critical - Need proper validation,UAT,Chrome 119,3
+UAT-022,Special Characters in Task Title,Validation,P1,"1. Create task with title containing special chars: <>&""'
+2. Save task
+3. View task in list",Special characters properly encoded. No XSS vulnerability. Display correct.,Characters encoded correctly. No security issues.,✅ Pass,Robert Taylor,2025-11-18,,Security validation passed,UAT,Firefox 120,2
+UAT-023,Concurrent Edit Conflict,Concurrency,P2,"1. User A opens task for editing
+2. User B opens same task
+3. User A saves changes
+4. User B attempts to save",Conflict detected. User B notified: 'Task modified by another user. Refresh to see latest version.',Conflict message displayed. Refresh option provided.,✅ Pass,Amy Johnson,2025-11-18,,Concurrency handling good,UAT,Multiple,8
+UAT-024,Task Due Date - Past Date Warning,Validation,P2,"1. Create task
+2. Select due date in past
+3. Save task",Warning displayed but allows save: 'Due date is in the past. Continue?',Warning shown. User can proceed or cancel.,✅ Pass,Tom Wilson,2025-11-18,,Appropriate warning level,UAT,Edge 119,2
+UAT-025,Backup and Restore - Task Recovery,Data Recovery,P0,"1. Note existing task count
+2. Administrator performs backup
+3. Delete test tasks
+4. Administrator restores backup
+5. Verify tasks restored",Deleted tasks restored from backup. Data integrity maintained.,All tasks restored correctly. Checksums match.,✅ Pass,Admin Team,2025-11-18,,DR test successful,UAT,N/A,45
+UAT-026,High Volume - 1000 Tasks Display,Performance,P1,"1. Ensure 1000+ tasks in database
+2. Navigate to task list
+3. Measure load time",Task list loads within 5 seconds. Pagination implemented (50 tasks per page). Navigation smooth.,Initial load: 3.2s. Pagination works. Total: 1247 tasks.,✅ Pass,Kevin Martinez,2025-11-18,,Performance acceptable,UAT,Chrome 119,4
+UAT-027,Sorting - Task List by Due Date,Sorting,P1,"1. Open task list
+2. Click 'Due Date' column header
+3. Observe sort order",Tasks sorted by due date ascending. Click again for descending.,Sorting works correctly both directions.,✅ Pass,Linda Anderson,2025-11-18,,Sorting functionality good,UAT,Firefox 120,1.5
+UAT-028,Accessibility - Screen Reader Support,Accessibility,P2,"1. Enable screen reader (NVDA)
+2. Navigate through application
+3. Create and edit task using keyboard only",All elements accessible via keyboard. Screen reader announces all actions and content.,Keyboard navigation works. Some aria-labels missing on buttons.,⚠️ Pass with Comments,Paul Garcia,2025-11-18,DEF-008,Add aria-labels for better accessibility,UAT,Chrome 119 + NVDA,12
+UAT-029,Bulk Operations - Multiple Task Delete,Bulk Actions,P2,"1. Select 10 tasks using checkboxes
+2. Click 'Delete Selected' button
+3. Confirm bulk delete",Confirmation shows count: 'Delete 10 selected tasks?'. All selected tasks deleted after confirmation.,Bulk delete successful. All 10 tasks removed.,✅ Pass,Nancy Lee,2025-11-18,,Bulk actions working well,UAT,Edge 119,3
+UAT-030,Print Task Report,Reporting,P2,"1. Generate task report
+2. Click 'Print' button
+3. Preview print layout",Print-friendly layout without navigation elements. Proper page breaks. Company branding included.,Print preview looks professional. Layout clean.,✅ Pass,Chris Rodriguez,2025-11-18,,Print layout excellent,UAT,Chrome 119,2
+UAT-031,Task Assignment to User,Collaboration,P1,"1. Open task
+2. Click 'Assign to' dropdown
+3. Select user from list
+4. Save",Task assigned to selected user. User receives email notification.,Assignment works but email notification delayed by 5 minutes.,⚠️ Pass with Comments,Jessica Brown,2025-11-18,DEF-009,Email notification delay acceptable for now,UAT,Firefox 120,3
+UAT-032,Task Comments - Add Comment,Collaboration,P2,"1. Open task details
+2. Enter comment in comment box: 'Requires supervisor approval'
+3. Click 'Add Comment'",Comment added with timestamp and username. Visible to all users with access to task.,Comment added successfully. Shows: Chris Rodriguez - 11/18/2025 2:45 PM,✅ Pass,David Park,2025-11-18,,Comments feature working,UAT,Chrome 119,2
+UAT-033,File Attachment - Upload Document,Attachments,P2,"1. Open task
+2. Click 'Attach File'
+3. Select PDF file (2 MB)
+4. Upload",File uploaded successfully. File name and size displayed. Download link available.,Upload successful: maintenance_checklist.pdf (2.1 MB),✅ Pass,Emma Davis,2025-11-18,,File upload working,UAT,Edge 119,3
+UAT-034,File Attachment - Size Limit,Attachments,P2,"1. Attempt to upload file > 10 MB
+2. Observe validation",Error message: 'File size exceeds 10 MB limit'. Upload rejected.,Validation works. Clear error message displayed.,✅ Pass,Lisa Wong,2025-11-18,,Size limit enforced correctly,UAT,Chrome 119,2
+UAT-035,Dashboard - Task Summary Widgets,Dashboard,P1,"1. Navigate to dashboard
+2. View summary widgets (Total Tasks, Completed, In Progress, Overdue)
+3. Verify counts accurate",Widget counts match actual task counts. Charts update in real-time.,All widget counts verified accurate. Pie chart showing task distribution.,✅ Pass,Robert Taylor,2025-11-18,,Dashboard data accurate,UAT,Firefox 120,3
+UAT-036,Notification - Task Due Tomorrow,Notifications,P2,"1. Create task with due date tomorrow
+2. Wait for daily notification job (or trigger manually in test)
+3. Check for notification",Email notification sent 24 hours before due date: 'Task Due Tomorrow: [task title]',Notification received in test. Email format professional.,✅ Pass,Sarah Miller,2025-11-18,,Notification system working,UAT,Outlook,5
+UAT-037,User Preferences - Theme Selection,Customization,P3,"1. Navigate to Settings
+2. Select 'Dark Theme'
+3. Apply changes",Application switches to dark theme. Preference saved for user.,Theme changed successfully. Persists after logout/login.,✅ Pass,Mike Chen,2025-11-18,,Nice UI customization,UAT,Chrome 119,2
+UAT-038,Data Export - JSON Format,Integration,P2,"1. Navigate to Reports
+2. Select tasks
+3. Choose 'Export as JSON'
+4. Download file",JSON file downloaded with properly formatted task data. Valid JSON structure.,JSON file valid. Tested with JSON validator. Structure correct.,✅ Pass,Amy Johnson,2025-11-18,,Good for API integration,UAT,Edge 119,3
+UAT-039,API Access - Authentication Token,API,P2,"1. Login via API endpoint
+2. Retrieve authentication token
+3. Use token for API request",Bearer token returned. Token valid for 1 hour. API request succeeds with valid token.,Token received. API calls working with authentication.,✅ Pass,Tom Wilson,2025-11-18,,API authentication solid,UAT,Postman,8
+UAT-040,System Health - Monitoring Dashboard,Admin,P1,"1. Login as admin
+2. Navigate to System Health dashboard
+3. Review metrics",Dashboard shows: Server status, Database connections, Memory usage, Active users, Response times.,All metrics visible. Currently: 2 servers healthy, 15 DB connections, 4 active users.,✅ Pass,Admin Team,2025-11-18,,Monitoring dashboard comprehensive,UAT,Chrome 119,5

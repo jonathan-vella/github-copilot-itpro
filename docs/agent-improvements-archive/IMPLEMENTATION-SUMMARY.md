@@ -118,7 +118,7 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 
 #### Test Suite Structure
 
-**Location:** `demos/agent-testing/`
+**Location:** `scenarios/agent-testing/`
 
 **Components:**
 
@@ -138,7 +138,7 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 
 #### Test Runner Script
 
-**File:** `demos/agent-testing/Run-AgentTests.ps1`
+**File:** `scenarios/agent-testing/Run-AgentTests.ps1`
 
 **Features:**
 
@@ -214,10 +214,10 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 3. `docs/agent-improvements/TESTING-RESULTS.md`
 
 **Testing Framework:**
-4. `demos/agent-testing/README.md`
-5. `demos/agent-testing/Run-AgentTests.ps1`
-6. `demos/agent-testing/TESTING-PROCEDURES.md`
-7. `demos/agent-testing/test-cases/azure-architect-tests.md`
+4. `scenarios/agent-testing/README.md`
+5. `scenarios/agent-testing/Run-AgentTests.ps1`
+6. `scenarios/agent-testing/TESTING-PROCEDURES.md`
+7. `scenarios/agent-testing/test-cases/azure-architect-tests.md`
 
 **Troubleshooting:**
 8. `resources/copilot-customizations/AGENT-TROUBLESHOOTING.md`
@@ -272,7 +272,7 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 2. **Run Baseline Tests**
 
    ```powershell
-   cd demos/agent-testing
+   cd scenarios/agent-testing
    .\Run-AgentTests.ps1 -Agent all -Baseline -Verbose
 ```
 
@@ -624,7 +624,7 @@ Additionally, comprehensive testing and troubleshooting frameworks ensure these 
 # Ctrl+Shift+A
 
 # Run tests
-cd demos/agent-testing
+cd scenarios/agent-testing
 .\Run-AgentTests.ps1 -Agent all
 
 # View improvements
