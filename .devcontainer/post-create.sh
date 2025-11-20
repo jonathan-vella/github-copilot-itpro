@@ -93,7 +93,8 @@ sudo apt-get install -y -qq \
     curl \
     wget \
     unzip \
-    graphviz
+    graphviz \
+    dos2unix
 
 # Configure Git safe directory (for mounted volumes)
 echo "🔐 Configuring Git safe directory..."
@@ -104,6 +105,12 @@ echo "🔧 Installing Bicep CLI..."
 if ! az bicep version &> /dev/null; then
     rm -rf ~/.azure/bin/bicep
     az bicep install && chmod +x ~/.azure/bin/bicep || echo "Warning: Bicep installation had issues, continuing..."
+fi
+
+# Add Bicep to PATH if not already present
+if [[ ":$PATH:" != *":$HOME/.azure/bin:"* ]]; then
+    echo 'export PATH=$PATH:$HOME/.azure/bin' >> ~/.bashrc
+    echo "  → Added Bicep to PATH in .bashrc"
 fi
 
 # Set up Azure CLI defaults
