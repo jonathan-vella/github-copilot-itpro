@@ -53,21 +53,31 @@ This demo shows how GitHub Copilot transforms documentation from a tedious, time
    - Scan Azure resources and generate architecture documentation
    - Create Mermaid diagrams automatically
    - Export to Markdown with embedded visuals
+   - Includes network topology and cost analysis
 
 2. **New-RunbookDoc.ps1** (15 min)
    - Generate operational runbooks from infrastructure code
    - Extract deployment steps from Bicep/ARM templates
    - Create step-by-step procedures with validation checks
+   - Includes troubleshooting sections and rollback procedures
 
 3. **New-TroubleshootingGuide.ps1** (15 min)
    - Create troubleshooting guides from Application Insights patterns
    - Document common errors and resolutions
    - Generate decision trees for issue diagnosis
+   - Includes KQL queries and resolution playbooks
 
 4. **New-APIDocumentation.ps1** (15 min)
    - Generate API documentation from code comments and OpenAPI specs
    - Create interactive examples with sample requests/responses
    - Export to Markdown, HTML, or Swagger UI format
+   - Includes authentication flows and error handling
+
+5. **New-Day2OperationsGuide.ps1** (20 min)
+   - Generate comprehensive Day 2 operations guide via GitHub Copilot
+   - Analyzes deployed resources and creates tailored operational procedures
+   - Covers monitoring, backup, scaling, security, and cost management
+   - Includes automation scripts and troubleshooting playbooks
 
 ### Key Features
 
@@ -242,7 +252,15 @@ S04-documentation-generation/
 │   ├── New-ArchitectureDoc.ps1         # Architecture documentation generator
 │   ├── New-RunbookDoc.ps1              # Operational runbook generator
 │   ├── New-TroubleshootingGuide.ps1    # Troubleshooting guide generator
-│   └── New-APIDocumentation.ps1        # API documentation generator
+│   ├── New-APIDocumentation.ps1        # API documentation generator
+│   ├── New-Day2OperationsGuide.ps1     # Day 2 operations guide generator (via Copilot)
+│   └── output/                         # Generated documentation examples
+│       ├── architecture-documentation.md
+│       ├── runbook-main.md
+│       ├── troubleshooting-guide.md
+│       ├── api-documentation.md
+│       ├── day2-operations-guide.md
+│       └── day2-operations-prompt.txt
 ├── prompts/
 │   └── effective-prompts.md            # Documentation generation prompts
 └── examples/
@@ -265,10 +283,16 @@ Connect-AzAccount
 Set-AzContext -SubscriptionId "<your-subscription-id>"
 
 # 3. Generate architecture documentation
-.\solution\New-ArchitectureDoc.ps1 -ResourceGroupName "rg-production" -OutputPath ".\docs"
+.\solution\New-ArchitectureDoc.ps1 -ResourceGroupName "rg-production" -OutputPath ".\output" -IncludeDiagrams -IncludeNetworkTopology -IncludeCostAnalysis
 
-# 4. View generated documentation
-code .\docs\architecture.md
+# 4. Generate Day 2 operations guide (via Copilot prompt)
+.\solution\New-Day2OperationsGuide.ps1 -ResourceGroupName "rg-production" -OutputPath ".\output"
+# Copy the generated prompt from .\output\day2-operations-prompt.txt
+# Paste into GitHub Copilot Chat for comprehensive Day 2 operations guide
+
+# 5. View generated documentation
+code .\output\architecture-documentation.md
+code .\output\day2-operations-guide.md
 ```
 
 ### Full Demo Setup (20 Minutes)
@@ -339,6 +363,42 @@ New-RunbookDoc -Type "DisasterRecovery" -ResourceGroupName "rg-prod"
 ```
 
 **Result**: DR runbook in 20 minutes vs. 4 hours (92% faster)
+
+### 4. Day 2 Operations Guide
+
+**Challenge**: Create comprehensive Day 2 operations guide for deployed infrastructure
+
+**Manual Approach** (8 hours):
+
+- Inventory all resources
+- Document daily/weekly/monthly tasks
+- Create monitoring queries and alert configurations
+- Write backup/recovery procedures
+- Document scaling procedures
+- Create security checklists
+- Write troubleshooting playbooks
+- Format and validate
+
+**With Copilot** (1 hour):
+
+```powershell
+# Analyze deployed resources and generate Copilot prompt
+.\solution\New-Day2OperationsGuide.ps1 -ResourceGroupName "rg-contoso-patient-portal-dev" -OutputPath ".\output"
+
+# Use generated prompt with GitHub Copilot Chat to create comprehensive guide
+# Prompt is automatically saved to .\output\day2-operations-prompt.txt
+```
+
+**Generated Output** (Sample from Contoso Patient Portal):
+
+- **20 resources analyzed**: App Service, SQL Database, Key Vault, VNet, NSGs, Private Endpoints
+- **11 comprehensive sections**: Daily ops (15 min), weekly tasks (45 min), monthly ops (2-3 hrs)
+- **15+ PowerShell scripts**: Health checks, backup verification, scaling procedures
+- **10+ KQL queries**: Monitoring, alerting, performance analysis
+- **3 detailed playbooks**: CPU issues, SQL connectivity, Key Vault access
+- **Cost breakdown**: $305/month with $200/month optimization opportunities
+
+**Result**: Complete Day 2 ops guide in 1 hour vs. 8 hours (87.5% faster)
 
 ## Key Takeaways
 
