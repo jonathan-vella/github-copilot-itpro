@@ -189,12 +189,15 @@ Generate a Bicep module (compute.bicep) for Windows Server VMs with IIS installa
 **Custom Script Extension Requirements**:
 Install and configure IIS with the following PowerShell script:
 ```
+
 Install-WindowsFeature -Name Web-Server -IncludeManagementTools
 Install-WindowsFeature -Name Web-Asp-Net45
 New-WebAppPool -Name 'TaskManagerPool'
 Set-ItemProperty IIS:\AppPools\TaskManagerPool -name processModel.identityType -value 2
 New-Item -Path 'C:\inetpub\wwwroot\TaskManager' -ItemType Directory
+
 # Configure IIS site binding
+
 ```
 
 **Azure Monitor Agent Extension**:
@@ -246,6 +249,7 @@ Generate the complete compute.bicep module with all resources, extensions, param
 ```
 
 **Why this works**:
+
 - ✅ Complete VM specifications including sizes and images
 - ✅ Detailed extension configurations with actual scripts
 - ✅ Loop implementation for scalability
@@ -356,7 +360,9 @@ Generate a Bicep module (database.bicep) for Azure SQL Database with comprehensi
 **Example Connection String Output**:
 
 ```
+
 Server=tcp:{serverName}.database.windows.net,1433;Initial Catalog={databaseName};Persist Security Info=False;User ID={username};Password={your_password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+
 ```
 
 Generate the complete database.bicep module with all resources, security configurations, parameters, and outputs.
@@ -364,6 +370,7 @@ Generate the complete database.bicep module with all resources, security configu
 ```
 
 **Why this works**:
+
 - ✅ Comprehensive security configuration (TDE, auditing, threat detection)
 - ✅ Detailed backup and retention policies
 - ✅ Firewall rules with least privilege
@@ -478,6 +485,7 @@ Generate the complete loadbalancer.bicep module with all resources, rules, param
 ```
 
 **Why this works**:
+
 - ✅ Complete load balancer configuration
 - ✅ Health probe specifications with timing
 - ✅ Multiple load balancing rules
@@ -609,6 +617,7 @@ Generate the complete monitoring.bicep module with all resources, alert rules, d
 ```
 
 **Why this works**:
+
 - ✅ Comprehensive monitoring strategy
 - ✅ Multiple alert rules with specific thresholds
 - ✅ Diagnostic settings for all resource types
@@ -629,6 +638,7 @@ Generate a Bicep template for VMs in Azure.
 ```
 
 **Problems**:
+
 - No VM specifications (size, OS, quantity)
 - No network configuration
 - No parameters defined
@@ -646,6 +656,7 @@ Create a network.bicep module with a VNet and two subnets.
 ```
 
 **Problems**:
+
 - No address spaces specified
 - No NSG configurations
 - No subnet associations
@@ -663,6 +674,7 @@ Generate database.bicep for Azure SQL with all features enabled.
 ```
 
 **Problems**:
+
 - No parameter definitions
 - No credential handling strategy
 - "All features" is too vague
@@ -676,6 +688,7 @@ Generate database.bicep for Azure SQL with all features enabled.
 ### 1. Specify Complete Resource Configurations
 
 Be explicit about every property:
+
 ```
 
 SQL Database Configuration:
@@ -691,6 +704,7 @@ SQL Database Configuration:
 ### 2. Define Comprehensive Parameter Lists
 
 Include all parameters with types and defaults:
+
 ```
 
 Parameters:
@@ -706,6 +720,7 @@ Parameters:
 ### 3. Request All Necessary Outputs
 
 Specify outputs for dependent modules:
+
 ```
 
 Outputs Required:
@@ -720,6 +735,7 @@ Outputs Required:
 ### 4. Emphasize Security Best Practices
 
 Always mention security requirements:
+
 ```
 
 Security Requirements:
@@ -735,6 +751,7 @@ Security Requirements:
 ### 5. Include Decorators and Comments
 
 Request documentation in code:
+
 ```
 
 Implementation Requirements:
@@ -749,6 +766,7 @@ Implementation Requirements:
 ### 6. Reference Azure Verified Modules
 
 Direct to use official modules:
+
 ```
 
 Best Practices:
@@ -845,6 +863,7 @@ Generate a complete Bicep module (network.bicep) for network infrastructure supp
 **Parameters**:
 
 ```
+
 @description('Azure region for all resources')
 param location string = resourceGroup().location
 
@@ -878,11 +897,13 @@ param tags object = {
   ManagedBy: 'Bicep'
   AuditRequired: 'Yes'
 }
+
 ```bicep
 
 **Outputs Required**:
 
 ```
+
 @description('Virtual network resource ID')
 output vnetId string
 
@@ -909,6 +930,7 @@ output publicIpAddress string
 
 @description('Public IP DNS FQDN')
 output publicIpFqdn string
+
 ```
 
 **Implementation Requirements**:
@@ -964,6 +986,7 @@ output publicIpFqdn string
 **Expected Module Structure**:
 
 ```
+
 // network.bicep - Network Infrastructure Module
 // Purpose: Deploys VNet, subnets, NSGs, and public IP for Contoso Task Manager
 // ALZ Alignment: Network topology, security, resource organization
@@ -1005,6 +1028,7 @@ resource dataNsgDiagnostics 'Microsoft.Insights/diagnosticSettings@2021-05-01-pr
 // ============================================
 
 // [All output definitions]
+
 ```bicep
 
 **Validation Requirements**:

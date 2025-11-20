@@ -115,7 +115,7 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
 
    "Notice it scored each pillar and provided confidence levels. This helps us understand trade-offs."
 
-2. **Service Recommendations:**
+1. **Service Recommendations:**
 
 ```yaml
    - App Service Standard S1 (zone-redundant, 2 instances) - $146/month
@@ -126,7 +126,7 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
 
    "It recommended specific SKUs with justifications and costs."
 
-3. **HIPAA Compliance:**
+1. **HIPAA Compliance:**
 
 ```text
    ✅ Encryption at rest (TDE for SQL Database)
@@ -182,7 +182,7 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
 
    "Visual dependency graph shows deployment order."
 
-3. **4-Phase Implementation:**
+1. **4-Phase Implementation:**
 
 ```yaml
    Phase 1: Foundation (8 tasks)
@@ -193,7 +193,7 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
 
    "Progressive deployment ensures dependencies are met."
 
-4. **Cost Table:**
+1. **Cost Table:**
 
 ```bicep
    | Resource | Monthly Cost |

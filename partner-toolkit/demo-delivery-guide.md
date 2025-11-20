@@ -245,9 +245,9 @@ IT operations teams, Azure administrators, compliance officers
 #>
 ```
 
-3. Accept Copilot's comment-based help completion
-4. Type: `[CmdletBinding()]` and let Copilot suggest parameters
-5. Type: `# Get all resources in subscription` and accept function logic
+1. Accept Copilot's comment-based help completion
+2. Type: `[CmdletBinding()]` and let Copilot suggest parameters
+3. Type: `# Get all resources in subscription` and accept function logic
 
 **Copilot Magic Moments:**
 
@@ -433,13 +433,13 @@ additional compliance and privacy features."
 
 ```
 
-3. **Technical Setup**
+1. **Technical Setup**
    - Schedule 30-minute setup session
    - Install VS Code and Copilot extension
    - Configure Azure CLI authentication
    - Walk through first task together
 
-4. **Follow-Up Demo**
+2. **Follow-Up Demo**
    - Schedule demo of remaining scenarios
    - Show Troubleshooting Assistant
    - Show Documentation Generator

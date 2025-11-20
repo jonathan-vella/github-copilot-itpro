@@ -294,6 +294,7 @@ Start with main.bicep and provide complete, deployable code.
 
    ```powershell
    tree infrastructure /F
+
 ```
 
 ---

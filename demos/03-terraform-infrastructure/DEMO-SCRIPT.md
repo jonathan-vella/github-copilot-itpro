@@ -44,6 +44,7 @@ code demos/03-terraform-infrastructure
 **Show**: `scenario/requirements.md` - Scroll through the pain points
 
 **Pain Points to Emphasize**:
+
 - ❌ 60 hours to build production-ready Terraform code manually
 - ❌ Inconsistent patterns across teams
 - ❌ Security misconfigurations discovered in audits
@@ -59,6 +60,7 @@ code demos/03-terraform-infrastructure
 **Show**: `manual-approach/example-code/main.tf`
 
 **Point Out**:
+
 - Basic resource definitions
 - Hard-coded values
 - Minimal variable validation
@@ -91,12 +93,13 @@ code demos/03-terraform-infrastructure
 ```
 
 **Accept Copilot suggestions** - Point out:
+
 - ✅ Complete resource blocks
 - ✅ Proper subnet CIDR notation
 - ✅ Security group associations
 - ✅ Deny-by-default rules
 
-3. Create `variables.tf` - Type comment:
+1. Create `variables.tf` - Type comment:
 
 ```hcl
 # Define variables for networking module:
@@ -110,7 +113,7 @@ code demos/03-terraform-infrastructure
 
 **Accept suggestions** - Highlight validation blocks
 
-4. Create `outputs.tf` - Type comment:
+1. Create `outputs.tf` - Type comment:
 
 ```hcl
 # Export outputs:
@@ -141,6 +144,7 @@ code demos/03-terraform-infrastructure
 ```
 
 **Accept suggestions** - Point out:
+
 - ✅ Zone-redundant SKU
 - ✅ Security configurations
 - ✅ Managed Identity
@@ -181,7 +185,7 @@ code demos/03-terraform-infrastructure
 # - Set up Azure Storage backend for remote state
 ```
 
-2. Create `terraform.tfvars`:
+1. Create `terraform.tfvars`:
 
 ```hcl
 # Development environment variables
@@ -216,6 +220,7 @@ terraform plan
 ```
 
 **Metrics to Call Out**:
+
 - ⏱️ **Time elapsed**: ~6 minutes of development
 - 📝 **Lines of code**: ~300-400 lines generated
 - 🔒 **Security features**: 8+ security configurations automatic
@@ -228,6 +233,7 @@ terraform plan
 **Display**: `scenario/architecture.md` - Mermaid diagram
 
 **Walk Through**:
+
 - 3-tier separation
 - Private endpoints (no public access)
 - NSG rules between tiers
@@ -256,6 +262,7 @@ terraform plan
 **Say**: "Let's talk ROI..."
 
 **Show**:
+
 - **Time saved**: 54 hours per project
 - **Cost savings**: $8,100 per project at $150/hour
 - **Annual value**: 6-10 projects = **$48,600-$81,000**
@@ -263,6 +270,7 @@ terraform plan
 - **Security posture**: 8+ hardening features automatic
 
 **Additional Benefits**:
+
 - ✅ Faster onboarding for new team members
 - ✅ Consistent code quality across teams
 - ✅ Reusable modules accelerate future projects
@@ -275,6 +283,7 @@ terraform plan
 ### Key Takeaways
 
 **Summarize**:
+
 1. 📉 **90% time reduction** - 60 hours → 6 hours
 2. 🔒 **Security by default** - Copilot suggests best practices
 3. ♻️ **Reusable modules** - Write once, use for all environments
@@ -301,12 +310,14 @@ A: Absolutely. Copilot can suggest module extraction, variable improvements, and
 ### Next Steps
 
 **For Attendees**:
+
 1. Try the demo yourself: `demos/03-terraform-infrastructure/`
 2. Review prompts: `prompts/effective-prompts.md`
 3. Explore other demos: Bicep (01), PowerShell (02), Troubleshooting (04)
 4. Access partner toolkit: Sales decks, ROI calculators, customer pitch templates
 
 **For Partners**:
+
 - **Customer pitch deck** available in `partner-toolkit/`
 - **ROI calculator** customizable for your engagements
 - **Demo delivery guide** with timing and backup plans
@@ -364,6 +375,7 @@ terraform destroy --auto-approve
 - ✅ `validation/deploy.sh` - Deployment automation
 
 **Presenter Checklist**:
+
 - [ ] VS Code with Copilot active
 - [ ] Azure CLI logged in
 - [ ] Terraform CLI installed

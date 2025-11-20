@@ -42,14 +42,14 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
    and consequences (positive and negative).
 ```
 
-3. **Review the ADR**:
+1. **Review the ADR**:
    - Copilot creates a structured ADR with:
      - Status, Context, Decision, Consequences
      - Alternatives Considered with rejection reasons
      - Implementation notes
      - Validation criteria
 
-4. **Use the Handoff Button** ⭐:
+2. **Use the Handoff Button** ⭐:
    - Look at the bottom of the response
    - Click **"Review Against WAF Pillars"** button
    - This automatically invokes `azure-principal-architect` with context
@@ -71,7 +71,7 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 
 - (Using `azure-principal-architect` agent from dropdown)
 
-2. **Review the WAF Assessment**:
+1. **Review the WAF Assessment**:
    - Copilot evaluates across 5 pillars:
      - **Reliability**: Availability, resilience
      - **Security**: Network isolation, access control
@@ -81,7 +81,7 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
    - Provides overall score (e.g., 7.2/10)
    - Lists specific recommendations
 
-3. **Use the Handoff Button** ⭐:
+2. **Use the Handoff Button** ⭐:
    - Click **"Generate Implementation Plan"**
    - Automatically invokes `bicep-plan` with architecture context
 
@@ -102,7 +102,7 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 
 - (Using `bicep-plan` agent from dropdown)
 
-2. **Review the Implementation Plan**:
+1. **Review the Implementation Plan**:
    - Copilot creates `.bicep-planning-files/INFRA.{goal}.md` with:
      - **Resources section**: YAML specs for each Azure resource
 
@@ -162,7 +162,7 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 
 - Shows compilation success with no errors
 
-4. **Optional Handoff**:
+1. **Optional Handoff**:
    - Click **"Review Security & Compliance"** to return to `azure-principal-architect`
    - Or click **"Update Plan Status"** to mark tasks complete in planning file
 

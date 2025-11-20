@@ -203,7 +203,7 @@ include comprehensive outputs for audit documentation.
    az account set --subscription "Your-Subscription-Name"
 ```
 
-3. **Run the demo script**:
+1. **Run the demo script**:
 
    ```powershell
    # Follow the demo script
@@ -217,7 +217,7 @@ include comprehensive outputs for audit documentation.
    ./scripts/deploy.ps1 -Environment prod -Location eastus
 ```
 
-5. **Validate deployment**:
+1. **Validate deployment**:
 
    ```powershell
    ./scripts/validate.ps1 -ResourceGroupName rg-audit-demo-prod

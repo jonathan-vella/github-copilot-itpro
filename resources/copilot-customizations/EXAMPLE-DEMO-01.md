@@ -370,12 +370,16 @@ virtual network with proper segmentation.
 
 ### 1. Review the Template
 ```
+
 # Clone the repository
+
 git clone https://github.com/jonathan-vella/github-copilot-itpro.git
 cd github-copilot-itpro/demos/01-bicep-quickstart/with-copilot
 
 # Open in VS Code
+
 code network.bicep
+
 ```text
 
 [... rest of detailed guide ...]

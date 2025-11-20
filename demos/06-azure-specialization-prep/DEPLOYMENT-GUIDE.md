@@ -280,6 +280,7 @@ Or open `schema.sql` in Azure Data Studio and execute.
    ```powershell
    # Get VM public IP from load balancer NAT rules
    mstsc /v:<public-ip>:50001
+
 ```
 
 2. **Upload application files:**
@@ -296,7 +297,7 @@ Or open `schema.sql` in Azure Data Studio and execute.
 
 ```
 
-4. **Repeat for VM2**
+1. **Repeat for VM2**
 
 ### Option 2: Automated Deployment with Azure DevOps
 
@@ -349,6 +350,7 @@ Refresh the page multiple times. Server name should alternate between:
    | where ResourceType == "LOADBALANCERS"
    | where TimeGenerated > ago(1h)
    | summarize count() by TimeGenerated
+
 ```
 
 ---
@@ -368,13 +370,14 @@ Refresh the page multiple times. Server name should alternate between:
 
 ```
 
-2. Review deployment logs in Azure Portal
+1. Review deployment logs in Azure Portal
 
-3. Verify Bicep templates:
+2. Verify Bicep templates:
 
    ```powershell
    cd infrastructure
    bicep build main.bicep
+
 ```
 
 ### Issue: VMs Not Responding
@@ -390,10 +393,11 @@ Refresh the page multiple times. Server name should alternate between:
 
 ```
 
-2. Verify NSG rules allow HTTP:
+1. Verify NSG rules allow HTTP:
 
    ```powershell
    az network nsg rule list --resource-group rg-taskmanager-demo --nsg-name nsg-web-prod --output table
+
 ```
 
 3. Check IIS installation (via RDP):
@@ -413,6 +417,7 @@ Refresh the page multiple times. Server name should alternate between:
 
    ```powershell
    az sql server firewall-rule list --resource-group rg-taskmanager-demo --server <sql-server-name> --output table
+
 ```
 
 2. Test connectivity from VM:
@@ -422,7 +427,7 @@ Refresh the page multiple times. Server name should alternate between:
 
 ```
 
-3. Verify connection string in Web.config
+1. Verify connection string in Web.config
 
 ### Issue: Load Balancer Not Distributing Traffic
 
@@ -434,6 +439,7 @@ Refresh the page multiple times. Server name should alternate between:
 
    ```powershell
    az network lb show --resource-group rg-taskmanager-demo --name lb-web-prod --query "backendAddressPools[0].backendIPConfigurations[].id"
+
 ```
 
 2. Verify health probe:
@@ -443,7 +449,7 @@ Refresh the page multiple times. Server name should alternate between:
 
 ```
 
-3. Check VM health in Azure Portal > Load Balancer > Backend Pools
+1. Check VM health in Azure Portal > Load Balancer > Backend Pools
 
 ---
 

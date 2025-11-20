@@ -131,8 +131,8 @@ Use when you need to generate:
 // - NSGs on all subnets
 ```
 
-4. Let Copilot generate the template
-5. Review and accept
+1. Let Copilot generate the template
+2. Review and accept
 
 **Time saved**: 45 min → 10 min (78% faster)
 
@@ -157,7 +157,7 @@ Create Pester tests for Get-AzureResources function that:
 
 ```
 
-4. Review generated test structure
+1. Review generated test structure
 
 **Time saved**: 30 min → 5 min (83% faster)
 
@@ -181,7 +181,7 @@ Review for:
 
 ```
 
-4. Get structured feedback with recommendations
+1. Get structured feedback with recommendations
 
 **Time saved**: 60 min → 15 min (75% faster)
 
@@ -216,8 +216,8 @@ Include: Prerequisites, steps, validation, troubleshooting
 
 ```
 
-3. Review proposed structure
-4. Generate full documentation
+1. Review proposed structure
+2. Generate full documentation
 
 **Time saved**: 90 min → 20 min (78% faster)
 
@@ -234,8 +234,8 @@ Include: Prerequisites, steps, validation, troubleshooting
 param storage
 ```
 
-3. Copilot should suggest using `@description` decorator
-4. Variable suggestions should use lowerCamelCase
+1. Copilot should suggest using `@description` decorator
+2. Variable suggestions should use lowerCamelCase
 
 ### Check Chat Mode Is Active
 

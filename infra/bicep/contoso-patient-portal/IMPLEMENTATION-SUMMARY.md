@@ -313,6 +313,7 @@ az deployment sub create \
 
    ```powershell
    .\deploy.ps1 -Environment dev -Location eastus2
+
 ```
 
 2. **Verify Resources**: Check resource provisioning
@@ -323,10 +324,11 @@ az deployment sub create \
 
 ```
 
-3. **Test Connectivity**: Verify App Service and database
+1. **Test Connectivity**: Verify App Service and database
 
    ```powershell
    curl https://app-contoso-patient-portal-dev.azurewebsites.net
+
 ```
 
 ### Application Deployment

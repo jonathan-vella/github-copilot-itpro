@@ -278,16 +278,21 @@ graph TD
 **3. Combine Modes for Complex Tasks**
 
 ```
+
 # Step 1: Architecture Assessment
-Using azure-principal-architect mode, evaluate security requirements 
+
+Using azure-principal-architect mode, evaluate security requirements
 for PCI-DSS compliant infrastructure.
 
 # Step 2: Create Plan
-Using bicep-plan mode, create a plan implementing the security 
+
+Using bicep-plan mode, create a plan implementing the security
 recommendations from the architecture assessment.
 
 # Step 3: Implement
+
 Using bicep-implement mode, generate Bicep templates from the plan.
+
 ```sql
 
 **4. Mode-Specific Context**
@@ -320,33 +325,42 @@ Using bicep-implement mode, generate Bicep templates from the plan.
 **Step 1: Document Decision**
 
 ```
-@adr-generator Create an ADR for using hub-spoke network topology 
+
+@adr-generator Create an ADR for using hub-spoke network topology
 vs. virtual WAN for a multi-region deployment.
+
 ```
 
 **Step 2: Architecture Guidance**
 
 ```
-Using azure-principal-architect mode, assess the hub-spoke design 
+
+Using azure-principal-architect mode, assess the hub-spoke design
 against WAF pillars for a requirement of 99.95% SLA.
+
 ```yaml
 
 **Step 3: Create Plan**
 
 ```
-Using bicep-plan mode, create a detailed plan for implementing 
+
+Using bicep-plan mode, create a detailed plan for implementing
 a hub-spoke network with:
+
 - Hub VNet in West Europe with Azure Firewall
 - 3 spoke VNets (production, staging, development)
 - VNet peering with proper route tables
 - Private DNS zones for Azure PaaS services
+
 ```
 
 **Step 4: Implement**
 
 ```
-Using bicep-implement mode, implement the hub network from 
+
+Using bicep-implement mode, implement the hub network from
 .bicep-planning-files/INFRA.hub-spoke-network.md
+
 ```yaml
 
 ---
@@ -356,30 +370,36 @@ Using bicep-implement mode, implement the hub network from
 **Scenario:** Bicep deployment fails with cryptic error
 
 ```
+
 Using debug mode, analyze this deployment error and suggest fixes:
 
 Error: InvalidTemplateDeployment
-Message: The template deployment failed because of policy violation. 
+Message: The template deployment failed because of policy violation.
 Please see details for more information.
-Details: Policy violation: "Deny-Subnet-Without-Nsg" - 
+Details: Policy violation: "Deny-Subnet-Without-Nsg" -
 Subnets must have an NSG attached.
+
 ```
 
 **Debug Mode Response:**
 
 ```
+
 Analysis:
+
 - Azure Policy is blocking subnet creation without NSG
 - Policy name: "Deny-Subnet-Without-Nsg"
 - Common in enterprise environments
 
 Solution:
+
 1. Create NSG resource before subnet
 2. Reference NSG in subnet properties
 3. Or request policy exemption
 
 Code Fix:
 [Provides corrected Bicep with NSG dependency]
+
 ```
 
 ---

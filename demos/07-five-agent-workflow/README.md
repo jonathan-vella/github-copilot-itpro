@@ -119,9 +119,9 @@ Traditional infrastructure design involves:
    code .
 ```
 
-3. **Open GitHub Copilot Chat** (`Ctrl+Shift+I`)
+1. **Open GitHub Copilot Chat** (`Ctrl+Shift+I`)
 
-4. **Follow the five-agent workflow**:
+2. **Follow the five-agent workflow**:
    - Stage 0: Planning with `@plan` (5-10 min)
    - Stage 1: Architecture Design (15 min)
    - Stage 2: Implementation Planning (10 min)

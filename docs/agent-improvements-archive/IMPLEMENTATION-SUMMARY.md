@@ -276,7 +276,7 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
    .\Run-AgentTests.ps1 -Agent all -Baseline -Verbose
 ```
 
-3. **Review Documentation**
+1. **Review Documentation**
    - Read FIVE-MODE-WORKFLOW.md for updated workflow
    - Review AGENT-TROUBLESHOOTING.md for common issues
    - Familiarize with testing procedures
@@ -382,6 +382,7 @@ Output:
 # Resource Dependencies
 
 ```
+
 graph TD
     RG[Resource Group] --> HubVNet[Hub VNet]
     RG --> Spoke1[Spoke VNet 1]
@@ -390,6 +391,7 @@ graph TD
     HubVNet --> Bastion[Azure Bastion]
     HubVNet -.Peering.-> Spoke1
     HubVNet -.Peering.-> Spoke2
+
 ```
 
 **Deployment Order:**
@@ -404,6 +406,7 @@ graph TD
 ### Example 3: Using Progressive Implementation
 
 **Before (v1.0.0):**
+
 ```markdown
 Agent: bicep-implement
 Prompt: Implement the network plan
@@ -430,9 +433,11 @@ Generating network-foundation.bicep...
 
 **Validation Steps:**
 ```
+
 bicep build network-foundation.bicep
 az deployment group what-if --template-file network-foundation.bicep
 az deployment group create --template-file network-foundation.bicep
+
 ```text
 
 **Phase 1 Complete. Proceed to Phase 2? (y/n)**

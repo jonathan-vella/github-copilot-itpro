@@ -179,6 +179,7 @@ resource "azurerm_service_plan" "main" {
 ```
 
 **Why P1v3?**
+
 - ✅ Zone redundancy support (Standard SKU doesn't support it)
 - ✅ 4 GB RAM, 2 vCPUs
 - ✅ Private endpoint support
@@ -556,6 +557,7 @@ graph LR
 ```
 
 **Dependencies**:
+
 1. Network foundation must be created first (VNet, subnets, NSGs)
 2. Private DNS zones needed before private endpoints
 3. Key Vault created early for secrets storage

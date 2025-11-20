@@ -465,34 +465,42 @@ This guide provides curated prompts for using GitHub Copilot to generate product
 ## Prompt Engineering Tips
 
 ### 1. Be Specific About Azure Services
+
 - ✅ "Create Azure SQL Database with private endpoint"
 - ❌ "Create database"
 
 ### 2. Mention Security Requirements
+
 - ✅ "with Azure AD authentication only, private endpoint, TLS 1.2 minimum"
 - ❌ "secure database"
 
 ### 3. Specify Environment Context
+
 - ✅ "S0 SKU for dev, S3 for prod, based on environment variable"
 - ❌ "appropriate SKU"
 
 ### 4. Request Validation Rules
+
 - ✅ "Add validation: location must be valid Azure region from list"
 - ❌ "validate location"
 
 ### 5. Ask for Complete Modules
+
 - ✅ "with main.tf, variables.tf, outputs.tf, and README.md"
 - ❌ "create module"
 
 ### 6. Mention Dependencies
+
 - ✅ "depends on VNet and subnet from networking module"
 - ❌ "needs network"
 
 ### 7. Include Monitoring & Logging
+
 - ✅ "Add diagnostic settings to send logs to Log Analytics workspace"
 - ❌ "enable logging"
 
 ### 8. Reference Best Practices
+
 - ✅ "Follow Azure Well-Architected Framework security pillar"
 - ❌ "make it secure"
 

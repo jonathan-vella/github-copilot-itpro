@@ -9,12 +9,14 @@ This folder contains **manually-written Terraform code**, representing the tradi
 ## Characteristics of Manual Approach
 
 ### ❌ Poor Structure
+
 - Monolithic file (all resources in one file)
 - No modules or code reusability
 - Hard-coded values throughout
 - No separation of environments
 
 ### ❌ Security Issues
+
 - 🔴 Hard-coded password in code (`P@ssw0rd1234!`)
 - 🔴 SQL Server publicly accessible
 - 🔴 App Service publicly accessible (no private endpoint)
@@ -25,6 +27,7 @@ This folder contains **manually-written Terraform code**, representing the tradi
 - 🔴 No Azure AD authentication
 
 ### ❌ Missing Features
+
 - No variable definitions (hard to customize)
 - No outputs (how do you get connection strings?)
 - No tagging (cost allocation impossible)
@@ -34,6 +37,7 @@ This folder contains **manually-written Terraform code**, representing the tradi
 - No threat detection
 
 ### ❌ Operational Problems
+
 - **Not reusable**: Can't deploy to staging/prod without duplication
 - **Not testable**: No variables to inject test values
 - **Not maintainable**: Everything in one file
@@ -41,6 +45,7 @@ This folder contains **manually-written Terraform code**, representing the tradi
 - **No state management**: Local state only (team conflicts)
 
 ### ❌ Scalability Issues
+
 - Standard tier App Service (no zone redundancy)
 - Basic SQL Database (poor performance)
 - No autoscaling
@@ -49,6 +54,7 @@ This folder contains **manually-written Terraform code**, representing the tradi
 ## Time Investment
 
 Creating this basic configuration manually:
+
 - **Research Azure resources**: 4-6 hours
 - **Write Terraform code**: 6-8 hours  
 - **Debug errors**: 4-6 hours (hard-coded values cause many issues)
@@ -87,7 +93,9 @@ If you deployed this manually-written code, a security audit would find:
 ## Why This Approach Fails
 
 ### 1. **Knowledge Gap**
+
 Manually writing Terraform requires deep expertise in:
+
 - HCL syntax
 - Azure resource dependencies
 - Security best practices
@@ -97,19 +105,25 @@ Manually writing Terraform requires deep expertise in:
 Most engineers don't have all this knowledge, leading to trial-and-error development.
 
 ### 2. **Copy-Paste from Internet**
+
 Engineers often:
+
 - Copy code from StackOverflow (outdated, insecure)
 - Use examples from blog posts (not production-ready)
 - Adapt code without understanding implications
 
 ### 3. **No Security Validation**
+
 Without tools like Checkov/tfsec integrated, security issues aren't discovered until:
+
 - Security audit (costly remediation)
 - Production deployment (security incident)
 - Compliance review (project delays)
 
 ### 4. **Time Pressure**
+
 Under pressure to deliver quickly, engineers skip:
+
 - Proper module design
 - Comprehensive testing
 - Security hardening

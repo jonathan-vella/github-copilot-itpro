@@ -131,7 +131,7 @@ This workflow analyzes a specific Azure resource to assess its health status, di
    | summarize ConnectionFailures=count() by bin(TimeGenerated, 1h)
 ```
 
-3. **Pattern Recognition**:
+1. **Pattern Recognition**:
    - Identify recurring error patterns or anomalies
    - Correlate errors with deployment times or configuration changes
    - Analyze performance trends and degradation patterns
@@ -226,7 +226,7 @@ This workflow analyzes a specific Azure resource to assess its health status, di
 
 ```
 
-2. **Generate Detailed Report**:
+1. **Generate Detailed Report**:
 
    ```markdown
    # Azure Resource Health Report: [Resource Name]
@@ -262,22 +262,31 @@ This workflow analyzes a specific Azure resource to assess its health status, di
    
    ### Phase 1: Immediate Actions (0-2 hours)
    ```
+
    # Critical fixes to restore service
+
    [Azure CLI commands with explanations]
+
 ```
 
 ### Phase 2: Short-term Fixes (2-24 hours)
 
    ```
-   # Performance and reliability improvements
+
+# Performance and reliability improvements
+
    [Azure CLI commands with explanations]
+
 ```yaml
 
    ### Phase 3: Long-term Improvements (1-4 weeks)
 
    ```
-   # Architectural and preventive measures
+
+# Architectural and preventive measures
+
    [Azure CLI commands and configuration changes]
+
 ```
 
 ## 📈 Monitoring Recommendations

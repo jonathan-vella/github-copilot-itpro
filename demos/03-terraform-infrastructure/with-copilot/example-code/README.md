@@ -39,11 +39,13 @@ example-code/
 ## Key Features
 
 ### ✅ Modular Design
+
 - **4 reusable modules**: Networking, App Service, Database, Monitoring
 - **DRY principle**: Write once, use across all environments
 - **Clear interfaces**: Well-defined inputs and outputs
 
 ### ✅ Security by Default
+
 - 🔒 **Private endpoints** for all data services (no public access)
 - 🔒 **Managed Identity** for authentication (no credentials)
 - 🔒 **Azure AD authentication** for SQL Server
@@ -54,18 +56,21 @@ example-code/
 - 🔒 **Advanced Threat Protection** on database
 
 ### ✅ Multi-Environment Support
+
 - **3 environments**: dev, staging, prod
 - **Environment-specific**: Variables, SKUs, retention policies
 - **No code duplication**: Same modules, different parameters
 - **Isolated state**: Separate state files per environment
 
 ### ✅ Comprehensive Variables
+
 - **30+ variables** with descriptions
 - **Validation rules** (e.g., location must be valid Azure region)
 - **Default values** for common scenarios
 - **Type constraints** (string, number, map, list)
 
 ### ✅ Complete Outputs
+
 - **15+ outputs** per environment
 - Resource IDs for dependencies
 - Connection strings (from Key Vault)
@@ -73,6 +78,7 @@ example-code/
 - Managed Identity principal IDs
 
 ### ✅ Remote State Management
+
 - **Azure Storage backend** with state locking
 - **State versioning** enabled
 - **Azure AD authentication** (no storage keys)
@@ -95,6 +101,7 @@ example-code/
 ## Security Validation
 
 ### Checkov Results
+
 ```bash
 $ checkov -d environments/dev
 Passed checks: 45
@@ -123,6 +130,7 @@ Check: CKV_AZURE_50: "Ensure Azure Storage Account has 'https_only' enabled"
 **Result**: 0 critical security findings
 
 ### tfsec Results
+
 ```bash
 $ tfsec environments/dev
 No problems detected!
@@ -131,6 +139,7 @@ No problems detected!
 ## Deployment Instructions
 
 ### Prerequisites
+
 ```bash
 # Install Terraform
 terraform version  # v1.5.0+
@@ -141,6 +150,7 @@ az account set --subscription "<your-subscription-id>"
 ```
 
 ### Deploy to Dev Environment
+
 ```bash
 cd environments/dev
 
@@ -165,6 +175,7 @@ terraform apply
 ```
 
 ### Deploy to Staging/Prod
+
 ```bash
 # Same commands, just change directory
 cd environments/staging
@@ -176,6 +187,7 @@ terraform apply
 ## Example Copilot Prompts Used
 
 ### Networking Module
+
 ```hcl
 // Create an Azure Virtual Network module with:
 // - VNet with customizable address space
@@ -189,6 +201,7 @@ terraform apply
 ```
 
 ### App Service Module
+
 ```hcl
 // Create Azure App Service module with:
 // - App Service Plan (P1v3 SKU with zone redundancy)
@@ -202,6 +215,7 @@ terraform apply
 ```
 
 ### Database Module
+
 ```hcl
 // Create Azure SQL Database module with:
 // - SQL Server with Azure AD admin only (no SQL auth)
@@ -218,6 +232,7 @@ terraform apply
 ## Testing
 
 ### Terratest (Go)
+
 ```go
 // See tests/terraform_test.go for full implementation
 func TestTerraformInfrastructure(t *testing.T) {
@@ -245,6 +260,7 @@ terraform destroy
 ```
 
 Or use the cleanup script:
+
 ```bash
 ../../validation/cleanup.sh
 ```
@@ -254,7 +270,9 @@ Or use the cleanup script:
 ## Why Copilot Made This Better
 
 ### 1. **Complete Module Structure**
+
 Copilot generated:
+
 - All resource blocks with correct syntax
 - Variable definitions with validation
 - Comprehensive outputs
@@ -263,7 +281,9 @@ Copilot generated:
 **Manual effort saved**: 20+ hours
 
 ### 2. **Security Best Practices**
+
 Copilot automatically suggested:
+
 - Private endpoints instead of public access
 - Managed Identity instead of connection strings
 - NSG deny-by-default rules
@@ -273,7 +293,9 @@ Copilot automatically suggested:
 **Manual research saved**: 6+ hours
 
 ### 3. **Correct Dependencies**
+
 Copilot understood resource dependencies:
+
 - VNet before subnets
 - Subnets before NSGs
 - Private DNS zones before private endpoints
@@ -282,7 +304,9 @@ Copilot understood resource dependencies:
 **Debugging time saved**: 4+ hours
 
 ### 4. **Variable Validation**
+
 Copilot added validation rules:
+
 ```hcl
 variable "location" {
   validation {
@@ -295,7 +319,9 @@ variable "location" {
 **Manual implementation saved**: 2+ hours
 
 ### 5. **Comprehensive Outputs**
+
 Copilot generated outputs for all resources:
+
 ```hcl
 output "app_service_url" {
   description = "URL of the App Service"

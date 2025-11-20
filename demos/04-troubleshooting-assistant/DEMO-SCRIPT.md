@@ -211,6 +211,7 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
        "*5xx errors*" { $query = "requests | where resultCode startswith '5'..." }
        "*timeout*" { $query = "exceptions | where type contains 'Timeout'..." }
    }
+
 ```
 
    > "Copilot generated pattern matching for common symptoms. This is knowledge capture happening in real-time."
@@ -228,13 +229,14 @@ Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
 
    > "Look at this KQL - perfectly formatted, with time filtering, aggregation, and sorting. Writing this manually would take 20-30 minutes if you're experienced, hours if you're learning KQL."
 
-3. **Next Steps Suggestions**:
+1. **Next Steps Suggestions**:
 
    ```powershell
    Write-Host "Suggested Next Steps:" -ForegroundColor Yellow
    Write-Host "1. Check backend dependencies: $query2"
    Write-Host "2. Review recent deployments"
    Write-Host "3. Analyze database performance"
+
 ```
 
    > "Copilot isn't just diagnosing - it's teaching. It suggests what to check next based on common troubleshooting patterns."
@@ -333,6 +335,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 
    ```powershell
    Get-AzureHealthSnapshot -ResourceGroupName "rg-retailmax-prod"
+
 ```
 
    > "Step 1: Quick triage - identify degraded SQL Database in 30 seconds vs. 15 minutes manually."
@@ -346,10 +349,11 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
 
    > "Step 2: KQL analysis - found top 5 CPU-intensive queries in 2 minutes vs. 45 minutes manually."
 
-3. **Remediation**:
+1. **Remediation**:
 
    ```powershell
    Resolve-CommonIssues -Issue 'SlowQueries' -AddMissingIndexes
+
 ```
 
    > "Step 3: Applied index recommendations in 5 minutes vs. 2 hours of manual optimization."
@@ -528,6 +532,7 @@ New-TroubleshootingReport -IncidentTitle "RetailMax Checkout Failures" -OutputPa
    # RetailMax uses Premium P2 tier SQL Database in East US region
    # High CPU detected during peak hours (6PM-9PM UTC)
    # Need query to identify blocking queries and missing indexes
+
 ```
 
 4. **Request Multiple Options**:
