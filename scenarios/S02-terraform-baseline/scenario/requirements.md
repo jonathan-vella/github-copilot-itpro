@@ -354,7 +354,7 @@ TechCorp Solutions provides a multi-tenant SaaS platform for project management 
 
 **Director of Cloud Operations - James O'Connor**
 
-- **Concern**: "We spend $400K/year on Azure, but can't track who's spending what"
+- **Concern**: "We have significant Azure spending, but can't track who's spending what"
 - **Success Criteria**: Full cost visibility with chargeback per team
 
 ### Secondary Stakeholders

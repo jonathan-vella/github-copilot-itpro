@@ -53,8 +53,8 @@ Get-AzResource -ResourceGroupName "rg-demo"  # Verify resources exist
 
 **Business Impact**:
 
-- **$3,750 in labor** per project (25 hours × $150/hr)
-- **8 projects per year** = $30,000 in documentation costs
+- **25 hours per project** in manual documentation effort
+- **8 projects per year** = 200 hours annually on documentation
 - **Customer dissatisfaction**: Incomplete handoffs
 - **Knowledge loss**: When team members leave
 

@@ -228,7 +228,7 @@
 **Operational Efficiency**:
 
 - 20 hours → 2 hours (90% time reduction)
-- $3,000 → $300 (90% cost reduction)
+- 18 hours saved per project
 - Senior engineer time recovered for billable work
 - Repeatable process for future projects
 

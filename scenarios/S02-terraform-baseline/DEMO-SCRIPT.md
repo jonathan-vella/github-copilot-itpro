@@ -263,9 +263,8 @@ terraform plan
 
 **Show**:
 
-- **Time saved**: 54 hours per project
-- **Cost savings**: $8,100 per project at $150/hour
-- **Annual value**: 6-10 projects = **$48,600-$81,000**
+- **Time saved**: 54 hours per project (90% reduction)
+- **Annual time savings**: 6-10 projects = **324-540 hours/year** (~0.16-0.26 FTE)
 - **Quality improvement**: 95% reduction in syntax errors
 - **Security posture**: 8+ hardening features automatic
 

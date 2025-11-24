@@ -10,14 +10,14 @@ This demo shows how GitHub Copilot transforms documentation from a tedious, time
 |----------|---------------|-------------|
 | **Manual** | 20 hours | Writing documentation from scratch, creating diagrams, formatting |
 | **With Copilot** | 2 hours | AI-assisted generation, automated formatting, instant diagrams |
-| **Savings** | **18 hours (90%)** | $2,700 per project × 8 projects/year = **$21,600 annual savings** |
+| **Savings** | **18 hours (90%)** | 18 hours × 8 projects/year = **144 hours annual savings** |
 
 ## Business Value
 
 ### Per-Project Impact
 
 - **Time Reduction**: 20 hours → 2 hours (90% faster)
-- **Cost Savings**: $2,700 per documentation project (@ $150/hour)
+- **Time Savings**: 18 hours per documentation project
 - **Quality Improvement**: Consistent formatting, complete coverage, fewer errors
 - **Maintenance**: 75% reduction in update time (regenerate vs. manual edit)
 
@@ -160,19 +160,19 @@ This demo shows how GitHub Copilot transforms documentation from a tedious, time
 - **Consultants**: Deliverables for engagements
 - **Training Teams**: Create learning materials from infrastructure
 
-## ROI Calculation
+## Time Savings Calculation
 
 ### Single Project
 
-- Manual time: 20 hours × $150/hour = **$3,000**
-- Copilot time: 2 hours × $150/hour = **$300**
-- **Savings per project: $2,700**
+- Manual time: 20 hours
+- Copilot-assisted time: 2 hours
+- **Time saved per project: 18 hours** (90% reduction)
 
 ### Annual Impact (8 Documentation Projects)
 
-- Manual cost: 160 hours × $150 = **$24,000**
-- Copilot cost: 16 hours × $150 = **$2,400**
-- **Annual savings: $21,600**
+- Manual time: 160 hours
+- Copilot-assisted time: 16 hours
+- **Annual time savings: 144 hours** (~0.07 FTE freed up for other work)
 
 ### Quality Benefits (Non-Financial)
 

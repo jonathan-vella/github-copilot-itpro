@@ -247,23 +247,21 @@ Even with Copilot, some tasks still required manual effort:
 - **With Copilot**: 10 minutes
 - **Time saved**: 45 minutes (82% reduction)
 
-### Cost Savings (for a team)
+### Time Savings (for a team)
 
 Assuming:
 
 - Team of 5 engineers
 - Deploying infrastructure 3x per week
-- Engineer hourly rate: $75/hour
 
-**Monthly Savings**:
+**Monthly Time Savings**:
 
 - Time saved per deployment: 45 min
 - Deployments per month: 3 × 4 = 12
-- Total time saved: 12 × 45 min = 9 hours
-- Cost savings: 9 hours × $75 = **$675/month per engineer**
-- Team savings: $675 × 5 = **$3,375/month**
+- Total time saved per engineer: 12 × 45 min = 9 hours
+- Team time saved: 9 × 5 = **45 hours/month**
 
-**Annual Savings**: **$40,500** for a team of 5
+**Annual Time Savings**: **540 hours** for a team of 5 (~0.26 FTE freed up)
 
 ### Productivity Gains
 

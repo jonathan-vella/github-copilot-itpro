@@ -12,7 +12,7 @@ The infrastructure includes:
 - **Security**: Azure Key Vault with private endpoints and managed identities
 - **Monitoring**: Log Analytics Workspace and Application Insights
 
-**Estimated Monthly Cost**: $331-346
+**Estimated Monthly Cost**: See Azure Pricing Calculator for current rates (varies by region)
 
 ## 🏗️ Architecture
 
