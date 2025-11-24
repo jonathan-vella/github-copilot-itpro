@@ -7,10 +7,11 @@ This scenario demonstrates **Module B Control 4.1** from the Azure Infrastructur
 **Application**: SAIF (Secure AI Framework) api-v2 - A Python FastAPI application with Azure SQL Database backend
 
 **Testing Focus**:
-- ✅ Load Testing (Azure Load Testing)
-- ✅ Chaos Engineering (Azure Chaos Studio)
-- ✅ User Acceptance Testing (UAT)
+- ✅ HTTP Load Testing (Bash/curl-based)
+- ✅ API Endpoint Validation
 - ✅ Performance Baseline Measurement
+- 🔜 Chaos Engineering (planned)
+- 🔜 User Acceptance Testing (planned)
 
 ---
 
@@ -28,11 +29,11 @@ S05-service-validation/
 │   ├── main.bicep                # Main orchestration
 │   ├── main.parameters.json      # Parameters file
 │   └── modules/                  # Modular Bicep files
-├── testing/                      # Testing scripts and configurations
-│   ├── load-testing/             # Azure Load Testing configs
-│   ├── chaos/                    # Chaos Studio experiments
-│   ├── uat/                      # UAT test cases
-│   └── baseline/                 # Performance baseline tests
+├── validation/                   # Service validation and testing
+│   ├── load-testing/             # HTTP load testing (quick-load-test.sh)
+│   ├── chaos-testing/            # Resilience testing (future)
+│   ├── uat/                      # User acceptance tests (future)
+│   └── README.md                 # Validation documentation
 ├── monitoring/                   # Monitoring queries and dashboards
 ├── scripts/                      # Helper automation scripts
 ├── validation/                   # Validation report templates
@@ -74,10 +75,14 @@ cd scripts
 
 ### Step 3: Run Service Validation Tests
 
-```powershell
-# Run all tests (coming soon)
-cd scripts
-./Run-AllTests.ps1 -ResourceGroupName "rg-saif-validation-dev"
+```bash
+# Navigate to validation directory
+cd validation/load-testing
+
+# Run quick HTTP load test (30 seconds, 20 concurrent requests)
+./quick-load-test.sh 30 20
+
+# Expected output: Success rate > 99%, Avg response time < 500ms
 ```
 
 ---
@@ -113,9 +118,9 @@ By completing this scenario, you will learn how to:
 | Task | Manual | With Copilot | Savings |
 |------|--------|--------------|---------|
 | Infrastructure Setup | 6 hrs | 1 hr | 83% |
-| Load Test Creation | 8 hrs | 2 hrs | 75% |
-| Chaos Experiments | 6 hrs | 1.5 hrs | 75% |
-| UAT Test Cases | 4 hrs | 1 hr | 75% |
+| Simple Load Test Script | 4 hrs | 20 min | 92% |
+| API Endpoint Validation | 3 hrs | 15 min | 92% |
+| Performance Baseline | 2 hrs | 30 min | 75% |
 | Validation Report | 8 hrs | 2 hrs | 75% |
 | Monitoring Setup | 4 hrs | 1 hr | 75% |
 | Documentation | 4 hrs | 1.5 hrs | 62% |

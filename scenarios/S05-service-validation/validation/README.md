@@ -1,96 +1,104 @@
 # S05 Service Validation - Testing Framework
 
-This folder contains comprehensive testing scripts for validating the S05 SAIF deployment.
+This folder contains service validation scripts for testing the S05 SAIF deployment.
 
 ## Testing Phases
 
 ### 1. Load Testing (`load-testing/`)
 
-Validates application performance under various load conditions:
+Simple HTTP load testing using bash and curl to validate API performance:
 
-- **Baseline Test**: 100 users, 5 minutes
-- **Stress Test**: 500 users, 10 minutes  
-- **Spike Test**: 0→500→0 users, 15 minutes
-- **Endurance Test**: 200 users, 30 minutes
+- **Quick Load Test**: `quick-load-test.sh` - Configurable duration and concurrency
+- **Key Features**:
+  - Parallel curl requests
+  - Response time measurement
+  - Success rate calculation
+  - Color-coded pass/fail output
 
 **Run load tests:**
-```powershell
+
+```bash
 cd load-testing
-.\Run-LoadTest.ps1 -TestName baseline
+
+# 30-second test with 20 concurrent requests
+./quick-load-test.sh 30 20
+
+# 60-second test with 10 concurrent requests
+./quick-load-test.sh 60 10
 ```
 
 ### 2. Chaos Engineering (`chaos-testing/`)
 
-Tests application resilience through controlled failure injection:
+⚠️ **Coming Soon** - Planned resilience testing:
 
-- CPU spike (80% load)
-- Memory pressure (90% usage)
-- Network latency injection (+100ms)
-- Database connection failures
-- Container restart simulation
-
-**Run chaos experiments:**
-```powershell
-cd chaos-testing
-.\Run-ChaosExperiment.ps1 -ExperimentName cpu-spike
-```
+- Container restart scenarios
+- Resource contention simulation
+- Network interruption tests
 
 ### 3. User Acceptance Testing (`uat/`)
 
-Automated functional tests for critical user scenarios:
+⚠️ **Coming Soon** - Planned functional tests:
 
 - API health checks
 - SQL connectivity validation
-- Managed identity verification
 - Response format validation
 - Performance threshold checks
 
-**Run UAT tests:**
-```powershell
-cd uat
-.\Run-UAT.ps1
-```
-
 ## Test Execution Order
 
-1. **Pre-deployment**: Infrastructure validation
-2. **Post-deployment**: Load testing (baseline)
-3. **Resilience**: Chaos engineering experiments
-4. **Acceptance**: UAT functional tests
+1. **Deploy Infrastructure**: Run `solution/scripts/deploy.ps1`
+2. **Wait for Services**: Allow 60-90 seconds for containers to start
+3. **Run Load Test**: Execute `quick-load-test.sh` from `validation/load-testing/`
+4. **Verify Results**: Check success rate and response times
 
 ## Success Criteria
 
 | Test Type | Metric | Target |
 |-----------|--------|--------|
-| Load Test | P95 Response Time | < 500ms |
-| Load Test | Error Rate | < 1% |
-| Load Test | RPS | > 100 |
-| Chaos | Recovery Time | < 2 minutes |
-| UAT | Pass Rate | 100% |
+| Quick Load Test | Success Rate | > 99% |
+| Quick Load Test | Avg Response Time | < 500ms |
+| Quick Load Test | RPS | > 10 |
+| API Endpoints | HTTP Status | 200 |
 
 ## CI/CD Integration
 
-All tests can be integrated into Azure DevOps or GitHub Actions pipelines:
+Integrate load testing into Azure DevOps or GitHub Actions pipelines:
 
 ```yaml
-- task: PowerShell@2
-  displayName: 'Run Load Tests'
+- task: Bash@3
+  displayName: 'Run Service Validation'
   inputs:
-    filePath: 'validation/load-testing/Run-LoadTest.ps1'
-    arguments: '-TestName baseline'
+    targetType: 'filePath'
+    filePath: 'validation/load-testing/quick-load-test.sh'
+    arguments: '30 20'
+  continueOnError: false
+```
+
+**GitHub Actions Example:**
+
+```yaml
+- name: Run Load Test
+  run: |
+    cd validation/load-testing
+    chmod +x quick-load-test.sh
+    ./quick-load-test.sh 30 20
 ```
 
 ## Troubleshooting
 
-**Load test fails with "resource not found":**
-- Ensure infrastructure is deployed
-- Verify resource group name matches pattern `rg-s05-validation-*`
+**Load test returns all failures:**
 
-**Chaos experiment permission denied:**
-- Check Azure Chaos Studio is enabled
-- Verify RBAC permissions on target resources
+- Ensure infrastructure is deployed: `az group exists -n rg-s05-validation-swc01`
+- Verify App Services are running: `az webapp list -g rg-s05-validation-swc01 --query "[].state"`
+- Check API is accessible: `curl https://app-saifv2-api-ss4xs2.azurewebsites.net/`
 
-**UAT tests timeout:**
-- Check App Service is running
-- Verify firewall allows test traffic
-- Review Application Insights for errors
+**Slow response times (> 500ms):**
+
+- Check App Service Plan SKU (should be P1v3 for production)
+- Review Application Insights for bottlenecks
+- Verify SQL database isn't throttled
+
+**"curl: command not found" error:**
+
+- Install curl: `sudo apt-get install curl` (Ubuntu/Debian) or `brew install curl` (macOS)
+- For Windows: Use Git Bash or WSL2

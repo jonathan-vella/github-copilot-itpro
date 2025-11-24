@@ -51,35 +51,45 @@ This demo showcases a comprehensive approach to validating Azure application dep
    .\Configure-SqlAccess.ps1 -location swedencentral
    ```
 
-6. **Run load tests**
-   - Open `validation/load-testing/load-test-config.yaml`
-   - Show Azure Load Testing configuration
-   ```powershell
-   .\validation\load-testing\Run-LoadTest.ps1
+6. **Run quick load test**
+   - Navigate to validation directory
+   - Show the simple bash script for HTTP load testing
+   ```bash
+   cd validation/load-testing
+   ./quick-load-test.sh 30 20
    ```
+   - Explain what it does:
+     - 30-second test with 20 concurrent requests
+     - Tests 4 API endpoints in parallel
+     - Calculates success rate and average response time
+     - Color-coded output (green = pass, red = fail)
 
-7. **Execute chaos experiments**
-   - Open `validation/chaos-testing/chaos-experiments.json`
-   - Demonstrate CPU spike, memory pressure, network latency
-   ```powershell
-   .\validation\chaos-testing\Run-ChaosExperiment.ps1 -ExperimentName cpu-spike
-   ```
+7. **Analyze test results**
+   - Point out key metrics:
+     - Total requests made (should be ~600-1000)
+     - Success rate (should be > 99%)
+     - Average response time (should be < 500ms)
+     - Pass/fail status
+   - **Value message**: "Simple bash script provides immediate validation without complex infrastructure"
 
-8. **User acceptance tests**
-   ```powershell
-   .\validation\uat\Run-UAT.ps1
+8. **Verify API endpoints**
+   ```bash
+   # Test individual endpoints
+   curl -s https://app-saifv2-api-ss4xs2.azurewebsites.net/ | jq
+   curl -s https://app-saifv2-api-ss4xs2.azurewebsites.net/api/version | jq
    ```
 
 ### Phase 3: GitHub Copilot Integration (10 min)
 
-9. **Show Copilot-assisted testing**
-   - Ask: "Generate a load test that simulates 100 concurrent users"
-   - Ask: "Create a chaos experiment for database connection failures"
-   - Ask: "Write UAT scenarios for SQL connectivity"
+9. **Show Copilot-assisted test creation**
+   - Ask: "Create a bash script to validate all API endpoints return 200"
+   - Ask: "Generate a curl command to measure API response time"
+   - Ask: "Write a script to compare current performance against a baseline"
 
-10. **Demonstrate debugging**
-    - Introduce an error (e.g., wrong connection string)
-    - Use Copilot to diagnose and fix
+10. **Demonstrate performance analysis**
+    - Ask: "Parse quick-load-test.sh output and calculate percentiles"
+    - Ask: "Create a markdown report from test results"
+    - Use Copilot to add new test scenarios
 
 ### Phase 4: Cleanup & Q&A (5 min)
 
