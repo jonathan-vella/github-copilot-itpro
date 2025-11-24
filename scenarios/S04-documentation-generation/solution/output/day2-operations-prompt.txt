@@ -4,12 +4,13 @@ Please create a comprehensive **Day 2 Operations Guide** for the following Azure
 
 ## Deployed Resources
 
+- **Microsoft.Network/networkSecurityGroups** (3 instance(s))
+  - Name: `nsg-data-dev-qkfwso`, Location: `swedencentral`
+  - Name: `nsg-web-dev-qkfwso`, Location: `swedencentral`
+  - Name: `vnet-contosopat-dev-qkfwso-snet-privateendpoints-dev-nsg-swedencentral`, Location: `swedencentral`
 - **Microsoft.Network/networkInterfaces** (2 instance(s))
   - Name: `pe-sqlserver-dev-qkfwso.nic.2452ca69-7f5e-4505-b393-c8087fa23188`, Location: `swedencentral`
   - Name: `pe-keyvault-dev-qkfwso.nic.caf77a4e-ae78-4d34-89d4-17f3838ecd40`, Location: `swedencentral`
-- **Microsoft.Network/networkSecurityGroups** (2 instance(s))
-  - Name: `nsg-data-dev-qkfwso`, Location: `swedencentral`
-  - Name: `nsg-web-dev-qkfwso`, Location: `swedencentral`
 - **Microsoft.Network/privateDnsZones** (2 instance(s))
   - Name: `privatelink.database.windows.net`, Location: `global`
   - Name: `privatelink.vaultcore.azure.net`, Location: `global`
@@ -35,7 +36,7 @@ Please create a comprehensive **Day 2 Operations Guide** for the following Azure
 - **Microsoft.Sql/servers** (1 instance(s))
   - Name: `sql-contosopat-dev-qkfwso`, Location: `swedencentral`
 - **Microsoft.Web/serverFarms** (1 instance(s))
-  - Name: `asp-contosopat-dev-qkfwso`, SKU: `P1v3`, Location: `swedencentral`
+  - Name: `asp-contosopat-dev-qkfwso`, SKU: `P1v2`, Location: `swedencentral`
 - **Microsoft.Web/sites** (1 instance(s))
   - Name: `app-contosopat-dev-qkfwso`, Location: `swedencentral`
 
