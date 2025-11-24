@@ -126,7 +126,7 @@ Next Steps:
 
 The script references: `../infra/main.bicep` (relative to scripts folder)
 
-**Full Path:** `/scenarios/S05-service-validation/infra/main.bicep`
+**Full Path:** `/scenarios/S05-service-validation/solution/infra/main.bicep`
 
 ## Validation
 
@@ -193,12 +193,12 @@ az group delete --name rg-s05-validation-swc01 --yes --no-wait
 
 ## Related Files
 
-- `deploy.ps1` - Main deployment script (this file)
+- `deploy.ps1` - Main deployment script
 - `Configure-SqlAccess.ps1` - SQL firewall and managed identity configuration
-- `Update-Containers.ps1` - Container update script
-- `Test-Local.ps1` - Local validation script
-- `../infra/main.bicep` - Infrastructure template
-- `../app/` - Application source code
+- `Update-Containers.ps1` - Container update script (if exists)
+- `../infra/main.bicep` - Infrastructure template (`solution/infra/main.bicep`)
+- `../app/` - Application source code (`solution/app/`)
+- `../web/` - Web frontend source code (`solution/web/`)
 
 ## Time Savings
 
