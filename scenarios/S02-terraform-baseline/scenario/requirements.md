@@ -5,7 +5,7 @@
 **Name**: TechCorp Solutions  
 **Industry**: Software-as-a-Service (SaaS)  
 **Size**: 450 employees, 15 development teams  
-**Revenue**: $85M annually  
+**Revenue**: Mid-market SaaS company  
 **Cloud Maturity**: Intermediate (2 years on Azure)
 
 ### Business Context
@@ -116,7 +116,7 @@ TechCorp Solutions provides a multi-tenant SaaS platform for project management 
 - Compliance risk (SOC 2, ISO 27001 certifications)
 - Potential data breach exposure
 - Customer trust concerns
-- Remediation cost: $180K+ in engineering time
+- Remediation effort: Significant engineering time investment required
 
 #### 5. Knowledge Silos
 
@@ -296,9 +296,9 @@ TechCorp Solutions provides a multi-tenant SaaS platform for project management 
 
 #### NFR3: Cost Optimization
 
-- **Dev environment**: < $300/month per team
-- **Staging environment**: < $800/month per team
-- **Production environment**: $2,000-$3,000/month per team (based on scale)
+- **Dev environment**: Low monthly cost per team (optimized SKUs)
+- **Staging environment**: Moderate monthly cost per team (production-like)
+- **Production environment**: Higher monthly cost per team (based on scale and redundancy)
 - **Cost visibility**: Tags for chargeback (CostCenter, Owner)
 
 #### NFR4: Compliance
@@ -390,7 +390,7 @@ TechCorp Solutions provides a multi-tenant SaaS platform for project management 
 
 ### Business Constraints
 
-- **Budget**: $50K for implementation (consulting + tools)
+- **Budget**: Limited implementation budget (consulting + tools)
 - **Timeline**: 3 months to pilot with 3 teams, 6 months full rollout
 - **Training**: Max 2 days per team for training
 - **Change management**: Can't disrupt current production deployments

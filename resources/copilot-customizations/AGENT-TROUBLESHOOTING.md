@@ -510,7 +510,7 @@ Design a secure web application
 Design a secure web application for:
 - 50,000 monthly active users
 - PCI-DSS Level 1 compliance required
-- Budget: $2,000/month
+- Budget: Limited budget for demo environment
 - Team has limited Azure experience
 - Must support EU and US users
 ```

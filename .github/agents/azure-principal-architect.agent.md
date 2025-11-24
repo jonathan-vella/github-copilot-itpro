@@ -113,37 +113,38 @@ For each recommendation:
 
 When recommending Azure services, always include cost estimates:
 
-1. **Provide Cost Ranges**: Use min-max format (e.g., "$50-150/month")
-2. **Break Down by Service**: Show cost per service/component
-3. **Include Cost Drivers**: Identify main cost factors (storage, compute, bandwidth)
-4. **Optimization Suggestions**: Provide cost-saving alternatives
+1. **Identify Cost Drivers**: List main cost factors (storage, compute, bandwidth, data transfer)
+2. **Break Down by Service**: Show SKU tier recommendations for each service/component
+3. **Provide Relative Sizing**: Compare Basic/Standard/Premium tiers
+4. **Optimization Suggestions**: Provide cost-saving alternatives (dev/test tiers, reserved instances, spot VMs)
 5. **Regional Variations**: Note if costs vary significantly by region
-6. **Cost Patterns to Use**:
-   - App Service: Basic (B1) ~$13/mo, Standard (S1) ~$70/mo, Premium (P1v3) ~$120/mo
-   - Azure SQL: Basic ~$5/mo, Standard S0 ~$15/mo, Premium P1 ~$465/mo
-   - Storage Account: LRS ~$0.02/GB/mo, GRS ~$0.05/GB/mo
-   - VMs: B2s ~$30/mo, D2s_v5 ~$70/mo, D4s_v5 ~$140/mo
-   - Azure Bastion: Basic ~$140/mo, Standard ~$140/mo
-   - Application Gateway: Standard_v2 ~$250/mo, WAF_v2 ~$300/mo
-   - Front Door: Standard ~$35/mo + data transfer
-   - Azure Firewall: ~$1.25/hr (~$912/mo) + data processing
+6. **Reference Azure Pricing**: Direct users to Azure Pricing Calculator for current rates
+7. **SKU Tier Patterns to Recommend**:
+   - App Service: Basic (B1) for dev/test, Standard (S1) for production, Premium (P1v3) for zone redundancy
+   - Azure SQL: Basic for dev, Standard S0-S2 for small-medium workloads, Premium P1+ for high performance
+   - Storage Account: LRS for non-critical data, GRS for geo-redundancy requirements
+   - VMs: B-series for burstable workloads, D-series for general purpose, E-series for memory-intensive
+   - Azure Bastion: Basic for standard access, Standard for advanced features
+   - Application Gateway: Standard_v2 for basic load balancing, WAF_v2 for web application firewall
 
 **Format Example:**
 ```markdown
-## Estimated Monthly Costs
+## Resource SKU Recommendations
 
-| Service | SKU | Configuration | Est. Cost |
-|---------|-----|---------------|-----------|
-| App Service | Standard S1 | 2 instances | $140 |
-| Azure SQL | Standard S2 | Single DB | $30 |
-| Storage | LRS | 100GB | $2 |
-| Application Gateway | WAF_v2 | 1 instance | $300 |
-| **Total** | | | **$472/month** |
+| Service | Recommended SKU | Configuration | Justification |
+|---------|----------------|---------------|---------------|
+| App Service | Standard S1 | 2 instances | Production workload with scaling |
+| Azure SQL | Standard S2 | Single DB | Medium transaction volume |
+| Storage | LRS | 100GB | Non-critical application data |
+| Application Gateway | WAF_v2 | 1 instance | Web application firewall required |
 
 **Cost Optimization Options:**
-- Use App Service Basic tier for dev/test: Save $110/month
-- Consider Azure SQL serverless for variable workloads: Save 30-40%
-- Implement auto-shutdown for non-prod VMs: Save 50% on compute
+- Use App Service Basic tier for dev/test environments
+- Consider Azure SQL serverless for variable workloads (save 30-40%)
+- Implement auto-shutdown for non-prod VMs (save ~50% on compute)
+- Use reserved instances for predictable workloads (save up to 72%)
+
+**Cost Estimation**: Use [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) for current regional pricing.
 ```
 
 ## Key Focus Areas

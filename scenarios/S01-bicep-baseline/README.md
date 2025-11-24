@@ -98,7 +98,7 @@ graph TB
 - 3 Subnets
 - 2 Network Security Groups
 - 1 Storage Account
-- Estimated cost: **~$10/month** (minimal for demo)
+- Estimated cost: **Very low** (minimal infrastructure - primarily storage and data transfer)
 
 ## Demo Components
 

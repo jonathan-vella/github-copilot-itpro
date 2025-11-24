@@ -123,7 +123,7 @@ POS-002: No Jump Box management overhead (reduced operational costs)
 ...
 
 ### Negative
-NEG-001: Additional Azure cost for Bastion host ($140/month)
+NEG-001: Additional Azure cost for Bastion host (see Azure Pricing Calculator)
 NEG-002: Cannot demonstrate Jump Box patterns
 ...
 ```
@@ -171,7 +171,7 @@ Requirements:
 - 99.95% SLA required
 - Global users (North America and Europe)
 - PCI-DSS compliance needed
-- Budget: $5,000/month
+- Budget: Enterprise-scale budget for production workload
 
 Proposed Architecture:
 - Azure Front Door for global load balancing
@@ -200,8 +200,8 @@ Assess against all WAF pillars and suggest improvements.
 [... continues for all 5 pillars ...]
 
 ## Recommendations
-1. Add Private Endpoints: +$200/month, significant security improvement
-2. Enable DDoS Protection: +$2,944/month, required for PCI-DSS
+1. Add Private Endpoints: Additional cost, significant security improvement
+2. Enable DDoS Protection: Significant cost increase, required for PCI-DSS
 3. Consider: Azure SQL elastic pool for cost optimization
 
 ## Trade-offs
@@ -486,7 +486,7 @@ Requirements:
 Design a development environment with:
 - Network isolation per ADR-0003
 - Azure Bastion for secure access per ADR-0002
-- Budget: $500/month
+- Budget: Small-scale production budget
 - Support 5 developers with 2 VMs each
 
 Assess against WAF pillars and provide detailed recommendations.

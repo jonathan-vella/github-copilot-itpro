@@ -4,7 +4,7 @@
 
 **Organization**: Regional Bank Expansion to Azure  
 **Industry**: Financial Services  
-**Size**: 200 employees, $500M in assets  
+**Size**: 200 employees, mid-sized financial services firm  
 **Current State**: On-premises datacenter, planning cloud migration  
 
 ## Business Context
@@ -146,7 +146,7 @@ The team has only 2 weeks to get the core network and storage infrastructure dep
 
 ### Budget Constraints
 
-**Monthly Infrastructure Budget:** $2,000  
+**Monthly Infrastructure Budget:** Constrained for demo/dev environment  
 **Cost Optimization Required:**
 
 - Use Standard tier where appropriate (not Premium)
@@ -175,7 +175,7 @@ The infrastructure deployment will be considered successful if:
 2. ✅ **Security**: Pass automated compliance checks (Azure Policy)
 3. ✅ **Reliability**: No deployment errors or rollbacks
 4. ✅ **Maintainability**: Code is readable and well-documented
-5. ✅ **Cost**: Monthly run rate <$500 for demo/dev environment
+5. ✅ **Cost**: Low monthly run rate for demo/dev environment
 6. ✅ **Knowledge Transfer**: Team can modify/extend templates independently
 
 ## Pain Points (Traditional Approach)
