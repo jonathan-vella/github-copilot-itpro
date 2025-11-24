@@ -52,16 +52,19 @@
 ### Service Availability
 
 - [ ] **App Service Running**: Check app state is "Running"
+
   ```bash
   az webapp list -g rg-s05-validation-swc01 --query "[].{name:name, state:state}"
   ```
 
 - [ ] **Container Started**: No "ImagePullBackOff" or crash loops
+
   ```bash
   az webapp log tail -g rg-s05-validation-swc01 -n app-saifv2-api-ss4xs2
   ```
 
 - [ ] **DNS Resolution**: App URLs resolve correctly
+
   ```bash
   nslookup app-saifv2-api-ss4xs2.azurewebsites.net
   ```
@@ -71,11 +74,13 @@
 #### Root Endpoint (`/`)
 
 - [ ] **HTTP 200 Status**: Returns success
+
   ```bash
   curl -I https://app-saifv2-api-ss4xs2.azurewebsites.net/
   ```
 
 - [ ] **Valid JSON Response**: Returns application metadata
+
   ```bash
   curl -s https://app-saifv2-api-ss4xs2.azurewebsites.net/ | jq
   ```
@@ -83,6 +88,7 @@
 - [ ] **Response Time**: < 2 seconds (cold start acceptable)
 
 **Expected Response:**
+
 ```json
 {
   "name": "SAIF API v2",
@@ -94,16 +100,19 @@
 #### Version Endpoint (`/api/version`)
 
 - [ ] **HTTP 200 Status**: Returns success
+
   ```bash
   curl -I https://app-saifv2-api-ss4xs2.azurewebsites.net/api/version
   ```
 
 - [ ] **Version Info**: Returns current version
+
   ```bash
   curl -s https://app-saifv2-api-ss4xs2.azurewebsites.net/api/version | jq
   ```
 
 **Expected Response:**
+
 ```json
 {
   "version": "2.0.0",
@@ -115,11 +124,13 @@
 
 - [ ] **HTTP 200 Status**: Returns success
 - [ ] **Managed Identity Name**: Shows correct identity
+
   ```bash
   curl -s https://app-saifv2-api-ss4xs2.azurewebsites.net/api/whoami | jq
   ```
 
 **Expected Response:**
+
 ```json
 {
   "identity": "app-saifv2-api-ss4xs2",
@@ -131,6 +142,7 @@
 
 - [ ] **HTTP 200 Status**: Returns success
 - [ ] **Client IP**: Shows your public IP
+
   ```bash
   curl -s https://app-saifv2-api-ss4xs2.azurewebsites.net/api/sourceip | jq
   ```
@@ -138,6 +150,7 @@
 #### SQL Endpoints (Database Connectivity)
 
 - [ ] **SQL WhoAmI** (`/api/sqlwhoami`): Returns SQL identity
+
   ```bash
   curl -s https://app-saifv2-api-ss4xs2.azurewebsites.net/api/sqlwhoami | jq
   ```
@@ -145,6 +158,7 @@
 - [ ] **SQL Source IP** (`/api/sqlsrcip`): Returns database connection info
 
 **Expected Response:**
+
 ```json
 {
   "status": "OK",
@@ -162,6 +176,7 @@
 - [ ] **Test Script Exists**: `validation/load-testing/quick-load-test.sh`
 - [ ] **Script is Executable**: `chmod +x quick-load-test.sh`
 - [ ] **Test Execution**: Run 30-second test
+
   ```bash
   cd validation/load-testing
   ./quick-load-test.sh 30 20
@@ -176,6 +191,7 @@
 - [ ] **Test Exit Code**: 0 (pass)
 
 **Test Output Verification:**
+
 ```
 Results:
   Total Requests:    1000+
@@ -233,6 +249,7 @@ Results:
 ### Log Analytics
 
 - [ ] **Query Logs**: Can query application logs
+
   ```kusto
   AppServiceConsoleLogs
   | where TimeGenerated > ago(1h)
@@ -240,6 +257,7 @@ Results:
   ```
 
 - [ ] **Performance Data**: Metrics available
+
   ```kusto
   AppServiceHTTPLogs
   | where TimeGenerated > ago(1h)
@@ -253,6 +271,7 @@ Results:
 ### Baseline Establishment
 
 - [ ] **Baseline Test Run**: Extended test (60s, 10 concurrent)
+
   ```bash
   ./quick-load-test.sh 60 10 > baseline-results.txt
   ```
@@ -262,6 +281,7 @@ Results:
 - [ ] **Thresholds Set**: Monitoring alerts configured based on baseline
 
 **Baseline Metrics:**
+
 - Success Rate: _____%
 - Avg Response Time: _____ms
 - Requests/Second: _____
@@ -312,11 +332,12 @@ Results:
 
 **If PASSED WITH WARNINGS, list conditions:**
 
-1. _______________________________________
-2. _______________________________________
-3. _______________________________________
+1. [Condition 1]
+2. [Condition 2]
+3. [Condition 3]
 
 **Remediation Plan:**
+
 - Owner: _____________
 - Due Date: _____________
 - Follow-up: _____________

@@ -418,6 +418,7 @@ Endpoint            | Status | Response Time
 ### Performance Metrics
 
 **Response Time Distribution:**
+
 - Minimum: 42ms
 - P50 (Median): 125ms
 - P75: 178ms
@@ -426,6 +427,7 @@ Endpoint            | Status | Response Time
 - Maximum: 587ms
 
 **Throughput:**
+
 - Total Requests: 1,245
 - Duration: 30 seconds
 - Average RPS: 41.5

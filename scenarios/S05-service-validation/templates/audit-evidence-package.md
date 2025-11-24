@@ -56,12 +56,14 @@ Demonstrate compliance with **Azure Infrastructure Specialization - Module B Con
 **Requirement**: Perform load testing to validate application performance under expected production load.
 
 **Evidence**:
+
 - [x] Load test script implemented (`quick-load-test.sh`)
 - [x] Load test executed and documented
 - [x] Results meet performance targets (> 99% success rate, < 500ms avg response)
 - [x] Test results archived with timestamps
 
 **Supporting Documents**:
+
 - `validation/load-testing/quick-load-test.sh` - Load test script
 - `examples/load-test-report.md` - Sample test report with metrics
 - `templates/test-results-sign-off.md` - Test execution approval
@@ -84,6 +86,7 @@ Demonstrate compliance with **Azure Infrastructure Specialization - Module B Con
 **Requirement**: Validate all API endpoints return expected responses and meet functional requirements.
 
 **Evidence**:
+
 - [x] All 6 API endpoints identified and documented
 - [x] Test coverage: 100% of endpoints
 - [x] Expected responses documented
@@ -101,6 +104,7 @@ Demonstrate compliance with **Azure Infrastructure Specialization - Module B Con
 | `/api/sqlsrcip` | SQL connection | 200 OK | ✅ Pass |
 
 **Supporting Documents**:
+
 - `examples/api-validation-checklist.md` - Complete validation checklist
 - `examples/test-execution-log.md` - Detailed execution log with timestamps
 
@@ -113,6 +117,7 @@ Demonstrate compliance with **Azure Infrastructure Specialization - Module B Con
 **Requirement**: Establish and maintain performance baselines for ongoing monitoring.
 
 **Evidence**:
+
 - [x] Initial baseline established
 - [x] Baseline metrics documented
 - [x] Thresholds defined (< 500ms avg, > 99% success)
@@ -128,6 +133,7 @@ Demonstrate compliance with **Azure Infrastructure Specialization - Module B Con
 | Requests per Second | 41.5 | 2025-11-24 | > 10 |
 
 **Supporting Documents**:
+
 - `examples/baseline-performance.md` - Baseline documentation
 - `examples/load-test-report.md` - Historical test results
 
@@ -140,6 +146,7 @@ Demonstrate compliance with **Azure Infrastructure Specialization - Module B Con
 **Requirement**: Validate database connectivity using secure authentication (managed identity, no hardcoded credentials).
 
 **Evidence**:
+
 - [x] Managed Identity configured
 - [x] Entra ID-only authentication enabled
 - [x] No SQL usernames/passwords in configuration
@@ -147,17 +154,20 @@ Demonstrate compliance with **Azure Infrastructure Specialization - Module B Con
 - [x] Database queries execute successfully
 
 **Authentication Method**:
+
 - **Type**: Azure Managed Identity (System-assigned)
 - **SQL Auth**: Disabled (Entra ID-only)
 - **RBAC Role**: SQL DB Contributor
 - **Connection String**: Uses `Authentication=Active Directory Managed Identity`
 
 **Test Evidence**:
+
 - `/api/sqlwhoami` endpoint returns managed identity name
 - No connection strings in `appsettings.json` or environment variables
 - SQL Server configuration shows "Entra ID Admin Only" enabled
 
 **Supporting Documents**:
+
 - `infra/main.bicep` - Infrastructure as code (managed identity configuration)
 - `app/config.py` - Application configuration (no hardcoded credentials)
 
@@ -170,6 +180,7 @@ Demonstrate compliance with **Azure Infrastructure Specialization - Module B Con
 **Requirement**: Integrate validation tests into CI/CD pipeline for repeatability.
 
 **Evidence**:
+
 - [x] Test scripts can run in CI/CD pipeline
 - [x] Exit codes indicate pass/fail
 - [x] Results exportable for archival
@@ -193,6 +204,7 @@ Demonstrate compliance with **Azure Infrastructure Specialization - Module B Con
 ```
 
 **Supporting Documents**:
+
 - `examples/ci-cd-integration.md` - Complete pipeline examples (Azure DevOps, GitHub Actions, GitLab)
 - `validation/load-testing/quick-load-test.sh` - Exit code 0 (pass) or 1 (fail)
 
@@ -205,6 +217,7 @@ Demonstrate compliance with **Azure Infrastructure Specialization - Module B Con
 **Requirement**: Implement monitoring to track application health and performance.
 
 **Evidence**:
+
 - [x] Application Insights configured
 - [x] Log Analytics workspace configured
 - [x] Telemetry flowing from application
@@ -233,6 +246,7 @@ requests
 ```
 
 **Supporting Documents**:
+
 - `infra/main.bicep` - Application Insights deployment
 - `app/main.py` - Instrumentation code
 
@@ -247,6 +261,7 @@ requests
 **Control**: All Azure services use managed identity (no connection strings or hardcoded credentials).
 
 **Evidence**:
+
 - [x] App Service managed identity enabled
 - [x] SQL Server uses Entra ID-only authentication
 - [x] Container Registry uses managed identity for image pulls
@@ -265,6 +280,7 @@ connection_string = (
 ```
 
 **Configuration Review**:
+
 - ✅ `appsettings.json` - No connection strings
 - ✅ Environment variables - Uses Azure configuration references
 - ✅ Key Vault (if used) - Managed identity access
@@ -276,6 +292,7 @@ connection_string = (
 **Control**: HTTPS enforcement, TLS 1.2 minimum, no public access to backend services.
 
 **Evidence**:
+
 - [x] HTTPS-only mode enabled on all App Services
 - [x] TLS 1.2 minimum configured
 - [x] HTTP requests redirect to HTTPS
@@ -299,12 +316,14 @@ curl -I https://app-saifv2-api-xxx.azurewebsites.net/
 **Control**: Data encrypted at rest and in transit, data residency compliance.
 
 **Evidence**:
+
 - [x] SQL Database encryption at rest enabled (TDE)
 - [x] TLS 1.2+ for data in transit
 - [x] Data residency: Sweden Central (EU)
 - [x] GDPR compliance for EU data
 
 **Configuration Evidence**:
+
 - SQL Database: Transparent Data Encryption (TDE) enabled by default
 - App Service: TLS 1.2 minimum configured in Azure Portal
 - Region: Sweden Central (Microsoft datacenter in Gävle, Sweden)
@@ -318,18 +337,21 @@ curl -I https://app-saifv2-api-xxx.azurewebsites.net/
 **Control**: All infrastructure deployed via IaC (Bicep) for auditability and repeatability.
 
 **Evidence**:
+
 - [x] Complete Bicep templates in source control
 - [x] Git commit history shows all changes
 - [x] No manual Azure Portal changes
 - [x] Deployment history in Azure
 
 **IaC Files**:
+
 - `infra/main.bicep` - Main infrastructure orchestration
 - `infra/modules/app-service.bicep` - App Service configuration
 - `infra/modules/sql-database.bicep` - SQL Database configuration
 - `infra/modules/monitoring.bicep` - Application Insights & Log Analytics
 
 **Git History**:
+
 ```bash
 git log --oneline --graph infra/
 # Shows complete commit history of infrastructure changes
@@ -342,6 +364,7 @@ git log --oneline --graph infra/
 **Control**: All deployments logged with timestamps, approvers, and change descriptions.
 
 **Evidence**:
+
 - [x] Azure deployment history available
 - [x] Deployment sign-off documents completed
 - [x] Change approvals documented
@@ -364,6 +387,7 @@ git log --oneline --graph infra/
 **Control**: All test executions logged with timestamps, results, and approvals.
 
 **Evidence**:
+
 - [x] Test execution logs with timestamps
 - [x] Test results archived
 - [x] Test sign-off documents completed
@@ -388,6 +412,7 @@ git log --oneline --graph infra/
 **Control**: Complete documentation available for deployment, testing, and troubleshooting.
 
 **Evidence**:
+
 - [x] Deployment guide (README.md)
 - [x] Architecture diagrams (Mermaid)
 - [x] API documentation
@@ -412,12 +437,14 @@ git log --oneline --graph infra/
 **Control**: Documentation enables knowledge transfer and replication by other teams.
 
 **Evidence**:
+
 - [x] Demo script for stakeholder presentations
 - [x] Step-by-step deployment guide
 - [x] Prompt examples for GitHub Copilot
 - [x] Reusable templates
 
 **Training Materials**:
+
 - `DEMO-SCRIPT.md` - 45-60 minute demo walkthrough
 - `prompts/effective-prompts.md` - GitHub Copilot prompt examples
 - `templates/` - Reusable sign-off templates
@@ -431,6 +458,7 @@ git log --oneline --graph infra/
 **Control**: All Azure resources documented and tagged for cost tracking.
 
 **Evidence**:
+
 - [x] Complete resource inventory
 - [x] Resources tagged (Environment, Project, Owner, ManagedBy)
 - [x] Cost estimates documented
@@ -458,12 +486,14 @@ git log --oneline --graph infra/
 **Control**: Cost optimization measures implemented to minimize expenses.
 
 **Evidence**:
+
 - [x] Basic SQL tier used for demo (vs. Standard/Premium)
 - [x] Resource cleanup scripts provided
 - [x] Monitoring ingestion optimized
 - [x] Cost alerts configured (optional)
 
 **Optimization Actions**:
+
 1. SQL Database: Basic tier ($5/month vs. $15+/month for Standard)
 2. Log Analytics: 5GB limit configured to control costs
 3. App Service: P1v3 (lowest Premium tier for zone redundancy)
@@ -477,32 +507,38 @@ git log --oneline --graph infra/
 Complete list of evidence files included in this audit package:
 
 #### Infrastructure Code
+
 - `infra/main.bicep`
 - `infra/modules/app-service.bicep`
 - `infra/modules/sql-database.bicep`
 - `infra/modules/monitoring.bicep`
 
 #### Application Code
+
 - `app/main.py`
 - `app/database.py`
 - `app/requirements.txt`
 
 #### Validation Scripts
+
 - `validation/load-testing/quick-load-test.sh`
 - `validation/api-tests/test-all-endpoints.sh`
 
 #### Documentation
+
 - `README.md`
 - `DEMO-SCRIPT.md`
 - `scenario/requirements.md`
 - `scenario/architecture.md`
 
 #### Templates
+
 - `templates/deployment-sign-off.md`
 - `templates/test-results-sign-off.md`
 - `templates/audit-evidence-package.md` (this document)
 
 #### Examples
+
 - `examples/load-test-report.md`
 - `examples/baseline-performance.md`
 - `examples/api-validation-checklist.md`

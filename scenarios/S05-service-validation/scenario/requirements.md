@@ -15,6 +15,7 @@
 Contoso Healthcare is undergoing a digital transformation and migrating their patient management system to Azure. As part of their Azure Infrastructure Specialization journey, they must demonstrate **Module B Control 4.1: Service Validation and Testing**.
 
 **Key Pain Points:**
+
 1. **Manual Testing Overhead**: Current validation process takes 40+ hours per release
 2. **Inconsistent Testing**: Different testers use different approaches, leading to gaps
 3. **Audit Requirements**: Healthcare regulations require documented evidence of testing
@@ -37,12 +38,14 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 
 **Application**: SAIF API v2 (Secure AI Framework)  
 **Technology Stack**:
+
 - **Backend**: Python 3.11 (FastAPI framework)
 - **Database**: Azure SQL Database (Entra ID authentication)
 - **Containers**: Azure Container Registry + App Service (Linux)
 - **Monitoring**: Application Insights + Log Analytics
 
 **API Endpoints**:
+
 - `GET /` - Health check and application metadata
 - `GET /api/version` - Application version information
 - `GET /api/whoami` - Managed identity information
@@ -53,22 +56,26 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 ### Infrastructure Requirements
 
 #### Compute
+
 - **App Service Plan**: Premium P1v3 (zone redundancy)
 - **App Services**: 2 instances (API + Web frontend)
 - **Scaling**: Manual scaling for demo (auto-scale for production)
 
 #### Data
+
 - **SQL Server**: Entra ID-only authentication (no SQL auth)
 - **SQL Database**: Basic tier for demo (Standard/Premium for production)
 - **Data Residency**: Sweden Central (EU data sovereignty)
 
 #### Security
+
 - **Authentication**: Azure Managed Identity (no connection strings)
 - **Network**: HTTPS-only, TLS 1.2 minimum
 - **Secrets**: Azure Key Vault for sensitive configuration
 - **Access Control**: RBAC for all resources
 
 #### Monitoring
+
 - **Application Insights**: Request tracking, dependency monitoring, exceptions
 - **Log Analytics**: Centralized logging and queries
 - **Alerts**: Performance degradation, error rate, availability
@@ -82,6 +89,7 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 **Objective**: Validate application can handle expected production load
 
 **Requirements**:
+
 - Test with 10-50 concurrent users
 - Duration: 30-120 seconds for quick validation
 - Endpoints: All public API endpoints
@@ -92,6 +100,7 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
   - Error rate < 1%
 
 **Tooling**:
+
 - Simple bash script with curl (quick-load-test.sh)
 - No complex infrastructure required
 - CI/CD integration ready
@@ -101,6 +110,7 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 **Objective**: Verify all endpoints return expected responses
 
 **Requirements**:
+
 - Test each endpoint individually
 - Validate HTTP status codes (200 OK)
 - Verify JSON response structure
@@ -108,6 +118,7 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 - Test error handling (4xx, 5xx)
 
 **Test Coverage**:
+
 - Health check endpoint (/)
 - Version endpoint (/api/version)
 - Identity endpoints (/api/whoami)
@@ -119,6 +130,7 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 **Objective**: Establish performance benchmarks for ongoing monitoring
 
 **Requirements**:
+
 - Measure cold start time (< 2 seconds acceptable)
 - Measure warm response times (< 500ms target)
 - Calculate percentiles (P50, P95, P99)
@@ -126,6 +138,7 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 - Document baseline in version control
 
 **Baseline Metrics**:
+
 - Minimum response time
 - Average response time
 - Median (P50)
@@ -139,6 +152,7 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 **Objective**: Validate managed identity authentication to SQL Database
 
 **Requirements**:
+
 - Verify Entra ID authentication works
 - Test database read/write operations
 - Validate connection pooling
@@ -146,6 +160,7 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 - No hardcoded credentials or connection strings
 
 **Test Scenarios**:
+
 - Managed identity token acquisition
 - SQL query execution
 - Connection timeout handling
@@ -156,6 +171,7 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 **Objective**: Ensure security best practices are implemented
 
 **Requirements**:
+
 - HTTPS enforcement (HTTP redirects to HTTPS)
 - TLS 1.2+ only
 - No public blob access
@@ -164,6 +180,7 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 - Security headers present (X-Frame-Options, etc.)
 
 **Compliance**:
+
 - GDPR (data residency in EU)
 - Healthcare data handling (HIPAA-aligned practices)
 - Azure Security Benchmark alignment
@@ -273,6 +290,7 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 **So that** I can prove it meets performance and reliability requirements
 
 **Acceptance Criteria**:
+
 - Deploy infrastructure with one command
 - Application accessible within 5 minutes
 - Validation tests run automatically
@@ -285,6 +303,7 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 **So that** I can validate performance before production release
 
 **Acceptance Criteria**:
+
 - Execute load test with single command
 - Results show success rate and response times
 - Test exits with code 0 (pass) or 1 (fail)
@@ -297,6 +316,7 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 **So that** I can verify Module B Control 4.1 compliance
 
 **Acceptance Criteria**:
+
 - Test execution logs with timestamps
 - Performance metrics with pass/fail thresholds
 - Infrastructure as code (auditable)
@@ -309,6 +329,7 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 **So that** I can demonstrate Module B Control 4.1 capability
 
 **Acceptance Criteria**:
+
 - Complete documentation for replication
 - All scripts and templates provided
 - Clear architecture diagrams

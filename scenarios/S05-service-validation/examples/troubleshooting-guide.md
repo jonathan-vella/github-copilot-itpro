@@ -21,6 +21,7 @@ This guide provides solutions to common issues encountered during service valida
 ### Issue: Load Test Returns 100% Failure Rate
 
 **Symptoms:**
+
 ```bash
 $ ./quick-load-test.sh 30 20
 Results:
@@ -33,14 +34,16 @@ Results:
 **Possible Causes:**
 
 1. **App Service Not Running**
+
    ```bash
    # Check app service status
    az webapp show --name app-saifv2-api-ss4xs2 \
      --resource-group rg-s05-validation-swc01 \
      --query "state" -o tsv
    ```
-   
+
    **Solution:** Start the app service
+
    ```bash
    az webapp start --name app-saifv2-api-ss4xs2 \
      --resource-group rg-s05-validation-swc01
@@ -48,12 +51,14 @@ Results:
 
 2. **Wrong API URL**
    - Verify URL in script or environment variable
+
    ```bash
    curl -I https://app-saifv2-api-ss4xs2.azurewebsites.net/
    ```
 
 3. **Firewall/NSG Blocking Access**
    - Check if your IP is allowed
+
    ```bash
    # Get your public IP
    curl -s https://api.ipify.org
@@ -69,6 +74,7 @@ Results:
 ### Issue: High Failure Rate (50-90%)
 
 **Symptoms:**
+
 ```bash
 Results:
   Successful:        523 (52%)
@@ -80,6 +86,7 @@ Results:
 **Possible Causes:**
 
 1. **Resource Exhaustion**
+
    ```bash
    # Check CPU and Memory
    az monitor metrics list \
@@ -87,8 +94,9 @@ Results:
      --metric "CpuPercentage,MemoryPercentage" \
      --start-time 2025-11-24T14:00:00Z
    ```
-   
+
    **Solution:** Scale up App Service Plan
+
    ```bash
    az appservice plan update \
      --name asp-saif-ss4xs2 \
@@ -98,6 +106,7 @@ Results:
 
 2. **Database Throttling**
    - Check SQL Database DTU usage
+
    ```bash
    az sql db show \
      --name sqldb-saif \
@@ -108,6 +117,7 @@ Results:
 
 3. **Container Cold Start**
    - Wait longer after deployment
+
    ```bash
    # Wait 90 seconds instead of 60
    sleep 90
@@ -118,6 +128,7 @@ Results:
 ### Issue: "curl: command not found"
 
 **Symptoms:**
+
 ```bash
 $ ./quick-load-test.sh 30 20
 ./quick-load-test.sh: line 15: curl: command not found
@@ -126,21 +137,25 @@ $ ./quick-load-test.sh 30 20
 **Solution:**
 
 **Ubuntu/Debian:**
+
 ```bash
 sudo apt-get update && sudo apt-get install -y curl bc
 ```
 
 **macOS:**
+
 ```bash
 brew install curl
 ```
 
 **Windows (WSL2):**
+
 ```bash
 sudo apt update && sudo apt install curl bc
 ```
 
 **Alpine Linux:**
+
 ```bash
 apk add --no-cache curl bc
 ```
@@ -152,6 +167,7 @@ apk add --no-cache curl bc
 ### Issue: HTTP 403 Forbidden
 
 **Symptoms:**
+
 ```bash
 $ curl -I https://app-saifv2-api-ss4xs2.azurewebsites.net/
 HTTP/2 403
@@ -160,14 +176,16 @@ HTTP/2 403
 **Possible Causes:**
 
 1. **Access Restrictions Enabled**
+
    ```bash
    # Check access restrictions
    az webapp config access-restriction show \
      --name app-saifv2-api-ss4xs2 \
      --resource-group rg-s05-validation-swc01
    ```
-   
+
    **Solution:** Add your IP to allow list
+
    ```bash
    az webapp config access-restriction add \
      --name app-saifv2-api-ss4xs2 \
@@ -180,6 +198,7 @@ HTTP/2 403
 
 2. **Authentication Required**
    - Check if API requires authentication
+
    ```bash
    # Test with authentication header
    curl -H "Authorization: Bearer $TOKEN" \
@@ -191,6 +210,7 @@ HTTP/2 403
 ### Issue: HTTP 404 Not Found
 
 **Symptoms:**
+
 ```bash
 $ curl -I https://app-saifv2-api-ss4xs2.azurewebsites.net/api/version
 HTTP/2 404
@@ -200,11 +220,13 @@ HTTP/2 404
 
 1. **Wrong Endpoint Path**
    - List available endpoints
+
    ```bash
    curl -s https://app-saifv2-api-ss4xs2.azurewebsites.net/ | jq
    ```
 
 2. **Container Not Running**
+
    ```bash
    # Check container logs
    az webapp log tail \
@@ -213,6 +235,7 @@ HTTP/2 404
    ```
 
 3. **Application Not Deployed**
+
    ```bash
    # Check deployment status
    az webapp deployment list \
@@ -225,6 +248,7 @@ HTTP/2 404
 ### Issue: HTTP 429 Too Many Requests
 
 **Symptoms:**
+
 ```bash
 HTTP/2 429
 {
@@ -235,6 +259,7 @@ HTTP/2 429
 **This is EXPECTED** during load testing. App Service has built-in rate limiting.
 
 **If excessive (> 5%):**
+
 - Reduce concurrent requests: `./quick-load-test.sh 30 10`
 - Increase App Service Plan tier
 - Implement request throttling in application
@@ -244,6 +269,7 @@ HTTP/2 429
 ### Issue: HTTP 500 Internal Server Error
 
 **Symptoms:**
+
 ```bash
 $ curl https://app-saifv2-api-ss4xs2.azurewebsites.net/
 HTTP/2 500
@@ -255,6 +281,7 @@ HTTP/2 500
 **Diagnostic Steps:**
 
 1. **Check Application Logs**
+
    ```bash
    az webapp log tail \
      --name app-saifv2-api-ss4xs2 \
@@ -262,6 +289,7 @@ HTTP/2 500
    ```
 
 2. **Check Application Insights**
+
    ```bash
    az monitor app-insights query \
      --app app-saifv2-api-insights \
@@ -269,11 +297,13 @@ HTTP/2 500
    ```
 
 3. **Test Database Connection**
+
    ```bash
    curl https://app-saifv2-api-ss4xs2.azurewebsites.net/api/sqlwhoami
    ```
 
 **Common Solutions:**
+
 - Database connection string incorrect
 - Managed identity not granted SQL permissions
 - Application code error (check logs)
@@ -283,6 +313,7 @@ HTTP/2 500
 ### Issue: HTTP 503 Service Unavailable
 
 **Symptoms:**
+
 ```bash
 HTTP/2 503
 ```
@@ -291,12 +322,14 @@ HTTP/2 503
 
 1. **Container Starting (Cold Start)**
    - **Expected** - Wait 30-60 seconds
+
    ```bash
    sleep 60
    curl https://app-saifv2-api-ss4xs2.azurewebsites.net/
    ```
 
 2. **App Service Crashed**
+
    ```bash
    # Restart app service
    az webapp restart \
@@ -305,6 +338,7 @@ HTTP/2 503
    ```
 
 3. **Health Check Failing**
+
    ```bash
    # Check health check configuration
    az webapp config show \
@@ -320,6 +354,7 @@ HTTP/2 503
 ### Issue: Slow Response Times (> 1 second)
 
 **Symptoms:**
+
 ```bash
 Results:
   Avg Response Time: 1,245ms
@@ -329,6 +364,7 @@ Results:
 **Diagnostic Steps:**
 
 1. **Check Application Insights**
+
    ```kusto
    requests
    | where timestamp > ago(1h)
@@ -336,6 +372,7 @@ Results:
    ```
 
 2. **Identify Slow Endpoints**
+
    ```bash
    for endpoint in "/" "/api/version" "/api/whoami" "/api/sourceip"; do
      echo "Testing: $endpoint"
@@ -346,6 +383,7 @@ Results:
    ```
 
 3. **Check Database Performance**
+
    ```bash
    # Check SQL Database DTU
    az sql db show-usage \
@@ -357,6 +395,7 @@ Results:
 **Solutions:**
 
 1. **Enable Always On**
+
    ```bash
    az webapp config set \
      --name app-saifv2-api-ss4xs2 \
@@ -365,6 +404,7 @@ Results:
    ```
 
 2. **Scale Up App Service Plan**
+
    ```bash
    az appservice plan update \
      --name asp-saif-ss4xs2 \
@@ -380,6 +420,7 @@ Results:
 ### Issue: Response Time Spikes
 
 **Symptoms:**
+
 - P95: 200ms
 - P99: 1,500ms
 - Max: 5,000ms
@@ -391,6 +432,7 @@ Results:
    - Increase container memory
 
 2. **Database Query Timeouts**
+
    ```kusto
    // Query slow SQL requests
    dependencies
@@ -401,6 +443,7 @@ Results:
 
 3. **Network Latency**
    - Test from different regions
+
    ```bash
    # Test from Azure VM in different region
    curl -s -w "Time: %{time_total}s\n" \
@@ -415,6 +458,7 @@ Results:
 ### Issue: "Login failed for user"
 
 **Symptoms:**
+
 ```bash
 $ curl https://app-saifv2-api-ss4xs2.azurewebsites.net/api/sqlwhoami
 {
@@ -425,6 +469,7 @@ $ curl https://app-saifv2-api-ss4xs2.azurewebsites.net/api/sqlwhoami
 **Solution Steps:**
 
 1. **Verify Managed Identity Exists**
+
    ```bash
    az webapp identity show \
      --name app-saifv2-api-ss4xs2 \
@@ -432,6 +477,7 @@ $ curl https://app-saifv2-api-ss4xs2.azurewebsites.net/api/sqlwhoami
    ```
 
 2. **Grant SQL Permissions**
+
    ```sql
    -- Run this in SQL Database via Azure Portal Query Editor
    CREATE USER [app-saifv2-api-ss4xs2] FROM EXTERNAL PROVIDER;
@@ -440,6 +486,7 @@ $ curl https://app-saifv2-api-ss4xs2.azurewebsites.net/api/sqlwhoami
    ```
 
 3. **Verify Firewall Rules**
+
    ```bash
    az sql server firewall-rule list \
      --server sql-saif-ss4xs2 \
@@ -447,6 +494,7 @@ $ curl https://app-saifv2-api-ss4xs2.azurewebsites.net/api/sqlwhoami
    ```
 
 4. **Enable "Allow Azure Services"**
+
    ```bash
    az sql server firewall-rule create \
      --server sql-saif-ss4xs2 \
@@ -461,6 +509,7 @@ $ curl https://app-saifv2-api-ss4xs2.azurewebsites.net/api/sqlwhoami
 ### Issue: Database Connection Timeout
 
 **Symptoms:**
+
 ```bash
 {
   "error": "Timeout expired. The timeout period elapsed prior to obtaining a connection."
@@ -470,6 +519,7 @@ $ curl https://app-saifv2-api-ss4xs2.azurewebsites.net/api/sqlwhoami
 **Solutions:**
 
 1. **Check Connection String**
+
    ```bash
    az webapp config connection-string list \
      --name app-saifv2-api-ss4xs2 \
@@ -477,6 +527,7 @@ $ curl https://app-saifv2-api-ss4xs2.azurewebsites.net/api/sqlwhoami
    ```
 
 2. **Verify SQL Server is Running**
+
    ```bash
    az sql server show \
      --name sql-saif-ss4xs2 \
@@ -485,6 +536,7 @@ $ curl https://app-saifv2-api-ss4xs2.azurewebsites.net/api/sqlwhoami
    ```
 
 3. **Test SQL Connectivity**
+
    ```bash
    # From within App Service
    az webapp ssh --name app-saifv2-api-ss4xs2 \
@@ -501,6 +553,7 @@ $ curl https://app-saifv2-api-ss4xs2.azurewebsites.net/api/sqlwhoami
 ### Issue: "ImagePullBackOff"
 
 **Symptoms:**
+
 ```bash
 az webapp log tail shows:
 Failed to pull image "acrsaifss4xs2.azurecr.io/saifv2/api:latest": 
@@ -510,6 +563,7 @@ Error: ImagePullBackOff
 **Solution Steps:**
 
 1. **Verify Image Exists**
+
    ```bash
    az acr repository show \
      --name acrsaifss4xs2 \
@@ -517,6 +571,7 @@ Error: ImagePullBackOff
    ```
 
 2. **Check Managed Identity AcrPull Role**
+
    ```bash
    az role assignment list \
      --assignee $(az webapp identity show \
@@ -527,6 +582,7 @@ Error: ImagePullBackOff
    ```
 
 3. **Grant AcrPull Permission**
+
    ```bash
    az role assignment create \
      --assignee $(az webapp identity show \
@@ -538,6 +594,7 @@ Error: ImagePullBackOff
    ```
 
 4. **Rebuild and Push Image**
+
    ```bash
    cd app/
    az acr build --registry acrsaifss4xs2 \
@@ -549,6 +606,7 @@ Error: ImagePullBackOff
 ### Issue: Container Keeps Restarting
 
 **Symptoms:**
+
 ```bash
 Container crashes every few seconds
 ```
@@ -556,6 +614,7 @@ Container crashes every few seconds
 **Diagnostic Steps:**
 
 1. **Check Container Logs**
+
    ```bash
    az webapp log tail \
      --name app-saifv2-api-ss4xs2 \
@@ -563,6 +622,7 @@ Container crashes every few seconds
    ```
 
 2. **Check Startup Command**
+
    ```bash
    az webapp config show \
      --name app-saifv2-api-ss4xs2 \
@@ -571,6 +631,7 @@ Container crashes every few seconds
    ```
 
 3. **Verify Environment Variables**
+
    ```bash
    az webapp config appsettings list \
      --name app-saifv2-api-ss4xs2 \
@@ -584,11 +645,13 @@ Container crashes every few seconds
 ### Issue: "Script not executable"
 
 **Symptoms:**
+
 ```bash
 bash: ./quick-load-test.sh: Permission denied
 ```
 
 **Solution:**
+
 ```bash
 chmod +x validation/load-testing/quick-load-test.sh
 # Then run the script
@@ -600,6 +663,7 @@ chmod +x validation/load-testing/quick-load-test.sh
 ### Issue: Pipeline Timeout
 
 **Symptoms:**
+
 ```
 Task 'Run Load Test' exceeded timeout of 5 minutes
 ```
@@ -607,6 +671,7 @@ Task 'Run Load Test' exceeded timeout of 5 minutes
 **Solutions:**
 
 1. **Increase Timeout**
+
    ```yaml
    # Azure DevOps
    - task: Bash@3
@@ -614,6 +679,7 @@ Task 'Run Load Test' exceeded timeout of 5 minutes
    ```
 
 2. **Reduce Test Duration**
+
    ```bash
    # Use shorter test for CI/CD
    ./quick-load-test.sh 15 10  # Instead of 30 20
@@ -624,6 +690,7 @@ Task 'Run Load Test' exceeded timeout of 5 minutes
 ### Issue: "az: command not found"
 
 **Symptoms:**
+
 ```bash
 ./deploy.ps1: az: command not found
 ```

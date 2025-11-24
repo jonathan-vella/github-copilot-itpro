@@ -7,6 +7,7 @@ This scenario demonstrates **Module B Control 4.1** from the Azure Infrastructur
 **Application**: SAIF (Secure AI Framework) api-v2 - A Python FastAPI application with Azure SQL Database backend
 
 **Testing Focus**:
+
 - ✅ HTTP Load Testing (Bash/curl-based)
 - ✅ API Endpoint Validation
 - ✅ Performance Baseline Measurement
@@ -55,6 +56,7 @@ S05-service-validation/
 ### Step 1: Review SAIF Application
 
 The SAIF api-v2 application provides these endpoints:
+
 - `/` - Health check
 - `/api/whoami` - Identity information
 - `/api/version` - Application version

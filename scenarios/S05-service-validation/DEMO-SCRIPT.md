@@ -7,6 +7,7 @@
 ## Overview
 
 This demo showcases a comprehensive approach to validating Azure application deployments through:
+
 - Infrastructure-as-Code deployment with Bicep
 - Managed Identity authentication to Azure SQL
 - Load testing with Azure Load Testing
@@ -33,6 +34,7 @@ This demo showcases a comprehensive approach to validating Azure application dep
    - `solution/infra/modules/` - modular design with AVM patterns
 
 3. **Deploy infrastructure**
+
    ```powershell
    cd solution/scripts
    .\deploy.ps1 -location swedencentral
@@ -46,25 +48,28 @@ This demo showcases a comprehensive approach to validating Azure application dep
 
 ### Phase 2: Validation Testing (20 min)
 
-5. **Configure SQL access**
+1. **Configure SQL access**
+
    ```powershell
    .\Configure-SqlAccess.ps1 -location swedencentral
    ```
 
-6. **Run quick load test**
+2. **Run quick load test**
    - Navigate to validation directory
    - Show the simple bash script for HTTP load testing
+
    ```bash
    cd validation/load-testing
    ./quick-load-test.sh 30 20
    ```
+
    - Explain what it does:
      - 30-second test with 20 concurrent requests
      - Tests 4 API endpoints in parallel
      - Calculates success rate and average response time
      - Color-coded output (green = pass, red = fail)
 
-7. **Analyze test results**
+3. **Analyze test results**
    - Point out key metrics:
      - Total requests made (should be ~600-1000)
      - Success rate (should be > 99%)
@@ -72,7 +77,8 @@ This demo showcases a comprehensive approach to validating Azure application dep
      - Pass/fail status
    - **Value message**: "Simple bash script provides immediate validation without complex infrastructure"
 
-8. **Verify API endpoints**
+4. **Verify API endpoints**
+
    ```bash
    # Test individual endpoints
    curl -s https://app-saifv2-api-ss4xs2.azurewebsites.net/ | jq
@@ -81,24 +87,25 @@ This demo showcases a comprehensive approach to validating Azure application dep
 
 ### Phase 3: GitHub Copilot Integration (10 min)
 
-9. **Show Copilot-assisted test creation**
+1. **Show Copilot-assisted test creation**
    - Ask: "Create a bash script to validate all API endpoints return 200"
    - Ask: "Generate a curl command to measure API response time"
    - Ask: "Write a script to compare current performance against a baseline"
 
-10. **Demonstrate performance analysis**
+2. **Demonstrate performance analysis**
     - Ask: "Parse quick-load-test.sh output and calculate percentiles"
     - Ask: "Create a markdown report from test results"
     - Use Copilot to add new test scenarios
 
 ### Phase 4: Cleanup & Q&A (5 min)
 
-11. **Show resource cleanup**
+1. **Show resource cleanup**
+
     ```powershell
     .\scripts\Cleanup.ps1
     ```
 
-12. **Q&A and discussion**
+2. **Q&A and discussion**
 
 ## Key Talking Points
 

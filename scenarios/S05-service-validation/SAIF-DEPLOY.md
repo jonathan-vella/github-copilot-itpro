@@ -27,6 +27,7 @@ cd SAIF
 ```
 
 **✅ What this automates:**
+
 - ✅ Resource group creation and tagging
 - ✅ All Azure infrastructure (ACR, App Services, SQL, Monitoring)
 - ✅ Managed identities and RBAC permissions (AcrPull)
@@ -65,6 +66,7 @@ For Azure Portal enthusiasts:
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjonathan-vella%2FSAIF%2Fmain%2Finfra%2Fazuredeploy.json)
 
 **Step 2:** Build and deploy containers
+
 ```powershell
 git clone https://github.com/jonathan-vella/SAIF.git
 cd SAIF
@@ -80,6 +82,7 @@ Note: The portal button deploys the v1 infrastructure. The v2 (Managed Identity 
 The automated deployment creates a complete hackathon environment:
 
 ### 🏗️ Infrastructure (All Automated)
+
 - Resource Group: `rg-saifv1-swc01` (Sweden Central) or `rg-saifv1-gwc01` (Germany West Central)
 - Azure Container Registry: Standard SKU with managed identity authentication
 - App Service Plan: Linux Premium P1v3 tier with Always On enabled
@@ -87,21 +90,24 @@ The automated deployment creates a complete hackathon environment:
 - Web App Service: PHP frontend (container)
 - Azure SQL Server and Database: S1 tier
 - Log Analytics Workspace + Application Insights
- - (v2) Consolidated diagnostics bundle attaches three diagnostic settings (API, Web, SQL) via single module
+- (v2) Consolidated diagnostics bundle attaches three diagnostic settings (API, Web, SQL) via single module
 
 ### 🔐 Security Configuration (All Automated)
+
 - Managed Identities: System-assigned identities on both App Services (used for ACR and, in v2, for SQL)
 - RBAC: AcrPull roles assigned to identities for ACR image pulls
-	- Stable GUID salt (subscription + ACR name + principalId) prevents unnecessary role assignment recreation on template refactors
+  - Stable GUID salt (subscription + ACR name + principalId) prevents unnecessary role assignment recreation on template refactors
 - ACR Authentication: Uses managed identity (no admin credentials)
 - Application Insights: Connection strings automatically configured
 - SQL Authentication: Behavior differs by version (see below)
 
 ### 🔁 v1 vs v2 Authentication
+
 - v1 (baseline for training): API connects to SQL using SQL username/password.
 - v2 (more secure path): API connects to SQL using Microsoft Entra (Managed Identity) with token-based auth.
 
 ### 🐳 Container Deployment (Automated via PowerShell)
+
 - **API Container**: Built from `./api` and pushed as `saif/api:latest`
 - **Web Container**: Built from `./web` and pushed as `saif/web:latest`
 - **App Service Configuration**: Containers automatically configured and started
@@ -122,6 +128,7 @@ The automated deployment creates a complete hackathon environment:
 ### Script Examples
 
 **Complete deployment:**
+
 ```powershell
 # Launch version chooser (default region: Germany West Central)
 .\scripts\Deploy-SAIF.ps1
@@ -143,6 +150,7 @@ The automated deployment creates a complete hackathon environment:
 ```
 
 **Container updates only:**
+
 ```powershell
 # Update both containers
 .\scripts\Update-SAIF-Containers.ps1
@@ -176,6 +184,7 @@ After making changes to your application code, update containers easily:
 ```
 
 **What this automates:**
+
 - ✅ Builds containers from source code
 - ✅ Pushes to Azure Container Registry
 - ✅ Restarts App Services to pull new images
@@ -184,23 +193,27 @@ After making changes to your application code, update containers easily:
 ## 📍 Deployment Regions
 
 Choose from supported regions:
+
 - **Germany West Central** (`germanywestcentral`) - Default
 - **Sweden Central** (`swedencentral`)
 
 ## 🔧 Prerequisites
 
-### For PowerShell Automation (Recommended):
+### For PowerShell Automation (Recommended)
+
 - ✅ Azure CLI installed (authentication pre-configured)
 - ✅ PowerShell 5.1+ or PowerShell Core 7+
 - ✅ Docker (for container builds)
 - ✅ Git (for repository cloning)
 
-### For Deploy to Azure Button:
+### For Deploy to Azure Button
+
 - ✅ Azure subscription with Contributor access
 - ✅ Browser access to Azure Portal
 - ✅ PowerShell + Azure CLI (for follow-up container build)
 
-### Automatic Validation:
+### Automatic Validation
+
 Both deployment methods include automatic prerequisite checking and clear error messages.
 
 ## 🎯 Post-Deployment
@@ -217,6 +230,7 @@ Web URL: https://app-saif-web-axxq5b.azurewebsites.net
 ```
 
 ### ✅ Automatic Configuration Verification
+
 - **Managed Identity**: ✅ Assigned to both App Services (ACR pulls; v2 also uses MI for SQL)
 - **Container Registry Access**: ✅ Verified
 - **Application Insights**: ✅ Connected
@@ -225,16 +239,19 @@ Web URL: https://app-saif-web-axxq5b.azurewebsites.net
 - **v2 SQL Access**: ✅ Firewall rule and DB user/roles configured (unless -skipSqlAccessConfig used)
 
 ### 🌐 Access Your Application
+
 1. **Web Interface**: Visit the Web URL for the diagnostic dashboard
 2. **API Documentation**: Visit `{API_URL}/docs` for interactive API documentation
 3. **Monitoring**: Application Insights automatically collects telemetry
 4. **Database**: SQL Server accessible from App Services. For v2, validate MI with:
-	- `{API_URL}/api/sqlwhoami` (returns DB, login/user, roles)
-	- `{API_URL}/api/sqlsrcip` (returns SQL‑seen client IP)
+
+- `{API_URL}/api/sqlwhoami` (returns DB, login/user, roles)
+- `{API_URL}/api/sqlsrcip` (returns SQL‑seen client IP)
 
 ## 📊 Monitoring
 
 Access monitoring data through:
+
 - **Application Insights**: Performance and error tracking
 - **Log Analytics**: Detailed logging and queries
 - **Azure Portal**: Resource health and metrics
@@ -265,26 +282,29 @@ Note: Defaults are merged with provided tags using `union(tags, defaults)`. If y
 ## 🔍 Optional: Preview and Non‑Interactive
 
 - Preview changes (what‑if):
-	```powershell
-	az deployment group what-if `
-		--resource-group <rg-name> `
-		--template-file ./infra/main.bicep `
-		--parameters ./infra/main.parameters.json sqlAdminPassword=<secure>
-	```
+
+ ```powershell
+ az deployment group what-if `
+  --resource-group <rg-name> `
+  --template-file ./infra/main.bicep `
+  --parameters ./infra/main.parameters.json sqlAdminPassword=<secure>
+ ```
 
 - Non‑interactive deploy with parameter file:
-	```powershell
-	az deployment group create `
-		--resource-group <rg-name> `
-		--template-file ./infra/main.bicep `
-		--parameters ./infra/main.parameters.json applicationName="SAIF" owner="<you>" sqlAdminPassword=<secure>
-	```
+
+ ```powershell
+ az deployment group create `
+  --resource-group <rg-name> `
+  --template-file ./infra/main.bicep `
+  --parameters ./infra/main.parameters.json applicationName="SAIF" owner="<you>" sqlAdminPassword=<secure>
+ ```
 
 ## 🔍 Troubleshooting
 
 ### Common Issues
 
 **Container Build Fails**
+
 ```powershell
 # Check Docker is running
 docker version
@@ -294,6 +314,7 @@ az account show
 ```
 
 **App Service Shows "Application Error"**
+
 ```powershell
 # Check container logs
 az webapp log tail --name your-app-name --resource-group rg-saifv1-swc01
@@ -303,13 +324,16 @@ az role assignment list --assignee $(az webapp identity show --name your-app-nam
 ```
 
 **SQL Connection Issues**
+
 - v2: If you deployed with -skipSqlAccessConfig, run:
-	- `./scripts/Configure-SAIF-SqlAccess.ps1 -ResourceGroupName <rg>` (adds firewall rule, creates MI DB user, grants roles)
+  - `./scripts/Configure-SAIF-SqlAccess.ps1 -ResourceGroupName <rg>` (adds firewall rule, creates MI DB user, grants roles)
 - Verify firewall rules include your client IP if you need direct SQL access
 - Confirm app settings SQL_SERVER/SQL_DATABASE point to the expected DB
 
 ### Support
+
 For deployment issues, check:
+
 1. [Azure Resource Group Activity Log](https://portal.azure.com)
 2. Application Insights for runtime errors
 3. Container Registry build history

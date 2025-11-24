@@ -85,6 +85,7 @@
 - [ ] Response time < 500ms
 
 **Sample Response**:
+
 ```json
 {
   "app_name": "SAIF API v2",
@@ -104,6 +105,7 @@
 - [ ] Response time < 500ms
 
 **Sample Response**:
+
 ```json
 {
   "version": "2.1.0",
@@ -123,6 +125,7 @@
 - [ ] Response time < 500ms
 
 **Sample Response**:
+
 ```json
 {
   "sql_user": "app-saifv2-api-xxx",

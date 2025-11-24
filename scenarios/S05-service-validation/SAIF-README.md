@@ -19,17 +19,21 @@ A 3-tier diagnostic application designed for hands-on learning about securing AI
 Deploy SAIF to Azure with **complete automation** - true 1-click deployment:
 
 ### Option 1: PowerShell Script (Recommended - Fully Automated)
+
 ```powershell
 git clone https://github.com/jonathan-vella/SAIF.git
 cd SAIF\scripts
 .\Deploy-SAIF-v1.ps1
 ```
+
 **✅ Includes:** Infrastructure + Container builds + App configuration + Monitoring setup
 
 ### Option 2: Deploy to Azure Button (Infrastructure Only)
+
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjonathan-vella%2FSAIF%2Fmain%2Finfra%2Fazuredeploy.json)
 
 After infrastructure deployment, complete setup:
+
 ```powershell
 git clone https://github.com/jonathan-vella/SAIF.git
 cd SAIF\scripts
@@ -107,11 +111,13 @@ docker-compose up
 SAIF features **true 1-click deployment** with complete automation:
 
 **Fully Automated (Recommended):**
+
 ```powershell
 .\scripts\Deploy-SAIF-v1.ps1
 ```
 
 **Infrastructure + Manual Container Build:**
+
 1. Use Deploy to Azure button (see above)
 2. Run `.\scripts\Update-SAIF-Containers.ps1` to build and deploy containers
 
@@ -268,11 +274,15 @@ graph TD
 MIT
 
 ## (Optional) Enable Documentation Pre-Commit Hook
+
 To automatically run the docs linter before each commit:
+
 ```powershell
 git config core.hooksPath .githooks
 ```
+
 Disable again by resetting:
+
 ```powershell
 git config --unset core.hooksPath
 ```

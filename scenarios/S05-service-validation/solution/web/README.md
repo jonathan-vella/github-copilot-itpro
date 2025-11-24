@@ -45,6 +45,7 @@ The web interface provides access to all API endpoints, including:
 ## Setup
 
 The web component requires:
+
 - PHP 8.2+
 - Apache or other compatible web server
 

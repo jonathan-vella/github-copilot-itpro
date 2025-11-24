@@ -163,11 +163,13 @@ alerts:
 ### Traffic Patterns
 
 **Weekday Average** (Mon-Fri):
+
 - Peak Hours (9 AM - 5 PM): 45-50 RPS
 - Off-Peak (6 PM - 8 AM): 20-25 RPS
 - Average: 35 RPS
 
 **Weekend Average** (Sat-Sun):
+
 - Consistent: 15-20 RPS
 - Lower load expected
 

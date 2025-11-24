@@ -13,6 +13,7 @@ This scenario focuses on **testing and validating** deployed Azure applications,
 ## Quick Load Testing with Bash
 
 ### 1. Simple HTTP Load Test Script
+
 ```
 Create a bash script (quick-load-test.sh) that:
 - Accepts duration (seconds) and concurrent requests parameters
@@ -25,6 +26,7 @@ Create a bash script (quick-load-test.sh) that:
 ```
 
 ### 2. Load Test Execution
+
 ```
 Run a 30-second load test with 20 concurrent requests:
 ./quick-load-test.sh 30 20
@@ -38,6 +40,7 @@ Expected output:
 ```
 
 ### 3. Performance Thresholds
+
 ```
 Define validation criteria for load tests:
 - Success rate: > 99%

@@ -7,14 +7,17 @@ Successfully validated S05 service deployment with load testing scripts.
 ## Available Test Scripts
 
 ### 1. Quick Load Test (`quick-load-test.sh`)
+
 **Status**: ✅ Validated and Working
 
 Simple bash-based load test using curl for quick validation:
+
 ```bash
 ./quick-load-test.sh [concurrent_users] [requests_per_user]
 ```
 
 **Example Results** (30 concurrent users, 20 requests each):
+
 ```
 Total Requests:    600
 Successful (200):  600 (100%)
@@ -24,14 +27,17 @@ Throughput:        12 req/s
 ```
 
 ### 2. Azure Load Testing (`Run-LoadTest.ps1`)
+
 **Status**: ⏳ Requires Azure Load Testing Service
 
 Full-featured PowerShell script for Azure Load Testing service:
+
 ```powershell
 .\Run-LoadTest.ps1 -TestName baseline
 ```
 
 Requires:
+
 - Azure Load Testing resource
 - JMeter test plan (load-test.jmx)
 - Load test configuration (load-test-config.yaml)
@@ -39,6 +45,7 @@ Requires:
 ## Test Endpoints Validated
 
 All endpoints returning HTTP 200:
+
 - `/` - Root endpoint
 - `/api/healthcheck` - Health status
 - `/api/sqlversion` - SQL Server version

@@ -119,11 +119,13 @@ Status: ✓ PASS
 ### Error Details
 
 **429 Errors (Rate Limiting):**
+
 - Occurred during peak concurrent requests
 - Expected behavior for App Service throttling
 - No action required - within tolerance
 
 **503 Errors (Service Unavailable):**
+
 - 2 instances during container cold start
 - Duration: < 500ms recovery time
 - Acceptable for production workload

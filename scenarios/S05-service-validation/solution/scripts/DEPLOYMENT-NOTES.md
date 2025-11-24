@@ -9,6 +9,7 @@ The `deploy.ps1` script has been customized from the SAIF reference implementati
 ### Resource Naming
 
 **Resource Groups:**
+
 - Pattern: `rg-s05-validation-{region-suffix}`
 - Examples:
   - Sweden Central: `rg-s05-validation-swc01`
@@ -23,6 +24,7 @@ The `deploy.ps1` script has been customized from the SAIF reference implementati
 **Default Region:** `swedencentral` (changed from `germanywestcentral`)
 
 **Supported Regions:**
+
 - `swedencentral` (default)
 - `germanywestcentral`
 - `westeurope`
@@ -33,31 +35,38 @@ Aligns with repository default region policy.
 ### Tagging
 
 **Application Tag:** `S05-Service-Validation` (default)
+
 - Previous: `SAIF`
 
 **Environment Tag:** `demo`
+
 - Previous: `hackathon`
 
 **Purpose Tag:** `Service Validation and Testing Demo`
+
 - Previous: `Security Training`
 
 ### Container Images
 
 **Image Name:** `s05/api:latest`
+
 - Previous: `saifv2/api:latest`
 
 **Build Source:** `../app` (relative to scripts folder)
+
 - Contains SAIF api-v2 application adapted for S05
 
 ### Deployment Names
 
 **Deployment Name:** `s05-validation-{timestamp}`
+
 - Previous: `main-v2-{timestamp}`
 
 ### User Guidance
 
 **Post-Deployment Output:**
 Enhanced with next steps for testing phases:
+
 ```
 Next Steps:
   1. Run load tests: .\testing\load-testing\Run-LoadTest.ps1
@@ -68,6 +77,7 @@ Next Steps:
 ### Script References
 
 **SQL Configuration Script:** `Configure-SqlAccess.ps1`
+
 - Previous: `Configure-SAIF-SqlAccess.ps1`
 
 ## Usage
@@ -123,6 +133,7 @@ The script references: `../infra/main.bicep` (relative to scripts folder)
 After deployment, verify:
 
 1. **Resource Group Created:**
+
    ```powershell
    az group show --name rg-s05-validation-swc01 --query "{name:name,location:location,provisioningState:properties.provisioningState}"
    ```
@@ -132,11 +143,13 @@ After deployment, verify:
    - API Docs: `https://app-{name}.azurewebsites.net/docs`
 
 3. **Managed Identity Configured:**
+
    ```powershell
    az webapp identity show --name <api-app-name> --resource-group rg-s05-validation-swc01
    ```
 
 4. **SQL Access (for Managed Identity):**
+
    ```powershell
    # Test SQL whoami endpoint
    curl https://<api-url>/api/sqlwhoami
@@ -198,4 +211,3 @@ az group delete --name rg-s05-validation-swc01 --yes --no-wait
 ---
 
 **Note:** This script is based on SAIF Deploy-SAIF-v2.ps1 and has been customized for the S05 Service Validation scenario. For SAIF-specific deployment, refer to the original SAIF repository.
-
