@@ -103,7 +103,7 @@ Next Steps:
 
 ## Prerequisites
 
-- ✅ Azure CLI installed and logged in (`az login`)
+- ✅ Azure CLI installed (authentication pre-configured)
 - ✅ PowerShell 5.1+ or PowerShell Core 7+
 - ✅ Docker installed (for container builds)
 - ✅ Contributor access to Azure subscription
@@ -124,7 +124,7 @@ After deployment, verify:
 
 1. **Resource Group Created:**
    ```powershell
-   az group show --name rg-s05-validation-swc01
+   az group show --name rg-s05-validation-swc01 --query "{name:name,location:location,provisioningState:properties.provisioningState}"
    ```
 
 2. **Application Accessible:**
@@ -149,9 +149,6 @@ After deployment, verify:
 ```powershell
 # Verify Docker is running
 docker version
-
-# Check Azure CLI authentication
-az account show
 
 # Verify ACR permissions
 az acr login --name <acr-name>

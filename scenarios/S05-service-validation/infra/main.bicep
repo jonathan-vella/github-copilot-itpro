@@ -1,8 +1,8 @@
 // SAIF v2 Infrastructure - Managed Identity SQL auth for API
-metadata name        = 'SAIF v2 Infrastructure'
+metadata name = 'SAIF v2 Infrastructure'
 metadata description = 'Deploys SAIF v2 with API using Microsoft Entra (managed identity) to access Azure SQL'
-metadata owner       = 'SAIF Team'
-metadata version     = '2.0.0'
+metadata owner = 'SAIF Team'
+metadata version = '2.0.0'
 metadata lastUpdated = '2025-09-03'
 metadata documentation = 'https://github.com/your-org/saif/blob/main/docs/DEPLOY-v2.md'
 
@@ -64,7 +64,7 @@ var defaultTags = union(tags, {
 })
 
 // Observability
-module observability '../infra/modules/observability/logging.bicep' = {
+module observability './modules/observability/logging.bicep' = {
   name: 'observability-v2-${uniqueSuffix}'
   params: {
     location: location
@@ -77,7 +77,7 @@ module observability '../infra/modules/observability/logging.bicep' = {
 }
 
 // Container Registry
-module acr '../infra/modules/container/registry.bicep' = {
+module acr './modules/container/registry.bicep' = {
   name: 'acr-v2-${uniqueSuffix}'
   params: {
     name: acrName
@@ -88,9 +88,8 @@ module acr '../infra/modules/container/registry.bicep' = {
   }
 }
 
-
 // SQL Server (keeps public access for SAIF training)
-module sqlServer '../infra/modules/sql/server.bicep' = {
+module sqlServer './modules/sql/server.bicep' = {
   name: 'sql-v2-${uniqueSuffix}'
   params: {
     name: sqlServerName
@@ -98,24 +97,18 @@ module sqlServer '../infra/modules/sql/server.bicep' = {
     tags: defaultTags
     administratorLogin: sqlAdminLogin
     administratorLoginPassword: sqlAdminPassword
+    aadAdminLogin: aadAdminLogin
+    aadAdminObjectId: aadAdminObjectId
   }
 }
 
-// Set Azure AD admin on SQL Server (enables EXTERNAL PROVIDER users)
-module sqlAadAdmin './modules/sql/aadAdmin.bicep' = {
-  name: 'sqladm-v2-${uniqueSuffix}'
-  params: {
-    serverName: sqlServerName
-    login: aadAdminLogin
-    objectId: aadAdminObjectId
-  }
-  dependsOn: [ sqlServer ]
-}
+// Note: Azure AD admin is now configured directly in the SQL Server module above
+// The separate aadAdmin module is no longer needed to avoid conflicts
 
 // SQL Database
-module sqlDatabase '../infra/modules/sql/database.bicep' = {
+module sqlDatabase './modules/sql/database.bicep' = {
   name: 'sqldb-v2-${uniqueSuffix}'
-  dependsOn: [ sqlServer ]
+  dependsOn: [sqlServer]
   params: {
     location: location
     tags: defaultTags
@@ -128,16 +121,16 @@ module sqlDatabase '../infra/modules/sql/database.bicep' = {
 }
 
 // Firewall rule 0.0.0.0 (Allow Azure Services)
-module sqlFirewall '../infra/modules/sql/firewallAllowAzure.bicep' = {
+module sqlFirewall './modules/sql/firewallAllowAzure.bicep' = {
   name: 'sqlfw-v2-${uniqueSuffix}'
-  dependsOn: [ sqlServer ]
+  dependsOn: [sqlServer]
   params: {
     serverName: sqlServerName
   }
 }
 
 // App Service Plan (Linux)
-module appServicePlan '../infra/modules/web/plan.bicep' = {
+module appServicePlan './modules/web/plan.bicep' = {
   name: 'plan-v2-${uniqueSuffix}'
   params: {
     name: appServicePlanName
@@ -149,7 +142,7 @@ module appServicePlan '../infra/modules/web/plan.bicep' = {
 }
 
 // API App Service (container) - uses MI to access SQL
-module apiAppService '../infra/modules/web/site.bicep' = {
+module apiAppService './modules/web/site.bicep' = {
   name: 'api-v2-${uniqueSuffix}'
   params: {
     name: apiAppServiceName
@@ -160,7 +153,7 @@ module apiAppService '../infra/modules/web/site.bicep' = {
     websitesPort: '8000'
     healthCheckPath: '/api/healthcheck'
     appSettings: [
-  { name: 'SQL_SERVER', value: sqlServer.outputs.fullyQualifiedDomainName }
+      { name: 'SQL_SERVER', value: sqlServer.outputs.fullyQualifiedDomainName }
       { name: 'SQL_DATABASE', value: sqlDatabaseName }
       // NOTE: No SQL username/password in v2; API uses managed identity token.
       { name: 'APPLICATIONINSIGHTS_CONNECTION_STRING', value: observability.outputs.appInsightsConnectionString }
@@ -169,7 +162,7 @@ module apiAppService '../infra/modules/web/site.bicep' = {
 }
 
 // Web App Service (container) - reuse v1 web image
-module webAppService '../infra/modules/web/site.bicep' = {
+module webAppService './modules/web/site.bicep' = {
   name: 'web-v2-${uniqueSuffix}'
   params: {
     name: webAppServiceName
@@ -196,12 +189,12 @@ module diagnosticsBundle './modules/diagnostics/diagnosticsBundle.bicep' = {
     workspaceId: observability.outputs.logAnalyticsId
     uniqueSuffix: uniqueSuffix
   }
-  dependsOn: [ apiAppService, webAppService, sqlServer ]
+  dependsOn: [apiAppService, webAppService, sqlServer]
 }
 
 // RBAC AcrPull to ACR
 // AcrPull role assignments (module-based)
-module apiAcrPull '../infra/modules/security/roleAcrPull.bicep' = {
+module apiAcrPull './modules/security/roleAcrPull.bicep' = {
   name: 'ra-api-v2-${uniqueSuffix}'
   params: {
     acrName: acrName
@@ -209,7 +202,7 @@ module apiAcrPull '../infra/modules/security/roleAcrPull.bicep' = {
   }
 }
 
-module webAcrPull '../infra/modules/security/roleAcrPull.bicep' = {
+module webAcrPull './modules/security/roleAcrPull.bicep' = {
   name: 'ra-web-v2-${uniqueSuffix}'
   params: {
     acrName: acrName

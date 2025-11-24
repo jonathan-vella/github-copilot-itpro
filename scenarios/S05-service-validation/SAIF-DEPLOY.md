@@ -190,7 +190,7 @@ Choose from supported regions:
 ## 🔧 Prerequisites
 
 ### For PowerShell Automation (Recommended):
-- ✅ Azure CLI installed and logged in (`az login`)
+- ✅ Azure CLI installed (authentication pre-configured)
 - ✅ PowerShell 5.1+ or PowerShell Core 7+
 - ✅ Docker (for container builds)
 - ✅ Git (for repository cloning)

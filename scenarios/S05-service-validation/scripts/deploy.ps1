@@ -78,8 +78,17 @@ else {
 
 # SQL admin password prompt (infra requires params though API won't use it)
 $sqlPwd = Read-Host "Enter SQL Admin Password (min 12 chars)" -AsSecureString
-$sqlPwdText = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($sqlPwd))
-if ($sqlPwdText.Length -lt 12) { Write-Host "Password too short" -ForegroundColor Red; exit 1 }
+$BSTR = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($sqlPwd)
+try {
+  $sqlPwdText = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($BSTR)
+}
+finally {
+  [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($BSTR)
+}
+if ($sqlPwdText.Length -lt 12) { 
+  Write-Host "Password too short (received $($sqlPwdText.Length) chars, need 12+)" -ForegroundColor Red
+  exit 1 
+}
 
 # AAD Admin inputs (to automate EXTERNAL PROVIDER support)
 $aadAdminLogin = Read-Host "AAD Admin Login (UPN or display name) [default: $($acct.user)]"
@@ -134,10 +143,16 @@ $apiUrl = $outs.apiUrl.value
 
 if (-not $skipContainers) {
   Show-Banner "Build & Push Application Containers"
+  
   $appPath = Join-Path $PSScriptRoot "..\app"
   Write-Host "Building API container from: $appPath" -ForegroundColor Cyan
-  az acr build --registry $acrName --image s05/api:latest $appPath
+  az acr build --registry $acrName --image saifv2/api:latest $appPath
   if ($LASTEXITCODE -ne 0) { Write-Host "API image build failed" -ForegroundColor Red; exit 1 }
+  
+  $webPath = Join-Path $PSScriptRoot "..\web"
+  Write-Host "Building Web container from: $webPath" -ForegroundColor Cyan
+  az acr build --registry $acrName --image saif/web:latest $webPath
+  if ($LASTEXITCODE -ne 0) { Write-Host "Web image build failed" -ForegroundColor Red; exit 1 }
   
   Write-Host "Restarting App Services" -ForegroundColor Green
   az webapp restart --name $apiApp --resource-group $resourceGroupName | Out-Null

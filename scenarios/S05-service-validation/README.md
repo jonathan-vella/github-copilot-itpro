@@ -46,10 +46,10 @@ S05-service-validation/
 ### Prerequisites
 
 - Azure subscription with Contributor access
-- Azure CLI installed and authenticated
+- Azure CLI installed (authentication pre-configured)
 - PowerShell 7+
 - VS Code with GitHub Copilot
-- Bicep CLI
+- Docker Desktop (for container builds)
 
 ### Step 1: Review SAIF Application
 
@@ -64,13 +64,12 @@ See `SAIF-README.md` for full application documentation.
 ### Step 2: Deploy Infrastructure
 
 ```powershell
-# Connect to Azure
-Connect-AzAccount
-Set-AzContext -Subscription "your-subscription-name"
+# Deploy infrastructure and application
+cd scripts
+./deploy.ps1
 
-# Deploy infrastructure (coming soon)
-cd infra
-./deploy.ps1 -ResourceGroupName "rg-saif-validation-dev" -Location "swedencentral"
+# Or specify custom options
+./deploy.ps1 -location swedencentral -resourceGroupName "rg-my-validation-test"
 ```
 
 ### Step 3: Run Service Validation Tests
