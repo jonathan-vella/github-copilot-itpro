@@ -46,45 +46,53 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 4. **Configuration**: Misconfigured resources, RBAC issues
 5. **Resource Exhaustion**: CPU/memory/disk space limits
 
-## What You'll Build
+## What You'll Learn
 
-### Troubleshooting Scripts (With Copilot)
+### Interactive Troubleshooting Workflow (With Copilot)
 
-1. **Get-AzureHealthSnapshot.ps1** (15 min)
-   - Resource health checks across subscriptions
-   - Service availability validation
-   - Quick incident triage
+This demo shows Copilot as your **diagnostic partner**, guiding you through:
 
-2. **Invoke-DiagnosticQuery.ps1** (20 min)
-   - KQL query generation from natural language
-   - Log Analytics automated analysis
-   - Common pattern detection
+#### Phase 1: Problem Definition (5 min)
+- **Challenge**: Vague symptoms ("checkout is broken")
+- **Copilot helps**: Structure problem statement, identify affected components
+- **Output**: Clear incident description with scope and impact
 
-3. **Resolve-CommonIssues.ps1** (10 min)
-   - Automated remediation for known problems
-   - Configuration validation and repair
-   - Self-healing capabilities
+#### Phase 2: Data Discovery (5 min)
+- **Challenge**: "Where do I even look?" (App Insights? Log Analytics? SQL logs?)
+- **Copilot helps**: Suggest relevant log sources based on symptoms
+- **Output**: Prioritized list of data sources to investigate
 
-4. **New-TroubleshootingReport.ps1** (15 min)
-   - Incident timeline generation
-   - Root cause analysis documentation
-   - Post-mortem report creation
+#### Phase 3: Log Extraction (10 min)
+- **Challenge**: Writing KQL queries from scratch (syntax, logic, performance)
+- **Copilot helps**: Generate KQL from natural language descriptions
+- **Output**: Working queries that extract relevant telemetry
 
-### Key Features
+#### Phase 4: Log Analysis (15 min)
+- **Challenge**: Interpreting raw logs, finding patterns in noise
+- **Copilot helps**: Summarize findings, highlight anomalies, correlate events
+- **Output**: Key insights from logs (error patterns, timing, correlations)
 
-- **Natural Language Queries**: Describe symptoms → Get KQL queries
-- **Pattern Recognition**: AI identifies common failure patterns
-- **Solution Suggestions**: Context-aware remediation steps
-- **Knowledge Capture**: Auto-document troubleshooting process
+#### Phase 5: Root Cause Analysis (10 min)
+- **Challenge**: Connecting dots between multiple data points
+- **Copilot helps**: Synthesize findings, suggest probable causes, recommend validation
+- **Output**: RCA hypothesis with supporting evidence
+
+### Key Capabilities Demonstrated
+
+- **Conversational Diagnostics**: Chat with Copilot about your incident
+- **Context-Aware Queries**: Copilot generates KQL based on your Azure environment
+- **Pattern Recognition**: AI spots anomalies humans might miss
+- **Learning by Doing**: Copilot explains KQL logic as it generates queries
+- **Documentation**: Auto-generate incident reports from chat history
 
 ## Technologies Demonstrated
 
-- **Azure Monitor**: Metrics, logs, alerts analysis
-- **Log Analytics**: KQL query generation and execution
-- **Application Insights**: Distributed tracing, dependency analysis
-- **Azure Resource Graph**: Cross-subscription resource queries
-- **PowerShell**: Automated diagnostics and remediation
-- **KQL (Kusto Query Language)**: Log analysis and pattern detection
+- **GitHub Copilot Chat**: Interactive troubleshooting assistant
+- **Azure Monitor**: Metrics and alerts analysis
+- **Log Analytics**: KQL query execution
+- **Application Insights**: Application telemetry and dependencies
+- **KQL (Kusto Query Language)**: Log query language (Copilot generates queries)
+- **Azure Portal**: Log query interface
 
 ## Prerequisites
 
@@ -97,10 +105,9 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 
 ### Local Environment
 
-- PowerShell 7.0+ (`$PSVersionTable.PSVersion`)
-- Azure PowerShell module (`Install-Module -Name Az -AllowClobber`)
-- VS Code with GitHub Copilot extension
-- Azure CLI (optional, for some diagnostics)
+- VS Code with **GitHub Copilot Chat** extension
+- Azure Portal access (for Log Analytics query interface)
+- Browser for viewing Azure Monitor/Application Insights
 
 ### Permissions Required
 
@@ -230,51 +237,41 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 
 ## Files in This Demo
 
-```bicep
+```
 S06-troubleshooting/
 ├── README.md                           # This file
 ├── DEMO-SCRIPT.md                      # Detailed presenter guide
 ├── scenario/
 │   ├── requirements.md                 # RetailMax incident details
 │   └── incident-timeline.md            # Problem progression
-├── manual-approach/
-│   ├── time-tracking.md                # 30-hour baseline breakdown
-│   └── typical-process.md              # Manual troubleshooting workflow
-├── solution/
-│   ├── Get-AzureHealthSnapshot.ps1     # Resource health diagnostics
-│   ├── Invoke-DiagnosticQuery.ps1      # KQL query generator
-│   ├── Resolve-CommonIssues.ps1        # Automated remediation
-│   └── New-TroubleshootingReport.ps1   # Incident documentation
 ├── prompts/
-│   └── effective-prompts.md            # Copilot prompting guide
+│   └── effective-prompts.md            # Copilot conversation patterns
+├── examples/
+│   ├── copilot-conversation.md         # Full troubleshooting chat session
+│   ├── generated-queries.kql           # KQL queries from Copilot
+│   └── incident-report.md              # Final RCA document
 └── validation/
-    ├── test-queries.kql                # Sample KQL for testing
-    └── cleanup.ps1                     # Remove test resources
+    └── sample-logs.json                # Sample data for practice
 ```
 
 ## Getting Started
 
-### Quick Start (10 Minutes)
+### Quick Start (5 Minutes)
 
-```powershell
-# 1. Clone repository
-git clone https://github.com/your-org/github-copilot-itpro.git
-cd github-copilot-itpro/scenarios/S06-troubleshooting
+**No scripts to run!** This demo is conversation-based:
 
-# 2. Connect to Azure
-Connect-AzAccount
-Set-AzContext -SubscriptionId "<your-subscription-id>"
-
-# 3. Run health snapshot
-.\solution\Get-AzureHealthSnapshot.ps1 -ResourceGroupName "rg-production"
-
-# 4. Generate diagnostic query
-.\solution\Invoke-DiagnosticQuery.ps1 -Symptom "High API latency in last 2 hours"
-```
+1. **Open VS Code** with GitHub Copilot Chat
+2. **Read the scenario**: `scenario/requirements.md` (RetailMax incident)
+3. **Start conversation**: Open Copilot Chat and type:
+   ```
+   I have an Azure incident: 15% of checkout transactions are failing with HTTP 500 errors. 
+   Started 2 hours ago. Black Friday is in 3 days. Help me troubleshoot this.
+   ```
+4. **Follow Copilot's guidance** through the 5-phase workflow
 
 ### Full Demo Setup (20 Minutes)
 
-See [DEMO-SCRIPT.md](./DEMO-SCRIPT.md) for complete setup instructions.
+See [DEMO-SCRIPT.md](./DEMO-SCRIPT.md) for complete presenter guide with conversation patterns.
 
 ## Common Use Cases
 
@@ -282,67 +279,93 @@ See [DEMO-SCRIPT.md](./DEMO-SCRIPT.md) for complete setup instructions.
 
 **Symptom**: "API response times increased from 200ms to 3000ms"
 
-**Manual Approach** (8 hours):
+**Copilot Conversation** (45 minutes):
 
-- Check Azure Monitor metrics manually
-- Write KQL queries to find slow requests
-- Analyze Application Insights traces
-- Correlate with infrastructure changes
-- Test hypothesis with configuration changes
-
-**With Copilot** (45 minutes):
-
-```powershell
-# Copilot generates diagnostic query from natural language
-Invoke-DiagnosticQuery -Symptom "API response times increased from 200ms to 3000ms"
-
-# AI suggests: Check App Insights dependencies, review recent deployments, analyze DTU consumption
-# Generates KQL: requests | where timestamp > ago(2h) | where duration > 3000 | summarize...
 ```
+You: "My API response times increased from 200ms to 3000ms in the last 2 hours. 
+     This is an Azure App Service with Application Insights."
+
+Copilot: "Let me help you investigate. First, let's check:
+         1. Application Insights request telemetry
+         2. Dependency call duration
+         3. Recent deployments or config changes
+         
+         Here's a KQL query to identify slow requests:
+         
+         requests
+         | where timestamp > ago(2h)
+         | where duration > 3000
+         | summarize count(), avg(duration), percentiles(duration, 50, 95, 99) by name
+         | order by avg_duration desc
+         
+         Run this in Log Analytics. What do you see?"
+
+You: [Paste results showing /api/checkout is slow]
+
+Copilot: "The checkout endpoint is the issue. Let's drill deeper into dependencies:
+         [Generates query to analyze SQL calls, external APIs, etc.]"
+```
+
+**Result**: Identifies SQL connection pool exhaustion in 45 minutes vs 8 hours manual
 
 ### 2. Intermittent Connectivity Issues
 
 **Symptom**: "Users report 5xx errors during checkout (15% failure rate)"
 
-**Manual Approach** (6 hours):
+**Copilot Conversation** (30 minutes):
 
-- Check load balancer health probes
-- Review NSG/firewall rules
-- Analyze network flow logs
-- Test connectivity from various regions
-- Review DNS resolution
-
-**With Copilot** (30 minutes):
-
-```powershell
-# Copilot creates comprehensive connectivity check
-Get-AzureHealthSnapshot -ResourceGroupName "rg-ecommerce" -IncludeNetworking
-
-# Suggests checking: Backend pool health, timeout settings, SNAT exhaustion
-# Auto-generates remediation: Resolve-CommonIssues -Issue "LoadBalancerSNAT"
 ```
+You: "15% of checkout requests are failing with HTTP 500 errors. Intermittent pattern."
+
+Copilot: "Let's check:
+         1. Error patterns (timing, specific users, regions?)
+         2. Backend health (App Service instances, dependencies)
+         3. Resource limits (connection pools, thread exhaustion)
+         
+         What's your architecture? App Service + SQL Database?"
+
+You: "Yes, App Service (10 instances) + Azure SQL Database Premium P2"
+
+Copilot: "Here's a query to check error correlation with SQL operations:
+         [Generates KQL joining requests, exceptions, and dependencies]
+         
+         Also check SQL DTU and connection count with this query:
+         [Generates SQL-specific metrics query]"
+```
+
+**Result**: Finds connection pool limit in 30 minutes vs 6 hours manual
 
 ### 3. Resource Exhaustion
 
 **Symptom**: "Database CPU at 100%, queries timing out"
 
-**Manual Approach** (4 hours):
+**Copilot Conversation** (20 minutes):
 
-- Check Azure SQL metrics
-- Review query performance insights
-- Analyze missing indexes
-- Consider scaling options
-- Test different tier configurations
-
-**With Copilot** (20 minutes):
-
-```powershell
-# Copilot generates SQL diagnostics
-Invoke-DiagnosticQuery -Symptom "Database CPU at 100%, queries timing out" -ResourceType "SqlDatabase"
-
-# AI suggests: Review top CPU queries, check DTU limits, analyze index usage
-# Provides: Auto-scale recommendation, index creation scripts, query optimization tips
 ```
+You: "Azure SQL Database CPU is at 100%, queries are timing out"
+
+Copilot: "Let's identify the culprit queries. Run this in your SQL Database's Query Performance Insight:
+         
+         [Generates T-SQL query for top CPU consumers]
+         
+         While that runs, check if this is:
+         - Sudden spike (new query introduced?)
+         - Gradual increase (data growth, missing index?)
+         - Periodic pattern (scheduled job?)
+         
+         What does your CPU trend look like over 24 hours?"
+
+You: "Sudden spike starting 2 hours ago. Top query is from checkout flow."
+
+Copilot: "Check execution plan for that query. Also verify:
+         1. Recent schema changes
+         2. Parameter sniffing issues
+         3. Lock contention
+         
+         Here's a query to check for blocking: [generates blocking analysis query]"
+```
+
+**Result**: Identifies missing index in 20 minutes vs 4 hours manual
 
 ## Key Takeaways
 
