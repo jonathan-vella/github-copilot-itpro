@@ -183,7 +183,7 @@ resource "azurerm_service_plan" "main" {
 - ✅ Zone redundancy support (Standard SKU doesn't support it)
 - ✅ 4 GB RAM, 2 vCPUs
 - ✅ Private endpoint support
-- ✅ ~$146/month (dev environment acceptable)
+- ✅ Low monthly cost (dev environment optimized)
 
 ### App Service
 
@@ -475,10 +475,10 @@ terraform {
 | Resource | Configuration | Rationale |
 |----------|--------------|-----------|
 | **App Service Plan** | P1v3, 3 instances | Zone redundant, cost-optimized |
-| **SQL Database** | S0 tier | Basic performance, $15/month |
+| **SQL Database** | S0 tier | Basic performance tier |
 | **Backup Retention** | 7 days | Short retention for dev data |
 | **Log Retention** | 30 days | Compliance minimum |
-| **Total Cost** | ~$300/month | Budget-friendly |
+| **Total Cost** | Low | Budget-friendly dev tier |
 
 ### Staging Environment
 
@@ -488,7 +488,7 @@ terraform {
 | **SQL Database** | S2 tier | Mid-tier performance |
 | **Backup Retention** | 14 days | Pre-production testing |
 | **Log Retention** | 60 days | Extended debugging |
-| **Total Cost** | ~$800/month | Production-like |
+| **Total Cost** | Moderate | Production-like staging |
 
 ### Production Environment
 
@@ -498,7 +498,7 @@ terraform {
 | **SQL Database** | S3 tier, zone-redundant | Business-critical |
 | **Backup Retention** | 35 days | Compliance requirement |
 | **Log Retention** | 90 days | Audit requirements |
-| **Total Cost** | ~$2,500/month | Mission-critical |
+| **Total Cost** | Higher | Mission-critical production |
 
 ---
 

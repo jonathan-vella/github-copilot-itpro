@@ -335,11 +335,11 @@ output "app_service_url" {
 
 ## Total Value Delivered
 
-- ⏱️ **Time saved**: 27 hours (30 hours manual → 3 hours with Copilot)
-- 💰 **Cost saved**: $4,050 at $150/hour
+- ⏱️ **Time saved**: 27 hours (30 hours manual → 3 hours with Copilot) = 90% reduction
 - 🔒 **Security**: 0 critical findings (vs. 35+ manually)
 - ♻️ **Reusability**: Modules work for all environments
 - 📚 **Learning**: Engineers learn best practices while coding
+- 📈 **Productivity**: Teams can handle 10x more infrastructure projects annually
 
 ---
 

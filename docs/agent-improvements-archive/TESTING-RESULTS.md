@@ -155,7 +155,7 @@ Assess this architecture:
 - Azure App Service (B1)
 - Azure SQL Database (S0)
 - Single region (East US)
-- Budget: $100/month
+- Budget: Very low (dev environment)
 ```
 
 **Expected Outputs:**
@@ -184,7 +184,7 @@ Assess this architecture:
 Design a global web application:
 - Users in North America, Europe, Asia
 - 99.99% SLA required
-- Budget: $5,000/month
+- Budget: Enterprise production environment
 - PCI-DSS compliance needed
 ```
 

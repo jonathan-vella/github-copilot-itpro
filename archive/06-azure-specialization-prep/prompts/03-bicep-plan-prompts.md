@@ -246,7 +246,7 @@ Create a Bicep implementation plan for comprehensive monitoring and observabilit
 - Parameterize alert thresholds for different environments
 - Include workbook templates for common scenarios
 - Support integration with existing monitoring tools
-- Keep costs under $50/month for demo environment
+- Optimize for low-cost demo environment (use dev-tier SKUs)
 
 Provide: module structure for monitoring components, alert rule definitions, parameter strategy for thresholds, dashboard JSON templates, and cost optimization recommendations.
 ```

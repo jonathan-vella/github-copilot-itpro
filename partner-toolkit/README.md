@@ -39,9 +39,11 @@ Welcome to the GitHub Copilot for IT Pros Partner Toolkit. This directory contai
 
 **Typical Results:**
 
-- ROI: 13,000%+
-- Payback Period: 3-7 days
-- Annual Savings: $62,040 per engineer
+- Time Savings: 400+ hours per engineer annually
+- Productivity Gains: 75-85% for infrastructure tasks
+- Value Realization: Within 30-60 days
+
+For evidence and methodology, see [EVIDENCE-TIME-SAVINGS.md](../EVIDENCE-TIME-SAVINGS.md)
 
 ---
 

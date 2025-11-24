@@ -12,7 +12,7 @@ The infrastructure includes:
 - **Security**: Azure Key Vault with private endpoints and managed identities
 - **Monitoring**: Log Analytics Workspace and Application Insights
 
-**Estimated Monthly Cost**: $331-346
+**Estimated Monthly Cost**: See Azure Pricing Calculator for current rates (varies by region)
 
 ## 🏗️ Architecture
 
@@ -182,22 +182,24 @@ az keyvault secret list --vault-name <keyvault-name>
 
 ## 💰 Cost Management
 
-### Monthly Cost Breakdown
+### Resource Configuration
 
-| Resource | SKU | Quantity | Monthly Cost |
-|----------|-----|----------|--------------|
-| App Service Plan | Standard S1 | 2 instances | $146 |
-| SQL Database | Standard S2 | 1 | $150 |
-| Key Vault | Standard | 1 | $3 |
-| Private Endpoints | Standard | 2 | $15 |
-| Log Analytics | Pay-as-you-go | 5-10 GB | $15-30 |
-| **Total** | | | **$331-346** |
+| Resource | SKU | Quantity | Notes |
+|----------|-----|----------|-------|
+| App Service Plan | Standard S1 | 2 instances | Zone-redundant deployment |
+| SQL Database | Standard S2 | 1 | TDE encryption enabled |
+| Key Vault | Standard | 1 | RBAC-enabled |
+| Private Endpoints | Standard | 2 | Key Vault & SQL |
+| Log Analytics | Pay-as-you-go | 5-10 GB | Application monitoring |
 
-### Cost Optimization
+**Cost Estimation**: Use [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) for current regional pricing.
+
+### Cost Optimization Recommendations
 
 - **Reserved Instances**: Save 30-50% with 1-3 year App Service reservations
-- **SQL Serverless**: Consider serverless tier for dev/staging environments
-- **Log Analytics**: Use 100 GB/day commitment tier if ingestion exceeds 100 GB/month
+- **SQL Serverless**: Consider serverless tier for dev/staging environments (save ~40%)
+- **Log Analytics**: Use commitment tier if ingestion exceeds 100 GB/month
+- **Dev/Test Pricing**: Use B-series SKUs for non-production environments
 
 ## 🛠️ Customization
 

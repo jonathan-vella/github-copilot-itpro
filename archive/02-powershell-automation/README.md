@@ -140,7 +140,7 @@ This demo uses **read-only operations** by default. Optional write operations (t
 
 - Tag Contributor role (for Set-BulkTags)
 - Contributor role (for Remove-OrphanedResources)
-- Estimated cost: **$0** (reporting only)
+- Azure cost: Minimal (reporting only, no resource creation)
 
 ## Demo Components
 
@@ -265,7 +265,7 @@ Track these metrics during your demo:
 | **Research Time** | 28 min | 2 min | 93% faster |
 | **Debugging Time** | 30 min | 3 min | 90% reduction |
 | **First-Run Success** | 40% | 95% | 138% improvement |
-| **Annual Team Savings** | Baseline | $31,680 | Per 12-person team |
+| **Annual Team Time Savings** | Baseline | 1,566 hours | Per 12-person team |
 
 ---
 

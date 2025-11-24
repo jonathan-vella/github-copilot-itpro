@@ -139,42 +139,41 @@ Would you like me to connect you with GitHub's compliance team for a detailed re
 **Response:**
 
 ```bicep
-"Let's look at the actual numbers for YOUR team specifically:
+"Let's look at the actual time savings for YOUR team specifically:
 
-**Investment:**
-GitHub Copilot: $39/user/month
-Your team of [X] users: $39 × [X] × 12 = $[Y]/year
-
-**Return - Conservative Estimate:**
+**Conservative Time Savings Estimate:**
 Based on the demos we just saw and YOUR infrastructure workload:
 
-[Open ROI calculator and fill in customer-specific numbers]
+[Open Time Savings Calculator and fill in customer-specific numbers]
 
 - Infrastructure deployments: [X per month] × 35 min saved = [Y hours/year]
 - PowerShell automation: [Z tasks/month] × 60 min saved = [A hours/year]
 - Troubleshooting: [B incidents/month] × 25 min saved = [C hours/year]
 
-Total hours saved: [Total hours]
-Value at $150/hour: $[Total value]
+Total hours saved per engineer: [Total hours]
+Total team hours saved: [Total hours] × [Team Size] = [Team Hours]
 
-**ROI: [Calculated ROI]%**
-**Payback Period: [Days/Weeks]**
+**What This Means:**
+- Equivalent to [X] full-time engineers freed up for strategic work
+- [Y] hours per week per person for innovation and improvement
+- Time reduction of 75-85% for routine infrastructure tasks
 
 And this doesn't include:
 - Reduced Azure costs (orphaned resource cleanup)
 - Fewer production incidents from better code quality
 - Faster onboarding of junior engineers
-- Time freed up for strategic initiatives
+- Knowledge retention and sharing improvements
 
-The real question is: Can you afford NOT to invest $[Y] to save $[Total value]?"
+Your team can apply their own labor rates and productivity metrics to calculate financial impact.
+For our evidence and methodology, see [EVIDENCE-TIME-SAVINGS.md](../EVIDENCE-TIME-SAVINGS.md)."
 ```
 
 **Proof Points:**
 
-- ROI calculator with customer-specific numbers
-- Average ROI: 13,000%+
-- Typical payback: 3-7 days
-- Case study showing 6-month results
+- Time savings calculator with customer-specific task frequencies
+- Average time reduction: 75-85% for infrastructure tasks
+- Typical value realization: Within 30-60 days
+- Case study showing 6-month results with actual time tracking
 
 ---
 
@@ -194,8 +193,8 @@ The real question is: Can you afford NOT to invest $[Y] to save $[Total value]?"
 - Focus on [2-3 high-frequency tasks identified]
 - Track time savings daily
 
-**Investment:**
-$195-390 for the pilot period (depending on team size)
+**Scope:**
+Contact GitHub or Microsoft for pilot program pricing and terms
 
 **Success Metrics We'll Track:**
 1. Time per task: Before vs. During pilot
@@ -214,7 +213,7 @@ $195-390 for the pilot period (depending on team size)
 - 30 minutes for kickoff training
 - 30 minutes for wrap-up discussion
 
-If the pilot doesn't show at least 50% time savings, we'll refund the pilot cost.
+If the pilot doesn't show measurable time savings, we can discuss adjustments or alternatives.
 
 Sound fair?"
 ```
@@ -343,7 +342,7 @@ Would it help if I showed you how Copilot handles [specific complex aspect they 
 - Net result: Narrows the productivity gap while boosting everyone
 
 **Not About Skill Level, About Value of Time:**
-If your senior engineer makes $150/hour, do you want them spending that time on boilerplate code 
+Do you want your senior engineers spending their time on boilerplate code 
 or solving complex architectural challenges?
 
 Which is more valuable to your business?"
@@ -539,7 +538,7 @@ of avoiding a 30-minute introduction?"
 4. **Integration**: Native VS Code integration (VS Code is most popular for Azure development)
 
 **Not Either/Or - Try Both:**
-Many customers use both tools in different contexts. The cost is low enough ($39/month) that 
+Many customers use both tools in different contexts. GitHub Copilot's pricing is competitive enough that 
 even if you use it just for Azure infrastructure, the ROI justifies it.
 
 **Suggested Comparison:**
@@ -585,7 +584,7 @@ make the business case:
 - No PHI/PCI/regulated data processing
 
 **For Procurement:**
-- Clear pricing: $39/user/month, monthly or annual
+- Clear pricing: Contact GitHub or Microsoft for current pricing
 - Volume discounts available for enterprise
 - Flexible commitment terms
 - Standard Microsoft vendor relationship
@@ -626,7 +625,7 @@ Would you like me to prepare these materials for your stakeholder meetings?"
 |-----------|-------------------|-----------------|
 | "Is it secure?" | "You review every suggestion. Copilot suggests security best practices by default. Used by Microsoft's own Azure teams." | Show security configs in demo |
 | "What about our code?" | "Your code never trains the model. It stays private. SOC 2 certified." | Privacy documentation link |
-| "Too expensive" | "Let's calculate: $468/year investment, $62,000/year savings per engineer. ROI: 13,000%." | ROI calculator |
+| "Too expensive" | "Let's look at time savings: 400+ hours saved per engineer annually. What's that worth to your team?" | Time savings calculator |
 | "Need to prove it" | "30-day pilot: 5-10 users, track time savings, money-back if no 50% improvement." | Pilot program template |
 | "Wrong tech stack" | "Supports Bicep, ARM, Terraform, PowerShell, Python, CLI - what are you using?" | Language support matrix |
 | "Too complex" | "Complex infrastructure is where it helps MOST. Maintains consistency across complexity." | Complex case study |

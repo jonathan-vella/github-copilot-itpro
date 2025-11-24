@@ -79,7 +79,7 @@ We will use **Azure Bastion** as the standard secure access method for VMs in al
 
 **NEG-001: Additional Azure Cost**
 
-- Azure Bastion costs ~$140/month when deployed
+- Azure Bastion has recurring Azure costs when deployed (see Azure Pricing Calculator)
 - Cannot use free tier for this service
 - Cost multiplies if deployed in multiple demo environments simultaneously
 - Mitigation: Deploy only when needed, cleanup after demos
@@ -118,7 +118,7 @@ We will use **Azure Bastion** as the standard secure access method for VMs in al
 
 **ALT-001: Deploy a dedicated Windows/Linux VM as Jump Box**
 
-- Lower cost (~$30/month for B2s VM)
+- Lower Azure cost than Bastion (B-series VMs are cost-effective)
 - Faster deployment (2-3 minutes)
 - Familiar pattern for traditional IT Pros
 - Allows file transfers and complex tooling
@@ -143,7 +143,7 @@ We will use **Azure Bastion** as the standard secure access method for VMs in al
 **ALT-004: Rejected**
 
 - Still requires public IPs on VMs
-- Requires Azure Defender (additional cost ~$15/VM/month)
+- Requires Azure Defender (additional per-VM cost)
 - More complex to demonstrate in 30-minute format
 - Requires manual approval workflow that slows demos
 - Not as intuitive for IT Pros new to Azure
@@ -159,7 +159,7 @@ We will use **Azure Bastion** as the standard secure access method for VMs in al
 
 **ALT-006: Rejected**
 
-- Significant additional cost ($150+ per month)
+- Significant additional Azure cost (higher than Bastion)
 - Complex setup and management
 - Overkill for simple demo access needs
 - Would consume too much demo time to explain

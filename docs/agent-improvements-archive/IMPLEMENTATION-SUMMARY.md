@@ -338,7 +338,7 @@ Output:
 
 ```markdown
 Agent: azure-principal-architect
-Prompt: Design a web app architecture with budget of $500/month
+Prompt: Design a web app architecture optimized for low monthly cost
 
 Output:
 Architecture Recommendation:
@@ -349,12 +349,12 @@ Architecture Recommendation:
 ## Estimated Monthly Costs
 | Service | SKU | Cost |
 |---------|-----|------|
-| App Service | S1 | $70 |
-| Azure SQL | S0 | $15 |
-| App Gateway | Std_v2 | $250 |
-| **Total** | | **$335/month** |
+| App Service | S1 | Standard tier |
+| Azure SQL | S0 | Basic tier |
+| App Gateway | Std_v2 | Standard v2 |
+| **Total** | | **Use Azure Pricing Calculator** |
 
-Fits within $500 budget with $165 margin for data transfer/storage.
+Optimized for low monthly cost with appropriate margin for data transfer/storage.
 ```
 
 ### Example 2: Using Dependency Visualization

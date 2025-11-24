@@ -241,12 +241,12 @@ gantt
 
 | Resource | SKU/Tier | Quantity | Unit Cost | Monthly Cost |
 |----------|----------|----------|-----------|--------------|
-| **VNet** | Standard | 1 | $0 | **$0** |
-| **NSGs** | Standard | 3 | $0 | **$0** |
-| **Storage Account** | Standard LRS (Hot) | 100 GB | $0.0184/GB | **$1.84** |
-| **Private Endpoint** | Standard | 1 | $7.30 | **$7.30** |
-| **Data Transfer** | Outbound | 10 GB | $0.087/GB | **$0.87** |
-| **Total** | - | - | - | **~$10/month** |
+| **VNet** | Standard | 1 | No charge | No charge |
+| **NSGs** | Standard | 3 | No charge | No charge |
+| **Storage Account** | Standard LRS (Hot) | 100 GB | Per GB charge | Minimal |
+| **Private Endpoint** | Standard | 1 | Per endpoint | Minimal |
+| **Data Transfer** | Outbound | 10 GB | Per GB charge | Minimal |
+| **Total** | - | - | - | **Very low cost** |
 
 > **Note**: This is infrastructure-only cost. VM/container costs are separate and depend on application requirements.
 
@@ -356,7 +356,7 @@ Compliance: PCI-DSS, SOC 2 controls verified
 - 📐 **Three-Tier Design**: Clear separation of web, app, and data layers
 - 🛡️ **Defense in Depth**: 6 layers of security controls
 - 📈 **Scalable**: Room for 65K+ IP addresses, can grow to thousands of VMs
-- 💰 **Cost-Effective**: ~$10/month for infrastructure foundation
+- 💰 **Cost-Effective**: Very low monthly cost for infrastructure foundation (primarily storage and data transfer)
 - ✅ **Compliant**: Meets PCI-DSS and SOC 2 requirements
 
 [🏠 Back to Scenario Requirements](./requirements.md) | [📚 Back to Demo README](../README.md)

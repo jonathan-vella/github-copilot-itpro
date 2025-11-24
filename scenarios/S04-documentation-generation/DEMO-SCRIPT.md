@@ -2,7 +2,7 @@
 
 **Duration**: 30 minutes  
 **Audience**: IT Pros, Cloud Architects, System Integrators  
-**Value Proposition**: Reduce documentation time from 25 hours to 3.3 hours (87% reduction), saving $26,000 annually
+**Value Proposition**: Reduce documentation time from 25 hours to 3.3 hours (87% reduction), saving 174 hours annually across 8 projects
 
 ---
 
@@ -53,8 +53,8 @@ Get-AzResource -ResourceGroupName "rg-demo"  # Verify resources exist
 
 **Business Impact**:
 
-- **$3,750 in labor** per project (25 hours × $150/hr)
-- **8 projects per year** = $30,000 in documentation costs
+- **25 hours per project** in manual documentation effort
+- **8 projects per year** = 200 hours annually on documentation
 - **Customer dissatisfaction**: Incomplete handoffs
 - **Knowledge loss**: When team members leave
 
@@ -66,7 +66,7 @@ Get-AzResource -ResourceGroupName "rg-demo"  # Verify resources exist
 **Value Proposition**:
 
 - ⏱️ **Time**: 25 hours → 3.3 hours (87% reduction)
-- 💰 **Cost**: $3,750 → $500 per project
+- ⏱️ **Time**: 25 hours → 3.3 hours per project (87% reduction)
 - 📊 **Quality**: 95% completeness vs. 60% manual
 - 🔄 **Updates**: Regenerate in 30 minutes vs. 5 hours rewrite
 
@@ -234,8 +234,8 @@ Set-AzContext -Subscription "Demo-Subscription"
 
 **ROI Calculation**:
 
-- **Per Project**: $3,750 → $500 = **$3,250 saved** (25 hrs @ $150/hr → 3.33 hrs)
-- **Annual (8 projects)**: **$26,000 saved**
+- **Per Project**: 25 hrs → 3.33 hrs = **21.67 hours saved** (87% reduction)
+- **Annual (8 projects)**: **173 hours saved** (~0.08 FTE freed up)
 - **Time recovered**: 173 hours/year = **4.3 work weeks**
 
 **Quality Improvements**:
@@ -284,7 +284,7 @@ Set-AzContext -Subscription "Demo-Subscription"
 
 ### Partner Value Proposition
 
-> "For MSPs and SIs, documentation quality differentiates you in customer engagements. Copilot lets you deliver professional, comprehensive documentation in 13% of the time - saving $3,250 per project. This allows you to take on more projects while improving quality and customer satisfaction."
+> "For MSPs and SIs, documentation quality differentiates you in customer engagements. Copilot lets you deliver professional, comprehensive documentation in 13% of the time - saving 21+ hours per project. This allows you to take on more projects while improving quality and customer satisfaction."
 
 ### Objection Handling
 

@@ -90,7 +90,7 @@ Resource Group (rg-taskmanager-prod)
 
 ```
 
-**Total estimated cost:** ~$374/month
+**Total estimated cost:** See Azure Pricing Calculator for current rates
 
 ---
 
@@ -482,26 +482,26 @@ Type 'DELETE' to confirm deletion
 
 | Resource | SKU | Quantity | Monthly Cost |
 |----------|-----|----------|--------------|
-| Virtual Machines | Standard_D2s_v3 | 2 | $140.16 |
-| Managed Disks | Premium SSD P10 | 2 | $19.20 |
-| Load Balancer | Standard | 1 | $18.26 |
-| Public IP | Static Standard | 1 | $3.65 |
-| SQL Database | Standard S2 | 1 | $150.00 |
-| Log Analytics | PerGB2018 (5GB/day) | 1 | $35.00 |
-| Application Insights | Included | 1 | $0.00 |
-| **Total** | | | **~$374/month** |
+| Virtual Machines | Standard_D2s_v3 | 2 | See pricing |
+| Managed Disks | Premium SSD P10 | 2 | See pricing |
+| Load Balancer | Standard | 1 | See pricing |
+| Public IP | Static Standard | 1 | See pricing |
+| SQL Database | Standard S2 | 1 | See pricing |
+| Log Analytics | PerGB2018 (5GB/day) | 1 | See pricing |
+| Application Insights | Included | 1 | Included |
+| **Total** | | | **Use Azure Pricing Calculator** |
 
 ### Cost Optimization Tips
 
 **For Dev/Testing:**
 
 ```bicep
-param vmSize = 'Standard_B2s' // $38/month (74% savings)
-param databaseSku = 'Basic' // $5/month (97% savings)
-param dailyQuotaGb = 1 // $7/month (80% savings)
+param vmSize = 'Standard_B2s' // Lower-cost dev SKU (74% cost reduction)
+param databaseSku = 'Basic' // Development tier (97% cost reduction)
+param dailyQuotaGb = 1 // Minimal logging (80% cost reduction)
 ```
 
-**Estimated dev cost:** ~$95/month (75% savings)
+**Estimated dev cost:** Significantly reduced from production (75% savings)
 
 **Shutdown VMs when not in use:**
 

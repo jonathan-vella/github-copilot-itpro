@@ -182,14 +182,14 @@ With Copilot: 10 minutes, zero errors
 Time Savings: 78%
 
 For a team of 5 engineers doing this 24 times per year:
-Annual savings: $40,500
+Annual time savings: 213 hours (equivalent to ~0.1 FTE)
 ```
 
 **Ask for commitment:**
 
 ```javascript
 "Based on what you've seen, how many infrastructure deployments does your team do per month?
-Let me calculate your specific ROI..."
+Let me calculate your specific time savings using our calculator..."
 ```
 
 ---
@@ -217,7 +217,7 @@ IT operations teams, Azure administrators, compliance officers
 1. Open `scenarios/02-powershell-automation/scenario/requirements.md`
 2. Highlight:
    - 2 hours/day manual reporting
-   - $5K/month wasted on orphaned resources
+   - Significant monthly waste on orphaned resources
    - 4 hours/week compliance auditing
 3. Show manual development time: 130 minutes
 
@@ -267,7 +267,7 @@ IT operations teams, Azure administrators, compliance officers
 
 ```
 
-"This script will save you $244,000 per year by finding and removing orphaned resources.
+"This script will identify and help remove orphaned resources, reducing your Azure waste.
 Copilot just generated the logic to identify them and calculate savings."
 
 ```
@@ -316,9 +316,9 @@ Time Savings: 88%
 
 Operational Savings:
 
-- 2 hours/day reporting → 15 minutes: $842,400/year for 12-person team
-- Orphaned resource cleanup: $244,000/year Azure cost reduction
-Total Annual Value: $1,086,000
+- 2 hours/day reporting → 15 minutes: 1,566 hours/year saved for 12-person team
+- Orphaned resource cleanup: Measurable Azure cost reduction
+- Script development time: 85% faster (130+ hours saved per engineer annually)
 
 ```
 
@@ -381,10 +381,11 @@ same repository, and Copilot will suggest patterns that match YOUR standards. Yo
 
 ```
 
-"GitHub Copilot is $39/user/month for enterprise. Let's do the math:
+"Let's look at the time savings for a 15-person team:
 
-- Investment for 15-person team: $7,020/year
-- Savings based on what we just demonstrated: $930,600/year
+- Annual hours saved per engineer: 400+ hours
+- Total team hours saved: 6,000+ hours/year
+- Equivalent capacity: ~3 full-time engineers freed up for strategic work
 - ROI: 13,156%
 - Payback period: 3 days
 
@@ -429,7 +430,7 @@ additional compliance and privacy features."
   - Time savings on 3 specific tasks
   - Error reduction rate
   - Developer satisfaction survey
-- Cost: $195-390 for pilot period
+- Contact GitHub or Microsoft for pilot program pricing
 
 ```
 

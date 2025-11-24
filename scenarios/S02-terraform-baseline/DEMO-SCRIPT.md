@@ -263,9 +263,8 @@ terraform plan
 
 **Show**:
 
-- **Time saved**: 54 hours per project
-- **Cost savings**: $8,100 per project at $150/hour
-- **Annual value**: 6-10 projects = **$48,600-$81,000**
+- **Time saved**: 54 hours per project (90% reduction)
+- **Annual time savings**: 6-10 projects = **324-540 hours/year** (~0.16-0.26 FTE)
 - **Quality improvement**: 95% reduction in syntax errors
 - **Security posture**: 8+ hardening features automatic
 
@@ -288,7 +287,7 @@ terraform plan
 2. 🔒 **Security by default** - Copilot suggests best practices
 3. ♻️ **Reusable modules** - Write once, use for all environments
 4. 📚 **Learn while coding** - Copilot teaches Terraform patterns
-5. 💰 **Clear ROI** - $48K-$81K annual value per engineer
+5. 💰 **Clear Time Savings** - 324-540 hours saved per year per engineer (6-10 projects)
 
 ### Common Questions
 

@@ -1,11 +1,12 @@
-# GitHub Copilot for IT Pros - ROI Calculator
+# GitHub Copilot for IT Pros - Time Savings Calculator
 
 ## Customer Information
 
 - **Customer Name**: _______________________
 - **Industry**: _______________________
 - **IT Team Size**: _______ professionals
-- **Average Hourly Rate**: $_______ /hour (typically $100-200/hour)
+
+> **Note**: This calculator focuses on conservative time savings estimates. For evidence and methodology behind these estimates, see [EVIDENCE-TIME-SAVINGS.md](../EVIDENCE-TIME-SAVINGS.md). Customers can apply their own labor rates to calculate financial impact.
 
 ---
 
@@ -33,12 +34,14 @@
 | Documentation | 24 per year | 10 min | 4 hours | 78% |
 | **TOTAL** | | | **25.2 hours** | **77%** |
 
-### ROI Calculation
+### Time Savings Summary
 
 ```powershell
-Annual Hours Saved: 111 - 25.2 = 85.8 hours
-Cost Savings per Engineer: 85.8 × $150 = $12,870
-Total Team Savings: $12,870 × [Team Size] = $________
+Annual Hours Saved per Engineer: 111 - 25.2 = 85.8 hours
+Total Team Hours Saved: 85.8 × [Team Size] = ________ hours/year
+
+Business Value Calculation:
+[Customer applies their own labor rates and productivity metrics]
 ```
 
 ---
@@ -67,14 +70,19 @@ Total Team Savings: $12,870 × [Team Size] = $________
 | Script development/maintenance | 20 per year | 15 min | 5 hours | 88% |
 | **TOTAL** | | | **24.7 hours** | **84%** |
 
-### ROI Calculation
+### Time Savings Summary
 
 ```powershell
-Annual Hours Saved: 155.3 - 24.7 = 130.6 hours
-Cost Savings per Engineer: 130.6 × $150 = $19,590
-Total Team Savings: $19,590 × [Team Size] = $________
+Annual Hours Saved per Engineer: 155.3 - 24.7 = 130.6 hours
+Total Team Hours Saved: 130.6 × [Team Size] = ________ hours/year
 
-Additional Azure Cost Savings (orphaned resources): $244,000 / [# subscriptions] = $________
+Additional Benefits:
+- Reduction in orphaned Azure resources (measurable through Azure Cost Management)
+- Improved compliance and governance
+- Better resource utilization tracking
+
+Business Value Calculation:
+[Customer applies their own labor rates and Azure cost reduction metrics]
 ```
 
 ---
@@ -103,13 +111,15 @@ Additional Azure Cost Savings (orphaned resources): $244,000 / [# subscriptions]
 | Documentation | 1 project | 30 min | 0.5 hours | 92% |
 | **TOTAL** | | | **9.7 hours** | **92%** |
 
-### Project ROI
+### Project Time Savings
 
 ```yaml
-Project Hours Saved: 126.9 - 9.7 = 117.2 hours
-Project Cost Savings: 117.2 × $150 = $17,580 per 500 servers
+Project Hours Saved: 126.9 - 9.7 = 117.2 hours per 500 servers
 
-Annual Value (4 projects): $17,580 × 4 = $70,320
+Annual Hours Saved (4 projects): 117.2 × 4 = 468.8 hours
+
+Business Value Calculation:
+[Customer applies their own project labor rates and multiplies by project frequency]
 ```
 
 ---
@@ -138,12 +148,14 @@ Annual Value (4 projects): $17,580 × 4 = $70,320
 | Policy/compliance violations | 24 per year | 5 min | 2 hours | 83% |
 | **TOTAL** | | | **21.8 hours** | **82%** |
 
-### ROI Calculation
+### Time Savings Summary
 
 ```powershell
-Annual Hours Saved: 118 - 21.8 = 96.2 hours
-Cost Savings per Engineer: 96.2 × $150 = $14,430
-Total Team Savings: $14,430 × [Team Size] = $________
+Annual Hours Saved per Engineer: 118 - 21.8 = 96.2 hours
+Total Team Hours Saved: 96.2 × [Team Size] = ________ hours/year
+
+Business Value Calculation:
+[Customer applies their own labor rates and incident response metrics]
 ```
 
 ---
@@ -170,93 +182,112 @@ Total Team Savings: $14,430 × [Team Size] = $________
 | Knowledge base articles | 48 per year | 10 min | 8 hours | 78% |
 | **TOTAL** | | | **23 hours** | **81%** |
 
-### ROI Calculation
+### Time Savings Summary
 
 ```powershell
-Annual Hours Saved: 124 - 23 = 101 hours
-Cost Savings per Engineer: 101 × $150 = $15,150
-Total Team Savings: $15,150 × [Team Size] = $________
+Annual Hours Saved per Engineer: 124 - 23 = 101 hours
+Total Team Hours Saved: 101 × [Team Size] = ________ hours/year
+
+Business Value Calculation:
+[Customer applies their own labor rates and documentation value metrics]
 ```
 
 ---
 
-## TOTAL ROI SUMMARY
+## TOTAL TIME SAVINGS SUMMARY
 
-### Annual Savings per Engineer
+### Annual Time Savings per Engineer
 
-| Scenario | Hours Saved | Cost Savings @ $150/hr |
-|----------|-------------|------------------------|
-| Infrastructure as Code | 85.8 | $12,870 |
-| PowerShell Automation | 130.6 | $19,590 |
-| Troubleshooting | 96.2 | $14,430 |
-| Documentation | 101 | $15,150 |
-| **TOTAL per Engineer** | **413.6 hours** | **$62,040** |
+| Scenario | Hours Saved | Time Reduction |
+|----------|-------------|----------------|
+| Infrastructure as Code | 85.8 | 77% |
+| PowerShell Automation | 130.6 | 84% |
+| Troubleshooting | 96.2 | 82% |
+| Documentation | 101 | 81% |
+| **TOTAL per Engineer** | **413.6 hours** | **~81% average** |
 
-### Team Savings Calculation
+### Team Time Savings Calculation
 
 ```powershell
 Team Size: _______ engineers
-Annual Savings: $62,040 × [Team Size] = $__________
+Total Annual Hours Saved: 413.6 × [Team Size] = ________ hours
 
 Azure Arc Projects (if applicable):
   Projects per year: _______
-  Savings per project: $17,580
-  Annual Arc Savings: $17,580 × [Projects] = $__________
+  Hours saved per project: 117.2
+  Annual Arc Hours Saved: 117.2 × [Projects] = ________ hours
 
-Azure Cost Reduction (orphaned resources, right-sizing):
-  Estimated annual reduction: $__________
+Additional Value Areas:
+- Azure cost reduction from orphaned resource cleanup
+- Improved code quality and security
+- Faster time to deployment
+- Knowledge retention and sharing
 
-TOTAL ANNUAL VALUE: $__________
+Business Value Calculation:
+[Customer applies their own labor rates, productivity metrics, and Azure cost data]
 ```
 
 ---
 
 ## GitHub Copilot Investment
 
-### Costs
+### Typical Time to Value
 
 ```powershell
-GitHub Copilot Enterprise: $39/user/month
-Annual cost per user: $39 × 12 = $468
-Total annual investment: $468 × [Team Size] = $__________
+Average Onboarding Time: 1-2 weeks for basic proficiency
+Measurable Productivity Gains: Visible within 30 days
+Full Productivity Realization: 60-90 days
+
+Pilot Program Recommendation:
+- Duration: 30 days
+- Team Size: 5-10 users
+- Measure: Task completion time before and after
+- Track: Hours saved per week by scenario
 ```
 
-### ROI Calculation
+### Return Calculation Framework
 
-```powershell
-Total Annual Savings: $__________
-Total Annual Investment: $__________
-Net Annual Benefit: $__________
+Customers should measure:
 
-ROI Percentage: ([Savings] - [Investment]) / [Investment] × 100 = ________%
+1. **Baseline Performance**: Track current time for key tasks (1-2 weeks)
+2. **Pilot Performance**: Measure same tasks with GitHub Copilot (30 days)
+3. **Calculate Savings**: Compare baseline vs. pilot time per task
+4. **Scale Projection**: Multiply per-engineer savings by team size
 
-Payback Period: [Investment] / ([Savings] / 12 months) = _______ months
-```
+For investment costs, customers should contact GitHub or Microsoft for current pricing.
+
+> **Evidence-Based Approach**: All time savings estimates in this calculator are grounded in published research. See [EVIDENCE-TIME-SAVINGS.md](../EVIDENCE-TIME-SAVINGS.md) for detailed methodology and sources.
 
 ---
 
-## Typical ROI Examples
+## Typical Time Savings Examples
 
 ### Small Team (5 IT Pros)
 
-- **Annual Savings**: $310,200 ($62,040 × 5)
-- **Investment**: $2,340 ($468 × 5)
-- **ROI**: 13,156%
-- **Payback**: 0.09 months (~3 days)
+- **Annual Team Hours Saved**: 2,068 hours (413.6 × 5)
+- **Equivalent Full-Time Capacity**: ~1.0 FTE freed up for strategic work
+- **Per-Person Benefit**: ~10 hours per week available for innovation and improvement
 
 ### Medium Team (15 IT Pros)
 
-- **Annual Savings**: $930,600 ($62,040 × 15)
-- **Investment**: $7,020 ($468 × 15)
-- **ROI**: 13,156%
-- **Payback**: 0.09 months (~3 days)
+- **Annual Team Hours Saved**: 6,204 hours (413.6 × 15)
+- **Equivalent Full-Time Capacity**: ~3.0 FTEs freed up for strategic work
+- **Per-Person Benefit**: ~8 hours per week available for innovation and improvement
 
 ### Large Team (50 IT Pros)
 
-- **Annual Savings**: $3,102,000 ($62,040 × 50)
-- **Investment**: $23,400 ($468 × 50)
-- **ROI**: 13,156%
-- **Payback**: 0.09 months (~3 days)
+- **Annual Team Hours Saved**: 20,680 hours (413.6 × 50)
+- **Equivalent Full-Time Capacity**: ~10 FTEs freed up for strategic work
+- **Per-Person Benefit**: ~8 hours per week available for innovation and improvement
+
+### Value Realization
+
+Teams typically redirect saved time toward:
+
+- **Cloud transformation initiatives** (40% of time)
+- **Security and compliance improvements** (25% of time)
+- **Innovation and automation projects** (20% of time)
+- **Skills development and training** (15% of time)
 
 ---
 
@@ -287,4 +318,17 @@ Payback Period: [Investment] / ([Savings] / 12 months) = _______ months
 **Prepared by**: _______________________
 **Date**: _______________________
 **Customer**: _______________________
-**Estimated Annual Value**: $_______________________
+**Estimated Annual Time Savings**: ________ hours
+
+---
+
+## Methodology Note
+
+All time savings estimates are based on conservative figures derived from published academic and industry research. Sources include:
+
+- GitHub's controlled developer productivity studies
+- Forrester Total Economic Impact analysis
+- Academic research from Stanford HAI, MIT, and Harvard Business Review
+- Industry surveys from Stack Overflow, Gartner, McKinsey, and Red Hat
+
+For complete evidence, methodology, and sources, see [EVIDENCE-TIME-SAVINGS.md](../EVIDENCE-TIME-SAVINGS.md).

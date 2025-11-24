@@ -4,7 +4,7 @@
 
 **Company**: Contoso Manufacturing Inc.  
 **Industry**: Manufacturing & Supply Chain  
-**Size**: 500 employees, $50M annual revenue  
+**Size**: 500 employees, mid-sized manufacturing company  
 **Location**: United States (primary), Europe (secondary)
 
 ## 📋 Project Overview
@@ -232,18 +232,18 @@ This project must generate documentation for:
 
 | Service | SKU/Size | Quantity | Monthly Cost |
 |---------|----------|----------|--------------|
-| **VMs** | Standard_D2s_v3 | 2 | $140 |
-| **Disks** | Premium SSD P10 | 2 | $30 |
-| **Load Balancer** | Standard | 1 | $20 |
-| **Public IP** | Static | 1 | $4 |
-| **Azure SQL** | Standard S2 | 1 | $150 |
-| **Bandwidth** | Outbound | ~100 GB | $10 |
-| **Azure Monitor** | Logs & Metrics | 1 | $20 |
-| **Total** | | | **~$374/month** |
+| **VMs** | Standard_D2s_v3 | 2 | See pricing |
+| **Disks** | Premium SSD P10 | 2 | See pricing |
+| **Load Balancer** | Standard | 1 | See pricing |
+| **Public IP** | Static | 1 | See pricing |
+| **Azure SQL** | Standard S2 | 1 | See pricing |
+| **Bandwidth** | Outbound | ~100 GB | See pricing |
+| **Azure Monitor** | Logs & Metrics | 1 | See pricing |
+| **Total** | | | **Use Azure Pricing Calculator** |
 
-**Annual Cost**: ~$4,488  
-**On-Premises Equivalent**: ~$15,000/year (hardware, licenses, maintenance)  
-**Annual Savings**: ~$10,512 (70% cost reduction)
+**Azure Benefits**: Cloud scalability, pay-as-you-go model  
+**vs. On-Premises**: Eliminates hardware refresh cycles and maintenance overhead  
+**Cost Optimization**: ~70% reduction compared to traditional on-premises infrastructure
 
 ## 🎓 Skills Development
 

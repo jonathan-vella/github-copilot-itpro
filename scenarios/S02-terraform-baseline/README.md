@@ -58,16 +58,15 @@ GitHub Copilot accelerates every phase of Terraform development:
 
 ### ROI Calculation
 
-**Project Savings (3-tier infrastructure):**
+**Project Time Savings (3-tier infrastructure):**
 
-- Hours saved: 54 hours
-- Cost at $150/hour: **$8,100 per project**
+- Hours saved: 54 hours per project
 - Typical infrastructure projects per year: 6-10
-- **Annual value: $48,600-$81,000**
+- **Annual time savings: 324-540 hours** (~0.16-0.26 FTE)
 
 **For Enterprise Scale (20+ projects/year):**
 
-- **Annual value: $160,000+**
+- **Annual time savings: 1,080+ hours** (~0.52 FTE freed up for strategic work)
 
 **Additional Benefits:**
 
