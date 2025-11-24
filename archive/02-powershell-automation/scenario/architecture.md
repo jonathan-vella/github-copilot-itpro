@@ -430,7 +430,7 @@ All scripts implement:
 │ Total Resources: 1,247                      │
 │ Tag Compliance: 87% ⬆️                      │
 │ Orphaned Resources: 23 ⬇️                   │
-│ Monthly Cost: $45,231 ⬇️ (-8%)             │
+│ Monthly Cost: 45,231 ⬇️ (-8%)              │
 │                                             │
 │ Last Report: 2025-11-18 06:00 ✅           │
 │ Next Report: 2025-11-19 06:00              │

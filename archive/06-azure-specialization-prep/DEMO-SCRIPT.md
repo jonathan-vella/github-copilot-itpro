@@ -697,8 +697,8 @@ Get-ChildItem evidence/ -Recurse | Select-Object FullName
 For a partner completing **4 specialization audits per year**:
 
 - **Time saved**: 230 hours/year (57.5 hours per audit × 4 audits)
-- **Cost savings**: $34,500/year (at $150/hour blended rate)
-- **ROI**: 35x return on Copilot investment ($34,500 saved vs ~$1,000 annual cost)
+- **Time savings**: 230 hours/year per audit team
+- **Productivity gain**: 83% reduction in audit preparation time
 - **Competitive edge**: Faster specialization achievement enables more customer engagements
 - **Quality improvement**: Comprehensive validation framework reduces post-migration issues
 - **Reusability**: Validation templates and scripts accelerate future customer projects

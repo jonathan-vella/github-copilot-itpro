@@ -203,19 +203,17 @@
 - Peer review: 20 minutes
 - **Total per admin**: 3 hours
 
-### Annual Team Cost
+### Annual Team Time Investment
 
 - Hours per admin per year: 3 hours × 4 major scripts = 12 hours
-- Total team hours: 12 hours × 12 admins = 144 hours
-- Cost at $150/hour: **$21,600**
+- Total team hours: 12 hours × 12 admins = **144 hours**
 
 ### Ongoing Maintenance
 
 - Bug fixes and updates: 2 hours per script per year
-- Total maintenance: 8 hours × 12 admins = 96 hours/year
-- Maintenance cost: **$14,400/year**
+- Total maintenance: 8 hours × 12 admins = **96 hours/year**
 
-**Total Annual Cost**: $21,600 + $14,400 = **$36,000**
+**Total Annual Time Investment**: 144 + 96 = **240 hours** (manual approach)
 
 ---
 
@@ -229,7 +227,7 @@
 | Debugging Time | 30 minutes | 3 minutes | **90% reduction** |
 | First-Run Success | 40% | 95% | **138% increase** |
 | Code Quality | Good | Excellent | Best practices built-in |
-| Annual Team Cost | $36,000 | $4,320 | **$31,680 savings** |
+| Annual Team Time | 240 hours | 29 hours | **211 hours saved** (88% reduction) |
 
 ---
 

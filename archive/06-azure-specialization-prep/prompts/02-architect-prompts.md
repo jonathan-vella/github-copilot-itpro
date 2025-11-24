@@ -141,14 +141,14 @@ Provide security recommendations categorized as:
 Conduct a Well-Architected Framework cost optimization assessment for this architecture:
 
 **Current Monthly Costs** (East US):
-- 2 × Standard_D2s_v3 VMs: $140
-- 2 × Premium SSD P10 disks: $30
-- Azure Load Balancer (Standard): $20
-- Public IP (Static): $4
-- Azure SQL Database (Standard S2): $150
-- Bandwidth (~100 GB/month): $10
-- Azure Monitor (Logs): $20
-**Total: ~$374/month, ~$4,488/year**
+- 2 × Standard_D2s_v3 VMs
+- 2 × Premium SSD P10 disks
+- Azure Load Balancer (Standard)
+- Public IP (Static)
+- Azure SQL Database (Standard S2)
+- Bandwidth (~100 GB/month)
+- Azure Monitor (Logs)
+**Total: Use Azure Pricing Calculator for current rates**
 
 **Requirements**:
 - Must maintain 99.99% availability target
@@ -403,7 +403,7 @@ migration to Azure:
 - SLA: 99.99% availability target (52 min downtime/year max)
 - Performance: 100 TPS sustained, 500 concurrent users, < 2s response time
 - Security: Public endpoints (demo), but NSGs, SQL firewall, TLS 1.2 required
-- Cost: ~$375/month budget for production-like demo environment
+- Cost: Production-like demo environment (use Azure Pricing Calculator)
 - Team: 3-person ops team, moderate Azure experience, strong Windows background
 - Timeline: Deploy in 4 weeks for specialization audit
 

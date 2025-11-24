@@ -135,11 +135,10 @@ scenarios/06-azure-specialization-prep/
 
 For a System Integrator pursuing 4 specializations/year:
 
-- **Consultant rate**: $150/hour
 - **Time saved per audit**: 35 hours
-- **Annual savings**: 35 × 4 × $150 = **$21,000/year**
-- **Copilot cost**: ~$2,400/year (GitHub Copilot Business)
-- **Net ROI**: **$18,600/year** (775% return)
+- **Annual time savings**: 35 × 4 = **140 hours/year** (~0.07 FTE)
+- **Productivity improvement**: 83% faster audit preparation
+- **Quality improvement**: Consistent evidence across all audits
 
 ---
 

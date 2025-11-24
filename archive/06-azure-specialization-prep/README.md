@@ -22,11 +22,11 @@ This demo showcases how GitHub Copilot's custom agents dramatically accelerate t
 
 For a System Integrator partner with:
 
-- **Consultant rate**: $150/hour
+- **Time tracking**: Measured per audit cycle
 - **Projects per year**: 4 specialization audits
 - **Time saved per audit**: 35 hours
 
-**Annual savings**: 35 hours × 4 audits × $150/hour = **$21,000/year**
+**Annual time savings**: 35 hours × 4 audits = **140 hours/year** (~0.07 FTE)
 
 ## 🏗️ Demo Architecture
 

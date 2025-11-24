@@ -14,7 +14,7 @@
 
 - Manual reporting takes 2 hours daily
 - Inconsistent resource tagging
-- $5,000/month wasted on orphaned resources
+- Significant monthly waste on orphaned resources
 - 4 hours/week spent on compliance auditing
 
 **Automation Goals:**
@@ -27,9 +27,9 @@
 ## Expected ROI
 
 **Time Savings**: 18 hours/week per admin  
-**Cost Savings**: $63K/year in orphaned resources  
-**Team Savings**: $842K/year (12 admins)  
-**Azure Cost Savings**: $244K/year  
-**Total Annual Value**: $1.086M
+**Benefits**: Reduction in orphaned resources through automated cleanup  
+**Team Time Savings**: 1,566 hours/year (12 admins, ~130 hours per admin)  
+**Azure Cost Reduction**: Measurable through Azure Cost Management  
+**Productivity Gain**: 88% reduction in script development time
 
 [🏠 Back to Demo README](../README.md)
