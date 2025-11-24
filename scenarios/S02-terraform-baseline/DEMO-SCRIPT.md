@@ -287,7 +287,7 @@ terraform plan
 2. 🔒 **Security by default** - Copilot suggests best practices
 3. ♻️ **Reusable modules** - Write once, use for all environments
 4. 📚 **Learn while coding** - Copilot teaches Terraform patterns
-5. 💰 **Clear ROI** - $48K-$81K annual value per engineer
+5. 💰 **Clear Time Savings** - 324-540 hours saved per year per engineer (6-10 projects)
 
 ### Common Questions
 

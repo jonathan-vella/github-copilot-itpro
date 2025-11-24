@@ -91,7 +91,7 @@ Implementation agent uses phase-based deployment with validation gates between e
    ```markdown
    # Press Ctrl+Shift+A to select agent
    Agent: azure-principal-architect
-   Prompt: Design a web app with cost estimates under $500/month
+   Prompt: Design a web app optimized for low monthly cost
    
    # Expected: Architecture + cost breakdown table
    ```

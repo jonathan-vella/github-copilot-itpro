@@ -4,7 +4,7 @@
 
 **Company**: TechCorp Solutions  
 **Type**: Mid-Market Managed Service Provider (MSP)  
-**Size**: 45 employees, $12M annual revenue  
+**Size**: 45 employees, managed service provider  
 **Specialization**: Azure cloud migrations and managed services
 
 ## Project Context
@@ -15,7 +15,7 @@
 **Project**: Datacenter-to-Azure migration  
 **Scope**: 50 servers, 15 applications, 8TB data  
 **Timeline**: 6-month migration completed  
-**Budget**: $480,000 (migration complete, under budget)
+**Project Status**: Azure migration complete, within allocated budget
 
 ### The Documentation Challenge
 
@@ -44,7 +44,7 @@
 
 **Traditional approach**:
 
-- Assign senior engineer for 20 hours ($3,000 labor cost)
+- Assign senior engineer for 20 hours (significant time investment)
 - Delay project closure by 1 week
 - Eat cost to maintain customer relationship
 - Documentation still incomplete (60% done, "good enough")
