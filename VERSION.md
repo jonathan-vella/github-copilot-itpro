@@ -93,7 +93,7 @@ Production-ready repository with 7 comprehensive demos, 4 custom agents with aut
 - **Code Lines**: ~8,000 lines (PowerShell + Bicep)
 - **Documentation**: ~15,000 lines (Markdown)
 - **Time Savings**: 60-95% across scenarios
-- **Annual ROI**: $21,000+ for specialization partners
+- **Annual Time Savings**: 400+ hours per engineer for infrastructure teams
 
 ### Known Limitations
 
