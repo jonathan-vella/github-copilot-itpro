@@ -84,6 +84,7 @@ By completing this demo, participants will understand:
 ## What You'll Learn & Build
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph "Phase 1: Problem Definition (10 min)"
         Q1["What is an SBOM?<br/>Why does Mayo Clinic need one?"]

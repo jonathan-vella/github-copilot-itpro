@@ -805,6 +805,7 @@ references:
 ## Dependency Diagram
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TD
     RG[Resource Group] --> VNet[Virtual Network]
     RG --> ASP[App Service Plan]

@@ -715,6 +715,7 @@ assessment. Let me structure this for the Contoso Healthcare patient portal.
 ### Dependency Diagram
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TD
     subgraph "Phase 1: Foundation"
         RG[Resource Group]

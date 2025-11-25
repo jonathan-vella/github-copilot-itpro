@@ -400,6 +400,7 @@ Output: Valid Mermaid syntax in Markdown code block
 **Example Output**:
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph Frontend
         AGW[Application Gateway]

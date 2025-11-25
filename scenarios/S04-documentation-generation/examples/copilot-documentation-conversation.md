@@ -356,6 +356,7 @@ visual diagram. This is transformative for documentation automation.
 
 **Basic Mermaid Architecture Diagram:**
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph Frontend
         AGW[Application Gateway]
@@ -420,6 +421,7 @@ This is exactly what our documentation scripts do—query resources, generate Me
 
 1. **High-Level Architecture** (`graph TB`):
    ```mermaid
+%%{init: {'theme':'neutral'}}%%
    graph TB
        User -->|HTTPS| FrontDoor
        FrontDoor --> AppService
@@ -428,6 +430,7 @@ This is exactly what our documentation scripts do—query resources, generate Me
 
 2. **Network Topology** (`graph LR`):
    ```mermaid
+%%{init: {'theme':'neutral'}}%%
    graph LR
        subgraph VNet[10.0.0.0/16]
            subgraph WebSubnet[10.0.1.0/24]
@@ -441,6 +444,7 @@ This is exactly what our documentation scripts do—query resources, generate Me
 
 3. **Request Flow** (`sequenceDiagram`):
    ```mermaid
+%%{init: {'theme':'neutral'}}%%
    sequenceDiagram
        User->>+Gateway: Request
        Gateway->>+App: Route

@@ -8,6 +8,7 @@
 PHP-based web interface that provides a user-friendly way to interact with the SAIF API endpoints.
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph LR
     User((User)) --> Web[Web Frontend]
     Web --> API[API Backend]

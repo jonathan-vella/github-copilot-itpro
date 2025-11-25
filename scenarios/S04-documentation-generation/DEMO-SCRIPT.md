@@ -169,6 +169,7 @@ Resources
 **Show Mermaid diagram generation:**
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph Frontend
         AGW[Application Gateway]

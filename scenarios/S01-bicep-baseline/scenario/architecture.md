@@ -3,6 +3,7 @@
 ## Logical Architecture
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph "Azure Subscription"
         subgraph "Resource Group: rg-digitalbanking-prod"
@@ -53,6 +54,7 @@ graph TB
 ### Traffic Flow Rules
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 flowchart LR
     Internet[Internet Users] -->|HTTPS 443| Web[Web Tier<br/>10.0.1.0/24]
     Web -->|HTTP 8080| App[App Tier<br/>10.0.2.0/24]
@@ -84,6 +86,7 @@ flowchart LR
 ## Security Architecture
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph "Defense in Depth"
         L1[Layer 1: Network Security Groups<br/>Subnet-level firewall rules]
@@ -118,6 +121,7 @@ graph TB
 ## Resource Topology
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TD
     RG[Resource Group<br/>rg-digitalbanking-prod]
     
@@ -155,6 +159,7 @@ graph TD
 ### Bicep Module Structure
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph LR
     Main[main.bicep<br/>Orchestration]
     
@@ -177,6 +182,7 @@ graph LR
 ### Parameter Flow
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 flowchart TB
     User[User Input] --> Params[Parameters<br/>location: eastus<br/>environment: prod]
     
@@ -214,6 +220,7 @@ flowchart TB
 ### Growth Planning
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 gantt
     title Subnet Growth Projection
     dateFormat YYYY-MM
@@ -283,6 +290,7 @@ gantt
 ### Post-Deployment Checks
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 flowchart TD
     Start([Deploy Infrastructure]) --> Check1{VNet Exists?}
     Check1 -->|Yes| Check2{3 Subnets Created?}

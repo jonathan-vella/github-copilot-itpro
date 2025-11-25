@@ -247,6 +247,7 @@ param location string = resourceGroup().location
 ### Mermaid Diagrams
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph LR
     A[On-Premises] --> B[Azure Arc]
     B --> C[Azure Portal]

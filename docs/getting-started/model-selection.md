@@ -6,6 +6,7 @@
 ## Quick Decision Guide
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 flowchart TD
     A[What are you doing?] --> B{Code-heavy<br/>implementation?}
     B -->|Yes| C[GPT 5.1 Codex]

@@ -174,6 +174,7 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
 2. **Mermaid Dependency Diagram:**
 
    ```mermaid
+%%{init: {'theme':'neutral'}}%%
    graph TD
        RG[Resource Group] --> VNet[Virtual Network]
        VNet --> NSGs[Network Security Groups]

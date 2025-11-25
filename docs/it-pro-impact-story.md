@@ -10,6 +10,7 @@
 Every IT Professional knows this reality:
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 pie title Where IT Pro Time Goes (Before AI)
     "Writing IaC templates" : 25
     "Troubleshooting issues" : 20
@@ -78,6 +79,7 @@ Each scenario features a real-world character facing challenges you'll recognize
 ### Writing Infrastructure Code
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph LR
     subgraph Before["Before Copilot (45 min)"]
         A1[Research docs] --> A2[Find examples]
@@ -111,6 +113,7 @@ graph LR
 For complex projects, this repository demonstrates a **five-agent workflow** that mirrors how senior architects think:
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 flowchart LR
     A["@plan<br/>Create Strategy"] --> B["ADR Generator<br/>Document Decisions"]
     B --> C["Azure Architect<br/>WAF Assessment"]
@@ -143,6 +146,7 @@ production-ready code, documentation, and architectural decisions recorded.
 ### Your Value Increases
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TD
     subgraph Before["Low-Value Activities"]
         L1[Copy-paste templates]

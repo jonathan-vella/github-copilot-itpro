@@ -3,6 +3,7 @@
 ## Logical Architecture
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph "Azure Subscription"
         subgraph "Resource Group: rg-s05-validation-swc01"
@@ -54,6 +55,7 @@ graph TB
 ### Request Flow
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 sequenceDiagram
     participant User
     participant AppService as App Service<br/>(API)
@@ -75,6 +77,7 @@ sequenceDiagram
 ### API Endpoints
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph LR
     subgraph "API Endpoints"
         ROOT[GET /<br/>Health Check]
@@ -107,6 +110,7 @@ graph LR
 ### Authentication Flow
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph "Managed Identity Flow"
         APP[App Service]
@@ -132,6 +136,7 @@ graph TB
 ### Security Controls
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph "Defense in Depth"
         L1[Layer 1: HTTPS Only<br/>TLS 1.2 Minimum]
@@ -157,6 +162,7 @@ graph TB
 ### Testing Workflow
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph LR
     subgraph "Pre-Deployment"
         BUILD[Container<br/>Build]
@@ -195,6 +201,7 @@ graph LR
 ### Load Testing Flow
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 sequenceDiagram
     participant Test as quick-load-test.sh
     participant API as App Service API
@@ -224,6 +231,7 @@ sequenceDiagram
 ### Pipeline Architecture
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph "Source Control"
         GIT[GitHub Repository]
@@ -281,6 +289,7 @@ graph TB
 ### Resource Hierarchy
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TD
     SUB[Azure Subscription]
     
@@ -322,6 +331,7 @@ graph TD
 ### Post-Deployment Checks
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 flowchart TD
     Start([Deploy Infrastructure]) --> Check1{All Resources<br/>Deployed?}
     Check1 -->|Yes| Check2{App Service<br/>Accessible?}
@@ -357,6 +367,7 @@ flowchart TD
 ### Telemetry Flow
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph "Application Layer"
         API_APP[API Application]
@@ -399,6 +410,7 @@ graph TB
 ### Key Metrics
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph LR
     subgraph "Performance Metrics"
         RT[Response Time<br/>Target: < 500ms]
@@ -476,6 +488,7 @@ graph LR
 ### Read Operation
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 sequenceDiagram
     participant Client
     participant AppService as App Service
@@ -495,6 +508,7 @@ sequenceDiagram
 ### Write Operation (Future)
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 sequenceDiagram
     participant Client
     participant AppService as App Service

@@ -22,6 +22,7 @@ The five-agent workflow provides a systematic approach to infrastructure develop
 ## Workflow Diagram
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     Start([Infrastructure Requirement]) --> Decision{Need Governance<br/>Documentation?}
     
@@ -592,6 +593,7 @@ Using debug mode, analyze this deployment error:
 ### Decision Tree
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TD
     Start([Infrastructure Task]) --> Q1{Is this a<br/>significant decision?}
     

@@ -7,6 +7,7 @@ The HealthTech Patient Portal is a modern, cloud-native application built for sc
 ## High-Level Architecture
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph "User Access"
         Patient[Patient Web Browser]
@@ -179,6 +180,7 @@ The Software Bill of Materials will capture three layers:
 ### Dependency Tree
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     App[Patient Portal Application]
     
@@ -253,6 +255,7 @@ The SBOM **WILL** include:
 ## Data Flow for SBOM Generation
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph LR
     subgraph "Source Data"
         PkgJSON[package.json<br/>npm dependencies]

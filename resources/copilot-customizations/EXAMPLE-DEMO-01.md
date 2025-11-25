@@ -406,6 +406,7 @@ code network.bicep
 ### Recommended Workflow
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph LR
     A[Install Customizations] --> B[Generate Code]
     B --> C[Review Against Instructions]

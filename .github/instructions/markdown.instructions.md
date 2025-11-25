@@ -1,6 +1,6 @@
 ---
-description: 'Documentation and content creation standards'
-applyTo: '**/*.md'
+description: "Documentation and content creation standards"
+applyTo: "**/*.md"
 ---
 
 ## Markdown Content Rules
@@ -12,8 +12,11 @@ The following markdown content rules are enforced in the validators:
 3. **Code Blocks**: Use fenced code blocks for code snippets. Specify the language for syntax highlighting.
 4. **Links**: Use proper markdown syntax for links. Ensure that links are valid and accessible.
 5. **Images**: Use proper markdown syntax for images. Include alt text for accessibility.
-6. **Tables**: Use markdown tables for tabular data. Ensure proper formatting and alignment.
-7. **Line Length**: Limit line length to 400 characters for readability.
+
+- **Tables**: Use markdown tables for tabular data. Ensure proper formatting and alignment.
+- **Mermaid Diagrams**: Always include `%%{init: {'theme':'neutral'}}%%` as the first line inside Mermaid code blocks to ensure dark mode compatibility.
+- **Line Length**: Limit line length to 400 characters for readability.
+
 8. **Whitespace**: Use appropriate whitespace to separate sections and improve readability.
 9. **Front Matter**: Include YAML front matter at the beginning of the file with required metadata fields.
 

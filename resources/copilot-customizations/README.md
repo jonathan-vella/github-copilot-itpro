@@ -100,6 +100,7 @@ The most effective way to use GitHub Copilot for Azure infrastructure is through
 3. **Follow the Workflow**
 
    ```mermaid
+%%{init: {'theme':'neutral'}}%%
    graph LR
        P[@plan] --> A[ADR Generator]
        A --> B[Principal Architect]

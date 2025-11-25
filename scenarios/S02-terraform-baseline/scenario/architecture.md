@@ -3,6 +3,7 @@
 ## High-Level Overview
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph "Azure Subscription"
         subgraph "Resource Group: rg-techcorp-dev"
@@ -73,6 +74,7 @@ graph TB
 **Address Space**: `10.0.0.0/16` (65,536 IPs)
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TB
     VNET[VNet: 10.0.0.0/16]
     
@@ -535,6 +537,7 @@ terraform {
 ## Deployment Sequence
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph LR
     A[Resource Group] --> B[Virtual Network]
     B --> C[Subnets]

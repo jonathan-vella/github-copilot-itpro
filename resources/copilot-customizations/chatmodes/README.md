@@ -224,6 +224,7 @@ Use these **supplementary chat modes** for:
 ### Mode Selection Decision Tree
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph TD
     A[What do you need?] --> B{Document Decision?}
     B -->|Yes| C[@adr-generator Agent]

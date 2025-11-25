@@ -362,6 +362,7 @@ Use Mermaid diagrams for architecture
 ### Azure Resource Deployment Workflow
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph LR
     A[Write Bicep] --> B[Validate Locally]
     B --> C[Deploy to Azure]
@@ -373,6 +374,7 @@ graph LR
 ### Copilot-Assisted Development Workflow
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph LR
     A[Describe Intent] --> B[Accept Suggestions]
     B --> C[Refine with Prompts]

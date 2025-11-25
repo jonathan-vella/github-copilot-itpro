@@ -1,6 +1,7 @@
 # GitHub Copilot for Azure IT Pros
 
 <!-- Badges -->
+
 [![GitHub Copilot](https://img.shields.io/badge/GitHub%20Copilot-Powered-8957e5?style=for-the-badge&logo=github)](https://github.com/features/copilot)
 [![Azure](https://img.shields.io/badge/Azure-Infrastructure-0078D4?style=for-the-badge&logo=microsoftazure)](https://azure.microsoft.com)
 [![Bicep](https://img.shields.io/badge/Bicep-IaC-00B4AB?style=for-the-badge&logo=microsoftazure)](https://learn.microsoft.com/azure/azure-resource-manager/bicep/)
@@ -19,6 +20,7 @@
 > and documentation built in.
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 graph LR
     A["📝 Describe Intent"] --> B["🤖 AI Generates Code"]
     B --> C["👀 Review & Refine"]
@@ -32,12 +34,12 @@ graph LR
 
 ## Why This Matters
 
-| Traditional Approach | With GitHub Copilot |
-|---------------------|---------------------|
-| 45 min to write VNet + NSGs | **10 min** (78% faster) |
-| 60 min for automation scripts | **15 min** (75% faster) |
-| 2 hours for documentation | **20 min** (83% faster) |
-| Days of troubleshooting | **Minutes** with AI diagnosis |
+| Traditional Approach          | With GitHub Copilot           |
+| ----------------------------- | ----------------------------- |
+| 45 min to write VNet + NSGs   | **10 min** (78% faster)       |
+| 60 min for automation scripts | **15 min** (75% faster)       |
+| 2 hours for documentation     | **20 min** (83% faster)       |
+| Days of troubleshooting       | **Minutes** with AI diagnosis |
 
 📖 **[Read the full IT Pro Impact Story](docs/it-pro-impact-story.md)** — Real challenges, real transformations.
 
@@ -69,17 +71,17 @@ code github-copilot-itpro
 
 Each scenario features a real-world IT Pro facing a challenge you'll recognize.
 
-| Scenario | Description | What You'll Learn |
-|----------|-------------|-------------------|
-| **[S01 Bicep Baseline](scenarios/S01-bicep-baseline)** | Hub & Spoke network with Firewall & Bastion | Bicep fundamentals, Copilot prompting |
-| **[S02 Terraform Baseline](scenarios/S02-terraform-baseline)** | Same topology in Terraform | Multi-cloud IaC, HCL syntax |
-| **[S03 Five Agent Workflow](scenarios/S03-five-agent-workflow)** | End-to-end with 5 specialized agents | Advanced workflow, agent handoffs |
-| **[S04 Documentation](scenarios/S04-documentation-generation)** | Auto-generate docs and diagrams | Markdown, Mermaid, consistency |
-| **[S05 Service Validation](scenarios/S05-service-validation)** | Automated testing of Azure services | PowerShell, Pester, compliance |
-| **[S06 Troubleshooting](scenarios/S06-troubleshooting)** | Diagnose and fix infrastructure issues | Azure Monitor, Log Analytics |
-| **[S07 SBOM Generator](scenarios/S07-sbom-generator)** | Software Bill of Materials for compliance | Syft, Grype, security scanning |
-| **[S08 Diagrams as Code](scenarios/S08-diagrams-as-code)** | Architecture diagrams in Python | Diagrams library, automation |
-| **[S09 Coding Agent](scenarios/S09-coding-agent)** | Assign issues to Copilot for autonomous implementation | Coding Agent, async workflows |
+| Scenario                                                         | Description                                            | What You'll Learn                     |
+| ---------------------------------------------------------------- | ------------------------------------------------------ | ------------------------------------- |
+| **[S01 Bicep Baseline](scenarios/S01-bicep-baseline)**           | Hub & Spoke network with Firewall & Bastion            | Bicep fundamentals, Copilot prompting |
+| **[S02 Terraform Baseline](scenarios/S02-terraform-baseline)**   | Same topology in Terraform                             | Multi-cloud IaC, HCL syntax           |
+| **[S03 Five Agent Workflow](scenarios/S03-five-agent-workflow)** | End-to-end with 5 specialized agents                   | Advanced workflow, agent handoffs     |
+| **[S04 Documentation](scenarios/S04-documentation-generation)**  | Auto-generate docs and diagrams                        | Markdown, Mermaid, consistency        |
+| **[S05 Service Validation](scenarios/S05-service-validation)**   | Automated testing of Azure services                    | PowerShell, Pester, compliance        |
+| **[S06 Troubleshooting](scenarios/S06-troubleshooting)**         | Diagnose and fix infrastructure issues                 | Azure Monitor, Log Analytics          |
+| **[S07 SBOM Generator](scenarios/S07-sbom-generator)**           | Software Bill of Materials for compliance              | Syft, Grype, security scanning        |
+| **[S08 Diagrams as Code](scenarios/S08-diagrams-as-code)**       | Azure Architecture diagrams in Python                  | Diagrams library, automation          |
+| **[S09 Coding Agent](scenarios/S09-coding-agent)**               | Assign issues to Copilot for autonomous implementation | Coding Agent, async workflows         |
 
 ---
 
@@ -88,6 +90,7 @@ Each scenario features a real-world IT Pro facing a challenge you'll recognize.
 For complex projects, use our five-agent workflow that mirrors how senior architects think:
 
 ```mermaid
+%%{init: {'theme':'neutral'}}%%
 flowchart LR
     A["@plan"] --> B["ADR Generator"]
     B --> C["Azure Architect"]
