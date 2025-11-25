@@ -120,13 +120,26 @@ jobs:
               `*This issue was automatically generated on ${today} by the [Markdown Validation workflow](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})*`
             ].join('\n');
 
-            const { data: issue } = await github.rest.issues.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: `Automated markdownlint problems [${today}]`,
-              body: issueBody,
-              labels: ['markdownlint', 'automated'],
-              assignees: ['copilot']
-            });
-
-            console.log(`Created issue #${issue.number}: ${issue.html_url}`);
+            // Try to create issue with copilot assignee, fall back to no assignee if it fails
+            try {
+              const { data: issue } = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `Automated markdownlint problems [${today}]`,
+                body: issueBody,
+                labels: ['markdownlint', 'automated'],
+                assignees: ['copilot']
+              });
+              console.log(`Created issue #${issue.number}: ${issue.html_url}`);
+            } catch (error) {
+              // If assignment fails, create issue without assignee
+              console.log(`Warning: Could not assign to copilot, creating issue without assignee: ${error.message}`);
+              const { data: issue } = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `Automated markdownlint problems [${today}]`,
+                body: issueBody,
+                labels: ['markdownlint', 'automated']
+              });
+              console.log(`Created issue #${issue.number}: ${issue.html_url}`);
+            }
