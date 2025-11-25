@@ -97,12 +97,14 @@ Open GitHub Copilot Chat and start the UAT workflow:
 ```
 
 The agent will:
+
 1. Ask about your service and acceptance criteria
 2. Generate a comprehensive test plan
 3. Guide you to run automated tests (24 test cases)
 4. Auto-populate a professional report with results
 
 **Manual test execution** (if preferred):
+
 ```bash
 cd validation/uat
 export API_BASE_URL="https://your-api-url"
@@ -120,6 +122,7 @@ Continue with the Load Test Assistant:
 ```
 
 The agent will:
+
 1. Ask about performance goals and load patterns
 2. Generate k6 or Azure Load Testing scripts
 3. Execute tests and monitor progress
@@ -137,6 +140,7 @@ code validation/load-testing/load-test-report-template.md
 ```
 
 Both reports include:
+
 - Executive summary with pass/fail status
 - Detailed test results and metrics
 - Issues and recommendations
@@ -187,6 +191,7 @@ By completing this scenario, you will learn how to:
 | **Total Validation** | **25 hrs** | **65 min** | **96%** |
 
 **Key Benefits:**
+
 - ✅ Comprehensive test coverage (50+ validations)
 - ✅ Professional reports with executive summaries
 - ✅ Actionable recommendations with cost analysis
@@ -198,6 +203,7 @@ By completing this scenario, you will learn how to:
 ## 🔗 Related Resources
 
 ### Documentation
+
 - [Demo Script](DEMO-SCRIPT.md) - 30-45 minute walkthrough
 - [Deployment Guide](solution/scripts/DEPLOYMENT-NOTES.md) - Infrastructure deployment
 - [Effective Prompts](prompts/effective-prompts.md) - Agent usage patterns
@@ -205,10 +211,12 @@ By completing this scenario, you will learn how to:
 - [Load Testing Guide](validation/load-testing/README.md) - Performance validation
 
 ### Agents
+
 - [UAT Assistant](agents/uat-assistant.agent.md) - User acceptance testing workflow
 - [Load Test Assistant](agents/loadtest-assistant.agent.md) - Performance testing workflow
 
 ### External Links
+
 - [GitHub Copilot](https://github.com/features/copilot)
 - [k6 Load Testing](https://k6.io/)
 - [Azure Load Testing](https://learn.microsoft.com/azure/load-testing/)
@@ -219,12 +227,14 @@ By completing this scenario, you will learn how to:
 ## 📝 Get Started
 
 **For Demo/Training:**
+
 1. Review [DEMO-SCRIPT.md](DEMO-SCRIPT.md) for presentation guidance
 2. Deploy SAIF using `solution/scripts/deploy.ps1`
 3. Run agents with `@uat-assistant` and `@loadtest-assistant`
 4. Review generated reports and customize for your needs
 
 **For Your Own API:**
+
 1. Deploy your service to Azure
 2. Open Copilot Chat: `@uat-assistant I need to test [your API]`
 3. Follow agent prompts (service URL, endpoints, criteria)
@@ -232,6 +242,7 @@ By completing this scenario, you will learn how to:
 5. Generate professional reports automatically
 
 **For CI/CD Integration:**
+
 1. Add test scripts to your pipeline (see `validation/uat/README.md`)
 2. Configure environment variables (API_BASE_URL)
 3. Capture test output for automated reporting

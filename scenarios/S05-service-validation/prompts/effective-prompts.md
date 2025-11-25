@@ -58,6 +58,7 @@ Agent: All tests complete! Should I populate the report template?
 ### UAT Test Scripts Available
 
 **Bash:**
+
 ```bash
 cd validation/uat
 export API_BASE_URL="https://your-api-url"
@@ -65,6 +66,7 @@ export API_BASE_URL="https://your-api-url"
 ```
 
 **PowerShell:**
+
 ```powershell
 cd validation/uat
 $env:API_BASE_URL = "https://your-api-url"
@@ -74,6 +76,7 @@ $env:API_BASE_URL = "https://your-api-url"
 ### UAT Test Coverage
 
 The assistant validates:
+
 - ✅ Health & availability (endpoint responses, response times)
 - ✅ Version information (API version, metadata)
 - ✅ Identity verification (managed identity, no secrets exposed)
@@ -144,12 +147,14 @@ Agent: Should I generate the detailed report with recommendations?
 ### Load Test Tools Supported
 
 **k6 (Recommended):**
+
 ```bash
 cd validation/load-testing
 k6 run --out json=results.json load-test.js
 ```
 
 **Azure Load Testing:**
+
 ```bash
 az load test create \
   --name my-load-test \
@@ -160,6 +165,7 @@ az load test create \
 ### Load Test Metrics
 
 The assistant analyzes:
+
 - 📊 **Throughput** - Requests per second (RPS)
 - ⏱️ **Response Times** - p50, p95, p99 percentiles
 - ❌ **Error Rate** - HTTP errors, timeouts, connection failures
@@ -205,9 +211,11 @@ curl -s "$API_URL/api/sqlwhoami" | jq
 Both assistants auto-populate comprehensive templates:
 
 ### UAT Report Template
+
 Location: `validation/uat/uat-report-template.md`
 
 Includes:
+
 - Executive summary with pass/fail metrics
 - Test results by category (8 test suites)
 - Issues and defects tracking
@@ -215,9 +223,11 @@ Includes:
 - Three-level sign-off (QA, Tech Lead, Business)
 
 ### Load Test Report Template
+
 Location: `validation/load-testing/load-test-report-template.md`
 
 Includes:
+
 - Executive summary with performance grade
 - Detailed metrics (RPS, response times, error rates)
 - Per-endpoint breakdown

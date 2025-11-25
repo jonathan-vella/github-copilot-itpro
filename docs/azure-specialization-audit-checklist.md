@@ -196,6 +196,7 @@ This will ensure that all production-oriented considerations are taken into acco
 **Examples must include:** Two (2) unique customer projects that were completed in the past **twelve (12) months**.
 
 ---
+
 ## 3.0 Manage and Optimize
 
 The partner must demonstrate that they have set up their customers for operational success to deploy compliant environments with built-in policies and controls, including ALZ. All partners have a role in setting up operations management, even if they do not provide long-term managed services.
@@ -203,6 +204,7 @@ The partner must demonstrate that they have set up their customers for operation
 ### 3.1 Repeatable Deployment
 
 #### Requirement
+
 The partner must demonstrate adherence to **Azure landing zone (ALZ)** design areas through a repeatable deployment. ALZ applies to all sizes of deployments.
 
 The deployment should configure, at minimum, the following attributes:
@@ -275,6 +277,7 @@ In either case, the output evidence must demonstrate the configuration of the id
 > Demonstration of the approach type for ALZ is required for two (2) unique customers for Analytics on Azure and Data Warehouse Migration to Azure specializations.
 
 ---
+
 ### 3.2 Plan for Skilling
 
 #### Requirement
@@ -370,6 +373,7 @@ The partner must have a consistent approach for assessing customer requirements 
 ### 1.1 Workload Assessment
 
 #### Requirement
+
 The partner must demonstrate how they assess each workload prior to migration to ensure that adequate pre-migration or pre-deployment planning and sizing were performed.
 
 #### Assessment Must Include

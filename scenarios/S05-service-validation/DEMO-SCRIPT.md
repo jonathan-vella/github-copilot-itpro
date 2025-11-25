@@ -45,10 +45,12 @@ curl -s https://app-saifv2-api-ss4xs2.azurewebsites.net/ | jq
 ```
 
 **Open scenario files:**
+
 - `scenario/requirements.md` - Business requirements and acceptance criteria
 - `scenario/architecture.md` - Technical architecture with Mermaid diagrams
 
 **Key talking points:**
+
 - "We have a HIPAA-compliant patient portal API deployed to Azure"
 - "Challenge: How do we validate it meets acceptance criteria efficiently?"
 - "Solution: GitHub Copilot agents guide us through comprehensive testing"
@@ -99,6 +101,7 @@ export API_BASE_URL="https://app-saifv2-api-ss4xs2.azurewebsites.net"
 ```
 
 **Show the results:**
+
 - ✅ 24 tests executed
 - ✅ 100% pass rate
 - ✅ All endpoints validated
@@ -107,11 +110,13 @@ export API_BASE_URL="https://app-saifv2-api-ss4xs2.azurewebsites.net"
 **4. Generate Report** (2 min)
 
 Ask the agent:
+
 ```
 Populate the UAT report template with these results
 ```
 
 **Show generated report:**
+
 - Open `validation/uat/uat-report-template.md` (now filled)
 - Highlight: Executive summary, detailed metrics, sign-off section
 - **Value message**: "Manual testing would take 2-3 hours. With Copilot: 15 minutes."
@@ -156,12 +161,14 @@ export const options = {
 **3. Execute Load Test** (5 min)
 
 If k6 is installed:
+
 ```bash
 cd validation/load-testing
 k6 run load-test.js
 ```
 
 If not, simulate with agent guidance:
+
 ```
 Agent: [Simulates test execution]
 Agent: Test complete! Results:
@@ -174,17 +181,20 @@ Agent: Test complete! Results:
 **4. Analyze Results** (3 min)
 
 Agent will:
+
 - Identify bottlenecks (if any)
 - Recommend scaling (e.g., "Consider upgrading to P2v3 for 600+ RPS")
 - Calculate cost impact
 - Generate performance grade (e.g., "Grade: B")
 
 **Ask agent to generate report:**
+
 ```
 Generate the load test report with recommendations
 ```
 
 **Show generated report:**
+
 - Open `validation/load-testing/load-test-report-template.md` (now filled)
 - Highlight: Performance metrics, bottleneck analysis, scaling recommendations
 - **Value message**: "Agent identified that database queries are the bottleneck and suggested connection pooling optimization"
@@ -196,10 +206,12 @@ Generate the load test report with recommendations
 **1. Review Both Reports** (2 min)
 
 Show side-by-side:
+
 - `uat-report-template.md` - Functional validation
 - `load-test-report-template.md` - Performance validation
 
 **Key highlights:**
+
 - ✅ All UAT tests passed (24/24)
 - ✅ Load test achieved 485 RPS (target: 500)
 - ✅ p95 response time: 445ms (target: <500ms)
@@ -209,6 +221,7 @@ Show side-by-side:
 **2. Sign-Off Process** (1 min)
 
 Show the sign-off sections in reports:
+
 - QA Engineer approval
 - Technical Lead approval
 - Business stakeholder approval
@@ -216,10 +229,12 @@ Show the sign-off sections in reports:
 **3. Key Takeaways** (2 min)
 
 **Time Savings:**
+
 - **Manual UAT**: 2-3 hours → **With Copilot**: 15 minutes (80% reduction)
 - **Manual Load Test**: 4-5 hours → **With Copilot**: 15 minutes (85% reduction)
 
 **Quality Improvements:**
+
 - Comprehensive test coverage (24 test cases)
 - Professional reports with executive summaries
 - Actionable recommendations with cost analysis
@@ -233,6 +248,7 @@ Show the sign-off sections in reports:
 ## Key Talking Points Throughout Demo
 
 ### UAT Assistant Benefits
+
 - 🤖 **Guided Workflow**: Step-by-step prompts eliminate guesswork
 - 📋 **Auto-Generated Checklists**: Comprehensive test plans based on your requirements
 - 📊 **Professional Reports**: Executive summaries with sign-off sections
@@ -240,6 +256,7 @@ Show the sign-off sections in reports:
 - 🔁 **Repeatable**: Same quality every time, regardless of tester experience
 
 ### Load Test Assistant Benefits
+
 - 🎯 **Intelligent Configuration**: Asks the right questions to build optimal test plans
 - 🛠️ **Multi-Tool Support**: Generates scripts for k6, Azure Load Testing, or Artillery
 - 🔍 **Bottleneck Analysis**: Identifies performance issues with root cause analysis
@@ -247,6 +264,7 @@ Show the sign-off sections in reports:
 - 📈 **Performance Grading**: A-F grades make results easy to communicate to stakeholders
 
 ### Business Value
+
 - **ROI**: 70-80% time reduction = more testing cycles = higher quality
 - **Consistency**: Standardized testing process across all teams
 - **Documentation**: Audit-ready reports generated automatically
@@ -270,6 +288,7 @@ Show the sign-off sections in reports:
 ## Success Metrics
 
 **Demo is successful when:**
+
 - ✅ UAT Assistant completes full workflow (discovery → execution → report) in < 15 min
 - ✅ All 24 UAT tests pass with 100% success rate
 - ✅ Load Test Assistant generates k6 script and analyzes results in < 15 min
@@ -282,17 +301,20 @@ Show the sign-off sections in reports:
 ## Demo Variants
 
 ### Short Version (15 min)
+
 - Show UAT Assistant workflow only
 - Use pre-executed test results
 - Focus on report generation
 
 ### Extended Version (60 min)
+
 - Add manual testing comparison (show old way vs. new way)
 - Run actual k6 load test (not simulated)
 - Show CI/CD integration examples
 - Demonstrate agent handoffs between UAT → Load Test
 
 ### Workshop Format (90 min)
+
 - Attendees bring their own APIs
 - Guide them through using both agents
 - Hands-on: Generate tests for their services
@@ -303,6 +325,7 @@ Show the sign-off sections in reports:
 ## Follow-Up Resources
 
 ### Documentation
+
 - [UAT Assistant Agent](.github/agents/uat-assistant.agent.md)
 - [Load Test Assistant Agent](.github/agents/loadtest-assistant.agent.md)
 - [Effective Prompts Guide](prompts/effective-prompts.md)
@@ -310,12 +333,14 @@ Show the sign-off sections in reports:
 - [Load Test Report Template](validation/load-testing/load-test-report-template.md)
 
 ### Tools & Frameworks
+
 - [GitHub Copilot](https://github.com/features/copilot)
 - [k6 Load Testing](https://k6.io/)
 - [Azure Load Testing](https://learn.microsoft.com/azure/load-testing/)
 - [Pester Testing Framework](https://pester.dev/)
 
 ### Related Demos
+
 - **S01: Bicep Quickstart** - Infrastructure deployment
 - **S02: PowerShell Automation** - Azure automation with Copilot
 - **S06: Azure Specialization Prep** - Azure certifications with AI assistance
@@ -325,11 +350,13 @@ Show the sign-off sections in reports:
 ## Appendix: Agent Prompts Cheat Sheet
 
 ### UAT Assistant Quick Start
+
 ```
 @uat-assistant I need to run UAT tests for [service name]
 ```
 
 ### Load Test Assistant Quick Start
+
 ```
 @loadtest-assistant I need to load test [service name]
 ```
@@ -337,18 +364,21 @@ Show the sign-off sections in reports:
 ### Useful Follow-Up Prompts
 
 **During UAT:**
+
 - "Add a test for [specific functionality]"
 - "What's the current pass rate?"
 - "Show me only failed tests"
 - "Generate executive summary"
 
 **During Load Testing:**
+
 - "What's causing the bottleneck?"
 - "How much would scaling to [SKU] cost?"
 - "Compare these results to previous test"
 - "Show performance trend over last 3 tests"
 
 **For Reports:**
+
 - "Populate the template with current results"
 - "Add recommendations section"
 - "Include cost-benefit analysis"

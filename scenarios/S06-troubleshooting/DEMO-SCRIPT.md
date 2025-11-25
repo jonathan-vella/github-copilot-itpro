@@ -83,6 +83,7 @@ By the end of this demo, participants will understand:
 > "Meet RetailMax Online, a Fortune 500 retailer with an $800M e-commerce platform on Azure."
 
 **Key Points to Emphasize**:
+
 - Platform criticality: $22K revenue loss per hour
 - Business pressure: Black Friday in 3 days
 - SLA at risk: 99.9% uptime commitment
@@ -128,7 +129,7 @@ By the end of this demo, participants will understand:
 ### Part 2: Live Copilot Conversation (18 minutes)
 
 **Setup Narration**:
-> "I'm opening Copilot Chat in VS Code. On the right, I have Azure Portal ready to run queries. 
+> "I'm opening Copilot Chat in VS Code. On the right, I have Azure Portal ready to run queries.
 > I'm going to **talk to Copilot** like I would talk to a senior colleague during an incident."
 
 ---
@@ -160,21 +161,23 @@ Help me identify the root cause systematically.
 
 **Narrate While Typing** (key teaching moment):
 > "Notice I'm not just saying 'my app is broken.' I'm giving Copilot:
+>
 > - **Specific symptoms**: 15% failure, HTTP 500
 > - **Timeline**: Started 2 hours ago
 > - **Architecture context**: App Service + SQL
 > - **Business impact**: Creates urgency
-> 
+>
 > This helps Copilot understand what kind of guidance I need."
 
 **Press Enter, Wait for Response** (10-15 seconds)
 
 **Read Copilot's Response Out Loud** (summarize, don't read word-for-word):
 > "Copilot is structuring the investigation for me. It says:
+>
 > 1. First, check Application Insights for exception patterns
 > 2. Then analyze SQL Database performance metrics
 > 3. Look for recent changes or deployments
-> 
+>
 > It's asking if I have Log Analytics access. Yes, I do. Let me respond."
 
 **Teaching Point**:
@@ -195,7 +198,7 @@ What should I check first?
 **Wait for Copilot** (it should suggest checking exceptions)
 
 **Read Response, Highlight Key Parts**:
-> "Copilot is recommending we start with the Application Insights `exceptions` table. 
+> "Copilot is recommending we start with the Application Insights `exceptions` table.
 > And look - it's **generating a KQL query for me**. Let me copy this."
 
 **Copy the KQL Query** (should be similar to):
@@ -213,24 +216,25 @@ exceptions
 
 **Teaching Point (while copying)**:
 > "In the manual approach, I'd spend 30-45 minutes:
+>
 > - Looking up KQL syntax
 > - Figuring out which table to query
 > - Getting the aggregation logic right
-> 
+>
 > Copilot did it in 5 seconds based on my symptom description."
 
 **Switch to Azure Portal** (show screen transition):
-> "Now I'll run this in Azure Portal. 
+> "Now I'll run this in Azure Portal.
 > Log Analytics → Queries → [paste query] → Run"
 
 **Show Results** (read table out loud):
 > "Wow, look at this data:
-> 
+>
 > | Exception Type | Operation | Count | Sample Message |
 > |----------------|-----------|-------|----------------|
 > | InvalidOperationException | POST /api/checkout | 423 | **Timeout expired... obtaining a connection from the pool** |
 > | SqlException | POST /api/checkout | 156 | Cannot open database |
-> 
+>
 > That error message is the smoking gun: '**Timeout obtaining connection from the pool**'"
 
 **Return to Copilot Chat**:
@@ -260,10 +264,11 @@ What does this tell us?
 
 **Read Response, Get Excited**:
 > "Listen to this! Copilot is saying:
+>
 > - 'This strongly suggests SQL connection pool exhaustion'
 > - 'The timeout message is a classic symptom'
 > - 'Long-running transactions are likely holding connections'
-> 
+>
 > And it's asking me to run a follow-up query to check SQL dependency duration. Here's the query..."
 
 **Copy Second Query**:
@@ -287,15 +292,16 @@ dependencies
 
 **Show Results**:
 > "Aha! Here's the problem:
+>
 > - Checkout operations: **3,800 milliseconds average** (3.8 seconds!)
 > - Normal product queries: 124 milliseconds
-> 
-> Checkout operations are **30 times slower** than they should be. 
+>
+> Checkout operations are **30 times slower** than they should be.
 > Those long-running transactions are holding SQL connections, exhausting the pool!"
 
 **Teaching Point**:
 > "In 10 minutes, we've gone from '15% of checkouts are broken' to 'checkout SQL operations take 3.8 seconds and are exhausting the connection pool.'
-> 
+>
 > That's the power of Copilot guiding the investigation."
 
 ---
@@ -317,14 +323,15 @@ How do I check the current pool size configuration?
 
 **Read and React**:
 > "Copilot is doing the **math** for me! It says:
-> 
-> 'If you have 10 App Service instances, each with default pool size of 100, 
+>
+> 'If you have 10 App Service instances, each with default pool size of 100,
 > and checkout operations take 3.8 seconds, here's what happens:
+>
 > - At peak: 2 requests/second × 3.8 seconds = 7.6 connections held per instance
 > - Plus baseline operations: ~15-20 connections
 > - Total: 22-27 connections per instance
 > - When traffic spikes 5x: You hit 98-100 connections → timeouts'
-> 
+>
 > And it's telling me to check the App Service connection string for 'Max Pool Size' parameter."
 
 **Switch to Portal** (quickly):
@@ -332,7 +339,7 @@ How do I check the current pool size configuration?
 
 **Show Connection String** (mock or real):
 > "There it is: `Max Pool Size=100`
-> 
+>
 > Copilot's hypothesis is **confirmed**! The default pool size of 100 isn't enough for peak load."
 
 **Return to Copilot**:
@@ -344,26 +351,30 @@ What's the recommended fix?
 
 **Read Response**:
 > "Copilot is giving me a **three-tier approach**:
-> 
+>
 > **Immediate (5 minutes)**: Increase Max Pool Size to 200
+>
 > - Stops the bleeding right now
 > - Handles current traffic pattern
-> 
+>
 > **Short-term (30 minutes)**: Add retry logic and timeout handling
+>
 > - More resilient to future spikes
-> 
+>
 > **Long-term (post-Black Friday)**: Optimize payment processing
+>
 > - Move to async queue (Service Bus)
 > - Don't hold connections during external API calls
-> 
+>
 > For now, let's do the immediate fix."
 
 **Teaching Point**:
 > "Notice Copilot isn't just saying 'increase the pool size.' It's explaining:
+>
 > - Why this works (math)
 > - How to do it safely (step-by-step)
 > - What to do long-term (architectural improvement)
-> 
+>
 > It's **teaching** while troubleshooting."
 
 ---
@@ -373,11 +384,12 @@ What's the recommended fix?
 **Action**: Skip the fix implementation (mention it), jump to documentation
 
 > "I won't actually make the change live, but Copilot would walk me through:
+>
 > 1. Update connection string
 > 2. Restart App Service (rolling restart to avoid downtime)
 > 3. Monitor for 30 minutes to validate
-> 
-> Let's say the fix worked. Now I need to document this incident. 
+>
+> Let's say the fix worked. Now I need to document this incident.
 > In the old world, this takes 2 hours. Let's ask Copilot..."
 
 **Type in Chat**:
@@ -391,19 +403,20 @@ Can you generate a post-mortem report for this incident?
 
 **Scroll Through Response**:
 > "In 30 seconds, Copilot has generated:
+>
 > - Executive summary
 > - Complete timeline with timestamps
 > - Root cause analysis with technical details
 > - Resolution steps
 > - Prevention recommendations
 > - Even action items with owners and due dates!
-> 
+>
 > This is audit-ready documentation generated automatically."
 
 **Show Full Example** (open examples/copilot-conversation.md):
-> "Here's what a complete troubleshooting conversation looks like - 
+> "Here's what a complete troubleshooting conversation looks like -
 > 2 hours 45 minutes from incident to resolution to documentation.
-> 
+>
 > Normally? 30 hours."
 
 ---
@@ -417,10 +430,12 @@ Can you generate a post-mortem report for this incident?
 > "Let me show you these queries actually work..."
 
 **Run 1-2 queries live**:
+
 - Show exceptions table query
 - Show results are real data
 
 **Or Show Screenshots**:
+
 - "Here's what the actual results look like in a real incident"
 
 #### Summary of Time Savings (2 minutes)
@@ -439,6 +454,7 @@ Can you generate a post-mortem report for this incident?
 > "That's the difference between spending **3-4 work days** on an incident versus **half a work day**."
 
 **Cost Impact**:
+
 - Labor savings: $3,750 per incident (@ $150/hour)
 - Annual savings (12 incidents): **$45,000**
 - Downtime avoided: **$30M potential** (25 hours × $100K/hour × 12 incidents)
@@ -447,17 +463,19 @@ Can you generate a post-mortem report for this incident?
 
 **For IT Professionals**:
 > "You just saw how to use Copilot as your **troubleshooting partner**:
+>
 > 1. Describe symptoms in plain English
 > 2. Get guided investigation plan
 > 3. Copilot generates queries on-demand
 > 4. Share results, get interpretation
 > 5. Iterate until root cause found
 > 6. Auto-generate documentation
-> 
+>
 > It's like having a senior SRE on-call with you 24/7."
 
 **For Management**:
 > "The business value is clear:
+>
 > - 83% faster resolution (30h → 5h)
 > - $45K annual labor savings
 > - Millions in downtime cost avoidance
@@ -492,6 +510,7 @@ Can you generate a post-mortem report for this incident?
 > "Hmm, that's not quite what I need. Let me be more specific..."
 
 **Rephrase with more context**:
+
 ```
 I need a KQL query for Application Insights exceptions table.
 Show me exceptions in the last 2 hours, grouped by exception type and operation name.
@@ -505,9 +524,9 @@ Include count of exceptions and sample error message.
 **Scenario**: KQL syntax error or no data
 
 **Recovery**:
-> "This happens sometimes - let me check the syntax... 
+> "This happens sometimes - let me check the syntax...
 > [Fix obvious error like missing pipe or typo]
-> 
+>
 > In a real incident, I'd also have Copilot help debug the query error."
 
 ### If Demo Environment Lacks Data
@@ -515,7 +534,7 @@ Include count of exceptions and sample error message.
 **Scenario**: Application Insights has no recent data
 
 **Recovery**:
-> "In my demo environment, there's no live data right now. 
+> "In my demo environment, there's no live data right now.
 > But I have screenshots from a real incident - let me show you..."
 
 **Show examples/copilot-conversation.md or screenshots**
@@ -542,7 +561,7 @@ Include count of exceptions and sample error message.
 
 ## Demo Success Criteria
 
-### You'll Know It Went Well If...
+### You'll Know It Went Well If
 
 ✅ Audience understands this is **conversation**, not scripting  
 ✅ They see Copilot as a **thinking partner**, not magic  
@@ -563,9 +582,9 @@ Include count of exceptions and sample error message.
 
 ---
 
-**Demo Philosophy**: 
-> "Show, don't tell. Let the conversation unfold naturally. 
-> Embrace pauses. React authentically to Copilot's responses. 
+**Demo Philosophy**:
+> "Show, don't tell. Let the conversation unfold naturally.
+> Embrace pauses. React authentically to Copilot's responses.
 > Make it feel like the audience is watching a real troubleshooting session, not a scripted performance."
 
 **Remember**: The power isn't in building tools - it's in having an AI partner who helps you **think through** complex problems.

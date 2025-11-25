@@ -53,26 +53,31 @@ This demo shows how GitHub Copilot transforms Azure troubleshooting from a time-
 This demo shows Copilot as your **diagnostic partner**, guiding you through:
 
 #### Phase 1: Problem Definition (5 min)
+
 - **Challenge**: Vague symptoms ("checkout is broken")
 - **Copilot helps**: Structure problem statement, identify affected components
 - **Output**: Clear incident description with scope and impact
 
 #### Phase 2: Data Discovery (5 min)
+
 - **Challenge**: "Where do I even look?" (App Insights? Log Analytics? SQL logs?)
 - **Copilot helps**: Suggest relevant log sources based on symptoms
 - **Output**: Prioritized list of data sources to investigate
 
 #### Phase 3: Log Extraction (10 min)
+
 - **Challenge**: Writing KQL queries from scratch (syntax, logic, performance)
 - **Copilot helps**: Generate KQL from natural language descriptions
 - **Output**: Working queries that extract relevant telemetry
 
 #### Phase 4: Log Analysis (15 min)
+
 - **Challenge**: Interpreting raw logs, finding patterns in noise
 - **Copilot helps**: Summarize findings, highlight anomalies, correlate events
 - **Output**: Key insights from logs (error patterns, timing, correlations)
 
 #### Phase 5: Root Cause Analysis (10 min)
+
 - **Challenge**: Connecting dots between multiple data points
 - **Copilot helps**: Synthesize findings, suggest probable causes, recommend validation
 - **Output**: RCA hypothesis with supporting evidence
@@ -263,10 +268,12 @@ S06-troubleshooting/
 1. **Open VS Code** with GitHub Copilot Chat
 2. **Read the scenario**: `scenario/requirements.md` (RetailMax incident)
 3. **Start conversation**: Open Copilot Chat and type:
+
    ```
    I have an Azure incident: 15% of checkout transactions are failing with HTTP 500 errors. 
    Started 2 hours ago. Black Friday is in 3 days. Help me troubleshoot this.
    ```
+
 4. **Follow Copilot's guidance** through the 5-phase workflow
 
 ### Full Demo Setup (20 Minutes)

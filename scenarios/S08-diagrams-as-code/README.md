@@ -37,6 +37,7 @@ GitHub Copilot understands the `diagrams` library and can translate natural lang
 You need to document a standard 3-tier web application architecture on Azure for a design review. Instead of drawing it manually, you will use Python code to generate it.
 
 **Architecture Components**:
+
 - Azure DNS
 - Azure Load Balancer
 - Web Tier (VM Scale Set)
@@ -64,12 +65,14 @@ scenarios/S08-diagrams-as-code/
 ## Quick Start
 
 1. **Install Dependencies**:
+
    ```bash
    pip install diagrams
    # Ensure Graphviz is installed on your OS (e.g., 'sudo apt-get install graphviz')
    ```
 
 2. **Run the Script**:
+
    ```bash
    python solution/architecture.py
    ```
@@ -80,4 +83,3 @@ scenarios/S08-diagrams-as-code/
 ## Related Demos
 
 - [Demo 04: Documentation Generation (S04)](../S04-documentation-generation/)
-

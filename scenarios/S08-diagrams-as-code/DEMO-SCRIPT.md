@@ -16,7 +16,6 @@ Explain the concept of "Diagrams as Code".
 - "Binary files like Visio are hard to version control."
 - "Python `diagrams` library lets us draw with code."
 
-
 ### 2. Using Copilot to Generate the Code (5 mins)
 
 1. Create a new file named `my_architecture.py`.

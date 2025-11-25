@@ -97,6 +97,28 @@ scenarios/XX-demo-name/
 - Add troubleshooting sections
 - Use Mermaid for diagrams
 
+### Markdown Linting
+
+This repository uses [markdownlint](https://github.com/DavidAnson/markdownlint) to ensure consistent markdown formatting. The configuration is defined in `.markdownlint.json`.
+
+**Running the linter:**
+
+```bash
+# Check for issues
+markdownlint '**/*.md' --ignore node_modules --config .markdownlint.json
+
+# Auto-fix issues
+markdownlint '**/*.md' --ignore node_modules --config .markdownlint.json --fix
+```
+
+**Installing markdownlint-cli:**
+
+```bash
+npm install -g markdownlint-cli
+```
+
+The repository includes a pre-commit hook (`.husky/pre-commit`) that automatically validates staged markdown files before each commit.
+
 ## 🚀 Contribution Process
 
 ### 1. Fork & Clone
@@ -177,6 +199,7 @@ Before submitting:
 - [ ] No hardcoded secrets or subscription IDs
 - [ ] Mermaid diagrams render correctly
 - [ ] Links work and images load
+- [ ] Markdown files pass linting (`markdownlint '**/*.md' --ignore node_modules --config .markdownlint.json`)
 - [ ] CHANGELOG.md updated (if applicable)
 
 ## 🔍 Review Process

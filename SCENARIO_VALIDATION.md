@@ -26,9 +26,10 @@ This document tracks the testing and validation status of all scenarios in the r
 ## Detailed Validation Logs
 
 ### Validation Criteria
-1.  **Content**: Markdown files (README, DEMO-SCRIPT) are accurate, links work, no outdated references (e.g., `manual-approach`).
-2.  **Prompts**: Prompt files exist, inputs/outputs are clear, business outcomes are defined.
-3.  **Infra**: Code (Bicep/Terraform/Scripts) lints, builds, and deploys successfully.
+
+1. **Content**: Markdown files (README, DEMO-SCRIPT) are accurate, links work, no outdated references (e.g., `manual-approach`).
+2. **Prompts**: Prompt files exist, inputs/outputs are clear, business outcomes are defined.
+3. **Infra**: Code (Bicep/Terraform/Scripts) lints, builds, and deploys successfully.
 
 ### S01: Bicep Baseline
 
@@ -85,31 +86,3 @@ This document tracks the testing and validation status of all scenarios in the r
 
 - **Test Plan**: Run Python scripts to generate diagrams. Verify image output matches architecture.
 - **Current Status**: Not Started.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
