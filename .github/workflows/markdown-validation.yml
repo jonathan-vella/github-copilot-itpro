@@ -225,7 +225,7 @@ jobs:
 
           # Check if assignment was successful
           assignees=$(echo "$assign_response" | jq -r '.data.replaceActorsForAssignable.assignable.assignees.nodes[].login' 2>/dev/null || echo "")
-          if echo "$assignees" | grep -qi "copilot"; then
+          if echo "$assignees" | grep -qE "^(copilot-swe-agent|Copilot)$"; then
             echo "✅ Successfully assigned issue #$ISSUE_NUMBER to Copilot"
           else
             echo "Warning: Assignment may not have succeeded"
