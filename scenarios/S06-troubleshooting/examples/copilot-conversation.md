@@ -82,16 +82,19 @@ exceptions
 ```
 
 This will show:
+
 - Which exceptions are occurring most frequently
 - Which operations (API endpoints) are affected
 - How many users are impacted
 
 Paste the results and we'll analyze together.
+
 ```
 
 ### Sarah (Runs Query, Pastes Results)
 
 ```
+
 Here's what I see:
 
 | type | operation_Name | ExceptionCount | UniqueUsers | SampleMessage |
@@ -99,27 +102,32 @@ Here's what I see:
 | System.InvalidOperationException | POST /api/checkout | 423 | 347 | Timeout expired. The timeout period elapsed prior to obtaining a connection from the pool. |
 | System.Data.SqlClient.SqlException | POST /api/checkout | 156 | 134 | Cannot open database requested by the login. The login failed. |
 | System.TimeoutException | GET /api/products | 45 | 38 | The operation has timed out. |
+
 ```
 
 ### Copilot's Analysis
 
 ```
+
 Excellent - this is very revealing! The error messages point to SQL connection issues:
 
 **Key Findings:**
+
 1. "Timeout expired... obtaining a connection from the pool" → Connection pool exhaustion
 2. All high-count exceptions involve database operations
 3. Checkout endpoint is most affected (423 exceptions)
 
-**Root Cause Hypothesis:** Your SQL connection pool is exhausted. When checkout operations spike, 
+**Root Cause Hypothesis:** Your SQL connection pool is exhausted. When checkout operations spike,
 all available connections are consumed, causing new requests to timeout.
 
 **Why intermittent?** Only 15% fail because:
+
 - Some requests arrive when connections are available
 - Connection pool has max limit (default 100)
 - Checkout operations might hold connections longer than other operations
 
 Let's verify this hypothesis. Next query will show SQL connection usage patterns.
+
 ```
 
 ---
@@ -129,6 +137,7 @@ Let's verify this hypothesis. Next query will show SQL connection usage patterns
 ### Copilot
 
 ```
+
 Run this query to analyze SQL dependency call patterns:
 
 ```kql
@@ -150,49 +159,58 @@ dependencies
 ```
 
 This will show which SQL operations are failing and their duration characteristics.
+
 ```
 
 ### Sarah (Pastes Results)
 
 ```
+
 | operation_Name | name | TotalCalls | SuccessfulCalls | FailedCalls | AvgDuration | P95Duration | P99Duration | FailureRate |
 |----------------|------|------------|-----------------|-------------|-------------|-------------|-------------|-------------|
 | POST /api/checkout | sp_ProcessPayment | 2847 | 2424 | 423 | 3824 | 8200 | 12500 | 14.85% |
 | POST /api/checkout | sp_UpdateInventory | 2847 | 2691 | 156 | 1245 | 2800 | 4100 | 5.48% |
 | GET /api/products | SELECT * FROM Products | 8392 | 8347 | 45 | 124 | 340 | 890 | 0.54% |
+
 ```
 
 ### Copilot's Analysis
 
 ```
+
 Perfect! The data confirms connection pool exhaustion:
 
-**Critical Insight:** 
+**Critical Insight:**
+
 - `sp_ProcessPayment` takes **3.8 seconds average** (up to 12.5 seconds at P99)
 - This is holding SQL connections for extended periods
 - Normal queries (product lookup) are much faster (124ms average)
 
-**The Problem:** 
-Payment processing operations are long-running transactions that hold database connections. 
+**The Problem:**
+Payment processing operations are long-running transactions that hold database connections.
 During peak traffic, these long-held connections exhaust the pool, causing timeouts for new requests.
 
-**Let me verify your connection pool configuration.** 
+**Let me verify your connection pool configuration.**
 
 Check your App Service application settings or connection string. Look for:
+
 - `Max Pool Size` parameter (default is usually 100)
 - Connection timeout settings
 
 Can you share your SQL connection string (redact password)? Or check App Service Configuration → Connection Strings?
+
 ```
 
 ### Sarah
 
 ```
+
 Found it in App Service Configuration. Connection string has:
 "Server=tcp:retailmax-prod.database.windows.net;Database=RetailMax;User ID=sa;Password=***;
 Max Pool Size=100;Connect Timeout=30;"
 
 Max Pool Size is 100. Should I increase it?
+
 ```
 
 ---
@@ -202,14 +220,17 @@ Max Pool Size is 100. Should I increase it?
 ### Copilot
 
 ```
+
 Yes! Here's the math:
 
 **Current State:**
+
 - Max Pool Size: 100 connections
 - Checkout operations: ~3.8 seconds average
 - Traffic: 2847 checkouts in 2 hours = ~24 per minute = 0.4 per second
 
 **Connection Usage Calculation:**
+
 - 0.4 requests/sec × 3.8 seconds duration = 1.52 connections held on average
 - But at peak (5x average) = 2 requests/sec × 3.8 seconds = 7.6 connections
 - Plus other operations (product queries, cart updates) = ~15-20 connections baseline
@@ -235,20 +256,25 @@ At peak times, you're hitting 98-100 connections, causing timeouts for new reque
    - Consider read replicas for product queries
 
 For now, let's do #1 to stop the bleeding, then #2 for resilience. Want me to help with the configuration change?
+
 ```
 
 ### Sarah
 
 ```
+
 Yes, please! Walk me through updating the connection string safely.
+
 ```
 
 ### Copilot's Step-by-Step Guide
 
 ```
+
 **Safe Deployment Steps:**
 
 1. **Update Connection String** (App Service Configuration):
+
    ```
    Old: Max Pool Size=100;
    New: Max Pool Size=200;
@@ -261,6 +287,7 @@ Yes, please! Walk me through updating the connection string safely.
    Recommendation: Rolling restart (use Azure Portal → Scale Out → Manual Scale → Restart)
 
 3. **Monitoring Query** (to verify fix):
+
    ```kql
    exceptions
    | where timestamp > now(-15m)
@@ -268,7 +295,7 @@ Yes, please! Walk me through updating the connection string safely.
    | summarize count() by bin(timestamp, 1m)
    | render timechart
    ```
-   
+
    Expected: Exception count drops to near-zero after restart completes.
 
 4. **Validation Criteria:**
@@ -277,11 +304,13 @@ Yes, please! Walk me through updating the connection string safely.
    - Average response time returns to baseline (~500ms for checkout)
 
 **Post-Fix Actions:**
+
 - Monitor for 1 hour to ensure stability
 - Document incident (I can help generate post-mortem)
 - Schedule follow-up for optimization (async processing)
 
 Ready to make the change? I recommend doing it now (10:20 PM) rather than waiting - every minute is $367 revenue loss.
+
 ```
 
 ---
@@ -291,15 +320,18 @@ Ready to make the change? I recommend doing it now (10:20 PM) rather than waitin
 ### Sarah
 
 ```
-Change deployed. Connection string updated to Max Pool Size=200. 
+
+Change deployed. Connection string updated to Max Pool Size=200.
 Initiated rolling restart at 11:25 PM. All instances restarted by 11:32 PM.
 
 Running monitoring query now...
+
 ```
 
 ### Copilot
 
 ```
+
 Excellent! Let's watch for improvement. Run this query every 5 minutes for the next 30 minutes:
 
 ```kql
@@ -328,35 +360,43 @@ requests
 ```
 
 What do you see after the restart?
+
 ```
 
 ### Sarah (11:40 PM - 15 minutes post-restart)
 
 ```
+
 Monitoring results are showing improvement!
 
-Pre-restart (11:00-11:30): 
+Pre-restart (11:00-11:30):
+
 - 89 exceptions in 30 minutes
 - Success rate: 85%
 
 Post-restart (11:30-12:00):
+
 - 4 exceptions in 30 minutes
 - Success rate: 99.2%
 
 Customer complaints have stopped. Response times back to ~450ms average for checkout.
+
 ```
 
 ### Copilot
 
 ```
+
 🎉 Excellent! The fix is working:
 
 **Results:**
+
 - Exception rate: 89 → 4 (95.5% reduction)
 - Success rate: 85% → 99.2% (restored to normal)
 - Response time: Normalized to baseline
 
 **Incident Status: RESOLVED**
+
 - Resolution Time: 2 hours 25 minutes (vs typical 30 hours)
 - Revenue protected: ~$53K (2.4 hours × $22K/hour)
 
@@ -378,6 +418,7 @@ Customer complaints have stopped. Response times back to ~450ms average for chec
    - Consider SQL read replicas for product queries
 
 Want me to generate the incident post-mortem report now?
+
 ```
 
 ---
@@ -387,7 +428,9 @@ Want me to generate the incident post-mortem report now?
 ### Sarah
 
 ```
+
 Yes, please generate the post-mortem. Include timeline, root cause, resolution, and prevention recommendations.
+
 ```
 
 ### Copilot (Generates Report)
@@ -613,6 +656,7 @@ exceptions
 ```
 
 **SQL Dependency Analysis:**
+
 ```kql
 dependencies
 | where timestamp > ago(2h)
@@ -632,6 +676,7 @@ dependencies
 ```
 
 **Success Rate Monitoring:**
+
 ```kql
 requests
 | where timestamp > ago(30m)
@@ -649,12 +694,14 @@ requests
 ### Appendix B: Configuration Changes
 
 **Before:**
+
 ```
 Server=tcp:retailmax-prod.database.windows.net;Database=RetailMax;User ID=sa;Password=***;
 Max Pool Size=100;Connect Timeout=30;
 ```
 
 **After:**
+
 ```
 Server=tcp:retailmax-prod.database.windows.net;Database=RetailMax;User ID=sa;Password=***;
 Max Pool Size=200;Connect Timeout=30;
@@ -673,6 +720,7 @@ Max Pool Size=200;Connect Timeout=30;
 **Report Author:** Sarah Chen (On-Call Engineer) with GitHub Copilot assistance  
 **Incident Status:** CLOSED  
 **Follow-up Review:** November 15, 2025, 10:00 AM EST
+
 ```
 
 ---
