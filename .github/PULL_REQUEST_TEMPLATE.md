@@ -30,18 +30,18 @@ Fixes #
 
 <!-- Describe how you tested your changes. Include validation steps for Azure deployments. -->
 
-- [ ] Tested in a clean Azure subscription
-- [ ] Ran validation scripts (`./validation/deploy.ps1`)
-- [ ] Verified resource cleanup (`./validation/cleanup.ps1`)
+- [ ] Tested in a clean Azure subscription (if applicable)
+- [ ] Ran validation scripts (if applicable to scenarios)
+- [ ] Verified resource cleanup (if applicable)
 - [ ] Tested locally with relevant tools (Bicep CLI, Terraform, PowerShell)
 
 ## Time Savings (if applicable)
 
 <!-- Document any time savings metrics for new demos or features -->
 
-| Task                   | Traditional Approach | With GitHub Copilot |
-| ---------------------- | -------------------- | ------------------- |
-| Example task           | X min                | Y min               |
+| Task                      | Traditional Approach | With GitHub Copilot |
+| ------------------------- | -------------------- | ------------------- |
+| Bicep template creation   | X min                | Y min               |
 
 ## Pre-Submission Checklist
 
