@@ -1,0 +1,10 @@
+{
+    "database": {
+        "endpoint": "",
+        "databaseName": "Todo"
+    },
+    "observability": {
+        "connectionString": "",
+        "roleName": "API"
+    }
+}

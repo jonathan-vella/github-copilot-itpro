@@ -1,0 +1,235 @@
+name: Markdown Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.md'
+  pull_request:
+    branches: [main]
+    paths:
+      - '**/*.md'
+  schedule:
+    - cron: '0 1 * * *'  # Run daily at 01:00 UTC
+  workflow_dispatch:  # Allow manual triggering
+
+permissions:
+  actions: write
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  validate-markdown:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install markdownlint-cli
+        run: npm install -g markdownlint-cli
+
+      - name: Run markdown validation
+        id: markdownlint
+        continue-on-error: true
+        run: |
+          echo "::group::Validating markdown files"
+          OUTPUT=$(markdownlint '**/*.md' --ignore node_modules --config .markdownlint.json 2>&1) || true
+          EXIT_CODE=$?
+          echo "$OUTPUT"
+          echo "::endgroup::"
+          # Save output for issue creation
+          {
+            echo "lint_output<<EOF"
+            echo "$OUTPUT"
+            echo "EOF"
+            echo "exit_code=$EXIT_CODE"
+          } >> "$GITHUB_OUTPUT"
+          # Re-run to get the actual exit code for the step
+          markdownlint '**/*.md' --ignore node_modules --config .markdownlint.json
+
+      - name: Check line endings
+        run: |
+          echo "::group::Checking line endings (should all be LF)"
+          if git ls-files --eol | grep 'w/crlf'; then
+            echo "::error::Found files with CRLF line endings. Run 'git add --renormalize .' to fix."
+            exit 1
+          else
+            echo "✓ All files use LF line endings"
+          fi
+          echo "::endgroup::"
+
+      - name: Check for existing issue
+        id: check_issue
+        if: (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && steps.markdownlint.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const today = new Date().toISOString().split('T')[0];
+            const issueTitle = `Automated markdownlint problems [${today}]`;
+
+            // Search for existing open issues with the same title
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'markdownlint'
+            });
+
+            const existingIssue = issues.find(issue => issue.title === issueTitle);
+            if (existingIssue) {
+              console.log(`Issue already exists: #${existingIssue.number}`);
+              core.setOutput('exists', 'true');
+              core.setOutput('issue_number', existingIssue.number);
+            } else {
+              console.log('No existing issue found for today');
+              core.setOutput('exists', 'false');
+            }
+
+      - name: Create issue for markdownlint errors
+        id: create_issue
+        if: (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && steps.markdownlint.outcome == 'failure' && steps.check_issue.outputs.exists == 'false'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const today = new Date().toISOString().split('T')[0];
+            const lintOutput = `${{ steps.markdownlint.outputs.lint_output }}`;
+
+            const issueBody = [
+              '## Automated Markdown Lint Report',
+              '',
+              'This issue was automatically created by the nightly markdown validation workflow.',
+              '',
+              '### Errors Found',
+              '',
+              '```',
+              lintOutput,
+              '```',
+              '',
+              '### How to Fix',
+              '',
+              '1. Review the errors listed above',
+              '2. Fix the markdown issues in the affected files',
+              '3. Run `markdownlint \'**/*.md\' --ignore node_modules --config .markdownlint.json` locally to verify fixes',
+              '4. Commit and push changes',
+              '',
+              '---',
+              `*This issue was automatically generated on ${today} by the [Markdown Validation workflow](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})*`
+            ].join('\n');
+
+            // Create the issue without assignee (REST API cannot assign Copilot)
+            const { data: issue } = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Automated markdownlint problems [${today}]`,
+              body: issueBody,
+              labels: ['markdownlint', 'automated']
+            });
+            console.log(`Created issue #${issue.number}: ${issue.html_url}`);
+            core.setOutput('issue_number', issue.number);
+
+      - name: Assign issue to Copilot
+        if: (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && steps.markdownlint.outcome == 'failure' && steps.check_issue.outputs.exists == 'false' && steps.create_issue.outputs.issue_number != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_NUMBER: ${{ steps.create_issue.outputs.issue_number }}
+        run: |
+          echo "Attempting to assign issue #$ISSUE_NUMBER to Copilot..."
+
+          # Query for Copilot agent ID using GraphQL suggestedActors
+          copilot_query='query {
+            repository(owner: "${{ github.repository_owner }}", name: "${{ github.event.repository.name }}") {
+              suggestedActors(capabilities: [CAN_BE_ASSIGNED], first: 100) {
+                nodes {
+                  login
+                  __typename
+                  ... on Bot {
+                    id
+                  }
+                }
+              }
+            }
+          }'
+
+          copilot_response=$(gh api graphql -f query="$copilot_query" 2>&1) || {
+            echo "Warning: Failed to query suggested actors: $copilot_response"
+            echo "Issue created but not assigned to Copilot"
+            exit 0
+          }
+
+          copilot_id=$(echo "$copilot_response" | jq -r '.data.repository.suggestedActors.nodes[] | select(.login == "copilot-swe-agent") | .id')
+
+          if [[ -z "$copilot_id" || "$copilot_id" == "null" ]]; then
+            echo "Warning: Copilot coding agent not available in this repository"
+            echo "Available actors: $(echo "$copilot_response" | jq -r '.data.repository.suggestedActors.nodes[].login' 2>/dev/null || echo 'none')"
+            echo "Issue created but not assigned to Copilot"
+            exit 0
+          fi
+
+          echo "Found Copilot agent ID: $copilot_id"
+
+          # Get the issue GraphQL ID
+          issue_query='query {
+            repository(owner: "${{ github.repository_owner }}", name: "${{ github.event.repository.name }}") {
+              issue(number: '$ISSUE_NUMBER') {
+                id
+                title
+              }
+            }
+          }'
+
+          issue_response=$(gh api graphql -f query="$issue_query" 2>&1) || {
+            echo "Warning: Failed to query issue: $issue_response"
+            echo "Issue created but not assigned to Copilot"
+            exit 0
+          }
+
+          issue_id=$(echo "$issue_response" | jq -r '.data.repository.issue.id')
+
+          if [[ -z "$issue_id" || "$issue_id" == "null" ]]; then
+            echo "Warning: Could not find issue GraphQL ID"
+            echo "Issue created but not assigned to Copilot"
+            exit 0
+          fi
+
+          echo "Found issue ID: $issue_id"
+
+          # Assign the issue to Copilot using GraphQL mutation
+          assign_mutation='mutation {
+            replaceActorsForAssignable(input: {assignableId: "'$issue_id'", actorIds: ["'$copilot_id'"]}) {
+              assignable {
+                ... on Issue {
+                  id
+                  title
+                  assignees(first: 10) {
+                    nodes {
+                      login
+                    }
+                  }
+                }
+              }
+            }
+          }'
+
+          assign_response=$(gh api graphql -f query="$assign_mutation" 2>&1) || {
+            echo "Warning: Failed to assign issue: $assign_response"
+            echo "Issue created but not assigned to Copilot"
+            exit 0
+          }
+
+          echo "Assignment response: $assign_response"
+
+          # Check if assignment was successful
+          assignees=$(echo "$assign_response" | jq -r '.data.replaceActorsForAssignable.assignable.assignees.nodes[].login' 2>/dev/null || echo "")
+          if echo "$assignees" | grep -qE "^(copilot-swe-agent|Copilot)$"; then
+            echo "✅ Successfully assigned issue #$ISSUE_NUMBER to Copilot"
+          else
+            echo "Warning: Assignment may not have succeeded"
+            echo "Assignees found: $assignees"
+          fi
