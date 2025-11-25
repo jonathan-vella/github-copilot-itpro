@@ -14,8 +14,10 @@ on:
   workflow_dispatch:  # Allow manual triggering
 
 permissions:
-  contents: read
+  actions: write
+  contents: write
   issues: write
+  pull-requests: write
 
 jobs:
   validate-markdown:
