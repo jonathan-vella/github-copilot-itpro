@@ -43,6 +43,8 @@ graph LR
 
 📖 **[Read the full IT Pro Impact Story](docs/it-pro-impact-story.md)** — Real challenges, real transformations.
 
+🎯 **[See What Copilot Enabled Me to Build](docs/copilot-portfolio-showcase.md)** — Real projects built by a non-developer.
+
 ---
 
 ## 🚀 Getting Started

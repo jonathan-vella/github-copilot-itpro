@@ -309,6 +309,8 @@ When generating documentation:
 
 📊 **Time Savings Metrics**: See `docs/time-savings-evidence.md` for detailed methodology and scenario-specific data.
 
+🎯 **Real-World Portfolio**: See `docs/copilot-portfolio-showcase.md` for actual projects built by a non-developer using GitHub Copilot.
+
 **Messaging Focus**: Efficiency Multiplier (not pain points) • Augment Capabilities (not replace) • Infrastructure as Code (not just dev) • Learn by Doing (not tool training)
 
 ## Copilot Prompting Best Practices
