@@ -35,7 +35,7 @@ Our approach to estimating time savings follows these principles:
    - Relevance: Validates IaC-specific productivity gains
 
 3. **Forrester Total Economic Impact Study (2024)**
-   - Source: [The Total Economic Impact™ Of GitHub Copilot](https://github.com/resources/articles/forrester-tei-github-copilot)
+   - Source: [The Total Economic Impact™ Of GitHub Copilot](https://github.com/resources/whitepapers/forrester)
    - Finding: 88% reduction in time for repetitive coding tasks
    - Methodology: Composite organization analysis with 15 interviews
    - Relevance: Supports upper bound of time savings estimates
@@ -64,7 +64,7 @@ Our approach to estimating time savings follows these principles:
 **Primary Research Sources:**
 
 1. **Microsoft Research - AI Pair Programming Study (2023)**
-   - Source: [The impact of AI on developer productivity](https://www.microsoft.com/en-us/research/project/productivity-assessment-of-neural-code-generation/)
+   - Source: [The impact of AI on developer productivity](https://www.microsoft.com/en-us/research/publication/the-impact-of-ai-on-developer-productivity-evidence-from-github-copilot/)
    - Finding: Script development time reduced by 60-75% with AI assistance
    - Methodology: Analysis of 2,000+ developers across Microsoft
    - Relevance: Direct measurement of automation script creation
@@ -357,7 +357,7 @@ Design measurement approach:
 ### Industry Research
 
 - GitHub: [Quantifying GitHub Copilot's impact](https://github.blog/2023-06-27-the-economic-impact-of-the-ai-powered-developer-lifecycle-and-lessons-from-github-copilot/) (2023)
-- Forrester: [The Total Economic Impact™ Of GitHub Copilot](https://github.com/resources/articles/forrester-tei-github-copilot) (2024)
+- Forrester: [The Total Economic Impact™ Of GitHub Copilot](https://github.com/resources/whitepapers/forrester) (2024)
 - Accenture: [Reinventing the enterprise with generative AI](https://www.accenture.com/us-en/insights/technology/generative-ai) (2024)
 - Gartner: [AI in IT Operations](https://www.gartner.com/en/information-technology/insights/artificial-intelligence) (2024)
 - McKinsey: [The state of AI in 2023: Generative AI's breakout year](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai) (2024)
@@ -367,7 +367,7 @@ Design measurement approach:
 
 ### Vendor Research
 
-- Microsoft Research: [Productivity Assessment of Neural Code Generation](https://www.microsoft.com/en-us/research/project/productivity-assessment-of-neural-code-generation/) (2023)
+- Microsoft Research: [Productivity Assessment of Neural Code Generation](https://www.microsoft.com/en-us/research/publication/the-impact-of-ai-on-developer-productivity-evidence-from-github-copilot/) (2023)
 - GitClear: [Coding on Copilot: 2023 Data Suggests Downward Pressure on Code Quality](https://www.gitclear.com/coding_on_copilot_data_shows_ais_downward_pressure_on_code_quality) (2024)
 
 ## Document Maintenance
