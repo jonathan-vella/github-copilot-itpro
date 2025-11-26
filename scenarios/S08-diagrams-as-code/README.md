@@ -9,8 +9,8 @@
 > **Today's Challenge**: Design review meeting in 2 hours - needs to document a new microservices architecture  
 > **The Twist**: He's heard about "diagrams-as-code" but has never used it
 
-*"I've been dragging boxes in Visio for years. There has to be a better way - something I can version control
-with my infrastructure code. But I don't have time to read documentation right now..."*
+_"I've been dragging boxes in Visio for years. There has to be a better way - something I can version control
+with my infrastructure code. But I don't have time to read documentation right now..."_
 
 **What Marcus will discover**: How to use Copilot as a learning partner to understand diagrams-as-code concepts,
 not just generate scripts. In 20 minutes, he'll go from "never used it" to creating professional architecture
@@ -43,13 +43,13 @@ By the end of this demo, participants will understand:
 
 ## The Challenge: Traditional Diagramming Pain Points
 
-| Problem | Impact | Business Cost |
-|---------|--------|---------------|
-| **Drift** | Diagrams become outdated as infrastructure changes | Wrong decisions from stale docs |
-| **Inconsistency** | Different architects use different styles/icons | Confusion in reviews |
-| **No Version Control** | Binary files (Visio, PPT) can't be diffed | No audit trail of changes |
-| **Manual Effort** | Aligning boxes and arrows takes significant time | 30-45 min per diagram |
-| **No Automation** | Can't regenerate when architecture changes | Always out of date |
+| Problem                | Impact                                             | Business Cost                   |
+| ---------------------- | -------------------------------------------------- | ------------------------------- |
+| **Drift**              | Diagrams become outdated as infrastructure changes | Wrong decisions from stale docs |
+| **Inconsistency**      | Different architects use different styles/icons    | Confusion in reviews            |
+| **No Version Control** | Binary files (Visio, PPT) can't be diffed          | No audit trail of changes       |
+| **Manual Effort**      | Aligning boxes and arrows takes significant time   | 30-45 min per diagram           |
+| **No Automation**      | Can't regenerate when architecture changes         | Always out of date              |
 
 ## The Solution: Conversation-Based Learning
 
@@ -67,6 +67,7 @@ Instead of asking Copilot to "generate a diagram script," we use Copilot as a **
 Has never used diagrams-as-code before.
 
 **Architecture to Document**:
+
 - Azure Front Door (global entry point)
 - AKS Cluster with 3 microservices (Product, Order, User)
 - Azure SQL Database + Redis Cache (data tier)
@@ -112,6 +113,7 @@ S08-diagrams-as-code/
 ### Option 2: Watch the Demo
 
 Review `examples/copilot-diagrams-conversation.md` to see a complete 20-minute conversation showing:
+
 - Concept explanation (when to use diagrams-as-code)
 - Architecture discovery (how to think about visual representation)
 - Code generation with understanding
@@ -137,14 +139,14 @@ xdg-open ecommerce_architecture.png  # Linux
 
 ## Key Copilot Features Demonstrated
 
-| Feature | How It's Used |
-|---------|--------------|
-| **Conceptual Teaching** | Explains what diagrams-as-code is and when to use it |
-| **Trade-off Analysis** | Honest comparison with Visio/Draw.io |
-| **Architectural Thinking** | Helps structure components into logical tiers |
-| **Step-by-Step Building** | Explains each code section as it's written |
-| **Customization Guidance** | Shows styling options (edges, colors, labels) |
-| **Best Practices** | Team adoption, version control, CI/CD integration |
+| Feature                    | How It's Used                                        |
+| -------------------------- | ---------------------------------------------------- |
+| **Conceptual Teaching**    | Explains what diagrams-as-code is and when to use it |
+| **Trade-off Analysis**     | Honest comparison with Visio/Draw.io                 |
+| **Architectural Thinking** | Helps structure components into logical tiers        |
+| **Step-by-Step Building**  | Explains each code section as it's written           |
+| **Customization Guidance** | Shows styling options (edges, colors, labels)        |
+| **Best Practices**         | Team adoption, version control, CI/CD integration    |
 
 ## 5-Phase Conversation Flow
 
@@ -183,20 +185,20 @@ xdg-open ecommerce_architecture.png  # Linux
 
 ### Time Efficiency
 
-| Metric | Traditional | With Copilot | Improvement |
-|--------|-------------|--------------|-------------|
-| First diagram | 45 min | 20 min | 56% faster |
-| Subsequent diagrams | 30-45 min | 5-10 min | 78% faster |
-| Updates/changes | 15-20 min | 2-3 min | 85% faster |
+| Metric              | Traditional | With Copilot | Improvement |
+| ------------------- | ----------- | ------------ | ----------- |
+| First diagram       | 45 min      | 20 min       | 56% faster  |
+| Subsequent diagrams | 30-45 min   | 5-10 min     | 78% faster  |
+| Updates/changes     | 15-20 min   | 2-3 min      | 85% faster  |
 
 ### Knowledge Transfer
 
-| Metric | Script Generation | Conversation Approach |
-|--------|------------------|----------------------|
-| Understanding gained | Minimal | Complete |
-| Can modify independently | Limited | Yes |
-| Can teach others | No | Yes |
-| Next diagram time | Same (ask again) | 78% faster |
+| Metric                   | Script Generation | Conversation Approach |
+| ------------------------ | ----------------- | --------------------- |
+| Understanding gained     | Minimal           | Complete              |
+| Can modify independently | Limited           | Yes                   |
+| Can teach others         | No                | Yes                   |
+| Next diagram time        | Same (ask again)  | 78% faster            |
 
 ### Quality Improvements
 
@@ -210,6 +212,7 @@ xdg-open ecommerce_architecture.png  # Linux
 ### Time Savings Calculation
 
 **Single Architect (First Year)**:
+
 - Diagrams per month: 4
 - Traditional time: 4 × 40 min = 160 min/month
 - After learning: 4 × 8 min = 32 min/month
@@ -217,43 +220,49 @@ xdg-open ecommerce_architecture.png  # Linux
 - **Annual time saved: 25 hours**
 
 **Team of 5 Architects**:
+
 - Annual time saved: 25 × 5 = **125 hours/year (3+ work weeks)**
 - Plus: Consistent quality, version control, automation
 
 ### Efficiency Metrics
 
-| Metric | Value |
-|--------|-------|
-| Time reduction per diagram | 80% |
-| Annual hours saved (team of 5) | 125 hours |
-| Learning curve | 20 min |
-| Consistency improvement | 100% (templated) |
+| Metric                         | Value            |
+| ------------------------------ | ---------------- |
+| Time reduction per diagram     | 80%              |
+| Annual hours saved (team of 5) | 125 hours        |
+| Learning curve                 | 20 min           |
+| Consistency improvement        | 100% (templated) |
 
 **Additional Benefits**: Version-controlled diagrams, automated generation, team standardization
 
 ## Use Cases
 
 ### 1. Design Reviews
+
 **Need**: Professional architecture diagram in 2 hours  
 **Approach**: Conversation to understand components → Generate diagram → Iterate styling  
 **Outcome**: Clean, version-controlled diagram with full understanding
 
 ### 2. Documentation Updates
+
 **Need**: Keep architecture docs current with infrastructure changes  
 **Approach**: Modify Python code → Regenerate PNG → Commit both  
 **Outcome**: Docs stay in sync with actual architecture
 
 ### 3. Team Standardization
+
 **Need**: Consistent diagram style across 5 architects  
 **Approach**: Shared styling module → CI/CD generation → PR reviews  
 **Outcome**: Professional, consistent output from everyone
 
 ### 4. Client Deliverables
+
 **Need**: High-quality diagrams for customer presentations  
 **Approach**: Generate base diagram → Post-process for annotations  
 **Outcome**: Professional deliverables in fraction of time
 
 ### 5. Architecture Decision Records
+
 **Need**: Visual representation of architecture evolution  
 **Approach**: Diagram per ADR → Git history shows changes  
 **Outcome**: Visual audit trail of architecture decisions
@@ -265,6 +274,7 @@ xdg-open ecommerce_architecture.png  # Linux
 **Symptom**: Generic Python code instead of `diagrams` library specifics
 
 **Solution**: Be explicit about the library:
+
 ```
 I want to use the Python 'diagrams' library by mingrammer (https://diagrams.mingrammer.com/).
 Can you show me how to create an Azure architecture diagram with this specific library?
@@ -275,6 +285,7 @@ Can you show me how to create an Azure architecture diagram with this specific l
 **Symptom**: "No module named 'diagrams.azure.network'"
 
 **Solution**: Check icon availability:
+
 ```
 What Azure icons are available in the diagrams library? I need Front Door, AKS, SQL Database.
 ```
@@ -284,6 +295,7 @@ What Azure icons are available in the diagrams library? I need Front Door, AKS, 
 **Symptom**: "ExecutableNotFound: failed to execute 'dot'"
 
 **Solution**: Install Graphviz:
+
 ```bash
 # Ubuntu/Debian
 sudo apt-get install graphviz
@@ -300,26 +312,34 @@ choco install graphviz
 **Symptom**: Components not arranged as expected
 
 **Solution**: Ask about layout options:
+
 ```
 The components are arranged oddly. How can I control the layout direction and grouping
 in the diagrams library?
 ```
 
+---
+
+📖 **For general issues** (Dev Container, Copilot problems, tool installation), see the [Troubleshooting Guide](../../docs/troubleshooting.md).
+
 ## Next Steps
 
 ### For Presenters
+
 1. Review `DEMO-SCRIPT.md` for the 20-minute walkthrough
 2. Practice the conversation flow with Copilot
 3. Prepare your own architecture example for live demo
 4. Have backup: `examples/copilot-diagrams-conversation.md`
 
 ### For Learners
+
 1. Start with `examples/copilot-diagrams-conversation.md`
 2. Try your own architecture in a conversation
 3. Run `solution/architecture.py` to see output
 4. Experiment with styling and customization
 
 ### For Teams
+
 1. Establish shared styling conventions
 2. Set up CI/CD diagram generation
 3. Create template repository structure
@@ -328,18 +348,21 @@ in the diagrams library?
 ## Key Takeaways
 
 ### For Architects
+
 - **Diagrams-as-code** solves drift, inconsistency, and version control problems
 - **Understanding beats copying** - learn the concepts, not just the syntax
 - **5-10 minutes** for future diagrams (after 20-minute learning investment)
 - **Version control** brings architectural changes into code review process
 
 ### For Leaders
+
 - **25 hours/year saved** per architect in diagram creation time
 - **Consistency** improves with automated styling
 - **Knowledge transfers** - architects can teach each other
 - **Audit trail** - Git history shows architecture evolution
 
 ### For Partners
+
 - **Quick win demo** - visible results in 20 minutes
 - **Universal applicability** - every organization has diagrams
 - **Low barrier** - no infrastructure required
@@ -356,6 +379,5 @@ in the diagrams library?
 
 ---
 
-*This scenario demonstrates using GitHub Copilot as a learning partner for diagrams-as-code.
-The focus is on building understanding, not just generating scripts.*
-
+_This scenario demonstrates using GitHub Copilot as a learning partner for diagrams-as-code.
+The focus is on building understanding, not just generating scripts._

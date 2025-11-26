@@ -27,6 +27,7 @@
 | [executive-pitch.md](executive-pitch.md)                       | C-level, Directors  | 5-minute pitch with key stats and ROI        | 5 min          |
 | [copilot-portfolio-showcase.md](copilot-portfolio-showcase.md) | Technical audiences | Real projects built with Copilot             | 5-10 min read  |
 | [time-savings-evidence.md](time-savings-evidence.md)           | Skeptics, Analysts  | Research-backed methodology and sources      | Reference      |
+| [troubleshooting.md](troubleshooting.md)                       | Everyone            | Centralized troubleshooting guide            | Reference      |
 
 ---
 
@@ -194,6 +195,7 @@ Historical documentation of agent development and improvements.
 | **See working code**    | [infra/bicep/contoso-patient-portal/](../infra/bicep/contoso-patient-portal/) |
 | **Run a demo**          | [demos/30-MIN-DEMO-SCRIPT.md](../demos/30-MIN-DEMO-SCRIPT.md)                 |
 | **Present to partners** | [resources/presenter-toolkit/](../resources/presenter-toolkit/)               |
+| **Fix issues**          | [troubleshooting.md](troubleshooting.md)                                      |
 
 ---
 

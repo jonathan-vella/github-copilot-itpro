@@ -9,8 +9,8 @@
 > **Today's Challenge**: Build secure network foundation for new application in 2 weeks  
 > **The Twist**: Management expects Azure expertise she's still building
 
-*"I've been managing VMware for a decade. I know networking, I know security, but Azure feels
-like learning a new language. I need to understand WHY things work here, not just copy templates."*
+_"I've been managing VMware for a decade. I know networking, I know security, but Azure feels
+like learning a new language. I need to understand WHY things work here, not just copy templates."_
 
 **What Elena will discover**: How to use Copilot as a learning partner to map her VMware knowledge
 to Azure concepts, building real infrastructure while gaining transferable skills.
@@ -43,13 +43,13 @@ By the end of this demo, participants will understand:
 
 ## The Challenge: Traditional IaC Learning Curve
 
-| Problem | Impact | Business Cost |
-|---------|--------|---------------|
-| **Steep learning curve** | Hours researching Azure/Bicep syntax | Delayed projects |
-| **Copy-paste templates** | No understanding, can't troubleshoot | Extended debugging |
-| **Security gaps** | Miss best practices without guidance | Compliance failures |
-| **No knowledge transfer** | Each project starts from scratch | Repeated effort |
-| **Team bottlenecks** | Only one person knows the templates | Single point of failure |
+| Problem                   | Impact                               | Business Cost           |
+| ------------------------- | ------------------------------------ | ----------------------- |
+| **Steep learning curve**  | Hours researching Azure/Bicep syntax | Delayed projects        |
+| **Copy-paste templates**  | No understanding, can't troubleshoot | Extended debugging      |
+| **Security gaps**         | Miss best practices without guidance | Compliance failures     |
+| **No knowledge transfer** | Each project starts from scratch     | Repeated effort         |
+| **Team bottlenecks**      | Only one person knows the templates  | Single point of failure |
 
 ## The Solution: Conversation-Based Learning
 
@@ -63,6 +63,7 @@ Instead of asking Copilot to "generate a Bicep template," we use Copilot as a **
 ## Scenario
 
 **Architecture to Build**:
+
 - Virtual Network with three subnets (web, app, data tiers)
 - Network Security Groups for microsegmentation
 - Storage Account with private endpoint
@@ -116,6 +117,7 @@ S01-bicep-baseline/
 ### Option 2: Watch the Demo
 
 Review `examples/copilot-bicep-conversation.md` to see a complete 30-minute conversation showing:
+
 - VMware to Azure concept mapping
 - Azure networking fundamentals
 - Bicep syntax with explanations
@@ -140,14 +142,14 @@ cd scenarios/S01-bicep-baseline/validation
 
 ## Key Copilot Features Demonstrated
 
-| Feature | How It's Used |
-|---------|--------------|
-| **Concept Mapping** | Translates VMware knowledge to Azure equivalents |
-| **Architecture Guidance** | Explains three-tier design patterns |
-| **Syntax Teaching** | Explains each Bicep element as it's written |
-| **Security Coaching** | Teaches NSG rules, storage hardening, private endpoints |
-| **Best Practices** | Demonstrates module organization, parameter files |
-| **Troubleshooting** | Explains errors and how to fix them |
+| Feature                   | How It's Used                                           |
+| ------------------------- | ------------------------------------------------------- |
+| **Concept Mapping**       | Translates VMware knowledge to Azure equivalents        |
+| **Architecture Guidance** | Explains three-tier design patterns                     |
+| **Syntax Teaching**       | Explains each Bicep element as it's written             |
+| **Security Coaching**     | Teaches NSG rules, storage hardening, private endpoints |
+| **Best Practices**        | Demonstrates module organization, parameter files       |
+| **Troubleshooting**       | Explains errors and how to fix them                     |
 
 ## 5-Phase Conversation Flow
 
@@ -186,20 +188,20 @@ cd scenarios/S01-bicep-baseline/validation
 
 ### Time Efficiency
 
-| Metric | Traditional | With Copilot | Improvement |
-|--------|-------------|--------------|-------------|
-| First deployment | 45-60 min | 30 min | 50% faster |
-| Subsequent deployments | 30-45 min | 10-15 min | 67% faster |
-| Debugging time | 15-20 min | 5 min | 75% faster |
+| Metric                 | Traditional | With Copilot | Improvement |
+| ---------------------- | ----------- | ------------ | ----------- |
+| First deployment       | 45-60 min   | 30 min       | 50% faster  |
+| Subsequent deployments | 30-45 min   | 10-15 min    | 67% faster  |
+| Debugging time         | 15-20 min   | 5 min        | 75% faster  |
 
 ### Knowledge Transfer
 
-| Metric | Script Generation | Conversation Approach |
-|--------|------------------|----------------------|
-| Understanding gained | Minimal | Complete |
-| Can troubleshoot independently | Limited | Yes |
-| Can teach others | No | Yes |
-| Can adapt to new scenarios | Ask again | Apply knowledge |
+| Metric                         | Script Generation | Conversation Approach |
+| ------------------------------ | ----------------- | --------------------- |
+| Understanding gained           | Minimal           | Complete              |
+| Can troubleshoot independently | Limited           | Yes                   |
+| Can teach others               | No                | Yes                   |
+| Can adapt to new scenarios     | Ask again         | Apply knowledge       |
 
 ### Security Improvements
 
@@ -216,6 +218,7 @@ cd scenarios/S01-bicep-baseline/validation
 ### Time Savings Calculation
 
 **Single Engineer (First Year)**:
+
 - Azure projects per year: 12
 - Traditional time: 12 × 50 min = 600 min = 10 hours
 - With conversation approach: 12 × 20 min = 240 min = 4 hours
@@ -223,57 +226,63 @@ cd scenarios/S01-bicep-baseline/validation
 - Plus: Future projects faster (knowledge retained)
 
 **Team of 5 Engineers**:
+
 - Annual time saved: 6 × 5 = **30+ hours/year**
 - Plus: Reduced bottlenecks, better security, faster onboarding
 
 ### Efficiency Metrics
 
-| Metric | Value |
-|--------|-------|
-| Time reduction per project | 60% |
+| Metric                         | Value     |
+| ------------------------------ | --------- |
+| Time reduction per project     | 60%       |
 | Annual hours saved (team of 5) | 30+ hours |
-| Learning curve | 30 min |
-| Knowledge retention | Permanent |
+| Learning curve                 | 30 min    |
+| Knowledge retention            | Permanent |
 
 **Additional Benefits**: Reduced errors, consistent code quality, faster onboarding
 
 ## VMware to Azure Concept Mapping
 
-| VMware Concept | Azure Equivalent | Notes |
-|----------------|------------------|-------|
-| vCenter | Azure Subscription | Management boundary |
-| Cluster | Region | Physical location |
-| Resource Pool | Resource Group | Logical grouping |
-| Distributed Switch | Virtual Network | Network isolation |
-| Port Group | Subnet | Traffic segmentation |
-| NSX Firewall | Network Security Group | Layer 4 filtering |
-| Datastore | Storage Account | Object/blob storage |
-| VM Template | Bicep/ARM Template | Infrastructure definition |
-| PowerCLI | Azure CLI | Command-line management |
+| VMware Concept     | Azure Equivalent       | Notes                     |
+| ------------------ | ---------------------- | ------------------------- |
+| vCenter            | Azure Subscription     | Management boundary       |
+| Cluster            | Region                 | Physical location         |
+| Resource Pool      | Resource Group         | Logical grouping          |
+| Distributed Switch | Virtual Network        | Network isolation         |
+| Port Group         | Subnet                 | Traffic segmentation      |
+| NSX Firewall       | Network Security Group | Layer 4 filtering         |
+| Datastore          | Storage Account        | Object/blob storage       |
+| VM Template        | Bicep/ARM Template     | Infrastructure definition |
+| PowerCLI           | Azure CLI              | Command-line management   |
 
 ## Use Cases
 
 ### 1. VMware to Azure Migration
+
 **Need**: Infrastructure engineer transitioning to Azure  
 **Approach**: Map existing VMware knowledge → Build with understanding  
 **Outcome**: Productive on Azure in days, not weeks
 
 ### 2. First Azure Project
+
 **Need**: Deploy secure foundation for new application  
 **Approach**: Learn networking + storage concepts while building  
 **Outcome**: Secure infrastructure + knowledge for future projects
 
 ### 3. Team Standardization
+
 **Need**: Consistent Bicep patterns across team  
 **Approach**: Learn module organization, parameter files, outputs  
 **Outcome**: Reusable templates, collaborative workflow
 
 ### 4. Security Hardening
+
 **Need**: Understand and implement Azure security best practices  
 **Approach**: Learn NSG rules, private endpoints, encryption  
 **Outcome**: Secure-by-default infrastructure patterns
 
 ### 5. Infrastructure Troubleshooting
+
 **Need**: Debug deployment failures  
 **Approach**: Understand error messages with Copilot explanation  
 **Outcome**: Faster resolution, learning for next time
@@ -285,6 +294,7 @@ cd scenarios/S01-bicep-baseline/validation
 **Symptom**: Generic responses instead of Azure-specific guidance
 
 **Solution**: Provide context about your background:
+
 ```
 I have 10 years of VMware experience and am transitioning to Azure. Can you explain
 Azure networking in terms I'd understand coming from vSphere/NSX?
@@ -295,6 +305,7 @@ Azure networking in terms I'd understand coming from vSphere/NSX?
 **Symptom**: Red squiggles, deployment failures
 
 **Solution**: Ask Copilot to explain:
+
 ```
 I'm getting this error: [paste error]. Can you explain what it means and how to fix it?
 ```
@@ -304,6 +315,7 @@ I'm getting this error: [paste error]. Can you explain what it means and how to 
 **Symptom**: Unsure if configuration is secure
 
 **Solution**: Ask for review:
+
 ```
 Is this storage account configuration secure for production? What am I missing?
 ```
@@ -313,25 +325,33 @@ Is this storage account configuration secure for production? What am I missing?
 **Symptom**: File structure feels messy
 
 **Solution**: Ask about patterns:
+
 ```
 How should I organize my Bicep files for a team of 5 engineers working on multiple projects?
 ```
 
+---
+
+📖 **For general issues** (Dev Container, Azure auth, Copilot problems), see the [Troubleshooting Guide](../../docs/troubleshooting.md).
+
 ## Next Steps
 
 ### For Presenters
+
 1. Review `DEMO-SCRIPT.md` for the 30-minute walkthrough
 2. Practice the conversation flow with Copilot
 3. Prepare your own infrastructure example for live demo
 4. Have backup: `examples/copilot-bicep-conversation.md`
 
 ### For Learners
+
 1. Start with `examples/copilot-bicep-conversation.md`
 2. Try building your own VNet through conversation
 3. Deploy `solution/` templates to see the output
 4. Experiment with parameter files for different environments
 
 ### For Teams
+
 1. Establish naming conventions
 2. Create shared module library
 3. Set up CI/CD for Bicep deployments
@@ -340,18 +360,21 @@ How should I organize my Bicep files for a team of 5 engineers working on multip
 ## Key Takeaways
 
 ### For Infrastructure Engineers
+
 - **Bicep is Azure-native IaC** - cleaner than ARM JSON, compiles to same output
 - **Map your existing knowledge** - VMware concepts translate directly
 - **Security by default** - NSGs, private endpoints, encryption patterns
 - **Understanding beats copying** - learn once, apply everywhere
 
 ### For Leaders
+
 - **Faster onboarding** - engineers productive in days, not weeks
 - **Reduced risk** - security patterns built into learning
 - **Team enablement** - knowledge transfers between engineers
 - **Cost savings** - 428% ROI from reduced development time
 
 ### For Partners
+
 - **Universal applicability** - every Azure customer needs IaC
 - **Quick wins** - visible results in 30 minutes
 - **Skills multiplier** - customers become self-sufficient
@@ -368,5 +391,5 @@ How should I organize my Bicep files for a team of 5 engineers working on multip
 
 ---
 
-*This scenario demonstrates using GitHub Copilot as a learning partner for Azure IaC.
-The focus is on building understanding, not just generating templates.*
+_This scenario demonstrates using GitHub Copilot as a learning partner for Azure IaC.
+The focus is on building understanding, not just generating templates._

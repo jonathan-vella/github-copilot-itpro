@@ -24,19 +24,19 @@ For **current, active agent documentation**, please refer to:
 
 - **Agent Definitions:** [`.github/agents/`](../../.github/agents/)
 - **Workflow Guide:** [`resources/copilot-customizations/FIVE-MODE-WORKFLOW.md`](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md)
-- **Troubleshooting:** [`resources/copilot-customizations/AGENT-TROUBLESHOOTING.md`](../../resources/copilot-customizations/AGENT-TROUBLESHOOTING.md)
+- **Troubleshooting:** [`docs/troubleshooting.md`](../../docs/troubleshooting.md)
 
 ---
 
 ## 📁 Archived Contents
 
-| File | Purpose | Status |
-|------|---------|--------|
-| **README.md** | Agent improvements overview v1.1.0 | Archived |
-| **CHANGELOG.md** | Version history for agents | Reference |
-| **ROADMAP.md** | Implementation timeline (completed) | Archived |
-| **IMPLEMENTATION-SUMMARY.md** | Complete implementation details | Archived |
-| **TESTING-RESULTS.md** | Test execution results (incomplete) | Archived |
+| File                          | Purpose                             | Status    |
+| ----------------------------- | ----------------------------------- | --------- |
+| **README.md**                 | Agent improvements overview v1.1.0  | Archived  |
+| **CHANGELOG.md**              | Version history for agents          | Reference |
+| **ROADMAP.md**                | Implementation timeline (completed) | Archived  |
+| **IMPLEMENTATION-SUMMARY.md** | Complete implementation details     | Archived  |
+| **TESTING-RESULTS.md**        | Test execution results (incomplete) | Archived  |
 
 ---
 

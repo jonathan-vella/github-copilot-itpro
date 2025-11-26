@@ -29,29 +29,29 @@ code github-copilot-itpro
 
 **What's included:**
 
-| Tool | Version | Purpose |
-|------|---------|---------|
-| Azure CLI | Latest | Azure resource management |
-| Bicep CLI | Latest | Infrastructure as Code |
-| Terraform | Latest | Multi-cloud IaC |
-| PowerShell 7 | Latest | Automation scripts |
-| Git | Latest | Version control |
-| tfsec / Checkov | Latest | Security scanning |
+| Tool            | Version | Purpose                   |
+| --------------- | ------- | ------------------------- |
+| Azure CLI       | Latest  | Azure resource management |
+| Bicep CLI       | Latest  | Infrastructure as Code    |
+| Terraform       | Latest  | Multi-cloud IaC           |
+| PowerShell 7    | Latest  | Automation scripts        |
+| Git             | Latest  | Version control           |
+| tfsec / Checkov | Latest  | Security scanning         |
 
 ### Option B: Manual Installation
 
 If you can't use Dev Containers, install these tools:
 
-| Tool | Minimum Version | Installation |
-|------|-----------------|--------------|
-| VS Code | Latest | [code.visualstudio.com](https://code.visualstudio.com/) |
-| GitHub Copilot | Extension | VS Code Marketplace |
-| GitHub Copilot Chat | Extension | VS Code Marketplace |
-| Azure CLI | 2.50+ | `winget install Microsoft.AzureCLI` |
-| Bicep CLI | 0.20+ | Included with Azure CLI |
-| PowerShell | 7.0+ | `winget install Microsoft.PowerShell` |
-| Terraform | 1.5+ | `winget install Hashicorp.Terraform` |
-| Git | 2.30+ | `winget install Git.Git` |
+| Tool                | Minimum Version | Installation                                            |
+| ------------------- | --------------- | ------------------------------------------------------- |
+| VS Code             | Latest          | [code.visualstudio.com](https://code.visualstudio.com/) |
+| GitHub Copilot      | Extension       | VS Code Marketplace                                     |
+| GitHub Copilot Chat | Extension       | VS Code Marketplace                                     |
+| Azure CLI           | 2.50+           | `winget install Microsoft.AzureCLI`                     |
+| Bicep CLI           | 0.20+           | Included with Azure CLI                                 |
+| PowerShell          | 7.0+            | `winget install Microsoft.PowerShell`                   |
+| Terraform           | 1.5+            | `winget install Hashicorp.Terraform`                    |
+| Git                 | 2.30+           | `winget install Git.Git`                                |
 
 ---
 
@@ -66,19 +66,19 @@ If you can't use Dev Containers, install these tools:
 
 Most scenarios use minimal resources, but check these quotas for larger demos:
 
-| Resource | Typical Usage | How to Check |
-|----------|---------------|--------------|
-| vCPUs | 4-8 cores | `az vm list-usage --location swedencentral` |
-| Public IPs | 2-3 | `az network list-usages --location swedencentral` |
-| Storage Accounts | 1-2 | Rarely hits limits |
+| Resource         | Typical Usage | How to Check                                      |
+| ---------------- | ------------- | ------------------------------------------------- |
+| vCPUs            | 4-8 cores     | `az vm list-usage --location swedencentral`       |
+| Public IPs       | 2-3           | `az network list-usages --location swedencentral` |
+| Storage Accounts | 1-2           | Rarely hits limits                                |
 
 ### Recommended Regions
 
-| Region | Use Case |
-|--------|----------|
-| `swedencentral` | Default - sustainable, good availability |
-| `germanywestcentral` | Alternative if quota issues |
-| `eastus` / `westus2` | Americas users for lower latency |
+| Region               | Use Case                                 |
+| -------------------- | ---------------------------------------- |
+| `swedencentral`      | Default - sustainable, good availability |
+| `germanywestcentral` | Alternative if quota issues              |
+| `eastus` / `westus2` | Americas users for lower latency         |
 
 ---
 
@@ -86,20 +86,20 @@ Most scenarios use minimal resources, but check these quotas for larger demos:
 
 ### Required (You Should Know)
 
-| Concept | Why It Matters | Quick Refresher |
-|---------|----------------|-----------------|
-| **Azure fundamentals** | Resource groups, subscriptions, regions | [Azure Fundamentals](https://learn.microsoft.com/training/paths/azure-fundamentals/) |
-| **Basic networking** | VNets, subnets, IP addressing | [Azure Networking](https://learn.microsoft.com/azure/virtual-network/virtual-networks-overview) |
-| **Command line basics** | Terminal navigation, running scripts | - |
+| Concept                 | Why It Matters                          | Quick Refresher                                                                                 |
+| ----------------------- | --------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **Azure fundamentals**  | Resource groups, subscriptions, regions | [Azure Fundamentals](https://learn.microsoft.com/training/paths/azure-fundamentals/)            |
+| **Basic networking**    | VNets, subnets, IP addressing           | [Azure Networking](https://learn.microsoft.com/azure/virtual-network/virtual-networks-overview) |
+| **Command line basics** | Terminal navigation, running scripts    | -                                                                                               |
 
 ### Helpful (But We'll Teach You)
 
-| Concept | Where You'll Learn |
-|---------|-------------------|
-| Bicep syntax | S01 - Bicep Baseline scenario |
-| Terraform basics | S02 - Terraform Baseline scenario |
-| Copilot prompting | Every scenario includes effective prompts |
-| Azure Well-Architected Framework | S03 - Five Agent Workflow |
+| Concept                          | Where You'll Learn                        |
+| -------------------------------- | ----------------------------------------- |
+| Bicep syntax                     | S01 - Bicep Baseline scenario             |
+| Terraform basics                 | S02 - Terraform Baseline scenario         |
+| Copilot prompting                | Every scenario includes effective prompts |
+| Azure Well-Architected Framework | S03 - Five Agent Workflow                 |
 
 ### Not Required
 
@@ -152,7 +152,7 @@ My Azure Subscription   xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 1. Ensure Docker Desktop is running
 2. Check available disk space (needs ~5GB)
 3. Try "Rebuild Container" from command palette
-4. See `.devcontainer/TROUBLESHOOTING.md` for detailed fixes
+4. See the [Troubleshooting Guide](../troubleshooting.md) for detailed fixes
 
 ### Azure CLI Authentication Issues
 

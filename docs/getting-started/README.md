@@ -305,39 +305,19 @@ pwsh -File validation/validate.ps1
 
 ## Troubleshooting
 
-### Dev Container won't start
+### Quick Fixes
 
-```bash
-# Check Docker is running
-docker ps
+| Issue                     | Solution                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------------ |
+| Dev Container won't start | Check Docker running, `F1` → "Rebuild Container"                                     |
+| Copilot not responding    | Check [github.com/settings/copilot](https://github.com/settings/copilot), re-sign in |
+| Response hit length limit | Break request into smaller prompts                                                   |
+| Azure deployment fails    | Run `az login` then `az account set --subscription "Name"`                           |
+| Agent not appearing       | `Ctrl+Shift+P` → "Reload Window"                                                     |
 
-# Rebuild container
-# F1 → "Dev Containers: Rebuild Container"
-```
+📖 **Full troubleshooting guide:** [docs/troubleshooting.md](../troubleshooting.md)
 
-### Copilot not responding
-
-1. Check Copilot status: github.com/settings/copilot
-2. Verify extension is enabled in VS Code
-3. Try: `F1` → "GitHub Copilot: Sign Out" → Sign back in
-
-### Azure deployment fails
-
-```bash
-# Check you're logged in
-az account show
-
-# Login if needed
-az login
-
-# Set correct subscription
-az account set --subscription "Your Subscription Name"
-```
-
-### More help
-
-- 📖 [Dev Container Troubleshooting](../../.devcontainer/TROUBLESHOOTING.md)
-- 📖 [Agent Troubleshooting](../../resources/copilot-customizations/AGENT-TROUBLESHOOTING.md)
+Covers: Dev Container issues, Copilot problems, Azure deployment errors, custom agents, network/proxy issues, and a complete error message reference.
 
 ---
 

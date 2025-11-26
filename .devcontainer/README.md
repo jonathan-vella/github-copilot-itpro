@@ -135,28 +135,16 @@ sudo npm update -g markdownlint-cli           # markdownlint
 
 ## 🐛 Troubleshooting
 
-### Container Won't Start
+### Quick Fixes
 
-1. Check Docker Desktop is running
-2. Increase Docker memory (Settings → Resources → Memory → 4GB+)
-3. Clear Docker cache: `docker system prune -a --volumes`
-4. Rebuild: `F1` → `Dev Containers: Rebuild Container Without Cache`
+| Issue                 | Solution                                                 |
+| --------------------- | -------------------------------------------------------- |
+| Container won't start | Check Docker running, increase memory to 4GB+            |
+| Tool not found        | Run `bash .devcontainer/post-create.sh`                  |
+| Azure auth fails      | Use `az login --use-device-code`                         |
+| Rebuild needed        | `F1` → `Dev Containers: Rebuild Container Without Cache` |
 
-### Tool Not Found
-
-1. Check install log: `cat ~/.devcontainer-install.log`
-2. Re-run post-create: `bash .devcontainer/post-create.sh`
-3. Rebuild container
-
-### Azure CLI Authentication Issues
-
-```bash
-# Use device code flow (works through proxies)
-az login --use-device-code
-
-# Or use service principal
-az login --service-principal -u <app-id> -p <secret> --tenant <tenant-id>
-```
+📖 **Full troubleshooting guide:** [docs/troubleshooting.md](../docs/troubleshooting.md)
 
 ## 📊 Resource Usage
 

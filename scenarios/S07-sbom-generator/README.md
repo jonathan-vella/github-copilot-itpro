@@ -584,6 +584,10 @@ Are there any components we missed? Let's review:
 - 💬 Ask in [GitHub Discussions](../../discussions) for conversation tips
 - 🐛 Report issues in [GitHub Issues](../../issues) if Copilot gives incorrect SBOM guidance
 
+---
+
+📖 **For general issues** (Dev Container, Azure auth, Copilot problems), see the [Troubleshooting Guide](../../docs/troubleshooting.md).
+
 ## Next Steps
 
 ### For Demo Presenters

@@ -12,12 +12,12 @@ This directory tracks improvements to the GitHub Copilot custom agents used in t
 
 ## 📁 Contents
 
-| File | Purpose | Audience |
-|------|---------|----------|
-| **[ROADMAP.md](./ROADMAP.md)** | Implementation timeline and phases | Project managers, stakeholders |
-| **[CHANGELOG.md](./CHANGELOG.md)** | Version history and changes | All users, developers |
-| **[TESTING-RESULTS.md](./TESTING-RESULTS.md)** | Test execution results | QA, developers |
-| **[IMPLEMENTATION-SUMMARY.md](./IMPLEMENTATION-SUMMARY.md)** | Complete implementation details | All users |
+| File                                                         | Purpose                            | Audience                       |
+| ------------------------------------------------------------ | ---------------------------------- | ------------------------------ |
+| **[ROADMAP.md](./ROADMAP.md)**                               | Implementation timeline and phases | Project managers, stakeholders |
+| **[CHANGELOG.md](./CHANGELOG.md)**                           | Version history and changes        | All users, developers          |
+| **[TESTING-RESULTS.md](./TESTING-RESULTS.md)**               | Test execution results             | QA, developers                 |
+| **[IMPLEMENTATION-SUMMARY.md](./IMPLEMENTATION-SUMMARY.md)** | Complete implementation details    | All users                      |
 
 ---
 
@@ -26,7 +26,7 @@ This directory tracks improvements to the GitHub Copilot custom agents used in t
 ### Getting Started
 
 - [Five-Mode Workflow](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md) - How to use the agents
-- [Agent Troubleshooting](../../resources/copilot-customizations/AGENT-TROUBLESHOOTING.md) - Common issues and solutions
+- [Troubleshooting Guide](../../docs/troubleshooting.md) - Common issues and solutions
 
 ### Agent Definitions
 
@@ -61,12 +61,12 @@ Implementation agent uses phase-based deployment with validation gates between e
 
 ## 📊 Key Metrics
 
-| Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
-| Cost Visibility | 0% | 100% | ∞ |
-| Workflow Time | 60 min | 40 min (target) | 33% faster |
-| Deployment Safety | All-at-once | 4-phase validated | -70% risk |
-| Test Coverage | 0% | Framework ready | New capability |
+| Metric            | Before      | After             | Improvement    |
+| ----------------- | ----------- | ----------------- | -------------- |
+| Cost Visibility   | 0%          | 100%              | ∞              |
+| Workflow Time     | 60 min      | 40 min (target)   | 33% faster     |
+| Deployment Safety | All-at-once | 4-phase validated | -70% risk      |
+| Test Coverage     | 0%          | Framework ready   | New capability |
 
 ---
 
@@ -81,6 +81,7 @@ Implementation agent uses phase-based deployment with validation gates between e
    ```
 
 2. **Reload VS Code:**
+
    - Press `Ctrl+Shift+P`
    - Type "Reload Window"
    - Wait 10-15 seconds
@@ -89,9 +90,10 @@ Implementation agent uses phase-based deployment with validation gates between e
 
    ```markdown
    # Press Ctrl+Shift+A to select agent
+
    Agent: azure-principal-architect
    Prompt: Design a web app optimized for low monthly cost
-   
+
    # Expected: Architecture + cost breakdown table
    ```
 
@@ -104,6 +106,7 @@ Implementation agent uses phase-based deployment with validation gates between e
    ```
 
 2. **Check for Breaking Changes:**
+
    - None in v1.1.0 (backwards compatible)
 
 3. **Update Your Prompts:**
@@ -134,14 +137,14 @@ cd scenarios/agent-testing
 
 ### Common Issues
 
-| Issue | Solution |
-|-------|----------|
-| Agent not responding | Reload VS Code window |
-| Cost estimates missing | Update agent to v1.1.0, reload window |
-| Diagrams not rendering | Install Markdown Preview Mermaid Support extension |
-| Progressive implementation not used | Explicitly request in prompt |
+| Issue                               | Solution                                           |
+| ----------------------------------- | -------------------------------------------------- |
+| Agent not responding                | Reload VS Code window                              |
+| Cost estimates missing              | Update agent to v1.1.0, reload window              |
+| Diagrams not rendering              | Install Markdown Preview Mermaid Support extension |
+| Progressive implementation not used | Explicitly request in prompt                       |
 
-**Full Guide:** [AGENT-TROUBLESHOOTING.md](../../resources/copilot-customizations/AGENT-TROUBLESHOOTING.md)
+**Full Guide:** [Troubleshooting Guide](../../docs/troubleshooting.md)
 
 ---
 
@@ -175,7 +178,7 @@ cd scenarios/agent-testing
 
 ### Reporting Issues
 
-1. Check [AGENT-TROUBLESHOOTING.md](../../resources/copilot-customizations/AGENT-TROUBLESHOOTING.md) first
+1. Check [Troubleshooting Guide](../../docs/troubleshooting.md) first
 2. Search existing GitHub issues
 3. Create new issue with:
    - Agent name and version
@@ -203,7 +206,7 @@ cd scenarios/agent-testing
 ### Core Documentation
 
 - **Getting Started:** [Five-Mode Workflow](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md)
-- **Troubleshooting:** [Agent Troubleshooting Guide](../../resources/copilot-customizations/AGENT-TROUBLESHOOTING.md)
+- **Troubleshooting:** [Troubleshooting Guide](../../docs/troubleshooting.md)
 - **Testing:** [Test Suite README](../../scenarios/agent-testing/README.md)
 
 ### Reference
@@ -256,10 +259,10 @@ cd scenarios/agent-testing
 
 ## 📅 Version History
 
-| Version | Date | Key Changes |
-|---------|------|-------------|
+| Version   | Date       | Key Changes                                                          |
+| --------- | ---------- | -------------------------------------------------------------------- |
 | **1.1.0** | 2025-11-18 | Cost estimation, dependency viz, progressive impl, testing framework |
-| **1.0.0** | 2025-11-15 | Initial release of four custom agents |
+| **1.0.0** | 2025-11-15 | Initial release of four custom agents                                |
 
 ---
 

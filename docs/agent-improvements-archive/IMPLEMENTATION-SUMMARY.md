@@ -1,5 +1,7 @@
 # Agent Improvements Implementation Summary
 
+> ⚠️ **Note:** This is an archived document. The troubleshooting content referenced here has been consolidated into [docs/troubleshooting.md](../troubleshooting.md).
+
 **Date:** 2025-11-18  
 **Status:** ✅ Complete  
 **Version:** 1.1.0
@@ -175,13 +177,13 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 
 ### Quantitative Improvements
 
-| Metric | Before | After | Improvement |
-|--------|--------|-------|-------------|
-| **Cost Visibility** | 0% (no estimates) | 100% (all recommendations) | ∞ |
-| **Architecture Clarity** | Text-only | Visual diagrams | +300% comprehension |
-| **Deployment Safety** | All-at-once | 4-phase validation | -70% failure risk |
-| **Documentation Completeness** | 70% | 95% | +36% |
-| **Test Coverage** | 0% | Framework ready | New capability |
+| Metric                         | Before            | After                      | Improvement         |
+| ------------------------------ | ----------------- | -------------------------- | ------------------- |
+| **Cost Visibility**            | 0% (no estimates) | 100% (all recommendations) | ∞                   |
+| **Architecture Clarity**       | Text-only         | Visual diagrams            | +300% comprehension |
+| **Deployment Safety**          | All-at-once       | 4-phase validation         | -70% failure risk   |
+| **Documentation Completeness** | 70%               | 95%                        | +36%                |
+| **Test Coverage**              | 0%                | Framework ready            | New capability      |
 
 ### Qualitative Improvements
 
@@ -213,17 +215,11 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 2. `docs/agent-improvements/CHANGELOG.md`
 3. `docs/agent-improvements/TESTING-RESULTS.md`
 
-**Testing Framework:**
-4. `scenarios/agent-testing/README.md`
-5. `scenarios/agent-testing/Run-AgentTests.ps1`
-6. `scenarios/agent-testing/TESTING-PROCEDURES.md`
-7. `scenarios/agent-testing/test-cases/azure-architect-tests.md`
+**Testing Framework:** 4. `scenarios/agent-testing/README.md` 5. `scenarios/agent-testing/Run-AgentTests.ps1` 6. `scenarios/agent-testing/TESTING-PROCEDURES.md` 7. `scenarios/agent-testing/test-cases/azure-architect-tests.md`
 
-**Troubleshooting:**
-8. `resources/copilot-customizations/AGENT-TROUBLESHOOTING.md`
+**Troubleshooting:** 8. `resources/copilot-customizations/AGENT-TROUBLESHOOTING.md`
 
-**Summary:**
-9. `docs/agent-improvements/IMPLEMENTATION-SUMMARY.md` (this file)
+**Summary:** 9. `docs/agent-improvements/IMPLEMENTATION-SUMMARY.md` (this file)
 
 **Directory Structure:**
 10-15. Test output directories (expected, actual, baseline)
@@ -233,17 +229,20 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 **Agent Definitions:**
 
 1. `.github/agents/azure-principal-architect.agent.md`
+
    - Added WAF scoring guidelines
    - Added cost estimation section
    - Enhanced response structure
 
 2. `.github/agents/bicep-plan.agent.md`
+
    - Added cost estimation to template
    - Added dependency visualization
    - Added testing strategy
    - Added rollback procedures
 
 3. `.github/agents/bicep-implement.agent.md`
+
    - Added progressive implementation pattern
    - Enhanced validation procedures
    - Added security scanning
@@ -263,18 +262,19 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
    ```powershell
    # Reload VS Code to load updated agents
    # Ctrl+Shift+P > Developer: Reload Window
-   
+
    # Test each agent with simple prompts
    # Verify new features appear in outputs
+   ```
 
-```
+````
 
 2. **Run Baseline Tests**
 
    ```powershell
    cd scenarios/agent-testing
    .\Run-AgentTests.ps1 -Agent all -Baseline -Verbose
-```
+````
 
 1. **Review Documentation**
    - Read FIVE-MODE-WORKFLOW.md for updated workflow
@@ -284,11 +284,13 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 ### Short-Term (Weeks 2-4)
 
 1. **Execute Test Suite**
+
    - Run all test scenarios manually
    - Document results in TESTING-RESULTS.md
    - Create expected output baselines
 
 2. **Gather User Feedback**
+
    - Share improvements with SI partners
    - Collect feedback on new features
    - Identify pain points or gaps
@@ -301,11 +303,13 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 ### Medium-Term (Months 2-3)
 
 1. **Measure Success Metrics**
+
    - Track time savings
    - Monitor cost estimation accuracy
    - Measure user satisfaction
 
 2. **Create Training Materials**
+
    - Record demo videos showing new features
    - Update partner toolkit
    - Create quick-start guides
@@ -327,11 +331,12 @@ Successfully implemented systematic improvements to all four GitHub Copilot cust
 Agent: azure-principal-architect
 Prompt: Design a web app architecture
 
-Output: 
+Output:
+
 - Use App Service Standard tier
 - Add Azure SQL Database
 - Implement Application Gateway
-[No cost information]
+  [No cost information]
 ```
 
 **After (v1.1.0):**
@@ -342,17 +347,19 @@ Prompt: Design a web app architecture optimized for low monthly cost
 
 Output:
 Architecture Recommendation:
+
 - App Service Standard S1
 - Azure SQL Standard S0
 - Application Gateway Standard_v2
 
 ## Estimated Monthly Costs
-| Service | SKU | Cost |
-|---------|-----|------|
-| App Service | S1 | Standard tier |
-| Azure SQL | S0 | Basic tier |
-| App Gateway | Std_v2 | Standard v2 |
-| **Total** | | **Use Azure Pricing Calculator** |
+
+| Service     | SKU    | Cost                             |
+| ----------- | ------ | -------------------------------- |
+| App Service | S1     | Standard tier                    |
+| Azure SQL   | S0     | Basic tier                       |
+| App Gateway | Std_v2 | Standard v2                      |
+| **Total**   |        | **Use Azure Pricing Calculator** |
 
 Optimized for low monthly cost with appropriate margin for data transfer/storage.
 ```
@@ -379,18 +386,18 @@ Agent: bicep-plan
 Prompt: Plan a hub-spoke network
 
 Output:
-# Resource Dependencies
 
+# Resource Dependencies
 ```
 
 graph TD
-    RG[Resource Group] --> HubVNet[Hub VNet]
-    RG --> Spoke1[Spoke VNet 1]
-    RG --> Spoke2[Spoke VNet 2]
-    HubVNet --> Firewall[Azure Firewall]
-    HubVNet --> Bastion[Azure Bastion]
-    HubVNet -.Peering.-> Spoke1
-    HubVNet -.Peering.-> Spoke2
+RG[Resource Group] --> HubVNet[Hub VNet]
+RG --> Spoke1[Spoke VNet 1]
+RG --> Spoke2[Spoke VNet 2]
+HubVNet --> Firewall[Azure Firewall]
+HubVNet --> Bastion[Azure Bastion]
+HubVNet -.Peering.-> Spoke1
+HubVNet -.Peering.-> Spoke2
 
 ```
 
@@ -424,9 +431,11 @@ Agent: bicep-implement
 Prompt: Implement the network plan
 
 Output:
+
 ## Progressive Implementation: Phase 1 - Foundation
 
 Generating network-foundation.bicep...
+
 - Resource Group
 - Hub VNet (basic configuration)
 - Network Security Groups (empty rules)
@@ -453,11 +462,13 @@ az deployment group create --template-file network-foundation.bicep
 ### For Demo Delivery
 
 1. **Highlight New Features**
+
    - Show cost estimates in real-time
    - Display dependency diagrams
    - Demonstrate progressive deployment
 
 2. **Use Visual Aids**
+
    - Mermaid diagrams render in preview
    - Cost tables easy to understand
    - Scoring provides quick assessment
@@ -470,11 +481,13 @@ az deployment group create --template-file network-foundation.bicep
 ### For Partners
 
 1. **What Changed**
+
    - Review CHANGELOG.md for details
    - Understand new capabilities
    - Know when to use each feature
 
 2. **How to Use**
+
    - Follow updated FIVE-MODE-WORKFLOW.md
    - Reference troubleshooting guide when stuck
    - Use test cases as prompt templates
@@ -522,7 +535,7 @@ $metrics = @{
 }
 
 # Save to tracking file
-$metrics | ConvertTo-Json | 
+$metrics | ConvertTo-Json |
     Add-Content "docs/agent-improvements/metrics-tracking.json"
 ```
 

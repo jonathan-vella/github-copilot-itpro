@@ -1,5 +1,7 @@
 # Agent Improvements Roadmap
 
+> ⚠️ **Note:** This is an archived document. The troubleshooting content referenced here has been consolidated into [docs/troubleshooting.md](../troubleshooting.md).
+
 **Version:** 1.1.0  
 **Status:** In Progress  
 **Last Updated:** 2025-11-18
@@ -173,35 +175,35 @@ This roadmap tracks improvements to the four custom GitHub Copilot agents used i
 
 ### Baseline (Before Improvements)
 
-| Metric | Current Value |
-|--------|---------------|
-| Average workflow time | 60 minutes |
-| Clarification questions per session | 8-10 |
-| User satisfaction score | 7/10 |
-| Test coverage | 0% |
-| Documentation completeness | 70% |
+| Metric                              | Current Value |
+| ----------------------------------- | ------------- |
+| Average workflow time               | 60 minutes    |
+| Clarification questions per session | 8-10          |
+| User satisfaction score             | 7/10          |
+| Test coverage                       | 0%            |
+| Documentation completeness          | 70%           |
 
 ### Target (After Phase 4)
 
-| Metric | Target Value | Improvement |
-|--------|--------------|-------------|
-| Average workflow time | 40 minutes | 33% faster |
-| Clarification questions per session | 3-5 | 50% reduction |
-| User satisfaction score | 8.5/10 | 21% increase |
-| Test coverage | 80%+ | New capability |
-| Documentation completeness | 95% | 36% increase |
+| Metric                              | Target Value | Improvement    |
+| ----------------------------------- | ------------ | -------------- |
+| Average workflow time               | 40 minutes   | 33% faster     |
+| Clarification questions per session | 3-5          | 50% reduction  |
+| User satisfaction score             | 8.5/10       | 21% increase   |
+| Test coverage                       | 80%+         | New capability |
+| Documentation completeness          | 95%          | 36% increase   |
 
 ---
 
 ## Risk & Mitigation
 
-| Risk | Impact | Probability | Mitigation |
-|------|--------|-------------|------------|
-| Agent breaking changes | High | Low | Comprehensive regression testing |
-| Microsoft Docs API changes | Medium | Medium | Fallback to cached patterns |
-| User adoption resistance | Medium | Low | Training and clear benefits demo |
-| Performance degradation | Low | Low | Monitor response times |
-| Test maintenance overhead | Medium | Medium | Automated test generation |
+| Risk                       | Impact | Probability | Mitigation                       |
+| -------------------------- | ------ | ----------- | -------------------------------- |
+| Agent breaking changes     | High   | Low         | Comprehensive regression testing |
+| Microsoft Docs API changes | Medium | Medium      | Fallback to cached patterns      |
+| User adoption resistance   | Medium | Low         | Training and clear benefits demo |
+| Performance degradation    | Low    | Low         | Monitor response times           |
+| Test maintenance overhead  | Medium | Medium      | Automated test generation        |
 
 ---
 

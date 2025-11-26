@@ -324,6 +324,10 @@ I'm getting a reference error when calling this module. Can you help me understa
 how module outputs work?
 ```
 
+---
+
+📖 **For general issues** (Dev Container, Azure auth, Copilot problems), see the [Troubleshooting Guide](../../docs/troubleshooting.md).
+
 ## Next Steps
 
 ### For Presenters

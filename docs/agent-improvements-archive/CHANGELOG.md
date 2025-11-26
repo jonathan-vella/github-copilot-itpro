@@ -189,7 +189,7 @@ Special thanks to everyone who contributed to these improvements:
 - [Roadmap](./ROADMAP.md)
 - [Testing Results](./TESTING-RESULTS.md)
 - [Five-Mode Workflow](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md)
-- [Agent Troubleshooting](../../resources/copilot-customizations/AGENT-TROUBLESHOOTING.md)
+- [Troubleshooting Guide](../../docs/troubleshooting.md)
 
 ---
 
