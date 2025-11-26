@@ -5,7 +5,7 @@
 **Organization**: Regional Bank Expansion to Azure  
 **Industry**: Financial Services  
 **Size**: 200 employees, mid-sized financial services firm  
-**Current State**: On-premises datacenter, planning cloud migration  
+**Current State**: On-premises datacenter, planning cloud migration
 
 ## Business Context
 
@@ -95,13 +95,13 @@ Per regulatory compliance (PCI-DSS, SOC 2):
 
 **Required Tags:**
 
-| Tag | Example Value | Purpose |
-|-----|---------------|---------|
-| Environment | Production | Environment designation |
-| Application | DigitalBanking | Application name |
-| Owner | ITOperations | Responsible team |
-| CostCenter | CC-1234 | Billing allocation |
-| Compliance | PCI-DSS | Regulatory requirement |
+| Tag         | Example Value  | Purpose                 |
+| ----------- | -------------- | ----------------------- |
+| Environment | Production     | Environment designation |
+| Application | DigitalBanking | Application name        |
+| Owner       | ITOperations   | Responsible team        |
+| CostCenter  | CC-1234        | Billing allocation      |
+| Compliance  | PCI-DSS        | Regulatory requirement  |
 
 ### 5. Operational Requirements
 
@@ -130,7 +130,7 @@ Per regulatory compliance (PCI-DSS, SOC 2):
 
 **Week 1-2**: Infrastructure foundation (this demo)  
 **Week 3-4**: Application deployment  
-**Week 5-6**: Security hardening and compliance validation  
+**Week 5-6**: Security hardening and compliance validation
 
 The team has only 2 weeks to get the core network and storage infrastructure deployed and validated.
 
@@ -142,7 +142,7 @@ The team has only 2 weeks to get the core network and storage infrastructure dep
 - ⚠️ Moderate: Azure Portal navigation, basic CLI commands
 - ❌ Limited: Infrastructure as Code, Bicep/ARM, DevOps practices
 
-**Challenge**: Need to produce production-ready Bicep templates without months of training.
+**Challenge**: Need to produce near-production-ready Bicep templates without months of training.
 
 ### Budget Constraints
 

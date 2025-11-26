@@ -59,6 +59,7 @@ solution/
 ### modules/networking/
 
 Creates the network foundation:
+
 - Virtual Network with configurable address space
 - Three subnets (web, app, data)
 - Network Security Groups for each tier
@@ -68,6 +69,7 @@ Creates the network foundation:
 ### modules/app-service/
 
 Creates the application tier:
+
 - App Service Plan (Linux, Premium SKU)
 - Linux Web App with security hardening
 - Managed Identity for Azure resource access
@@ -77,6 +79,7 @@ Creates the application tier:
 ### modules/database/
 
 Creates the data tier:
+
 - Azure SQL Server with Azure AD admin
 - SQL Database with threat protection
 - Private endpoint for VNet-only access
@@ -177,38 +180,38 @@ The modules create this architecture:
 
 ## Security Features Implemented
 
-| Feature | Implementation | Why It Matters |
-|---------|---------------|----------------|
-| NSG Deny-All | Priority 4096 deny rules | Block unexpected traffic |
-| Tier Isolation | Web→App, App→Data rules | Prevent lateral movement |
-| HTTPS Only | `https_only = true` | Encrypt in transit |
-| TLS 1.2 | `minimum_tls_version = "1.2"` | Modern encryption |
-| Private Endpoints | All PaaS via PE | No public exposure |
-| Azure AD Auth | SQL AD-only | No passwords to leak |
-| Managed Identity | System-assigned | No credential management |
-| Threat Detection | SQL enabled | Alert on suspicious activity |
+| Feature           | Implementation                | Why It Matters               |
+| ----------------- | ----------------------------- | ---------------------------- |
+| NSG Deny-All      | Priority 4096 deny rules      | Block unexpected traffic     |
+| Tier Isolation    | Web→App, App→Data rules       | Prevent lateral movement     |
+| HTTPS Only        | `https_only = true`           | Encrypt in transit           |
+| TLS 1.2           | `minimum_tls_version = "1.2"` | Modern encryption            |
+| Private Endpoints | All PaaS via PE               | No public exposure           |
+| Azure AD Auth     | SQL AD-only                   | No passwords to leak         |
+| Managed Identity  | System-assigned               | No credential management     |
+| Threat Detection  | SQL enabled                   | Alert on suspicious activity |
 
 ## CloudFormation Comparison
 
-| CloudFormation | Terraform | Implementation |
-|----------------|-----------|----------------|
-| Nested Stacks | `module` blocks | `modules/` directory |
-| Parameters | `variable` blocks | `variables.tf` files |
-| Outputs | `output` blocks | `outputs.tf` files |
-| Mappings | `locals` block | In `main.tf` |
-| Exports/Imports | Module outputs | `module.name.output` |
-| Change Sets | `terraform plan` | Always run before apply |
-| Stack State | State file | `backend.tf` config |
+| CloudFormation  | Terraform         | Implementation          |
+| --------------- | ----------------- | ----------------------- |
+| Nested Stacks   | `module` blocks   | `modules/` directory    |
+| Parameters      | `variable` blocks | `variables.tf` files    |
+| Outputs         | `output` blocks   | `outputs.tf` files      |
+| Mappings        | `locals` block    | In `main.tf`            |
+| Exports/Imports | Module outputs    | `module.name.output`    |
+| Change Sets     | `terraform plan`  | Always run before apply |
+| Stack State     | State file        | `backend.tf` config     |
 
 ## Environment Differences
 
-| Setting | Dev | Staging | Prod |
-|---------|-----|---------|------|
-| `app_service_sku` | P1v3 | P2v3 | P3v3 |
-| `sql_sku` | S0 | S2 | S3 |
-| `zone_redundant` | false | false | true |
-| `backup_retention` | 7 | 14 | 35 |
-| `log_retention` | 30 | 60 | 90 |
+| Setting            | Dev   | Staging | Prod |
+| ------------------ | ----- | ------- | ---- |
+| `app_service_sku`  | P1v3  | P2v3    | P3v3 |
+| `sql_sku`          | S0    | S2      | S3   |
+| `zone_redundant`   | false | false   | true |
+| `backup_retention` | 7     | 14      | 35   |
+| `log_retention`    | 30    | 60      | 90   |
 
 ## Customization Points
 
@@ -235,5 +238,5 @@ The modules create this architecture:
 
 ---
 
-*These modules demonstrate production-ready Terraform patterns for Azure. Use them as a
-reference after learning the concepts through conversation with Copilot.*
+_These modules demonstrate near-production-ready Terraform patterns for Azure. Use them as a
+reference after learning the concepts through conversation with Copilot._

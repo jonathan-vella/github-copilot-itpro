@@ -123,7 +123,7 @@ output primaryEndpoints object = storageAccount.properties.primaryEndpoints
   - `minimumTlsVersion: 'TLS1_2'`
   - `allowBlobPublicAccess: false`
   - Encryption enabled
-- **Benefit**: Production-ready security
+- **Benefit**: near-production-ready security
 
 ### 5. Comprehensive Outputs ✅
 
@@ -193,13 +193,13 @@ Looking at `scenarios/S01-bicep-baseline/solution/network.bicep`:
 
 ### Time Savings Breakdown
 
-| Activity | Without Customizations | With Customizations | Savings |
-|----------|------------------------|---------------------|---------|
-| **Writing code** | 30 min | 8 min | 73% |
-| **Adding security** | 10 min | 1 min | 90% |
-| **Documentation** | 5 min | 1 min | 80% |
-| **Code review fixes** | 10 min | 2 min | 80% |
-| **Total** | **55 min** | **12 min** | **78%** |
+| Activity              | Without Customizations | With Customizations | Savings |
+| --------------------- | ---------------------- | ------------------- | ------- |
+| **Writing code**      | 30 min                 | 8 min               | 73%     |
+| **Adding security**   | 10 min                 | 1 min               | 90%     |
+| **Documentation**     | 5 min                  | 1 min               | 80%     |
+| **Code review fixes** | 10 min                 | 2 min               | 80%     |
+| **Total**             | **55 min**             | **12 min**          | **78%** |
 
 ## Integration with Chat Modes
 
@@ -211,10 +211,10 @@ After installing `chatmodes/bicep-implement.chatmode.md`:
 
 ```yaml
 Create a storage account for demo 01 with:
-- Premium tier for app data
-- Geo-redundant storage
-- Container soft delete (7 days)
-- Blob versioning enabled
+  - Premium tier for app data
+  - Geo-redundant storage
+  - Container soft delete (7 days)
+  - Blob versioning enabled
 ```
 
 **Expected behavior**:
@@ -255,24 +255,24 @@ on:
   push:
     branches: [main]
     paths:
-      - 'scenarios/S01-bicep-baseline/**'
+      - "scenarios/S01-bicep-baseline/**"
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
+
       # Copilot adds validation step
       - name: Validate Bicep
         run: az bicep build --file main.bicep
-      
+
       # Copilot adds what-if check
       - name: What-If Analysis
         run: az deployment group what-if \
           --resource-group ${{ vars.RG_NAME }} \
           --template-file main.bicep
-      
+
       # Copilot adds deployment with retry
       - name: Deploy
         run: |
@@ -356,11 +356,13 @@ Include: Prerequisites, steps, validation, troubleshooting
 # How to Deploy the Three-Tier Network Infrastructure
 
 ## Overview
-This guide walks you through deploying a secure three-tier network 
-infrastructure using Bicep. By the end, you'll have a production-ready
+
+This guide walks you through deploying a secure three-tier network
+infrastructure using Bicep. By the end, you'll have a near-production-ready
 virtual network with proper segmentation.
 
 ## Prerequisites
+
 - Azure CLI installed and authenticated
 - Resource group created (`az group create -n rg-demo-dev -l eastus`)
 - VS Code with Bicep extension (optional but recommended)
@@ -401,7 +403,7 @@ code network.bicep
 2. **Learning Acceleration**: See patterns, understand why
 3. **Consistency**: All templates follow same standards
 4. **Speed**: 78% time reduction (45 min → 10 min)
-5. **Quality**: Production-ready code from first generation
+5. **Quality**: near-production-ready code from first generation
 
 ### Recommended Workflow
 
@@ -428,4 +430,4 @@ graph LR
 **Time Investment**: 15 minutes  
 **ROI**: Recovered on first use  
 **Learning Curve**: Gentle (learn by doing)  
-**Quality Improvement**: Production-ready code from start
+**Quality Improvement**: near-production-ready code from start

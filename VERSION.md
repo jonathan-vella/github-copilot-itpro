@@ -15,7 +15,7 @@ This repository follows [Semantic Versioning 2.0.0](https://semver.org/):
 
 ### Summary
 
-Production-ready repository with 9 comprehensive scenarios, 4 custom agents with automatic handoffs, and complete workflow documentation. Demonstrates 60-96% time savings across Azure infrastructure scenarios.
+near-production-ready repository with 9 comprehensive scenarios, 4 custom agents with automatic handoffs, and complete workflow documentation. Demonstrates 60-96% time savings across Azure infrastructure scenarios.
 
 ### Added
 
@@ -36,12 +36,12 @@ Production-ready repository with 9 comprehensive scenarios, 4 custom agents with
 - **ADR Generator** - Architectural decision documentation
 - **Azure Principal Architect** - Well-Architected Framework assessment
 - **Bicep Planning Specialist** - Machine-readable implementation plans
-- **Bicep Implementation Specialist** - Production-ready Bicep code generation
+- **Bicep Implementation Specialist** - near-production-ready Bicep code generation
 
 #### Infrastructure Code
 
 - **Contoso Patient Portal** (15 Bicep files)
-  - Production-ready templates with AVM modules
+  - near-production-ready templates with AVM modules
   - HIPAA-compliant architecture
   - Deployment automation scripts
 
@@ -57,7 +57,7 @@ Production-ready repository with 9 comprehensive scenarios, 4 custom agents with
 
 - ✅ Automatic agent handoffs with context preservation
 - ✅ Machine-readable implementation plans (YAML)
-- ✅ Production-ready code with security defaults
+- ✅ near-production-ready code with security defaults
 - ✅ Comprehensive demo scripts with timing
 - ✅ ROI calculators and metrics
 - ✅ Real-world scenarios (healthcare, retail, finance)

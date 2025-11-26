@@ -11,6 +11,7 @@
 ## Session Overview
 
 **Timeline**:
+
 - **2:00 PM - 2:10 PM**: Problem Definition & Strategy (10 min)
 - **2:10 PM - 2:30 PM**: Application Dependencies Discovery (20 min)
 - **2:30 PM - 2:45 PM**: Container Components Analysis (15 min)
@@ -18,6 +19,7 @@
 - **3:00 PM - 3:15 PM**: SBOM Assembly & Validation (15 min)
 
 **Key Learning Outcomes**:
+
 - ✅ Understanding SBOM fundamentals (what, why, standards)
 - ✅ Component discovery across 3 tiers (app, container, infra)
 - ✅ CycloneDX format structure and requirements
@@ -40,8 +42,8 @@ Subject: SBOM Required for Procurement Approval
 
 Hi HealthTech Team,
 
-Our security team requires a Software Bill of Materials (SBOM) for your 
-patient portal application before we can proceed with the contract renewal. 
+Our security team requires a Software Bill of Materials (SBOM) for your
+patient portal application before we can proceed with the contract renewal.
 
 Please provide:
 - Complete component inventory (application, container, infrastructure)
@@ -63,15 +65,17 @@ Sarah has never created an SBOM before and is feeling overwhelmed.
 ### **Conversation Start: 2:00 PM**
 
 **Sarah → Copilot:**
+
 ```
-I need to create an SBOM for our ToDo application urgently. I've heard of 
-SBOMs but never created one. Where do I even start? What is an SBOM exactly 
+I need to create an SBOM for our ToDo application urgently. I've heard of
+SBOMs but never created one. Where do I even start? What is an SBOM exactly
 and what do I need to include?
 ```
 
 **Copilot Response:**
+
 ```
-An SBOM (Software Bill of Materials) is like an ingredient list for software 
+An SBOM (Software Bill of Materials) is like an ingredient list for software
 - it's a comprehensive inventory of all components that make up your application.
 
 For your ToDo application, you'll need to document:
@@ -94,7 +98,7 @@ For your ToDo application, you'll need to document:
 - **CycloneDX**: Industry-standard, OWASP project, JSON/XML formats
 - **SPDX**: Linux Foundation standard, focus on license compliance
 
-**Recommendation**: Start with CycloneDX 1.5 (JSON format) - it's widely 
+**Recommendation**: Start with CycloneDX 1.5 (JSON format) - it's widely
 supported and has excellent tooling.
 
 **Your Next Steps:**
@@ -107,13 +111,15 @@ Would you like to start with the application dependencies from package.json?
 ```
 
 **Sarah → Copilot:**
+
 ```
-Yes! Let's start with package.json. What information do I need to extract 
+Yes! Let's start with package.json. What information do I need to extract
 from it? And what is CycloneDX format - what does it look like?
 ```
 
 **Copilot Response:**
-```
+
+````
 Great! Here's what we need from package.json:
 
 **For Each Component:**
@@ -151,9 +157,10 @@ Great! Here's what we need from package.json:
     // ... more components
   ]
 }
-```
+````
 
 **Key Fields Explained:**
+
 - `bomFormat`: Always "CycloneDX"
 - `specVersion`: "1.5" (latest as of 2025)
 - `serialNumber`: Unique UUID for this SBOM instance
@@ -163,6 +170,7 @@ Great! Here's what we need from package.json:
 - `components[]`: Array of all dependencies
 
 Ready to analyze your package.json?
+
 ```
 
 ---
@@ -173,44 +181,48 @@ Ready to analyze your package.json?
 
 **Sarah → Copilot:**
 ```
+
 Here's our package.json from src/api/package.json:
 
 {
-  "name": "todo-api",
-  "version": "1.0.0",
-  "description": "ToDo API for patient task management",
-  "main": "index.js",
-  "scripts": {
-    "start": "node dist/index.js",
-    "build": "tsc",
-    "dev": "ts-node-dev src/index.ts"
-  },
-  "dependencies": {
-    "express": "^4.18.2",
-    "mongoose": "^7.4.3",
-    "dotenv": "^16.3.1",
-    "cors": "^2.8.5",
-    "helmet": "^7.0.0",
-    "express-validator": "^7.0.1"
-  },
-  "devDependencies": {
-    "typescript": "^5.1.6",
-    "ts-node-dev": "^2.0.0",
-    "@types/express": "^4.17.17",
-    "@types/node": "^20.5.0",
-    "@types/cors": "^2.8.13"
-  }
+"name": "todo-api",
+"version": "1.0.0",
+"description": "ToDo API for patient task management",
+"main": "index.js",
+"scripts": {
+"start": "node dist/index.js",
+"build": "tsc",
+"dev": "ts-node-dev src/index.ts"
+},
+"dependencies": {
+"express": "^4.18.2",
+"mongoose": "^7.4.3",
+"dotenv": "^16.3.1",
+"cors": "^2.8.5",
+"helmet": "^7.0.0",
+"express-validator": "^7.0.1"
+},
+"devDependencies": {
+"typescript": "^5.1.6",
+"ts-node-dev": "^2.0.0",
+"@types/express": "^4.17.17",
+"@types/node": "^20.5.0",
+"@types/cors": "^2.8.13"
+}
 }
 
 What components do I need to include in the SBOM? Should I include devDependencies?
+
 ```
 
 **Copilot Response:**
 ```
+
 Excellent question! For **production SBOMs** (like what Mayo Clinic needs):
 
 **Include (Runtime Dependencies):**
 ✅ All packages under `dependencies` (these run in production)
+
 - express 4.18.2
 - mongoose 7.4.3
 - dotenv 16.3.1
@@ -220,6 +232,7 @@ Excellent question! For **production SBOMs** (like what Mayo Clinic needs):
 
 **Optional (DevDependencies):**
 ⚠️ Typically **exclude** devDependencies for production SBOM
+
 - They're only used during development/build (not in deployed app)
 - Exception: If customer specifically requests "complete SBOM including build tools"
 
@@ -227,26 +240,32 @@ Excellent question! For **production SBOMs** (like what Mayo Clinic needs):
 
 **Next: License Information**
 npm packages declare licenses in their package metadata. Common licenses:
+
 - **MIT**: Very permissive (can use in commercial software)
 - **Apache-2.0**: Permissive with patent grant
 - **ISC**: Similar to MIT
 - **BSD-3-Clause**: Permissive with conditions
 
-**Action Item**: We need to look up licenses for each package. 
+**Action Item**: We need to look up licenses for each package.
 Would you like me to help structure these 6 components in CycloneDX format?
+
 ```
 
 **Sarah → Copilot:**
 ```
-Yes please! But how do I find the license for each package? Do I need to 
+
+Yes please! But how do I find the license for each package? Do I need to
 check npmjs.com manually for each one?
+
 ```
 
 **Copilot Response:**
 ```
+
 Great question! Here are 3 ways to get license info:
 
 **Option 1: npm view (Fastest)**
+
 ```bash
 npm view express license
 npm view mongoose license
@@ -257,17 +276,17 @@ npm view mongoose license
 If you have `package-lock.json`, it includes license info for all dependencies.
 
 **Option 3: I can help!**
-Based on current npm registry data (common knowledge), here are the licenses 
+Based on current npm registry data (common knowledge), here are the licenses
 for your dependencies:
 
-| Package | Version | License |
-|---------|---------|---------|
-| express | 4.18.2 | MIT |
-| mongoose | 7.4.3 | MIT |
-| dotenv | 16.3.1 | BSD-2-Clause |
-| cors | 2.8.5 | MIT |
-| helmet | 7.0.0 | MIT |
-| express-validator | 7.0.1 | MIT |
+| Package           | Version | License      |
+| ----------------- | ------- | ------------ |
+| express           | 4.18.2  | MIT          |
+| mongoose          | 7.4.3   | MIT          |
+| dotenv            | 16.3.1  | BSD-2-Clause |
+| cors              | 2.8.5   | MIT          |
+| helmet            | 7.0.0   | MIT          |
+| express-validator | 7.0.1   | MIT          |
 
 **License Compliance Check:**
 ✅ All are permissive licenses - safe for commercial use
@@ -275,45 +294,55 @@ for your dependencies:
 ✅ BSD-2-Clause (dotenv) requires attribution in documentation
 
 **Ready for CycloneDX format?**
+
 ```
 
 **Sarah → Copilot:**
 ```
+
 Perfect! What about the "PURL" you mentioned earlier? What's the format for npm packages?
+
 ```
 
 **Copilot Response:**
 ```
-PURL (Package URL) is a standardized way to identify software packages 
+
+PURL (Package URL) is a standardized way to identify software packages
 across different ecosystems.
 
 **Format for npm packages:**
+
 ```
 pkg:npm/[package-name]@[version]
 ```
 
 **Examples from your dependencies:**
+
 - express: `pkg:npm/express@4.18.2`
 - mongoose: `pkg:npm/mongoose@7.4.3`
 - dotenv: `pkg:npm/dotenv@16.3.1`
 
 **Why PURL matters:**
+
 - Universal identifier across SBOM tools
 - Enables vulnerability database lookups
 - Supports multi-ecosystem projects (npm + pip + Maven)
 
 **General PURL format:**
+
 ```
 pkg:[type]/[namespace]/[name]@[version]
 ```
 
 Examples:
+
 - npm: `pkg:npm/express@4.18.2`
 - NuGet: `pkg:nuget/Newtonsoft.Json@13.0.1`
 - PyPI: `pkg:pypi/django@4.2.0`
 - Maven: `pkg:maven/org.springframework/spring-core@6.0.9`
 
 Ready to generate your application SBOM?
+
 ```
 
 ---
@@ -322,8 +351,10 @@ Ready to generate your application SBOM?
 
 **Sarah → Copilot:**
 ```
+
 Yes! Can you help me create the CycloneDX JSON for these 6 components?
-```
+
+````
 
 **Copilot Response:**
 ```json
@@ -434,7 +465,7 @@ Yes! Can you help me create the CycloneDX JSON for these 6 components?
     }
   ]
 }
-```
+````
 
 **Key points in this SBOM:**
 
@@ -447,14 +478,16 @@ Yes! Can you help me create the CycloneDX JSON for these 6 components?
 
 **This is now a valid CycloneDX 1.5 SBOM!**
 
-You can save this as `application-sbom.json` and it meets Mayo Clinic's 
+You can save this as `application-sbom.json` and it meets Mayo Clinic's
 requirements for the application layer.
 
 **Next steps:**
+
 - Container components (base image)
 - Infrastructure components (Azure resources)
 
 Ready to tackle the container layer?
+
 ```
 
 ---
@@ -465,33 +498,40 @@ Ready to tackle the container layer?
 
 **Sarah → Copilot:**
 ```
-Great! Now for containers - our app runs in Docker using node:20-alpine as 
+
+Great! Now for containers - our app runs in Docker using node:20-alpine as
 the base image. What components do I need to document from the container?
+
 ```
 
 **Copilot Response:**
 ```
+
 Excellent question! For container SBOMs, you need to document:
 
 **1. Base Image Itself**
+
 - Image: node:20-alpine
 - Version: 20.9.0 (Node.js version in that tag)
 - OS: Alpine Linux 3.18
 
 **2. OS Packages in Alpine**
 Alpine Linux includes system packages. Common ones in node:20-alpine:
+
 - musl (C standard library)
 - busybox (Unix utilities)
 - openssl (cryptography)
 - ca-certificates (SSL/TLS certificates)
 
 **3. Node.js Runtime**
+
 - Node.js 20.9.0
 - npm (bundled with Node)
 
 **How to Find This Information:**
 
 **Option 1: Docker inspect**
+
 ```bash
 docker pull node:20-alpine
 docker inspect node:20-alpine
@@ -501,34 +541,41 @@ docker inspect node:20-alpine
 Check https://hub.docker.com/_/node/tags?name=20-alpine
 
 **Option 3: Use Syft (industry-standard SBOM scanner)**
+
 ```bash
 syft node:20-alpine -o cyclonedx-json
 ```
 
 **For this demo, I'll help you document the key components manually.**
 
-**Question**: Do you want a **complete** container SBOM (all OS packages) or 
+**Question**: Do you want a **complete** container SBOM (all OS packages) or
 a **focused** one (just key components like Node.js, Alpine, OpenSSL)?
 
 Mayo Clinic typically wants focused SBOMs showing critical components.
+
 ```
 
 **Sarah → Copilot:**
 ```
-Let's go with focused - Node.js, Alpine Linux, and any security-critical 
+
+Let's go with focused - Node.js, Alpine Linux, and any security-critical
 components like OpenSSL. How do I represent these in CycloneDX?
+
 ```
 
 **Copilot Response:**
 ```
+
 Perfect! Here's how to document container components in CycloneDX:
 
 **Component Types:**
+
 - **Operating System**: `type: "operating-system"`
 - **Application**: `type: "application"` (for Node.js runtime)
 - **Library**: `type: "library"` (for OpenSSL, ca-certificates)
 
 **PURL for Container Components:**
+
 - Alpine: `pkg:alpine/alpine-baselayout@3.4.3-r1`
 - Node.js: `pkg:generic/nodejs@20.9.0` (or use OCI format)
 - OpenSSL: `pkg:alpine/openssl@3.1.2-r0`
@@ -597,11 +644,13 @@ Perfect! Here's how to document container components in CycloneDX:
 ```
 
 **Key Security Components Identified:**
+
 - ✅ **OpenSSL 3.1.2**: Critical for HTTPS, encryption
 - ✅ **ca-certificates**: SSL/TLS trust chain
 - ✅ **musl**: C library (memory safety critical)
 
 **Why These Matter:**
+
 - OpenSSL has history of critical CVEs (Heartbleed, etc.)
 - ca-certificates outdated = SSL failures
 - musl vulnerabilities = potential container escape
@@ -609,6 +658,7 @@ Perfect! Here's how to document container components in CycloneDX:
 This gives Mayo Clinic visibility into your security-critical dependencies.
 
 Ready for infrastructure components?
+
 ```
 
 ---
@@ -619,17 +669,21 @@ Ready for infrastructure components?
 
 **Sarah → Copilot:**
 ```
+
 Yes! Our app runs on Azure. We have:
+
 - Azure App Service (Linux, P1v3 tier)
 - Azure Cosmos DB (MongoDB API, Standard tier)
 - Azure Key Vault (for secrets)
 - Application Insights (monitoring)
 
 Do I need to include all of these in the SBOM? And how?
+
 ```
 
 **Copilot Response:**
 ```
+
 Great question! Infrastructure SBOM scope depends on **purpose**:
 
 **Include Infrastructure When:**
@@ -642,7 +696,7 @@ Great question! Infrastructure SBOM scope depends on **purpose**:
 ❌ Customer just wants "what could have CVEs" (npm packages, OS libs)
 
 **For Mayo Clinic (enterprise healthcare customer):**
-**Recommendation: Include Azure infrastructure** - they likely want complete 
+**Recommendation: Include Azure infrastructure** - they likely want complete
 visibility for risk assessment.
 
 **How to Represent Azure Resources:**
@@ -650,16 +704,19 @@ visibility for risk assessment.
 Azure resources aren't traditional "components", but CycloneDX allows them:
 
 **Component Type Options:**
+
 - `platform`: For PaaS services (App Service, Cosmos DB)
 - `service`: For managed services (Key Vault, App Insights)
 
 **PURL for Azure:**
 No official PURL spec for Azure, so use generic format:
+
 ```
 pkg:azure/[resource-type]/[resource-name]@[version]
 ```
 
 Example:
+
 ```
 pkg:azure/app-service/todo-app-prod@2023-12-01
 ```
@@ -750,6 +807,7 @@ Let me show you how to structure these:
 ```
 
 **Key Points:**
+
 1. **version**: Azure API version for that resource type
 2. **properties**: Custom fields for Azure-specific metadata
 3. **resourceType**: Full Azure resource type identifier
@@ -759,15 +817,18 @@ You can paste your `az resource list` output, and I'll help format it!
 Or manually from Azure Portal.
 
 **Quick Question:** Do you have access to Azure Portal to grab resource details?
+
 ```
 
 **Sarah → Copilot:**
 ```
+
 Yes! Here's what I see in Azure Portal:
 
 Resource Group: rg-todo-prod-eastus
 
 Resources:
+
 1. App Service: todo-app-prod (Linux, Node 20, P1v3, East US)
 2. App Service Plan: asp-todo-prod (P1v3, 1 instance)
 3. Cosmos DB: todo-db-prod (MongoDB API, Standard)
@@ -775,10 +836,12 @@ Resources:
 5. Application Insights: appi-todo-prod
 
 Should I include the App Service Plan separately or just the App Service?
+
 ```
 
 **Copilot Response:**
 ```
+
 Great question! For **SBOM purposes**:
 
 **Include:**
@@ -788,22 +851,24 @@ Great question! For **SBOM purposes**:
 ✅ Application Insights (monitoring)
 
 **Exclude:**
-❌ App Service Plan (it's infrastructure *for* App Service, not a component itself)
+❌ App Service Plan (it's infrastructure _for_ App Service, not a component itself)
 
-**Analogy**: App Service Plan is like "rack space in datacenter" - you document 
+**Analogy**: App Service Plan is like "rack space in datacenter" - you document
 the server (App Service), not the rack.
 
 **Reasoning:**
+
 - SBOM consumers care about "what's running" (App Service)
 - App Service Plan is capacity/billing construct
 - Including both creates redundancy
 
-**Exception**: If customer specifically asks for "all Azure resources including 
+**Exception**: If customer specifically asks for "all Azure resources including
 supporting infrastructure" - then include it.
 
 For Mayo Clinic's SBOM, the 4 resources you listed (excluding ASP) are perfect.
 
 Your infrastructure SBOM is complete! Ready to merge everything together?
+
 ```
 
 ---
@@ -814,19 +879,24 @@ Your infrastructure SBOM is complete! Ready to merge everything together?
 
 **Sarah → Copilot:**
 ```
+
 Perfect! So I have:
+
 - 6 application components (npm packages)
 - 5 container components (Alpine, Node.js, OpenSSL, etc.)
 - 4 infrastructure components (Azure services)
 
 How do I combine these into one complete SBOM? Do I just merge the components arrays?
+
 ```
 
 **Copilot Response:**
 ```
+
 Exactly right! The beauty of CycloneDX is that **all components go into one array**.
 
 **Structure:**
+
 ```json
 {
   "bomFormat": "CycloneDX",
@@ -837,10 +907,10 @@ Exactly right! The beauty of CycloneDX is that **all components go into one arra
   "components": [
     // Application components (6)
     { npm packages... },
-    
+
     // Container components (5)
     { Alpine, Node.js, OpenSSL... },
-    
+
     // Infrastructure components (4)
     { App Service, Cosmos DB, Key Vault, App Insights }
   ]
@@ -899,9 +969,7 @@ Let me generate the complete, merged SBOM for you:
       "version": "4.18.2",
       "purl": "pkg:npm/express@4.18.2",
       "description": "Fast, unopinionated, minimalist web framework",
-      "licenses": [
-        { "license": { "id": "MIT" } }
-      ]
+      "licenses": [{ "license": { "id": "MIT" } }]
     },
     {
       "type": "library",
@@ -910,9 +978,7 @@ Let me generate the complete, merged SBOM for you:
       "version": "7.4.3",
       "purl": "pkg:npm/mongoose@7.4.3",
       "description": "MongoDB object modeling tool",
-      "licenses": [
-        { "license": { "id": "MIT" } }
-      ]
+      "licenses": [{ "license": { "id": "MIT" } }]
     },
     {
       "type": "library",
@@ -921,9 +987,7 @@ Let me generate the complete, merged SBOM for you:
       "version": "16.3.1",
       "purl": "pkg:npm/dotenv@16.3.1",
       "description": "Loads environment variables from .env file",
-      "licenses": [
-        { "license": { "id": "BSD-2-Clause" } }
-      ]
+      "licenses": [{ "license": { "id": "BSD-2-Clause" } }]
     },
     {
       "type": "library",
@@ -932,9 +996,7 @@ Let me generate the complete, merged SBOM for you:
       "version": "2.8.5",
       "purl": "pkg:npm/cors@2.8.5",
       "description": "Cross-Origin Resource Sharing middleware",
-      "licenses": [
-        { "license": { "id": "MIT" } }
-      ]
+      "licenses": [{ "license": { "id": "MIT" } }]
     },
     {
       "type": "library",
@@ -943,9 +1005,7 @@ Let me generate the complete, merged SBOM for you:
       "version": "7.0.0",
       "purl": "pkg:npm/helmet@7.0.0",
       "description": "Security middleware for Express apps",
-      "licenses": [
-        { "license": { "id": "MIT" } }
-      ]
+      "licenses": [{ "license": { "id": "MIT" } }]
     },
     {
       "type": "library",
@@ -954,9 +1014,7 @@ Let me generate the complete, merged SBOM for you:
       "version": "7.0.1",
       "purl": "pkg:npm/express-validator@7.0.1",
       "description": "Express middleware for validator.js",
-      "licenses": [
-        { "license": { "id": "MIT" } }
-      ]
+      "licenses": [{ "license": { "id": "MIT" } }]
     },
 
     // ===== CONTAINER LAYER (base image components) =====
@@ -967,9 +1025,7 @@ Let me generate the complete, merged SBOM for you:
       "version": "3.18",
       "purl": "pkg:alpine/alpine@3.18",
       "description": "Alpine Linux base operating system",
-      "licenses": [
-        { "license": { "id": "MIT" } }
-      ]
+      "licenses": [{ "license": { "id": "MIT" } }]
     },
     {
       "type": "application",
@@ -978,9 +1034,7 @@ Let me generate the complete, merged SBOM for you:
       "version": "20.9.0",
       "purl": "pkg:generic/nodejs@20.9.0",
       "description": "Node.js JavaScript runtime built on V8 engine",
-      "licenses": [
-        { "license": { "id": "MIT" } }
-      ]
+      "licenses": [{ "license": { "id": "MIT" } }]
     },
     {
       "type": "library",
@@ -989,9 +1043,7 @@ Let me generate the complete, merged SBOM for you:
       "version": "3.1.2-r0",
       "purl": "pkg:alpine/openssl@3.1.2-r0",
       "description": "Cryptography and SSL/TLS toolkit",
-      "licenses": [
-        { "license": { "id": "OpenSSL" } }
-      ]
+      "licenses": [{ "license": { "id": "OpenSSL" } }]
     },
     {
       "type": "library",
@@ -1000,9 +1052,7 @@ Let me generate the complete, merged SBOM for you:
       "version": "20230506-r0",
       "purl": "pkg:alpine/ca-certificates@20230506-r0",
       "description": "Common CA certificates for SSL/TLS",
-      "licenses": [
-        { "license": { "id": "MPL-2.0" } }
-      ]
+      "licenses": [{ "license": { "id": "MPL-2.0" } }]
     },
     {
       "type": "library",
@@ -1011,9 +1061,7 @@ Let me generate the complete, merged SBOM for you:
       "version": "1.2.4-r1",
       "purl": "pkg:alpine/musl@1.2.4-r1",
       "description": "C standard library implementation for Linux",
-      "licenses": [
-        { "license": { "id": "MIT" } }
-      ]
+      "licenses": [{ "license": { "id": "MIT" } }]
     },
 
     // ===== INFRASTRUCTURE LAYER (Azure resources) =====
@@ -1038,7 +1086,10 @@ Let me generate the complete, merged SBOM for you:
       "version": "2023-12-01",
       "description": "Azure Cosmos DB with MongoDB API",
       "properties": [
-        { "name": "azure:resourceType", "value": "Microsoft.DocumentDB/databaseAccounts" },
+        {
+          "name": "azure:resourceType",
+          "value": "Microsoft.DocumentDB/databaseAccounts"
+        },
         { "name": "azure:apiKind", "value": "MongoDB" },
         { "name": "azure:consistencyLevel", "value": "Session" },
         { "name": "azure:tier", "value": "Standard" }
@@ -1062,7 +1113,10 @@ Let me generate the complete, merged SBOM for you:
       "version": "2020-02-02",
       "description": "Application Insights for performance monitoring",
       "properties": [
-        { "name": "azure:resourceType", "value": "Microsoft.Insights/components" },
+        {
+          "name": "azure:resourceType",
+          "value": "Microsoft.Insights/components"
+        },
         { "name": "azure:applicationType", "value": "Node.JS" }
       ]
     }
@@ -1073,6 +1127,7 @@ Let me generate the complete, merged SBOM for you:
 **✅ Complete CycloneDX 1.5 SBOM Generated!**
 
 **Summary Statistics:**
+
 - **Total Components**: 15
 - **Application Layer**: 6 npm packages
 - **Container Layer**: 5 components (OS + runtime)
@@ -1080,7 +1135,7 @@ Let me generate the complete, merged SBOM for you:
 - **Licenses**: 5 unique (MIT, BSD-2-Clause, OpenSSL, MPL-2.0)
 - **SBOM Size**: ~3.2 KB (compressed)
 
-**What makes this production-ready:**
+**What makes this near-production-ready:**
 ✅ Valid CycloneDX 1.5 format
 ✅ Unique serial number (UUID)
 ✅ Complete metadata (timestamp, author, tools)
@@ -1089,6 +1144,7 @@ Let me generate the complete, merged SBOM for you:
 ✅ Human-readable descriptions
 
 Ready to validate?
+
 ```
 
 ---
@@ -1097,12 +1153,15 @@ Ready to validate?
 
 **Sarah → Copilot:**
 ```
-This looks amazing! How do I validate that it's correct? And can I check it 
+
+This looks amazing! How do I validate that it's correct? And can I check it
 against the CycloneDX schema to make sure Mayo Clinic's tools can read it?
+
 ```
 
 **Copilot Response:**
 ```
+
 Excellent question! Here are 3 ways to validate your SBOM:
 
 **Option 1: Online Validator (Easiest)**
@@ -1115,6 +1174,7 @@ Visit: https://cyclonedx.org/tool-center/validate/
 You should see: ✅ "Document is valid"
 
 **Option 2: CycloneDX CLI (Command-line)**
+
 ```bash
 npm install -g @cyclonedx/cyclonedx-cli
 cyclonedx validate --input-file sbom.json --schema-version 1.5
@@ -1122,6 +1182,7 @@ cyclonedx validate --input-file sbom.json --schema-version 1.5
 
 **Option 3: Manual Checklist**
 ✅ Required fields present:
+
 - `bomFormat`: "CycloneDX" ✓
 - `specVersion`: "1.5" ✓
 - `serialNumber`: Unique UUID ✓
@@ -1130,12 +1191,14 @@ cyclonedx validate --input-file sbom.json --schema-version 1.5
 - `components` array ✓
 
 ✅ Each component has:
+
 - `type` ✓
 - `name` ✓
 - `version` ✓
 - `bom-ref` (unique ID) ✓
 
 ✅ PURLs are valid format:
+
 - npm: `pkg:npm/[name]@[version]` ✓
 - alpine: `pkg:alpine/[name]@[version]` ✓
 
@@ -1149,6 +1212,7 @@ Your SBOM will work with:
 ✅ Any tool supporting CycloneDX 1.5
 
 **File Delivery to Mayo Clinic:**
+
 1. Save as: `todo-app-sbom-v1.0.0-20251125.json`
 2. Include README with:
    - SBOM format: CycloneDX 1.5
@@ -1158,18 +1222,22 @@ Your SBOM will work with:
 
 **Additional Formats (Optional):**
 If they want other formats:
+
 - **SPDX**: I can convert for you
 - **CSV**: For Excel analysis
 - **HTML**: Human-readable report
 
 Need any of these?
+
 ```
 
 **Sarah → Copilot:**
 ```
-Perfect! Can you also generate a simple HTML report that explains the SBOM 
+
+Perfect! Can you also generate a simple HTML report that explains the SBOM
 in plain language for Mayo Clinic's non-technical stakeholders?
-```
+
+````
 
 **Copilot Response:**
 ```html
@@ -1489,19 +1557,19 @@ in plain language for Mayo Clinic's non-technical stakeholders?
 
     <div class="section">
         <h2>❓ Frequently Asked Questions</h2>
-        
+
         <h3>What is an SBOM?</h3>
         <p>A Software Bill of Materials is a complete inventory of all software components in an application, similar to an ingredient list on food packaging. It helps identify security vulnerabilities, manage licenses, and ensure supply chain transparency.</p>
-        
+
         <h3>Why is this important for healthcare?</h3>
         <p>Healthcare organizations require SBOMs to comply with HIPAA, manage cybersecurity risks, and meet vendor security questionnaire requirements. It enables rapid response to security vulnerabilities like Log4Shell.</p>
-        
+
         <h3>How do you keep this updated?</h3>
         <p>SBOMs should be regenerated with each application release. We can automate this in our CI/CD pipeline to provide always-current component inventories.</p>
-        
+
         <h3>Can you search for specific vulnerabilities?</h3>
         <p>Yes! This SBOM can be imported into vulnerability scanning tools like Dependency-Track, Grype, or GitHub Advanced Security to automatically check for known CVEs.</p>
-        
+
         <h3>What about transitive dependencies?</h3>
         <p>This SBOM shows direct dependencies. A complete SBOM would include transitive dependencies (dependencies of dependencies). We can provide an expanded version if needed.</p>
     </div>
@@ -1513,11 +1581,12 @@ in plain language for Mayo Clinic's non-technical stakeholders?
     </div>
 </body>
 </html>
-```
+````
 
 **✅ HTML Report Generated!**
 
 **This report includes:**
+
 - Executive summary with component counts
 - Detailed tables for each layer
 - License analysis and compliance status
@@ -1526,11 +1595,13 @@ in plain language for Mayo Clinic's non-technical stakeholders?
 - Professional formatting for Mayo Clinic
 
 **Delivery Package for Mayo Clinic:**
+
 1. `todo-app-sbom-v1.0.0.json` (machine-readable CycloneDX)
 2. `todo-app-sbom-report.html` (human-readable report)
 3. `README.txt` (explains how to use the SBOM)
 
 You're ready to deliver! 🎉
+
 ```
 
 ---
@@ -1539,17 +1610,21 @@ You're ready to deliver! 🎉
 
 **Sarah → Copilot:**
 ```
-This is incredible! In 1 hour and 15 minutes, I went from "I don't know what 
-an SBOM is" to having a production-ready deliverable for Mayo Clinic. Thank you!
+
+This is incredible! In 1 hour and 15 minutes, I went from "I don't know what
+an SBOM is" to having a near-production-ready deliverable for Mayo Clinic. Thank you!
 
 Can you summarize what we learned today?
+
 ```
 
 **Copilot Response:**
 ```
+
 You're welcome, Sarah! Here's what you accomplished today:
 
 **🎓 Knowledge Gained:**
+
 1. ✅ **SBOM Fundamentals**: What, why, and when to create SBOMs
 2. ✅ **CycloneDX Format**: Structure, required fields, best practices
 3. ✅ **Component Discovery**: How to find dependencies across 3 layers
@@ -1558,18 +1633,19 @@ You're welcome, Sarah! Here's what you accomplished today:
 6. ✅ **Validation**: How to verify SBOM correctness
 
 **📦 Deliverables Created:**
+
 - ✅ Complete CycloneDX 1.5 SBOM (15 components)
 - ✅ Professional HTML report for stakeholders
 - ✅ Ready for Mayo Clinic procurement review
 
 **⏱️ Time Comparison:**
+
 - **Traditional Manual Approach**: 6 hours
   - 90 min: npm package inventory
   - 120 min: Container research
   - 60 min: Azure documentation
   - 90 min: Format to CycloneDX
   - 60 min: Report generation
-  
 - **With Copilot Partnership**: 1 hour 15 minutes
   - 10 min: Strategy and education
   - 20 min: Application dependencies
@@ -1578,28 +1654,33 @@ You're welcome, Sarah! Here's what you accomplished today:
   - 15 min: Assembly and validation
 
 **💰 Value Delivered:**
+
 - **Time Saved**: 4 hours 45 minutes (79% faster)
 - **Accuracy**: 98% vs. 80% manual (3 more components found)
 - **Learning**: Reusable SBOM knowledge for future requests
 
 **🚀 Next Steps:**
+
 1. Send deliverables to Mayo Clinic
 2. Automate SBOM generation in CI/CD pipeline
 3. Set up vulnerability monitoring with this SBOM
 4. Create quarterly update schedule
 
 **Key Insight:**
-You didn't just get an SBOM - you learned **how to think about component 
-discovery and documentation**. Next time, you'll be even faster because you 
+You didn't just get an SBOM - you learned **how to think about component
+discovery and documentation**. Next time, you'll be even faster because you
 understand the process, not just the output.
 
 Ready to send to Mayo Clinic? 🎉
+
 ```
 
 **Sarah → Copilot:**
 ```
-Absolutely! This was a perfect example of Copilot as a learning partner, not 
+
+Absolutely! This was a perfect example of Copilot as a learning partner, not
 just a code generator. Thank you!
+
 ```
 
 ---
@@ -1610,7 +1691,7 @@ just a code generator. Thank you!
 - ✅ Copilot teaches SBOM fundamentals while generating output
 - ✅ Learns component discovery across 3 layers (app, container, infra)
 - ✅ Understands CycloneDX format and requirements
-- ✅ Delivers production-ready SBOM + stakeholder report
+- ✅ Delivers near-production-ready SBOM + stakeholder report
 
 ### **For Presenters**
 - ✅ Natural conversation flow (not script generation)
@@ -1626,13 +1707,14 @@ just a code generator. Thank you!
 
 ---
 
-**Session Duration**: 1 hour 15 minutes  
-**Components Documented**: 15  
-**Formats Generated**: CycloneDX JSON + HTML Report  
-**Time Saved vs Manual**: 4 hours 45 minutes (79%)  
-**Cost Saved**: $712.50  
+**Session Duration**: 1 hour 15 minutes
+**Components Documented**: 15
+**Formats Generated**: CycloneDX JSON + HTML Report
+**Time Saved vs Manual**: 4 hours 45 minutes (79%)
+**Cost Saved**: $712.50
 **Knowledge Transfer**: ✅ Complete SBOM understanding
 
 ---
 
 **End of Conversation Transcript**
+```

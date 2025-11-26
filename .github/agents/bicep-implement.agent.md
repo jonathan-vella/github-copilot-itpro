@@ -1,6 +1,6 @@
 ---
 name: Azure Bicep Implementation Specialist
-description: Expert Azure Bicep Infrastructure as Code specialist that creates production-ready Bicep templates following best practices and Azure Verified Modules standards. Validates, tests, and ensures code quality.
+description: Expert Azure Bicep Infrastructure as Code specialist that creates near-production-ready Bicep templates following best practices and Azure Verified Modules standards. Validates, tests, and ensures code quality.
 tools: ['edit', 'search', 'runCommands', 'Microsoft Docs/*', 'Azure MCP/*', 'Bicep (EXPERIMENTAL)/*', 'ms-azuretools.vscode-azure-github-copilot/azure_recommend_custom_modes', 'ms-azuretools.vscode-azure-github-copilot/azure_query_azure_resource_graph', 'ms-azuretools.vscode-azure-github-copilot/azure_get_auth_context', 'ms-azuretools.vscode-azure-github-copilot/azure_set_auth_context', 'ms-azuretools.vscode-azure-github-copilot/azure_get_dotnet_template_tags', 'ms-azuretools.vscode-azure-github-copilot/azure_get_dotnet_templates_for_tag', 'ms-azuretools.vscode-azureresourcegroups/azureActivityLog']
 handoffs:
   - label: Review Security & Compliance

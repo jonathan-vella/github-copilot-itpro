@@ -53,14 +53,14 @@ code sample-app/src/api/Dockerfile     # For Phase 3
 
 ## Demo Structure Overview
 
-| Time | Phase | Focus | Key Message |
-|------|-------|-------|-------------|
-| 0-5 min | **Intro & Scene Setting** | Sarah's urgent Mayo Clinic request | "I've never created an SBOM before" |
-| 5-10 min | **Phase 1: Problem Definition** | What is an SBOM? | Copilot teaches fundamentals |
-| 10-18 min | **Phase 2: Application Discovery** | Analyzing package.json | PURL format, licenses |
-| 18-23 min | **Phase 3-4: Container & Infrastructure** | Docker image, Azure services | Component completeness |
-| 23-28 min | **Phase 5: Assembly & Validation** | CycloneDX JSON generation | Production deliverables |
-| 28-30 min | **Wrap-Up & Metrics** | Knowledge transfer value | 79% time savings + learning |
+| Time      | Phase                                     | Focus                              | Key Message                         |
+| --------- | ----------------------------------------- | ---------------------------------- | ----------------------------------- |
+| 0-5 min   | **Intro & Scene Setting**                 | Sarah's urgent Mayo Clinic request | "I've never created an SBOM before" |
+| 5-10 min  | **Phase 1: Problem Definition**           | What is an SBOM?                   | Copilot teaches fundamentals        |
+| 10-18 min | **Phase 2: Application Discovery**        | Analyzing package.json             | PURL format, licenses               |
+| 18-23 min | **Phase 3-4: Container & Infrastructure** | Docker image, Azure services       | Component completeness              |
+| 23-28 min | **Phase 5: Assembly & Validation**        | CycloneDX JSON generation          | Production deliverables             |
+| 28-30 min | **Wrap-Up & Metrics**                     | Knowledge transfer value           | 79% time savings + learning         |
 
 ---
 
@@ -72,12 +72,12 @@ code sample-app/src/api/Dockerfile     # For Phase 3
 
 > **Subject**: URGENT: SBOM Required for Contract Renewal  
 > **From**: Mayo Clinic Procurement  
-> **To**: Sarah Chen, Security Engineer, HealthTech Solutions  
-> 
+> **To**: Sarah Chen, Security Engineer, HealthTech Solutions
+>
 > Sarah,
-> 
+>
 > Our security team requires a complete Software Bill of Materials (SBOM) for your Patient Portal application before we can approve the $2M contract renewal. Please provide by end of week (48 hours).
-> 
+>
 > Best,  
 > Mayo Clinic Security Team
 
@@ -86,6 +86,7 @@ code sample-app/src/api/Dockerfile     # For Phase 3
 > "Meet Sarah Chen. She's a security engineer at HealthTech Solutions, a healthcare SaaS company. She just received this email from her biggest customer, Mayo Clinic. They need an SBOM in 48 hours or the $2M contract renewal is blocked."
 >
 > "Sarah's problem: She has **never created an SBOM before**. She doesn't know:"
+>
 > - "What components to include - just app code? Containers? Infrastructure?"
 > - "What format to use - CycloneDX? SPDX? JSON? XML?"
 > - "How to structure the data - what fields are required?"
@@ -103,8 +104,9 @@ code sample-app/src/api/Dockerfile     # For Phase 3
 **[TRANSITION TO DEMO]**:
 
 > "By the end of this 30-minute demo, you'll see how Sarah:"
+>
 > - "✅ Learns SBOM fundamentals from Copilot (not just gets output)"
-> - "✅ Creates a production-ready 15-component SBOM in 1 hour 15 minutes (not 6 hours)"
+> - "✅ Creates a near-production-ready 15-component SBOM in 1 hour 15 minutes (not 6 hours)"
 > - "✅ Understands PURL, CycloneDX, licenses - can create future SBOMs in 30 minutes"
 > - "✅ Can explain her methodology to Mayo Clinic auditors confidently"
 >
@@ -127,8 +129,8 @@ code sample-app/src/api/Dockerfile     # For Phase 3
 **[TYPE IN COPILOT CHAT]**:
 
 ```
-I need to create a Software Bill of Materials (SBOM) for a healthcare application 
-that Mayo Clinic is requiring for procurement. I've never created an SBOM before - 
+I need to create a Software Bill of Materials (SBOM) for a healthcare application
+that Mayo Clinic is requiring for procurement. I've never created an SBOM before -
 can you help me understand what it is and what I need to include?
 ```
 
@@ -141,6 +143,7 @@ can you help me understand what it is and what I need to include?
 **[EXPECTED COPILOT RESPONSE - READ KEY POINTS ALOUD]**:
 
 > "Copilot explains:"
+>
 > - "**What it is**: An SBOM is like a recipe card for software - lists every ingredient (component)"
 > - "**Why Mayo needs it**: HIPAA compliance, vulnerability tracking, incident response"
 > - "**Format recommendation**: CycloneDX 1.5 (industry standard, JSON format)"
@@ -222,7 +225,7 @@ Let's start with the application layer. How do I analyze package.json?
 **[TYPE IN COPILOT CHAT]**:
 
 ```
-I have Express version 4.18.2 as a dependency. How should I format this 
+I have Express version 4.18.2 as a dependency. How should I format this
 in the SBOM? What fields are required?
 ```
 
@@ -241,9 +244,7 @@ in the SBOM? What fields are required?
   "name": "express",
   "version": "4.18.2",
   "purl": "pkg:npm/express@4.18.2",
-  "licenses": [
-    { "license": { "id": "MIT" } }
-  ]
+  "licenses": [{ "license": { "id": "MIT" } }]
 }
 ```
 
@@ -251,6 +252,7 @@ in the SBOM? What fields are required?
 
 > "🎓 **Key Learning Moment**: Notice what just happened: Sarah asked about
 > **one package**, and Copilot taught her:"
+>
 > - "The PURL format: `pkg:npm/express@4.18.2`"
 > - "Required CycloneDX fields: type, bom-ref, name, version, purl, licenses"
 > - "How to structure the JSON"
@@ -262,7 +264,7 @@ in the SBOM? What fields are required?
 **[TYPE IN COPILOT CHAT]**:
 
 ```
-How do I find the license for Express and the other packages? 
+How do I find the license for Express and the other packages?
 Does the license type matter for Mayo Clinic?
 ```
 
@@ -271,6 +273,7 @@ Does the license type matter for Mayo Clinic?
 **[NARRATE]**:
 
 > "Copilot explains:"
+>
 > - "Licenses are in package.json or on npmjs.com"
 > - "Express uses MIT license (permissive, allows commercial use)"
 > - "For Mayo Clinic (healthcare), need to avoid GPL (copyleft) in proprietary software"
@@ -292,7 +295,7 @@ Does the license type matter for Mayo Clinic?
 **[TYPE IN COPILOT CHAT]**:
 
 ```
-Can you generate CycloneDX components for all 6 packages in my package.json? 
+Can you generate CycloneDX components for all 6 packages in my package.json?
 Use PURL format and include license information.
 ```
 
@@ -316,7 +319,7 @@ Use PURL format and include license information.
       "version": "7.0.3",
       "purl": "pkg:npm/mongoose@7.0.3",
       "licenses": [{ "license": { "id": "MIT" } }]
-    },
+    }
     // ... 4 more packages
   ]
 }
@@ -355,7 +358,7 @@ CMD ["node", "server.js"]
 **[TYPE IN COPILOT CHAT]**:
 
 ```
-My Dockerfile uses node:20-alpine as the base image. Do I need to include 
+My Dockerfile uses node:20-alpine as the base image. Do I need to include
 components from that base image in the SBOM? What would Mayo Clinic expect?
 ```
 
@@ -364,6 +367,7 @@ components from that base image in the SBOM? What would Mayo Clinic expect?
 **[NARRATE WHILE READING KEY POINTS]**:
 
 > "Copilot explains:"
+>
 > - "**Yes**, base image components matter - vulnerabilities like Heartbleed live in system libraries"
 > - "node:20-alpine includes Alpine Linux packages (musl, apk-tools), Node.js runtime, and OpenSSL"
 > - "Mayo Clinic will want to know about OpenSSL specifically (security-critical)"
@@ -417,8 +421,8 @@ Use PURL format for Alpine packages (pkg:alpine/...)
 **[TYPE IN COPILOT CHAT]**:
 
 ```
-My application runs on Azure App Service with Cosmos DB backend, Key Vault 
-for secrets, and Application Insights for monitoring. Should I document 
+My application runs on Azure App Service with Cosmos DB backend, Key Vault
+for secrets, and Application Insights for monitoring. Should I document
 these Azure services as components?
 ```
 
@@ -427,6 +431,7 @@ these Azure services as components?
 **[NARRATE]**:
 
 > "Copilot explains: For Mayo Clinic's procurement team, **yes**. They care about:"
+>
 > - "What platform (App Service P1v2)"
 > - "Where data is stored (Cosmos DB)"
 > - "How secrets are managed (Key Vault)"
@@ -457,8 +462,8 @@ these Azure services as components?
 **[TYPE IN COPILOT CHAT]**:
 
 ```
-Can you combine all 15 components into a complete CycloneDX 1.5 SBOM? 
-Include the required metadata (bomFormat, specVersion, serialNumber, version, 
+Can you combine all 15 components into a complete CycloneDX 1.5 SBOM?
+Include the required metadata (bomFormat, specVersion, serialNumber, version,
 metadata with component details for the Patient Portal application).
 ```
 
@@ -490,6 +495,7 @@ metadata with component details for the Patient Portal application).
 **[NARRATE]**:
 
 > "Copilot generated:"
+>
 > - "Complete CycloneDX 1.5 structure"
 > - "Unique serial number (urn:uuid)"
 > - "Timestamp for when SBOM was created"
@@ -516,7 +522,7 @@ How can I validate this SBOM is correct? Are there any required fields missing?
 
 **[NARRATE RESULT]**:
 
-> "✅ Validation passed! This is a production-ready CycloneDX 1.5 SBOM."
+> "✅ Validation passed! This is a near-production-ready CycloneDX 1.5 SBOM."
 
 **[TEACHING MOMENT - TO AUDIENCE]**:
 
@@ -527,8 +533,8 @@ How can I validate this SBOM is correct? Are there any required fields missing?
 **[TYPE IN COPILOT CHAT]**:
 
 ```
-Can you generate an HTML report from this SBOM that I can send to Mayo Clinic's 
-procurement team? Make it non-technical, showing component counts, license summary, 
+Can you generate an HTML report from this SBOM that I can send to Mayo Clinic's
+procurement team? Make it non-technical, showing component counts, license summary,
 and risk assessment.
 ```
 
@@ -537,34 +543,61 @@ and risk assessment.
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Patient Portal SBOM - Mayo Clinic Procurement</title>
-  <style>
-    body { font-family: Arial; max-width: 1200px; margin: 0 auto; }
-    .summary { background: #f0f0f0; padding: 20px; }
-    .metric { display: inline-block; margin: 10px 20px; }
-    table { border-collapse: collapse; width: 100%; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-  </style>
-</head>
-<body>
-  <h1>Software Bill of Materials</h1>
-  <div class="summary">
-    <h2>Summary</h2>
-    <div class="metric"><strong>Total Components:</strong> 15</div>
-    <div class="metric"><strong>Application Dependencies:</strong> 6 (npm)</div>
-    <div class="metric"><strong>Container Components:</strong> 5 (Alpine Linux)</div>
-    <div class="metric"><strong>Infrastructure Services:</strong> 4 (Azure)</div>
-    <div class="metric"><strong>License Compliance:</strong> ✅ All Open Source (MIT, BSD)</div>
-  </div>
-  <!-- ... component table ... -->
-</body>
+  <head>
+    <title>Patient Portal SBOM - Mayo Clinic Procurement</title>
+    <style>
+      body {
+        font-family: Arial;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .summary {
+        background: #f0f0f0;
+        padding: 20px;
+      }
+      .metric {
+        display: inline-block;
+        margin: 10px 20px;
+      }
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Software Bill of Materials</h1>
+    <div class="summary">
+      <h2>Summary</h2>
+      <div class="metric"><strong>Total Components:</strong> 15</div>
+      <div class="metric">
+        <strong>Application Dependencies:</strong> 6 (npm)
+      </div>
+      <div class="metric">
+        <strong>Container Components:</strong> 5 (Alpine Linux)
+      </div>
+      <div class="metric">
+        <strong>Infrastructure Services:</strong> 4 (Azure)
+      </div>
+      <div class="metric">
+        <strong>License Compliance:</strong> ✅ All Open Source (MIT, BSD)
+      </div>
+    </div>
+    <!-- ... component table ... -->
+  </body>
 </html>
 ```
 
 **[NARRATE]**:
 
 > "Sarah can send this HTML report to Mayo Clinic's procurement team. They see:"
+>
 > - "15 total components clearly categorized"
 > - "All licenses are permissive (MIT/BSD)"
 > - "Security-critical components identified (OpenSSL)"
@@ -579,11 +612,12 @@ and risk assessment.
 **[NARRATE WITH ENTHUSIASM]**:
 
 > "In **1 hour 15 minutes**, Sarah:"
+>
 > - "✅ Learned what an SBOM is and why Mayo Clinic needs it"
 > - "✅ Understood PURL format across 3 ecosystems (npm, Alpine, Azure)"
 > - "✅ Learned license compliance basics (MIT vs GPL)"
 > - "✅ Discovered container base image importance (80% miss this)"
-> - "✅ Created production-ready CycloneDX 1.5 SBOM (15 components, 98% accuracy)"
+> - "✅ Created near-production-ready CycloneDX 1.5 SBOM (15 components, 98% accuracy)"
 > - "✅ Generated stakeholder-friendly HTML report"
 > - "✅ Validated output against industry standards"
 >
@@ -593,15 +627,16 @@ and risk assessment.
 
 **[SHOW SLIDE OR SCREEN]**:
 
-| Approach | Time | Outcome |
-|----------|------|---------|
-| **Manual Research** | 6 hours | 80% accuracy, exhausted, can't explain methodology |
-| **With Copilot** | 1.25 hours | 98% accuracy, confident, understands process |
-| **Next SBOM** | 30 minutes | Knowledge retained, much faster |
+| Approach            | Time       | Outcome                                            |
+| ------------------- | ---------- | -------------------------------------------------- |
+| **Manual Research** | 6 hours    | 80% accuracy, exhausted, can't explain methodology |
+| **With Copilot**    | 1.25 hours | 98% accuracy, confident, understands process       |
+| **Next SBOM**       | 30 minutes | Knowledge retained, much faster                    |
 
 **[NARRATE]**:
 
 > "**79% time reduction** on first SBOM. But the real value is **knowledge transfer**:"
+>
 > - "Sarah's next SBOM will take 30 minutes (not 6 hours)"
 > - "She can train other team members using the same approach"
 > - "She can answer auditor questions confidently"
@@ -628,6 +663,7 @@ and risk assessment.
 > "This demo shows GitHub Copilot's unique value: **Teaching while delivering**."
 >
 > "Sarah didn't just get an SBOM. She learned:"
+>
 > - "SBOM fundamentals (CycloneDX, PURL, licenses)"
 > - "Component discovery across layers (app, container, infrastructure)"
 > - "Stakeholder communication (technical → non-technical)"
@@ -694,6 +730,7 @@ A: "$10/month per user (Individual) or $19/month (Business). The ROI is 27,150% 
 ### If Running Short on Time
 
 **15-minute version**:
+
 - Intro (2 min)
 - Phase 1: Problem Definition (3 min)
 - Phase 2: Application Discovery (5 min) - show 1-2 npm packages, explain pattern
@@ -701,6 +738,7 @@ A: "$10/month per user (Individual) or $19/month (Business). The ROI is 27,150% 
 - Wrap-up (2 min)
 
 **10-minute version**:
+
 - Intro (2 min)
 - Show conversation transcript (4 min) - walk through key teaching moments
 - Show final SBOM + HTML report (2 min)

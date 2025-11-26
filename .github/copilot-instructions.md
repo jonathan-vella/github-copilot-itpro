@@ -108,7 +108,7 @@ Agent: bicep-plan (auto-selected via handoff)
 Click "Generate Bicep Code" button → Switches to bicep-implement
 
 Agent: bicep-implement (auto-selected via handoff)
-[Generates production-ready Bicep templates]
+[Generates near-production-ready Bicep templates]
 ```
 
 **Quick Workflow (Skip Planning):**
@@ -161,7 +161,7 @@ github-copilot-itpro/
 │   ├── S07-sbom-generator/              # Software Bill of Materials
 │   ├── S08-diagrams-as-code/            # Architecture diagrams with Python
 │   └── S09-coding-agent/                # GitHub Copilot Coding Agent (async)
-├── infra/bicep/                         # Production-ready Bicep examples
+├── infra/bicep/                         # near-production-ready Bicep examples
 │   └── contoso-patient-portal/         # HIPAA-compliant multi-tier app (S03 implementation)
 ├── docs/                                # ADRs and archived documentation
 └── resources/

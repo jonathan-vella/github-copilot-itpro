@@ -14,6 +14,7 @@ patterns through discovery-based dialogue with GitHub Copilot.
 **Goal:** Learn to automate documentation using Copilot while understanding the underlying patterns
 
 **Project Context:**
+
 - TechCorp Solutions needs migration documentation handoff
 - 50-server Azure environment to document
 - Deliverables: Architecture docs, runbooks, troubleshooting guides, API documentation
@@ -34,16 +35,19 @@ information from sources (Azure resources, code, logs) and transforming it into 
 documentation. Let me break down the key patterns:
 
 **Pattern 1: Resource Discovery → Documentation**
+
 ```
 Azure Resources → Resource Graph Query → Structured Data → Markdown Template → Documentation
 ```
 
 **Pattern 2: Code Analysis → Documentation**
+
 ```
 Source Code → Parse Comments/Annotations → Extract Structure → Format → API Docs
 ```
 
 **Pattern 3: Log Analysis → Documentation**
+
 ```
 Application Insights → Query Patterns → Identify Issues → Troubleshooting Guide
 ```
@@ -63,15 +67,16 @@ Azure resources at scale using a SQL-like language called Kusto Query Language (
 
 **Why Resource Graph vs. Portal for Documentation:**
 
-| Approach | Manual (Portal) | Resource Graph |
-|----------|-----------------|----------------|
-| Time to inventory 50 resources | 2-3 hours | 30 seconds |
-| Output format | Screenshots, manual notes | Structured JSON/Table |
-| Repeatability | Start over each time | Save and rerun query |
-| Cross-subscription | Switch contexts manually | Query all at once |
-| Automation potential | None | Full automation |
+| Approach                       | Manual (Portal)           | Resource Graph        |
+| ------------------------------ | ------------------------- | --------------------- |
+| Time to inventory 50 resources | 2-3 hours                 | 30 seconds            |
+| Output format                  | Screenshots, manual notes | Structured JSON/Table |
+| Repeatability                  | Start over each time      | Save and rerun query  |
+| Cross-subscription             | Switch contexts manually  | Query all at once     |
+| Automation potential           | None                      | Full automation       |
 
 **Basic Resource Graph Query:**
+
 ```kusto
 Resources
 | where resourceGroup == 'rg-techcorp-prod'
@@ -91,6 +96,7 @@ dozens of fields.
 resource type. Here's how to discover what's available:
 
 **Discovery Query - See All Properties:**
+
 ```kusto
 Resources
 | where type == 'microsoft.web/sites'
@@ -100,15 +106,16 @@ Resources
 
 **Common Documentation-Relevant Properties by Resource Type:**
 
-| Resource Type | Key Properties for Docs |
-|---------------|------------------------|
-| App Service | `properties.httpsOnly`, `properties.state`, `kind` |
-| SQL Database | `properties.maxSizeBytes`, `properties.edition`, `sku` |
-| Storage Account | `properties.encryption`, `properties.networkAcls` |
-| Virtual Network | `properties.addressSpace`, `properties.subnets` |
-| Key Vault | `properties.enableSoftDelete`, `properties.enablePurgeProtection` |
+| Resource Type   | Key Properties for Docs                                           |
+| --------------- | ----------------------------------------------------------------- |
+| App Service     | `properties.httpsOnly`, `properties.state`, `kind`                |
+| SQL Database    | `properties.maxSizeBytes`, `properties.edition`, `sku`            |
+| Storage Account | `properties.encryption`, `properties.networkAcls`                 |
+| Virtual Network | `properties.addressSpace`, `properties.subnets`                   |
+| Key Vault       | `properties.enableSoftDelete`, `properties.enablePurgeProtection` |
 
 **Pro Tip:** For documentation purposes, focus on:
+
 1. **Configuration** - What's deployed and how
 2. **Security** - Encryption, network isolation, access control
 3. **Scale** - SKUs, capacity, limits
@@ -134,10 +141,11 @@ Would you like to try building a documentation query together?
 Let's build the query step by step:
 
 **Step 1: Basic Inventory**
+
 ```kusto
 Resources
 | where resourceGroup == 'rg-techcorp-prod'
-| project 
+| project
     name,
     type,
     location,
@@ -148,24 +156,26 @@ Resources
 ```
 
 **Step 2: Add Security-Relevant Properties**
+
 ```kusto
 Resources
 | where resourceGroup == 'rg-techcorp-prod'
-| extend 
+| extend
     httpsOnly = properties.httpsOnly,
     tlsVersion = properties.minTlsVersion,
     encryption = properties.encryption.services.blob.enabled
-| project 
-    name, type, location, 
+| project
+    name, type, location,
     httpsOnly, tlsVersion, encryption
 ```
 
 **Step 3: Identify Relationships (Network)**
+
 ```kusto
 Resources
 | where resourceGroup == 'rg-techcorp-prod' and type == 'microsoft.network/virtualnetworks'
 | mv-expand subnet = properties.subnets
-| project 
+| project
     vnetName = name,
     subnetName = subnet.name,
     addressPrefix = subnet.properties.addressPrefix,
@@ -182,6 +192,7 @@ to just calling Azure CLI.
 **Copilot:** Great critical question! Let me compare approaches:
 
 **Azure CLI Approach:**
+
 ```bash
 # Get all resources
 az resource list --resource-group rg-techcorp-prod --output table
@@ -194,6 +205,7 @@ az keyvault list --resource-group rg-techcorp-prod
 ```
 
 **Resource Graph KQL Approach:**
+
 ```kusto
 # One query for everything
 Resources
@@ -203,21 +215,22 @@ Resources
 
 **Why KQL Wins for Documentation:**
 
-| Factor | Azure CLI | Resource Graph KQL |
-|--------|-----------|-------------------|
-| Queries needed for full inventory | 15-20 (per resource type) | 1 |
-| Cross-subscription support | Loop through contexts | Built-in |
-| Join relationships | Manual correlation | `join` operator |
-| Aggregations | Post-process in script | Built-in (`summarize`) |
-| Performance | Sequential API calls | Parallel execution |
-| Output structure | Varies by command | Consistent schema |
+| Factor                            | Azure CLI                 | Resource Graph KQL     |
+| --------------------------------- | ------------------------- | ---------------------- |
+| Queries needed for full inventory | 15-20 (per resource type) | 1                      |
+| Cross-subscription support        | Loop through contexts     | Built-in               |
+| Join relationships                | Manual correlation        | `join` operator        |
+| Aggregations                      | Post-process in script    | Built-in (`summarize`) |
+| Performance                       | Sequential API calls      | Parallel execution     |
+| Output structure                  | Varies by command         | Consistent schema      |
 
 **The Real Power - Joins:**
+
 ```kusto
 Resources
 | where type == 'microsoft.web/sites'
 | join kind=leftouter (
-    Resources 
+    Resources
     | where type == 'microsoft.insights/components'
 ) on resourceGroup
 | project webAppName = name, appInsightsName = name1
@@ -256,6 +269,7 @@ structured data and asking it to transform that into narrative.
 **Example Transformation:**
 
 **Input (Query Result):**
+
 ```json
 {
   "name": "app-techcorp-api",
@@ -268,6 +282,7 @@ structured data and asking it to transform that into narrative.
 ```
 
 **Prompt:**
+
 ```
 Transform this Azure resource data into an architecture documentation entry:
 [paste JSON]
@@ -280,19 +295,22 @@ Include:
 ```
 
 **Output:**
+
 ```markdown
 ### Application API Service
 
 **Resource:** `app-techcorp-api` (Azure App Service)  
 **Location:** East US  
-**SKU:** Premium v3 (P1v3) - Production-ready with zone redundancy support
+**SKU:** Premium v3 (P1v3) - near-production-ready with zone redundancy support
 
 **Security Configuration:**
+
 - ✅ HTTPS Only: Enforced (HTTP redirects to HTTPS)
 - ✅ TLS Version: 1.2 minimum (current best practice)
 - ✅ Premium SKU: Supports VNet integration and private endpoints
 
 **Recommendations:**
+
 - Consider enabling VNet integration for database connectivity
 - Verify managed identity is configured for Key Vault access
 ```
@@ -307,12 +325,14 @@ to write the narrative around it?
 **Copilot:** Exactly! You've identified the separation of concerns:
 
 **Script Responsibilities:**
+
 1. **Query** - Get accurate data from Azure
 2. **Structure** - Organize data logically (by tier, by function)
 3. **Enrich** - Add context (resource relationships, dependencies)
 4. **Format** - Prepare for prompt consumption
 
 **Copilot Responsibilities:**
+
 1. **Interpret** - Understand what resources do
 2. **Analyze** - Identify security gaps, best practices
 3. **Narrate** - Write human-readable documentation
@@ -320,14 +340,14 @@ to write the narrative around it?
 
 **Why This Split Works:**
 
-| Task | Script | Copilot | Why |
-|------|--------|---------|-----|
-| List all resources | ✅ | ❌ | API accuracy needed |
-| Describe resource purpose | ❌ | ✅ | Interpretation needed |
-| Get exact SKU name | ✅ | ❌ | No guessing allowed |
-| Explain SKU implications | ❌ | ✅ | Knowledge synthesis |
-| Find missing tags | ✅ | ❌ | Boolean check |
-| Recommend improvements | ❌ | ✅ | Best practice knowledge |
+| Task                      | Script | Copilot | Why                     |
+| ------------------------- | ------ | ------- | ----------------------- |
+| List all resources        | ✅     | ❌      | API accuracy needed     |
+| Describe resource purpose | ❌     | ✅      | Interpretation needed   |
+| Get exact SKU name        | ✅     | ❌      | No guessing allowed     |
+| Explain SKU implications  | ❌     | ✅      | Knowledge synthesis     |
+| Find missing tags         | ✅     | ❌      | Boolean check           |
+| Recommend improvements    | ❌     | ✅      | Best practice knowledge |
 
 This is why documentation automation is "90% faster" not "100% automated"—you still need
 human review, but the tedious parts are eliminated.
@@ -344,34 +364,35 @@ visual diagram. This is transformative for documentation automation.
 
 **Why Mermaid Over Visio:**
 
-| Factor | Visio | Mermaid |
-|--------|-------|---------|
+| Factor          | Visio                   | Mermaid                     |
+| --------------- | ----------------------- | --------------------------- |
 | Version control | Binary file, can't diff | Text file, full Git history |
-| Automation | Manual creation only | Generate from code/data |
-| Collaboration | One person at a time | Merge like code |
-| Consistency | Manual alignment | Auto-layout |
-| Update time | Re-draw diagram | Edit text, auto-render |
-| Cost | License required | Free, open source |
-| Portability | Windows desktop | Any Markdown renderer |
+| Automation      | Manual creation only    | Generate from code/data     |
+| Collaboration   | One person at a time    | Merge like code             |
+| Consistency     | Manual alignment        | Auto-layout                 |
+| Update time     | Re-draw diagram         | Edit text, auto-render      |
+| Cost            | License required        | Free, open source           |
+| Portability     | Windows desktop         | Any Markdown renderer       |
 
 **Basic Mermaid Architecture Diagram:**
+
 ```mermaid
 %%{init: {'theme':'neutral'}}%%
 graph TB
     subgraph Frontend
         AGW[Application Gateway]
     end
-    
+
     subgraph Application
         App[App Service]
         Func[Functions]
     end
-    
+
     subgraph Data
         SQL[(SQL Database)]
         KV[Key Vault]
     end
-    
+
     AGW -->|HTTPS| App
     App -->|Queries| SQL
     App -->|Secrets| KV
@@ -390,6 +411,7 @@ Resources
 ```
 
 Then transform to Mermaid:
+
 ```
 For each App Service: App[{name}]
 For each SQL Server: SQL[({name})]
@@ -407,21 +429,22 @@ This is exactly what our documentation scripts do—query resources, generate Me
 
 **Diagram Type Selection Guide:**
 
-| Question to Answer | Diagram Type | Example Use |
-|--------------------|--------------|-------------|
-| What components exist and how are they connected? | `graph TB/LR` | Architecture overview |
-| What's the network topology? | `graph LR` | VNet/subnet layout |
-| How does a request flow through the system? | `sequenceDiagram` | API call documentation |
-| What are the deployment phases? | `flowchart TD` | Runbook procedures |
-| What's the timeline of events? | `gantt` | Project/incident timeline |
-| What's the class structure? | `classDiagram` | API object models |
-| What state transitions occur? | `stateDiagram` | Workflow documentation |
+| Question to Answer                                | Diagram Type      | Example Use               |
+| ------------------------------------------------- | ----------------- | ------------------------- |
+| What components exist and how are they connected? | `graph TB/LR`     | Architecture overview     |
+| What's the network topology?                      | `graph LR`        | VNet/subnet layout        |
+| How does a request flow through the system?       | `sequenceDiagram` | API call documentation    |
+| What are the deployment phases?                   | `flowchart TD`    | Runbook procedures        |
+| What's the timeline of events?                    | `gantt`           | Project/incident timeline |
+| What's the class structure?                       | `classDiagram`    | API object models         |
+| What state transitions occur?                     | `stateDiagram`    | Workflow documentation    |
 
 **Architecture Documentation Typically Uses:**
 
 1. **High-Level Architecture** (`graph TB`):
+
    ```mermaid
-%%{init: {'theme':'neutral'}}%%
+   %%{init: {'theme':'neutral'}}%%
    graph TB
        User -->|HTTPS| FrontDoor
        FrontDoor --> AppService
@@ -429,8 +452,9 @@ This is exactly what our documentation scripts do—query resources, generate Me
    ```
 
 2. **Network Topology** (`graph LR`):
+
    ```mermaid
-%%{init: {'theme':'neutral'}}%%
+   %%{init: {'theme':'neutral'}}%%
    graph LR
        subgraph VNet[10.0.0.0/16]
            subgraph WebSubnet[10.0.1.0/24]
@@ -444,7 +468,7 @@ This is exactly what our documentation scripts do—query resources, generate Me
 
 3. **Request Flow** (`sequenceDiagram`):
    ```mermaid
-%%{init: {'theme':'neutral'}}%%
+   %%{init: {'theme':'neutral'}}%%
    sequenceDiagram
        User->>+Gateway: Request
        Gateway->>+App: Route
@@ -468,6 +492,7 @@ structure I should follow?
 **Copilot:** Documentation scripts follow a consistent pattern. Let me break down the structure:
 
 **Documentation Script Pattern:**
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │ 1. PARAMETERS                                                    │
@@ -514,7 +539,7 @@ actual code structure.
 
 **Copilot:** Here's a simplified architecture documentation script with annotations:
 
-```powershell
+````powershell
 <#
 .SYNOPSIS
     Generates architecture documentation prompt for Azure resources.
@@ -538,13 +563,13 @@ actual code structure.
 param(
     [Parameter(Mandatory = $true)]
     [string]$ResourceGroupName,
-    
+
     [Parameter(Mandatory = $false)]
     [string]$OutputPath = ".\output",
-    
+
     [Parameter(Mandatory = $false)]
     [switch]$IncludeDiagrams,
-    
+
     [Parameter(Mandatory = $false)]
     [switch]$IncludeCostAnalysis
 )
@@ -558,10 +583,10 @@ Write-Host "📊 Querying Azure resources..." -ForegroundColor Cyan
 $resourceQuery = @"
 Resources
 | where resourceGroup == '$ResourceGroupName'
-| project 
-    name, 
-    type, 
-    location, 
+| project
+    name,
+    type,
+    location,
     resourceGroup,
     sku = sku.name,
     kind,
@@ -577,7 +602,7 @@ Resources
 | where resourceGroup == '$ResourceGroupName'
 | where type == 'microsoft.network/virtualnetworks'
 | mv-expand subnet = properties.subnets
-| project 
+| project
     vnetName = name,
     vnetAddressSpace = properties.addressSpace.addressPrefixes,
     subnetName = subnet.name,
@@ -728,7 +753,7 @@ Write-Host "   3. Review and refine generated documentation"
 Write-Host "   4. Save final documentation as architecture.md"
 
 #endregion
-```
+````
 
 **Key Design Patterns:**
 
@@ -748,14 +773,14 @@ extra step instead of calling Copilot directly?
 
 **Why Prompt Files vs. Direct Generation:**
 
-| Factor | Direct API Call | Prompt File |
-|--------|-----------------|-------------|
-| User control | Black box | Full visibility |
-| Customization | Re-run script | Edit prompt |
-| Learning | Hidden process | See how prompts work |
-| Iteration | Script changes | Quick edits |
-| Cost | API call per run | One interaction |
-| Quality review | After generation | Before + after |
+| Factor         | Direct API Call  | Prompt File          |
+| -------------- | ---------------- | -------------------- |
+| User control   | Black box        | Full visibility      |
+| Customization  | Re-run script    | Edit prompt          |
+| Learning       | Hidden process   | See how prompts work |
+| Iteration      | Script changes   | Quick edits          |
+| Cost           | API call per run | One interaction      |
+| Quality review | After generation | Before + after       |
 
 **The Workflow This Enables:**
 
@@ -778,6 +803,7 @@ extra step instead of calling Copilot directly?
 5. **Learning** - Understand prompt engineering by example
 
 **Example Customization:**
+
 ```
 # Original generated prompt:
 "Generate architecture documentation..."
@@ -808,19 +834,19 @@ Here's the systematic approach:
 ```
 1. Executive Summary (for leadership)
    └── What, why, key metrics
-   
+
 2. Architecture Overview (for architects)
    └── Design decisions, patterns, trade-offs
-   
+
 3. Component Details (for engineers)
    └── Each resource, configuration, purpose
-   
+
 4. Network Architecture (for network team)
    └── Topology, security groups, connectivity
-   
+
 5. Security Architecture (for security team)
    └── Controls, encryption, access management
-   
+
 6. Operational Guide (for ops team)
    └── Monitoring, scaling, maintenance
 ```
@@ -892,12 +918,12 @@ is that operations procedures are both resource-specific AND pattern-based.
 
 Each Azure resource type has standard operations:
 
-| Resource Type | Daily Check | Weekly Check | Common Issues |
-|---------------|-------------|--------------|---------------|
-| App Service | Health endpoint | CPU/Memory metrics | Cold starts, memory leaks |
-| SQL Database | DTU usage | Query performance | Blocking, deadlocks |
-| Key Vault | Access attempts | Certificate expiry | Permission errors |
-| Storage | Availability | Capacity growth | Throttling |
+| Resource Type | Daily Check     | Weekly Check       | Common Issues             |
+| ------------- | --------------- | ------------------ | ------------------------- |
+| App Service   | Health endpoint | CPU/Memory metrics | Cold starts, memory leaks |
+| SQL Database  | DTU usage       | Query performance  | Blocking, deadlocks       |
+| Key Vault     | Access attempts | Certificate expiry | Permission errors         |
+| Storage       | Availability    | Capacity growth    | Throttling                |
 
 The script queries your resources, identifies types, and generates procedures specific to
 YOUR infrastructure, not generic best practices.
@@ -1101,13 +1127,13 @@ TOTAL TIME: ~1.5-2 hours (vs. 20+ hours manual)
 
 **Documentation Types and Time:**
 
-| Document Type | Script | Copilot | Review | Total | Manual |
-|---------------|--------|---------|--------|-------|--------|
-| Architecture | 5 min | 20 min | 20 min | 45 min | 6 hrs |
-| Day 2 Ops | 5 min | 30 min | 20 min | 55 min | 8 hrs |
-| Troubleshooting | 5 min | 25 min | 15 min | 45 min | 5 hrs |
-| API Docs | 5 min | 20 min | 15 min | 40 min | 4 hrs |
-| **TOTAL** | 20 min | 95 min | 70 min | **3 hrs** | **23 hrs** |
+| Document Type   | Script | Copilot | Review | Total     | Manual     |
+| --------------- | ------ | ------- | ------ | --------- | ---------- |
+| Architecture    | 5 min  | 20 min  | 20 min | 45 min    | 6 hrs      |
+| Day 2 Ops       | 5 min  | 30 min  | 20 min | 55 min    | 8 hrs      |
+| Troubleshooting | 5 min  | 25 min  | 15 min | 45 min    | 5 hrs      |
+| API Docs        | 5 min  | 20 min  | 15 min | 40 min    | 4 hrs      |
+| **TOTAL**       | 20 min | 95 min  | 70 min | **3 hrs** | **23 hrs** |
 
 ---
 
@@ -1118,6 +1144,7 @@ TOTAL TIME: ~1.5-2 hours (vs. 20+ hours manual)
 **Copilot:** Here are the key discovery questions organized by phase:
 
 **Understanding the Tools:**
+
 ```
 - Why Resource Graph over Azure CLI for documentation?
 - How do I discover what properties are available for each resource type?
@@ -1126,6 +1153,7 @@ TOTAL TIME: ~1.5-2 hours (vs. 20+ hours manual)
 ```
 
 **Understanding the Data:**
+
 ```
 - What resource relationships are important to document?
 - How do I identify security-relevant configurations?
@@ -1134,6 +1162,7 @@ TOTAL TIME: ~1.5-2 hours (vs. 20+ hours manual)
 ```
 
 **Understanding the Output:**
+
 ```
 - Who is the audience for this documentation?
 - What decisions will this documentation support?
@@ -1142,6 +1171,7 @@ TOTAL TIME: ~1.5-2 hours (vs. 20+ hours manual)
 ```
 
 **Understanding Quality:**
+
 ```
 - How do I validate generated documentation is accurate?
 - What's the appropriate level of detail for each audience?
@@ -1150,6 +1180,7 @@ TOTAL TIME: ~1.5-2 hours (vs. 20+ hours manual)
 ```
 
 **The Meta-Question:**
+
 ```
 "What would I need to know to maintain this documentation myself?"
 
@@ -1177,14 +1208,14 @@ This question ensures you're learning, not just generating.
 
 ### Time Investment
 
-| Activity | One-Time | Per Project |
-|----------|----------|-------------|
-| Learn Resource Graph | 2 hours | - |
-| Customize script templates | 2 hours | - |
-| Run documentation scripts | - | 20 min |
-| Generate with Copilot | - | 90 min |
-| Review and polish | - | 60 min |
-| **Total** | 4 hours setup | ~3 hours/project |
+| Activity                   | One-Time      | Per Project      |
+| -------------------------- | ------------- | ---------------- |
+| Learn Resource Graph       | 2 hours       | -                |
+| Customize script templates | 2 hours       | -                |
+| Run documentation scripts  | -             | 20 min           |
+| Generate with Copilot      | -             | 90 min           |
+| Review and polish          | -             | 60 min           |
+| **Total**                  | 4 hours setup | ~3 hours/project |
 
 **ROI:** After setup, each documentation project saves 20 hours.
 Break-even after 1 project. 8 projects/year = 160 hours saved.
@@ -1201,10 +1232,11 @@ Break-even after 1 project. 8 projects/year = 160 hours saved.
 
 ---
 
-*This conversation demonstrates learning documentation automation patterns through discovery-based
-dialogue. The focus is understanding WHY approaches work, not just WHAT commands to run.*
+_This conversation demonstrates learning documentation automation patterns through discovery-based
+dialogue. The focus is understanding WHY approaches work, not just WHAT commands to run._
 
 **Character Growth:**
+
 - **Start:** Manual documentation taking 20+ hours per project
 - **End:** Understands automation patterns, prompt engineering, and diagram-as-code approaches
 - **Key Insight:** Documentation automation transforms data into narrative, not replaces writers

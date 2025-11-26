@@ -5,7 +5,7 @@
 **Budget:** $800/month | **Users:** 10,000 patients, 50 staff | **Timeline:** 3 months
 
 > 💡 **Discovery-First Approach:** Each stage includes discovery questions to help you understand
-> *why* agents make specific recommendations, not just *what* they recommend. Ask these questions
+> _why_ agents make specific recommendations, not just _what_ they recommend. Ask these questions
 > during your conversation to deepen your understanding of Azure architecture and Bicep patterns.
 
 ---
@@ -36,7 +36,7 @@ Understanding cost estimation:
 ### Prompt
 
 ```text
-I need help planning a HIPAA-compliant patient portal for Contoso Healthcare. 
+I need help planning a HIPAA-compliant patient portal for Contoso Healthcare.
 Before we start designing, I want to understand the full scope.
 
 **Context:**
@@ -156,7 +156,7 @@ After your assessment, hand off to the Bicep Planning Specialist for detailed im
 
 ### Teaching Moments to Look For
 
-- [ ] Agent explains *why* each WAF pillar received its score
+- [ ] Agent explains _why_ each WAF pillar received its score
 - [ ] Trade-offs are clearly articulated (cost vs. security, simplicity vs. features)
 - [ ] HIPAA requirements mapped to specific Azure features (TDE, audit logs, etc.)
 - [ ] Cost optimization suggestions beyond the initial recommendation
@@ -280,7 +280,7 @@ Create a detailed Bicep implementation plan for the Contoso Healthcare patient p
 - Development: Cost-optimized, single region
 - Production: High availability, meets all compliance requirements
 
-**Save Plan To:** 
+**Save Plan To:**
 .bicep-planning-files/INFRA.contoso-patient-portal.md
 
 **Additional Considerations:**
@@ -323,7 +323,7 @@ After creating the plan, hand off to the Bicep Implementation Specialist to gene
 ## Stage 4: Bicep Implementation Specialist
 
 **Agent:** `bicep-implement`  
-**Objective:** Generate production-ready Bicep templates using progressive implementation
+**Objective:** Generate near-production-ready Bicep templates using progressive implementation
 
 ### Discovery Questions (Ask Before/During)
 

@@ -42,7 +42,7 @@ Three chat modes (azure-principal-architect, bicep-plan, bicep-implement) have b
 **Example:**
 
 ```markdown
-Using bicep-plan mode, create a plan for deploying a hub-spoke network 
+Using bicep-plan mode, create a plan for deploying a hub-spoke network
 with 3 spokes, Azure Firewall, and Private DNS zones.
 ```
 
@@ -50,7 +50,7 @@ with 3 spokes, Azure Firewall, and Private DNS zones.
 
 #### bicep-implement.chatmode.md
 
-**Purpose:** Generate production-ready Bicep templates
+**Purpose:** Generate near-production-ready Bicep templates
 
 ### Azure Verified Modules (AVM) Modes
 
@@ -69,7 +69,7 @@ with 3 spokes, Azure Firewall, and Private DNS zones.
 **Example:**
 
 ```markdown
-Using azure-verified-modules-bicep mode, create a Virtual Network using 
+Using azure-verified-modules-bicep mode, create a Virtual Network using
 the AVM pattern with proper tagging and diagnostic settings.
 ```
 
@@ -105,7 +105,7 @@ the AVM pattern with proper tagging and diagnostic settings.
 **Example:**
 
 ```markdown
-Using azure-saas-architect mode, design a tenant isolation strategy 
+Using azure-saas-architect mode, design a tenant isolation strategy
 using Azure AD B2C and database-per-tenant pattern.
 ```
 
@@ -127,7 +127,7 @@ using Azure AD B2C and database-per-tenant pattern.
 
 #### terraform-azure-implement.chatmode.md
 
-**Purpose:** Generate production-ready Terraform code for Azure
+**Purpose:** Generate near-production-ready Terraform code for Azure
 
 **Use When:**
 
@@ -183,7 +183,7 @@ using Azure AD B2C and database-per-tenant pattern.
 **Example:**
 
 ```markdown
-Using debug mode, analyze this Bicep deployment error: 
+Using debug mode, analyze this Bicep deployment error:
 "The subscription is not registered to use namespace Microsoft.Network"
 ```
 
@@ -232,17 +232,17 @@ graph TD
     D -->|Yes| E{For SaaS?}
     E -->|Yes| F[azure-saas-architect mode]
     E -->|No| G[@azure-principal-architect Agent]
-    
+
     D -->|No| H{Infrastructure as Code?}
     H -->|Bicep| I{Have Plan?}
     I -->|No| J[@bicep-plan Agent]
     I -->|Yes| K[@bicep-implement Agent]
-    
+
     H -->|Terraform| L[terraform-azure-planning mode]
     L --> M[terraform-azure-implement mode]
-    
+
     H -->|Troubleshooting| N[debug mode]
-    
+
     style C fill:#4CAF50,color:#fff
     style G fill:#4CAF50,color:#fff
     style J fill:#4CAF50,color:#fff
@@ -257,8 +257,8 @@ graph TD
 
 - 🟢 **Green** = Custom Agents (Primary Workflow)
 - 🟡 **Yellow** = Chat Modes (Supplementary Tools)
-    style G fill:#e8f5e8
-    style H fill:#ffe8f5
+  style G fill:#e8f5e8
+  style H fill:#ffe8f5
 
 ```
 
@@ -436,5 +436,6 @@ Code Fix:
 
 ---
 
-**Last Updated:** 2025-11-17  
+**Last Updated:** 2025-11-17
 **Maintained By:** GitHub Copilot IT Pro Repository Team
+```

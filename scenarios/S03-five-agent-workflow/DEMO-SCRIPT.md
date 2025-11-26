@@ -108,12 +108,12 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
 1. **WAF Scores:**
 
 ```yaml
-   Security: 9/10 (High confidence) - Private endpoints, managed identities
-   Reliability: 7/10 (Medium) - Zone redundancy limited by budget
-   Cost: 8/10 (High) - $334/month well under $800 budget
+Security: 9/10 (High confidence) - Private endpoints, managed identities
+Reliability: 7/10 (Medium) - Zone redundancy limited by budget
+Cost: 8/10 (High) - $334/month well under $800 budget
 ```
 
-   "Notice it scored each pillar and provided confidence levels. This helps us understand trade-offs."
+"Notice it scored each pillar and provided confidence levels. This helps us understand trade-offs."
 
 1. **Service Recommendations:**
 
@@ -124,7 +124,7 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
    ...
 ```
 
-   "It recommended specific SKUs with justifications and costs."
+"It recommended specific SKUs with justifications and costs."
 
 1. **HIPAA Compliance:**
 
@@ -136,7 +136,7 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
    ...
 ```
 
-   "Compliance requirements are automatically mapped."
+"Compliance requirements are automatically mapped."
 
 **[Scroll to bottom - find handoff button]**
 
@@ -166,8 +166,9 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
        estimatedCost:
          sku: N/A
          monthlyRange: $0
+   ```
 
-```
+````
 
    "Each resource is fully specified with purpose, dependencies, parameters, and costs."
 
@@ -179,20 +180,20 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
        RG[Resource Group] --> VNet[Virtual Network]
        VNet --> NSGs[Network Security Groups]
        ...
-```
+````
 
-   "Visual dependency graph shows deployment order."
+"Visual dependency graph shows deployment order."
 
 1. **4-Phase Implementation:**
 
 ```yaml
-   Phase 1: Foundation (8 tasks)
-   Phase 2: Platform Services (8 tasks)
-   Phase 3: Security & Application (9 tasks)
-   Phase 4: Configuration & Access (10 tasks)
+Phase 1: Foundation (8 tasks)
+Phase 2: Platform Services (8 tasks)
+Phase 3: Security & Application (9 tasks)
+Phase 4: Configuration & Access (10 tasks)
 ```
 
-   "Progressive deployment ensures dependencies are met."
+"Progressive deployment ensures dependencies are met."
 
 1. **Cost Table:**
 
@@ -204,7 +205,7 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
    | Total | $331-346 |
 ```
 
-   "Detailed cost breakdown with optimization opportunities."
+"Detailed cost breakdown with optimization opportunities."
 
 **[Find handoff button at bottom]**
 
@@ -218,7 +219,7 @@ You are designing Azure infrastructure for Contoso Healthcare's patient portal.
 
 **[Bicep Implementation Specialist agent auto-selects]**
 
-"The implementation specialist generates production-ready Bicep templates from the plan."
+"The implementation specialist generates near-production-ready Bicep templates from the plan."
 
 **[Agent generates templates]**
 
@@ -248,7 +249,7 @@ param environment string = 'prod'
 - `sql-database.bicep` - Database with TDE encryption
 - `key-vault.bicep` - Secrets management
 - `private-endpoints.bicep` - Secure connectivity
-..."
+  ..."
 
 **[Open `deploy.ps1`]**
 
@@ -274,7 +275,7 @@ bicep build main.bicep --stdout --no-restore
 
 **[Show successful compilation]**
 
-"Zero errors - production-ready on first attempt!"
+"Zero errors - near-production-ready on first attempt!"
 
 ```powershell
 bicep lint main.bicep
@@ -301,7 +302,7 @@ bicep lint main.bicep
 **Traditional Approach:**
 
 - Architecture Assessment: 4-6 hours
-- Implementation Planning: 3-6 hours  
+- Implementation Planning: 3-6 hours
 - Bicep Template Creation: 6-8 hours
 - **Total: 13-20 hours**
 
@@ -433,7 +434,7 @@ If short on time, use this condensed version:
 ### Energy Management
 
 - Pause after each agent output to let audience absorb
-- Use humor: "I'm pressing a button and getting production-ready code - this still amazes me"
+- Use humor: "I'm pressing a button and getting near-production-ready code - this still amazes me"
 - Invite reactions: "Have you seen anything like this before?"
 
 ---

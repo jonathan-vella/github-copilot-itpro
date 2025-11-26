@@ -4,7 +4,7 @@ This demo showcases the **five-agent workflow** for Azure infrastructure develop
 
 ## 🎯 Demo Objective
 
-Show how GitHub Copilot custom agents collaborate to take an infrastructure idea from **architectural decision** → **WAF assessment** → **implementation plan** → **production-ready Bicep code**.
+Show how GitHub Copilot custom agents collaborate to take an infrastructure idea from **architectural decision** → **WAF assessment** → **implementation plan** → **near-production-ready Bicep code**.
 
 **Duration**: 15-20 minutes
 
@@ -17,13 +17,14 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 
 ## 📋 Demo Script
 
-### Phase 1: Document Architectural Decision (ADR Generator) - *Optional*
+### Phase 1: Document Architectural Decision (ADR Generator) - _Optional_
 
 > **⏭️ Skip this phase** if you want to focus on infrastructure speed (start at Phase 2). This phase is valuable for showing enterprise governance capabilities.
 
 **Goal**: Create an Architecture Decision Record documenting a technical choice.
 
 1. **Invoke the ADR Generator**:
+
    - Press `Ctrl+Shift+A` (or click **Agent** button in Copilot Chat)
    - Select `adr_generator` from the dropdown
 
@@ -31,18 +32,19 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 
 ```text
    Document the decision to use a hub network topology for an Azure test environment.
-   
+
    Context:
    - Need central connectivity for testing/validation
    - Single region (East US), minimal cost
    - Must support basic network segmentation
    - Foundation for future spoke networks
-   
-   Include rationale, alternatives (flat network, multiple VNets, Azure Virtual WAN), 
+
+   Include rationale, alternatives (flat network, multiple VNets, Azure Virtual WAN),
    and consequences (positive and negative).
 ```
 
 1. **Review the ADR**:
+
    - Copilot creates a structured ADR with:
      - Status, Context, Decision, Consequences
      - Alternatives Considered with rejection reasons
@@ -64,14 +66,15 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
    - If not, manually invoke:
 
 ```text
-     Assess the hub network topology decision against 
-     Azure Well-Architected Framework pillars. Use the ADR from 
+     Assess the hub network topology decision against
+     Azure Well-Architected Framework pillars. Use the ADR from
      #file:docs/adr/adr-0003-hub-network-topology-test.md
 ```
 
 - (Using `azure-principal-architect` agent from dropdown)
 
 1. **Review the WAF Assessment**:
+
    - Copilot evaluates across 5 pillars:
      - **Reliability**: Availability, resilience
      - **Security**: Network isolation, access control
@@ -103,14 +106,17 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 - (Using `bicep-plan` agent from dropdown)
 
 1. **Review the Implementation Plan**:
+
    - Copilot creates `.bicep-planning-files/INFRA.{goal}.md` with:
+
      - **Resources section**: YAML specs for each Azure resource
 
        ```yaml
        - name: vnet-hub-test
          type: Microsoft.Network/virtualNetworks
          apiVersion: 2023-05-01
-         properties: {...}
+         properties: { ... }
+       ```
 
 ```
 
@@ -127,19 +133,19 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 
 ### Phase 4: Generate Bicep Templates (Bicep Implementation Specialist)
 
-**Goal**: Create production-ready, modular Bicep templates.
+**Goal**: Create near-production-ready, modular Bicep templates.
 
 1. **Agent automatically invoked** (via handoff from Phase 3)
    - If not, manually invoke:
 
 ```
 
-     Implement the Bicep templates based on the plan in 
+     Implement the Bicep templates based on the plan in
      #file:.bicep-planning-files/INFRA.hub-network-test.md
-     
+
      Output to: infrastructure/hub-network-demo/
 
-```
+````
 
    - (Using `bicep-implement` agent from dropdown)
 
@@ -158,7 +164,7 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
      bicep build main.bicep --stdout
      bicep lint main.bicep
      bicep format main.bicep
-```
+````
 
 - Shows compilation success with no errors
 
@@ -182,7 +188,7 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 - Implementation agent reads this directly (not relying on LLM interpretation)
 - Plans can be version-controlled and reviewed in PRs
 
-### 3. **Production-Ready Code**
+### 3. **near-production-ready Code**
 
 - Generated Bicep uses:
   - Latest API versions (2023-05-01+)
@@ -193,13 +199,13 @@ Show how GitHub Copilot custom agents collaborate to take an infrastructure idea
 
 ### 4. **Time Savings**
 
-   | Task | Manual Time | With Agents | Savings |
-   |------|-------------|-------------|---------|
-   | ADR Writing | 45 min | 2 min | 96% |
-   | WAF Assessment | 60 min | 3 min | 95% |
-   | Implementation Plan | 90 min | 5 min | 94% |
-   | Bicep Templates | 120 min | 10 min | 92% |
-   | **Total** | **5.25 hours** | **20 minutes** | **94%** |
+| Task                | Manual Time    | With Agents    | Savings |
+| ------------------- | -------------- | -------------- | ------- |
+| ADR Writing         | 45 min         | 2 min          | 96%     |
+| WAF Assessment      | 60 min         | 3 min          | 95%     |
+| Implementation Plan | 90 min         | 5 min          | 94%     |
+| Bicep Templates     | 120 min        | 10 min         | 92%     |
+| **Total**           | **5.25 hours** | **20 minutes** | **94%** |
 
 ---
 
@@ -247,7 +253,7 @@ By the end of the demo, audience should understand:
 - ✅ How to invoke custom agents (Agent button dropdown)
 - ✅ That handoff buttons automatically switch agents with context
 - ✅ The five-agent workflow (@plan → ADR → WAF → Plan → Implement)
-- ✅ How agents produce production-ready outputs (not just suggestions)
+- ✅ How agents produce near-production-ready outputs (not just suggestions)
 - ✅ The time savings compared to manual approach (90%+)
 
 ---

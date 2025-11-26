@@ -9,14 +9,14 @@
 
 ## Summary
 
-| Metric | Time | Notes |
-|--------|------|-------|
-| **Total Development Time** | **10 minutes** | Complete infrastructure deployment |
-| **Lines of Code** | 450+ | Generated from ~50 lines of prompts |
-| **Errors Encountered** | 0 | Zero deployment errors |
-| **Documentation Time** | 2 minutes | Auto-generated from code |
-| **Deployment Time** | 3 minutes | Azure deployment |
-| **Total End-to-End** | **15 minutes** | From start to verified deployment |
+| Metric                     | Time           | Notes                               |
+| -------------------------- | -------------- | ----------------------------------- |
+| **Total Development Time** | **10 minutes** | Complete infrastructure deployment  |
+| **Lines of Code**          | 450+           | Generated from ~50 lines of prompts |
+| **Errors Encountered**     | 0              | Zero deployment errors              |
+| **Documentation Time**     | 2 minutes      | Auto-generated from code            |
+| **Deployment Time**        | 3 minutes      | Azure deployment                    |
+| **Total End-to-End**       | **15 minutes** | From start to verified deployment   |
 
 ---
 
@@ -128,15 +128,15 @@ az deployment group validate `
 
 ## Comparison: Manual vs. Copilot
 
-| Task | Manual Time | With Copilot | Time Saved | Improvement |
-|------|-------------|--------------|------------|-------------|
-| **Research Bicep Syntax** | 10 min | 0 min | 10 min | N/A |
-| **Write VNet Template** | 15 min | 4 min | 11 min | 73% |
-| **Write Storage Template** | 10 min | 3 min | 7 min | 70% |
-| **Create Orchestration** | 5 min | 2 min | 3 min | 60% |
-| **Debug Errors** | 10 min | 0 min | 10 min | 100% |
-| **Documentation** | 5 min | 1 min | 4 min | 80% |
-| **Total** | **55 min** | **10 min** | **45 min** | **82%** |
+| Task                       | Manual Time | With Copilot | Time Saved | Improvement |
+| -------------------------- | ----------- | ------------ | ---------- | ----------- |
+| **Research Bicep Syntax**  | 10 min      | 0 min        | 10 min     | N/A         |
+| **Write VNet Template**    | 15 min      | 4 min        | 11 min     | 73%         |
+| **Write Storage Template** | 10 min      | 3 min        | 7 min      | 70%         |
+| **Create Orchestration**   | 5 min       | 2 min        | 3 min      | 60%         |
+| **Debug Errors**           | 10 min      | 0 min        | 10 min     | 100%        |
+| **Documentation**          | 5 min       | 1 min        | 4 min      | 80%         |
+| **Total**                  | **55 min**  | **10 min**   | **45 min** | **82%**     |
 
 ---
 
@@ -162,7 +162,7 @@ az deployment group validate `
   - `minimumTlsVersion: 'TLS1_2'`
   - `allowBlobPublicAccess: false`
   - Deny rules at priority 4096
-- **Value**: Production-ready security without research
+- **Value**: near-production-ready security without research
 
 ### 4. Context Awareness
 
@@ -195,12 +195,14 @@ az deployment group validate `
 Even with Copilot, some tasks still required manual effort:
 
 1. **Strategic Decisions** (human judgment):
+
    - Subnet sizing (/24 for each tier)
    - Port numbers (80, 443, 8080, 1433)
    - Soft delete retention (7 days)
    - Storage SKU selection (Standard_LRS)
 
 2. **Project Organization** (structure):
+
    - Decision to use separate modules
    - File naming conventions
    - Repository structure
@@ -221,13 +223,13 @@ Even with Copilot, some tasks still required manual effort:
 ✅ **Descriptive prompts**: "Create a secure storage account with..." worked better than "storage account"  
 ✅ **Iterative refinement**: Adding requirements one at a time let Copilot understand context  
 ✅ **Accepting suggestions**: Trusting Copilot's defaults (API versions, security) saved time  
-✅ **Natural language**: Writing comments in plain English felt intuitive  
+✅ **Natural language**: Writing comments in plain English felt intuitive
 
 ### What Could Be Improved
 
 ⚠️ **Multi-file context**: Copilot doesn't always see other files (had to specify module paths)  
 ⚠️ **Complex logic**: For advanced scenarios (loops, conditionals), needed more guidance  
-⚠️ **Custom requirements**: Very specific business rules still require manual coding  
+⚠️ **Custom requirements**: Very specific business rules still require manual coding
 
 ### Recommended Workflow
 
@@ -268,7 +270,7 @@ Assuming:
 - **Faster delivery**: Infrastructure ready in 10 min instead of 1 hour
 - **Reduced errors**: Zero bugs on first deployment
 - **Learning acceleration**: No training required, learn by doing
-- **Better quality**: Production-ready code with security best practices
+- **Better quality**: near-production-ready code with security best practices
 
 ---
 

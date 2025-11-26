@@ -1,6 +1,6 @@
 # Copilot-Generated Terraform Code
 
-This folder contains **production-ready Terraform modules** generated with GitHub Copilot assistance.
+This folder contains **near-production-ready Terraform modules** generated with GitHub Copilot assistance.
 
 ## Module Structure
 
@@ -86,17 +86,17 @@ example-code/
 
 ## Time to Create with Copilot
 
-| Task | Manual Time | Copilot Time | Savings |
-|------|-------------|--------------|---------|
-| **Networking Module** | 6 hours | 30 min | 92% |
-| **App Service Module** | 5 hours | 25 min | 92% |
-| **Database Module** | 5 hours | 25 min | 92% |
-| **Monitoring Module** | 3 hours | 15 min | 92% |
-| **Variables & Validation** | 4 hours | 20 min | 92% |
-| **Outputs** | 2 hours | 10 min | 92% |
-| **Multi-Environment Setup** | 3 hours | 15 min | 92% |
-| **Testing & Refinement** | 2 hours | 20 min | 83% |
-| **TOTAL** | **30 hours** | **2.7 hours** | **91%** |
+| Task                        | Manual Time  | Copilot Time  | Savings |
+| --------------------------- | ------------ | ------------- | ------- |
+| **Networking Module**       | 6 hours      | 30 min        | 92%     |
+| **App Service Module**      | 5 hours      | 25 min        | 92%     |
+| **Database Module**         | 5 hours      | 25 min        | 92%     |
+| **Monitoring Module**       | 3 hours      | 15 min        | 92%     |
+| **Variables & Validation**  | 4 hours      | 20 min        | 92%     |
+| **Outputs**                 | 2 hours      | 10 min        | 92%     |
+| **Multi-Environment Setup** | 3 hours      | 15 min        | 92%     |
+| **Testing & Refinement**    | 2 hours      | 20 min        | 83%     |
+| **TOTAL**                   | **30 hours** | **2.7 hours** | **91%** |
 
 ## Security Validation
 
@@ -239,14 +239,14 @@ func TestTerraformInfrastructure(t *testing.T) {
     terraformOptions := &terraform.Options{
         TerraformDir: "../environments/dev",
     }
-    
+
     defer terraform.Destroy(t, terraformOptions)
     terraform.InitAndApply(t, terraformOptions)
-    
+
     // Validate outputs
     vnetID := terraform.Output(t, terraformOptions, "vnet_id")
     assert.NotEmpty(t, vnetID)
-    
+
     appServiceURL := terraform.Output(t, terraformOptions, "app_service_url")
     assert.Contains(t, appServiceURL, "azurewebsites.net")
 }

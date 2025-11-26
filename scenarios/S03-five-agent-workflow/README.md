@@ -2,9 +2,9 @@
 
 ## 🎯 Overview
 
-This demo showcases GitHub Copilot's **5-agent workflow** for designing and implementing Azure infrastructure using custom agents. It demonstrates how architects and IT professionals can leverage specialized agents to move from business requirements to production-ready Bicep templates through a structured, iterative process.
+This demo showcases GitHub Copilot's **5-agent workflow** for designing and implementing Azure infrastructure using custom agents. It demonstrates how architects and IT professionals can leverage specialized agents to move from business requirements to near-production-ready Bicep templates through a structured, iterative process.
 
-> **Working Implementation**: The complete workflow output is available as production-ready infrastructure in [`../../infra/bicep/contoso-patient-portal/`](../../infra/bicep/contoso-patient-portal/) (1,070 lines of Bicep, 10 modules).
+> **Working Implementation**: The complete workflow output is available as near-production-ready infrastructure in [`../../infra/bicep/contoso-patient-portal/`](../../infra/bicep/contoso-patient-portal/) (1,070 lines of Bicep, 10 modules).
 
 **Target Audience**: Solution Architects, Cloud Architects, Infrastructure Engineers, IT Professionals
 
@@ -31,7 +31,7 @@ Traditional infrastructure design involves:
 
 ## 🤖 The Five Agents
 
-### 0. Plan Agent (`@plan`) - *Start Here*
+### 0. Plan Agent (`@plan`) - _Start Here_
 
 - **Purpose**: Break down complex infrastructure projects into step-by-step implementation plans
 - **Input**: Business requirements, constraints, budget, compliance needs
@@ -57,14 +57,14 @@ Traditional infrastructure design involves:
 
 ### 4. Bicep Implementation Specialist (`bicep-implement`)
 
-- **Purpose**: Production-ready Bicep templates
+- **Purpose**: near-production-ready Bicep templates
 - **Input**: Implementation plan
 - **Output**: Modular Bicep templates, parameter files, deployment scripts
 - **Handoff**: Templates ready for deployment
 - **Regional Default**: `swedencentral` (renewable energy)
 - **Naming Convention**: Generates unique suffixes using `uniqueString()` to prevent resource name collisions
 
-### 2. ADR Generator (`adr_generator`) - *Optional*
+### 2. ADR Generator (`adr_generator`) - _Optional_
 
 - **Purpose**: Document architectural decisions for enterprise governance
 - **Input**: Architecture discussions, trade-offs, decisions from Plan agent
@@ -110,14 +110,15 @@ Traditional infrastructure design involves:
 
    ```powershell
    cd scenarios/S03-five-agent-workflow/prompts
+   ```
 
-```
+````
 
 2. **Open VS Code**:
 
    ```powershell
    code .
-```
+````
 
 1. **Open GitHub Copilot Chat** (`Ctrl+Shift+I`)
 
@@ -199,28 +200,29 @@ S03-five-agent-workflow/
    cd solution/templates
    bicep build main.bicep --stdout --no-restore
    bicep lint main.bicep
+   ```
 
-```
+````
 
 4. (Optional) What-if deployment:
 
    ```powershell
    .\deploy.ps1 -WhatIf
-```
+````
 
-**Key Takeaway**: Production-ready templates in minutes, following Azure best practices and security defaults.
+**Key Takeaway**: near-production-ready templates in minutes, following Azure best practices and security defaults.
 
 ## 📊 Value Metrics
 
-| Metric | Traditional Approach | With 5-Agent Workflow | Improvement |
-|--------|---------------------|----------------------|-------------|
-| **Planning & Requirements** | 1-2 hours | 5 minutes | **96% reduction** |
-| **Architecture Assessment** | 2-4 hours | 5 minutes | **96% reduction** |
-| **Implementation Planning** | 3-6 hours | 5 minutes | **95% reduction** |
-| **Bicep Template Creation** | 4-8 hours | 10 minutes | **95% reduction** |
-| **Total Time** | 10-20 hours | 45 minutes | **96% reduction** |
-| **Context Loss** | High (multiple handoffs) | None (automatic) | **Eliminated** |
-| **Documentation** | Manual, often outdated | Auto-generated | **Always current** |
+| Metric                      | Traditional Approach     | With 5-Agent Workflow | Improvement        |
+| --------------------------- | ------------------------ | --------------------- | ------------------ |
+| **Planning & Requirements** | 1-2 hours                | 5 minutes             | **96% reduction**  |
+| **Architecture Assessment** | 2-4 hours                | 5 minutes             | **96% reduction**  |
+| **Implementation Planning** | 3-6 hours                | 5 minutes             | **95% reduction**  |
+| **Bicep Template Creation** | 4-8 hours                | 10 minutes            | **95% reduction**  |
+| **Total Time**              | 10-20 hours              | 45 minutes            | **96% reduction**  |
+| **Context Loss**            | High (multiple handoffs) | None (automatic)      | **Eliminated**     |
+| **Documentation**           | Manual, often outdated   | Auto-generated        | **Always current** |
 
 **Time Savings**:
 
@@ -335,7 +337,7 @@ By the end of this demo, participants will:
 
 ### Opening (2 minutes)
 
-- **Hook**: "What if you could go from customer requirements to production-ready infrastructure in 30 minutes?"
+- **Hook**: "What if you could go from customer requirements to near-production-ready infrastructure in 30 minutes?"
 - Present traditional timeline (2-3 days)
 - Introduce 4-agent workflow concept
 
@@ -369,14 +371,17 @@ A: No - it augments their capabilities. Architects still make decisions; agents 
 ## 🧪 Variations to Try
 
 1. **Change Compliance Requirements**:
+
    - Swap HIPAA for PCI-DSS or SOC 2
    - Observe how recommendations change
 
 2. **Adjust Budget**:
+
    - Set budget to $200/month or $5,000/month
    - See how SKU recommendations adapt
 
 3. **Add Specific Requirements**:
+
    - "Must use Azure Firewall"
    - "Require multi-region active-active"
    - See how architecture adjusts
@@ -392,7 +397,7 @@ Demo is successful when audience:
 - [ ] Understands the 5-agent workflow concept (starting with Plan agent)
 - [ ] Sees value in automatic context handoffs
 - [ ] Recognizes time savings (96% reduction, 18 hours → 45 minutes)
-- [ ] Appreciates production-ready output quality (unique suffixes, regional defaults)
+- [ ] Appreciates near-production-ready output quality (unique suffixes, regional defaults)
 - [ ] Wants to try it on their own projects
 
 ## 📝 Feedback & Improvement

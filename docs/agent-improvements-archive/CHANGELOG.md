@@ -120,17 +120,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Structured ADR generation with coded bullet points
 - WAF pillar assessment (5 pillars)
 - Machine-readable infrastructure planning
-- Production-ready Bicep code generation
+- near-production-ready Bicep code generation
 - Cross-agent workflow integration
 
 ---
 
 ## Version History Summary
 
-| Version | Date | Key Changes | Agents Affected |
-|---------|------|-------------|-----------------|
-| 1.1.0 | 2025-11-18 | Cost estimation, dependency viz, progressive impl | All 4 agents |
-| 1.0.0 | 2025-11-15 | Initial release | All 4 agents |
+| Version | Date       | Key Changes                                       | Agents Affected |
+| ------- | ---------- | ------------------------------------------------- | --------------- |
+| 1.1.0   | 2025-11-18 | Cost estimation, dependency viz, progressive impl | All 4 agents    |
+| 1.0.0   | 2025-11-15 | Initial release                                   | All 4 agents    |
 
 ---
 

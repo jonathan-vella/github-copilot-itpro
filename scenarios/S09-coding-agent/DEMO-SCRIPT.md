@@ -28,6 +28,7 @@ gh auth status
 ### Backup Plan
 
 If Copilot is slow or unavailable:
+
 - Show a previously completed PR from Copilot
 - Walk through the session logs explaining what happened
 - Demo the interactive workflow instead (S03)
@@ -36,14 +37,14 @@ If Copilot is slow or unavailable:
 
 ## Demo Timeline
 
-| Time | Phase | What You're Doing |
-|------|-------|-------------------|
-| 0:00 | Opening | Set the scene, explain Coding Agent |
-| 2:00 | Issue Creation | Write/show the issue |
-| 5:00 | Assignment | Assign to Copilot, explain what happens |
-| 7:00 | Waiting | Talk about use cases while Copilot works |
-| 10:00 | PR Review | Show the generated PR and code |
-| 13:00 | Wrap-up | Metrics, Q&A |
+| Time  | Phase          | What You're Doing                        |
+| ----- | -------------- | ---------------------------------------- |
+| 0:00  | Opening        | Set the scene, explain Coding Agent      |
+| 2:00  | Issue Creation | Write/show the issue                     |
+| 5:00  | Assignment     | Assign to Copilot, explain what happens  |
+| 7:00  | Waiting        | Talk about use cases while Copilot works |
+| 10:00 | PR Review      | Show the generated PR and code           |
+| 13:00 | Wrap-up        | Metrics, Q&A                             |
 
 ---
 
@@ -84,22 +85,26 @@ If Copilot is slow or unavailable:
 ## Add Azure Monitor Alerts to Patient Portal
 
 ### Context
-The patient portal infrastructure in `infra/bicep/contoso-patient-portal/` needs 
+
+The patient portal infrastructure in `infra/bicep/contoso-patient-portal/` needs
 monitoring before production go-live. Currently there are no alert rules configured.
 
 ### Requirements
 
 **Alert Rules to Create:**
+
 1. **CPU Alert**: Trigger when App Service CPU > 80% for 5 minutes
-2. **Memory Alert**: Trigger when memory > 85% for 5 minutes  
+2. **Memory Alert**: Trigger when memory > 85% for 5 minutes
 3. **HTTP 5xx Alert**: Trigger when HTTP 500 errors > 10 in 5 minutes
 4. **Response Time Alert**: Trigger when avg response time > 3 seconds
 
 **Action Group:**
+
 - Create email action group for alerts
 - Email parameter should be configurable
 
 **Implementation Requirements:**
+
 - Create new module: `modules/monitoring-alerts.bicep`
 - Follow existing patterns in the codebase
 - Use `swedencentral` region
@@ -108,6 +113,7 @@ monitoring before production go-live. Currently there are no alert rules configu
 - Update `README.md` with monitoring section
 
 ### Acceptance Criteria
+
 - [ ] `bicep build` succeeds with no errors
 - [ ] All 4 alert rules are created
 - [ ] Action group is properly configured
@@ -144,6 +150,7 @@ monitoring before production go-live. Currently there are no alert rules configu
 > [Copilot will add a comment saying it's starting work]
 >
 > "Copilot is now:
+>
 > 1. Analyzing our entire codebase structure
 > 2. Understanding the existing Bicep patterns
 > 3. Planning the implementation
@@ -162,21 +169,25 @@ monitoring before production go-live. Currently there are no alert rules configu
 > "Here are perfect tasks for Coding Agent:
 >
 > **Infrastructure additions:**
+>
 > - Add monitoring to existing deployments (like we're doing)
 > - Create new Bicep modules following existing patterns
 > - Add tags or update configurations across modules
 >
 > **Documentation:**
+>
 > - Generate README files for undocumented code
 > - Add inline comments to complex templates
 > - Create architecture diagrams
 >
 > **Refactoring:**
+>
 > - Convert inline resources to modules
 > - Update API versions across all files
 > - Apply naming convention changes
 >
 > **What's NOT ideal:**
+>
 > - Greenfield architecture design (use interactive agents)
 > - Security-critical changes (need human design)
 > - Complex multi-system integrations"
@@ -199,17 +210,21 @@ monitoring before production go-live. Currently there are no alert rules configu
 ### What to Highlight
 
 **In the PR description:**
+
 > "Look at this PR description—Copilot explains what it did and why.
 > This is your audit trail."
 
 **In the code:**
+
 > "Let's look at the generated Bicep:
+>
 > - It followed our naming conventions
 > - Used the same parameter patterns as other modules
 > - Included the required tags
 > - Wired everything into main.bicep"
 
 **Session logs:**
+
 > "These session logs show Copilot's reasoning. This is incredibly valuable for
 > understanding why it made certain decisions—and for debugging if something's wrong."
 
@@ -222,7 +237,7 @@ bicep build main.bicep
 bicep lint main.bicep
 ```
 
-> "Zero errors. This is production-ready code."
+> "Zero errors. This is near-production-ready code."
 
 ---
 
@@ -232,13 +247,13 @@ bicep lint main.bicep
 
 > "Let's talk about what just happened:
 >
-> | Task | Manual | With Coding Agent |
-> |------|--------|-------------------|
-> | Write monitoring module | 2-3 hours | 5 min (issue writing) |
-> | Research alert thresholds | 30 min | Included |
-> | Wire into existing code | 30 min | Included |
-> | Update documentation | 30 min | Included |
-> | **Total** | **3-4 hours** | **5 min + review** |
+> | Task                      | Manual        | With Coding Agent     |
+> | ------------------------- | ------------- | --------------------- |
+> | Write monitoring module   | 2-3 hours     | 5 min (issue writing) |
+> | Research alert thresholds | 30 min        | Included              |
+> | Wire into existing code   | 30 min        | Included              |
+> | Update documentation      | 30 min        | Included              |
+> | **Total**                 | **3-4 hours** | **5 min + review**    |
 >
 > That's **90%+ time savings** on a routine infrastructure task."
 
@@ -257,16 +272,17 @@ bicep lint main.bicep
 
 ## 🆘 Troubleshooting During Demo
 
-| Problem | Quick Fix |
-|---------|-----------|
+| Problem                 | Quick Fix                                                                               |
+| ----------------------- | --------------------------------------------------------------------------------------- |
 | Can't assign to Copilot | "Coding Agent requires Copilot Business/Enterprise. Let me show a completed example..." |
-| Copilot taking > 10 min | "Complex tasks take longer. Let me show a previously completed PR while we wait..." |
-| PR has errors | "Great teaching moment! Let's ask Copilot to fix it..." → Comment on PR |
-| Wrong implementation | "This is why we review! Let me show how to request changes..." |
+| Copilot taking > 10 min | "Complex tasks take longer. Let me show a previously completed PR while we wait..."     |
+| PR has errors           | "Great teaching moment! Let's ask Copilot to fix it..." → Comment on PR                 |
+| Wrong implementation    | "This is why we review! Let me show how to request changes..."                          |
 
 ### Backup: Pre-Completed PR
 
 If you need to show a completed example, reference:
+
 - A previous PR created by Copilot in this repo
 - Or walk through what the PR would contain using the `examples/` folder
 
@@ -301,6 +317,7 @@ If you need to show a completed example, reference:
 ### "What tasks work best?"
 
 > "Well-defined, scoped tasks with clear acceptance criteria:
+>
 > - Add feature X following existing pattern Y
 > - Create module for Z with these specific requirements
 > - Update configuration across all files
@@ -321,14 +338,14 @@ If you need to show a completed example, reference:
 
 ### Key Metrics
 
-| Metric | Value |
-|--------|-------|
-| Time to write issue | 5-10 minutes |
-| Copilot processing | 2-10 minutes |
-| Review time | 5-15 minutes |
-| **Total** | **15-35 minutes** |
-| Traditional approach | 3-4 hours |
-| **Time savings** | **85-90%** |
+| Metric               | Value             |
+| -------------------- | ----------------- |
+| Time to write issue  | 5-10 minutes      |
+| Copilot processing   | 2-10 minutes      |
+| Review time          | 5-15 minutes      |
+| **Total**            | **15-35 minutes** |
+| Traditional approach | 3-4 hours         |
+| **Time savings**     | **85-90%**        |
 
 ### Copilot Coding Agent Requirements
 

@@ -16,7 +16,7 @@
 ---
 
 > **Transform how you build Azure infrastructure.** Go from hours of manual template writing
-> to minutes of AI-assisted development—with production-ready code, security best practices,
+> to minutes of AI-assisted development—with near-production-ready code, security best practices,
 > and documentation built in.
 
 ```mermaid
@@ -112,7 +112,7 @@ flowchart LR
     classDef implement fill:#fce4ec,stroke:#c2185b
 ```
 
-**Result:** Projects that took 18+ hours now complete in 45 minutes with production-ready code.
+**Result:** Projects that took 18+ hours now complete in 45 minutes with near-production-ready code.
 
 📖 **[See it in action → S03 Five Agent Workflow](scenarios/S03-five-agent-workflow)**
 

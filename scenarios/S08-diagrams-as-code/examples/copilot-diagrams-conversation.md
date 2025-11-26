@@ -28,22 +28,25 @@ for stakeholders. He's heard about "diagrams-as-code" but has never used it.
 **What is Diagrams-as-Code?**
 
 Instead of using visual tools like Visio or Draw.io where you drag-and-drop shapes, you write code
-(typically Python) that *describes* your architecture. A library then renders that description into
+(typically Python) that _describes_ your architecture. A library then renders that description into
 an image.
 
 **Key Benefits:**
+
 1. **Version Control**: Your diagram is code, so you can track changes in Git just like infrastructure
 2. **Consistency**: Same icons, same styling, every time - no more "which shade of blue is Azure?"
 3. **Reproducibility**: Run the script, get the same diagram - no manual alignment needed
 4. **Automation**: Can be part of CI/CD to auto-generate docs when architecture changes
 
 **For Your Situation (2-hour deadline):**
+
 - ✅ **Good fit**: You need a professional diagram quickly
 - ✅ **Good fit**: You want to version-control it with your code
 - ⚠️ **Learning curve**: First-time setup takes ~10 minutes (Python + Graphviz)
 - ✅ **Long-term win**: Future diagrams will take 5 minutes instead of 45
 
 **The Main Tool**: Python `diagrams` library (by mingrammer)
+
 - Supports Azure, AWS, GCP, Kubernetes, on-prem icons
 - Clean, professional output
 - Well-documented
@@ -78,6 +81,7 @@ Would you like me to walk you through the concepts while we build your specific 
 | Freeform drawings | Code enforces structure | Use Visio for whiteboard-style |
 
 **For Your Design Review:**
+
 - Architecture overview diagram → ✅ Perfect fit
 - Detailed network diagram with IP addresses → ⚠️ Possible but verbose
 - Whiteboard-style brainstorming → ❌ Use Visio/Miro instead
@@ -92,6 +96,7 @@ Does this help clarify? What type of diagram do you need for your review?
 
 > **Marcus**: Perfect context! I need an architecture overview showing our new e-commerce platform.
 > We have:
+>
 > - Azure Front Door for global load balancing
 > - Azure Kubernetes Service (AKS) cluster with 3 microservices
 > - Azure SQL Database and Redis Cache for data
@@ -144,9 +149,11 @@ skill - understanding HOW to represent your system visually.
 **Key Decisions for Your Diagram:**
 
 1. **Flow Direction**: Top-to-bottom (user → edge → compute → data) or left-to-right?
+
    - Recommendation: Top-to-bottom for this type of architecture
 
 2. **Clustering**: Group related services visually
+
    - AKS microservices in one cluster
    - Data services in another
    - Platform services (monitoring, secrets) separate
@@ -171,6 +178,7 @@ Does this logical structure match how you think about your architecture? Any con
 design reviews. Let me update the mental model:
 
 **Refined Connection Map:**
+
 ```
 Front Door
     │
@@ -188,16 +196,19 @@ Front Door
 ```
 
 **Diagram Implications:**
+
 1. We could use **edge labels** to show "read" vs "write" on the SQL connections
 2. Or keep it simple for the overview and note it verbally in the review
 3. For a detailed data flow diagram, you'd want a separate diagram
 
 **Recommendation for Design Review:**
+
 - Keep the main diagram clean (no labels on edges)
 - Mention the read/write pattern verbally
 - If stakeholders want detail, we can generate a second "data flow" diagram
 
 **Platform Services (cross-cutting):**
+
 - Key Vault: All 3 services retrieve secrets at startup
 - App Insights: All services send telemetry continuously
 
@@ -229,6 +240,7 @@ from diagrams.azure.devops import ApplicationInsights
 ```
 
 **Why This Matters:**
+
 - `Diagram` = The canvas that holds everything
 - `Cluster` = Visual grouping (those boxes around related services)
 - `Edge` = Connections between services (can have labels, colors)
@@ -236,6 +248,7 @@ from diagrams.azure.devops import ApplicationInsights
 
 **Icon Naming Convention:**
 The library organizes icons by cloud provider and category:
+
 - `diagrams.azure.network` → Network icons (Front Door, Load Balancer, etc.)
 - `diagrams.azure.compute` → Compute icons (VMs, AKS, App Service)
 - `diagrams.azure.database` → Data icons (SQL, Cosmos, Redis)
@@ -259,6 +272,7 @@ with Diagram(
 ```
 
 **Why This Matters:**
+
 - `with Diagram(...)` creates a context - everything inside gets drawn
 - `show=False` means it won't pop up a viewer (good for automation)
 - `direction` controls flow: "TB" (top-bottom), "LR" (left-right), "BT", "RL"
@@ -270,21 +284,21 @@ with Diagram(
 
 ```python
 with Diagram("TechVentures E-Commerce Platform", show=False, direction="TB"):
-    
+
     # Edge tier - entry point
     front_door = FrontDoors("Azure Front Door")
-    
+
     # Compute tier - our microservices in AKS
     with Cluster("AKS Cluster"):
         product_svc = KubernetesServices("Product Service")
         order_svc = KubernetesServices("Order Service")
         user_svc = KubernetesServices("User Service")
-    
+
     # Data tier
     with Cluster("Data Layer"):
         sql_db = SQLDatabases("Azure SQL")
         redis = CacheForRedis("Redis Cache")
-    
+
     # Platform services
     with Cluster("Platform Services"):
         key_vault = KeyVaults("Key Vault")
@@ -292,6 +306,7 @@ with Diagram("TechVentures E-Commerce Platform", show=False, direction="TB"):
 ```
 
 **Why This Matters:**
+
 - Each component is a variable - we'll connect them later
 - `Cluster()` creates a visual box around grouped items
 - The string in each constructor is the **label** shown on the diagram
@@ -306,22 +321,23 @@ with Diagram("TechVentures E-Commerce Platform", show=False, direction="TB"):
     front_door >> product_svc
     front_door >> order_svc
     front_door >> user_svc
-    
+
     # Data connections
     product_svc >> redis
     product_svc >> sql_db
-    
+
     order_svc >> redis
     order_svc >> sql_db
-    
+
     user_svc >> redis
     user_svc >> sql_db
-    
+
     # Platform service connections (simplified)
     [product_svc, order_svc, user_svc] >> app_insights
 ```
 
 **Why This Matters:**
+
 - `>>` means "connects to" (draws an arrow)
 - `<<` means "connects from" (reverse direction)
 - `- Edge() -` for bidirectional or labeled edges
@@ -367,45 +383,46 @@ with Diagram(
 ):
     # Edge Tier - Global entry point
     front_door = FrontDoors("Azure Front Door")
-    
+
     # Compute Tier - Microservices in AKS
     with Cluster("AKS Cluster"):
         product_svc = KubernetesServices("Product Service")
         order_svc = KubernetesServices("Order Service")
         user_svc = KubernetesServices("User Service")
-        
+
         # Group services for easier connection
         services = [product_svc, order_svc, user_svc]
-    
+
     # Data Tier
     with Cluster("Data Layer"):
         sql_db = SQLDatabases("Azure SQL")
         redis = CacheForRedis("Redis Cache")
-    
+
     # Platform Services
     with Cluster("Platform Services"):
         key_vault = KeyVaults("Key Vault")
         app_insights = ApplicationInsights("App Insights")
-    
+
     # === Connections ===
-    
+
     # Traffic flow from Front Door
     front_door >> services
-    
+
     # All services use Redis for caching
     services >> redis
-    
+
     # All services read from SQL (Order Service also writes)
     services >> sql_db
-    
+
     # Monitoring - all services send telemetry
     services >> app_insights
-    
+
     # Secrets - all services retrieve from Key Vault at startup
     services >> key_vault
 ```
 
 **To Run:**
+
 ```bash
 # Install dependencies (one-time)
 pip install diagrams
@@ -462,7 +479,7 @@ Create a "Critical Services" sub-cluster:
 with Cluster("AKS Cluster"):
     with Cluster("Critical Path", graph_attr={"bgcolor": "lightyellow"}):
         order_svc = KubernetesServices("Order Service")
-    
+
     product_svc = KubernetesServices("Product Service")
     user_svc = KubernetesServices("User Service")
 ```
@@ -497,6 +514,7 @@ on the diagram. This is one of those limitations I mentioned earlier.
 **Workarounds:**
 
 **1. In the Diagram Title:**
+
 ```python
 with Diagram(
     "TechVentures E-Commerce Platform\nSLA: 99.9% uptime, <200ms response",
@@ -506,6 +524,7 @@ with Diagram(
 ```
 
 **2. In Code Comments (for documentation):**
+
 ```python
 """
 Architecture: TechVentures E-Commerce Platform
@@ -517,6 +536,7 @@ SLA Commitments:
 ```
 
 **3. Post-Processing:**
+
 - Generate PNG with `diagrams`
 - Add annotations in a simple image editor
 - Or use the SVG output and edit in Inkscape
@@ -528,13 +548,16 @@ Create a `ARCHITECTURE.md` that embeds the image with context:
 # TechVentures E-Commerce Architecture
 
 ## SLA Commitments
+
 - **Availability**: 99.9% uptime
 - **Latency**: <200ms P95 response time
 
 ## Architecture Diagram
+
 ![Architecture](ecommerce_architecture.png)
 
 ## Component Details
+
 ...
 ```
 
@@ -548,7 +571,7 @@ The diagram is for visual understanding; the markdown is for details.
 
 > **Marcus**: Great advice! Let me have the final enhanced script.
 
-**Copilot**: Here's your production-ready script with the critical path highlighting:
+**Copilot**: Here's your near-production-ready script with the critical path highlighting:
 
 ```python
 """
@@ -586,48 +609,49 @@ with Diagram(
 ):
     # === EDGE TIER ===
     front_door = FrontDoors("Azure Front Door")
-    
+
     # === COMPUTE TIER ===
     with Cluster("AKS Cluster"):
         product_svc = KubernetesServices("Product Service")
         order_svc = KubernetesServices("Order Service")  # Critical path
         user_svc = KubernetesServices("User Service")
-    
+
     # === DATA TIER ===
     with Cluster("Data Layer"):
         sql_db = SQLDatabases("Azure SQL")
         redis = CacheForRedis("Redis Cache")
-    
+
     # === PLATFORM SERVICES ===
     with Cluster("Platform Services"):
         key_vault = KeyVaults("Key Vault")
         app_insights = ApplicationInsights("App Insights")
-    
+
     # === CONNECTIONS ===
-    
+
     # Critical transaction path (Order Service)
     front_door >> Edge(**CRITICAL_EDGE, label="transactions") >> order_svc
     order_svc >> Edge(**CRITICAL_EDGE, label="write") >> sql_db
     order_svc >> redis
-    
+
     # Standard service paths
     front_door >> Edge(**STANDARD_EDGE) >> product_svc
     front_door >> Edge(**STANDARD_EDGE) >> user_svc
-    
+
     # Read paths to SQL
     product_svc >> Edge(label="read") >> sql_db
     user_svc >> Edge(label="read") >> sql_db
-    
+
     # All services use Redis
     product_svc >> redis
     user_svc >> redis
-    
+
     # Platform service connections
     [product_svc, order_svc, user_svc] >> app_insights
     [product_svc, order_svc, user_svc] >> key_vault
 ```
 
 This script:
+
 - ✅ Highlights the critical transaction path in red
 - ✅ Labels read vs write operations
 - ✅ Groups services logically
@@ -646,6 +670,7 @@ This script:
 **Copilot**: Excellent question! Here's how to scale diagrams-as-code across a team:
 
 **Repository Structure:**
+
 ```
 docs/
 ├── architecture/
@@ -663,11 +688,13 @@ docs/
 **Best Practices:**
 
 1. **Commit the Code, Optionally the Images**
+
    - Always commit `.py` files
    - Either commit generated PNGs (for easy viewing in PRs)
    - Or add `generated/*.png` to `.gitignore` and generate in CI
 
 2. **Version the Library**
+
    ```txt
    # requirements.txt
    diagrams==0.23.4  # Pin version to avoid surprise changes
@@ -675,12 +702,13 @@ docs/
 
 3. **Standardize Styling**
    Create a shared `diagram_styles.py`:
+
    ```python
    # diagram_styles.py
    CRITICAL_EDGE = {"color": "darkred", "style": "bold"}
    STANDARD_EDGE = {"color": "gray"}
    DATA_EDGE = {"color": "blue", "style": "dashed"}
-   
+
    DIAGRAM_DEFAULTS = {
        "show": False,
        "direction": "TB",
@@ -689,13 +717,14 @@ docs/
    ```
 
 4. **CI/CD Integration**
+
    ```yaml
    # .github/workflows/generate-diagrams.yml
    name: Generate Architecture Diagrams
    on:
      push:
        paths:
-         - 'docs/architecture/*.py'
+         - "docs/architecture/*.py"
    jobs:
      generate:
        runs-on: ubuntu-latest
@@ -741,17 +770,20 @@ docs/
 | **Team Practices** | Pin versions, shared styles, CI generation |
 
 **Time Investment:**
+
 - First diagram: ~20 minutes (including learning)
 - Future diagrams: ~5-10 minutes
 - Visio equivalent: 30-45 minutes each time
 
 **Your New Workflow:**
+
 1. Describe architecture to Copilot
 2. Build diagram iteratively with understanding
 3. Commit to Git with your code
 4. Auto-generate in CI when architecture changes
 
 **Next Steps for Marcus:**
+
 1. ✅ Run the script, get your PNG for the design review
 2. 📁 Commit the `.py` file to your repo
 3. 📝 Create companion `ARCHITECTURE.md` with context
@@ -765,6 +797,7 @@ docs/
 ### All Prompts Used (for future reference)
 
 **Phase 1: Understanding**
+
 ```
 I have a design review in 2 hours and need to document our new Azure microservices
 architecture. I've heard about "diagrams as code" but never used it. Can you help me
@@ -772,6 +805,7 @@ understand what it is and whether it's the right approach for my situation?
 ```
 
 **Phase 2: Architecture Discovery**
+
 ```
 I need an architecture overview showing our new e-commerce platform. We have:
 - Azure Front Door for global load balancing
@@ -784,18 +818,21 @@ How should I think about organizing this in a diagram?
 ```
 
 **Phase 3: Code Generation**
+
 ```
 Let's write the code! But please explain each part as we go - I want to understand
 what I'm writing, not just copy-paste.
 ```
 
 **Phase 4: Customization**
+
 ```
 For the design review, I'd like to highlight that Order Service is the critical path
 for transactions. Can we make it stand out somehow?
 ```
 
 **Phase 5: Best Practices**
+
 ```
 How should I manage this going forward? We have 5 architects on the team who all
 maintain different diagrams.
@@ -805,19 +842,19 @@ maintain different diagrams.
 
 ## Value Delivered
 
-| Metric | Traditional Approach | Conversation Approach |
-|--------|---------------------|----------------------|
-| **Time to first diagram** | 45 minutes | 20 minutes |
-| **Future diagram time** | 30-45 minutes | 5-10 minutes |
-| **Version control** | Binary files (no diff) | Full Git history |
-| **Team consistency** | Manual enforcement | Automated via code |
-| **Knowledge transfer** | None | Complete understanding |
-| **Automation potential** | None | CI/CD ready |
+| Metric                    | Traditional Approach   | Conversation Approach  |
+| ------------------------- | ---------------------- | ---------------------- |
+| **Time to first diagram** | 45 minutes             | 20 minutes             |
+| **Future diagram time**   | 30-45 minutes          | 5-10 minutes           |
+| **Version control**       | Binary files (no diff) | Full Git history       |
+| **Team consistency**      | Manual enforcement     | Automated via code     |
+| **Knowledge transfer**    | None                   | Complete understanding |
+| **Automation potential**  | None                   | CI/CD ready            |
 
 **Key Insight**: Marcus didn't just get a diagram - he learned a repeatable skill. His next
 architecture diagram will take 10 minutes instead of 45, and he can teach his team the same approach.
 
 ---
 
-*This conversation demonstrates using GitHub Copilot as a learning partner, not just a code generator.
-The goal is understanding, not just output.*
+_This conversation demonstrates using GitHub Copilot as a learning partner, not just a code generator.
+The goal is understanding, not just output._

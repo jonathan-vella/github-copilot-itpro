@@ -9,7 +9,7 @@ These templates serve as:
 
 1. **Reference Implementation** - See the expected output of the learning conversation
 2. **Deployment Verification** - Test the templates work in your environment
-3. **Comparison Point** - Compare your conversation-generated code to production-ready code
+3. **Comparison Point** - Compare your conversation-generated code to near-production-ready code
 4. **Backup for Demos** - Presenter fallback if live conversation needs acceleration
 
 ## When to Use These Templates
@@ -41,6 +41,7 @@ solution/
 ### main.bicep
 
 The orchestration template that:
+
 - Defines parameters for the deployment
 - Calls network and storage modules
 - Passes outputs between modules
@@ -49,6 +50,7 @@ The orchestration template that:
 ### network.bicep
 
 The network module that creates:
+
 - Virtual Network with address space
 - Three subnets (web, app, data tiers)
 - Network Security Groups for each tier
@@ -58,6 +60,7 @@ The network module that creates:
 ### storage.bicep
 
 The storage module that creates:
+
 - Storage Account with security hardening
 - Private endpoint for secure access
 - Private DNS zone and link
@@ -144,15 +147,15 @@ The templates create this architecture:
 
 ## Security Features Implemented
 
-| Feature | Implementation | Why It Matters |
-|---------|---------------|----------------|
-| NSG Deny-All Baseline | Priority 4096 deny rules | Block unexpected traffic |
-| Tier Isolation | Web→App, App→Data only | Prevent lateral movement |
-| HTTPS Only | `supportsHttpsTrafficOnly: true` | Encrypt in transit |
-| TLS 1.2 | `minimumTlsVersion: 'TLS1_2'` | Modern encryption |
-| No Public Blobs | `allowBlobPublicAccess: false` | Prevent data leaks |
-| Private Endpoint | Storage on private network | No public exposure |
-| Soft Delete | 7-day retention | Data recovery option |
+| Feature               | Implementation                   | Why It Matters           |
+| --------------------- | -------------------------------- | ------------------------ |
+| NSG Deny-All Baseline | Priority 4096 deny rules         | Block unexpected traffic |
+| Tier Isolation        | Web→App, App→Data only           | Prevent lateral movement |
+| HTTPS Only            | `supportsHttpsTrafficOnly: true` | Encrypt in transit       |
+| TLS 1.2               | `minimumTlsVersion: 'TLS1_2'`    | Modern encryption        |
+| No Public Blobs       | `allowBlobPublicAccess: false`   | Prevent data leaks       |
+| Private Endpoint      | Storage on private network       | No public exposure       |
+| Soft Delete           | 7-day retention                  | Data recovery option     |
 
 ## Customization Points
 
@@ -179,5 +182,5 @@ The templates create this architecture:
 
 ---
 
-*These templates demonstrate production-ready Bicep patterns. Use them as a reference after
-learning the concepts through conversation with Copilot.*
+_These templates demonstrate near-production-ready Bicep patterns. Use them as a reference after
+learning the concepts through conversation with Copilot._

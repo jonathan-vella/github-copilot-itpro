@@ -246,9 +246,9 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 
 1. **Chaos Engineering**: Future enhancement (not in MVP)
 2. **Multi-region**: Single region deployment for demo
-3. **Custom Domains**: Using default *.azurewebsites.net domains
+3. **Custom Domains**: Using default \*.azurewebsites.net domains
 4. **Advanced Monitoring**: Basic Application Insights only
-5. **Production Scale**: Demo-scale infrastructure (not production-ready)
+5. **Production Scale**: Demo-scale infrastructure (not near-production-ready)
 
 ---
 
@@ -256,14 +256,14 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 
 ### Time Savings
 
-| Activity | Manual (Before) | With Copilot (After) | Savings |
-|----------|----------------|---------------------|---------|
-| Infrastructure Setup | 6 hours | 1 hour | 83% |
-| Load Test Script | 4 hours | 20 minutes | 92% |
-| API Validation | 3 hours | 15 minutes | 92% |
-| Documentation | 8 hours | 2 hours | 75% |
-| Test Reporting | 4 hours | 30 minutes | 88% |
-| **TOTAL** | **25 hours** | **4 hours 5 minutes** | **84%** |
+| Activity             | Manual (Before) | With Copilot (After)  | Savings |
+| -------------------- | --------------- | --------------------- | ------- |
+| Infrastructure Setup | 6 hours         | 1 hour                | 83%     |
+| Load Test Script     | 4 hours         | 20 minutes            | 92%     |
+| API Validation       | 3 hours         | 15 minutes            | 92%     |
+| Documentation        | 8 hours         | 2 hours               | 75%     |
+| Test Reporting       | 4 hours         | 30 minutes            | 88%     |
+| **TOTAL**            | **25 hours**    | **4 hours 5 minutes** | **84%** |
 
 ### Quality Metrics
 
@@ -357,13 +357,13 @@ Contoso Healthcare is undergoing a digital transformation and migrating their pa
 
 ## Risks and Mitigations
 
-| Risk | Impact | Probability | Mitigation |
-|------|--------|------------|------------|
-| SQL auth policy blocks deployment | High | Medium | Add `SecurityControl: 'Ignore'` tag |
-| Container pull failures | High | Low | Use managed identity with AcrPull role |
-| Load test fails due to rate limiting | Medium | Medium | Document 429 errors as expected |
-| Performance below baseline | Medium | Low | Right-size App Service Plan (P1v3) |
-| Cost overruns in demo environment | Low | Low | Use Basic SQL tier, cleanup scripts |
+| Risk                                 | Impact | Probability | Mitigation                             |
+| ------------------------------------ | ------ | ----------- | -------------------------------------- |
+| SQL auth policy blocks deployment    | High   | Medium      | Add `SecurityControl: 'Ignore'` tag    |
+| Container pull failures              | High   | Low         | Use managed identity with AcrPull role |
+| Load test fails due to rate limiting | Medium | Medium      | Document 429 errors as expected        |
+| Performance below baseline           | Medium | Low         | Right-size App Service Plan (P1v3)     |
+| Cost overruns in demo environment    | Low    | Low         | Use Basic SQL tier, cleanup scripts    |
 
 ---
 

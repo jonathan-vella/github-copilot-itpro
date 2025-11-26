@@ -19,7 +19,7 @@
 
 ## Overview
 
-This demo shows how GitHub Copilot acts as your **SBOM expert partner**, teaching you how to discover, understand, and document software components while creating a production-ready Software Bill of Materials (SBOM). Unlike traditional automation approaches, Copilot guides you through the process conversationally, building your understanding of SBOM fundamentals along the way.
+This demo shows how GitHub Copilot acts as your **SBOM expert partner**, teaching you how to discover, understand, and document software components while creating a near-production-ready Software Bill of Materials (SBOM). Unlike traditional automation approaches, Copilot guides you through the process conversationally, building your understanding of SBOM fundamentals along the way.
 
 **Perfect for**: Security teams new to SBOMs, compliance officers, IT professionals learning component discovery
 
@@ -44,6 +44,7 @@ By completing this demo, participants will understand:
 **Situation**: Sarah receives an urgent email from Mayo Clinic (enterprise customer) requesting a comprehensive SBOM within 48 hours for procurement approval. The $2M contract renewal is blocked until the SBOM is delivered.
 
 **The Problem**: Sarah has never created an SBOM before. She doesn't know:
+
 - What components to include (just app code? containers? infrastructure?)
 - What format to use (CycloneDX? SPDX?)
 - How to structure the data (what fields are required?)
@@ -68,7 +69,7 @@ By completing this demo, participants will understand:
 - 15 min: **Infrastructure** - Copilot guides Azure resource documentation decisions
 - 15 min: **Assembly** - Copilot generates complete SBOM JSON + HTML report
 - **Total: 1 hour 15 minutes** of guided discovery and learning
-- **Outcome**: 98% accuracy, production-ready SBOM + deep understanding for next time
+- **Outcome**: 98% accuracy, near-production-ready SBOM + deep understanding for next time
 
 **Key Difference**: Sarah doesn't just get an SBOM - she **learns how to create SBOMs** through conversation. Next customer request will be even faster.
 
@@ -90,33 +91,33 @@ graph TB
         Q1["What is an SBOM?<br/>Why does Mayo Clinic need one?"]
         A1[Copilot explains:<br/>Component inventory, CycloneDX, compliance]
     end
-    
+
     subgraph "Phase 2: Application Discovery (20 min)"
         Q2["What npm packages are in my app?<br/>How do I format them?"]
         A2[Copilot teaches PURL:<br/>pkg:npm/express@4.18.2, licenses]
     end
-    
+
     subgraph "Phase 3: Container Analysis (15 min)"
         Q3["What's in node:20-alpine?<br/>Do I include Alpine packages?"]
         A3[Copilot explains base image:<br/>Alpine Linux, musl, OpenSSL]
     end
-    
+
     subgraph "Phase 4: Infrastructure (15 min)"
         Q4["How do I document Azure services?<br/>Are they 'components'?"]
         A4[Copilot shows Azure PURL:<br/>pkg:azure/app-service, versions]
     end
-    
+
     subgraph "Phase 5: Assembly (15 min)"
         Q5["How do I combine everything?<br/>Is my SBOM valid?"]
         A5[Copilot generates CycloneDX 1.5:<br/>Validates, creates HTML report]
     end
-    
+
     subgraph "Final Deliverables"
         SBOM[15-Component SBOM<br/>CycloneDX 1.5 JSON]
         Report[Stakeholder Report<br/>HTML Dashboard]
         Knowledge[SBOM Understanding<br/>Reusable for next time]
     end
-    
+
     Q1 --> A1
     A1 --> Q2
     Q2 --> A2
@@ -129,7 +130,7 @@ graph TB
     A5 --> SBOM
     A5 --> Report
     A5 --> Knowledge
-    
+
     style Q1 fill:#FFD700,color:#000
     style Q2 fill:#FFD700,color:#000
     style Q3 fill:#FFD700,color:#000
@@ -154,12 +155,14 @@ graph TB
 ### Knowledge Prerequisites
 
 **None!** This demo is designed for security engineers **new to SBOMs**. Copilot will teach:
+
 - What SBOMs are and why they matter
 - CycloneDX format structure
 - Component discovery techniques
 - License compliance basics
 
 **Helpful but not required**:
+
 - Familiarity with JSON format (Copilot will explain)
 - Basic understanding of software dependencies (npm packages, Docker)
 - Awareness of compliance requirements (HIPAA, SOC2)
@@ -190,6 +193,7 @@ Real-world ToDo application from Azure Samples:
 ### 📁 [solution/](./solution/)
 
 **Legacy Scripts** (for reference only - automation approach):
+
 - **New-ApplicationSBOM.ps1**: PowerShell script for npm scanning
 - **New-ContainerSBOM.ps1**: Docker image analysis automation
 - **New-InfrastructureSBOM.ps1**: Azure Resource Graph queries
@@ -226,12 +230,14 @@ Real-world ToDo application from Azure Samples:
 1. **Open VS Code with Copilot Chat** (Ctrl+Shift+I / Cmd+Shift+I)
 
 2. **Start the conversation**:
+
    ```
-   I need to create a Software Bill of Materials (SBOM) for a healthcare application. 
+   I need to create a Software Bill of Materials (SBOM) for a healthcare application.
    I'm new to SBOMs - can you explain what they are and help me discover the components?
    ```
 
 3. **Follow Copilot's guidance** through:
+
    - Understanding SBOM purpose and formats
    - Discovering application dependencies
    - Analyzing container components
@@ -245,11 +251,13 @@ Real-world ToDo application from Azure Samples:
 **Best for**: Seeing the approach before trying yourself
 
 1. **Navigate to the demo folder**
+
 ```bash
 cd scenarios/S07-sbom-generator
 ```
 
 2. **Open the conversation example**
+
 ```bash
 code examples/copilot-sbom-conversation.md
 ```
@@ -294,21 +302,24 @@ code sbom-report.html
 ### 1. Teaching Through Conversation
 
 **What You'll See:**
+
 - Copilot explains SBOM concepts in plain language
 - Breaks complex topics into digestible pieces
 - Answers "why" questions (not just "how")
 
 **Example Exchange:**
+
 ```
 You: "What is an SBOM and why does Mayo Clinic need one?"
-Copilot: "An SBOM is like a recipe card for software - it lists every ingredient 
-(component) in your application. Mayo Clinic needs it for HIPAA compliance, 
+Copilot: "An SBOM is like a recipe card for software - it lists every ingredient
+(component) in your application. Mayo Clinic needs it for HIPAA compliance,
 vulnerability management, and incident response. Let me show you how to create one..."
 ```
 
 ### 2. Structured Discovery Process
 
 **Guided Workflow:**
+
 - **Phase 1**: Problem definition (10 min) - Understanding requirements
 - **Phase 2**: Application dependencies (20 min) - Analyzing package.json
 - **Phase 3**: Container components (15 min) - Docker image layers
@@ -318,6 +329,7 @@ vulnerability management, and incident response. Let me show you how to create o
 ### 3. Contextual Learning Moments
 
 **Educational Highlights:**
+
 - **PURL Format**: "Let me explain Package URLs (PURL) - the standard way to reference components"
 - **License Compliance**: "The MIT license means commercial use is allowed, but ISC has fewer restrictions"
 - **CycloneDX Structure**: "The 'components' array is the core - each entry needs name, version, and PURL"
@@ -325,6 +337,7 @@ vulnerability management, and incident response. Let me show you how to create o
 ### 4. Real-Time Problem Solving
 
 **Interactive Refinement:**
+
 - "Let's add Alpine Linux packages we might have missed"
 - "Should we include OpenSSL? Yes, because it's a security-critical component"
 - "Let's validate this SBOM against CycloneDX 1.5 schema"
@@ -332,6 +345,7 @@ vulnerability management, and incident response. Let me show you how to create o
 ### 5. Stakeholder-Ready Outputs
 
 **Production Deliverables:**
+
 - Complete CycloneDX 1.5 JSON (15 components)
 - HTML report for non-technical stakeholders
 - Understanding to create future SBOMs independently
@@ -340,18 +354,18 @@ vulnerability management, and incident response. Let me show you how to create o
 
 Track these metrics during your demo:
 
-| Metric | Manual Approach | With Copilot Conversation | Improvement |
-|--------|-----------------|---------------------------|-------------|
-| **Problem Understanding** | 30 min (reading docs) | 10 min (ask Copilot) | 67% faster |
-| **Application Dependencies** | 120 min (research npm) | 20 min (guided discovery) | 83% faster |
-| **Container Components** | 90 min (Docker docs) | 15 min (Copilot explains) | 83% faster |
-| **Infrastructure Inventory** | 60 min (Azure portal) | 15 min (paste & discuss) | 75% faster |
-| **SBOM Formatting** | 120 min (schema study) | 15 min (Copilot generates) | 88% faster |
-| **Report Generation** | 30 min (HTML/CSS) | 10 min (Copilot formats) | 67% faster |
-| **Total Time** | **6 hours** | **1.25 hours** | **79% reduction** |
-| **Accuracy** | 80% (missing components) | 98% (comprehensive) | +22.5% |
-| **Learning Outcome** | Minimal (task-focused) | **Complete SBOM understanding** | ✅ |
-| **Reusability** | Low (one-time effort) | **High (can create more SBOMs)** | ✅ |
+| Metric                       | Manual Approach          | With Copilot Conversation        | Improvement       |
+| ---------------------------- | ------------------------ | -------------------------------- | ----------------- |
+| **Problem Understanding**    | 30 min (reading docs)    | 10 min (ask Copilot)             | 67% faster        |
+| **Application Dependencies** | 120 min (research npm)   | 20 min (guided discovery)        | 83% faster        |
+| **Container Components**     | 90 min (Docker docs)     | 15 min (Copilot explains)        | 83% faster        |
+| **Infrastructure Inventory** | 60 min (Azure portal)    | 15 min (paste & discuss)         | 75% faster        |
+| **SBOM Formatting**          | 120 min (schema study)   | 15 min (Copilot generates)       | 88% faster        |
+| **Report Generation**        | 30 min (HTML/CSS)        | 10 min (Copilot formats)         | 67% faster        |
+| **Total Time**               | **6 hours**              | **1.25 hours**                   | **79% reduction** |
+| **Accuracy**                 | 80% (missing components) | 98% (comprehensive)              | +22.5%            |
+| **Learning Outcome**         | Minimal (task-focused)   | **Complete SBOM understanding**  | ✅                |
+| **Reusability**              | Low (one-time effort)    | **High (can create more SBOMs)** | ✅                |
 
 ### Additional Value Metrics
 
@@ -367,21 +381,25 @@ A **Software Bill of Materials (SBOM)** is a comprehensive inventory of all comp
 ### Why SBOMs Matter
 
 1. **Security & Vulnerability Management**
+
    - Identify vulnerable components quickly (e.g., Log4Shell, Heartbleed)
    - Track affected systems when vulnerabilities are disclosed
    - Prioritize patching based on actual component usage
 
 2. **Compliance & Regulatory Requirements**
+
    - **Executive Order 14028** (US Federal) requires SBOMs for software vendors
    - **HIPAA, SOC2, PCI-DSS** audits increasingly require SBOMs
    - **EU Cyber Resilience Act** will mandate SBOMs for software products
 
 3. **License Compliance**
+
    - Identify open-source licenses (GPL, MIT, Apache)
    - Avoid license conflicts (e.g., GPL in proprietary software)
    - Track attribution requirements
 
 4. **Supply Chain Risk Management**
+
    - Monitor third-party dependencies
    - Assess vendor risk (abandoned projects, malicious packages)
    - Support M&A due diligence
@@ -411,32 +429,34 @@ A **Software Bill of Materials (SBOM)** is a comprehensive inventory of all comp
 
 ### Per-SBOM Generation (Conversation Approach)
 
-| Item | Manual Research | With Copilot Conversation | Savings |
-|------|-----------------|---------------------------|---------|
-| **Time** | 6 hours | 1.25 hours | 4.75 hours (79%) |
-| **Accuracy** | 80% (missing Alpine packages) | 98% (comprehensive) | +22.5% |
-| **Coverage** | ~45 components | 60 components | +33% |
-| **Knowledge Transfer** | ❌ (one-time task) | ✅ (can create more SBOMs) | Ongoing |
+| Item                   | Manual Research               | With Copilot Conversation  | Savings          |
+| ---------------------- | ----------------------------- | -------------------------- | ---------------- |
+| **Time**               | 6 hours                       | 1.25 hours                 | 4.75 hours (79%) |
+| **Accuracy**           | 80% (missing Alpine packages) | 98% (comprehensive)        | +22.5%           |
+| **Coverage**           | ~45 components                | 60 components              | +33%             |
+| **Knowledge Transfer** | ❌ (one-time task)            | ✅ (can create more SBOMs) | Ongoing          |
 
 ### First Year Impact (1 security engineer, quarterly SBOMs for 10 apps)
 
-| Metric | Value | Calculation |
-|--------|-------|-------------|
-| **First SBOM (learning)** | 1.25 hours | With Copilot teaching |
-| **Subsequent SBOMs** | 30 min each | Knowledge retained |
-| **Total SBOMs** | 40 (10 apps × 4 quarters) | Quarterly compliance |
-| **Time Spent** | ~22 hours | 1.25 + (39 × 0.5) |
-| **Manual Time (if no Copilot)** | 240 hours | 40 × 6 hours |
-| **Time Saved** | **218 hours (91%)** | 27 work days recovered |
+| Metric                          | Value                     | Calculation            |
+| ------------------------------- | ------------------------- | ---------------------- |
+| **First SBOM (learning)**       | 1.25 hours                | With Copilot teaching  |
+| **Subsequent SBOMs**            | 30 min each               | Knowledge retained     |
+| **Total SBOMs**                 | 40 (10 apps × 4 quarters) | Quarterly compliance   |
+| **Time Spent**                  | ~22 hours                 | 1.25 + (39 × 0.5)      |
+| **Manual Time (if no Copilot)** | 240 hours                 | 40 × 6 hours           |
+| **Time Saved**                  | **218 hours (91%)**       | 27 work days recovered |
 
 ### Enterprise Scale (100 applications, 3 security engineers)
 
 **Traditional Approach (without Copilot):**
+
 - 400 SBOMs/year (100 apps × 4 quarters)
 - 2,400 hours @ 6 hours each
 - Requires 1.5 FTE dedicated to SBOM work
 
 **With Copilot Conversation Approach:**
+
 - 400 SBOMs/year (same coverage)
 - ~225 hours total (initial learning + 30 min each)
 - Handled by 3 security engineers as needed (no dedicated FTE)
@@ -510,24 +530,27 @@ A **Software Bill of Materials (SBOM)** is a comprehensive inventory of all comp
 **"Copilot doesn't know what an SBOM is"**
 
 ✅ **Solution**: Start with context-setting prompt:
+
 ```
-I need to create a Software Bill of Materials (SBOM) in CycloneDX 1.5 format 
-for a healthcare application. Can you help me understand what information I need 
+I need to create a Software Bill of Materials (SBOM) in CycloneDX 1.5 format
+for a healthcare application. Can you help me understand what information I need
 to collect and how to structure it?
 ```
 
 **"The conversation is too generic"**
 
 ✅ **Solution**: Provide specific context early:
+
 ```
-I'm working on a Node.js application (package.json attached) that runs in a 
-Docker container (node:20-alpine base image) on Azure App Service. I need to 
+I'm working on a Node.js application (package.json attached) that runs in a
+Docker container (node:20-alpine base image) on Azure App Service. I need to
 create an SBOM for HIPAA compliance. Where should I start?
 ```
 
 **"Copilot generated invalid CycloneDX JSON"**
 
 ✅ **Solution**: Ask for validation:
+
 ```
 Can you validate this SBOM against CycloneDX 1.5 schema? Fix any errors.
 ```
@@ -537,14 +560,16 @@ Then verify at: [CycloneDX Online Validator](https://cyclonedx.org/tool-center/v
 **"I don't understand Copilot's explanation"**
 
 ✅ **Solution**: Ask for clarification:
+
 ```
-Can you explain PURL (Package URL) in simpler terms? Give me an example 
+Can you explain PURL (Package URL) in simpler terms? Give me an example
 with the Express package from my package.json.
 ```
 
 **"The SBOM is missing components"**
 
 ✅ **Solution**: Iteratively refine:
+
 ```
 Are there any components we missed? Let's review:
 - Base container image packages (Alpine Linux)

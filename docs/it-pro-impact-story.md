@@ -36,17 +36,17 @@ Each scenario features a real-world character facing challenges you'll recognize
 
 ### Sarah Chen - Infrastructure Engineer
 
-> *"I need to deploy a hub-spoke network by Friday. Last time this took two weeks of research, testing, and debugging ARM templates."*
+> _"I need to deploy a hub-spoke network by Friday. Last time this took two weeks of research, testing, and debugging ARM templates."_
 
 **Her challenge:** Manual Bicep/Terraform development is slow and error-prone.
 
-**Her outcome:** Deploys production-ready hub-spoke network in 45 minutes (S01, S02).
+**Her outcome:** Deploys near-production-ready hub-spoke network in 45 minutes (S01, S02).
 
 ---
 
 ### Marcus Thompson - Cloud Architect
 
-> *"We're preparing for Azure Advanced Specialization audit. I have 200+ compliance controls to verify across our infrastructure."*
+> _"We're preparing for Azure Advanced Specialization audit. I have 200+ compliance controls to verify across our infrastructure."_
 
 **His challenge:** Manual compliance verification is tedious and incomplete.
 
@@ -56,7 +56,7 @@ Each scenario features a real-world character facing challenges you'll recognize
 
 ### Elena Rodriguez - DevOps Lead
 
-> *"Our runbooks are outdated, our architecture diagrams are wrong, and nobody has time to fix them."*
+> _"Our runbooks are outdated, our architecture diagrams are wrong, and nobody has time to fix them."_
 
 **Her challenge:** Documentation always falls behind reality.
 
@@ -66,7 +66,7 @@ Each scenario features a real-world character facing challenges you'll recognize
 
 ### James Park - Platform Engineer
 
-> *"Production is down. The error message is cryptic. I've been Googling for an hour."*
+> _"Production is down. The error message is cryptic. I've been Googling for an hour."_
 
 **His challenge:** Troubleshooting under pressure wastes precious time.
 
@@ -99,12 +99,12 @@ graph LR
     style After fill:#e8f5e9
 ```
 
-| Task | Manual Approach | With Copilot | Savings |
-|------|-----------------|--------------|---------|
-| VNet + subnets + NSGs | 45 min | 10 min | **78%** |
-| PowerShell automation | 60 min | 15 min | **75%** |
-| Troubleshooting research | 30 min | 5 min | **83%** |
-| Documentation generation | 120 min | 20 min | **83%** |
+| Task                     | Manual Approach | With Copilot | Savings |
+| ------------------------ | --------------- | ------------ | ------- |
+| VNet + subnets + NSGs    | 45 min          | 10 min       | **78%** |
+| PowerShell automation    | 60 min          | 15 min       | **75%** |
+| Troubleshooting research | 30 min          | 5 min        | **83%** |
+| Documentation generation | 120 min         | 20 min       | **83%** |
 
 ---
 
@@ -128,7 +128,7 @@ flowchart LR
 ```
 
 **Result:** A project that manually takes 18+ hours completes in 45 minutes with
-production-ready code, documentation, and architectural decisions recorded.
+near-production-ready code, documentation, and architectural decisions recorded.
 
 ---
 
@@ -136,12 +136,12 @@ production-ready code, documentation, and architectural decisions recorded.
 
 ### Your Role Evolves
 
-| From | To |
-|------|----|
-| Template writer | Architecture reviewer |
-| Documentation author | Quality validator |
-| Troubleshooting detective | Root cause analyst |
-| Script maintainer | Automation strategist |
+| From                      | To                    |
+| ------------------------- | --------------------- |
+| Template writer           | Architecture reviewer |
+| Documentation author      | Quality validator     |
+| Troubleshooting detective | Root cause analyst    |
+| Script maintainer         | Automation strategist |
 
 ### Your Value Increases
 
@@ -183,12 +183,12 @@ The time you save compounds into learning and strategic thinking:
 
 All time savings in this repository are backed by peer-reviewed research:
 
-| Source | Finding |
-|--------|---------|
-| GitHub Copilot Study | 55% faster task completion |
-| Forrester TEI | 88% reduction in repetitive tasks |
-| Stanford HAI | 60-70% problem-solving time reduction |
-| MIT Sloan | 80% documentation time saved |
+| Source               | Finding                               |
+| -------------------- | ------------------------------------- |
+| GitHub Copilot Study | 55% faster task completion            |
+| Forrester TEI        | 88% reduction in repetitive tasks     |
+| Stanford HAI         | 60-70% problem-solving time reduction |
+| MIT Sloan            | 80% documentation time saved          |
 
 📊 **[Full methodology and sources](time-savings-evidence.md)**
 
@@ -226,7 +226,7 @@ Use naming convention: kv-{project}-{env}-{suffix}
 Default region: swedencentral
 ```
 
-Watch as Copilot generates production-ready code with security best practices built in.
+Watch as Copilot generates near-production-ready code with security best practices built in.
 
 ---
 
@@ -234,7 +234,7 @@ Watch as Copilot generates production-ready code with security best practices bu
 
 ### "Will AI replace my job?"
 
-**No.** AI handles the *repetitive* parts of your job so you can focus on the *valuable* parts.
+**No.** AI handles the _repetitive_ parts of your job so you can focus on the _valuable_ parts.
 The IT Pros who thrive will be those who leverage AI, not those who ignore it.
 
 ### "Can I trust AI-generated code?"
@@ -258,14 +258,14 @@ The Dev Container handles setup; the scenarios teach by doing.
 
 Choose your path:
 
-| If you want to... | Start here |
-|-------------------|------------|
-| **Verify your setup** | [Prerequisites](getting-started/prerequisites.md) |
-| **Choose the right AI model** | [Model Selection](getting-started/model-selection.md) |
-| **Jump into code** | [S01 Bicep Baseline](../scenarios/S01-bicep-baseline/) |
+| If you want to...             | Start here                                                       |
+| ----------------------------- | ---------------------------------------------------------------- |
+| **Verify your setup**         | [Prerequisites](getting-started/prerequisites.md)                |
+| **Choose the right AI model** | [Model Selection](getting-started/model-selection.md)            |
+| **Jump into code**            | [S01 Bicep Baseline](../scenarios/S01-bicep-baseline/)           |
 | **See the advanced workflow** | [S03 Five Agent Workflow](../scenarios/S03-five-agent-workflow/) |
 
 ---
 
-*This repository is maintained by IT Pros, for IT Pros. We've been where you are.
-The transformation is real, and it starts with your next prompt.*
+_This repository is maintained by IT Pros, for IT Pros. We've been where you are.
+The transformation is real, and it starts with your next prompt._

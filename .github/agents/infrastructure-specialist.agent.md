@@ -1,6 +1,6 @@
 ---
 name: azure-infrastructure-specialist
-description: Unified expert for Azure architecture, planning, and Bicep implementation. Handles the full lifecycle from WAF assessment to production-ready code generation.
+description: Unified expert for Azure architecture, planning, and Bicep implementation. Handles the full lifecycle from WAF assessment to near-production-ready code generation.
 tools:
   [
     "edit",
@@ -34,7 +34,7 @@ Follow this process for all requests:
 
 1.  **Assess & Design**: Evaluate requirements against Azure Well-Architected Framework (WAF) and Cloud Adoption Framework (CAF).
 2.  **Plan**: Create a detailed implementation plan (`INFRA.md`) using Azure Verified Modules (AVM).
-3.  **Implement**: Generate production-ready Bicep code following the plan and best practices.
+3.  **Implement**: Generate near-production-ready Bicep code following the plan and best practices.
 
 ---
 

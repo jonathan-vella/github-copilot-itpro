@@ -9,13 +9,13 @@
 > **Today's Challenge:** Add monitoring and alerting before tomorrow's production go-live
 > **The Twist:** On-call rotation starts in 24 hours—needs alerts configured today
 
-*"We deployed the patient portal infrastructure last week, but nobody set up monitoring.
+_"We deployed the patient portal infrastructure last week, but nobody set up monitoring.
 I've got a dozen other tickets, and my on-call shift starts tomorrow. If something breaks
-in production without alerts, I'll be debugging blind at 2 AM."*
+in production without alerts, I'll be debugging blind at 2 AM."_
 
 **What Alex will discover:** GitHub Copilot Coding Agent can autonomously implement
 monitoring infrastructure from a well-written GitHub Issue—creating a PR with
-production-ready Bicep code while Alex focuses on other priorities.
+near-production-ready Bicep code while Alex focuses on other priorities.
 
 ---
 
@@ -33,12 +33,12 @@ an issue, assign it to Copilot, and continue with other work while it implements
 > **This scenario requires specific GitHub Copilot features that may not be available
 > on all plans or repositories.**
 
-| Requirement | Details |
-|-------------|---------|
-| **GitHub Copilot Plan** | Business or Enterprise (Coding Agent not available on Individual) |
-| **Coding Agent Enabled** | Must be enabled by organization admin in Copilot settings |
-| **Repository Access** | Copilot must have write access to the repository |
-| **Branch Protection** | Copilot creates PRs—ensure branch protection allows this |
+| Requirement              | Details                                                           |
+| ------------------------ | ----------------------------------------------------------------- |
+| **GitHub Copilot Plan**  | Business or Enterprise (Coding Agent not available on Individual) |
+| **Coding Agent Enabled** | Must be enabled by organization admin in Copilot settings         |
+| **Repository Access**    | Copilot must have write access to the repository                  |
+| **Branch Protection**    | Copilot creates PRs—ensure branch protection allows this          |
 
 ### Verify Your Setup
 
@@ -52,12 +52,12 @@ gh issue create --title "Test" --body "Test" --web
 
 ## Scenario Details
 
-| Attribute | Value |
-|-----------|-------|
-| **Duration** | 10-15 minutes (including Copilot processing time) |
-| **Difficulty** | Beginner-Intermediate |
-| **Target Audience** | IT Pros, DevOps Engineers, Platform Teams |
-| **Azure Services** | Azure Monitor, Action Groups, Alert Rules, Dashboards |
+| Attribute           | Value                                                 |
+| ------------------- | ----------------------------------------------------- |
+| **Duration**        | 10-15 minutes (including Copilot processing time)     |
+| **Difficulty**      | Beginner-Intermediate                                 |
+| **Target Audience** | IT Pros, DevOps Engineers, Platform Teams             |
+| **Azure Services**  | Azure Monitor, Action Groups, Alert Rules, Dashboards |
 
 ## Learning Objectives
 
@@ -73,12 +73,12 @@ By completing this scenario, you will:
 
 ## The Challenge
 
-| Problem | Impact | Business Cost |
-|---------|--------|---------------|
-| Infrastructure deployed without monitoring | Blind to performance issues | Potential SLA breaches |
-| Manual alert configuration is time-consuming | 2-4 hours per environment | Delayed go-live |
-| Inconsistent alerting across environments | Alert fatigue, missed incidents | Increased MTTR |
-| Documentation often skipped | Knowledge silos | Onboarding friction |
+| Problem                                      | Impact                          | Business Cost          |
+| -------------------------------------------- | ------------------------------- | ---------------------- |
+| Infrastructure deployed without monitoring   | Blind to performance issues     | Potential SLA breaches |
+| Manual alert configuration is time-consuming | 2-4 hours per environment       | Delayed go-live        |
+| Inconsistent alerting across environments    | Alert fatigue, missed incidents | Increased MTTR         |
+| Documentation often skipped                  | Knowledge silos                 | Onboarding friction    |
 
 ## The Solution
 
@@ -87,7 +87,7 @@ Instead of manually writing Bicep modules for monitoring, Alex will:
 1. **Create a GitHub Issue** with clear requirements for monitoring
 2. **Assign to Copilot** using the `@github-copilot` mention or assignee
 3. **Review the PR** that Copilot creates autonomously
-4. **Merge and deploy** production-ready monitoring infrastructure
+4. **Merge and deploy** near-production-ready monitoring infrastructure
 
 ---
 
@@ -123,6 +123,7 @@ scenarios/S09-coding-agent/
 ```
 
 **GitHub Issue Template:**
+
 ```
 .github/ISSUE_TEMPLATE/copilot-agent-task.yml
 ```
@@ -161,13 +162,13 @@ gh issue create \
 
 ## Key Features Demonstrated
 
-| Feature | Description | IT Pro Benefit |
-|---------|-------------|----------------|
-| **Autonomous Execution** | Copilot works without supervision | Focus on higher-value tasks |
-| **Codebase Understanding** | Analyzes existing code before changes | Context-aware implementations |
-| **PR-Based Workflow** | Creates reviewable pull requests | Maintains code review standards |
-| **Iterative Refinement** | Can respond to PR comments | Collaborative improvement |
-| **Session Logs** | Documents reasoning and decisions | Audit trail for changes |
+| Feature                    | Description                           | IT Pro Benefit                  |
+| -------------------------- | ------------------------------------- | ------------------------------- |
+| **Autonomous Execution**   | Copilot works without supervision     | Focus on higher-value tasks     |
+| **Codebase Understanding** | Analyzes existing code before changes | Context-aware implementations   |
+| **PR-Based Workflow**      | Creates reviewable pull requests      | Maintains code review standards |
+| **Iterative Refinement**   | Can respond to PR comments            | Collaborative improvement       |
+| **Session Logs**           | Documents reasoning and decisions     | Audit trail for changes         |
 
 ---
 
@@ -226,21 +227,21 @@ gh issue create \
 
 ### Time Efficiency
 
-| Task | Manual Approach | With Coding Agent | Savings |
-|------|-----------------|-------------------|---------|
-| Write alert Bicep modules | 2-3 hours | 5 min (issue writing) | 90%+ |
-| Create action groups | 30 min | Included | 100% |
-| Configure dashboard | 1-2 hours | Included | 90%+ |
-| Documentation | Often skipped | Auto-generated PR description | ∞ |
+| Task                      | Manual Approach | With Coding Agent             | Savings |
+| ------------------------- | --------------- | ----------------------------- | ------- |
+| Write alert Bicep modules | 2-3 hours       | 5 min (issue writing)         | 90%+    |
+| Create action groups      | 30 min          | Included                      | 100%    |
+| Configure dashboard       | 1-2 hours       | Included                      | 90%+    |
+| Documentation             | Often skipped   | Auto-generated PR description | ∞       |
 
 ### Quality Indicators
 
-| Metric | Target | Measurement |
-|--------|--------|-------------|
-| PR created successfully | 100% | Issue → PR conversion |
-| Code compiles (`bicep build`) | 100% | CI validation |
-| Follows existing patterns | High | Code review assessment |
-| Includes all requirements | High | Acceptance criteria check |
+| Metric                        | Target | Measurement               |
+| ----------------------------- | ------ | ------------------------- |
+| PR created successfully       | 100%   | Issue → PR conversion     |
+| Code compiles (`bicep build`) | 100%   | CI validation             |
+| Follows existing patterns     | High   | Code review assessment    |
+| Includes all requirements     | High   | Acceptance criteria check |
 
 ---
 
@@ -265,13 +266,13 @@ gh issue create \
 
 ## Troubleshooting
 
-| Issue | Symptom | Solution |
-|-------|---------|----------|
+| Issue                   | Symptom                        | Solution                            |
+| ----------------------- | ------------------------------ | ----------------------------------- |
 | Can't assign to Copilot | "Copilot" not in assignee list | Enable Coding Agent in org settings |
-| Copilot doesn't respond | Issue assigned but no activity | Check Copilot has repo access |
-| PR has errors | `bicep build` fails | Comment on PR asking Copilot to fix |
-| Wrong implementation | Doesn't match requirements | Clarify requirements in PR comment |
-| Takes too long | > 30 min without PR | Complex issues may need breakdown |
+| Copilot doesn't respond | Issue assigned but no activity | Check Copilot has repo access       |
+| PR has errors           | `bicep build` fails            | Comment on PR asking Copilot to fix |
+| Wrong implementation    | Doesn't match requirements     | Clarify requirements in PR comment  |
+| Takes too long          | > 30 min without PR            | Complex issues may need breakdown   |
 
 ---
 
@@ -311,22 +312,25 @@ gh issue create \
 ## Key Takeaways
 
 **For Engineers:**
+
 - Coding Agent handles routine infrastructure tasks autonomously
 - Well-written issues are the key to good results
 - Always review PRs—Copilot augments, not replaces, your expertise
 
 **For Leaders:**
+
 - Measurable time savings on repetitive infrastructure work
 - Maintains code review standards and audit trails
 - Enables engineers to focus on higher-value activities
 
 **For Partners:**
+
 - Demonstrates GitHub Copilot's enterprise capabilities
 - Shows integration with existing DevOps workflows
 - Quantifiable ROI through time savings metrics
 
 ---
 
-*This scenario demonstrates how GitHub Copilot Coding Agent transforms routine
+_This scenario demonstrates how GitHub Copilot Coding Agent transforms routine
 infrastructure tasks from hours of manual work into minutes of issue writing,
-enabling IT Pros to deliver faster while maintaining quality and governance.*
+enabling IT Pros to deliver faster while maintaining quality and governance._

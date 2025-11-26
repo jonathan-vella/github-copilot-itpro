@@ -9,20 +9,20 @@ This repository uses **five GitHub Copilot agents** (including the built-in Plan
 **Agents** (in `.github/agents/` + built-in):
 
 0. **Plan Agent** (built-in `@plan`) → Create implementation plans with cost estimates
-1. **ADR Generator** (`adr_generator`) → Document architectural decisions - *Optional: for enterprise governance*
+1. **ADR Generator** (`adr_generator`) → Document architectural decisions - _Optional: for enterprise governance_
 2. **Azure Principal Architect** (`azure-principal-architect`) → WAF assessment and guidance
 3. **Bicep Planning Specialist** (`bicep-plan`) → Create machine-readable implementation plans
-4. **Bicep Implementation Specialist** (`bicep-implement`) → Generate production-ready Bicep code
+4. **Bicep Implementation Specialist** (`bicep-implement`) → Generate near-production-ready Bicep code
 
 **Key Features**:
 
 - ✅ **Automatic Handoffs**: Click buttons to switch agents with context
 - ✅ **Machine-Readable Plans**: Structured YAML for deterministic code generation
-- ✅ **Production-Ready Code**: Latest APIs, security best practices, validation
+- ✅ **near-production-ready Code**: Latest APIs, security best practices, validation
 - ✅ **94% Time Savings**: 5.25 hours → 20 minutes for complete infrastructure
 
 📖 **Complete Guide:** [FIVE-MODE-WORKFLOW.md](FIVE-MODE-WORKFLOW.md)  
-🎬 **Demo Script:** [AGENT-HANDOFF-DEMO.md](AGENT-HANDOFF-DEMO.md) (15-20 minutes)  
+🎬 **Demo Script:** [AGENT-HANDOFF-DEMO.md](AGENT-HANDOFF-DEMO.md) (15-20 minutes)
 
 ### How to Use Custom Agents
 
@@ -89,10 +89,12 @@ copilot-customizations/
 The most effective way to use GitHub Copilot for Azure infrastructure is through our structured five-agent workflow:
 
 1. **Install Custom Agents** (if not already done)
+
    - ADR Generator is located in `.github/agents/adr-generator.agent.md`
    - Automatically available in VS Code GitHub Copilot
 
 2. **Activate Chat Modes**
+
    - All 11 chat modes are in `chatmodes/` directory
    - Use `@workspace` in Copilot Chat to invoke workspace context
    - Reference modes: "Using azure-principal-architect mode..."
@@ -100,14 +102,15 @@ The most effective way to use GitHub Copilot for Azure infrastructure is through
 3. **Follow the Workflow**
 
    ```mermaid
-%%{init: {'theme':'neutral'}}%%
+   %%{init: {'theme':'neutral'}}%%
    graph LR
        P[@plan] --> A[ADR Generator]
        A --> B[Principal Architect]
        B --> C[Bicep Planning]
        C --> D[Bicep Implementation]
+   ```
 
-```
+````
 
 4. **Learn by Example**
    - See [FIVE-MODE-WORKFLOW.md](FIVE-MODE-WORKFLOW.md) for complete examples
@@ -124,7 +127,7 @@ cd /path/to/github-copilot-itpro
 # Create or append to project instructions
 cat resources/copilot-customizations/instructions/bicep-code-best-practices.instructions.md >> .github/copilot-instructions.md
 cat resources/copilot-customizations/instructions/devops-core-principles.instructions.md >> .github/copilot-instructions.md
-```
+````
 
 This makes Copilot aware of these standards across the entire project.
 
@@ -134,7 +137,7 @@ For file-pattern-specific guidance, use the `applyTo` frontmatter in the instruc
 
 ```yaml
 ---
-applyTo: '**/*.bicep'
+applyTo: "**/*.bicep"
 ---
 ```
 
@@ -143,12 +146,14 @@ applyTo: '**/*.bicep'
 Chat modes provide specialized AI personas. Install them directly in VS Code:
 
 1. **Bicep Implementation Specialist**
+
    - Open VS Code
    - Open Copilot Chat
    - Install: Use the install badge in `chatmodes/bicep-implement.chatmode.md`
    - Or manually: Copy content to a new chat mode in VS Code
 
 2. **Azure Principal Architect**
+
    - Expert guidance using Azure Well-Architected Framework
    - Install from `chatmodes/azure-principal-architect.chatmode.md`
 
@@ -376,11 +381,11 @@ Create a storage account
 
 ```yaml
 Create a Bicep template for an Azure Storage Account with:
-- HTTPS only
-- TLS 1.2 minimum
-- No public blob access
-- ZRS redundancy
-- Using naming convention from our project standards
+  - HTTPS only
+  - TLS 1.2 minimum
+  - No public blob access
+  - ZRS redundancy
+  - Using naming convention from our project standards
 ```
 
 ### 5. Iterate and Refine
@@ -396,16 +401,16 @@ Don't expect perfection on the first try:
 
 These customizations are designed to enhance the demo modules in this repository:
 
-| Demo | Recommended Customizations |
-|------|---------------------------|
-| **S01-bicep-baseline** | `bicep-code-best-practices.instructions.md`<br>`bicep-implement.chatmode.md` |
-| **S02-terraform-baseline** | `terraform-azure.instructions.md`<br>`terraform-azure-implement.chatmode.md` |
-| **S03-five-agent-workflow** | `azure-principal-architect.chatmode.md`<br>`bicep-implement.chatmode.md` |
-| **S04-documentation-generation** | `documentation-writer.prompt.md`<br>`markdown.instructions.md` |
-| **S05-service-validation** | `powershell-pester-5.instructions.md` |
-| **S06-troubleshooting** | `azure-resource-health-diagnose.prompt.md` |
-| **S07-sbom-generator** | `devops-core-principles.instructions.md` |
-| **S08-diagrams-as-code** | `markdown.instructions.md` |
+| Demo                             | Recommended Customizations                                                   |
+| -------------------------------- | ---------------------------------------------------------------------------- |
+| **S01-bicep-baseline**           | `bicep-code-best-practices.instructions.md`<br>`bicep-implement.chatmode.md` |
+| **S02-terraform-baseline**       | `terraform-azure.instructions.md`<br>`terraform-azure-implement.chatmode.md` |
+| **S03-five-agent-workflow**      | `azure-principal-architect.chatmode.md`<br>`bicep-implement.chatmode.md`     |
+| **S04-documentation-generation** | `documentation-writer.prompt.md`<br>`markdown.instructions.md`               |
+| **S05-service-validation**       | `powershell-pester-5.instructions.md`                                        |
+| **S06-troubleshooting**          | `azure-resource-health-diagnose.prompt.md`                                   |
+| **S07-sbom-generator**           | `devops-core-principles.instructions.md`                                     |
+| **S08-diagrams-as-code**         | `markdown.instructions.md`                                                   |
 
 ## 📖 Learning Path
 

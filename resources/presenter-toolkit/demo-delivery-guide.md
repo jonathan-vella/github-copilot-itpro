@@ -18,12 +18,12 @@ but an amplifier of it.
 
 ### What to Avoid
 
-| ❌ Don't Say | ✅ Say Instead |
-|-------------|----------------|
-| "Copilot writes code for you" | "Copilot accelerates your workflow" |
-| "You don't need to know Bicep/Terraform" | "Copilot helps you learn best practices faster" |
-| "It's magic" | "It's pattern recognition from your context" |
-| "It always gets it right" | "It gives you a strong starting point to refine" |
+| ❌ Don't Say                             | ✅ Say Instead                                   |
+| ---------------------------------------- | ------------------------------------------------ |
+| "Copilot writes code for you"            | "Copilot accelerates your workflow"              |
+| "You don't need to know Bicep/Terraform" | "Copilot helps you learn best practices faster"  |
+| "It's magic"                             | "It's pattern recognition from your context"     |
+| "It always gets it right"                | "It gives you a strong starting point to refine" |
 
 ## 📋 Demo Structure (30 Minutes)
 
@@ -69,7 +69,7 @@ but an amplifier of it.
 3. **Deployment**: `az deployment group create --what-if` to preview changes
 4. **Resource Verification**: Show resources in Azure Portal
 
-**Why This Matters**: Validation builds trust—showing that Copilot output is production-ready.
+**Why This Matters**: Validation builds trust—showing that Copilot output is near-production-ready.
 
 ### Phase 4: Wrap-Up (2 minutes)
 
@@ -139,13 +139,13 @@ suggestions so relevant."
 
 ### Time Savings Framework
 
-| Task Category | Manual Estimate | With Copilot | Savings |
-|--------------|-----------------|--------------|---------|
-| Initial Setup | 2-4 hours | 15-30 min | 85-90% |
-| Security Configuration | 1-2 hours | 10-15 min | 85-90% |
-| Documentation | 1-2 hours | 10-15 min | 85-90% |
-| Testing/Validation | 1-2 hours | 15-20 min | 75-85% |
-| **Total** | **5-10 hours** | **50-80 min** | **85-90%** |
+| Task Category          | Manual Estimate | With Copilot  | Savings    |
+| ---------------------- | --------------- | ------------- | ---------- |
+| Initial Setup          | 2-4 hours       | 15-30 min     | 85-90%     |
+| Security Configuration | 1-2 hours       | 10-15 min     | 85-90%     |
+| Documentation          | 1-2 hours       | 10-15 min     | 85-90%     |
+| Testing/Validation     | 1-2 hours       | 15-20 min     | 75-85%     |
+| **Total**              | **5-10 hours**  | **50-80 min** | **85-90%** |
 
 ### Making ROI Personal
 
@@ -186,17 +186,17 @@ pwsh --version        # Should show 7+
 
 ## 📚 Scenario Quick Reference
 
-| Scenario | Duration | Best For | Key Demo Points |
-|----------|----------|----------|-----------------|
-| S01 - Bicep Baseline | 15-20 min | Quick demos | Fast IaC generation |
-| S02 - Terraform Baseline | 15-20 min | Multi-cloud teams | Cross-platform patterns |
-| S03 - Five-Agent Workflow | 30-45 min | Deep dives | Full agent orchestration |
-| S04 - Documentation | 10-15 min | Doc-heavy teams | Automated README/ADR |
-| S05 - Service Validation | 10-15 min | Testing focus | Validation scripts |
-| S06 - Troubleshooting | 15-20 min | Support teams | Diagnostic assistance |
-| S07 - SBOM Generator | 15-20 min | Security focus | Supply chain visibility |
-| S08 - Diagrams as Code | 10-15 min | Architecture teams | Visual documentation |
-| S09 - Coding Agent | 15-20 min | Async workflows | Issue-to-PR automation |
+| Scenario                  | Duration  | Best For           | Key Demo Points          |
+| ------------------------- | --------- | ------------------ | ------------------------ |
+| S01 - Bicep Baseline      | 15-20 min | Quick demos        | Fast IaC generation      |
+| S02 - Terraform Baseline  | 15-20 min | Multi-cloud teams  | Cross-platform patterns  |
+| S03 - Five-Agent Workflow | 30-45 min | Deep dives         | Full agent orchestration |
+| S04 - Documentation       | 10-15 min | Doc-heavy teams    | Automated README/ADR     |
+| S05 - Service Validation  | 10-15 min | Testing focus      | Validation scripts       |
+| S06 - Troubleshooting     | 15-20 min | Support teams      | Diagnostic assistance    |
+| S07 - SBOM Generator      | 15-20 min | Security focus     | Supply chain visibility  |
+| S08 - Diagrams as Code    | 10-15 min | Architecture teams | Visual documentation     |
+| S09 - Coding Agent        | 15-20 min | Async workflows    | Issue-to-PR automation   |
 
 ## 🎤 Presenter Tips
 

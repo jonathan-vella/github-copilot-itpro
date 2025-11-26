@@ -72,7 +72,7 @@ Always document region selection rationale in assessments.
 - **Operational Excellence** (X/10): DevOps, automation, monitoring, management
 
 **Scoring Guidelines:**
-- 9-10: Excellent - Follows all best practices, production-ready
+- 9-10: Excellent - Follows all best practices, near-production-ready
 - 7-8: Good - Follows most best practices, minor improvements needed
 - 5-6: Adequate - Meets basic requirements, notable gaps exist
 - 3-4: Poor - Significant issues, requires major improvements

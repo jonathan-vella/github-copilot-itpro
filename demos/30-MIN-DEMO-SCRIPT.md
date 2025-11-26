@@ -38,13 +38,13 @@ If live demo fails, switch to walking through the completed output in `infra/bic
 
 ## Demo Timeline
 
-| Time | Phase | What You're Doing |
-|------|-------|-------------------|
-| 0:00 | Opening | Set the scene, show the problem |
-| 3:00 | Agent 1 | Azure Principal Architect designs solution |
-| 11:00 | Agent 2 | Bicep Planner creates implementation plan |
-| 16:00 | Agent 3 | Bicep Implement generates production code |
-| 26:00 | Wrap-up | Show results, metrics, Q&A |
+| Time  | Phase   | What You're Doing                          |
+| ----- | ------- | ------------------------------------------ |
+| 0:00  | Opening | Set the scene, show the problem            |
+| 3:00  | Agent 1 | Azure Principal Architect designs solution |
+| 11:00 | Agent 2 | Bicep Planner creates implementation plan  |
+| 16:00 | Agent 3 | Bicep Implement generates production code  |
+| 26:00 | Wrap-up | Show results, metrics, Q&A                 |
 
 ---
 
@@ -250,14 +250,14 @@ contoso-patient-portal/
 
 > "Let's talk about what just happened:
 >
-> | Metric | Traditional | With Copilot |
-> |--------|-------------|--------------|
-> | Time | 14-18 hours | 30 minutes |
-> | Files | Varies | 10+ production-ready modules |
-> | Security | Manual review | Built-in from the start |
-> | Documentation | Often skipped | Auto-generated |
+> | Metric        | Traditional   | With Copilot                      |
+> | ------------- | ------------- | --------------------------------- |
+> | Time          | 14-18 hours   | 30 minutes                        |
+> | Files         | Varies        | 10+ near-production-ready modules |
+> | Security      | Manual review | Built-in from the start           |
+> | Documentation | Often skipped | Auto-generated                    |
 >
-> That's a **95% time reduction**. And this isn't prototype code—it's production-ready with HIPAA compliance, private endpoints, and managed identities."
+> That's a **95% time reduction**. And this isn't prototype code—it's near-production-ready with HIPAA compliance, private endpoints, and managed identities."
 
 ### Call to Action
 
@@ -273,12 +273,12 @@ contoso-patient-portal/
 
 ## 🆘 Troubleshooting During Demo
 
-| Problem | Quick Fix |
-|---------|-----------|
-| Agent not responding | Switch to different model (GPT-4o) or use pre-generated output |
-| Slow generation | Keep talking about what's happening, explain the complexity |
+| Problem                 | Quick Fix                                                          |
+| ----------------------- | ------------------------------------------------------------------ |
+| Agent not responding    | Switch to different model (GPT-4o) or use pre-generated output     |
+| Slow generation         | Keep talking about what's happening, explain the complexity        |
 | Error in generated code | "This is realistic—even AI needs review. Let's fix this together." |
-| Network issues | Switch to offline walkthrough of `contoso-patient-portal/` |
+| Network issues          | Switch to offline walkthrough of `contoso-patient-portal/`         |
 
 ### Backup: Pre-Generated Output Walkthrough
 
@@ -319,12 +319,12 @@ If live demo fails completely, spend 10 minutes walking through:
 
 ### Agent Commands
 
-| Agent | Access | Purpose |
-|-------|--------|---------|
-| @plan | Built-in | Create strategy with cost estimates |
-| azure-principal-architect | Ctrl+Shift+A | WAF assessment, architecture design |
-| bicep-plan | Ctrl+Shift+A | Implementation planning, Mermaid diagrams |
-| bicep-implement | Ctrl+Shift+A | Generate production Bicep code |
+| Agent                     | Access       | Purpose                                   |
+| ------------------------- | ------------ | ----------------------------------------- |
+| @plan                     | Built-in     | Create strategy with cost estimates       |
+| azure-principal-architect | Ctrl+Shift+A | WAF assessment, architecture design       |
+| bicep-plan                | Ctrl+Shift+A | Implementation planning, Mermaid diagrams |
+| bicep-implement           | Ctrl+Shift+A | Generate production Bicep code            |
 
 ### Key Talking Points
 
@@ -336,9 +336,9 @@ If live demo fails completely, spend 10 minutes walking through:
 
 ### Time Savings by Task
 
-| Task | Manual | With Copilot | Savings |
-|------|--------|--------------|---------|
-| Architecture design | 4-6 hours | 10 min | 90% |
-| Bicep templates | 6-8 hours | 15 min | 95% |
-| Documentation | 2-4 hours | 5 min | 90% |
-| **Total** | **14-18 hours** | **30 min** | **95%** |
+| Task                | Manual          | With Copilot | Savings |
+| ------------------- | --------------- | ------------ | ------- |
+| Architecture design | 4-6 hours       | 10 min       | 90%     |
+| Bicep templates     | 6-8 hours       | 15 min       | 95%     |
+| Documentation       | 2-4 hours       | 5 min        | 90%     |
+| **Total**           | **14-18 hours** | **30 min**   | **95%** |
