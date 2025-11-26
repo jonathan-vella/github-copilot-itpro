@@ -1,4 +1,4 @@
-# Demo Script: Five-Agent Workflow for Azure Infrastructure
+<img width="952" height="381" alt="image" src="https://github.com/user-attachments/assets/4ee90a67-424d-4262-aabb-e55583fb4971" /># Demo Script: Five-Agent Workflow for Azure Infrastructure
 
 **Duration**: 45-60 minutes (full) | 15-20 minutes (abbreviated)  
 **Audience**: Solution Architects, Cloud Architects, Infrastructure Engineers  
@@ -429,6 +429,7 @@ If short on time, use this condensed version:
 - **Agent not available**: Verify GitHub Copilot subscription and agent configuration
 - **Handoff button missing**: Manually copy Stage 2 prompt with architecture output
 - **Bicep validation fails**: Use pre-generated templates from `solution/outputs/` directory
+- **Sorry, the response hit the length limit. Please rephrase your prompt error**: Update the prompt to stay within the allowed limits, or break it into smaller requests, or consider switching to a different model.
 - **Audience questions derail timing**: "Great question - let's discuss after the demo"
 
 ### Energy Management
