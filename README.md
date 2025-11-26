@@ -36,7 +36,7 @@ graph LR
 
 | Traditional Approach          | With GitHub Copilot           |
 | ----------------------------- | ----------------------------- |
-| 45 min to write VNet + NSGs   | **10 min** (78% faster)       |
+| 45 min for Zero Trust Network | **10 min** (78% faster)       |
 | 60 min for automation scripts | **15 min** (75% faster)       |
 | 2 hours for documentation     | **20 min** (83% faster)       |
 | Days of troubleshooting       | **Minutes** with AI diagnosis |
