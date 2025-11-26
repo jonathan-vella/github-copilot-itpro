@@ -1,4 +1,4 @@
-<img width="952" height="381" alt="image" src="https://github.com/user-attachments/assets/4ee90a67-424d-4262-aabb-e55583fb4971" /># Demo Script: Five-Agent Workflow for Azure Infrastructure
+Demo Script: Five-Agent Workflow for Azure Infrastructure
 
 **Duration**: 45-60 minutes (full) | 15-20 minutes (abbreviated)  
 **Audience**: Solution Architects, Cloud Architects, Infrastructure Engineers  
