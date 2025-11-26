@@ -51,6 +51,17 @@ graph LR
 
 ## 🚀 Getting Started
 
+### 📘 Complete Guide
+
+**New here?** Follow our end-to-end guide: **[Getting Started: Your Complete Journey](docs/getting-started/README.md)**
+
+It walks you through:
+
+1. **Setup** (15 min) — Clone, Dev Container, verify tools
+2. **First Scenario** (30 min) — Deploy real infrastructure with Copilot
+3. **Explore** — Learning paths for your role
+4. **Master** — Five-Agent Workflow and Coding Agent
+
 ### Quick Start (5 minutes)
 
 ```bash

@@ -8,6 +8,7 @@ Thank you to everyone who has contributed to making this project better!
 
 - **Jonathan Vella** ([@jonathan-vella](https://github.com/jonathan-vella)) - Project Lead
 - **Storm Gibson** ([@StormyDevil](https://github.com/StormyDevil)) - Contributor
+- **Fares Zekri** ([@farez_microsoft](https://github.com/farez_microsoft)) - Contributor
 
 ## How to Contribute
 
@@ -19,4 +20,4 @@ All contributors are recognized for their valuable contributions to the project,
 
 ---
 
-*Want to see your name here? Check out our [contribution guidelines](CONTRIBUTING.md) and submit a pull request!*
+_Want to see your name here? Check out our [contribution guidelines](CONTRIBUTING.md) and submit a pull request!_

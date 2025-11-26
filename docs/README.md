@@ -6,6 +6,19 @@
 
 ---
 
+## 🚀 New Here? Start with the Complete Guide
+
+**[Getting Started: Your Complete Journey](getting-started/README.md)** — A step-by-step guide from setup to mastery.
+
+| Phase              | What You'll Do                               | Time      |
+| ------------------ | -------------------------------------------- | --------- |
+| **Setup**          | Clone repo, open Dev Container, verify tools | 15 min    |
+| **First Scenario** | Complete S01 Bicep Baseline                  | 30 min    |
+| **Explore**        | Try scenarios matching your role             | 2-4 hours |
+| **Master**         | Five-Agent Workflow, Coding Agent            | Ongoing   |
+
+---
+
 ## Document Index
 
 | Document                                                       | Audience            | Purpose                                      | Duration       |
