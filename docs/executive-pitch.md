@@ -2,6 +2,8 @@
 
 > **Duration:** 5 minutes | **Audience:** C-level, IT Directors, Partner Leadership
 
+![Time Savings Infographic](../resources/presenter-toolkit/infographics/generated/time-savings-infographic-web.png)
+
 ---
 
 ## The Hook (30 seconds)

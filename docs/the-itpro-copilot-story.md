@@ -3,6 +3,8 @@
 > _"I'm not a developer. I never was. Yet in the past year, I've shipped more production-ready
 > infrastructure, workshops, and automation than I did in the previous decade combined."_
 
+![Before/After Transformation](../resources/presenter-toolkit/infographics/generated/before-after-poster-web.png)
+
 ---
 
 ## Prologue: The Gap Nobody Talks About
