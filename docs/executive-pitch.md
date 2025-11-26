@@ -2,7 +2,7 @@
 
 > **Duration:** 5 minutes | **Audience:** C-level, IT Directors, Partner Leadership
 
-![Time Savings Infographic](../resources/presenter-toolkit/infographics/generated/time-savings-infographic-web.png)
+![78% Time Saved on Infrastructure Tasks](../resources/presenter-toolkit/infographics/generated/exec-pitch-banner.png)
 
 ---
 
@@ -113,28 +113,7 @@ This isn't vendor marketing. This is independent research from leading instituti
 
 ## One Slide Summary
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                                                                 │
-│   GITHUB COPILOT FOR IT PROS                                   │
-│                                                                 │
-│   Problem:  Architects design but can't implement              │
-│   Solution: AI-assisted infrastructure development             │
-│   Result:   78-88% time savings on repetitive tasks            │
-│                                                                 │
-│   ┌─────────────┐    ┌─────────────┐    ┌─────────────┐        │
-│   │   BEFORE    │    │    WITH     │    │   IMPACT    │        │
-│   │             │    │   COPILOT   │    │             │        │
-│   │  45 min     │ →  │   10 min    │ =  │    78%      │        │
-│   │  per task   │    │  per task   │    │   savings   │        │
-│   └─────────────┘    └─────────────┘    └─────────────┘        │
-│                                                                 │
-│   Evidence: Stanford, Forrester, MIT, McKinsey                 │
-│   Investment: $19/user/month                                   │
-│   ROI: Break-even in Week 1                                    │
-│                                                                 │
-└─────────────────────────────────────────────────────────────────┘
-```
+![Executive One-Slide Summary](../resources/presenter-toolkit/infographics/generated/executive-one-slide-web.png)
 
 ---
 
