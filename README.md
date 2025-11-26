@@ -41,9 +41,11 @@ graph LR
 | 2 hours for documentation     | **20 min** (83% faster)       |
 | Days of troubleshooting       | **Minutes** with AI diagnosis |
 
-📖 **[Read the full IT Pro Impact Story](docs/it-pro-impact-story.md)** — Real challenges, real transformations.
+📖 **[Read the IT Pro Transformation Story](docs/the-itpro-copilot-story.md)** — The narrative journey from frustration to productivity.
 
 🎯 **[See What Copilot Enabled Me to Build](docs/copilot-portfolio-showcase.md)** — Real projects built by a non-developer.
+
+💼 **[5-Minute Executive Pitch](docs/executive-pitch.md)** — Ready-to-use presentation for leadership.
 
 ---
 
@@ -123,6 +125,28 @@ flowchart LR
 All productivity estimates are backed by peer-reviewed research from GitHub, Forrester, Stanford HAI, MIT Sloan, and more.
 
 📖 **[Evidence & Methodology](docs/time-savings-evidence.md)**
+
+---
+
+## 📁 Documentation & Resources
+
+### Core Documentation
+
+| Document                                                                 | Description                                       |
+| ------------------------------------------------------------------------ | ------------------------------------------------- |
+| [docs/README.md](docs/README.md)                                         | **Documentation overview and navigation guide**   |
+| [docs/the-itpro-copilot-story.md](docs/the-itpro-copilot-story.md)       | Full narrative story of the IT Pro transformation |
+| [docs/executive-pitch.md](docs/executive-pitch.md)                       | 5-minute executive pitch                          |
+| [docs/copilot-portfolio-showcase.md](docs/copilot-portfolio-showcase.md) | Real projects built with Copilot                  |
+
+### Presenter Toolkit
+
+| Resource                                                                          | Description                                                 |
+| --------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| [ROI Calculator](resources/presenter-toolkit/roi-calculator-worksheet.md)         | Calculate time/cost savings for your team                   |
+| [Pilot Success Checklist](resources/presenter-toolkit/pilot-success-checklist.md) | Plan and evaluate Copilot pilots                            |
+| [Infographics](resources/presenter-toolkit/infographics/)                         | Python-generated visual assets (time savings, before/after) |
+| [Demo Delivery Guide](resources/presenter-toolkit/demo-delivery-guide.md)         | How to run effective demos                                  |
 
 ---
 

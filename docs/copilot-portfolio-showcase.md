@@ -13,13 +13,12 @@ with limited coding experience leverages GitHub Copilot as an efficiency multipl
 
 **My background:**
 
-- ✅ Cloud Architect with deep Azure knowledge
-- ❌ Not a developer—limited programming experience
-- ❌ Minimal Infrastructure-as-Code skills before GitHub Copilot
-- ✅ Strong understanding of what needed to be built, but struggled with *how*
+- ✅ I am a Cloud Architect with deep Azure knowledge
+- ❌ I am not a developer and have limited programming experience
+- ❌ I had minimal Infrastructure-as-Code skills before GitHub Copilot
+- ✅ I have a strong understanding of what needs to be built, but struggled with _how_
 
-**The transformation:** GitHub Copilot bridged the gap between my architectural vision and actual implementation,
-enabling me to create production-quality code, documentation, and learning materials.
+**The transformation:** GitHub Copilot bridged the gap between my architectural vision and actual implementation, enabling me to create production-quality code, documentation, and learning materials.
 
 ---
 
@@ -49,13 +48,15 @@ across identity, network, application, and content safety domains.
 - Docker Compose configurations for local development
 - Comprehensive documentation and security challenge guides
 
+**Link to project:** [SAIF on GitHub](https://github.com/jonathan-vella/SAIF)
+
 ```mermaid
 %%{init: {'theme':'neutral'}}%%
 graph LR
     User((User)) --> Web[Web Frontend<br/>PHP 8.2]
     Web --> API[API Backend<br/>Python FastAPI]
     API --> DB[(Database<br/>SQL Server)]
-    
+
     style Web fill:#0078D4,stroke:#005A9E,color:white
     style API fill:#0078D4,stroke:#005A9E,color:white
     style DB fill:#0078D4,stroke:#005A9E,color:white
@@ -87,14 +88,16 @@ with Premium v2 storage, CloudNativePG operator, and PgBouncer connection poolin
 - Comprehensive failover testing scenarios with RPO=0 validation
 - DevContainer with all tools pre-installed
 
+**Link to project:** [Azure PostgreSQL HA on AKS Workshop](https://github.com/jonathan-vella/azure-postgresql-ha-aks-workshop)
+
 **Key Metrics Achieved:**
 
-| Metric | Value |
-|--------|-------|
-| Recovery Time Objective | <10 seconds |
+| Metric                   | Value              |
+| ------------------------ | ------------------ |
+| Recovery Time Objective  | <10 seconds        |
 | Recovery Point Objective | 0 (zero data loss) |
-| Target Throughput | 8,000-10,000 TPS |
-| Max Connections | 30,000 concurrent |
+| Target Throughput        | 8,000-10,000 TPS   |
+| Max Connections          | 30,000 concurrent  |
 
 ---
 
@@ -120,6 +123,8 @@ from Java 8/Spring Boot 1.x to modern versions.
 - Documentation of Java 8 → Java 21 migration patterns
 - Spring Boot 1.x → 3.x upgrade guidance
 - Build configuration modernization with Maven
+
+**Link to project:** [GitHub Copilot Application Modernization](https://github.com/jonathan-vella/github-copilot-appmod-java-uportal)
 
 **Learning Impact:** This project serves as a training resource for Microsoft Learn's
 [Java Upgrade Documentation](https://learn.microsoft.com/en-us/java/upgrade/).
@@ -150,6 +155,8 @@ Sovereign Cloud, Azure Local, Azure Arc, and Edge AI technologies.
 - Quiz and assessment frameworks
 - Content organization for sales and technical professionals
 
+**Link to project:** [Microsoft Sovereign Cloud Brain Trek](https://github.com/jonathan-vella/microsoft-sovereign-cloud-brain-trek)
+
 **Content Structure:**
 
 ```mermaid
@@ -158,7 +165,7 @@ graph TD
     L100[Level 100<br/>Foundational] --> L200[Level 200<br/>Intermediate]
     L200 --> L300[Level 300<br/>Advanced]
     L300 --> Cert([Certification Ready])
-    
+
     style L100 fill:#0091EA,stroke:#0091EA,color:#fff
     style L200 fill:#FF6D00,stroke:#FF6D00,color:#fff
     style L300 fill:#AA00FF,stroke:#AA00FF,color:#fff
@@ -192,15 +199,17 @@ including licensing management, monitoring, and onboarding automation.
 - Namespace migration scripts for resource updates
 - FAQ and learning resource documentation
 
+**Link to project:** [Azure Arc-Enabled SQL Server 1-Stop](https://github.com/jonathan-vella/azure-arc-enabled-sql-server)
+
 **Repository Contents:**
 
-| Category | What Was Built |
-|----------|----------------|
-| Resource Management | Namespace migration scripts |
-| Licensing | P-Core activation, PAYG installation, license modification |
-| Monitoring | Data collection, best practices assessment |
-| Automation | Server onboarding scripts |
-| Learning | 2-hour hands-on lab, FAQ, presentation materials |
+| Category            | What Was Built                                             |
+| ------------------- | ---------------------------------------------------------- |
+| Resource Management | Namespace migration scripts                                |
+| Licensing           | P-Core activation, PAYG installation, license modification |
+| Monitoring          | Data collection, best practices assessment                 |
+| Automation          | Server onboarding scripts                                  |
+| Learning            | 2-hour hands-on lab, FAQ, presentation materials           |
 
 ---
 
@@ -223,10 +232,10 @@ including licensing management, monitoring, and onboarding automation.
 graph LR
     A[Architectural<br/>Vision] -->|Without Copilot| B[Frustrated<br/>Google Searches]
     B --> C[Incomplete<br/>Implementation]
-    
+
     A -->|With Copilot| D[Contextual<br/>Code Generation]
     D --> E[Production-Ready<br/>Solutions]
-    
+
     style B fill:#ffebee,stroke:#c62828
     style C fill:#ffebee,stroke:#c62828
     style D fill:#e8f5e9,stroke:#2e7d32
@@ -235,13 +244,13 @@ graph LR
 
 ### Time Investment vs. Output
 
-| Project | Traditional Estimate | With Copilot | What I Learned |
-|---------|---------------------|--------------|----------------|
-| SAIF | 3-4 months | 3 weeks | Python, PHP, Docker, Bicep |
-| PostgreSQL HA | 2-3 months | 2 weeks | Kubernetes, Bash, PostgreSQL |
-| Java AppMod | 1-2 months | 1 week | Java ecosystem, DevContainers |
-| Sovereign Cloud | 2-3 months | 3 weeks | Curriculum design, Mermaid |
-| Arc SQL Server | 2 months | 2 weeks | PowerShell automation |
+| Project         | Traditional Estimate | With Copilot | What I Learned                |
+| --------------- | -------------------- | ------------ | ----------------------------- |
+| SAIF            | 3-4 months           | 3 weeks      | Python, PHP, Docker, Bicep    |
+| PostgreSQL HA   | 2-3 months           | 2 weeks      | Kubernetes, Bash, PostgreSQL  |
+| Java AppMod     | 1-2 months           | 1 week       | Java ecosystem, DevContainers |
+| Sovereign Cloud | 2-3 months           | 3 weeks      | Curriculum design, Mermaid    |
+| Arc SQL Server  | 2 months             | 2 weeks      | PowerShell automation         |
 
 ---
 
@@ -261,5 +270,5 @@ You need:
 
 ---
 
-*These projects are open source and available for learning and reference.
-Feel free to explore, fork, and adapt them to your needs.*
+_These projects are open source and available for learning and reference.
+Feel free to explore, fork, and adapt them to your needs._
