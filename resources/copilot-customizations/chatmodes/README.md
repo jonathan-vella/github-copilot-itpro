@@ -152,18 +152,6 @@ using Azure AD B2C and database-per-tenant pattern.
 
 ---
 
-#### planner.chatmode.md
-
-**Purpose:** Strategic planning and roadmapping
-
-**Use When:**
-
-- Long-term technical planning
-- Architecture evolution planning
-- Technology adoption strategies
-
----
-
 #### debug.chatmode.md
 
 **Purpose:** Troubleshooting and diagnostics assistance

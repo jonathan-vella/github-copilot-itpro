@@ -1,6 +1,9 @@
 # Agent Improvements Implementation Summary
 
-> ⚠️ **Note:** This is an archived document. The troubleshooting content referenced here has been consolidated into [docs/troubleshooting.md](../troubleshooting.md).
+> ⚠️ **Archive Notice:** This is an archived document from November 2025.
+> - The troubleshooting content has been consolidated into [docs/troubleshooting.md](../troubleshooting.md)
+> - The testing framework (`scenarios/agent-testing/`) described here was planned but **not fully implemented**
+> - References to test files and scripts are historical documentation of the plan, not current functionality
 
 **Date:** 2025-11-18  
 **Status:** ✅ Complete  

@@ -16,7 +16,6 @@ This directory tracks improvements to the GitHub Copilot custom agents used in t
 | ------------------------------------------------------------ | ---------------------------------- | ------------------------------ |
 | **[ROADMAP.md](./ROADMAP.md)**                               | Implementation timeline and phases | Project managers, stakeholders |
 | **[CHANGELOG.md](./CHANGELOG.md)**                           | Version history and changes        | All users, developers          |
-| **[TESTING-RESULTS.md](./TESTING-RESULTS.md)**               | Test execution results             | QA, developers                 |
 | **[IMPLEMENTATION-SUMMARY.md](./IMPLEMENTATION-SUMMARY.md)** | Complete implementation details    | All users                      |
 
 ---
@@ -118,18 +117,14 @@ Implementation agent uses phase-based deployment with validation gates between e
 
 ## 🧪 Testing
 
-### Run Test Suite
-
-```powershell
-cd scenarios/agent-testing
-.\Run-AgentTests.ps1 -Agent all -Verbose
-```
+> **Note:** The testing framework documented here was planned but not fully implemented.
+> Agent testing is performed manually through the scenarios in this repository.
 
 ### Manual Testing
 
-1. Follow procedures in [TESTING-PROCEDURES.md](../../scenarios/agent-testing/TESTING-PROCEDURES.md)
-2. Use test cases from `scenarios/agent-testing/test-cases/`
-3. Record results in [TESTING-RESULTS.md](./TESTING-RESULTS.md)
+1. Use scenario prompts from `scenarios/S03-five-agent-workflow/prompts/`
+2. Verify agent outputs match expected patterns
+3. Check that handoff buttons work correctly
 
 ---
 
@@ -206,20 +201,13 @@ cd scenarios/agent-testing
 ### Core Documentation
 
 - **Getting Started:** [Five-Mode Workflow](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md)
-- **Troubleshooting:** [Troubleshooting Guide](../../docs/troubleshooting.md)
-- **Testing:** [Test Suite README](../../scenarios/agent-testing/README.md)
+- **Troubleshooting:** [Troubleshooting Guide](../troubleshooting.md)
 
 ### Reference
 
 - **Roadmap:** [ROADMAP.md](./ROADMAP.md)
 - **Changelog:** [CHANGELOG.md](./CHANGELOG.md)
-- **Test Results:** [TESTING-RESULTS.md](./TESTING-RESULTS.md)
 - **Implementation Summary:** [IMPLEMENTATION-SUMMARY.md](./IMPLEMENTATION-SUMMARY.md)
-
-### Procedures
-
-- **Testing Procedures:** [TESTING-PROCEDURES.md](../../scenarios/agent-testing/TESTING-PROCEDURES.md)
-- **Test Cases:** [test-cases/](../../scenarios/agent-testing/test-cases/)
 
 ---
 
@@ -253,7 +241,6 @@ cd scenarios/agent-testing
 
 - [Presenter Toolkit](../../resources/presenter-toolkit/)
 - [Demo Scripts](../../scenarios/)
-- [Skills Bridge](../../skills-bridge/)
 
 ---
 
