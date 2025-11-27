@@ -227,7 +227,7 @@ Real-world ToDo application from Azure Samples:
 
 **Best for**: New to SBOMs, want to learn fundamentals
 
-1. **Open VS Code with Copilot Chat** (Ctrl+Shift+I / Cmd+Shift+I)
+1. **Open VS Code with Copilot Chat** (Ctrl+Alt+I / Cmd+Alt+I)
 
 2. **Start the conversation**:
 

@@ -97,6 +97,17 @@ flowchart LR
     style E fill:#fce4ec,stroke:#c2185b
 ```
 
+| Agent                       | Type     | Purpose                                |
+| --------------------------- | -------- | -------------------------------------- |
+| `@plan`                     | Built-in | Strategic planning with cost estimates |
+| `adr_generator`             | Custom   | Document architectural decisions       |
+| `azure-principal-architect` | Custom   | Azure WAF assessment                   |
+| `bicep-plan`                | Custom   | Infrastructure module design           |
+| `bicep-implement`           | Custom   | Generate production-ready Bicep        |
+
+> **Note:** The Plan Agent (`@plan`) is a **built-in VS Code feature**—see [VS Code docs](https://code.visualstudio.com/docs/copilot/chat/chat-planning).
+> The other four agents are custom agents defined in `.github/agents/`.
+
 **Time Comparison**:
 | Approach | Duration |
 |----------|----------|

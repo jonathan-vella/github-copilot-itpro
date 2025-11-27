@@ -400,7 +400,7 @@ By the end of this demo, participants will:
 
 - **Hook**: "What if you could go from customer requirements to near-production-ready infrastructure in 30 minutes?"
 - Present traditional timeline (2-3 days)
-- Introduce 4-agent workflow concept
+- Introduce 5-agent workflow concept (Plan Agent + 4 custom agents)
 
 ### During Demo (35 minutes)
 

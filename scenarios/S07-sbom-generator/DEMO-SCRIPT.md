@@ -28,7 +28,7 @@
 
 ### Test Copilot
 
-Open Copilot Chat (Ctrl+Shift+I / Cmd+Shift+I) and verify:
+Open Copilot Chat (Ctrl+Alt+I / Cmd+Alt+I) and verify:
 
 ```
 Test prompt: "What is a Software Bill of Materials?"
@@ -118,7 +118,7 @@ code sample-app/src/api/Dockerfile     # For Phase 3
 
 ### Step 1: Open Copilot Chat
 
-**[ACTION]**: Open VS Code, start Copilot Chat (Ctrl+Shift+I / Cmd+Shift+I)
+**[ACTION]**: Open VS Code, start Copilot Chat (Ctrl+Alt+I / Cmd+Alt+I)
 
 **[NARRATE]**:
 

@@ -386,7 +386,7 @@ if ($GenerateDirectly) {
 }
 
 Write-Log "`n📋 Next Steps:" -Level Info
-Write-Log "1. Open GitHub Copilot Chat in VS Code (Ctrl+Shift+I or Cmd+Shift+I)" -Level Info
+Write-Log "1. Open GitHub Copilot Chat in VS Code (Ctrl+Alt+I or Cmd+Alt+I)" -Level Info
 Write-Log "2. Paste the prompt from: $promptFile" -Level Info
 Write-Log "3. Review and customize the generated API documentation" -Level Info
 Write-Log "4. Save to: $(Join-Path $OutputPath 'api-documentation.md')" -Level Info

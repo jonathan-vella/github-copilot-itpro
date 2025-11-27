@@ -125,6 +125,17 @@ flowchart LR
     classDef implement fill:#fce4ec,stroke:#c2185b
 ```
 
+| Agent                       | Type     | Purpose                                  |
+| --------------------------- | -------- | ---------------------------------------- |
+| `@plan`                     | Built-in | Strategic planning with cost estimates   |
+| `adr_generator`             | Custom   | Document architectural decisions         |
+| `azure-principal-architect` | Custom   | Azure Well-Architected Framework review  |
+| `bicep-plan`                | Custom   | Infrastructure module design             |
+| `bicep-implement`           | Custom   | Generate near-production-ready Bicep     |
+
+> **Note:** The Plan Agent (`@plan`) is a **built-in VS Code feature**. The other four agents are custom
+> agents defined in `.github/agents/`. See [VS Code Plan Agent docs](https://code.visualstudio.com/docs/copilot/chat/chat-planning).
+
 **Result:** Projects that took 18+ hours now complete in 45 minutes with near-production-ready code.
 
 📖 **[See it in action → S03 Five Agent Workflow](scenarios/S03-five-agent-workflow)**

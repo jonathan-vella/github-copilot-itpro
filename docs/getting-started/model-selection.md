@@ -162,7 +162,7 @@ resource kv 'Microsoft.KeyVault/vaults@2023-07-01' = {
 
 ### Method 1: Model Picker (Recommended)
 
-1. Open Copilot Chat (`Ctrl+Shift+I`)
+1. Open Copilot Chat (`Ctrl+Alt+I`)
 2. Click the model name in the chat header
 3. Select your preferred model
 

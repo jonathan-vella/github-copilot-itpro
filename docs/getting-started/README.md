@@ -234,14 +234,28 @@ flowchart LR
     style E fill:#fce4ec,stroke:#c2185b
 ```
 
+**Workflow Components:**
+
+| Agent | Type | Access |
+|-------|------|--------|
+| **@plan** | Built-in VS Code | Select from Agents dropdown (`Ctrl+Shift+A`) |
+| **adr_generator** | Custom | Select from Agents dropdown |
+| **azure-principal-architect** | Custom | Select from Agents dropdown |
+| **bicep-plan** | Custom | Select from Agents dropdown |
+| **bicep-implement** | Custom | Select from Agents dropdown |
+
+> **Note:** The Plan Agent (`@plan`) is a **built-in VS Code feature**, not a custom agent. It generates
+> reusable `*.prompt.md` files and provides automatic handoff buttons.
+> See [VS Code Plan Agent docs](https://code.visualstudio.com/docs/copilot/chat/chat-planning).
+
 **How to use:**
 
-1. **Start with `@plan`** - Press `Ctrl+Shift+A`, select `@plan`
+1. **Start with `@plan`** - Select from Agents dropdown (`Ctrl+Shift+A`)
 2. **Describe your project** - e.g., "HIPAA-compliant patient portal"
-3. **Follow agent handoffs** - Each agent suggests the next step
-4. **Review outputs** - ADRs, architecture docs, Bicep code
+3. **Follow agent handoffs** - Each agent suggests the next step via buttons
+4. **Review outputs** - Plan files, ADRs, architecture docs, Bicep code
 
-📖 **Full guide:** [S03 Five-Agent Workflow](../scenarios/S03-five-agent-workflow/)
+📖 **Full guide:** [S03 Five-Agent Workflow](../../scenarios/S03-five-agent-workflow/)
 
 ### GitHub Copilot Coding Agent
 
@@ -293,13 +307,15 @@ pwsh -File validation/validate.ps1
 
 ### Agent Quick Access
 
-| Agent                       | Access                  | Use For             |
-| --------------------------- | ----------------------- | ------------------- |
-| `@plan`                     | `Ctrl+Shift+A` → Select | Multi-step planning |
-| `adr_generator`             | `Ctrl+Shift+A` → Select | Document decisions  |
-| `azure-principal-architect` | `Ctrl+Shift+A` → Select | WAF assessment      |
-| `bicep-plan`                | `Ctrl+Shift+A` → Select | Module design       |
-| `bicep-implement`           | `Ctrl+Shift+A` → Select | Code generation     |
+| Agent                       | Type     | Access                        | Use For             |
+| --------------------------- | -------- | ----------------------------- | ------------------- |
+| `@plan`                     | Built-in | `Ctrl+Shift+A` → Select       | Multi-step planning |
+| `adr_generator`             | Custom   | `Ctrl+Shift+A` → Select       | Document decisions  |
+| `azure-principal-architect` | Custom   | `Ctrl+Shift+A` → Select       | WAF assessment      |
+| `bicep-plan`                | Custom   | `Ctrl+Shift+A` → Select       | Module design       |
+| `bicep-implement`           | Custom   | `Ctrl+Shift+A` → Select       | Code generation     |
+
+> 📖 **Plan Agent Documentation:** [VS Code Chat Planning](https://code.visualstudio.com/docs/copilot/chat/chat-planning)
 
 ---
 
