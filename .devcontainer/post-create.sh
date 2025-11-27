@@ -24,12 +24,14 @@ python3 -c "import checkov; import diagrams" 2>/dev/null && echo "  ✅ checkov 
     pip3 install --quiet --user checkov diagrams 2>&1 | tail -1 || echo "  ⚠️  Installation had issues, continuing..."
 }
 
-# Install markdownlint-cli (if not already present)
-echo "📝 Installing markdownlint-cli..."
-if ! command -v markdownlint &> /dev/null; then
-    npm install -g markdownlint-cli 2>&1 | grep -v "npm warn" || echo "⚠️  Warning: markdownlint installation had issues"
+# Install markdownlint-cli2 (installed via postCreateCommand, verify here)
+echo "📝 Verifying markdownlint-cli2..."
+if command -v markdownlint-cli2 &> /dev/null; then
+    echo "  ✅ markdownlint-cli2 already installed"
+elif command -v markdownlint &> /dev/null; then
+    echo "  ✅ markdownlint already installed"
 else
-    echo "  markdownlint already installed"
+    echo "  ⚠️  markdownlint not found (should have been installed via postCreateCommand)"
 fi
 
 # Install Azure PowerShell modules (parallel install)
@@ -106,7 +108,7 @@ printf "  %-15s %s\n" "Node.js:" "$(node --version 2>/dev/null || echo '❌ not 
 printf "  %-15s %s\n" "GitHub CLI:" "$(gh --version 2>/dev/null | head -n1 || echo '❌ not installed')"
 printf "  %-15s %s\n" "tfsec:" "$(tfsec --version 2>/dev/null || echo '❌ not installed')"
 printf "  %-15s %s\n" "Checkov:" "$(checkov --version 2>/dev/null || echo '❌ not installed')"
-printf "  %-15s %s\n" "markdownlint:" "$(markdownlint --version 2>/dev/null || echo '❌ not installed')"
+printf "  %-15s %s\n" "markdownlint:" "$(markdownlint-cli2 --version 2>/dev/null || markdownlint --version 2>/dev/null || echo '❌ not installed')"
 
 echo ""
 echo "🎉 Post-create setup completed!"
