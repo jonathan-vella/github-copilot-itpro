@@ -1,25 +1,45 @@
 # Demo Quick Reference Card
 
 > Print this or keep it on a second screen during the demo.
+> **Plan Agent Docs:** [VS Code Chat Planning](https://code.visualstudio.com/docs/copilot/chat/chat-planning)
 
 ## Timeline
 
 | Time | Phase | Key Action |
 |------|-------|------------|
-| **0:00** | Opening | "14-18 hours → 30 minutes" |
-| **3:00** | Agent 1 | `azure-principal-architect` → WAF + Cost |
-| **11:00** | Agent 2 | `bicep-plan` → Mermaid diagram |
-| **16:00** | Agent 3 | `bicep-implement` → Generate code |
+| **0:00** | Opening | "18-24 hours → 30 minutes" |
+| **3:00** | Plan Agent | `@plan` (built-in) → Research & breakdown |
+| **8:00** | Agent 1 | `azure-principal-architect` → WAF + Cost |
+| **14:00** | Agent 2 | `bicep-plan` → Mermaid diagram |
+| **19:00** | Agent 3 | `bicep-implement` → Generate code |
 | **26:00** | Wrap-up | Show files, state 95% savings |
 
 ---
 
 ## Copy-Paste Prompts
 
+### Prompt 0: Plan Agent (Agents dropdown → Plan)
+
+```text
+I need to design and implement a HIPAA-compliant patient portal for Contoso Healthcare.
+
+**Context:**
+- 10,000 patients, 50 staff members
+- $800/month budget constraint
+- HIPAA compliance required
+- 3-month timeline
+
+Please help me:
+1. Break down this project into implementation phases
+2. Identify key architectural decisions
+3. List open questions that need clarification
+4. Recommend which specialized agents to use for each phase
+```
+
 ### Prompt 1: Architecture (Ctrl+Shift+A → azure-principal-architect)
 
 ```text
-Design an Azure architecture for Contoso Healthcare's patient portal.
+Design an Azure architecture for the Contoso Healthcare patient portal based on our plan.
 
 **Business Context:**
 - Secure patient portal for appointment scheduling
@@ -32,6 +52,7 @@ Design an Azure architecture for Contoso Healthcare's patient portal.
 - Encryption at rest and in transit
 - Audit logging for compliance
 - Private network access for databases
+- Region: swedencentral (sustainable operations)
 
 Please provide:
 1. WAF assessment with scores for all 5 pillars
@@ -93,15 +114,18 @@ bicep build infra/bicep/contoso-patient-portal/main.bicep && bicep lint infra/bi
 ## Key Metrics to State
 
 | Traditional | With Copilot | Savings |
-|-------------|--------------|---------|
-| 14-18 hours | 30 minutes | **95%** |
+|-------------|--------------|-------|
+| 18-24 hours | 30 minutes | **95%** |
+
+**Key Insight:** "We started with Plan Agent, which researched before any code. That plan is now a reusable `*.prompt.md` file."
 
 ---
 
 ## If Things Go Wrong
 
 | Problem | Say This | Do This |
-|---------|----------|---------|
+|---------|----------|--------|
+| Plan Agent missing | "Let me update VS Code..." | Ensure VS Code + Copilot extension are current |
 | Agent slow | "Complex architecture takes a moment..." | Keep talking about WAF pillars |
 | Agent fails | "Let me show the pre-built output..." | Open `infra/bicep/contoso-patient-portal/` |
 | Code error | "Even AI needs review—let's fix it" | Show `bicep lint` catching issues |

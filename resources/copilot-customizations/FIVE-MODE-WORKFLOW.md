@@ -1,39 +1,51 @@
 # Five-Agent Workflow for Azure Infrastructure Development
 
-This document describes the structured workflow for developing Azure infrastructure using GitHub Copilot Custom Agents and Chat Modes.
+This document describes the structured workflow for developing Azure infrastructure using VS Code's built-in **Plan Agent** and GitHub Copilot Custom Agents.
 
 ## Overview
 
-The five-agent workflow provides a systematic approach to infrastructure development:
+The five-agent workflow provides a systematic approach to infrastructure development, **starting with VS Code's native Plan Agent**:
 
+0. **Research & Plan** → VS Code Plan Agent (`@plan`) - _Built-in, Start Here_
 1. **Document Decisions** → ADR Generator (Custom Agent) - _Optional for enterprise governance_
 2. **Plan Architecture** → Azure Principal Architect (Custom Agent)
 3. **Create Plan** → Bicep Planning Specialist (Custom Agent)
 4. **Implement Code** → Bicep Implementation Specialist (Custom Agent)
 
-> **Note**: The ADR Generator agent is optional. For quick demos focused on speed, you can start directly with the Azure Principal Architect agent (step 2). The ADR agent is most valuable for enterprise teams needing audit trails and governance documentation.
+> **📖 Official Documentation**: See [VS Code Plan Agent Documentation](https://code.visualstudio.com/docs/copilot/chat/chat-planning) for complete details on the built-in planning features.
 
-**How to Use Custom Agents:**
+> **Note**: The ADR Generator agent is optional. For quick demos focused on speed, you can start with Plan Agent and proceed directly to the Azure Principal Architect agent. The ADR agent is most valuable for enterprise teams needing audit trails and governance documentation.
 
-- Press `Ctrl+Shift+A` or click the **Agent** button in Copilot Chat
-- Select the agent from the dropdown: `adr_generator`, `azure-principal-architect`, `bicep-plan`, or `bicep-implement`
-- Type your prompt and submit
+**How to Use the Workflow:**
+
+1. Open Chat view (`Ctrl+Alt+I`) and select **Plan** from the agents dropdown - this is built into VS Code
+2. For custom agents, press `Ctrl+Shift+A` or click the **Agent** button in Copilot Chat
+3. Select the agent from the dropdown: `adr_generator`, `azure-principal-architect`, `bicep-plan`, or `bicep-implement`
+4. Use handoff controls at the end of each agent's response to transition to the next agent
 
 ## Workflow Diagram
 
 ```mermaid
 %%{init: {'theme':'neutral'}}%%
 graph TB
-    Start([Infrastructure Requirement]) --> Decision{Need Governance<br/>Documentation?}
+    Start([Infrastructure Requirement]) --> Plan[VS Code Plan Agent<br/>Research & Breakdown<br/><i>BUILT-IN - START HERE</i>]
+
+    Plan --> PlanOutput{Plan Output}
+    PlanOutput -->|Save Plan| PromptFile["*.prompt.md File<br/>(Reusable, Editable)"]
+    PlanOutput -->|Hand off| Decision
+
+    PromptFile -.->|Invoke Later| Decision
+
+    Decision{Need Governance<br/>Documentation?}
 
     Decision -->|Yes - Enterprise| ADR[ADR Generator Agent<br/>Document Decision<br/><i>OPTIONAL</i>]
     Decision -->|No - Quick Demo| Arch
 
     ADR --> Arch[Azure Principal Architect<br/>WAF Assessment]
 
-    Arch --> Plan[Bicep Planning Mode<br/>Create Implementation Plan]
+    Arch --> BicepPlan[Bicep Planning Mode<br/>Create Implementation Plan]
 
-    Plan --> Implement[Bicep Implementation Mode<br/>Generate Bicep Code]
+    BicepPlan --> Implement[Bicep Implementation Mode<br/>Generate Bicep Code]
 
     Implement --> Validate[Validate & Deploy]
 
@@ -44,14 +56,119 @@ graph TB
 
     Review -->|Success| Complete([Deployment Complete])
 
+    style Plan fill:#d4edda,stroke:#28a745
+    style PromptFile fill:#fff3cd,stroke:#ffc107
     style ADR fill:#e1f5ff
     style Arch fill:#fff4e1
-    style Plan fill:#e8f5e8
+    style BicepPlan fill:#e8f5e8
     style Implement fill:#ffe8f5
     style Debug fill:#ffe8e8
 ```
 
 ## Mode Details
+
+### 0. VS Code Plan Agent (Built-in) - _Start Here_
+
+**Purpose:** Research tasks comprehensively using read-only tools and codebase analysis before any implementation.
+
+> **This is a built-in VS Code feature**, not a custom agent. It's designed to ensure all requirements are understood before code changes are made.
+
+**Key Capabilities:**
+
+- **Read-only research**: Analyzes codebase and context without making changes
+- **Task breakdown**: Breaks down complex tasks into manageable, actionable steps
+- **Clarifying questions**: Asks open questions to refine understanding
+- **Plan files**: Generates `*.prompt.md` files that are editable and reusable
+- **Progress tracking**: Creates todo list to track completion during complex tasks
+- **Handoff controls**: UI buttons to "Save Plan" or "Hand off to implementation agent"
+
+**When to Use:**
+
+- Starting any multi-step infrastructure project
+- When you need to understand requirements before diving into architecture
+- To create reusable implementation blueprints for your team
+- When you want clarifying questions to surface hidden requirements
+
+**Inputs:**
+
+- High-level task description (feature, refactoring, bug, infrastructure project)
+- Business requirements and constraints
+- Budget and compliance needs
+
+**Outputs:**
+
+- High-level summary of the approach
+- Breakdown of implementation steps
+- Open questions for clarification
+- `*.prompt.md` file (when saved)
+- Handoff controls to proceed to implementation
+
+**How to Invoke:**
+
+1. Open Chat view (`Ctrl+Alt+I`)
+2. Select **Plan** from the agents dropdown
+3. Enter your high-level task and submit
+4. Review the plan draft and provide feedback for iteration
+5. Once finalized, save the plan or hand off to an implementation agent
+
+**Example Prompt:**
+
+```markdown
+I need to design and implement a HIPAA-compliant patient portal for Contoso Healthcare.
+
+Context:
+- 10,000 patients, 50 staff members
+- $800/month budget constraint
+- HIPAA compliance required
+- 3-month implementation timeline
+
+Please help me:
+1. Break down this project into implementation phases
+2. Identify key architectural decisions
+3. List open questions that need clarification
+4. Recommend which specialized agents to use for each phase
+```
+
+**Plan File Output (`*.prompt.md`):**
+
+When you click "Save Plan", VS Code generates a reusable prompt file:
+
+```markdown
+# contoso-patient-portal-plan.prompt.md
+
+## Summary
+HIPAA-compliant patient portal requiring App Service, Azure SQL, Key Vault...
+
+## Implementation Phases
+### Phase 1: Foundation
+- Resource group and networking
+- Key Vault for secrets
+
+### Phase 2: Platform
+- App Service and SQL Database
+- Application Insights
+
+## Open Decisions
+- [ ] EHR integration method
+- [ ] DR strategy
+```
+
+This file can be edited, shared with team members, or invoked later to resume the workflow.
+
+**Iterating on the Plan:**
+
+Stay in plan mode to refine before implementation:
+
+```markdown
+Answering your questions:
+- EHR integration: REST API to existing Epic system
+- DR requirements: RPO 1 hour, RTO 4 hours
+- Authentication: Azure AD SSO with MFA
+
+Please refine the plan with these details.
+```
+
+---
 
 ### 1. ADR Generator (Custom Agent) - _Optional_
 
@@ -477,7 +594,36 @@ output bastionSubnetId string = hubVNet.properties.subnets[0].id
 
 ### Scenario: Deploy Secure Development Environment
 
-#### Step 1: Document Decision (ADR Generator)
+#### Step 0: Research & Plan (VS Code Plan Agent)
+
+**Agent:** Select **Plan** from the agents dropdown in Chat view (`Ctrl+Alt+I`)
+
+**Prompt:**
+
+```markdown
+I need to design and deploy a secure development environment for our team.
+
+Context:
+- 5 developers, 2 VMs each
+- Cost-conscious demo environment
+- Must demonstrate Azure best practices
+- Security isolation required
+- 30-minute demo constraint
+
+Please help me:
+1. Break down this project into implementation phases
+2. Identify key architectural decisions
+3. List open questions that need clarification
+4. Recommend which specialized agents to use for each phase
+```
+
+**Output:** Plan draft with implementation steps and handoff controls
+
+**Action:** Review the plan, answer clarifying questions, then click "Hand off to implementation agent" or proceed to ADR Generator for documentation.
+
+---
+
+#### Step 1: Document Decision (ADR Generator) - Optional
 
 **Agent:** Select `adr_generator` from Agent dropdown (Ctrl+Shift+A)
 
@@ -506,7 +652,7 @@ Requirements:
 **Prompt:**
 
 ```markdown
-Design a development environment with:
+Design a development environment based on our plan with:
 
 - Network isolation per ADR-0003
 - Azure Bastion for secure access per ADR-0002
@@ -604,12 +750,13 @@ Using debug mode, analyze this deployment error:
 
 | Situation                        | Recommended Mode                           | Rationale                              |
 | -------------------------------- | ------------------------------------------ | -------------------------------------- |
+| Starting any complex project     | **VS Code Plan Agent**                     | Research before code, reusable plan files |
 | Making architecture choice       | ADR Generator                              | Document for future reference          |
 | Evaluating security posture      | Azure Principal Architect                  | WAF Security pillar expertise          |
-| Planning multi-region deployment | Azure Principal Architect + Bicep Planning | Architecture first, then detailed plan |
+| Planning multi-region deployment | Plan Agent → Principal Architect → Bicep Planning | Full workflow for complex deployments |
 | Converting ARM to Bicep          | Bicep Implementation                       | Direct code generation                 |
 | Troubleshooting deployment error | Debug Mode                                 | Specialized error analysis             |
-| Breaking down complex project    | Bicep Planning                             | Structured task decomposition          |
+| Breaking down complex project    | Plan Agent + Bicep Planning                | Research + structured task decomposition |
 | Quick single-resource creation   | Bicep Implementation                       | Direct implementation                  |
 | SaaS multi-tenancy design        | Azure SaaS Architect                       | Specialized domain expertise           |
 | Using AVM modules                | AVM Bicep Mode                             | Module-specific guidance               |
@@ -619,7 +766,12 @@ Using debug mode, analyze this deployment error:
 ```mermaid
 %%{init: {'theme':'neutral'}}%%
 graph TD
-    Start([Infrastructure Task]) --> Q1{Is this a<br/>significant decision?}
+    Start([Infrastructure Task]) --> Q0{Complex or<br/>multi-step task?}
+
+    Q0 -->|Yes| Mode0[VS Code Plan Agent<br/><i>Research & Breakdown</i>]
+    Q0 -->|No - Simple| Q1
+
+    Mode0 --> Q1{Is this a<br/>significant decision?}
 
     Q1 -->|Yes - Document it| Mode1[ADR Generator]
     Q1 -->|No| Q2{Need architecture<br/>guidance?}
@@ -651,6 +803,7 @@ graph TD
 
     Mode5 --> Mode4
 
+    style Mode0 fill:#d4edda,stroke:#28a745
     style Mode1 fill:#e1f5ff
     style Mode2A fill:#fff4e1
     style Mode2B fill:#fff4e1
@@ -696,6 +849,7 @@ graph TD
 
 | Mode                 | Output Type   | Location                           | Example                         |
 | -------------------- | ------------- | ---------------------------------- | ------------------------------- |
+| **VS Code Plan Agent** | **Prompt File** | **Workspace root or specified** | **`*.prompt.md`** |
 | ADR Generator        | Markdown ADR  | `/docs/adr/`                       | `adr-0003-network-isolation.md` |
 | Principal Architect  | Chat Response | N/A (guidance)                     | Inline recommendations          |
 | Bicep Planning       | Markdown Plan | `.bicep-planning-files/`           | `INFRA.dev-environment.md`      |
@@ -708,7 +862,7 @@ Each scenario in `scenarios/` can showcase the five-agent workflow:
 
 ### S01: Bicep Baseline
 
-- **Plan:** Project scope and cost estimation
+- **Plan Agent:** Research scope and requirements
 - **ADR:** Choice of Bicep over ARM/Terraform
 - **Architect:** WAF assessment of hub-spoke network
 - **Planning:** Network module breakdown
@@ -716,13 +870,15 @@ Each scenario in `scenarios/` can showcase the five-agent workflow:
 
 ### S03: Five-Agent Workflow
 
-- **ADR:** Full workflow documentation
+- **Plan Agent:** Research and break down patient portal requirements
+- **ADR:** Full workflow documentation (optional)
 - **Architect:** WAF assessment of patient portal
 - **Planning:** Complete infrastructure breakdown
 - **Implementation:** Production Bicep with AVM modules
 
 ### S04: Documentation Generation
 
+- **Plan Agent:** Research documentation structure
 - **ADR:** Documentation-as-code strategy
 - **Architect:** N/A (not infrastructure-focused)
 - **Planning:** Documentation structure plan
@@ -730,13 +886,21 @@ Each scenario in `scenarios/` can showcase the five-agent workflow:
 
 ### S09: Coding Agent
 
-- **Plan:** Issue scope and acceptance criteria
+- **Plan Agent:** Issue scope and acceptance criteria
 - **ADR:** N/A (typically skip for async tasks)
 - **Architect:** N/A (agent handles implementation)
 - **Planning:** Defined in issue body
 - **Implementation:** Automated via GitHub Copilot Coding Agent
 
 ## Troubleshooting
+
+### Issue: Plan Agent Not in Dropdown
+
+**Solution:** Ensure VS Code and GitHub Copilot extension are up to date. Plan Agent is built-in since late 2024.
+
+### Issue: Plan File Not Saving
+
+**Solution:** Check workspace write permissions. The `*.prompt.md` file is saved to your workspace.
 
 ### Issue: Mode Not Activating
 

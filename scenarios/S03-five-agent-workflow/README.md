@@ -2,9 +2,11 @@
 
 ## 🎯 Overview
 
-This demo showcases GitHub Copilot's **5-agent workflow** for designing and implementing Azure infrastructure using custom agents. It demonstrates how architects and IT professionals can leverage specialized agents to move from business requirements to near-production-ready Bicep templates through a structured, iterative process.
+This demo showcases GitHub Copilot's **5-agent workflow** for designing and implementing Azure infrastructure, starting with VS Code's built-in **Plan Agent** and handing off to specialized custom agents. It demonstrates how architects and IT professionals can leverage plan-driven development to move from business requirements to near-production-ready Bicep templates through a structured, iterative process.
 
 > **Working Implementation**: The complete workflow output is available as near-production-ready infrastructure in [`../../infra/bicep/contoso-patient-portal/`](../../infra/bicep/contoso-patient-portal/) (1,070 lines of Bicep, 10 modules).
+
+> **📖 Official Documentation**: See [VS Code Plan Agent Documentation](https://code.visualstudio.com/docs/copilot/chat/chat-planning) for complete details on the built-in planning features.
 
 **Target Audience**: Solution Architects, Cloud Architects, Infrastructure Engineers, IT Professionals
 
@@ -20,26 +22,53 @@ Traditional infrastructure design involves:
 - 📝 **Context loss**: Switching between tools and formats
 - 🔄 **Rework**: Architectural decisions not reflected in code
 - 📚 **Documentation lag**: Code and docs out of sync
+- 🎯 **Scope creep**: No structured planning before implementation
 
-**With 5-Agent Workflow**:
+**With 5-Agent Workflow (Plan-First Approach)**:
 
+- 📋 **Research before code**: VS Code Plan Agent researches comprehensively before any changes
 - ⚡ **45 minutes**: Complete workflow from requirements to deployable code (vs. 18 hours manual)
-- 🔗 **Automatic handoffs**: Context preserved between agents
-- ✅ **Aligned outputs**: Architecture drives implementation
-- 📖 **Living documentation**: Generated alongside infrastructure
+- 🔗 **Automatic handoffs**: Context preserved between agents via UI controls
+- ✅ **Aligned outputs**: Plan drives architecture drives implementation
+- 📖 **Living documentation**: Plans saved as reusable `*.prompt.md` files
 - 💰 **Cost-validated**: Budget estimates before implementation
+- 📊 **Progress tracking**: Built-in todo list tracks completion during complex tasks
 
 ## 🤖 The Five Agents
 
-### 0. Plan Agent (`@plan`) - _Start Here_
+### 0. Plan Agent (`@plan`) - _VS Code Built-in - Start Here_
 
-- **Purpose**: Break down complex infrastructure projects into step-by-step implementation plans
-- **Input**: Business requirements, constraints, budget, compliance needs
-- **Output**: Interactive planning session with clarifying questions, detailed implementation plan with phases, resource breakdown with cost estimates, deployment sequence
-- **Handoff**: Implementation plan → ADR Generator (optional) or Azure Principal Architect
-- **Key Feature**: Iterative refinement before any code is written
+> **This is a built-in VS Code feature**, not a custom agent. It's designed to research and plan before any code changes are made.
 
-**Usage**: Always start with `@plan` for multi-step infrastructure projects
+- **Purpose**: Research tasks comprehensively using read-only tools and codebase analysis before implementation
+- **Input**: High-level tasks (features, refactoring, bugs, infrastructure projects)
+- **Output**:
+  - High-level summary with breakdown of steps
+  - Open questions for clarification
+  - Saved plan as `*.prompt.md` file (editable prompt file)
+  - Handoff controls to implementation agents
+- **Key Features**:
+  - **Read-only research**: Analyzes codebase without making changes
+  - **Iterative refinement**: Stay in plan mode to refine before implementation
+  - **Plan files**: Generates `*.prompt.md` files you can edit and reuse
+  - **Todo tracking**: Creates todo list to track progress during complex tasks
+  - **UI controls**: "Save Plan" or "Hand off to implementation agent" buttons
+
+**How to Use**:
+
+1. Open Chat view (`Ctrl+Alt+I`)
+2. Select **Plan** from the agents dropdown
+3. Enter your high-level task and submit
+4. Preview the proposed plan draft and provide feedback for iteration
+5. Once finalized, save the plan or hand off to an implementation agent
+
+**Example Prompts**:
+
+- "Design a HIPAA-compliant patient portal for Contoso Healthcare with $800/month budget"
+- "Create infrastructure for a multi-tier web application with Azure App Service and SQL Database"
+- "Implement zone-redundant deployment for existing application"
+
+**Usage**: Always start with `@plan` for multi-step infrastructure projects. The plan ensures all requirements are considered before any code changes.
 
 ### 1. Azure Principal Architect (`azure-principal-architect`)
 
@@ -100,7 +129,7 @@ Traditional infrastructure design involves:
 
 ### Prerequisites
 
-- Visual Studio Code with GitHub Copilot
+- Visual Studio Code with GitHub Copilot (Plan Agent is built-in)
 - Azure subscription (for deployment validation)
 - Custom agents configured (see [FIVE-MODE-WORKFLOW.md](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md))
 
@@ -112,22 +141,25 @@ Traditional infrastructure design involves:
    cd scenarios/S03-five-agent-workflow/prompts
    ```
 
-````
-
 2. **Open VS Code**:
 
    ```powershell
    code .
-````
+   ```
 
-1. **Open GitHub Copilot Chat** (`Ctrl+Shift+I`)
+3. **Open GitHub Copilot Chat** (`Ctrl+Alt+I`)
 
-2. **Follow the five-agent workflow**:
-   - Stage 0: Planning with `@plan` (5-10 min)
-   - Stage 1: Architecture Design (15 min)
-   - Stage 2: Implementation Planning (10 min)
-   - Stage 3: Bicep Generation (15 min)
-   - Stage 4: Validation & Deployment
+4. **Follow the five-agent workflow**:
+
+   | Stage | Agent | Duration | Key Output |
+   |-------|-------|----------|------------|
+   | 0 | `@plan` (built-in) | 5-10 min | Implementation plan + `*.prompt.md` file |
+   | 1 | `azure-principal-architect` | 10-15 min | WAF assessment + cost estimates |
+   | 2 | `bicep-plan` | 5-10 min | Resource breakdown + Mermaid diagram |
+   | 3 | `bicep-implement` | 10-15 min | Modular Bicep templates |
+   | 4 | Validation & Deployment | 5-10 min | `bicep build` + `bicep lint` |
+
+5. **Pro Tip**: Use the UI handoff controls at the end of each agent's response to seamlessly transition to the next agent with full context preserved.
 
 See [DEMO-SCRIPT.md](DEMO-SCRIPT.md) for detailed walkthrough.
 
@@ -153,19 +185,45 @@ S03-five-agent-workflow/
 
 ## 🎬 Demo Flow
 
-### Part 1: Architecture Design (15 minutes)
+### Part 0: Planning with VS Code Plan Agent (5-10 minutes)
+
+**Agent**: `@plan` (Built-in)
+
+1. Open Copilot Chat (`Ctrl+Alt+I`)
+2. Select **Plan** from the agents dropdown
+3. Submit the high-level requirement:
+
+   ```text
+   Design a HIPAA-compliant patient portal for Contoso Healthcare.
+   - 10,000 patients, 50 staff members
+   - $800/month budget constraint
+   - 99.9% SLA requirement
+   - 3-month implementation timeline
+   ```
+
+4. Review the plan draft:
+   - High-level summary of the approach
+   - Breakdown of implementation steps
+   - Open questions for clarification (answer these to refine)
+5. **Iterate**: Provide feedback to refine the plan ("Add security considerations", "Include cost breakdown")
+6. **Save or Handoff**:
+   - Click **"Save Plan"** → Generates `*.prompt.md` file for later use
+   - OR Click **"Hand off to implementation agent"** → Proceed to architecture
+
+**Key Takeaway**: Plan Agent researches comprehensively before any code changes. The plan becomes a reusable `*.prompt.md` file.
+
+### Part 1: Architecture Design (10-15 minutes)
 
 **Agent**: `azure-principal-architect`
 
-1. Present business scenario
-2. Select Azure Principal Architect agent (`Ctrl+Shift+A`)
-3. Submit Stage 1 prompt (requirements)
-4. Review outputs:
+1. From Plan Agent handoff, or select Azure Principal Architect agent (`Ctrl+Shift+A`)
+2. The plan context is automatically passed to the architect
+3. Review outputs:
    - WAF scores (Security: 9/10, Reliability: 7/10, etc.)
    - Service recommendations with justification
    - Cost breakdown ($334/month vs $800 budget)
    - HIPAA compliance checklist
-5. **Click "Plan Bicep Implementation" handoff button**
+4. **Click "Plan Bicep Implementation" handoff button**
 
 **Key Takeaway**: Agent provides comprehensive architecture assessment in ~2 minutes vs. hours of manual analysis.
 
@@ -273,12 +331,14 @@ S03-five-agent-workflow/
 
 By the end of this demo, participants will:
 
-1. ✅ Understand the 4-agent workflow for Azure infrastructure
-2. ✅ Use agent handoff buttons for seamless transitions
-3. ✅ Interpret WAF scores and architecture recommendations
-4. ✅ Navigate implementation plans to understand dependencies
-5. ✅ Validate generated Bicep templates
-6. ✅ Articulate time savings and ROI to stakeholders
+1. ✅ Understand the **5-agent workflow** for Azure infrastructure (starting with Plan Agent)
+2. ✅ Use VS Code's built-in **Plan Agent** to research before implementing
+3. ✅ Generate and edit **`*.prompt.md` plan files** for reusable workflows
+4. ✅ Use agent handoff buttons/controls for seamless transitions
+5. ✅ Interpret WAF scores and architecture recommendations
+6. ✅ Navigate implementation plans to understand dependencies
+7. ✅ Validate generated Bicep templates
+8. ✅ Articulate time savings and ROI to stakeholders
 
 ## 🛠️ Customization Options
 
@@ -316,12 +376,13 @@ By the end of this demo, participants will:
 
 ### Documentation
 
-- [Five-Agent Workflow Guide](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md) - Complete documentation with Plan agent
+- [VS Code Plan Agent Documentation](https://code.visualstudio.com/docs/copilot/chat/chat-planning) - **Official VS Code docs for built-in Plan Agent**
+- [Five-Agent Workflow Guide](../../resources/copilot-customizations/FIVE-MODE-WORKFLOW.md) - Complete documentation with Plan agent integration
 - [15-Minute Demo Script](../../resources/copilot-customizations/AGENT-HANDOFF-DEMO.md) - Quick demonstration
 - [Custom Agent Configuration](../../.github/agents/) - Agent definitions with swedencentral defaults
-- [Plan Agent Documentation](https://code.visualstudio.com/docs/copilot/chat/chat-planning) - Official VS Code docs
 - [Azure Well-Architected Framework](https://learn.microsoft.com/azure/well-architected/)
 - [Azure Verified Modules](https://azure.github.io/Azure-Verified-Modules/)
+- [Context Engineering Guide](https://code.visualstudio.com/docs/copilot/guides/context-engineering-guide) - Best practices for AI-assisted development
 
 ### Related Demos
 
@@ -394,8 +455,10 @@ A: No - it augments their capabilities. Architects still make decisions; agents 
 
 Demo is successful when audience:
 
-- [ ] Understands the 5-agent workflow concept (starting with Plan agent)
-- [ ] Sees value in automatic context handoffs
+- [ ] Understands the **5-agent workflow** concept (starting with VS Code's built-in Plan Agent)
+- [ ] Recognizes Plan Agent as a **built-in VS Code feature** (not a custom agent)
+- [ ] Understands how **`*.prompt.md` files** preserve and share implementation plans
+- [ ] Sees value in automatic context handoffs via UI controls
 - [ ] Recognizes time savings (96% reduction, 18 hours → 45 minutes)
 - [ ] Appreciates near-production-ready output quality (unique suffixes, regional defaults)
 - [ ] Wants to try it on their own projects

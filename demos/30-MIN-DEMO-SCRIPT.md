@@ -1,8 +1,9 @@
 # High-Impact 30-Minute Demo Script
 
 > **Audience:** Technical professionals (architects, engineers, IT pros)
-> **Goal:** Show GitHub Copilot as an efficiency multiplier for Azure infrastructure
+> **Goal:** Show GitHub Copilot as an efficiency multiplier for Azure infrastructure, starting with VS Code's built-in Plan Agent
 > **Key Metric:** 18 hours → 45 minutes (95% time savings)
+> **Plan Agent Docs:** [VS Code Chat Planning](https://code.visualstudio.com/docs/copilot/chat/chat-planning)
 
 ---
 
@@ -21,14 +22,16 @@ az account show --query name -o tsv
 #    - scenarios/S03-five-agent-workflow/scenario/requirements.md
 #    - infra/bicep/contoso-patient-portal/main.bicep (as backup)
 
-# 4. Open Copilot Chat panel (Ctrl+Shift+I)
-# 5. Clear chat history for clean start
+# 4. Open Copilot Chat panel (Ctrl+Alt+I)
+# 5. Verify Plan agent is available in dropdown (built-in)
+# 6. Clear chat history for clean start
 ```
 
 ### Browser Tabs Ready
 
 1. This demo script (for timing reference)
 2. Azure Portal (logged in, ready to show resources if needed)
+3. [VS Code Plan Agent Docs](https://code.visualstudio.com/docs/copilot/chat/chat-planning) (for reference)
 
 ### Backup Plan
 
@@ -70,20 +73,75 @@ If live demo fails, switch to walking through the completed output in `infra/bic
 
 ### Transition
 
-> "Let's start with the architecture. I'm going to use our Azure Principal Architect agent."
+> "Let's start with VS Code's built-in **Plan Agent** to research and break down this project before we dive into architecture."
 
 ---
 
-## 🏗️ Stage 1: Azure Principal Architect (3:00 - 11:00)
+## 📋 Stage 0: VS Code Plan Agent (3:00 - 8:00)
 
 ### What to Do
 
-1. Press `Ctrl+Shift+A` to open Agent selector
-2. Select **azure-principal-architect**
+1. Open Copilot Chat (`Ctrl+Alt+I`)
+2. Click the agents dropdown and select **Plan** (built-in, not custom)
 3. Paste this prompt:
 
 ```text
-Design an Azure architecture for Contoso Healthcare's patient portal.
+I need to design and implement a HIPAA-compliant patient portal for Contoso Healthcare.
+
+**Context:**
+- 10,000 patients, 50 staff members  
+- $800/month budget constraint
+- HIPAA compliance required
+- 3-month timeline
+- Prefer managed Azure services
+
+Please help me:
+1. Break down this project into implementation phases
+2. Identify key architectural decisions
+3. List open questions that need clarification
+4. Recommend which specialized agents to use for each phase
+```
+
+### What to Highlight While Agent Works
+
+> "Notice what the Plan Agent is doing:
+>
+> - It's **researching using read-only tools** – no code changes yet
+> - It's analyzing our workspace context without modifying anything
+> - This is the key difference: **plan before code**"
+
+### Pause Points (Let Audience See)
+
+- **Implementation Steps**: "See how it broke this into phases – Foundation, Platform, Security, Configuration"
+- **Open Questions**: "It's asking clarifying questions – 'What EHR system?', 'DR requirements?'"
+- **Agent Recommendations**: "It tells us which specialized agents to use for each phase"
+
+### Show Plan Controls
+
+> "Look at these controls at the bottom:
+> - **Save Plan** – creates a `*.prompt.md` file I can edit and reuse
+> - **Hand off to implementation agent** – proceeds to architecture
+>
+> This plan file becomes living documentation I can share with my team."
+
+### Transition
+
+> "Now let's hand off to the Azure Principal Architect to design the solution."
+
+**[Click "Hand off to implementation agent" OR manually select azure-principal-architect]**
+
+---
+
+## 🏗️ Stage 1: Azure Principal Architect (8:00 - 14:00)
+
+### What to Do
+
+1. If not auto-selected from handoff, press `Ctrl+Shift+A` to open Agent selector
+2. Select **azure-principal-architect**
+3. Paste this prompt (or context carries forward from Plan):
+
+```text
+Design an Azure architecture for the Contoso Healthcare patient portal based on our plan.
 
 **Business Context:**
 - Secure patient portal for appointment scheduling
@@ -96,6 +154,7 @@ Design an Azure architecture for Contoso Healthcare's patient portal.
 - Encryption at rest and in transit
 - Audit logging for compliance
 - Private network access for databases
+- Region: swedencentral (sustainable operations)
 
 Please provide:
 1. WAF assessment with scores for all 5 pillars
@@ -110,7 +169,8 @@ After assessment, hand off to the Bicep Planning Specialist.
 
 > "Notice a few things happening here:
 >
-> - The agent is analyzing our requirements against all 5 pillars of the Azure Well-Architected Framework
+> - The agent has **context from our Plan** – it knows our requirements and constraints
+> - It's analyzing against all 5 pillars of the Azure Well-Architected Framework
 > - It's selecting specific SKUs—not just 'use App Service' but 'use S1 for dev, P1v3 for production'
 > - It's calculating estimated monthly costs
 > - And it's thinking about HIPAA compliance from the start"
@@ -127,7 +187,7 @@ After assessment, hand off to the Bicep Planning Specialist.
 
 ---
 
-## 📋 Stage 2: Bicep Planning (11:00 - 16:00)
+## 📋 Stage 2: Bicep Planning (14:00 - 19:00)
 
 ### What to Do
 
@@ -152,6 +212,7 @@ Then hand off to the Bicep Implementation Specialist.
 ### What to Highlight
 
 > "This agent is doing something really powerful—it's thinking about **dependencies**.
+> It has context from both our original Plan AND the architecture assessment.
 > You can't create a private endpoint before the VNet exists.
 > You can't store secrets in Key Vault before Key Vault is deployed.
 > Getting this order wrong is one of the most common deployment failures."
@@ -168,7 +229,7 @@ When the agent generates the dependency diagram, point out:
 
 ---
 
-## 💻 Stage 3: Bicep Implementation (16:00 - 26:00)
+## 💻 Stage 3: Bicep Implementation (19:00 - 26:00)
 
 ### What to Do
 
@@ -252,12 +313,14 @@ contoso-patient-portal/
 >
 > | Metric        | Traditional   | With Copilot                      |
 > | ------------- | ------------- | --------------------------------- |
-> | Time          | 14-18 hours   | 30 minutes                        |
+> | Time          | 18-24 hours   | 30 minutes                        |
 > | Files         | Varies        | 10+ near-production-ready modules |
 > | Security      | Manual review | Built-in from the start           |
-> | Documentation | Often skipped | Auto-generated                    |
+> | Documentation | Often skipped | Auto-generated + `*.prompt.md` plan |
 >
-> That's a **95% time reduction**. And this isn't prototype code—it's near-production-ready with HIPAA compliance, private endpoints, and managed identities."
+> That's a **95% time reduction**. And this isn't prototype code—it's near-production-ready with HIPAA compliance, private endpoints, and managed identities.
+>
+> **Key insight**: We started with the Plan Agent, which researched our requirements before any code was written. That plan became a reusable `*.prompt.md` file we can share with our team."
 
 ### Call to Action
 
@@ -275,6 +338,7 @@ contoso-patient-portal/
 
 | Problem                 | Quick Fix                                                          |
 | ----------------------- | ------------------------------------------------------------------ |
+| Plan Agent not in dropdown | Ensure VS Code and Copilot extension are up to date (Plan is built-in) |
 | Agent not responding    | Switch to different model (GPT-4o) or use pre-generated output     |
 | Slow generation         | Keep talking about what's happening, explain the complexity        |
 | Error in generated code | "This is realistic—even AI needs review. Let's fix this together." |
@@ -293,13 +357,17 @@ If live demo fails completely, spend 10 minutes walking through:
 
 ## 📝 Anticipated Q&A
 
+### "What's the Plan Agent and why start there?"
+
+> "Plan Agent is built into VS Code—it's not a custom agent. It researches your task using read-only tools before any code changes. This ensures we understand requirements fully before architecture. The plan becomes a reusable `*.prompt.md` file."
+
 ### "How does context pass between agents?"
 
-> "Each agent is configured with specific instructions in `.github/agents/`. When one agent 'hands off' to another, it's actually passing the conversation history plus its output. The next agent sees everything the previous one produced."
+> "When one agent 'hands off' to another via the UI controls, it passes the conversation history plus its output. The Plan context flows to Architecture, which flows to Planning, which flows to Implementation. No copy/paste needed."
 
 ### "Can I customize the agents?"
 
-> "Absolutely. The agent files are just markdown. You can modify the instructions, add your own security requirements, or create entirely new agents for your specific workflows."
+> "Absolutely. Custom agents are markdown files in `.github/agents/`. You can modify instructions, add security requirements, or create entirely new agents. Plan Agent behavior is controlled via VS Code settings."
 
 ### "What about hallucinations or wrong code?"
 
@@ -307,11 +375,11 @@ If live demo fails completely, spend 10 minutes walking through:
 
 ### "Does this work with Terraform?"
 
-> "Yes! Check out S02-terraform-baseline for the same hub-spoke demo in Terraform. The workflow is similar, just different agents."
+> "Yes! Check out S02-terraform-baseline for the same hub-spoke demo in Terraform. The Plan Agent works the same way, just different implementation agents."
 
 ### "What's the learning curve?"
 
-> "Most people are productive within a day. The Dev Container handles all tool setup. The real skill is learning to write good prompts—and we have examples for that in every scenario."
+> "Most people are productive within a day. The Dev Container handles all tool setup. Start with Plan Agent for any complex task—it guides you through the process."
 
 ---
 
@@ -321,13 +389,15 @@ If live demo fails completely, spend 10 minutes walking through:
 
 | Agent                     | Access       | Purpose                                   |
 | ------------------------- | ------------ | ----------------------------------------- |
-| @plan                     | Built-in     | Create strategy with cost estimates       |
+| @plan                     | Agents dropdown → Plan | Research & plan with read-only tools (built-in VS Code) |
 | azure-principal-architect | Ctrl+Shift+A | WAF assessment, architecture design       |
 | bicep-plan                | Ctrl+Shift+A | Implementation planning, Mermaid diagrams |
 | bicep-implement           | Ctrl+Shift+A | Generate production Bicep code            |
 
 ### Key Talking Points
 
+- **"Plan before code"** - Plan Agent researches before any changes
+- **"*.prompt.md files"** - Plans are saved as reusable, shareable documents
 - **"Efficiency multiplier"** - Not replacing you, augmenting you
 - **"Azure Verified Modules"** - Using Microsoft's official, tested modules
 - **"uniqueSuffix pattern"** - Prevents naming collisions in Azure

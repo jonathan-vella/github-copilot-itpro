@@ -1,8 +1,13 @@
 # Workflow Prompts: Healthcare Patient Portal Scenario
 
 **Scenario:** Contoso Healthcare Inc. - HIPAA-compliant patient portal for appointment scheduling  
-**Use Case:** Demonstrates five-agent workflow with realistic healthcare requirements  
+**Use Case:** Demonstrates five-agent workflow starting with VS Code's built-in Plan Agent  
 **Budget:** $800/month | **Users:** 10,000 patients, 50 staff | **Timeline:** 3 months
+
+> 💡 **Plan-First Approach:** This workflow starts with VS Code's built-in Plan Agent (`@plan`) to research
+> and break down the project before diving into architecture. The Plan Agent uses read-only tools
+> to understand requirements, generates clarifying questions, and produces reusable `*.prompt.md` files.
+> See [VS Code Plan Agent Documentation](https://code.visualstudio.com/docs/copilot/chat/chat-planning) for details.
 
 > 💡 **Discovery-First Approach:** Each stage includes discovery questions to help you understand
 > _why_ agents make specific recommendations, not just _what_ they recommend. Ask these questions
@@ -10,56 +15,146 @@
 
 ---
 
-## Stage 0: Planning with @plan Agent
+## Stage 0: Planning with VS Code Plan Agent
 
-**Agent:** `@plan` (Built-in)  
-**Objective:** Create comprehensive implementation plan with cost estimates before diving into architecture
+**Agent:** `@plan` (VS Code Built-in - Select "Plan" from agents dropdown)  
+**Objective:** Research requirements comprehensively and create actionable implementation plan before architecture
+
+> **Key Capability:** The Plan Agent is a built-in VS Code feature that:
+> - **Researches using read-only tools** - analyzes codebase without making changes
+> - **Breaks down tasks** into manageable, actionable steps
+> - **Asks clarifying questions** to refine understanding
+> - **Generates `*.prompt.md` files** - reusable, editable plan documents
+> - **Provides handoff controls** - "Save Plan" or "Hand off to implementation agent"
+
+### How to Invoke
+
+1. Open Chat view (`Ctrl+Alt+I`)
+2. Select **Plan** from the agents dropdown (not a custom agent)
+3. Enter your high-level task and submit
+4. Review the plan draft, answer clarifying questions
+5. Iterate until satisfied, then save or hand off
 
 ### Discovery Questions (Ask Before/During)
+
+Understanding plan-driven development:
+
+```text
+- Why should I plan before jumping into architecture?
+- How does Plan Agent research without making changes?
+- What should I include in my initial prompt vs. wait for clarifying questions?
+```
 
 Understanding project scope:
 
 ```text
 - What factors determine whether a project needs all 5 agents vs. fewer?
-- How do you decide which agent to start with for a given scenario?
+- How do you decide which specialized agent to hand off to?
 - What information from the requirements doc is most critical for the plan?
 ```
 
-Understanding cost estimation:
+Understanding plan files:
 
 ```text
-- How do you estimate Azure costs before selecting specific services?
-- What assumptions are built into your cost estimates?
-- How accurate are preliminary cost estimates vs. final implementation?
+- What is a `*.prompt.md` file and how do I use it later?
+- Can I share plan files with my team?
+- How do I edit a saved plan and re-invoke it?
 ```
 
 ### Prompt
 
 ```text
-I need help planning a HIPAA-compliant patient portal for Contoso Healthcare.
-Before we start designing, I want to understand the full scope.
+I need to design and implement a HIPAA-compliant patient portal for Contoso Healthcare.
+Before diving into architecture, I want to understand the full scope and create a solid plan.
 
 **Context:**
 - 10,000 patients, 50 staff members
-- $800/month budget
-- HIPAA compliance required
-- 3-month timeline
+- $800/month budget constraint
+- HIPAA compliance required (encryption, audit logging, access controls)
+- 3-month implementation timeline
+- Prefer managed Azure services over VMs
+- Region: swedencentral preferred (sustainable operations)
 
-Can you help me:
-1. Break down this project into phases
-2. Identify the key decisions I'll need to make
-3. Estimate costs for different architecture options
-4. Recommend which agents to use for each phase
+Please help me:
+1. Break down this project into implementation phases
+2. Identify the key architectural decisions I'll need to make
+3. List open questions that need clarification
+4. Recommend which specialized agents to use for each phase
 
-I'm new to multi-agent workflows - please explain why each phase matters.
+I'm using a five-agent workflow - please help me understand when to use:
+- azure-principal-architect (WAF assessment)
+- bicep-plan (implementation planning)
+- bicep-implement (code generation)
+- adr_generator (decision documentation - optional)
+```
+
+### Expected Plan Output
+
+The Plan Agent should return:
+
+- [ ] **Summary**: High-level approach to the project
+- [ ] **Implementation Steps**: Breakdown into phases (Foundation, Platform, Security, etc.)
+- [ ] **Open Questions**: Clarifying questions (EHR integration details? DR requirements?)
+- [ ] **Agent Recommendations**: Which agents to use when
+- [ ] **UI Controls**: "Save Plan" and "Hand off to implementation agent" buttons
+
+### Iterating on the Plan
+
+After reviewing the initial plan, provide clarifying answers:
+
+```text
+Answering your questions:
+- EHR integration: REST API to existing Epic system
+- DR requirements: RPO 1 hour, RTO 4 hours
+- Authentication: Azure AD SSO with MFA
+- Team Azure experience: Intermediate (comfortable with Portal, learning IaC)
+
+Please refine the plan with these details.
 ```
 
 ### Teaching Moments to Look For
 
-- [ ] Explains the role of each agent in the workflow
-- [ ] Shows how requirements map to agent selection
-- [ ] Provides preliminary cost ranges before detailed architecture
+- [ ] Plan Agent uses **read-only tools** - no code changes until you hand off
+- [ ] Explains the role of each specialized agent in the workflow
+- [ ] Shows how requirements map to implementation phases
+- [ ] Provides clarifying questions that surface hidden requirements
 - [ ] Identifies decision points that will affect the final design
+- [ ] Shows "Save Plan" and "Hand off" controls at the end
+
+### Saving the Plan
+
+When you click "Save Plan", VS Code generates a `*.prompt.md` file:
+
+```markdown
+# contoso-patient-portal-plan.prompt.md
+
+## Summary
+[High-level approach]
+
+## Implementation Phases
+### Phase 1: Foundation
+- Resource group
+- Networking
+...
+
+## Open Decisions
+- [ ] DR strategy confirmation
+- [ ] EHR API authentication method
+...
+```
+
+This file can be:
+- Edited and refined
+- Shared with team members for review
+- Invoked later to resume the workflow
+- Used as documentation
+
+### Handoff to Architecture
+
+Click **"Hand off to implementation agent"** or manually:
+1. Press `Ctrl+Shift+A`
+2. Select `azure-principal-architect`
+3. The plan context carries forward automatically
 
 ---
 
