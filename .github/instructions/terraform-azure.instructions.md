@@ -1,129 +1,88 @@
 ---
-description: 'Create or modify solutions built using Terraform on Azure.'
+description: 'Best practices for Azure infrastructure solutions using Terraform and Azure Verified Modules'
 applyTo: '**/*.terraform, **/*.tf, **/*.tfvars, **/*.tflint.hcl, **/*.tfstate, **/*.tf.json, **/*.tfvars.json'
 ---
 
 # Azure Terraform Best Practices
 
-## Integration and Self-Containment
+Guidelines for creating secure, maintainable, and Well-Architected Azure infrastructure using Terraform. Leverage Azure Verified Modules (AVM) whenever available to reduce maintenance burden and align with Microsoft best practices.
 
-This instruction set extends the universal DevOps Core Principles and Taming Copilot directives for Azure/Terraform scenarios. It assumes those foundational rules are loaded but includes summaries here for self-containment. If the general rules are not present, these summaries serve as defaults to maintain behavioral consistency.
+## General Instructions
 
-### Incorporated DevOps Core Principles (CALMS Framework)
+- Use latest stable Terraform and Azure provider versions
+- Default to `swedencentral` region (alternative: `germanywestcentral` for quota issues)
+- Use Azure Verified Modules (AVM) for all significant resources
+- Store state in Azure Storage backend with state locking enabled
+- Never commit state files or secrets to source control
+- Check for planning files in `.terraform-planning-files/` folder when present
 
-- **Culture**: Foster collaborative, blameless culture with shared responsibility and continuous learning.
-- **Automation**: Automate everything possible across the software delivery lifecycle to reduce manual effort and errors.
-- **Lean**: Eliminate waste, maximize flow, and deliver value continuously by reducing batch sizes and bottlenecks.
-- **Measurement**: Measure everything relevant (e.g., DORA metrics: Deployment Frequency, Lead Time for Changes, Change Failure Rate, Mean Time to Recovery) to drive improvement.
-- **Sharing**: Promote knowledge sharing, collaboration, and transparency across teams.
+## Anti-Patterns to Avoid
 
-### Incorporated Taming Copilot Directives (Behavioral Hierarchy)
-
-- **Primacy of User Directives**: Direct user commands take highest priority.
-- **Factual Verification**: Prioritize tools for current, factual answers over internal knowledge.
-- **Adherence to Philosophy**: Follow minimalist, surgical approaches—code on request only, minimal necessary changes, direct and concise responses.
-- **Tool Usage**: Use tools purposefully; declare intent before action; prefer parallel calls when possible.
-
-These summaries ensure the mode functions independently while aligning with the broader chat mode context. For full details, reference the original DevOps Core Principles and Taming Copilot instructions.
-
-## Chat Mode Integration
-
-When operating in chat mode with these instructions loaded:
-
-- Treat this as a self-contained extension that incorporates summarized general rules for independent operation.
-- Prioritize user directives over automated actions, especially for terraform commands beyond validate.
-- Use implicit dependencies where possible and confirm before any terraform plan or apply operations.
-- Maintain minimalist responses and surgical code changes, aligning with the incorporated Taming philosophy.
-- **Planning Files Awareness**: Always check for planning files in the `.terraform-planning-files/` folder (if present). Read and incorporate relevant details from these files into responses, especially for migration or implementation plans. If speckit or similar planning files exist in user-specified folders, prompt the user to confirm inclusion or read them explicitly.
-
-## 1. Overview
-
-These instructions provide Azure-specific guidance for solutions created Terraform, including how to incorporate and use Azure Verified Modules.
-
-For general Terraform conventions, see [terraform.instructions.md](terraform.instructions.md).
-
-For development of modules, especially Azure Verified Modules, see [azure-verified-modules-terraform.instructions.md](azure-verified-modules-terraform.instructions.md).
-
-## 2. Anti-Patterns to Avoid
-
-**Configuration:**
-
-- MUST NOT hardcode values that should be parameterized
-- SHOULD NOT use `terraform import` as a regular workflow pattern
-- SHOULD avoid complex conditional logic that makes code hard to understand
-- MUST NOT use `local-exec` provisioners unless absolutely necessary
-
-**Security:**
-
-- MUST NEVER store secrets in Terraform files or state
-- MUST avoid overly permissive IAM roles or network rules
-- MUST NOT disable security features for convenience
-- MUST NOT use default passwords or keys
-
-**Operational:**
-
-- MUST NOT apply Terraform changes directly to production without testing
-- MUST avoid making manual changes to Terraform-managed resources
-- MUST NOT ignore Terraform state file corruption or inconsistencies
-- MUST NOT run Terraform from local machines for production
-- MUST only use a Terraform state file (`**/*.tfstate`) for read only operations, all changes must be made via Terraform CLI or HCL.
-- MUST only use the contents of `**/.terraform/**` (fetched modules and providers) for read only operations.
-
-These build on the incorporated Taming Copilot directives for secure, operational practices.
+| Category | Anti-Pattern | Why to Avoid | Solution |
+|----------|--------------|--------------|----------|
+| Configuration | Hardcoded values | Reduces reusability | Use variables with defaults |
+| Configuration | `terraform import` as workflow | Creates drift risk | Define resources in code |
+| Configuration | Complex conditionals | Hard to maintain | Simplify or use modules |
+| Configuration | `local-exec` provisioners | Unreliable, not portable | Use native resources |
+| Security | Secrets in state files | Security vulnerability | Use ephemeral secrets (v1.11+) |
+| Security | Overly permissive IAM | Violates least privilege | Scope permissions narrowly |
+| Security | Default passwords/keys | Security risk | Use managed identities |
+| Operational | Direct production changes | Bypasses review | Use CI/CD pipelines |
+| Operational | Manual resource changes | Causes state drift | All changes via Terraform |
+| Operational | Local machine deployments | No audit trail | Use automation pipelines |
 
 ---
 
-## 3. Organize Code Cleanly
+## Code Organization
 
 Structure Terraform configurations with logical file separation:
 
-- Use `main.tf` for resources
-- Use `variables.tf` for inputs
-- Use `outputs.tf` for outputs
-- Use `terraform.tf` for provider configurations
-- Use `locals.tf` to abstract complex expressions and for better readability
-- Follow consistent naming conventions and formatting (`terraform fmt`)
-- If the main.tf or variables.tf files grow too large, split them into multiple files by resource type or function (e.g., `main.networking.tf`, `main.storage.tf` - move equivalent variables to `variables.networking.tf`, etc.)
+| File | Purpose |
+|------|---------|
+| `main.tf` | Core resources |
+| `variables.tf` | Input variables |
+| `outputs.tf` | Output values |
+| `terraform.tf` | Provider configuration |
+| `locals.tf` | Local values and expressions |
 
-Use `snake_casing` for variables and module names.
+- Use `snake_case` for variables and module names
+- Run `terraform fmt` to ensure consistent formatting
+- Split large files by resource type (e.g., `main.networking.tf`, `variables.networking.tf`)
 
-## 4. Use Azure Verified Modules (AVM)
+## Azure Verified Modules (AVM)
 
-Any significant resource should use an AVM if available. AVMs are designed to be aligned to the Well Architected Framework, are supported and maintained by Microsoft helping reduce the amount of code to be maintained. Information about how to discover these is available in [Azure Verified Modules for Terraform](azure-verified-modules-terraform.instructions.md).
+Use Azure Verified Modules for all significant resources. AVMs align with the Well-Architected Framework and reduce maintenance burden.
 
-If an Azure Verified Module is not available for the resource, suggest creating one "in the style of" AVM in order to align to existing work and provide an opportunity to contribute upstream to the community.
+- Discover AVMs at [Azure Verified Modules Registry](https://registry.terraform.io/namespaces/Azure)
+- If no AVM exists, create resources "in the style of" AVM for consistency
+- Exception: User explicitly requests not to use AVM or uses private registry
 
-An exception to this instruction is if the user has been directed to use an internal private registry, or explicitly states they do not wish to use Azure Verified Modules.
+## Code Style Standards
 
-This aligns with the incorporated DevOps Automation principle by leveraging pre-validated, community-maintained modules.
+Follow AVM-aligned coding standards:
 
-## 5. Variable and Code Style Standards
+| Standard | Rule | Reference |
+|----------|------|-----------|
+| Variable naming | Use `snake_case` for all names | TFNFR4, TFNFR16 |
+| Type declarations | Explicit types on all variables | TFNFR18 |
+| Descriptions | Comprehensive descriptions required | TFNFR17 |
+| Sensitive values | Mark sensitive appropriately | TFNFR22 |
+| Dynamic blocks | Use for optional nested objects | TFNFR12 |
 
-Follow AVM-aligned coding standards in solution code to maintain consistency:
+## Secrets Management
 
-- **Variable naming**: Use snake_case for all variable names (per TFNFR4 and TFNFR16). Be descriptive and consistent with naming conventions.
-- **Variable definitions**: All variables must have explicit type declarations (per TFNFR18) and comprehensive descriptions (per TFNFR17). Avoid nullable defaults for collection values (per TFNFR20) unless there's a specific need.
-- **Sensitive variables**: Mark sensitive variables appropriately and avoid setting `sensitive = false` explicitly (per TFNFR22). Handle sensitive default values correctly (per TFNFR23).
-- **Dynamic blocks**: Use dynamic blocks for optional nested objects where appropriate (per TFNFR12), and leverage `coalesce` or `try` functions for default values (per TFNFR13).
-- **Code organization**: Consider using `locals.tf` specifically for local values (per TFNFR31) and ensure precise typing for locals (per TFNFR33).
+Prefer managed identities over stored secrets. When secrets are required:
 
-## 6. Secrets
+- Use `ephemeral` secrets with write-only parameters (Terraform v1.11+)
+- Store secrets in Key Vault, not in code or state
+- Never write secrets to local filesystem or git
+- Mark sensitive values appropriately
 
-The best secret is one that does not need to be stored.  e.g. use Managed Identities rather than passwords or keys.
+## Outputs
 
-Use `ephemeral` secrets with write-only parameters when supported (Terraform v1.11+) to avoid storing secrets in state files. Consult module documentation for availability.
+Expose only information needed by other configurations:
 
-Where secrets are required, store in Key Vault unless directed to use a different service.
-
-Never write secrets to local filesystems or commit to git.
-
-Mark sensitive values appropriately, isolate them from other attributes, and avoid outputting sensitive data unless absolutely necessary. Follow TFNFR19, TFNFR22, and TFNFR23.
-
-## 7. Outputs
-
-- **Avoid unnecessary outputs**, only use these to expose information needed by other configurations.
-- Use `sensitive = true` for outputs containing secrets
-- Provide clear descriptions for all outputs
+### Good Example - Well-documented outputs
 
 ```hcl
 output "resource_group_name" {
@@ -137,11 +96,23 @@ output "virtual_network_id" {
 }
 ```
 
-## 8. Local Values Usage
+### Bad Example - Unnecessary or undocumented outputs
 
-- Use locals for computed values and complex expressions
-- Improve readability by extracting repeated expressions
-- Combine related values into structured locals
+```hcl
+output "rg" {
+  value = azurerm_resource_group.example.name  # Missing description
+}
+
+output "everything" {
+  value = azurerm_resource_group.example  # Exposes unnecessary attributes
+}
+```
+
+## Local Values
+
+Use locals for computed values and complex expressions:
+
+### Good Example - Structured locals
 
 ```hcl
 locals {
@@ -157,75 +128,54 @@ locals {
 }
 ```
 
-## 9. Follow recommended Terraform practices
+## Terraform Best Practices
 
-- **Redundant depends_on Detection**: Search and remove `depends_on` where the dependent resource is already referenced implicitly in the same resource block. Retain `depends_on` only where it is explicitly required.  Never depend on module outputs.
+| Practice | Rule | Notes |
+|----------|------|-------|
+| Dependencies | Remove redundant `depends_on` | Use implicit references |
+| Iteration | `count` for 0-1, `for_each` for many | Maps provide stable addresses |
+| Data sources | OK in root modules | Avoid in reusable modules |
+| Versioning | Target latest stable versions | Specify in terraform.tf |
 
-- **Iteration**: Use `count` for 0-1 resources, `for_each` for multiple resources. Prefer maps for stable resource addresses. Align with TFNFR7.
+## Folder Structure
 
-- **Data sources**: Acceptable in root modules but avoid in reusable modules. Prefer explicit module parameters over data source lookups.
-
-- **Parameterization**: Use strongly typed variables with explicit `type` declarations (TFNFR18), comprehensive descriptions (TFNFR17), and non-nullable defaults (TFNFR20). Leverage AVM-exposed variables.
-
-- **Versioning**: Target latest stable Terraform and Azure provider versions. Specify versions in code and keep updated (TFFR3).
-
-## 10. Folder Structure
-
-Use a consistent folder structure for Terraform configurations.
-
-Use tfvars to modify environmental differences. In general, aim to keep environments similar whilst cost optimising for non-production environments.
-
-Antipattern - branch per environment, repository per environment, folder per environment - or similar layouts that make it hard to test the root folder logic between environments.  
-
-Be aware of tools such as Terragrunt which may influence this design.
-
-A **suggested** structure is:
+Use tfvars for environment differences. Avoid branch/folder per environment anti-patterns.
 
 ```text
 my-azure-app/
-├── infra/                          # Terraform root module (AZD compatible)
+├── infra/                          # Terraform root module
 │   ├── main.tf                     # Core resources
 │   ├── variables.tf                # Input variables
 │   ├── outputs.tf                  # Outputs
 │   ├── terraform.tf                # Provider configuration
 │   ├── locals.tf                   # Local values
-│   └── environments/               # Environment-specific configurations
-│       ├── dev.tfvars              # Development environment
-│       ├── test.tfvars             # Test environment
-│       └── prod.tfvars             # Production environment
-├── .github/workflows/              # CI/CD pipelines (if using github)
-├── .azdo/                          # CI/CD pipelines (suggested if using Azure DevOps)
+│   └── environments/               # Environment-specific configs
+│       ├── dev.tfvars
+│       ├── test.tfvars
+│       └── prod.tfvars
+├── .github/workflows/              # CI/CD pipelines
 └── README.md                       # Documentation
 ```
 
-Never change the folder structure without direct agreement with the user.
-
-Follow AVM specifications TFNFR1, TFNFR2, TFNFR3, and TFNFR4 for consistent file naming and structure.
-
-## Azure-Specific Best Practices
+## Azure Best Practices
 
 ### Resource Naming and Tagging
 
-- Follow [Azure naming conventions](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming)
-- Use consistent region naming and variables for multi-region deployments
-- Implement consistent tagging.
+- Follow [Azure naming conventions](https://learn.microsoft.com/azure/cloud-adoption-framework/ready/azure-best-practices/resource-naming)
+- Use consistent region naming for multi-region deployments
+- Implement consistent tagging strategy
 
-### Resource Group Strategy
+### Networking
 
-- Use existing resource groups when specified
-- Create new resource groups only when necessary and with confirmation
-- Use descriptive names indicating purpose and environment
-
-### Networking Considerations
-
-- Validate existing VNet/subnet IDs before creating new network resources (for example, is this solution being deployed into an existing hub & spoke landing zone)
+- Validate existing VNet/subnet IDs before creating new resources
 - Use NSGs and ASGs appropriately
-- Implement private endpoints for PaaS services when required, use resource firewall restrictions to restrict public access otherwise.  Comment exceptions where public endpoints are required.
+- Implement private endpoints for PaaS services
+- Comment exceptions where public endpoints are required
 
 ### Security and Compliance
 
 - Use Managed Identities instead of service principals
-- Implement Key Vault with appropriate RBAC.
+- Implement Key Vault with appropriate RBAC
 - Enable diagnostic settings for audit trails
 - Follow principle of least privilege
 
@@ -243,12 +193,26 @@ Follow AVM specifications TFNFR1, TFNFR2, TFNFR3, and TFNFR4 for consistent file
 
 ## Validation
 
-- Do an inventory of existing resources and offer to remove unused resource blocks.
-- Run `terraform validate` to check syntax
-- Ask before running `terraform plan`.  Terraform plan will require a subscription ID, this should be sourced from the ARM_SUBSCRIPTION_ID environment variable, *NOT* coded in the provider block.
-- Test configurations in non-production environments first
-- Ensure idempotency (multiple applies produce same result)
+Run these commands before committing Terraform code:
 
-## Fallback Behavior
+```bash
+# Format code
+terraform fmt -recursive
 
-If general rules are not loaded, default to: minimalist code generation, explicit consent for any terraform commands beyond validate, and adherence to CALMS principles in all suggestions.
+# Validate syntax
+terraform validate
+
+# Plan changes (requires ARM_SUBSCRIPTION_ID env var)
+terraform plan -var-file=environments/dev.tfvars
+
+# Security scan
+tfsec .
+checkov -d .
+```
+
+## Maintenance
+
+- Review instructions when provider versions update
+- Update examples to reflect current patterns
+- Remove deprecated resource types
+- Keep AVM module versions current

@@ -1,55 +1,182 @@
 ---
-description: "Documentation and content creation standards"
-applyTo: "**/*.md"
+description: 'Documentation and content creation standards for markdown files'
+applyTo: '**/*.md'
 ---
 
-## Markdown Content Rules
+# Markdown Documentation Standards
 
-The following markdown content rules are enforced in the validators:
+Standards for creating consistent, accessible, and well-structured markdown documentation. Follow these guidelines to ensure documentation quality across the repository.
 
-1. **Headings**: Use appropriate heading levels (H2, H3, etc.) to structure your content. Do not use an H1 heading, as this will be generated based on the title.
-2. **Lists**: Use bullet points or numbered lists for lists. Ensure proper indentation and spacing.
-3. **Code Blocks**: Use fenced code blocks for code snippets. Specify the language for syntax highlighting.
-4. **Links**: Use proper markdown syntax for links. Ensure that links are valid and accessible.
-5. **Images**: Use proper markdown syntax for images. Include alt text for accessibility.
+## General Instructions
 
-- **Tables**: Use markdown tables for tabular data. Ensure proper formatting and alignment.
-- **Mermaid Diagrams**: Always include `%%{init: {'theme':'neutral'}}%%` as the first line inside Mermaid code blocks to ensure dark mode compatibility.
-- **Line Length**: Limit line length to 400 characters for readability.
+- Use ATX-style headings (`##`, `###`) - never use H1 (`#`) in content (reserved for document title)
+- Limit line length to 120 characters for readability
+- Use LF line endings (enforced by `.gitattributes`)
+- Include meaningful alt text for all images
+- Validate with `markdownlint` before committing
 
-8. **Whitespace**: Use appropriate whitespace to separate sections and improve readability.
-9. **Front Matter**: Include YAML front matter at the beginning of the file with required metadata fields.
+## Content Structure
 
-## Formatting and Structure
+| Element | Rule | Example |
+|---------|------|---------|
+| Headings | Use `##` for H2, `###` for H3, avoid H4+ | `## Section Title` |
+| Lists | Use `-` for unordered, `1.` for ordered | `- Item one` |
+| Code blocks | Use fenced blocks with language | ` ```bicep ` |
+| Links | Descriptive text, valid URLs | `[Azure docs](https://...)` |
+| Images | Include alt text | `![Architecture diagram](./img.png)` |
+| Tables | Align columns, include headers | See examples below |
 
-Follow these guidelines for formatting and structuring your markdown content:
+## Code Blocks
 
-- **Headings**: Use `##` for H2 and `###` for H3. Ensure that headings are used in a hierarchical manner. Recommend restructuring if content includes H4, and more strongly recommend for H5.
-- **Lists**: Use `-` for bullet points and `1.` for numbered lists. Indent nested lists with two spaces.
-- **Code Blocks**: Use triple backticks (`) to create fenced code blocks. Specify the language after the opening backticks for syntax highlighting (e.g., `csharp).
-- **Links**: Use `[link text](URL)` for links. Ensure that the link text is descriptive and the URL is valid.
-- **Images**: Use `![alt text](image URL)` for images. Include a brief description of the image in the alt text.
-- **Tables**: Use `|` to create tables. Ensure that columns are properly aligned and headers are included.
-- **Line Length**: Break lines at 80 characters to improve readability. Use soft line breaks for long paragraphs.
-- **Whitespace**: Use blank lines to separate sections and improve readability. Avoid excessive whitespace.
+Specify the language after opening backticks for syntax highlighting:
 
-## Validation Requirements
+### Good Example - Language-specified code block
 
-Ensure compliance with the following validation requirements:
+````markdown
+```bicep
+param location string = 'swedencentral'
+```
+````
 
-- **Front Matter**: Include the following fields in the YAML front matter:
+### Bad Example - No language specified
 
-  - `post_title`: The title of the post.
-  - `author1`: The primary author of the post.
-  - `post_slug`: The URL slug for the post.
-  - `microsoft_alias`: The Microsoft alias of the author.
-  - `featured_image`: The URL of the featured image.
-  - `categories`: The categories for the post. These categories must be from the list in /categories.txt.
-  - `tags`: The tags for the post.
-  - `ai_note`: Indicate if AI was used in the creation of the post.
-  - `summary`: A brief summary of the post. Recommend a summary based on the content when possible.
-  - `post_date`: The publication date of the post.
+````markdown
+```
+param location string = 'swedencentral'
+```
+````
 
-- **Content Rules**: Ensure that the content follows the markdown content rules specified above.
-- **Formatting**: Ensure that the content is properly formatted and structured according to the guidelines.
-- **Validation**: Run the validation tools to check for compliance with the rules and guidelines.
+## Mermaid Diagrams
+
+Always include the theme directive for dark mode compatibility:
+
+### Good Example - Mermaid with theme directive
+
+```markdown
+​```mermaid
+%%{init: {'theme':'neutral'}}%%
+graph LR
+    A[Start] --> B[End]
+​```
+```
+
+### Bad Example - Missing theme directive
+
+```markdown
+​```mermaid
+graph LR
+    A[Start] --> B[End]
+​```
+```
+
+## Lists and Formatting
+
+- Use `-` for bullet points (not `*` or `+`)
+- Use `1.` for numbered lists (auto-increment)
+- Indent nested lists with 2 spaces
+- Add blank lines before and after lists
+
+### Good Example - Proper list formatting
+
+```markdown
+Prerequisites:
+
+- Azure CLI 2.50+
+- Bicep CLI 0.20+
+- PowerShell 7+
+
+Steps:
+
+1. Clone the repository
+2. Run the setup script
+3. Verify installation
+```
+
+### Bad Example - Inconsistent list markers
+
+```markdown
+Prerequisites:
+* Azure CLI 2.50+
++ Bicep CLI 0.20+
+- PowerShell 7+
+```
+
+## Tables
+
+- Include header row with alignment
+- Keep columns aligned for readability
+- Use tables for structured comparisons
+
+```markdown
+| Resource | Purpose | Example |
+|----------|---------|---------|
+| Key Vault | Secrets management | `kv-contoso-dev` |
+| Storage | Blob storage | `stcontosodev` |
+```
+
+## Links and References
+
+- Use descriptive link text (not "click here")
+- Verify all links are valid and accessible
+- Prefer relative paths for internal links
+
+### Good Example - Descriptive links
+
+```markdown
+See the [deployment guide](./docs/deployment.md) for setup instructions.
+Refer to [Azure Bicep documentation](https://learn.microsoft.com/azure/azure-resource-manager/bicep/) for syntax details.
+```
+
+### Bad Example - Non-descriptive links
+
+```markdown
+Click [here](./docs/deployment.md) for more info.
+```
+
+## Front Matter (Optional)
+
+For blog posts or published content, include YAML front matter:
+
+```yaml
+---
+post_title: 'Article Title'
+author1: 'Author Name'
+post_slug: 'url-friendly-slug'
+post_date: '2025-01-15'
+summary: 'Brief description of the content'
+categories: ['Azure', 'Infrastructure']
+tags: ['bicep', 'iac', 'azure']
+---
+```
+
+**Note**: Front matter fields are project-specific. General documentation files may not require all fields.
+
+## Patterns to Avoid
+
+| Anti-Pattern | Problem | Solution |
+|--------------|---------|----------|
+| H1 in content | Conflicts with title | Use H2 (`##`) as top level |
+| Deep nesting (H4+) | Hard to navigate | Restructure content |
+| Long lines (400+ chars) | Poor readability | Break at 120 chars |
+| Missing code language | No syntax highlighting | Specify language |
+| "Click here" links | Poor accessibility | Use descriptive text |
+| Excessive whitespace | Inconsistent appearance | Single blank lines |
+
+## Validation
+
+Run these commands before committing markdown:
+
+```bash
+# Lint all markdown files
+markdownlint '**/*.md' --ignore node_modules --config .markdownlint.json
+
+# Check for broken links (if using markdown-link-check)
+markdown-link-check README.md
+```
+
+## Maintenance
+
+- Review documentation when code changes
+- Update examples to reflect current patterns
+- Remove references to deprecated features
+- Verify all links remain valid
