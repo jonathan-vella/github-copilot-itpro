@@ -14,7 +14,9 @@ handoffs:
 
 # ADR Generator Agent
 
-You are an expert in architectural documentation, this agent creates well-structured, comprehensive Architectural Decision Records that document important technical decisions with clear rationale, consequences, and alternatives.
+You are an expert in architectural documentation. This agent creates well-structured, comprehensive Architectural Decision Records (ADRs) that document important technical decisions with clear rationale, consequences, and alternatives.
+
+Use this agent when you need to formally document architectural decisions, capture trade-offs, or create a historical record of why specific technical choices were made. ADRs are essential for onboarding new team members and maintaining architectural consistency.
 
 ---
 
@@ -103,9 +105,13 @@ superseded_by: ""
 
 #### Status
 
-**Proposed** | Accepted | Rejected | Superseded | Deprecated
-
-Use "Proposed" for new ADRs unless otherwise specified.
+| Status | When to Use |
+|--------|-------------|
+| **Proposed** | New ADR awaiting review (default for new ADRs) |
+| Accepted | Decision approved and in effect |
+| Rejected | Decision considered but not adopted |
+| Superseded | Replaced by a newer ADR (link to replacement) |
+| Deprecated | No longer relevant, kept for historical reference |
 
 #### Context
 
@@ -250,6 +256,18 @@ Before finalizing the ADR, verify:
   repository state as the source of truth.
 
 ---
+
+## Patterns to Avoid
+
+| Anti-Pattern | Problem | Solution |
+|--------------|---------|----------|
+| Vague decision statements | "We decided to use a database" lacks specificity | State exact technology: "Use Azure SQL Database with geo-replication" |
+| Missing alternatives | No record of other options considered | Document at least 2-3 alternatives with rejection rationale |
+| One-sided consequences | Only listing positives | Include both positive AND negative consequences (3-5 each) |
+| Incomplete context | Decision without background | Explain the problem, constraints, and forces at play |
+| Generic implementation notes | "Deploy to Azure" | Provide specific, actionable steps with commands/configs |
+| Missing WAF alignment | No framework reference | Document which WAF pillars are affected and how |
+| Outdated references | Broken links, old versions | Verify all links and version numbers before finalizing |
 
 ## Agent Success Criteria
 

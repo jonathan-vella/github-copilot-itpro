@@ -301,3 +301,16 @@ az resource delete --ids {resource-id}
 - Include security, reliability, and cost considerations
 - Provide clear phase-by-phase implementation guidance
 - Generate architecture diagrams for visualization
+
+## Patterns to Avoid
+
+| Anti-Pattern | Problem | Solution |
+|--------------|---------|----------|
+| Incomplete dependencies | Resources fail to deploy in correct order | Map ALL resource dependencies in diagram |
+| Missing cost estimates | Budget surprises during deployment | Include monthly cost breakdown for every resource |
+| Outdated AVM versions | Missing features, security patches | Always fetch latest AVM version from registry |
+| Vague resource specs | Implementation agent makes wrong assumptions | Specify exact SKUs, configurations, parameters |
+| No rollback strategy | Stuck deployments with no recovery path | Document rollback commands for each phase |
+| Skipping validation steps | Errors discovered too late | Include pre/post-deployment validation for each phase |
+| Hardcoded values in plan | Plan not reusable across environments | Use parameter placeholders with examples |
+| Missing region rationale | No justification for region choice | Document why specific region was selected |
