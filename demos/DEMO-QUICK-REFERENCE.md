@@ -5,20 +5,21 @@
 
 ## Timeline
 
-| Time | Phase | Key Action |
-|------|-------|------------|
-| **0:00** | Opening | "18-24 hours → 30 minutes" |
-| **3:00** | Plan Agent | `@plan` (built-in) → Research & breakdown |
-| **8:00** | Agent 1 | `azure-principal-architect` → WAF + Cost |
-| **14:00** | Agent 2 | `bicep-plan` → Mermaid diagram |
-| **19:00** | Agent 3 | `bicep-implement` → Generate code |
-| **26:00** | Wrap-up | Show files, state 95% savings |
+| Time | Step | Agent | Key Action |
+|------|------|-------|------------|
+| **0:00** | Opening | - | "18-24 hours → 30 minutes" |
+| **3:00** | Step 1 | `@plan` (built-in) | Research & breakdown → **Approve** |
+| **8:00** | Step 2 | `azure-principal-architect` | WAF + Cost → **Approve** |
+| **14:00** | Step 3 | `bicep-plan` | Mermaid diagram → **Approve** |
+| **19:00** | Step 4 | `bicep-implement` | Generate code → **Approve** |
+| **24:00** | Optional | `diagram-generator` | Architecture diagram (PNG) |
+| **26:00** | Wrap-up | - | Show files, state 95% savings |
 
 ---
 
 ## Copy-Paste Prompts
 
-### Prompt 0: Plan Agent (Agents dropdown → Plan)
+### Step 1: Plan Agent (Agents dropdown → Plan)
 
 ```text
 I need to design and implement a HIPAA-compliant patient portal for Contoso Healthcare.
@@ -36,7 +37,9 @@ Please help me:
 4. Recommend which specialized agents to use for each phase
 ```
 
-### Prompt 1: Architecture (Ctrl+Shift+A → azure-principal-architect)
+> **Approval Gate**: Review plan and reply "approve" or provide feedback
+
+### Step 2: Architecture (Ctrl+Shift+A → azure-principal-architect)
 
 ```text
 Design an Azure architecture for the Contoso Healthcare patient portal based on our plan.
@@ -63,7 +66,9 @@ Please provide:
 After assessment, hand off to the Bicep Planning Specialist.
 ```
 
-### Prompt 2: Planning (Ctrl+Shift+A → bicep-plan)
+> **Approval Gate**: Review WAF assessment and reply "approve" or provide feedback
+
+### Step 3: Planning (Ctrl+Shift+A → bicep-plan)
 
 ```text
 Create a Bicep implementation plan for the Contoso Healthcare patient portal.
@@ -80,7 +85,9 @@ Save the plan to: .bicep-planning-files/INFRA.contoso-patient-portal.md
 Then hand off to the Bicep Implementation Specialist.
 ```
 
-### Prompt 3: Implementation (Ctrl+Shift+A → bicep-implement)
+> **Approval Gate**: Review implementation plan and reply "approve" or provide feedback
+
+### Step 4: Implementation (Ctrl+Shift+A → bicep-implement)
 
 ```text
 Implement the Bicep templates for the Contoso Healthcare patient portal.
@@ -99,6 +106,22 @@ Implement the Bicep templates for the Contoso Healthcare patient portal.
 
 Tags: Environment, ManagedBy, Project, Owner
 Default region: swedencentral
+```
+
+> **Approval Gate**: Review generated code, run `bicep build`, and reply "approve" or "deploy"
+
+### Optional: Architecture Diagram (Ctrl+Shift+A → diagram-generator)
+
+```text
+Generate a Python architecture diagram for the Contoso Healthcare patient portal.
+
+Include:
+- Azure Front Door for global load balancing
+- App Service in Sweden Central
+- Azure SQL Database
+- Key Vault for secrets
+- Application Insights for monitoring
+- Virtual Network with private endpoints
 ```
 
 ---

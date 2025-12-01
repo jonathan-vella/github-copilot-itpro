@@ -1,69 +1,81 @@
-# Five-Agent Workflow for Azure Infrastructure Development
+# Four-Step Agent Workflow for Azure Infrastructure Development
 
 This document describes the structured workflow for developing Azure infrastructure using VS Code's built-in **Plan Agent** and GitHub Copilot Custom Agents.
 
 ## Overview
 
-The five-agent workflow provides a systematic approach to infrastructure development, **starting with VS Code's native Plan Agent**:
+The four-step workflow provides a systematic approach to infrastructure development, with **approval gates at each step**:
 
-0. **Research & Plan** → VS Code Plan Agent (`@plan`) - _Built-in, Start Here_
-1. **Document Decisions** → ADR Generator (Custom Agent) - _Optional for enterprise governance_
-2. **Plan Architecture** → Azure Principal Architect (Custom Agent)
+1. **Research & Plan** → VS Code Plan Agent (`@plan`) - _Built-in, Start Here_
+2. **Plan Architecture** → Azure Principal Architect (Custom Agent) - _NO CODE CREATION_
 3. **Create Plan** → Bicep Planning Specialist (Custom Agent)
 4. **Implement Code** → Bicep Implementation Specialist (Custom Agent)
 
-> **📖 Official Documentation**: See [VS Code Plan Agent Documentation](https://code.visualstudio.com/docs/copilot/chat/chat-planning) for complete details on the built-in planning features.
+**Optional Agents:**
 
-> **Note**: The ADR Generator agent is optional. For quick demos focused on speed, you can start with Plan Agent and proceed directly to the Azure Principal Architect agent. The ADR agent is most valuable for enterprise teams needing audit trails and governance documentation.
+- **Diagram Generator** - Python architecture diagrams (after Step 2 or 4)
+- **ADR Generator** - Document architectural decisions (after any step)
+
+> **📖 Quick Reference**: See `.github/agents/WORKFLOW.md` for the streamlined workflow guide.
+
+> **📖 Official Documentation**: See [VS Code Plan Agent Documentation](https://code.visualstudio.com/docs/copilot/chat/chat-planning) for complete details on the built-in planning features.
 
 **How to Use the Workflow:**
 
 1. Open Chat view (`Ctrl+Alt+I`) and select **Plan** from the agents dropdown - this is built into VS Code
 2. For custom agents, press `Ctrl+Shift+A` or click the **Agent** button in Copilot Chat
-3. Select the agent from the dropdown: `adr_generator`, `azure-principal-architect`, `bicep-plan`, or `bicep-implement`
-4. Use handoff controls at the end of each agent's response to transition to the next agent
+3. Select the agent from the dropdown: `azure-principal-architect`, `bicep-plan`, `bicep-implement`, `diagram-generator`, or `adr-generator`
+4. **Wait for approval prompt** before proceeding to next step
+5. Use handoff controls at the end of each agent's response to transition to the next agent
 
 ## Workflow Diagram
 
 ```mermaid
 %%{init: {'theme':'neutral'}}%%
 graph TB
-    Start([Infrastructure Requirement]) --> Plan[VS Code Plan Agent<br/>Research & Breakdown<br/><i>BUILT-IN - START HERE</i>]
+    Start([Infrastructure Requirement]) --> Plan["VS Code Plan Agent<br/>Research & Breakdown<br/><i>BUILT-IN - START HERE</i>"]
 
-    Plan --> PlanOutput{Plan Output}
-    PlanOutput -->|Save Plan| PromptFile["*.prompt.md File<br/>(Reusable, Editable)"]
-    PlanOutput -->|Hand off| Decision
+    Plan --> Approve1{Approve?}
+    Approve1 -->|Yes| Arch
+    Approve1 -->|Feedback| Plan
 
-    PromptFile -.->|Invoke Later| Decision
+    Arch["Azure Principal Architect<br/>WAF Assessment<br/><i>NO CODE CREATION</i>"] --> Approve2{Approve?}
+    Approve2 -->|Yes| BicepPlan
+    Approve2 -->|Feedback| Arch
+    Approve2 -.->|Optional| Diagram1[Diagram Generator]
 
-    Decision{Need Governance<br/>Documentation?}
+    BicepPlan["Bicep Planning Mode<br/>Create Implementation Plan"] --> Approve3{Approve?}
+    Approve3 -->|Yes| Implement
+    Approve3 -->|Feedback| BicepPlan
 
-    Decision -->|Yes - Enterprise| ADR[ADR Generator Agent<br/>Document Decision<br/><i>OPTIONAL</i>]
-    Decision -->|No - Quick Demo| Arch
+    Implement["Bicep Implementation Mode<br/>Generate Bicep Code"] --> Approve4{Approve?}
+    Approve4 -->|Yes| Validate
+    Approve4 -->|Feedback| Implement
+    Approve4 -.->|Optional| Diagram2[Diagram Generator]
+    Approve4 -.->|Optional| ADR[ADR Generator]
 
-    ADR --> Arch[Azure Principal Architect<br/>WAF Assessment]
-
-    Arch --> BicepPlan[Bicep Planning Mode<br/>Create Implementation Plan]
-
-    BicepPlan --> Implement[Bicep Implementation Mode<br/>Generate Bicep Code]
-
-    Implement --> Validate[Validate & Deploy]
-
-    Validate --> Review{Review<br/>Results}
-
-    Review -->|Issues Found| Debug[Debug Mode<br/>Troubleshoot]
-    Debug --> Implement
-
-    Review -->|Success| Complete([Deployment Complete])
+    Validate[Validate & Deploy] --> Complete([Deployment Complete])
 
     style Plan fill:#d4edda,stroke:#28a745
-    style PromptFile fill:#fff3cd,stroke:#ffc107
-    style ADR fill:#e1f5ff
-    style Arch fill:#fff4e1
-    style BicepPlan fill:#e8f5e8
-    style Implement fill:#ffe8f5
-    style Debug fill:#ffe8e8
+    style Arch fill:#fff4e1,stroke:#ff9800
+    style BicepPlan fill:#e8f5e8,stroke:#4caf50
+    style Implement fill:#fce4ec,stroke:#e91e63
+    style Diagram1 fill:#e8eaf6,stroke:#3f51b5
+    style Diagram2 fill:#e8eaf6,stroke:#3f51b5
+    style ADR fill:#f3e5f5,stroke:#9c27b0
 ```
+
+## Approval Gates
+
+Each step requires user approval before proceeding:
+
+| Response | Action |
+|----------|--------|
+| **"yes"** or **"approve"** | Continue to next step |
+| **Feedback text** | Agent refines output |
+| **"no"** | Return to previous step or restart |
+
+> **Important**: Agents will NOT proceed automatically. You maintain control at each step.
 
 ## Mode Details
 
@@ -587,6 +599,91 @@ output hubVNetId string = hubVNet.id
 output hubVNetName string = hubVNet.name
 output bastionSubnetId string = hubVNet.properties.subnets[0].id
 ```
+
+---
+
+### 5. Diagram Generator (Custom Agent) - _Optional_
+
+**Purpose:** Generate Python architecture diagrams using the `diagrams` library for visual documentation.
+
+**When to Use:**
+
+- After architecture assessment (Step 2) to visualize proposed design
+- After implementation (Step 4) to document final architecture
+- Standalone for any Azure architecture visualization
+
+**Inputs:**
+
+- Architecture context from previous agents
+- Resource relationships and data flow
+- Network topology
+
+**Outputs:**
+
+- Python diagram file in `docs/diagrams/{project}/architecture.py`
+- PNG image (generated by running Python file)
+- Version-controlled, reproducible diagrams
+
+**How to Invoke:**
+
+1. Press `Ctrl+Shift+A` or click Agent button
+2. Select `diagram-generator` from dropdown
+3. Enter your prompt or use handoff button from previous agent
+
+**Prerequisites:**
+
+```bash
+pip install diagrams
+# Windows: choco install graphviz
+# macOS: brew install graphviz
+# Linux: apt-get install graphviz
+```
+
+**Example Prompt:**
+
+```markdown
+Generate an architecture diagram for the patient portal design:
+
+- Azure Front Door for global load balancing
+- App Service in Sweden Central
+- Azure SQL Database with geo-replication
+- Key Vault for secrets
+- Application Insights for monitoring
+- Virtual Network with private endpoints
+```
+
+**Example Output:**
+
+```python
+from diagrams import Diagram, Cluster
+from diagrams.azure.network import FrontDoors
+from diagrams.azure.compute import AppServices
+from diagrams.azure.database import SQLDatabases
+from diagrams.azure.security import KeyVaults
+from diagrams.azure.devops import ApplicationInsights
+
+with Diagram("Patient Portal Architecture", show=False, direction="TB"):
+    fd = FrontDoors("Front Door")
+    
+    with Cluster("Azure Region - Sweden Central"):
+        with Cluster("Virtual Network"):
+            app = AppServices("App Service")
+            sql = SQLDatabases("SQL Database")
+        
+        kv = KeyVaults("Key Vault")
+        insights = ApplicationInsights("App Insights")
+    
+    fd >> app >> sql
+    app >> kv
+    app >> insights
+```
+
+**Handoffs:**
+
+| Button | Next Agent | Purpose |
+|--------|------------|---------|
+| Continue to Infrastructure Planning | bicep-plan | Create implementation plan from visualized design |
+| Document Architecture Decision | adr-generator | Create ADR with diagram reference |
 
 ---
 

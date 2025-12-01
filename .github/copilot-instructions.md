@@ -11,7 +11,7 @@ This file provides context and guidance for GitHub Copilot when assisting with t
 3. **Name Length Limits**: Key Vault ≤24 chars, Storage ≤24 chars (no hyphens), SQL ≤63 chars
 4. **Azure SQL Auth Policy**: Azure AD-only auth for SQL Server
 5. **Zone Redundancy**: App Service Plans need P1v3 SKU (not S1) for zone redundancy
-6. **Five-Agent Workflow**: Start with `@plan` → (optional) adr_generator → azure-principal-architect → bicep-plan → bicep-implement
+6. **Four-Step Workflow**: `@plan` → `azure-principal-architect` → `bicep-plan` → `bicep-implement` (each step requires approval)
 7. **Working Example**: `infra/bicep/contoso-patient-portal/` demonstrates all patterns correctly
 8. **Deploy Script Pattern**: Use `[CmdletBinding(SupportsShouldProcess)]` + `$WhatIfPreference` (NOT explicit `$WhatIf` param)
 9. **Dev Container**: Pre-configured Ubuntu 24.04 with all tools (Terraform, Azure CLI, Bicep, PowerShell 7)
@@ -20,9 +20,11 @@ This file provides context and guidance for GitHub Copilot when assisting with t
 **Critical Files:**
 
 - Agent definitions: `.github/agents/*.agent.md`
-- Workflow guide: `resources/copilot-customizations/FIVE-MODE-WORKFLOW.md`
+- Workflow guide: `.github/agents/WORKFLOW.md`
+- Full workflow docs: `resources/copilot-customizations/FIVE-MODE-WORKFLOW.md`
 - Production example: `infra/bicep/contoso-patient-portal/`
 - Bicep implement agent: `.github/agents/bicep-implement.agent.md` (has unique suffix guidance)
+- Diagram generator: `.github/agents/diagram-generator.agent.md` (Python architecture diagrams)
 - Dev container config: `.devcontainer/devcontainer.json` (includes post-create.sh tool installation)
 - Line ending rules: `.gitattributes` (normalizes CRLF→LF for cross-platform development)
 
@@ -70,64 +72,85 @@ This repository demonstrates how GitHub Copilot serves as an **efficiency multip
 - **Primary**: System Integrator (SI) partners delivering Azure infrastructure projects
 - **Secondary**: IT Pros learning cloud/IaC, customers evaluating GitHub Copilot
 
-## Five-Agent Workflow Architecture
+## Four-Step Agent Workflow Architecture
 
-This repository uses a **five-agent workflow** for Azure infrastructure development:
+This repository uses a **4-step agent workflow** for Azure infrastructure development, with optional diagram generation:
 
-0. **Plan Agent** (Built-in) - Create implementation plans with cost estimates (invoke with `@plan`)
-1. **ADR Generator** (Optional) - Document architectural decisions (`.github/agents/adr-generator.agent.md`)
-2. **Azure Principal Architect** - Azure Well-Architected Framework guidance (`.github/agents/azure-principal-architect.agent.md`)
-3. **Bicep Planning Specialist** - Infrastructure planning with AVM modules (`.github/agents/bicep-plan.agent.md`)
-4. **Bicep Implementation Specialist** - Bicep code generation (`.github/agents/bicep-implement.agent.md`)
+```mermaid
+%%{init: {'theme':'neutral'}}%%
+graph LR
+    P["@plan"] --> A[azure-principal-architect]
+    A --> B[bicep-plan]
+    B --> I[bicep-implement]
+    A -.->|optional| D[diagram-generator]
+    I -.->|optional| D
+    A -.->|optional| ADR[adr-generator]
+```
+
+| Step | Agent | Purpose | Approval Required |
+|------|-------|---------|-------------------|
+| 1 | `@plan` (Built-in) | Create implementation plans with cost estimates | ✅ Yes |
+| 2 | `azure-principal-architect` | Azure Well-Architected Framework guidance (NO CODE) | ✅ Yes |
+| 3 | `bicep-plan` | Infrastructure planning with AVM modules | ✅ Yes |
+| 4 | `bicep-implement` | Bicep code generation | ✅ Yes |
+
+**Optional Agents:**
+
+- **diagram-generator** - Python architecture diagrams using `diagrams` library (after Step 2 or 4)
+- **adr-generator** - Document architectural decisions (after any step)
 
 **How to Use Custom Agents:**
 
 1. Press `Ctrl+Shift+A` or click the **Agent** button in Copilot Chat
-2. Select agent from dropdown: `@plan`, `adr_generator`, `azure-principal-architect`, `bicep-plan`, or `bicep-implement`
+2. Select agent from dropdown: `@plan`, `azure-principal-architect`, `bicep-plan`, `bicep-implement`, `diagram-generator`, or `adr-generator`
 3. Type your prompt and submit
+4. **Wait for approval prompt** before proceeding to next step
 
-**Recommended Workflow with Plan Agent:**
-
-```
-Agent: @plan (START HERE for multi-step projects)
-Prompt: Create deployment plan for HIPAA-compliant patient portal with cost estimates
-
-[Plan agent asks clarifying questions and generates detailed plan]
-Click "Document This Decision" button → Switches to adr_generator
-
-Agent: adr_generator (auto-selected via handoff)
-[Documents architectural decisions]
-Click "Review Against WAF Pillars" button → Switches to azure-principal-architect
-
-Agent: azure-principal-architect (auto-selected via handoff)
-Prompt: Assess architecture against WAF pillars
-Click "Generate Implementation Plan" button → Switches to bicep-plan
-
-Agent: bicep-plan (auto-selected via handoff)
-[Creates machine-readable YAML plan in .bicep-planning-files/]
-Click "Generate Bicep Code" button → Switches to bicep-implement
-
-Agent: bicep-implement (auto-selected via handoff)
-[Generates near-production-ready Bicep templates]
-```
-
-**Quick Workflow (Skip Planning):**
+**Recommended Workflow:**
 
 ```
-Agent: azure-principal-architect (skip ADR and Plan for quick demos)
+Step 1: @plan (START HERE)
+Prompt: Create deployment plan for HIPAA-compliant patient portal
+[Plan agent generates requirements]
+→ Approve to continue
+
+Step 2: azure-principal-architect
+[Provides WAF assessment with scores - NO CODE CREATION]
+→ Approve to continue
+→ Optional: Click "Generate Architecture Diagram" for visual
+
+Step 3: bicep-plan
+[Creates implementation plan in .bicep-planning-files/]
+→ Approve to continue
+
+Step 4: bicep-implement
+[Generates Bicep templates, validates with bicep build/lint]
+→ Approve to deploy or finalize
+→ Optional: Click "Generate Architecture Diagram" for documentation
+```
+
+**Quick Workflow (Skip @plan):**
+
+```
+Step 1: azure-principal-architect
 Prompt: Assess HIPAA-compliant patient portal architecture
+→ Approve
 
-Agent: bicep-plan
+Step 2: bicep-plan
 Prompt: Create implementation plan with AVM modules
+→ Approve
 
-Agent: bicep-implement
+Step 3: bicep-implement
 Prompt: Generate Bicep templates from the plan
+→ Approve and deploy
 ```
 
-📖 **Full Documentation:** See `resources/copilot-customizations/FIVE-MODE-WORKFLOW.md`
+📖 **Full Documentation:** See `.github/agents/WORKFLOW.md`
 
 **Critical Agent Behaviors:**
 
+- **All agents require approval** before proceeding to next step (reply "yes", "approve", or provide feedback)
+- **azure-principal-architect does NOT create code** - only provides architectural guidance
 - **All agents default to `swedencentral` region** (alternative: `germanywestcentral`), unless explicitly specified
 - **Bicep agents ALWAYS generate unique resource name suffixes** using `uniqueString(resourceGroup().id)` to prevent naming collisions
 - **Key Vault names**: Must be ≤24 chars (pattern: `kv-{shortname}-{env}-{suffix}`)
@@ -145,11 +168,13 @@ github-copilot-itpro/
 │   ├── post-create.sh                   # Tool installation script
 │   └── TROUBLESHOOTING.md               # Setup issues & fixes
 ├── .github/
-│   ├── agents/                          # 4 custom agents (Plan is built-in)
+│   ├── agents/                          # 5 custom agents (Plan is built-in)
 │   │   ├── adr-generator.agent.md
 │   │   ├── azure-principal-architect.agent.md
 │   │   ├── bicep-plan.agent.md
-│   │   └── bicep-implement.agent.md
+│   │   ├── bicep-implement.agent.md
+│   │   ├── diagram-generator.agent.md   # Python architecture diagrams
+│   │   └── WORKFLOW.md                  # Workflow documentation
 │   └── copilot-instructions.md          # THIS FILE - AI agent guidance
 ├── scenarios/                           # Self-contained learning scenarios
 │   ├── S01-bicep-baseline/              # Hub & Spoke network with Bicep

@@ -1,8 +1,8 @@
-# Demo 03: Five-Agent Workflow for Azure Infrastructure
+# Demo 03: Four-Step Agent Workflow for Azure Infrastructure
 
 ## 🎯 Overview
 
-This demo showcases GitHub Copilot's **5-agent workflow** for designing and implementing Azure infrastructure, starting with VS Code's built-in **Plan Agent** and handing off to specialized custom agents. It demonstrates how architects and IT professionals can leverage plan-driven development to move from business requirements to near-production-ready Bicep templates through a structured, iterative process.
+This demo showcases GitHub Copilot's **4-step agent workflow** for designing and implementing Azure infrastructure, starting with VS Code's built-in **Plan Agent** and handing off to specialized custom agents. Each step includes an **approval gate** where you review and approve before proceeding. It demonstrates how architects and IT professionals can leverage plan-driven development to move from business requirements to near-production-ready Bicep templates through a structured, iterative process.
 
 > **Working Implementation**: The complete workflow output is available as near-production-ready infrastructure in [`../../infra/bicep/contoso-patient-portal/`](../../infra/bicep/contoso-patient-portal/) (1,070 lines of Bicep, 10 modules).
 
@@ -24,19 +24,21 @@ Traditional infrastructure design involves:
 - 📚 **Documentation lag**: Code and docs out of sync
 - 🎯 **Scope creep**: No structured planning before implementation
 
-**With 5-Agent Workflow (Plan-First Approach)**:
+**With 4-Step Workflow (Plan-First with Approval Gates)**:
 
 - 📋 **Research before code**: VS Code Plan Agent researches comprehensively before any changes
+- ✅ **Approval gates**: Review and approve each step before proceeding
 - ⚡ **45 minutes**: Complete workflow from requirements to deployable code (vs. 18 hours manual)
 - 🔗 **Automatic handoffs**: Context preserved between agents via UI controls
 - ✅ **Aligned outputs**: Plan drives architecture drives implementation
 - 📖 **Living documentation**: Plans saved as reusable `*.prompt.md` files
 - 💰 **Cost-validated**: Budget estimates before implementation
 - 📊 **Progress tracking**: Built-in todo list tracks completion during complex tasks
+- 🎨 **Optional diagrams**: Generate Python architecture diagrams at any step
 
-## 🤖 The Five Agents
+## 🤖 The Four Steps (Plus Optional Agents)
 
-### 0. Plan Agent (`@plan`) - _VS Code Built-in - Start Here_
+### Step 1: Plan Agent (`@plan`) - _VS Code Built-in - Start Here_
 
 > **This is a built-in VS Code feature**, not a custom agent. It's designed to research and plan before any code changes are made.
 
@@ -70,36 +72,47 @@ Traditional infrastructure design involves:
 
 **Usage**: Always start with `@plan` for multi-step infrastructure projects. The plan ensures all requirements are considered before any code changes.
 
-### 1. Azure Principal Architect (`azure-principal-architect`)
+### Step 2: Azure Principal Architect (`azure-principal-architect`)
 
-- **Purpose**: Azure Well-Architected Framework assessment
+- **Purpose**: Azure Well-Architected Framework assessment (NO CODE CREATION)
 - **Input**: Business requirements, constraints, technical needs
 - **Output**: WAF scores, service recommendations, cost estimates, HIPAA compliance mapping
+- **Approval Gate**: Review WAF assessment before proceeding
 - **Handoff**: Architecture assessment → Bicep Planning Specialist
+- **Optional**: Generate Architecture Diagram → diagram-generator
 
-### 3. Bicep Planning Specialist (`bicep-plan`)
+### Step 3: Bicep Planning Specialist (`bicep-plan`)
 
 - **Purpose**: Machine-readable implementation plan
 - **Input**: Architecture assessment
 - **Output**: Resource definitions, dependencies, cost tables, deployment phases
+- **Approval Gate**: Review implementation plan before code generation
 - **Handoff**: Implementation plan → Bicep Implementation Specialist
 
-### 4. Bicep Implementation Specialist (`bicep-implement`)
+### Step 4: Bicep Implementation Specialist (`bicep-implement`)
 
 - **Purpose**: near-production-ready Bicep templates
 - **Input**: Implementation plan
 - **Output**: Modular Bicep templates, parameter files, deployment scripts
+- **Approval Gate**: Review generated code before deployment
 - **Handoff**: Templates ready for deployment
 - **Regional Default**: `swedencentral` (renewable energy)
 - **Naming Convention**: Generates unique suffixes using `uniqueString()` to prevent resource name collisions
+- **Optional**: Generate Architecture Diagram → diagram-generator
 
-### 2. ADR Generator (`adr_generator`) - _Optional_
+### Optional: ADR Generator (`adr-generator`)
 
 - **Purpose**: Document architectural decisions for enterprise governance
-- **Input**: Architecture discussions, trade-offs, decisions from Plan agent
+- **Input**: Architecture discussions, trade-offs, decisions from any step
 - **Output**: Structured ADR in markdown format (saved to `/docs/adr/`)
 - **Use Case**: Document key decisions during workflow (skip for speed-focused demos)
-- **Handoff**: ADR → Azure Principal Architect
+
+### Optional: Diagram Generator (`diagram-generator`)
+
+- **Purpose**: Generate Python architecture diagrams using `diagrams` library
+- **Input**: Architecture context from Step 2 or Step 4
+- **Output**: Python file + PNG image in `docs/diagrams/`
+- **Use Case**: Visual documentation for stakeholders
 
 ## 📋 Scenario: Contoso Healthcare Patient Portal
 

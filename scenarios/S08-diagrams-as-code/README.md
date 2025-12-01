@@ -1,5 +1,7 @@
 # S08: Diagrams-as-Code with GitHub Copilot
 
+> **🤖 Agent Available**: This scenario is also available as the `diagram-generator` agent for integration with the 4-step workflow. See `.github/agents/diagram-generator.agent.md`.
+
 ---
 
 ## Meet Marcus Chen
