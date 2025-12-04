@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300">
+  <defs>
+    <!-- Gradient for rocket -->
+    <linearGradient id="rocketGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B35"/>
+      <stop offset="100%" style="stop-color:#F7931E"/>
+    </linearGradient>
+    
+    <!-- Gradient for text -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#58a6ff"/>
+      <stop offset="50%" style="stop-color:#a371f7"/>
+      <stop offset="100%" style="stop-color:#FF6B35"/>
+    </linearGradient>
+    
+    <!-- Star glow filter -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Dark background -->
+  <rect width="800" height="300" fill="#0d1117" rx="12"/>
+  
+  <!-- Animated stars - more visible in dark mode -->
+  <g filter="url(#glow)">
+    <circle cx="50" cy="50" r="2.5" fill="#a371f7">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="150" cy="80" r="2" fill="#58a6ff">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
+    </circle>
+    <circle cx="700" cy="60" r="2.5" fill="#FF6B35">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite" begin="1s"/>
+    </circle>
+    <circle cx="750" cy="120" r="2" fill="#a371f7">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2s" repeatCount="indefinite" begin="0.3s"/>
+    </circle>
+    <circle cx="100" cy="200" r="2.5" fill="#58a6ff">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.8s" repeatCount="indefinite" begin="0.8s"/>
+    </circle>
+    <circle cx="680" cy="220" r="2" fill="#FF6B35">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.2s" repeatCount="indefinite" begin="0.2s"/>
+    </circle>
+    <circle cx="300" cy="40" r="1.5" fill="#fff">
+      <animate attributeName="opacity" values="0.2;0.8;0.2" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="500" cy="250" r="1.5" fill="#fff">
+      <animate attributeName="opacity" values="0.2;0.8;0.2" dur="2.8s" repeatCount="indefinite" begin="1.2s"/>
+    </circle>
+  </g>
+  
+  <!-- Rocket with glow -->
+  <g transform="translate(80, 150)" filter="url(#glow)">
+    <animateTransform attributeName="transform" type="translate" 
+      values="80,150; 100,130; 80,150" dur="3s" repeatCount="indefinite"/>
+    
+    <!-- Rocket body -->
+    <path d="M0,30 L15,-30 L30,30 L25,30 L25,50 L5,50 L5,30 Z" fill="url(#rocketGradient)"/>
+    
+    <!-- Window -->
+    <circle cx="15" cy="5" r="6" fill="#161b22"/>
+    <circle cx="15" cy="5" r="4" fill="#58a6ff"/>
+    
+    <!-- Fins -->
+    <path d="M0,30 L-10,50 L5,40 Z" fill="#a371f7"/>
+    <path d="M30,30 L40,50 L25,40 Z" fill="#a371f7"/>
+    
+    <!-- Flames - brighter for dark mode -->
+    <g>
+      <animateTransform attributeName="transform" type="scale" 
+        values="1,1; 1,1.3; 1,1" dur="0.3s" repeatCount="indefinite"/>
+      <path d="M8,50 L15,85 L22,50 Z" fill="#FF6B35"/>
+      <path d="M10,50 L15,75 L20,50 Z" fill="#FFD700"/>
+      <path d="M12,50 L15,65 L18,50 Z" fill="#fff"/>
+    </g>
+  </g>
+  
+  <!-- Main text -->
+  <text x="180" y="100" font-family="Segoe UI, Arial, sans-serif" font-size="42" font-weight="bold" fill="url(#textGradient)">
+    We've Moved!
+  </text>
+  
+  <!-- Subtitle -->
+  <text x="180" y="140" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="#8b949e">
+    github-copilot-itpro → azure-agentic-infraops
+  </text>
+  
+  <!-- Arrow animation -->
+  <g transform="translate(180, 170)">
+    <text font-family="Segoe UI, Arial, sans-serif" font-size="24" fill="#FF6B35">
+      🚀 Agentic InfraOps
+      <animate attributeName="opacity" values="1;0.6;1" dur="2s" repeatCount="indefinite"/>
+    </text>
+  </g>
+  
+  <!-- Moving arrow -->
+  <g>
+    <animateTransform attributeName="transform" type="translate" 
+      values="0,0; 20,0; 0,0" dur="1.5s" repeatCount="indefinite"/>
+    <path d="M550,145 L620,145 L600,130 M620,145 L600,160" stroke="#58a6ff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+  
+  <!-- New badge - glowing in dark mode -->
+  <g transform="translate(640, 120)">
+    <rect x="-2" y="-2" width="124" height="54" rx="10" fill="#FF6B35" opacity="0.3">
+      <animate attributeName="opacity" values="0.3;0.5;0.3" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="0" y="0" width="120" height="50" rx="8" fill="#FF6B35"/>
+    <text x="60" y="22" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="white" font-weight="bold">NEW HOME</text>
+    <text x="60" y="40" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="white">Click to visit →</text>
+  </g>
+  
+  <!-- Bottom tagline -->
+  <text x="400" y="260" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#8b949e" font-style="italic">
+    "Azure infrastructure engineered by agents. Verified. Well-Architected. Deployable."
+  </text>
+  
+  <!-- Decorative line with glow -->
+  <line x1="150" y1="280" x2="650" y2="280" stroke="url(#textGradient)" stroke-width="2" stroke-linecap="round" filter="url(#glow)">
+    <animate attributeName="stroke-dasharray" values="0,500;500,0" dur="3s" fill="freeze"/>
+  </line>
+</svg>
